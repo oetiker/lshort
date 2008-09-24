@@ -1,0 +1,43 @@
+Spick fuer den LaTeX Kurs
+=========================
+
+Grundbedienung
+--------------
+
+* Linke Maustaste bringt Menu
+
+* Unterster Menu Punkt zum ausloggen.
+
+
+Interessante Befehle
+--------------------
+
+
+
+ls               Files im aktuellen Verzeichnis anzeigen
+
+
+xterm &          Fenster oeffnen
+
+
+rm file.xyz      File loeschen
+
+
+emacs file.tex &   File bearbeiten
+
+
+latex file.tex     TeX File compilieren    tex -> dvi
+
+
+xdvi file.dvi &    DVI File betrachten   
+
+
+import bild.eps    Einen Screenshot machen und in bild.eps speichern
+
+
+makeindex file     Einen Index sortieren
+
+
+
+
+

@@ -1,0 +1,76 @@
+    The not so Short Introduction to LaTeX
+------------------------------------------------------------------------
+    by Tobias Oetiker <tobi@oetiker.ch>
+    
+    If you want to learn how to write your documents with LaTeX,
+    this introduction is for you. It is not about setting up a
+    LaTeX system. While it is not as comprehensive as Lamport's book,   
+    it should be sufficient in most cases.
+
+    To print the document, there are several possibilities:
+
+    a) Copy one of the ps files to your printer:
+          
+              lshort.ps  
+              lshort-book.ps  A4/booklet/duplex
+       
+       NOTE for Abt IIIB: you can print the booklet version to
+       the VPP printer with 
+
+  	  vpp -dest=etzj61 lshort-book.ps
+	or
+	  vpp -dest=etzd96 lshort-book.ps
+
+    b) Print the lshort2e.dvi file with a dvi-driver. (You need to 
+       have the AMS math fonts installed your system. If you don't,
+       your dvi-driver will complain.)
+
+    c) Rebuild the whole document from scratch by LaTeXing
+       lshort2e.tex. (If you don't have the AMS classes installed, the
+       relevant parts of the document will be left out, but it
+       will format without problem. After latexing the document twice, 
+       you should use makeindex to generate a new index file.
+
+       (to get the adobe euro symbol right you need to install the 
+        ftp://ftp.adobe.com/pub/adobe/type/win/all/eurofont.exe as described in
+        http://www.ctan.org/tex-archive/fonts/euro/latex/europs/README.europs)
+
+    The preformatted versions of the document are set for double sided
+    printing on A4 paper. If you want a single sided version, you need to
+    replace "twoside" by "oneside" in the parameters list of the
+    \documentclass command in lshort2e.tex. To produce a small booklet (A5)
+    you can use the pre generated ps file of you can use your dvi-driver to
+    shrink the output and then use pstops to paste the resulting pages
+    together in the right order.
+
+    To produce a A5 Booklet from source, I recommend the following procedure, 
+    on the twoside lshort2e.dvi:
+
+    *) dvips -x800 -P?? -olshort.ps lshort.dvi
+       (?? is the name of the printer you want to print the booklet)
+
+    *) psbook lshort2e.ps out.ps
+
+    *) pstops "4:0L(27.8cm,-1.5cm)+1L(27.8cm,13.3cm)" out.ps p1.ps
+       (p1.ps now contains the front pages)
+ 
+    *) pstops "4:2L(27.8cm,-1.5cm)+3L(27.8cm,13.3cm)" out.ps p2.ps 
+       (p2.ps contains the back pages)
+
+    If have a doublex(shoprtbind) Printer:
+
+    *) pstops "4:0L(27.8cm,-1.5cm)+1L(27.8cm,13.3cm),2L(27.8cm,-1.5cm)+3L(27.8cm,13.3cm)" out.ps lshort-book.ps
+
+    If you have postscript versions of the latex Fonts you can use
+    (make sure your printer has enough memmory for this)
+
+    *) dvips -Pcmz -olshort.ps lshort.dvi
+    *) psbook lshort.ps out.ps
+    *) pstops "4:0L@0.8(22.76cm,-0.6cm)+1L@0.8(22.76cm,13.45cm),3R@0.8(-1.38cm,16.25cm)+2R@0.8(-1.38cm,30.3cm)" out.ps lshort-book.ps
+
+
+    Cheers
+    Tobias Oetiker   tobi@oetiker.ch
+
+PS: If you have any comment, or just find the book helpful, 
+    please let me know. 
