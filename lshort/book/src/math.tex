@@ -1,0 +1,796 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Math typesetting with LaTeX
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\chapter{Typesetting Mathematical Formulae}
+
+\begin{intro}
+  Now you are ready! In this chapter, we will attack the main strength
+  of \TeX{}: mathematical typesetting. But be warned, this chapter
+  only scratches the surface. While the things explained here are
+  sufficient for many people, don't despair if you can't find a
+  solution to your mathematical typesetting needs here. It is highly likely
+  that your problem is addressed in \AmS-\LaTeX{}.
+\end{intro}
+  
+
+
+\section{The \texorpdfstring{\AmS}{AMS}-\LaTeX{} bundle}
+
+If you want to typeset (advanced) \wi{mathematics}, you should
+use \AmS-\LaTeX{}. The \AmS-\LaTeX{} bundle is a collection of packages and classes for
+mathematical typesetting. We will mostly deal with the \pai{amsmath} package
+which is a part of the bundle. \AmS-\LaTeX{} is produced by The \emph{\wi{American Mathematical Society}} 
+and it is used extensively for mathematical typesetting. \LaTeX{} itself does provide
+some basic features and environments for mathematics, but they are limited (or
+maybe it's the other way around: \AmS-\LaTeX{} is \emph{unlimited}!) and
+in some cases inconsistent. 
+
+\AmS-\LaTeX{} is a part of the required distribution and is provided
+with all recent \LaTeX{} distributions.\footnote{If yours is missing it, go to
+  \texttt{CTAN:macros/latex/required/amslatex}.} In this chapter, we assume
+  \pai{amsmath} is loaded in the preamble; \verb|\usepackage{amsmath}|.
+
+\section{Single Equations}
+  
+There two ways to typeset mathematical \wi{formulae}: in-line within a paragraph
+(\emph{\wi{text style}}), or the paragraph can be broken to 
+typeset it separately (\textit{\wi{display style}}). Mathematical \wi{equation}s 
+\emph{within} a paragraph is entered between \index{$@\texttt{\$}} %$
+between \texttt{\$} and \texttt{\$}:
+\begin{example}
+Add $a$ squared and $b$ squared
+to get $c$ squared. Or, using 
+a more mathematical approach:
+$a^2 + b^2 = c^2$
+\end{example}
+\begin{example}
+\TeX{} is pronounced as 
+$\tau\epsilon\chi$\\[5pt]
+100~m$^{3}$ of water\\[5pt]
+This comes from my $\heartsuit$
+\end{example}
+
+If you want your larger equations to be set apart
+from the rest of the paragraph, it is preferable to \emph{display} them
+rather than to break the paragraph apart.
+To do this, you enclose them between \verb|\begin{|\ei{equation}\verb|}| and
+\verb|\end{equation}|.\footnote{This is an \textsf{amsmath} command. If you don't
+have access to the package for some obscure reason, you can use \LaTeX's own
+\ei{displaymath} environment instead.} You can then \ci{label} an equation number and refer to
+it somewhere else in the text by using the \ci{eqref} command. If you want to
+name the equation something specific, you \ci{tag} it instead. You can't use
+\ci{eqref} with \ci{tag}.
+\begin{example}
+Add $a$ squared and $b$ squared
+to get $c$ squared. Or, using
+a more mathematical approach
+ \begin{equation}
+   a^2 + b^2 = c^2
+ \end{equation}
+Einstein says
+ \begin{equation}
+   E = mc^2 \label{clever}
+ \end{equation}
+He didn't say
+ \begin{equation}
+  1 + 1 = 3 \tag{dumb}
+ \end{equation}
+This is a reference to 
+\eqref{clever}. 
+\end{example}
+
+If you don't want \LaTeX{} to number the equations, use the starred
+version of \texttt{equation} using an asterisk, \ei{equation*}, or even easier, enclose the
+equation in \ci{[} and \ci{]}:\footnote{\index{equation!\textsf{amsmath}}
+  \index{equation!\LaTeX{}}This is again from \textsf{amsmath}. If you 
+didn't load the package, use \LaTeX{}'s own \texttt{equation} environment
+instead. The naming of the \textsf{amsmath}/\LaTeX{} commands may seem a bit
+confusing, but it's really not a problem since everybody uses \textsf{amsmath} anyway.
+In general, it is best to load the package from the beginning because you might use it
+later on, and then \LaTeX's unnumbered \texttt{equation} clashes with
+\AmS-\LaTeX's numbered \texttt{equation}.}
+\begin{example}
+Add $a$ squared and $b$ squared
+to get $c$ squared. Or, using
+a more mathematical approach
+ \begin{equation*}
+   a^2 + b^2 = c^2
+ \end{equation*}
+or you can type less for the
+same effect:
+ \[ a^2 + b^2 = c^2 \]
+\end{example}
+
+
+Note the difference in typesetting style between \wi{text style} and \wi{display style}
+equations: 
+\begin{example}
+This is text style: 
+$\lim_{n \to \infty} 
+ \sum_{k=1}^n \frac{1}{k^2} 
+ = \frac{\pi^2}{6}$.
+And this is display style:
+ \begin{equation}
+  \lim_{n \to \infty} 
+  \sum_{k=1}^n \frac{1}{k^2} 
+  = \frac{\pi^2}{6}
+ \end{equation}
+\end{example}
+
+In text style, enclose tall or deep math expressions or sub
+expressions in \ci{smash}. This makes \LaTeX{} ignore the height of
+these expressions. This keeps the line spacing even.
+
+\begin{example}
+A $d_{e_{e_p}}$ mathematical
+expression  followed by a
+$h^{i^{g^h}}$ expression. As
+opposed to a smashed 
+\smash{$d_{e_{e_p}}$} expression 
+followed by a
+\smash{$h^{i^{g^h}}$} expression.
+\end{example}
+
+\subsection{Math Mode}
+
+There are also differences between \emph{\wi{math mode}} and \emph{text mode}. For
+example, in \emph{math mode}: 
+
+\begin{enumerate}
+
+\item \index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
+are either derived logically from the mathematical expressions, or
+have to be specified with special commands such as \ci{,}, \ci{quad} or
+\ci{qquad} (we'll get back to that later, see section~\ref{sec:math-spacing}).
+ 
+\item Empty lines are not allowed. Only one paragraph per formula.
+
+\item Each letter is considered to be the name of a variable and will be
+typeset as such. If you want to typeset normal text within a formula
+(normal upright font and normal spacing) then you have to enter the
+text using the \verb|\text{...}| command (see also section \ref{sec:fontsz} on
+page \pageref{sec:fontsz}).
+
+\end{enumerate}
+\begin{example}
+$\forall x \in \mathbf{R}:
+ \qquad x^{2} \geq 0$
+\end{example}
+\begin{example}
+$x^{2} \geq 0\qquad
+ \text{for all }x\in\mathbf{R}$
+\end{example}
+ 
+Mathematicians can be very fussy about which symbols are used:
+it would be conventional here to use the `\wi{blackboard bold}' font,
+\index{bold symbols} which is obtained using \ci{mathbb} from the
+package \pai{amssymb}.\footnote{\pai{amssymb} is not a part
+  of the \AmS-\LaTeX{} bundle, but it is perhaps still a part of your \LaTeX{}
+  distribution. Check your distribution
+  or go to \texttt{CTAN:/fonts/amsfonts/latex/} to obtain it.}
+\ifx\mathbb\undefined\else
+The last example becomes
+\begin{example}
+$x^{2} \geq 0\qquad
+ \text{for all } x 
+ \in \mathbb{R}$
+\end{example}
+\fi
+See Table~\ref{mathalpha} on \pageref{mathalpha} and
+Table~\ref{mathfonts} on \pageref{mathfonts} for more math fonts.
+
+
+
+\section{Building Blocks of a Mathematical Formula}
+
+In this section, we describe the most important commands used in mathematical
+typesetting. Most of the commands in this section will not require
+\textsf{amsmath} (if they do, it will be stated clearly), but load it anyway.
+
+
+\textbf{Lowercase \wi{Greek letters}} are entered as \verb|\alpha|,
+ \verb|\beta|, \verb|\gamma|, \ldots, uppercase letters
+are entered as \verb|\Gamma|, \verb|\Delta|, \ldots\footnote{There is no
+  uppercase Alpha, Beta etc. defined in \LaTeXe{} because it looks the same as a 
+  normal roman A, B\ldots{} Once the new math coding is done, things will
+  change.} 
+
+Take a look at Table~\ref{greekletters} on page~\pageref{greekletters} for a
+list of Greek letters.
+\begin{example}
+$\lambda,\xi,\pi,\theta,
+ \mu,\Phi,\Omega,\Delta$
+\end{example}
+
+
+\textbf{Exponents and Subscripts} can be specified using\index{exponent}\index{subscript}
+the \verb|^|\index{^@\verb"|^"|} and the \verb|_|\index{_@\verb"|_"|} character.
+Most math mode commands act only on the next character, so if you
+want a command to affect several characters, you have to group them
+together using curly braces: \verb|{...}|.
+
+Table~\ref{binaryrel} on page \pageref{binaryrel} lists a lot of other binary
+relations like $\subseteq$ and $\perp$.
+
+\begin{example}
+$p^3_{ij} \qquad
+ m_\text{Knuth} \\[5pt]
+ a^x+y \neq a^{x+y}\qquad 
+ e^{x^2} \neq {e^x}^2$
+\end{example}
+
+
+The \textbf{\wi{square root}} is entered as \ci{sqrt}; the
+$n^\text{th}$ root is generated with \verb|\sqrt[|$n$\verb|]|. The size of
+the root sign is determined automatically by \LaTeX. If just the sign
+is needed, use \verb|\surd|.
+
+See other kinds of arrows like $\hookrightarrow$ and $\rightleftharpoons$ on
+Table~\ref{tab:arrows} on page \pageref{tab:arrows}. 
+\begin{example}
+$\sqrt{x} \Leftrightarrow x^{1/2}
+ \quad \sqrt[3]{2}
+ \quad \sqrt{x^{2} + \sqrt{y}}
+ \quad \surd[x^2 + y^2]$
+\end{example}
+
+
+\index{dots!three}
+\index{vertical!dots}
+\index{horizontal!dots}
+Usually you don't typeset an explicit \textbf{\wi{dot}} sign to indicate
+the multiplication operation when handling symbols; however sometimes it is written
+to help the reader's eyes in grouping a formula.
+You should use \ci{cdot} which typesets a single dot centered. \ci{cdots} is
+three centered \textbf{\wi{dots}} while \ci{ldots} sets the dots on the
+baseline. Besides that, there are \ci{vdots} for 
+vertical and \ci{ddots} for \wi{diagonal dots}. You can find another example in
+section~\ref{sec:arraymat}.
+\begin{example}
+$\Psi = v_1 \cdot v_2
+ \cdot \ldots \qquad 
+ n! = 1 \cdot 2 
+ \cdots (n-1) \cdot n$
+\end{example}
+
+The commands \ci{overline} and \ci{underline} create
+\textbf{horizontal lines} directly over or under an expression:
+\index{horizontal!line} \index{line!horizontal}
+\begin{example}
+$0.\overline{3} = 
+ \underline{\underline{1/3}}$
+\end{example}
+
+The commands \ci{overbrace} and \ci{underbrace} create
+long \textbf{horizontal braces} over or under an expression:
+\index{horizontal!brace} \index{brace!horizontal} 
+\begin{example}
+$\underbrace{\overbrace{a+b+c}^6 
+ \cdot \overbrace{d+e+f}^9}
+ _\text{meaning of life} = 42$
+\end{example}
+
+\index{mathematical!accents} To add mathematical accents such as \textbf{small
+arrows} or \textbf{\wi{tilde}} signs to variables, the commands
+given in Table~\ref{mathacc} on page~\pageref{mathacc} might be useful.  Wide hats and
+tildes covering several characters are generated with \ci{widetilde}
+and \ci{widehat}. Notice the difference between \ci{hat} and \ci{widehat} and the placement of
+\ci{bar} for a variable with subscript. The \wi{apostrophe} mark
+\verb|'|\index{'@\verb"|'"|} gives a \wi{prime}:
+% a dash is --
+\begin{example}
+$f(x) = x^2 \qquad f'(x) 
+ = 2x \qquad f''(x) = 2\\[5pt]
+ \hat{XY} \quad \widehat{XY}
+ \quad \bar{x_0} \quad \bar{x}_0$
+\end{example}
+
+
+\textbf{Vectors}\index{vectors} are often specified by adding small
+\wi{arrow symbols} on top of a variable. This is done with the
+\ci{vec} command. The two commands \ci{overrightarrow} and
+\ci{overleftarrow} are useful to denote the vector from $A$ to $B$:
+\begin{example}
+$\vec{a} \qquad
+ \vec{AB} \qquad
+ \overrightarrow{AB}$
+\end{example}
+
+
+Names of log-like functions are often typeset in an upright
+font, and not in italics as variables are, so \LaTeX{} supplies the
+following commands to typeset the most important function names:
+\index{mathematical!functions}
+
+\begin{tabular}{llllll}
+\ci{arccos} &  \ci{cos}  &  \ci{csc} &  \ci{exp} &  \ci{ker}    & \ci{limsup} \\
+\ci{arcsin} &  \ci{cosh} &  \ci{deg} &  \ci{gcd} &  \ci{lg}     & \ci{ln}     \\
+\ci{arctan} &  \ci{cot}  &  \ci{det} &  \ci{hom} &  \ci{lim}    & \ci{log}    \\
+\ci{arg}    &  \ci{coth} &  \ci{dim} &  \ci{inf} &  \ci{liminf} & \ci{max}    \\
+\ci{sinh}   & \ci{sup}   &  \ci{tan}  & \ci{tanh}&  \ci{min}    & \ci{Pr}     \\
+\ci{sec}    & \ci{sin} \\
+\end{tabular}
+
+\begin{example}
+\[\lim_{x \rightarrow 0}
+ \frac{\sin x}{x}=1\]
+\end{example}
+
+For functions missing from the list, use the \ci{DeclareMathOperator}
+command. There is even a starred version for functions with limits.
+This command works only in the preamble so the commented lines in the
+example below must be put into the preamble.
+
+\begin{example}
+%\DeclareMathOperator{\argh}{argh}
+%\DeclareMathOperator*{\nut}{Nut}
+\[3\argh = 2\nut_{x=1}\]
+\end{example}
+
+For the \wi{modulo function}, there are two commands: \ci{bmod} for the
+binary operator ``$a \bmod b$'' and \ci{pmod}
+for expressions
+such as ``$x\equiv a \pmod{b}$:''
+\begin{example}
+$a\bmod b \\
+ x\equiv a \pmod{b}$
+\end{example}
+
+A built-up \textbf{\wi{fraction}} is typeset with the
+\ci{frac}\verb|{...}{...}| command. In in-line equations, the fraction is shrunk to
+fit the line. This style is obtainable in display style with \ci{tfrac}. The
+reverse, i.e.\ display style fraction in text, is made with \ci{dfrac}.
+Often the slashed form $1/2$ is preferable, because it looks better
+for small amounts of `fraction material:'
+\begin{example}
+In display style:
+\[3/8 \qquad \frac{3}{8} 
+ \qquad \tfrac{3}{8} \]
+\end{example}
+
+\begin{example}
+In text style:
+$1\frac{1}{2}$~hours \qquad
+$1\dfrac{1}{2}$~hours
+\end{example}
+ 
+Here the \ci{partial} command for \wi{partial derivative}s is used:
+\begin{example}
+\[\sqrt{\frac{x^2}{k+1}}\qquad
+  x^\frac{2}{k+1}\qquad
+  \frac{\partial^2f}
+  {\partial x^2} \]
+\end{example}
+
+To typeset \wi{binomial coefficient}s or similar structures, use
+the command \ci{binom} from \pai{amsmath}:
+\begin{example}
+Pascal's rule is
+\begin{equation*}
+ \binom{n}{k} =\binom{n-1}{k}
+ + \binom{n-1}{k-1}
+\end{equation*}
+\end{example}
+
+For \wi{binary relations} it may be useful to stack symbols over each other.
+\ci{stackrel}\verb|{#1}{#2}| puts the symbol given
+in \verb|#1| in superscript-like size over \verb|#2| which
+is set in its usual position.
+\begin{example}
+\begin{equation*}
+ f_n(x) \stackrel{*}{\approx} 1
+\end{equation*}
+\end{example}
+
+The \textbf{\wi{integral operator}} is generated with \ci{int}, the
+\textbf{\wi{sum operator}} with \ci{sum}, and the \textbf{\wi{product operator}}
+with \ci{prod}. The upper and lower limits are specified with~\verb|^|
+and~\verb|_| like subscripts and superscripts:
+\begin{example}
+\begin{equation*}
+\sum_{i=1}^n \qquad
+\int_0^{\frac{\pi}{2}} \qquad
+\prod_\epsilon
+\end{equation*}
+\end{example}
+
+To get more control over the placement of indices in complex
+expressions, \pai{amsmath} provides the \ci{substack} command:
+\begin{example}
+\begin{equation*}
+\sum^n_{\substack{0<i<n \\ 
+        j\subseteq i}}
+   P(i,j) = Q(i,j)
+\end{equation*}
+\end{example}
+
+
+
+\LaTeX{} provides all sorts of symbols for \textbf{\wi{braces}} and other
+\textbf{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$).
+Round and square braces can be entered with the corresponding keys and
+curly braces with \verb|\{|, but all other delimiters are generated with
+special commands (e.g.~\verb|\updownarrow|).
+\begin{example}
+\begin{equation*}
+{a,b,c} \neq \{a,b,c\}
+\end{equation*}
+\end{example}
+
+If you put \ci{left} in front of an opening delimiter and
+\ci{right} in front of a closing delimiter, \LaTeX{} will automatically
+determine the correct size of the delimiter. Note that you must close
+every \ci{left} with a corresponding \ci{right}. If you
+don't want anything on the right, use the invisible ``\ci{right.}'':
+\begin{example}
+\begin{equation*}
+1 + \left(\frac{1}{1-x^{2}}
+    \right)^3 \qquad 
+\left. \ddagger \frac{~}{~}\right)
+\end{equation*}
+\end{example}
+
+In some cases it is necessary to specify the correct size of a
+mathematical delimiter\index{mathematical!delimiter} by hand,
+which can be done using the commands \ci{big}, \ci{Big}, \ci{bigg} and
+\ci{Bigg} as prefixes to most delimiter commands:
+\begin{example}
+$\Big((x+1)(x-1)\Big)^{2}$\\
+$\big( \Big( \bigg( \Bigg( \quad
+\big\} \Big\} \bigg\} \Bigg\} \quad
+\big\| \Big\| \bigg\| \Bigg\| \quad
+\big\Downarrow \Big\Downarrow 
+\bigg\Downarrow \Bigg\Downarrow$
+\end{example}
+ For a list of all delimiters available, see Table~\ref{tab:delimiters} on page
+\pageref{tab:delimiters}. 
+
+\section{Vertically Aligned Material} 
+
+\subsection{Multiple Equations}
+\index{equation!multiple}
+
+For formulae running over several lines or for \wi{equation system}s,
+you can use the environments \ei{align} and \verb|align*|
+instead of \texttt{equation} and \texttt{equation*}.\footnote{The \ei{align}
+  environment is from \textsf{amsmath}. A similar environment without \textsf{amsmath}
+  from \LaTeX{} is \ei{eqnarray}, but it is generally not advised to use that
+because of spacing and label inconsistencies.} With \ei{align} each line gets an
+equation number. The \verb|align*| does not number anything.
+
+The \ei{align} environments center the single equation around the \verb|&|
+sign. The \verb|\\| command breaks the lines. If you only want to enumerate some
+of equations, use \ci{nonumber} to remove the number. It has to be placed
+\emph{before} \verb|\\|:
+\begin{example}
+\begin{align}
+f(x) &= (a+b)(a-b) \label{1}\\
+     &= a^2-ab+ba-b^2  \\ 
+     &= a^2+b^2 \tag{wrong}
+\end{align}
+This is a reference to \eqref{1}.
+\end{example}
+
+\index{long equations} \textbf{Long equations} will not be
+automatically divided into neat bits.  The author has to specify
+where to break them and correct the indent:
+\begin{example}
+\begin{align}
+f(x) &= 3x^5 + x^4 + 2x^3 
+                \nonumber \\
+     &\qquad + 9x^2 + 12x + 23 \\
+     &= g(x) - h(x)
+\end{align}
+\end{example}
+The \pai{amsmath} package provides a couple of other useful environments: \verb|flalign|,
+\verb|gather|, \verb|multline| and \verb|split|. See the
+documentation for the package for a wide range of commands, environments and more.
+
+\subsection{Arrays and Matrices} \label{sec:arraymat}
+
+To typeset \textbf{arrays}, use the \ei{array} environment. It works
+somewhat similar to the \texttt{tabular} environment. The \verb|\\| command is
+used to break the lines:
+\begin{example}
+\begin{equation*}
+ \mathbf{X} = \left( 
+  \begin{array}{ccc}
+   x_1 & x_2 & \ldots \\
+   x_3 & x_4 & \ldots \\
+   \vdots & \vdots & \ddots
+  \end{array} \right)
+\end{equation*}
+\end{example}
+
+
+The \ei{array} environment can also be used to typeset \wi{piecewise function}s by
+using a ``\verb|.|'' as an invisible \ci{right} delimiter:\footnote{If you want
+  to typeset a lot of constructions like these, the \ei{cases} environment from
+  \textsf{amsmath} simplifies the syntax, so it is worth a look.}  
+\begin{example}
+\begin{equation*}
+|x| = \left\{
+ \begin{array}{rl}
+  -x & \text{if } x < 0\\
+   0 & \text{if } x = 0\\
+   x & \text{if } x > 0
+ \end{array} \right.
+\end{equation*}
+\end{example}
+
+
+
+\ei{array} can be used to typeset matrices\index{matrix} as well, but
+\pai{amsmath} provides a better solution using the different \ei{matrix}
+environments. There are six versions with different delimiters: \ei{matrix}
+(none), \ei{pmatrix} $($, \ei{bmatrix} $[$, \ei{Bmatrix} $\{$, \ei{vmatrix} $\vert$ and
+\ei{Vmatrix} $\Vert$. You don't have to specify the number of columns as with
+\ei{array}. The maximum number is 10, but it is customisable (though it is not
+very often you need 10 columns!):
+\begin{example}
+\begin{equation*}
+ \begin{matrix} 
+   1 & 2 \\
+   3 & 4 
+ \end{matrix} \qquad
+ \begin{bmatrix} 
+   1 & 2 & 3 \\
+   4 & 5 & 6 \\ 
+   7 & 8 & 9
+ \end{bmatrix}
+\end{equation*}
+\end{example}
+
+
+
+\section{Spacing in Math Mode} \label{sec:math-spacing}
+
+\index{math spacing} If the spacing within formulae chosen by \LaTeX{}
+is not satisfactory, it can be adjusted by inserting special
+spacing commands: \ci{,} for
+$\frac{3}{18}\:\textrm{quad}$ (\demowidth{0.166em}), \ci{:} for $\frac{4}{18}\:
+\textrm{quad}$ (\demowidth{0.222em}) and \ci{;} for $\frac{5}{18}\:
+\textrm{quad}$ (\demowidth{0.277em}).  The escaped space character
+\verb*|\ | generates a medium sized space comparable to the interword spacing and \ci{quad}
+(\demowidth{1em}) and \ci{qquad} (\demowidth{2em}) produce large
+spaces. The size of a \ci{quad} corresponds to the width of the
+character `M' of the current font. \verb|\!|\cih{"!} produces a
+negative space of $-\frac{3}{18}\:\textrm{quad}$ ($-$\demowidth{0.166em}).
+
+Note that `d' in the differential is conventionally set in roman:
+\begin{example}
+\begin{equation*}
+ \int_1^2 \ln x \mathrm{d}x \qquad
+ \int_1^2 \ln x \,\mathrm{d}x
+\end{equation*}
+\end{example}
+
+
+In the next example, we define a new command \ci{ud} which produces
+``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
+$\text{d}$), so we don't have to write it every time. The \ci{newcommand} is
+placed in the preamble. %  More on
+% \ci{newcommand} in section~\ref{} on page \pageref{}. To Do: Add label and
+% reference to "Customising LaTeX" -> "New Commands, Environments and Packages"
+% -> "New Commands".
+\begin{example}
+\newcommand{\ud}{\,\mathrm{d}}
+
+\begin{equation*}
+ \int_a^b f(x)\ud x 
+\end{equation*}
+\end{example}
+
+If you want to typeset multiple integrals, you'll discover that the spacing
+between the integrals is too wide. You can correct it using \ci{!}, but
+\pai{amsmath} provides an easier way for fine-tuning
+the spacing, namely the \ci{iint}, \ci{iiint}, \ci{iiiint}, and \ci{idotsint}
+commands.
+
+\begin{example}
+\newcommand{\ud}{\,\mathrm{d}}
+
+\[ \int\int f(x)g(y) 
+                  \ud x \ud y \]
+\[ \int\!\!\!\int 
+         f(x)g(y) \ud x \ud y \]
+\[ \iint f(x)g(y) \ud x \ud y \]
+\end{example}
+
+See the electronic document \texttt{testmath.tex} (distributed with
+\AmS-\LaTeX) or Chapter 8 of \companion{} for further details.
+
+\subsection{Phantoms}
+
+When vertically aligning text using \verb|^| and \verb|_| \LaTeX{} is sometimes
+just a little too helpful. Using the \ci{phantom} command you can
+reserve space for characters that do not show up in the final output.
+The easiest way to understand this is to look at an example:
+\begin{example}
+\begin{equation*}
+{}^{14}_{6}\text{C}
+\qquad \text{versus} \qquad
+{}^{14}_{\phantom{1}6}\text{C}
+\end{equation*}
+\end{example}
+If you want to typeset a lot of isotopes as in the example, the \pai{mhchem}
+package is very useful for typesetting isotopes and chemical formulae too.
+
+
+\section{Fiddling with the Math Fonts}\label{sec:fontsz}
+Different math fonts are listed on Table~\ref{mathalpha} on page
+\pageref{mathalpha}.
+\begin{example}
+ $\Re \qquad
+  \mathcal{R} \qquad
+  \mathfrak{R} \qquad
+  \mathbb{R} \qquad $  
+\end{example}
+The last two require \pai{amssymb} or \pai{amsfonts}.
+
+Sometimes you need to tell \LaTeX{} the correct font
+size. In math mode, this is set with the following four commands:
+\begin{flushleft}
+\ci{displaystyle}~($\displaystyle 123$),
+ \ci{textstyle}~($\textstyle 123$), 
+\ci{scriptstyle}~($\scriptstyle 123$) and
+\ci{scriptscriptstyle}~($\scriptscriptstyle 123$).
+\end{flushleft}
+
+If $\sum$ is placed in a fraction, it'll be typeset in text style unless you tell
+\LaTeX{} otherwise:
+\begin{example}
+\begin{equation*}
+ R = \frac{\displaystyle{ 
+   \sum_{i=1}^n (x_i-\bar{x})
+   (y_i- \bar{y})}} 
+   {\displaystyle{\left[
+   \sum_{i=1}^n(x_i-\bar{x})^2
+   \sum_{i=1}^n(y_i-\bar{y})^2
+   \right]^{1/2}}}
+\end{equation*}    
+\end{example}
+Changing styles generally affects the way big operators and limits are displayed.
+
+% This is not a math accent, and no maths book would be set this way.
+% mathop gets the spacing right.
+
+
+\subsection{Bold Symbols}
+\index{bold symbols}
+
+It is quite difficult to get bold symbols in \LaTeX{}; this is
+probably intentional as amateur typesetters tend to overuse them.  The
+font change command \verb|\mathbf| gives bold letters, but these are
+roman (upright) whereas mathematical symbols are normally italic, and
+furthermore it doesn't work on lower case Greek letters.
+There is a \ci{boldmath} command, but \emph{this can only be used
+outside math mode}. It works for symbols too, though:
+\begin{example}
+$\mu, M \qquad 
+\mathbf{\mu}, \mathbf{M}$
+\qquad \boldmath{$\mu, M$}
+\end{example}
+
+The package \pai{amsbsy} (included by \pai{amsmath}) as well as the
+\pai{bm} from the \texttt{tools} bundle make this much easier as they include
+a \ci{boldsymbol} command:
+
+\begin{example}
+$\mu, M \qquad
+\boldsymbol{\mu}, \boldsymbol{M}$
+\end{example}
+
+
+\section{Theorems, Lemmas, \ldots}
+
+When writing mathematical documents, you probably need a way to
+typeset ``Lemmas'', ``Definitions'', ``Axioms'' and similar
+structures.
+\begin{lscommand}
+\ci{newtheorem}\verb|{|\emph{name}\verb|}[|\emph{counter}\verb|]{|%
+         \emph{text}\verb|}[|\emph{section}\verb|]|
+\end{lscommand}
+The \emph{name} argument is a short keyword used to identify the
+``theorem''. With the \emph{text} argument you define the actual name
+of the ``theorem'', which will be printed in the final document.
+
+The arguments in square brackets are optional. They are both used to
+specify the numbering used on the ``theorem''. Use  the \emph{counter}
+argument to specify the \emph{name} of a previously declared
+``theorem''. The new ``theorem'' will then be numbered in the same
+sequence.  The \emph{section} argument allows you to specify the
+sectional unit within which the ``theorem'' should get its numbers.
+
+After executing the \ci{newtheorem} command in the preamble of your
+document, you can use the following command within the document.
+\begin{code}
+\verb|\begin{|\emph{name}\verb|}[|\emph{text}\verb|]|\\
+This is my interesting theorem\\
+\verb|\end{|\emph{name}\verb|}|     
+\end{code}
+
+The \pai{amsthm} package (part of \AmS-\LaTeX) provides the 
+\ci{theoremstyle}\verb|{|\emph{style}\verb|}|
+command which lets you define what the theorem is all about by picking
+from three predefined styles: \texttt{definition} (fat title, roman body),
+\texttt{plain} (fat title, italic body) or \texttt{remark} (italic
+title, roman body).
+
+This should be enough theory. The following examples should
+remove any remaining doubt, and make it clear that the
+\verb|\newtheorem| environment is way too complex to understand.
+
+% actually define things
+\theoremstyle{definition} \newtheorem{law}{Law}
+\theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
+\theoremstyle{remark}     \newtheorem*{marg}{Margaret}
+
+First define the theorems:
+
+\begin{verbatim}
+\theoremstyle{definition} \newtheorem{law}{Law}
+\theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
+\theoremstyle{remark}     \newtheorem*{marg}{Margaret}
+\end{verbatim}
+
+\begin{example}
+\begin{law} \label{law:box}
+Don't hide in the witness box
+\end{law}
+\begin{jury}[The Twelve]
+It could be you! So beware and
+see law~\ref{law:box}.\end{jury}
+\begin{marg}No, No, No\end{marg}
+\end{example}
+
+The ``Jury'' theorem uses the same counter as the ``Law''
+theorem, so it gets a number that is in sequence with
+the other ``Laws''. The argument in square brackets is used to specify 
+a title or something similar for the theorem.
+\begin{example}
+\newtheorem{mur}{Murphy}[section]
+
+\begin{mur} If there are two or 
+more ways to do something, and 
+one of those ways can result in
+a catastrophe, then someone 
+will do it.\end{mur}
+\end{example}
+
+The ``Murphy'' theorem gets a number that is linked to the number of
+the current section. You could also use another unit, for example chapter or
+subsection.
+
+The \pai{amsthm} package also provides the \ei{proof} environment.
+
+\begin{example}
+\begin{proof}
+ Trivial, use
+\[E=mc^2\]
+\end{proof}
+\end{example}
+
+With the command \ci{qedhere} you can move the `end of proof' symbol
+around for situations where it would end up alone on a line.
+
+\begin{example}
+\begin{proof}
+ Trivial, use
+\[E=mc^2 \qedhere\]
+\end{proof}
+\end{example}
+
+If you want to customize your theorems down to the last dot, the
+\pai{ntheorem} package offers a plethora of options.
+
+
+%
+
+% Local Variables:
+% TeX-master: "lshort"
+% mode: latex
+% mode: flyspell
+% End:
