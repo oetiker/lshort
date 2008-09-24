@@ -1,0 +1,1043 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Specialities of the LaTeX system
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\chapter{Specialities}
+\begin{intro}
+  When putting together a large document, \LaTeX{} will help you
+  with some special features like index generation,
+  bibliography management, and other things.
+  A much more complete description of specialities and
+  enhancements possible with \LaTeX{} can be found in the
+  {\normalfont\manual{}} and {\normalfont \companion}.
+\end{intro}
+
+\section{Including \EPSi{}}\label{eps}
+\LaTeX{} provides the basic facilities to work with floating bodies,
+such as images or graphics, with the \texttt{figure} and
+\texttt{table} environments.
+
+There are several ways to generate the actual
+\wi{graphics} with basic \LaTeX{} or a \LaTeX{} extension package,
+a few of them are described in chapter \ref{chap:graphics}.
+Please refer to \companion{} and the \manual{} for more information on
+that subject.
+
+A much easier way to get graphics into a document is to generate them with a
+specialised software package\footnote{Such as XFig, Gnuplot, Gimp, Xara X
+\ldots} and then include the finished graphics into the document. Here
+again, \LaTeX{} packages offer many ways to do this, but this introduction
+will only discuss the use of \EPSi{} (EPS) graphics, because it is quite
+easy to do and widely used.  In order to use pictures in the EPS format, you
+must have a \PSi{} printer\footnote{Another
+  possibility to output \PSi{} is the \textsc{\wi{GhostScript}}
+  program available from
+  \CTANref|support/ghostscript|. Windows and OS/2 users might
+  want to look for \textsc{GSview}.} available for output.
+
+A good set of commands for inclusion of graphics is provided in the
+\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
+of packages called the ``graphics''
+bundle.\footnote{\CTANref|macros/latex/required/graphics|}
+
+Assuming you are working on a system with a
+\PSi{} printer available for output and with the \textsf{graphicx}
+package installed, you can use the following step by step guide to
+include a picture into your document:
+
+\begin{enumerate}
+\item Export the picture from your graphics program in EPS
+  format.\footnote{If your software can not export into EPS format, you
+    can try to install a \PSi{} printer driver (such as an Apple
+    LaserWriter, for example) and then print to a file with this
+    driver. With some luck this file will be in EPS format. Note that
+    an EPS must not contain more than one page. Some printer drivers
+    can be explicitly configured to produce EPS format.}
+\item Load the \textsf{graphicx} package in the preamble of the input
+  file with
+\begin{lscommand}
+\verb|\usepackage[|\emph{driver}\verb|]{graphicx}|
+\end{lscommand}
+\noindent where \emph{driver} is the name of your ``dvi to postscript''
+converter program. The most
+widely used program is called \texttt{dvips}. The name of the driver is
+required, because there is no standard on how graphics are included in
+\TeX{}. Knowing the name of the \emph{driver}, the
+\textsf{graphicx} package can choose the correct method to insert
+information about the graphics into the \eei{.dvi}~file, so that the
+printer understands it and can correctly include the \eei{.eps} file.
+\item Use the command 
+\begin{lscommand}
+\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file}\verb|}|
+\end{lscommand}
+\noindent to include \emph{file} into your document. The optional parameter
+accepts a comma separated list of \emph{keys} and associated
+\emph{values}. The \emph{keys} can be used to alter the width, height
+and rotation of the included graphic. Table~\ref{keyvals} lists the
+most important keys.
+\end{enumerate}
+
+\begin{table}[htb]
+\caption{Key Names for \textsf{graphicx} Package.}
+\label{keyvals}
+\begin{lined}{9cm}
+\begin{tabular}{@{}ll}
+\texttt{width}& scale graphic to the specified width\\
+\texttt{height}& scale graphic to the specified height\\
+\texttt{angle}& rotate graphic counterclockwise\\
+\texttt{scale}& scale graphic \\
+\end{tabular}
+
+\bigskip
+\end{lined}
+\end{table}
+
+\pagebreak
+The following example code may help to clarify things:
+\begin{code}
+\begin{verbatim}
+\begin{figure}
+\centering
+\includegraphics[angle=90,
+                 width=0.5\textwidth]{test}
+\caption{This is a test.}
+\end{figure}
+\end{verbatim}
+\end{code}
+It includes the graphic stored in the file \texttt{test.eps}. The
+graphic is \emph{first} rotated by an angle of 90 degrees and
+\emph{then} scaled to the final width of 0.5 times the width of a
+standard paragraph.  The aspect ratio is $1.0$, because no special
+height is specified.  The width and height parameters can also be
+specified in absolute dimensions. Refer to Table~\ref{units} on
+page~\pageref{units} for more information. If you want to know more
+about this topic, make sure to read \cite{graphics} and \cite{eps}.
+
+\section{Bibliography}
+ 
+You can produce a \wi{bibliography} with the \ei{thebibliography}
+environment.  Each entry starts with
+\begin{lscommand}
+\ci{bibitem}\verb|[|\emph{label}\verb|]{|\emph{marker}\verb|}|
+\end{lscommand}
+The \emph{marker} is then used to cite the book, article or paper
+within the document.
+\begin{lscommand}
+\ci{cite}\verb|{|\emph{marker}\verb|}|
+\end{lscommand}
+If you do not use the \emph{label} option, the entries will get enumerated
+automatically.  The parameter after the \verb|\begin{thebibliography}|
+command defines how much space to reserve for the number of labels. In the example below,
+\verb|{99}| tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
+than the number 99.
+\enlargethispage{2cm}
+\begin{example}
+Partl~\cite{pa} has 
+proposed that \ldots 
+\begin{thebibliography}{99}
+\bibitem{pa} H.~Partl: 
+\emph{German \TeX},
+TUGboat Volume~9, Issue~1 (1988)
+\end{thebibliography}
+\end{example}
+
+\chaptermark{Specialities} % w need to fix the damage done by the
+                           %bibliography example.
+\thispagestyle{fancyplain}
+
+
+For larger projects, you might want to check out the Bib\TeX{}
+program. Bib\TeX{} is included with most \TeX{} distributions. It
+allows you to maintain a bibliographic database and then extract the
+references relevant to things you cited in your paper. The visual
+presentation of Bib\TeX{} generated bibliographies is based on a style
+sheets concept that allows you to create bibliographies following
+a wide range of established designs.
+
+\newpage
+
+\section{Indexing} \label{sec:indexing}
+A very useful feature of many books is their \wi{index}. With \LaTeX{}
+and the support program \texttt{makeindex},\footnote{On systems not
+  necessarily supporting
+  filenames longer than 8~characters, the program may be called
+  \texttt{makeidx}.} an index can be generated quite easily.  This
+introduction will only explain the basic index generation commands.
+For a more in-depth view, please refer to \companion.  \index{makeindex
+  program} \index{makeidx package}
+
+To enable the indexing feature of \LaTeX{}, the \pai{makeidx} package
+must be loaded in the preamble with:
+\begin{lscommand}
+\verb|\usepackage{makeidx}|
+\end{lscommand}
+\noindent and the special indexing commands must be enabled by putting 
+the
+\begin{lscommand}
+  \ci{makeindex}
+\end{lscommand}
+\noindent command into the input file preamble.
+
+The content of the index is specified with
+\begin{lscommand}
+  \ci{index}\verb|{|\emph{key}\verb|}|
+\end{lscommand}
+\noindent commands, where \emph{key} is the index entry. You enter the
+index commands at the points in the text that you want the final index
+entries to point to.  Table~\ref{index} explains the syntax of the
+\emph{key} argument with several examples.
+
+\begin{table}[!tp]
+\caption{Index Key Syntax Examples.}
+\label{index}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+  \textbf{Example} &\textbf{Index Entry} &\textbf{Comment}\\\hline
+  \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\ 
+\verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\ 
+\verb|\index{Sam@\textsl{Sam}}|     &\textsl{Sam}, 2& Formatted entry\\ 
+\verb|\index{Lin@\textbf{Lin}}|     &\textbf{Lin}, 7& Same as above\\ 
+\verb.\index{Jenny|textbf}.     &Jenny, \textbf{3}& Formatted page number\\
+\verb.\index{Joe|textit}.     &Joe, \textit{5}& Same as above\\
+\verb.\index{ecole@\'ecole}.     &\'ecole, 4& Handling of accents
+\end{tabular}
+\end{center}
+\end{table}
+
+When the input file is processed with \LaTeX{}, each \verb|\index|
+command writes an appropriate index entry, together with the current
+page number, to a special file. The file has the same name as the
+\LaTeX{} input file, but a different extension (\verb|.idx|). This
+\eei{.idx} file can then be processed with the \texttt{makeindex}
+program.
+
+\begin{lscommand}
+  \texttt{makeindex} \emph{filename}
+\end{lscommand}
+The \texttt{makeindex} program generates a sorted index with the same base
+file name, but this time with the extension \eei{.ind}. If now the
+\LaTeX{} input file is processed again, this sorted index gets
+included into the document at the point where \LaTeX{} finds
+\begin{lscommand}
+  \ci{printindex}
+\end{lscommand}
+
+The \pai{showidx} package that comes with \LaTeXe{} prints out all
+index entries in the left margin of the text. This is quite useful for
+proofreading a document and verifying the index.
+
+Note that the \ci{index} command can affect your layout if not used carefully.
+
+\begin{example}
+My Word \index{Word}. As opposed
+to Word\index{Word}. Note the
+position of the full stop.
+\end{example}
+
+\section{Fancy Headers}
+\label{sec:fancy}
+
+The \pai{fancyhdr} package,\footnote{Available from
+  \CTANref|macros/latex/contrib/supported/fancyhdr|.} written by
+Piet van Oostrum, provides a few simple commands that allow you to
+customize the header and footer lines of your document.  If you look
+at the top of this page, you can see a possible application of this
+package.
+
+\begin{figure}[!htbp]
+\begin{lined}{\textwidth}
+\begin{verbatim}
+\documentclass{book}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% with this we ensure that the chapter and section
+% headings are in lowercase.
+\renewcommand{\chaptermark}[1]{%
+        \markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+        \markright{\thesection\ #1}}
+\fancyhf{}  % delete current header and footer
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} % space for the rule
+\fancypagestyle{plain}{%
+   \fancyhead{} % get rid of headers on plain pages
+   \renewcommand{\headrulewidth}{0pt} % and the line
+}
+\end{verbatim}
+\end{lined}
+\caption{Example \pai{fancyhdr} Setup.} \label{fancyhdr}
+\end{figure}
+
+The tricky problem when customising headers and footers is to get
+things like running section and chapter names in there. \LaTeX{}
+accomplishes this with a two-stage approach. In the header and footer
+definition, you use the commands \ci{rightmark} and \ci{leftmark} to
+represent the current section and chapter heading, respectively.
+The values of these two commands are overwritten whenever a chapter or
+section command is processed. 
+
+For ultimate flexibility, the \verb|\chapter| command and its friends
+do not redefine \ci{rightmark} and \ci{leftmark} themselves. They call
+yet another command (\ci{chaptermark}, \ci{sectionmark}, or
+\ci{subsectionmark}) that is responsible for redefining \ci{rightmark}
+and \ci{leftmark}.
+
+If you want to change the look of the chapter
+name in the header line, you need only ``renew'' the \ci{chaptermark}
+command. \cih{sectionmark}\cih{subsectionmark}
+
+ 
+Figure~\ref{fancyhdr} shows a possible setup for the \pai{fancyhdr}
+package that makes the headers look about the same as they look in
+this booklet. In any case, I suggest you fetch the documentation for
+the package at the address mentioned in the footnote. 
+
+\section{The Verbatim Package}
+
+Earlier in this book, you got to know the \ei{verbatim}
+\emph{environment}.  In this section, you are going to learn about the
+\pai{verbatim} \emph{package}. The \pai{verbatim} package is basically
+a re-implementation of the \ei{verbatim} environment that works around
+some of the limitations of the original \ei{verbatim} environment.
+This by itself is not spectacular, but the implementation of the
+\pai{verbatim} package added new functionality, which is
+why I am mentioning the package here. The \pai{verbatim}
+package provides the
+
+\begin{lscommand}
+\ci{verbatiminput}\verb|{|\emph{filename}\verb|}|
+\end{lscommand}
+
+\noindent command, which allows you to include raw ASCII text into your
+document as if it were inside a \ei{verbatim} environment.
+
+As the \pai{verbatim} package is part of the `tools' bundle, you
+should find it pre-installed on most systems. If you want to know more
+about this package, make sure to read \cite{verbatim}.
+
+
+\section{Installing Extra Packages}\label{sec:Packages}
+
+Most \LaTeX{} installations come with a large set of pre-installed
+style packages, but many more are available on the net. The main
+place to look for style packages on the Internet is CTAN (\url{http://www.ctan.org/}).
+
+Packages such as \pai{geometry}, \pai{hyphenat}, and many
+others are typically made up of two files: a file with the extension
+\texttt{.ins} and another with the extension \texttt{.dtx}. There
+will often be a \texttt{readme.txt} with a brief description of the
+package. You should of course read this file first.
+
+In any event, once you have copied the package files onto your
+machine, you still have to process them in a way that (a) tells your
+\TeX\ distribution about the new style package and (b) gives you
+the documentation.  Here's how you do the first part:
+
+\begin{enumerate}
+\item Run \LaTeX{} on the \texttt{.ins} file. This will
+  extract a \eei{.sty} file.
+\item Move the \eei{.sty} file to a place where your distribution
+  can find it. Usually this is in your \texttt{\ldots/\emph{localtexmf}/tex/latex}
+  subdirectory (Windows or OS/2 users should feel free to change the
+  direction of the slashes).
+\item Refresh your distribution's file-name database. The command
+  depends on the \LaTeX distribution you use:
+  teTeX, fpTeX -- \texttt{texhash}; web2c -- \texttt{maktexlsr};
+  MikTeX -- \texttt{initexmf -update-fndb} or use the GUI.
+\end{enumerate}
+
+\noindent Now you can extract the documentation from the
+\texttt{.dtx} file:
+
+\begin{enumerate}
+\item Run \LaTeX\ on the \texttt{.dtx} file.  This will generate a
+  \texttt{.dvi} file. Note that you may have to run \LaTeX\
+  several times before it gets the cross-references right.
+\item Check to see if \LaTeX\ has produced a \texttt{.idx} file
+  among the various files you now have.
+  If you do not see this file, then you may proceed to
+  step~\ref{step:final}.
+\item In order to generate the index, type the following:\\
+        \fbox{\texttt{makeindex -s gind.ist \textit{name}}}\\
+        (where \textit{name} stands for the main-file name without any
+    extension).
+ \item Run \LaTeX\ on the \texttt{.dtx} file once again. \label{step:next}
+    
+\item Last but not least, make a \texttt{.ps} or \texttt{.pdf}
+  file to increase your reading pleasure.\label{step:final}
+  
+\end{enumerate}
+
+Sometimes you will see that a \texttt{.glo}
+(glossary) file has been produced. Run the following
+command between
+step~\ref{step:next} and~\ref{step:final}:
+
+\noindent\texttt{makeindex -s gglo.ist -o \textit{name}.gls \textit{name}.glo}
+
+\noindent Be sure to run \LaTeX\ on the \texttt{.dtx} one last
+time before moving on to step~\ref{step:final}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Chapter on pdfLaTeX
+% French original by Daniel Flipo 14/07/2004
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Working with pdf\LaTeX} \label{sec:pdftex}\index{PDF}
+\secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}%
+PDF is a \wi{hypertext} document format. Much like in a web page,
+some words in the document are marked as hyperlinks. They link to other
+places in the document or even to other documents. If you click
+on such a hyperlink you get transported to the destination of the
+link. In the context of \LaTeX{}, this means that all occurrences of
+\ci{ref} and \ci{pageref} become hyperlinks. Additionally, the table
+of contents, the index and all the other similar structures become
+collections of hyperlinks.
+
+Most web pages you find today are written in HTML \emph{(HyperText
+  Markup Language)}. This format has two significant disadvantages
+when writing scientific documents:
+\begin{enumerate}
+\item Including mathematical formulae into HTML documents is not
+  generally supported. While there is a standard for it, most browsers
+  used today do not support it, or lack the required fonts.
+\item Printing HTML documents is possible, but the results vary widely
+  between platforms and browsers. The results are miles removed from
+  the quality we have come to expect in the \LaTeX{} world.
+\end{enumerate}
+
+There have been many attempts to create translators from \LaTeX{} to
+HTML. Some were even quite successful in the sense that they are able
+to produce legible web pages from a standard \LaTeX{} input file. But
+all of them cut corners left and right to get the job done. As soon as
+you start using more complex \LaTeX{} features and external packages
+things tend to fall apart. Authors wishing to preserve the unique
+typographic quality of their documents even when publishing on the web
+turn to PDF \emph{(Portable Document Format)}, which preserves the 
+layout of the document and permits hypertext
+navigation. Most modern browsers come with plugins that allow the
+direct display of PDF documents.
+
+Even though there are DVI and PS viewers for almost every platform, you will find that
+\wi{Acrobat Reader} and \wi{Xpdf} for viewing PDF documents 
+are more widely deployed. So providing PDF versions of your documents will
+make them much more accessible to your potential readers.
+
+\subsection{PDF Documents for the Web}
+
+The creation of a PDF file from \LaTeX{} source is very simple,
+thanks to the pdf\TeX{} program developed by
+H\`an~Th\'{\^e}~Th\`anh. pdf\TeX{} produces PDF output where normal
+\TeX{} produces DVI. There is also a pdf\LaTeX{}, which produces
+  PDF output from \LaTeX{} sources. \index{pdftex@pdf\TeX}\index{pdftex@pdf\LaTeX}
+
+Both pdf\TeX{} and pdf\LaTeX{} are installed automatically by most
+modern \TeX{} distributions, such as te\TeX{}, fp\TeX{},
+Mik\TeX, \TeX{}Live and CMac\TeX{}.
+
+To produce a PDF instead of DVI, it is sufficient to replace the
+command \texttt{latex file.tex} by
+\texttt{pdflatex file.tex}. On systems where \LaTeX{} is not called from the
+command line, you may find a special button in the \TeX{}ControlCenter.
+
+In \LaTeX{} you can define the paper size with an 
+optional documentclass argument such as \texttt{a4paper} or
+\texttt{letterpaper}. This works in pdf\LaTeX{} too, but on top of this
+pdf\TeX{} also needs to know the physical size of the paper to determine the physical
+size of the pages in the pdf file.
+\index{paper size}
+If you use the
+\pai{hyperref} package (see page \pageref{ssec:pdfhyperref}), the
+papersize will be adjusted automatically. Otherwise you have to do this
+manually by putting the following lines into the preamble of the document:
+\begin{code}
+\begin{verbatim}
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+\end{verbatim}
+\end{code}
+
+The following section will go into more detail regarding the differences
+between normal \LaTeX{} and pdf\LaTeX{}. The main differences concern
+three areas: the fonts to use, the format of images to include, and the
+manual configuration of hyperlinks.
+
+\subsection{The Fonts}
+
+\wi{pdf\LaTeX} can deal with all sorts of fonts (PK bitmaps, TrueType,
+\PSi{} type~1\dots) but the normal \LaTeX{} font format, the bitmap PK
+fonts produce very ugly results when the document is displayed with Acrobat
+Reader. It is best to use \PSi{} Type 1 fonts exclusively to produce
+documents that display well. \emph{Modern TeX installations will be setup so that
+this happens automatically. Best is to try. If it works for you,
+just skip this whole section.}
+
+The \PSi{} Type 1 implementation of the Computer Modern and AMSFonts
+was produced by Blue Sky Research and Y\&Y, Inc., who then transferred
+copyright to the American Mathematical Society. The fonts were made
+publicly available in early 1997 and currently come with most of \TeX{}
+distributions. 
+
+However, if you are using \LaTeX{} to create documents in languages 
+other than English, you might want to use EC, LH, or CB fonts (see the
+discussion about \texttt{OT1} fonts on the page~\pageref{OT1}). 
+Vladimir Volovich has created the cm-super font bundle which covers the
+entire EC/TC, EC Concrete, EC Bright and LH font sets. It is available from
+\texttt{CTAN:/fonts/ps-type1/cm-super} and is included with \TeX{}Live7
+and Mik\TeX. Similar type~1 CB Greek fonts created by Apostolos
+Syropoulos are available at \texttt{CTAN:/tex-archive/fonts/greek/cb}.
+Unfortunately, both of these font sets are not of the same typographic
+quality as the Type1 CM fonts by Blue Sky/Y\&Y. They were automatically
+hinted, and the document might look not as neat on the screen as the ones using
+Blue Sky/Y\&Y type 1 CM fonts, on high resolution output devices they
+produce results identical to the original bitmap EC/LH/CB fonts. 
+
+If you are creating document in one of Latin-based languages, you have
+several other options. 
+\begin{itemize}
+\item You might want to use \pai{aeguill} package, aka
+  \emph{Almost European Computer Modern with Guillemets}. Just put the
+  line\newline \verb+\usepackage{aeguill}+\paih{aeguill}  into the preamble of  
+  your document, to enable AE virtual fonts instead of EC fonts.  
+\item Alternatively, you can use \pai{mltex} package, but this only works when  
+  your pdf\TeX{} has been compiled with the \wi{mltex} option.
+\end{itemize}
+The AE virtual fontset, like the {Ml\TeX} system, makes \TeX{} believe
+it has a full 256 character fontset at its disposal by creating most of
+the missing letters from characters of the CM font and rearranging them
+in the EC order, this allows to use the excellent type 1 format CM
+fonts available on most systems. As the font is now in T1 encoding,
+hyphenation will work well in Latin-based European languages.  The only
+disadvantage of this approach is that the artificial AE characters do
+not work with Acrobat Reader's \texttt{Find} function, so you cannot
+search for words with accented characters in your final PDF file.
+
+For the Russian language a similar solution is to use C1 virtual fonts 
+available at \texttt{ftp://ftp.vsu.ru/pub/tex/font-packs/c1fonts}. 
+These fonts combine the standard CM type~1                                 
+fonts from Bluesky collection and CMCYR type~1 fonts from  Paradissa and
+BaKoMa collection, all available on CTAN. Because Paradissa fonts
+contain only Russian letters, C1 fonts are                                  
+missing other Cyrillic glyphs. 
+
+Another solution is to switch to other \PSi{} type~1 fonts.
+Actually, some of them are even included with every copy of Acrobat
+Reader. Because these fonts have different character sizes, the text
+layout on your pages will change. Generally these other fonts will use more space than
+the CM fonts, which are very space-efficient.  Also, the overall visual
+coherence of your document will suffer because Times, Helvetica and
+Courier (the primary candidates for such a replacement job) have not
+been designed to work in harmony in a single document.
+ 
+Two ready-made font sets are available for this purpose:
+\pai{pxfonts}, which is based on \emph{Palatino} as its main text body font,
+and the \pai{txfonts} package, which is based on \emph{Times}. To use them it is
+sufficient to put the following lines into the preamble of your
+document:
+\begin{code}
+\begin{verbatim}
+\usepackage[T1]{fontenc}
+\usepackage{pxfonts}
+\end{verbatim}
+\end{code}
+
+Note: you may find lines like
+\begin{verbatim}
+Warning: pdftex (file eurmo10): Font eur... not found
+\end{verbatim}
+in the  \texttt{.log} file after compiling your input file. They mean
+that some font used in the document has not been found. You really have
+to fix these problems, as the resulting PDF document may 
+\emph{not display the pages with the missing characters at all}.
+
+As you can see this whole font business, especially the lack of a good EC
+fontset equivalent in quality to the CM font in type~1 format, has been
+occupying many peoples minds. Recently a new set of high quality outline
+fonts called Latin Modern (LM) has become available. It puts an end to the
+misery. If you have a recent \TeX{} installation, chances are that you
+already have a copy of them installed all you need todo is to add
+\begin{code}
+\begin{verbatim}  
+\usepackage{lmodern}
+\usepackage[T1]{fontenc} 
+\usepackage{textcomp}
+\end{verbatim}
+\end{code}
+to the preamble of your document and you are all set for creating excellent
+pdf output with full support for the full Latin character set.
+
+
+\subsection{Using Graphics}
+\label{ssec:pdfgraph}
+
+Including graphics into a document works best with the 
+\pai{graphicx} package (see page~\pageref{eps}). 
+By using the special \emph{driver} option \texttt{pdftex} the
+package will work with pdf\LaTeX{} as well:
+\begin{code}
+\begin{verbatim}
+\usepackage[pdftex]{color,graphicx}
+\end{verbatim}
+\end{code}
+In the sample above I have included the color option, as using color in
+documents displayed on the web comes quite naturally.
+
+So much for the good news. The bad news is that graphics in \EPSi{}
+format do not work with Pdf\LaTeX{}. If you don't define a file extension
+in the \ci{includegraphics} command, \pai{graphicx} will go
+looking for a suitable file on its own, depending on the setting of
+the \emph{driver} option. For \texttt{pdftex} this is
+formats \texttt{.png}, \texttt{.pdf}, \texttt{.jpg} and \texttt{.mps} (
+\MP\index{metapost@\MP})---but \emph{not} \texttt{.eps}.
+
+The simple way out of this problem is to just convert your EPS files
+into PDF format using the \texttt{epstopdf} utility found on many
+systems. For vector graphics (drawings) this is a great solution. For
+bitmaps (photos, scans) this is not ideal, because the PDF format
+natively supports the inclusion of PNG and JPEG images. PNG is
+good for screenshots and other images with few colors. JPEG is great
+for photos, as it is very space-efficient.
+
+It may even be desirable not to draw certain geometric figures, 
+but rather describe the figure with a specialized command language, such as
+ \MP\index{metapost@\MP}, which can be found in most \TeX{} distributions, and
+comes with its own extensive manual.
+
+\subsection{Hypertext Links}
+\label{ssec:pdfhyperref}
+
+The \pai{hyperref} package will take care of turning all internal
+references of your document into hyperlinks. For this to work
+properly some magic is necessary, so you have to put
+\verb+\usepackage[pdftex]{hyperref}+ as the \emph{last} command into
+the preamble of your document.
+
+Many options are available to customize the behaviour of the
+\pai{hyperref} package:
+\begin{itemize}
+\item either as a comma separated list after the pdftex option\\
+  \verb+\usepackage[pdftex]{hyperref}+
+\item or on individual lines with the command
+  \verb+\hypersetup{+\emph{options}\verb+}+.
+\end{itemize}
+
+The only required option is \texttt{pdftex}; the others are
+optional and allow you to change the default behaviour of hyperref.\footnote{It
+is worth noting that the \pai{hyperref} package is not limited to
+work with pdf\TeX{}. It can also be configured to embed PDF-specific
+information into the DVI output of normal \LaTeX{}, which then gets put
+into the PS file by \texttt{dvips} and is finally picked up by Adobe
+Distiller when it is used to turn the PS file into PDF.} In the following
+list the default values are written in an upright font.
+
+\begin{flushleft}
+\begin{description}
+  \item [\texttt{bookmarks (=true,\textit{false})}] show or hide the
+    bookmarks bar when displaying the document
+  \item [\texttt{unicode (=false,\textit{true})}] allows to use 
+    characters of non-latin based languages in Acrobat's bookmarks
+  \item [\texttt{pdftoolbar (=true,\textit{false})}] show or hide
+    Acrobat's toolbar
+  \item [\texttt{pdfmenubar (=true,\textit{false})}] show or hide
+    Acrobat's menu
+  \item [\texttt{pdffitwindow (=true,\textit{false})}] adjust the
+    initial magnification of the pdf when displayed
+  \item [\texttt{pdftitle (=\{text\})}] define the title that gets
+    displayed in the \texttt{Document Info} window of Acrobat
+  \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
+  \item [\texttt{pdfnewwindow (=true,\textit{false})}] define if a new
+    window should get opened when a link leads out of the current
+    document
+  \item [\texttt{colorlinks (=false,\textit{true})}] surround the  
+    links by color frames (\texttt{false}) or colors the text of the links 
+    (\texttt{true}). The color of these links can be configured
+    using the following options (default colors are shown):
+    \begin{description}
+    \item [\texttt{linkcolor (=red)}] color of internal
+      links (sections, pages, etc.),
+    \item [\texttt{citecolor (=green)}] color of
+      citation links (bibliography)
+    \item [\texttt{filecolor (=magenta)}] color of file
+      links
+    \item [\texttt{urlcolor (=cyan)}] color of URL
+      links (mail, web)
+    \end{description}
+\end{description}
+\end{flushleft}
+
+If you are happy with the defaults, use
+\begin{code}
+\begin{verbatim}
+\usepackage[pdftex]{hyperref}
+\end{verbatim}
+\end{code}
+
+To have the bookmark list open and links in color
+(the \texttt{=true} values are optional):
+\begin{code}
+\begin{verbatim}
+\usepackage[pdftex,bookmarks,colorlinks]{hyperref}
+\end{verbatim}
+\end{code}
+
+When creating PDFs destined for printing, colored links are not a
+  good thing as they end up in gray in the final output, making it
+  difficult to read. You can use color frames, which are not printed:
+\begin{code}
+\begin{verbatim}
+\usepackage{hyperref}
+\hypersetup{colorlinks=false}
+\end{verbatim}
+\end{code}
+\noindent or make links black:
+\begin{code}
+\begin{verbatim}
+\usepackage{hyperref}
+\hypersetup{colorlinks,%
+            citecolor=black,%
+            filecolor=black,%
+            linkcolor=black,%
+            urlcolor=black,%
+            pdftex}
+\end{verbatim}
+\end{code}
+
+When you just want to provide information for the
+  \texttt{Document Info} section of the PDF file:
+\begin{code}
+\begin{verbatim}
+\usepackage[pdfauthor={Pierre Desproges},%
+            pdftitle={Des femmes qui tombent},%
+            pdftex]{hyperref}
+\end{verbatim}
+\end{code}
+
+\vspace{\baselineskip}
+
+In addition to the automatic hyperlinks for cross references, it is
+possible to embed explicit links using
+\begin{lscommand}
+\ci{href}\verb|{|\emph{url}\verb|}{|\emph{text}\verb|}|
+\end{lscommand}
+
+The code
+\begin{code}
+\begin{verbatim}
+The \href{http://www.ctan.org}{CTAN} website.
+\end{verbatim}
+\end{code}
+produces the output ``\href{http://www.ctan.org}{CTAN}'';
+a click on the word ``\textcolor{magenta}{CTAN}''
+will take you to the CTAN website.
+
+If the destination of the link is not a URL but a local file,
+  you can use the \ci{href} command: 
+\begin{verbatim}
+  The complete document is \href{manual.pdf}{here}
+\end{verbatim}
+Which produces the text ``The complete document is \textcolor{cyan}{here}''.
+A click on the word
+``\textcolor{cyan}{here}''
+will open the file \texttt{manual.pdf}. (The filename is relative to
+the location of the current document).
+
+The author of an article might want her readers to easily send
+  email messages by using the \ci{href} command inside the \ci{author}
+  command on the title page of the document:
+\begin{code}
+\begin{verbatim}
+\author{Mary Oetiker $<$\href{mailto:mary@oetiker.ch}%
+       {mary@oetiker.ch}$>$
+\end{verbatim}
+\end{code}
+Note that I have put the link so that my email address appears not only
+in the link but also on the page itself. I did this because the
+link\\
+\verb+\href{mailto:mary@oetiker.ch}{Mary Oetiker}+\\
+would
+work well within Acrobat, but once the page is printed the email address
+would not be visible anymore.
+
+
+\subsection{Problems with Links}
+
+Messages like the following:
+\begin{verbatim}
+! pdfTeX warning (ext4): destination with the same
+  identifier (name{page.1}) has been already used,
+  duplicate ignored
+\end{verbatim}
+appear when a counter gets reinitialized, for example by using
+the command \ci{mainmatter} provided by the \texttt{book} document class. It
+resets the page number counter to~1 prior to the first chapter of the
+book. But as the preface of the book also has a page number~1 all
+links to ``page 1'' would not be unique anymore, hence the notice
+that ``\verb+duplicate+ has been \verb+ignored+.''
+
+The counter measure consists of putting \texttt{plainpages=false} into
+the hyperref options. This unfortunately only helps with the page
+counter.
+An even more radical solution is to use the option\\
+\texttt{hypertexnames=false}, but this will cause the page links in
+the index to stop working.
+
+\subsection{Problems with Bookmarks}
+
+The text displayed by bookmarks does not always look like you expect
+it to look. Because bookmarks are ``just text,'' much fewer
+characters are available for bookmarks than for normal \LaTeX{} text.
+Hyperref will normally notice such problems and put up a warning:
+\begin{code}
+\begin{verbatim}
+Package hyperref Warning: 
+Token not allowed in a PDFDocEncoded string:
+\end{verbatim}
+\end{code}
+You can now work around this problem by providing a text string for
+the bookmarks, which replaces the offending text:
+\begin{lscommand}
+\ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
+\end{lscommand}
+
+
+Math expressions are a prime candidate for this kind of problem:
+\begin{code}
+\begin{verbatim}
+\section{\texorpdfstring{$E=mc^2$}%
+        {E=mc^2}}
+\end{verbatim}
+\end{code}
+which turns \verb+\section{$E=mc^2$}+ to ``E=mc2'' in the bookmark area.
+
+Color changes also do not travel well into bookmarks:
+\begin{code}
+\verb+\section{\textcolor{red}{Red !}}+
+\end{code}
+produces the string ``redRed!''. The command \verb+\textcolor+ gets ignored
+but its argument (red) gets printed. 
+
+If you use
+\begin{code}
+\verb+\section{\texorpdfstring{\textcolor{red}{Red !}}{Red\ !}}+
+\end{code}
+the result will be much more legible.
+
+If you write your document in unicode and use the \verb+unicode+ option for
+the \pai{hyperref} package you can use unicode characters in bookmarks. This
+will give you a much larger selection of characters to pick from when
+when using \ci{texorpdfstring}.
+
+\subsubsection{Source Compatibility Between \LaTeX{} and pdf\LaTeX{}}
+\label{sec:pdfcompat}
+
+Ideally your document would compile equally well with \LaTeX{} and
+pdf\LaTeX{}. The main problem in this respect is the inclusion of
+graphics. The simple solution is to \emph{systematically drop} the
+file extension from \ci{includegraphics} commands. They will then
+automatically look for a file of a suitable format in the current
+directory. All you have to do is create appropriate versions of the
+graphics files. \LaTeX{} will look for \texttt{.eps}, and pdf\LaTeX{}
+will try to include a file with the extension
+\texttt{.png}, \texttt{.pdf}, \texttt{.jpg} or \texttt{.mps}
+(in that order).
+
+For the cases where you want to use different code for the
+PDF version of your document, you can simply add the package \pai{ifpdf}%
+\footnote{If you want the whole story on why to use this package then
+   go to the \TeX{} FAQ under the item\\
+   \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ifpdf}.}  to
+your preamble. Chances are that you already have it installed; if not
+then you're probably using MiK\TeX{} which will install it for you
+automatically the first time you try to use it. This package defines
+the special command \ci{ifpdf} that will allow you to write
+conditional code easily. In this example, we want the PostScript
+version to be black and white due to the printing costs but we want
+the PDF version for online viewing to be colourful.
+\begin{code}
+\begin{verbatim}
+\RequirePackage{ifpdf} % running on pdfTeX?
+\ifpdf
+  \documentclass[a4paper,12pt,pdftex]{book}
+\else
+  \documentclass[a4paper,12pt,dvips]{book}
+\fi
+
+\ifpdf
+  \usepackage{lmodern}
+\fi
+\usepackage[bookmarks, % add hyperlinks
+            colorlinks,
+            plainpages=false]{hyperref}                    
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+...
+\end{verbatim}
+\end{code}
+In the example above I have included the \pai{hyperref} package even in the
+non-PDF version. The effect of this is to make the \ci{href} command
+work in all cases, which saves me from wrapping every occurrence into a
+conditional statement.
+
+Note that in recent \TeX{} distributions (\TeX{}Live for example), the
+normal \TeX{} program is actually pdf\TeX{} it will automatically switch
+between producing pdf and dvi according to the settings in the document
+class. If you use the code above then you can still use the \verb|pdflatex|
+command to get pdf output and \verb|latex| for normal dvi output.
+
+
+\section{Creating Presentations}
+\label{sec:beamer}
+\secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}
+You can present the results of your scientific work on a blackboard,
+with transparencies, or directly from your laptop using some
+presentation software. 
+
+\wi{pdf\LaTeX} combined with the \pai{beamer} class allows you to
+create presentations in PDF, looking much like something you might be
+able to generate with PowerPoint if you had a very good day, but much
+more portable because Acrobat Reader is available on many more
+systems.
+
+The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
+\pai{hyperref} with options adapted to screen presentations.
+%La figure~\ref{fig:pdfscr} contient un exemple de fichier minimal à
+%compiler avec \wi{pdf\LaTeX} et le 
+%résultat produit.
+
+% Écran capturé par ImageMagick (man ImageMagick) fonction « import »
+% et convertie en jpg toujours par ImageMagick.
+
+\begin{figure}[htbp]
+\begin{verbatim}
+\documentclass[10pt]{beamer}
+\mode<beamer>{%
+  \usetheme[hideothersubsections,
+            right,width=22mm]{Goettingen}
+}
+
+\title{Simple Presentation}
+\author[D. Flipo]{Daniel Flipo}
+\institute{U.S.T.L. \& GUTenberg}
+\titlegraphic{\includegraphics[width=20mm]{USTL}}
+\date{2005}
+
+\begin{document}
+
+\begin{frame}<handout:0>
+  \titlepage
+\end{frame}
+
+\section{An Example}
+
+\begin{frame}
+  \frametitle{Things to do on a Sunday Afternoon}
+  \begin{block}{One could \ldots}
+    \begin{itemize}
+      \item walk the dog\dots \pause
+      \item read a book\pause
+      \item confuse a cat\pause
+    \end{itemize}
+  \end{block}
+  and many other things 
+\end{frame}
+\end{document}
+\end{verbatim}
+  \caption{Sample code for the \pai{beamer} class}
+  \label{fig:code-beamer}
+\end{figure}
+
+When you compile the code presented in figure \ref{fig:code-beamer}
+with \wi{PDF\LaTeX} you get a PDF file with a title page and a second page
+showing several items that will be reveled one at a time as you step
+though your presentation.
+
+One of the advantages of the beamer class is that it produces a PDF
+file that is directly usable without first going through a PostScript
+stage like \pai{prosper} or requiring additional post processing like
+presentations created with the \pai{ppower4} package.
+
+With the \pai{beamer} class you can produce several versions (modes) of your
+document from the same input file. The input file may contain special
+instructions for the different modes in angular brackets. The
+following modes are available.
+
+\begin{description}
+\item[beamer] for the presentation PDF
+  discussed above.
+\item[trans] for slides.
+\item[handout] for the printed version.
+\end{description}
+The default mode is \texttt{beamer}, you can change it by setting a
+different mode as a global option, like
+\verb|\documentclass[10pt,handout]{beamer}| to print the handouts for
+example.
+
+The look of the screen presentation depends on the theme you choose. You can either
+pick one of the themes shipped with the beamer class or you can
+even create your own. See the beamer class documentation in
+\texttt{beameruserguide.pdf} for more information on this.
+
+Lets have a closer look at the code in figure~\ref{fig:code-beamer}.
+
+For the screen version of the presentation \verb|\mode<beamer>| we
+have chosen the \emph{Goettingen} theme to show a navigation panel
+integrated into the table of contents. The options allow to choose the
+size of the panel (22~mm in this case) and its position (on the right
+side of the body text). The option \emph{hideothersubsections}, shows
+the chapter titles, but only the subsections of the present
+chapter. There are no special settings for \verb|\mode<trans>| and
+\verb|\mode<handout>|. They appear in their standard layout.
+
+The commands \verb|\title{}|, \verb|\author{}|, \verb|\institute{}|,
+and\\ \verb|\titlegraphic{}| set the content of the title page. The
+optional arguments of \verb|\title[]{}| and \verb|\author[]{}|
+let you specify a special version of the title and the author
+name to be displayed on the panel of the \emph{Goettingen} theme.
+
+The titles and subtitles in the panel are created with normal
+\verb|\section{}| and \verb|\subsection{}| commands that you place
+\emph{outside} the \ei{frame} environment.
+
+The tiny navigation icons at the bottom of the screen also allow to
+navigate the document. Their presence is not dependent on the theme
+you choose.
+
+The contents of each slide or screen has to be placed inside a
+\ei{frame} environment. There is an optional argument in angular
+brackets (\verb|<| and \verb|>|), it allows to suppress a particular
+frame in one of the versions of the presentation. In the example the
+first page would not be shown in the handout version due to the
+\verb|<handout:0>| argument.
+
+It is highly recommended to set a title for each slide apart from the
+title slide. This is done with the command \verb|\frametitle{}|. If a
+subtitle is necessary you can use the \ei{block} environment as shown
+in the example. Note that the sectioning commands \verb|\section{}|
+and \verb|\subsection{}| do not produce output on the slide proper.
+
+The command \verb|\pause| in the itemize environment lets you reveal
+the items one by one. For other presentation effects check out the
+commands \verb|\only|, \verb|\uncover|, \verb|\alt| and
+\verb|\temporal|. In many place you can also use angular brakes to
+further customize the presentation.
+
+In any case make sure you read through the beamer class documentation
+\texttt{beameruserguide.pdf} to get a complete picture of what is in
+store for you. This package is being actively developed, check out their website
+\href{http://latex-beamer.sourceforge.net/}{http://latex-beamer.sourceforge.net/}
+to get the latest information.
+
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:
