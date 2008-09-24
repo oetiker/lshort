@@ -1,0 +1,35 @@
+LaTeX Beamer Class
+http://latex-beamer.sourceforge.net/
+Make ETH Theme (www.cd.ethz.ch)
+
+
+
+Memoir is a flexible class for typesetting general fiction,
+non-fiction and mathematical works as books, reports, articles or
+manuscripts. Documents can use 9pt, 10pt, 11pt, 12pt, 14pt or 17pt 
+as the normal font size. Many methods are provided to let you create
+your particular design. 
+
+ftp://sunsite.cnlab-switch.ch/mirror/tex/macros/latex/contrib/memoir/
+
+
+NTGClass
+
+http://www.tex.ac.uk/tex-archive/macros/latex/contrib/ntgclass/
+
+
+KomaScript
+
+http://www.tex.ac.uk/tex-archive/macros/latex/contrib/koma-script/
+http://socha.net/scrguide
+
+
+Use LaTeX to create MetaFont (Post) input for graphics generation
+
+http://comp.uark.edu/~luecking/tex/mfpic.html
+
+
+Timing Diagrams
+
+ftp://tug.ctan.org/tex-archive/macros/latex/contrib/timing/
+
