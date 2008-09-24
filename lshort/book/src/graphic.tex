@@ -503,135 +503,137 @@ The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2
 Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
 is assigned the mathematical coordinates $(-3,-2)$ (black disk).
 
+\section{The TikZ \& PGF Graphics Package}
 
-\section{\texorpdfstring{\Xy}{Xy}-pic}
-\secby{Alberto Manuel Brand\~ao Sim\~oes}{albie@alfarrabio.di.uminho.pt}
-\pai{xy} is a special package for drawing diagrams. To use it,
-simply add the following line to the preamble of your document:
-\begin{lscommand}
-\verb|\usepackage[|\emph{options}\verb|]{xy}|
-\end{lscommand}
-\emph{options} is a list of functions from \Xy-pic you want to
-load. These options are primarily useful when debugging the package.  I recommend
-you pass the \verb!all! option, making \LaTeX{} load all the \Xy{} commands.
+Today every \LaTeX output generation system can create nice vector graphics,
+its just the interfaces that are rather diverse. The PGF package provides an
+abstraction layer over these interface and lets you use simple commands to
+conveniently create complex vector graphics right from inside your document. The
+PGF package comes with its own 500+ page documentation
+\cite{pfgplots}. So we are only going to scratch the surface of the package with this little
+section.
 
-\Xy-pic diagrams are drawn over a matrix-oriented canvas, where
-each diagram element is placed in a matrix slot:
+For high level access to 
+the PGF functions you should load the \pai{tikz} package.
+With the \pai{tikz} package you can use highly efficient commands to
+draw graphics right from inside your document Use the \ei{tikzpicture}
+environment to wrap your instructions.
 \begin{example}
-\begin{displaymath}
-\xymatrix{A & B \\
-          C & D }
-\end{displaymath}
+\begin{tikzpicture}[scale=3]
+  \clip (-0.1,-0.2)
+     rectangle (1.95,1.2);
+  \draw[step=.25cm,gray,very thin]
+       (-1.4,-1.4) grid (3.4,3.4);
+  \draw (-1.5,0) -- (2.5,0);
+  \draw (0,-1.5) -- (0,1.5);
+  \draw (0,0) circle (1cm);
+  \filldraw[fill=green!20!white,
+            draw=green!50!black]
+    (0,0) -- (3mm,0mm) 
+         arc (0:30:3mm) -- cycle;
+\end{tikzpicture}
 \end{example}
-The \ci{xymatrix} command must be used in math mode. Here, we
-specified two lines and two columns. To make this matrix a diagram we
-just add directed arrows using the \ci{ar} command.
+If  you know other programming languages you
+may notice the familiar semicolon (\texttt{;}) character that is used
+to separate the different commands. With the \ci{usetikzlibrary}
+command in the preamble you can enable a wide variety of additional
+features for drawing special shapes, like this box which is slightly bent.
 \begin{example}
-\begin{displaymath}
-\xymatrix{ A \ar[r] & B \ar[d] \\
-           D \ar[u] & C \ar[l] }
-\end{displaymath}
-\end{example}
-The arrow command is placed on the origin cell for the arrow. The
-arguments are the direction the arrow should point to (\texttt{u}p,
-\texttt{d}own, \texttt{r}ight and \texttt{l}eft).
-
-\begin{example}
-\begin{displaymath}
-\xymatrix{
-  A \ar[d] \ar[dr] \ar[r] & B \\
-  D                       & C }
-\end{displaymath}
-\end{example}
-To make diagonals, just use more than one direction. In
-fact, you can repeat directions to make bigger arrows.
-\begin{example}
-\begin{displaymath}
-\xymatrix{
-  A \ar[d] \ar[dr] \ar[drr] & & \\
-  B                      & C & D }
-\end{displaymath}
-\end{example}
-
-We can draw even more interesting diagrams by adding
-labels to the arrows. To do this, we use the common superscript and
-subscript operators.
-\begin{example}
-\begin{displaymath}
-\xymatrix{
-  A \ar[r]^f \ar[d]_g &
-             B \ar[d]^{g'} \\
-  D \ar[r]_{f'}       & C }
-\end{displaymath}
+\usetikzlibrary{%
+  decorations.pathmorphing}
+\begin{tikzpicture}[
+     decoration={bent,aspect=.3}]
+ \draw [decorate,fill=lightgray]
+        (0,0) rectangle (5.5,2);
+ \node[circle,draw] 
+        (A) at (.5,.5) {A};
+ \node[circle,draw] 
+        (B) at (5,1.5) {B};
+ \draw[->,decorate] (A) -- (B);
+ \draw[->,decorate] (B) -- (A);
+\end{tikzpicture}
 \end{example}
 
-As shown, you use these operators as in math mode. The only
-difference is that that superscript means ``on top of the arrow,''
-and subscript means ``under the arrow.'' There is a third operator, the vertical bar: \verb+|+
-It causes text to be placed \emph{in} the arrow.
-\begin{example}
-\begin{displaymath}
-\xymatrix{
-  A \ar[r]|f \ar[d]|g &
-             B \ar[d]|{g'} \\
-  D \ar[r]|{f'}       & C }
-\end{displaymath}
-\end{example}
+You can even draw diagrams that look as if they came straight from a book pascal
+programming spruced up with some fancy backgrounds. The code is a bit
+more daunting than the example above, so I will just show you the
+result of this one.
 
-To draw an arrow with a hole in it, use \verb!\ar[...]|\hole!.
-
-In some situations, it is important to distinguish between different types of
-arrows. This can be done by putting labels on them, or changing their appearance:
-
-\begin{example}
-\shorthandoff{"}
-\begin{displaymath}
-\xymatrix{
-\bullet\ar@{->}[rr] && \bullet\\
-\bullet\ar@{.<}[rr] && \bullet\\
-\bullet\ar@{~)}[rr] && \bullet\\
-\bullet\ar@{=(}[rr] && \bullet\\
-\bullet\ar@{~/}[rr] && \bullet\\
-\bullet\ar@{^{(}->}[rr] &&
-                       \bullet\\
-\bullet\ar@2{->}[rr] && \bullet\\
-\bullet\ar@3{->}[rr] && \bullet\\
-\bullet\ar@{=+}[rr]  && \bullet
+\begin{center}
+\begin{tikzpicture}[point/.style={coordinate},thick,draw=black!50,>=stealth',
+                    tip/.style={->,shorten >=1pt},every join/.style={rounded corners},
+                    skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}},
+                    hv path/.style={to path={-| (\tikztotarget)}},
+                    vh path/.style={to path={|- (\tikztotarget)}},
+                 terminal/.style={
+            rounded rectangle,
+            minimum size=6mm,
+            very thick,draw=black!50,
+            top color=white,bottom color=black!20,
+            font=\ttfamily\scriptsize},
+                nonterminal/.style={
+                       rectangle,
+                       minimum size=6mm,
+                       very thick,
+                       draw=red!50!black!50,         % 50% red and 50% black,
+                       top color=white,              % a shading that is white at the top...
+                       bottom color=red!50!black!20, % and something else at the bottom
+                       font=\itshape\scriptsize}]
+\matrix[column sep=4mm] {
+  % First row:
+  & & & & & & & & & & & \node (plus) [terminal] {+};\\
+  % Second row:
+  \node (p1) [point] {}; &     \node (ui1)    [nonterminal] {unsigned integer}; &
+  \node (p2) [point] {}; &     \node (dot)    [terminal]    {.};                &
+  \node (p3) [point] {}; &     \node (digit) [terminal]     {digit};            &
+  \node (p4) [point] {}; &     \node (p5)     [point] {};                       &
+  \node (p6) [point] {}; &     \node (e)      [terminal]    {E};                &
+  \node (p7) [point] {}; &                                                      &
+  \node (p8) [point] {}; &     \node (ui2)    [nonterminal] {unsigned integer}; &
+  \node (p9) [point] {}; &     \node (p10)    [point]       {};\\
+  % Third row:
+  & & & & & & & & & & & \node (minus)[terminal] {-};\\
+};
+{ [start chain]
+  \chainin (p1);
+  \chainin (ui1)   [join=by tip];
+  \chainin (p2)    [join];
+  \chainin (dot)   [join=by tip];
+  \chainin (p3)    [join];
+  \chainin (digit) [join=by tip];
+  \chainin (p4)    [join];
+  { [start branch=digit loop]
+    \chainin (p3) [join=by {skip loop=-6mm,tip}];
+  }
+  \chainin (p5)    [join,join=with p2 by {skip loop=6mm,tip}];
+  \chainin (p6)    [join];
+  \chainin (e)     [join=by tip];
+  \chainin (p7)    [join];
+  { [start branch=plus]
+    \chainin (plus) [join=by {vh path,tip}];
+    \chainin (p8)    [join=by {hv path,tip}];
+  }
+  { [start branch=minus]
+    \chainin (minus) [join=by {vh path,tip}];
+    \chainin (p8)    [join=by {hv path,tip}];
+  }
+  \chainin (p8)    [join];
+  \chainin (ui2)   [join=by tip];
+  \chainin (p9)    [join,join=with p6 by {skip loop=-11mm,tip}];
+  \chainin (p10)   [join=by tip];
 }
-\end{displaymath}
-\shorthandon{"}
-\end{example}
+\end{tikzpicture}
+\end{center}
 
-Notice the difference between the following two diagrams:
+\pagebreak
+And there is more, if you have to draw plots of numerical data or
+functions, you should have a closer look at the  \pai{pgfplot}
+package. It provides everything you need to draw plots. It can even
+call the external \texttt{gnuplot} command to evaluate actual
+functions you wrote into the graph.
 
-\begin{example}
-\begin{displaymath}
-\xymatrix{
- \bullet \ar[r] 
-         \ar@{.>}[r] & 
- \bullet
-}
-\end{displaymath}
-\end{example}
-
-\begin{example}
-\begin{displaymath}
-\xymatrix{
- \bullet \ar@/^/[r] 
-         \ar@/_/@{.>}[r] &
- \bullet
-}
-\end{displaymath}
-\end{example}
-
-The modifiers between the slashes define how the curves are drawn.
-\Xy-pic offers many ways to influence the drawing of curves;
-for more information, check \Xy-pic documentation.
-
-
-% \begin{example}
-% \begin{lscommand}
-% \ci{dum}
-% \end{lscommand}
-% \end{example}
-
+%%% Local Variables:
+%%% TeX-master: "lshort.tex"
+%%% mode: flyspell
+%%% TeX-PDF-mode: t
+%%% End:

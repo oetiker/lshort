@@ -1,24 +1,5 @@
-\documentclass[11pt,a4paper,twoside]{book}
-\usepackage{mylayout}
-\usepackage{ifpdf}
-\ifpdf
-\usepackage{thumbpdf}
-\pdfcompresslevel=9
-\RequirePackage[colorlinks,hyperindex,plainpages=false]{hyperref}
-\def\pdfBorderAttrs{/Border [0 0 0] } % No border arround Links
-\else
-\RequirePackage[plainpages=true]{hyperref}
-\usepackage{color}
-\fi
-\usepackage{lshort}
-\usepackage{makeidx,shortvrb,latexsym}
-\begin{document}
-\selectlanguage{english}
-\frontmatter
-\tableofcontents
-\mainmatter
-
-\chapter{Installing LaTeX}
+\appendix
+\chapter{Installing \LaTeX}
 \begin{intro}
 Knuth has published the source to \TeX{} back in a time when nobody knew
 about OpenSource and or Free Software. The License that comes with \TeX{}
@@ -136,17 +117,3 @@ setup. Use your package manager to install the following packages:
 \item inkscape -- a free illustrator/corel draw look-a-like.
 \end{itemize}
 
-
-\end{document}
-
-
-
-
-
-%
-
-% Local Variables:
-% TeX-master: "lshort2e"
-% mode: latex
-% mode: flyspell
-% End:
