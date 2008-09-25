@@ -505,7 +505,7 @@ is assigned the mathematical coordinates $(-3,-2)$ (black disk).
 
 \section{The TikZ \& PGF Graphics Package}
 
-Today every \LaTeX output generation system can create nice vector graphics,
+Today every \LaTeX{} output generation system can create nice vector graphics,
 its just the interfaces that are rather diverse. The PGF package provides an
 abstraction layer over these interface and lets you use simple commands to
 conveniently create complex vector graphics right from inside your document. The
@@ -516,7 +516,7 @@ section.
 For high level access to 
 the PGF functions you should load the \pai{tikz} package.
 With the \pai{tikz} package you can use highly efficient commands to
-draw graphics right from inside your document Use the \ei{tikzpicture}
+draw graphics right from inside your document. Use the \ei{tikzpicture}
 environment to wrap your instructions.
 \begin{example}
 \begin{tikzpicture}[scale=3]
@@ -533,7 +533,7 @@ environment to wrap your instructions.
          arc (0:30:3mm) -- cycle;
 \end{tikzpicture}
 \end{example}
-If  you know other programming languages you
+If you know other programming languages you
 may notice the familiar semicolon (\texttt{;}) character that is used
 to separate the different commands. With the \ci{usetikzlibrary}
 command in the preamble you can enable a wide variety of additional
@@ -554,10 +554,10 @@ features for drawing special shapes, like this box which is slightly bent.
 \end{tikzpicture}
 \end{example}
 
-You can even draw diagrams that look as if they came straight from a book pascal
-programming spruced up with some fancy backgrounds. The code is a bit
-more daunting than the example above, so I will just show you the
-result of this one.
+You can even draw diagrams that look as if they came straight from a book on
+pascal programming. The code is a bit more daunting than the example above,
+so I will just show you the result. If you have a look at the PGF documentation
+you will find a detailed tutorial on drawing this exact diagram.
 
 \begin{center}
 \begin{tikzpicture}[point/.style={coordinate},thick,draw=black!50,>=stealth',
