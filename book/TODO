@@ -16,11 +16,6 @@ from Lshort and might / should be added:
   -- Alexander Mai <st002279@hrzpub.tu-darmstadt.de>
   ## not assigned yet
 
-* A List of useful LaTeX packages with information on what they
-  do, and how to get to them or even better, there documentation.
-  -- Tobias Oetiker <oetiker@ee.ethz.ch> 
-  ## not assigned yet
-
 * Explain how to configure what numbers show up next to an equation
   -- Tobias Oetiker <oetiker@ee.ethz.ch> 
   ## not assigned yet
@@ -28,4 +23,3 @@ from Lshort and might / should be added:
 * Add a section about using (external) Fonts
   -- Björn Hvittfeldt <bjorn@hvittfeldt.com>
   ## not assigned yet
-
