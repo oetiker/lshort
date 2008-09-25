@@ -6,16 +6,18 @@ Makefile
 README 
 TRANSLATIONS 
 fixdate.pl 
+src/appendix.tex
 src/biblio.tex 
 src/contrib.tex 
 src/custom.tex 
 src/fancyhea.sty 
+src/graphic.tex
+src/lshort-a5.tex 
+src/lshort-base.tex 
+src/lshort.ist
 src/lshort.sty 
 src/lshort.tex 
-src/lshort-base.tex 
-src/lshort-a5.tex 
 src/lssym.tex 
-src/graphic.tex
 src/math.tex 
 src/mylayout.sty 
 src/overview.tex 
@@ -23,4 +25,3 @@ src/spec.tex
 src/things.tex 
 src/title.tex 
 src/typeset.tex 
-src/lshort.ist
