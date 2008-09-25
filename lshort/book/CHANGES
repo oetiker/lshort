@@ -1,3 +1,12 @@
+4.25 2008.09.25
+---------------
+
+* added a section in TikZ&PGF graphics
+
+* remove xy pics instead
+
+* added an appendix on installing latex
+
 * Added arraystretch and colsep to table section
 
 * Removed references to Corel Draw
