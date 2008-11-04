@@ -181,12 +181,13 @@ the
 
 The content of the index is specified with
 \begin{lscommand}
-  \ci{index}\verb|{|\emph{key}\verb|}|
+  \ci{index}\verb|{|\emph{key}\@\emph{formatted_entry}\verb|}|
 \end{lscommand}
-\noindent commands, where \emph{key} is the index entry. You enter the
-index commands at the points in the text that you want the final index
-entries to point to.  Table~\ref{index} explains the syntax of the
-\emph{key} argument with several examples.
+\noindent commands, where \emph{formatted_entry} will appear in the index
+and \emph{key} will be used for soring.  The \emph{formatted_entry} is
+optional. If it is missing the \emph{key} will be used. You enter the index
+commands at the points in the text that you want the final index entries to
+point to.  Table~\ref{index} explains the syntax with several examples.
 
 \begin{table}[!tp]
 \caption{Index Key Syntax Examples.}
@@ -197,7 +198,8 @@ entries to point to.  Table~\ref{index} explains the syntax of the
   \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\ 
 \verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\ 
 \verb|\index{Sam@\textsl{Sam}}|     &\textsl{Sam}, 2& Formatted entry\\ 
-\verb|\index{Lin@\textbf{Lin}}|     &\textbf{Lin}, 7& Same as above\\ 
+\verb|\index{Lin@\textbf{Lin}}|     &\textbf{Lin}, 7& Formatted entry\\ 
+\verb|\index{Kaese@K\"{a}se}|     &\textbf{K\"ase}, 33& Formatted entry\\ 
 \verb.\index{Jenny|textbf}.     &Jenny, \textbf{3}& Formatted page number\\
 \verb.\index{Joe|textit}.     &Joe, \textit{5}& Same as above\\
 \verb.\index{ecole@\'ecole}.     &\'ecole, 4& Handling of accents
