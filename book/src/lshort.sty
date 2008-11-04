@@ -16,6 +16,7 @@
 \RequirePackage{calc}
 \RequirePackage{lastpage}
 \RequirePackage{amsmath,latexsym,amsthm}
+\RequirePackage[retainorgcmds]{IEEEtrantools}
 \RequirePackage[psamsfonts]{amssymb}
 \RequirePackage{cmmib57}% Use blueSky cmmib5 cmmib7 cmsy
 \RequirePackage[all]{xy}
@@ -210,7 +211,7 @@
 \renewcommand{\arraystretch}{1.1}
 \begin{lrbox}{\symbbox}
 \hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
-{\end{tabular}\end{lrbox}\makebox[\textwidth]{\usebox{\symbbox}}\par\medskip}
+{\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
 %
 % Special Prep for AMS Symbols Printout
 % Should work if AMS is not available
@@ -270,9 +271,9 @@
   \ifodd\HyPsd@pageref{exa\theexacnt}\hspace*{0pt}\else\hspace*{-\outdent}\fi%
 %\fi
 \fi
-\makebox[\textwidth][l]{%
+\makebox[\linewidth][l]{%
 %\raisebox{-\height}[0pt][\totalheight]{%
-  \begin{minipage}[c]{0.5\outdent+0.46\textwidth-3mm}%
+  \begin{minipage}[c]{0.5\outdent+0.46\linewidth-3mm}%
     \small\verbatiminput{\jobname.exa}
   \end{minipage}%
                                 %}%
@@ -283,7 +284,7 @@
   \setlength{\fboxsep}{3mm}%
                                 %  \raisebox{-\height}[0pt][\totalheight]{%
   \fbox{%
-    \begin{minipage}{0.5\outdent+0.54\textwidth-3.5mm-2\fboxrule-2\fboxsep}%
+    \begin{minipage}{0.5\outdent+0.54\linewidth-3.5mm-2\fboxrule-2\fboxsep}%
       \setlength{\fboxrule}{\savefboxrule}%
       \setlength{\fboxsep}{\savefboxsep}%
       \setlength{\fboxrule}{0.5pt}%
