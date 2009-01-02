@@ -58,6 +58,15 @@ lshort.pdf: $(FILES)
 	mv lshort.pdf .. )
 	rm pdfbuild/*
 
+lshort-letter.pdf: $(FILES)
+	-mkdir pdfbuild
+	(T1FONTS=.:`pwd`/eurofont: && export T1FONTS && TEXINPUTS=.:`pwd`/src:`pwd`/euro:${TEXINPUTS:-:}&&export TEXINPUTS&& cd pdfbuild&& \
+	$(PDFLATEX) lshort-letter&& $(PDFLATEX) lshort-letter&& \
+	$(MAKEINDEX) -s ../src/lshort.ist lshort-letter&&$(PDFLATEX) lshort-letter&& \
+	(thumbpdf --resolution 10 lshort-letter.pdf && $(PDFLATEX) lshort-letter)&& \
+	mv lshort-letter.pdf .. )
+	rm pdfbuild/*
+
 src/title.tex: Makefile
 	perl fixdate.pl $(VERS) < src/title.tex > src/title.tex2 && mv src/title.tex2 src/title.tex
 

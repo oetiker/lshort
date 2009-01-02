@@ -991,6 +991,48 @@ produce letters from the Bulgarian alphabet.
 %Finally, math alphabets are redefined and  as well as the commands for math
 %operators according to Cyrillic typesetting traditions. 
 
+\subsection{Support for Mongolian}
+
+To use \LaTeX{} for typesetting Mongolian you have a choice between two packages:
+Multilingual Babel and Mon\TeX{} by Oliver Corff.
+
+Mon\TeX{} includes support for both Cyrillic and traditional
+Mongolian Script. In order to access the commands of Mon\TeX{}, the
+package must be loaded in the document preamble:
+\begin{lscommand}
+\ci{usepackage}\verb|[|\emph{language},\emph{encoding}\verb|]{mls}|
+\end{lscommand}
+\noindent You can choose the \emph{language} option \pai{xalx} which issues
+all captions and the date in Modern Mongolian, and the \emph{encoding} option
+\iei{utf8}. To write a complete document in the traditional Mongolian script
+you have to choose \pai{bicig} for the \emph{language} option. The document
+language option \pai{bicig} enables the ``Simplified Transliteration'' input method.
+
+Enable and disable Latin Transliteration Mode with
+\begin{lscommand}
+\verb|\SetDocumentEncodingLMC|
+\end{lscommand}
+and
+\begin{lscommand}
+\verb|\SetDocumentEncodingNeutral|
+\end{lscommand}
+
+More information about Mon\TeX{} is available from
+\CTAN|language/mongolian/montex/doc|.
+
+Mongolian Cyrillic script is supported by \pai{babel} and you can load
+Mongolian language support which enables hyphenation and changes all
+automatic text to Mongolian with the following command:
+
+\begin{lscommand}
+\verb|\usepackage[T2A]{fontenc}|\\
+\verb|\usepackage[mn]{inputenc}|\\
+\verb|\usepackage[mongolian]{babel}|
+\end{lscommand}
+
+\noindent where \iei{mn} is the \iei{cp1251} input encoding. You can also
+invoke with \iei{utf8} instead.
+
 \section{The Space Between Words}
 
 To get a straight right margin in the output, \LaTeX{} inserts varying
