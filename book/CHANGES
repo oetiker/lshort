@@ -1,3 +1,5 @@
+* better english for the apppendix by Tobias Vidarssønn Langhoff.
+* use \textbackslash instead of $\backslash$.
 * added notes on mongolian support by Dorjgotov Batumongke
 * added big update to math from stefan m. moser
 * added letter size to the build system

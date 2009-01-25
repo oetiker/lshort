@@ -238,15 +238,15 @@ As you will see, these characters can be used in your documents all
 the same by adding a prefix backslash:
 
 \begin{example}
-\# \$ \% \^{} \& \_ \{ \} \~{} 
+\# \$ \% \^{} \& \_ \{ \} \~{}
+\textbackslash
 \end{example}
 
 The other symbols and many more can be printed with special commands
 in mathematical formulae or as accents. The backslash character
-$\backslash$ can \emph{not} be entered by adding another backslash
+\textbackslash can \emph{not} be entered by adding another backslash
 in front of it (\verb|\\|); this sequence is used for
-line breaking.\footnote{Try the \texttt{\$}\ci{backslash}\texttt{\$} command instead. It
-  produces a `$\backslash$'.}
+line breaking. Use the \ci{textbackslash} command instead.
 
 \subsection{\LaTeX{} Commands}
 
@@ -769,7 +769,7 @@ there must be no spaces between the filenames and the commas.
 
 The \ci{include} command starts typesetting the included text on a new
 page. This is helpful when you use \ci{includeonly}, because the
-page breaks will not move, even when some included files are omitted.
+page breaks will not move, even when some include files are omitted.
 Sometimes this might not be desirable. In this case, you can use the
 \begin{lscommand}
 \ci{input}\verb|{|\emph{filename}\verb|}|
