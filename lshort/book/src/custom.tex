@@ -37,7 +37,7 @@ commands and environments for this purpose. Now I can simply write:
 In this example, I am using both a new environment called\\
 \ei{lscommand}, which is responsible for drawing the box around the
 command, and a new command named \ci{ci}, which typesets the command
-name and makes a corresponding entry in the index. You can check
+name and makes a corresponding entry in the index. Check
 this out by looking up the \ci{dum} command in the index at the back
 of this book, where you'll find an entry for \ci{dum}, pointing to
 every page where I mentioned the \ci{dum} command.
@@ -142,7 +142,7 @@ My humble subjects \ldots
 The \emph{num} argument is used the same way as in the
 \verb|\newcommand| command. \LaTeX{} makes sure that you do not define
 an environment that already exists. If you ever want to change an
-existing command, you can use the \ci{renewenvironment} command. It
+existing command, use the \ci{renewenvironment} command. It
 uses the same syntax as the \ci{newenvironment} command.
 
 The commands used in this example will be explained later. For the
@@ -201,7 +201,7 @@ parameters. If you add the following structure to your document:
 }
 \end{verbatim}
 
-Now you can call \LaTeX{} like this:
+Now call \LaTeX{} like this:
 \begin{verbatim}
 latex '\newcommand{\blackandwhite}{true}\input{test.tex}'
 \end{verbatim}
@@ -214,7 +214,7 @@ By setting \verb|\blackandwhite| to false the color version of the document woul
 If you define a lot of new environments and commands, the preamble of
 your document will get quite long. In this situation, it is a good
 idea to create a \LaTeX{} package containing all your command and
-environment definitions. You can then use the \ci{usepackage}
+environment definitions. Use the \ci{usepackage}
 command to make the package available in your document.
 
 \begin{figure}[!htbp]
@@ -250,7 +250,7 @@ package that contains the commands defined in the examples above.
 \index{font}\index{font size} \LaTeX{} chooses the appropriate font
 and font size based on the logical structure of the document
 (sections, footnotes, \ldots).  In some cases, one might like to change
-fonts and sizes by hand. To do this, you can use the commands listed in
+fonts and sizes by hand. To do this, use the commands listed in
 Tables~\ref{fonts} and~\ref{sizes}. The actual size of each font
 is a design issue and depends on the document class and its options. 
 Table~\ref{tab:pointsizes} shows the absolute point size for these
@@ -264,11 +264,11 @@ commands as implemented in the standard document classes.
 \end{example}
 
 One important feature of \LaTeXe{} is that the font attributes are
-independent. This means that you can issue size or even font
-changing commands, and still keep the bold or slant attribute set
+independent. This means that issuing size or even font
+changing commands, and still keep bold or slant attributes set
 earlier.
 
-In \emph{math mode} you can use the font changing \emph{commands} to
+In \emph{math mode} use the font changing \emph{commands} to
 temporarily exit \emph{math mode} and enter some normal text. If you want to
 switch to another font for math typesetting you need another
 special set of commands; refer to Table~\ref{mathfonts}.
@@ -439,7 +439,7 @@ of unknown origin and purpose.
 \end{example}
 
 This approach has the advantage that you can decide at some later
-stage that you want to use some visual representation of danger other
+stage that you want to use a visual representation of danger other
 than \verb|\textbf|, without having to wade through your document,
 identifying all the occurrences of \verb|\textbf| and then figuring out
 for each one whether it was used for pointing out danger or for some other
@@ -464,7 +464,7 @@ here is a little word of advice:\nopagebreak
 \subsection{Line Spacing}
 
 \index{line spacing} If you want to use larger inter-line spacing in a
-document, you can change its value by putting the
+document, change its value by putting the
 \begin{lscommand}
 \ci{linespread}\verb|{|\emph{factor}\verb|}|
 \end{lscommand}
@@ -523,7 +523,7 @@ because you'll find that most professional books use indenting and not
 spacing to separate paragraphs.
 
 
-If you want to indent a paragraph that is not indented, you can use 
+If you want to indent a paragraph that is not indented, use 
 \begin{lscommand}
 \ci{indent}
 \end{lscommand}
@@ -532,7 +532,7 @@ If you want to indent a paragraph that is not indented, you can use
 this will only have an effect when \verb|\parindent| is not set to
 zero.
 
-To create a non-indented paragraph, you can use 
+To create a non-indented paragraph, use 
 \begin{lscommand}
 \ci{noindent}
 \end{lscommand}
@@ -704,7 +704,7 @@ The second command adds a length to any of the parameters:
 \end{lscommand} 
 
 This second command is actually more useful than the \ci{setlength}
-command, because you can now work relative to the existing settings.
+command, because it works relative to the existing settings.
 To add one centimetre to the overall text width, I put the
 following commands into the document preamble:
 \begin{code}
@@ -714,7 +714,7 @@ following commands into the document preamble:
 
 In this context, you might want to look at the \pai{calc} package.
 It allows you to use arithmetic operations in the argument of \ci{setlength}
-and other places where you can enter numeric values into function
+and other places where numeric values are entered into function
 arguments.
 
 \section{More Fun With Lengths}
@@ -764,17 +764,17 @@ words. These are again glued to other words, but with special glue,
 which is elastic so that a series of words can be squeezed or
 stretched as to exactly fill a line on the page. 
 
-I admit, this is a very simplistic version of what really happens, but
-the point is that \TeX{} operates on glue and boxes. Letters are not the only things that
-can be boxes. You can put virtually everything into a box, including
-other boxes. Each box will then be handled by \LaTeX{} as if it were a
-single letter.
+I admit, this is a very simplistic version of what really happens, but the
+point is that \TeX{} operates on glue and boxes. Letters are not the only
+things that can be boxes. You can put virtually everything into a box,
+including other boxes. Each box will then be handled by \LaTeX{} as if it
+were a single letter.
 
-In the past chapters you have already encountered some boxes, although
-I did not tell you. The \ei{tabular} environment and the
-\ci{includegraphics}, for example, both produce a box. This means that you can
-easily arrange two tables or images side by side. You just have to
-make sure that their combined width is not larger than the textwidth.
+In the past chapters you have already encountered some boxes, although I did
+not tell you. The \ei{tabular} environment and the \ci{includegraphics}, for
+example, both produce a box. This means that you can easily arrange two
+tables or images side by side. You just have to make sure that their
+combined width is not larger than the textwidth.
 
 You can also pack a paragraph of your choice into a box with either
 the
@@ -803,7 +803,7 @@ everything, there is also a class of boxing commands that operates
 only on horizontally aligned material. We already know one of them;
 it's called \ci{mbox}. It simply packs up a series of boxes into
 another one, and can be used to prevent \LaTeX{} from breaking two
-words. As you can put boxes inside boxes, these horizontal box packers
+words. As boxes can be put inside boxes, these horizontal box packers
 give you ultimate flexibility.
 
 \begin{lscommand}
