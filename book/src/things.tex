@@ -141,9 +141,9 @@ chooses the most suitable layout.
 
 When people from the \wi{WYSIWYG} world meet people who use \LaTeX{},
 they often discuss ``the \wi{advantages of \LaTeX{}} over a normal
-word processor'' or the opposite.  The best thing you can do when such
+word processor'' or the opposite.  The best thing to do when such
 a discussion starts is to keep a low profile, since such discussions
-often get out of hand. But sometimes you cannot escape \ldots
+often get out of hand. But sometimes there is no escaping \ldots
 
 \medskip\noindent So here is some ammunition. The main advantages
 of \LaTeX{} over normal word processors are the following:
@@ -196,7 +196,7 @@ able to fully grasp the concept of Logical Markup.
 
 \section{\LaTeX{} Input Files}
 
-The input for \LaTeX{} is a plain \texttt{ASCII} text file. You can create it
+The input for \LaTeX{} is a plain \texttt{ASCII} text file. Create it
 with any text editor. It contains the text of the document, as well as
 the commands that tell \LaTeX{} how to typeset the text.
 
@@ -321,7 +321,7 @@ whitespace or line breaks are allowed.
 For longer comments you could use the \ei{comment} environment
 provided by the \pai{verbatim} package. This means, that you have to add the
 line \verb|\usepackage{verbatim}| to the preamble of your document as
-explained below before you can use this command.
+explained below to use this command.
 
 \begin{example}
 This is another
@@ -344,8 +344,8 @@ command
 \verb|\documentclass{...}|
 \end{code}
 This specifies what sort of document you intend to write. After that,
-you can include commands that influence the style of the whole
-document, or you can load \wi{package}s that add new
+add commands to influence the style of the whole
+document, or load \wi{package}s that add new
 features to the \LaTeX{} system. To load such a package you use the
 command
 \begin{code}
@@ -418,7 +418,7 @@ shown on page \pageref{mini}. Here is some help:
 \LaTeX{} itself comes without a GUI or
 fancy buttons to press. It is just a program that crunches away at your
 input file. Some \LaTeX{} installations feature a graphical front-end where
-you can click \LaTeX{} into compiling your input file. On other systems
+there is a \LaTeX{} button to start compiling your input file. On other systems
 there might be some typing involved, so here is how to coax \LaTeX{} into
 compiling your input file on a text based system. Please note: this
 description assumes that a working \LaTeX{} installation already sits on
@@ -446,13 +446,13 @@ input file. Type \texttt{ctrl-D} to get back to the command line.
 \end{lscommand}
 
 \item 
-Now you may view the DVI file. There are several ways to do that. You can show the file on screen with
+Now you may view the DVI file. There are several ways to do that. Look at the file on screen with
 \begin{lscommand}
 \verb+xdvi foo.dvi &+
 \end{lscommand}
 This only works on Unix with X11. If you are on Windows you might want to try \texttt{yap} (yet another previewer).
 
-You can also convert the dvi file to \PSi{} for printing or viewing with Ghostscript.
+Convert the dvi file to \PSi{} for printing or viewing with Ghostscript.
 \begin{lscommand}
 \verb+dvips -Pcmz foo.dvi -o foo.ps+
 \end{lscommand}
@@ -692,7 +692,7 @@ think is important, please drop me a line.
   
 \item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
   \texttt{latex}.
-\item[\eei{.sty}] \LaTeX{} Macro package. This is a file you can load
+\item[\eei{.sty}] \LaTeX{} Macro package. Load this
   into your \LaTeX{} document using the \ci{usepackage} command.
 \item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
   format for \LaTeX{} style files. If you process a .dtx file you get
@@ -711,8 +711,8 @@ file:
 
 \begin{description}
 \item[\eei{.dvi}] Device Independent File. This is the main result of a \LaTeX{}
-  compile run. You can look at its content with a DVI previewer
-  program or you can send it to a printer with \texttt{dvips} or a
+  compile run. Look at its content with a DVI previewer
+  program or send it to a printer with \texttt{dvips} or a
   similar application.
 \item[\eei{.log}] Gives a detailed account of what happened during the
   last compiler run.
@@ -751,7 +751,7 @@ that.
 \begin{lscommand}
 \ci{include}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
-\noindent You can use this command in the document body to insert the
+\noindent Use this command in the document body to insert the
 contents of another file named \emph{filename.tex}. Note that \LaTeX{}
 will start a new page
 before processing the material input from \emph{filename.tex}.
@@ -770,7 +770,7 @@ there must be no spaces between the filenames and the commas.
 The \ci{include} command starts typesetting the included text on a new
 page. This is helpful when you use \ci{includeonly}, because the
 page breaks will not move, even when some include files are omitted.
-Sometimes this might not be desirable. In this case, you can use the
+Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
 \ci{input}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
@@ -778,7 +778,7 @@ Sometimes this might not be desirable. In this case, you can use the
 No flashy suits, no strings attached.
 
 
-To make \LaTeX{} quickly check your document you can use the \pai{syntonly}
+To make \LaTeX{} quickly check your document use the \pai{syntonly}
 package. This makes \LaTeX{} skim through your document only checking for
 proper syntax and usage of the commands, but doesn't produce any (DVI) output.
 As \LaTeX{} runs faster in this mode you may save yourself valuable time.
