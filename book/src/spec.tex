@@ -41,9 +41,9 @@ A good set of commands for inclusion of graphics is provided in the
 of packages called the ``graphics''
 bundle.\footnote{\CTANref|macros/latex/required/graphics|}
 
-Assuming you are working on a system with a
+When working on a system with a
 \PSi{} printer available for output and with the \textsf{graphicx}
-package installed, you can use the following step by step guide to
+package installed, use the following step by step guide to
 include a picture into your document:
 
 \begin{enumerate}
@@ -116,7 +116,7 @@ about this topic, make sure to read \cite{graphics} and \cite{eps}.
 
 \section{Bibliography}
  
-You can produce a \wi{bibliography} with the \ei{thebibliography}
+Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
 \ci{bibitem}\verb|[|\emph{label}\verb|]{|\emph{marker}\verb|}|
@@ -243,8 +243,8 @@ position of the full stop.
 The \pai{fancyhdr} package,\footnote{Available from
   \CTANref|macros/latex/contrib/supported/fancyhdr|.} written by
 Piet van Oostrum, provides a few simple commands that allow you to
-customize the header and footer lines of your document.  If you look
-at the top of this page, you can see a possible application of this
+customize the header and footer lines of your document.  Look
+at the top of this page, for an application of this
 package.
 
 \begin{figure}[!htbp]
@@ -353,7 +353,7 @@ the documentation.  Here's how you do the first part:
   MikTeX -- \texttt{initexmf -update-fndb} or use the GUI.
 \end{enumerate}
 
-\noindent Now you can extract the documentation from the
+\noindent Now extract the documentation from the
 \texttt{.dtx} file:
 
 \begin{enumerate}
@@ -448,7 +448,7 @@ command \texttt{latex file.tex} by
 \texttt{pdflatex file.tex}. On systems where \LaTeX{} is not called from the
 command line, you may find a special button in the \TeX{}ControlCenter.
 
-In \LaTeX{} you can define the paper size with an 
+Set the paper size with an 
 optional documentclass argument such as \texttt{a4paper} or
 \texttt{letterpaper}. This works in pdf\LaTeX{} too, but on top of this
 pdf\TeX{} also needs to know the physical size of the paper to determine the physical
@@ -507,7 +507,7 @@ several other options.
   \emph{Almost European Computer Modern with Guillemets}. Just put the
   line\newline \verb+\usepackage{aeguill}+\paih{aeguill}  into the preamble of  
   your document, to enable AE virtual fonts instead of EC fonts.  
-\item Alternatively, you can use \pai{mltex} package, but this only works when  
+\item Alternatively, use \pai{mltex} package, but this only works when  
   your pdf\TeX{} has been compiled with the \wi{mltex} option.
 \end{itemize}
 The AE virtual fontset, like the {Ml\TeX} system, makes \TeX{} believe
@@ -558,7 +558,7 @@ that some font used in the document has not been found. You really have
 to fix these problems, as the resulting PDF document may 
 \emph{not display the pages with the missing characters at all}.
 
-As you can see this whole font business, especially the lack of a good EC
+That whole font business, especially the lack of a good EC
 fontset equivalent in quality to the CM font in type~1 format, has been
 occupying many peoples minds. Recently a new set of high quality outline
 fonts called Latin Modern (LM) has become available. It puts an end to the
@@ -690,7 +690,7 @@ To have the bookmark list open and links in color
 
 When creating PDFs destined for printing, colored links are not a
   good thing as they end up in gray in the final output, making it
-  difficult to read. You can use color frames, which are not printed:
+  difficult to read. Use color frames, which are not printed:
 \begin{code}
 \begin{verbatim}
 \usepackage{hyperref}
@@ -739,7 +739,7 @@ a click on the word ``\textcolor{magenta}{CTAN}''
 will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
-  you can use the \ci{href} command: 
+  use the \ci{href} command: 
 \begin{verbatim}
   The complete document is \href{manual.pdf}{here}
 \end{verbatim}
@@ -801,7 +801,7 @@ Package hyperref Warning:
 Token not allowed in a PDFDocEncoded string:
 \end{verbatim}
 \end{code}
-You can now work around this problem by providing a text string for
+Work around this problem by providing a text string for
 the bookmarks, which replaces the offending text:
 \begin{lscommand}
 \ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
@@ -831,7 +831,7 @@ If you use
 the result will be much more legible.
 
 If you write your document in unicode and use the \verb+unicode+ option for
-the \pai{hyperref} package you can use unicode characters in bookmarks. This
+the \pai{hyperref} package to use unicode characters in bookmarks. This
 will give you a much larger selection of characters to pick from when
 when using \ci{texorpdfstring}.
 
@@ -850,7 +850,7 @@ will try to include a file with the extension
 (in that order).
 
 For the cases where you want to use different code for the
-PDF version of your document, you can simply add the package \pai{ifpdf}%
+PDF version of your document, simply add the package \pai{ifpdf}%
 \footnote{If you want the whole story on why to use this package then
    go to the \TeX{} FAQ under the item\\
    \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ifpdf}.}  to
@@ -891,7 +891,7 @@ conditional statement.
 Note that in recent \TeX{} distributions (\TeX{}Live for example), the
 normal \TeX{} program is actually pdf\TeX{} it will automatically switch
 between producing pdf and dvi according to the settings in the document
-class. If you use the code above then you can still use the \verb|pdflatex|
+class. If you use the code above you can still use the \verb|pdflatex|
 command to get pdf output and \verb|latex| for normal dvi output.
 
 
@@ -977,14 +977,13 @@ following modes are available.
 \item[trans] for slides.
 \item[handout] for the printed version.
 \end{description}
-The default mode is \texttt{beamer}, you can change it by setting a
+The default mode is \texttt{beamer}, change it by setting a
 different mode as a global option, like
 \verb|\documentclass[10pt,handout]{beamer}| to print the handouts for
 example.
 
-The look of the screen presentation depends on the theme you choose. You can either
-pick one of the themes shipped with the beamer class or you can
-even create your own. See the beamer class documentation in
+The look of the screen presentation depends on the theme you choose. Pick one of the themes shipped with the beamer class or
+create your own. See the beamer class documentation in
 \texttt{beameruserguide.pdf} for more information on this.
 
 Lets have a closer look at the code in figure~\ref{fig:code-beamer}.
@@ -1021,14 +1020,14 @@ first page would not be shown in the handout version due to the
 
 It is highly recommended to set a title for each slide apart from the
 title slide. This is done with the command \verb|\frametitle{}|. If a
-subtitle is necessary you can use the \ei{block} environment as shown
+subtitle is necessary use the \ei{block} environment as shown
 in the example. Note that the sectioning commands \verb|\section{}|
 and \verb|\subsection{}| do not produce output on the slide proper.
 
 The command \verb|\pause| in the itemize environment lets you reveal
 the items one by one. For other presentation effects check out the
 commands \verb|\only|, \verb|\uncover|, \verb|\alt| and
-\verb|\temporal|. In many place you can also use angular brakes to
+\verb|\temporal|. In many place it is possible to use angular brakes to
 further customize the presentation.
 
 In any case make sure you read through the beamer class documentation
