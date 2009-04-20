@@ -1,3 +1,6 @@
+* Now that barack is in office we do not need all these 'you can's in the text
+  anymore removed about 1k of them. 
+* fix documentation on hyperref default settings by Gust Eilinger
 * better english for the apppendix by Tobias Vidarssønn Langhoff.
 * use \textbackslash instead of $\backslash$.
 * added notes on mongolian support by Dorjgotov Batumongke
