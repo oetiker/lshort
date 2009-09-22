@@ -85,13 +85,12 @@ If you wanted to use more than one argument, use \verb|#2| and
 so on.
 
 \begin{example}
-\newcommand{\txsit}[1]
- {This is the \emph{#1} Short 
-      Introduction to \LaTeXe}
+\newcommand{\txsit}[2]
+ {This is the \emph{#1} #2 Introduction to \LaTeXe}
 % in the document body: 
 \begin{itemize}
-\item \txsit{not so}
-\item \txsit{very}
+\item \txsit{not so}{short}
+\item \txsit{very}{long}
 \end{itemize}
 \end{example}
 
