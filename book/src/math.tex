@@ -85,8 +85,7 @@ To do this, you enclose them between \verb|\begin{|\ei{equation}\verb|}| and
 have access to the package for some obscure reason, you can use \LaTeX's own
 \ei{displaymath} environment instead.} You can then \ci{label} an equation number and refer to
 it somewhere else in the text by using the \ci{eqref} command. If you want to
-name the equation something specific, you \ci{tag} it instead. You can't use
-\ci{eqref} with \ci{tag}.
+name the equation something specific, you \ci{tag} it instead.
 \begin{example}
 Add $a$ squared and $b$ squared
 to get $c$ squared. Or, using
@@ -109,13 +108,7 @@ This is a reference to
 If you don't want \LaTeX{} to number the equations, use the starred
 version of \texttt{equation} using an asterisk, \ei{equation*}, or even easier, enclose the
 equation in \ci{[} and \ci{]}:\footnote{\index{equation!\textsf{amsmath}}
-  \index{equation!\LaTeX{}}This is again from \textsf{amsmath}. If you 
-didn't load the package, use \LaTeX{}'s own \texttt{equation} environment
-instead. The naming of the \textsf{amsmath}/\LaTeX{} commands may seem a bit
-confusing, but it's really not a problem since everybody uses \textsf{amsmath} anyway.
-In general, it is best to load the package from the beginning because you might use it
-later on, and then \LaTeX's unnumbered \texttt{equation} clashes with
-\AmS-\LaTeX's numbered \texttt{equation}.}
+  \index{equation!\LaTeX{}}This is again from \textsf{amsmath}. Standard \LaTeX{}'s has only the \texttt{equation} environment without the star.}
 \begin{example}
 Add $a$ squared and $b$ squared
 to get $c$ squared. Or, using
