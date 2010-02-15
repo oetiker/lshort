@@ -10,6 +10,9 @@
   * use francais instead of frenchb and mention numprint.
   * note about linux distros splitting tex distors up into many packages
   * do not mention java in math-graphics
+  * eqref does work with tag
+  * equation is from latex, equation* is from amslatex ... (footnote fix)
+  * textcolor works fine with hyperref by now
 
 4.27 2009.11.16
 ---------------
