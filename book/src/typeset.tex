@@ -158,7 +158,7 @@ standards, it lets one line stick out on the right of the paragraph.
 \LaTeX{} then complains (``\wi{overfull hbox}'') while processing the
 input file. This happens most often when \LaTeX{} cannot find a
 suitable place to hyphenate a word.\footnote{Although \LaTeX{} gives
-  you a warning when that happens (Overfull hbox) and displays the
+  you a warning when that happens (\verb|Overfull \hbox|) and displays the
   offending line, such lines are not always easy to find. If you use
   the option \texttt{draft} in the \ci{documentclass} command, these
   lines will be marked with a thick black line on the right margin.}
@@ -638,11 +638,8 @@ Some hints for those creating \wi{French} documents with \LaTeX{}:
 load French language support with the following command:
 
 \begin{lscommand}
-\verb|\usepackage[frenchb]{babel}|
+\verb|\usepackage[francais]{babel}|
 \end{lscommand}
-
-Note that, for historical reasons, the name of \textsf{babel}'s option 
-for French is either \emph{frenchb} or \emph{francais} but not \emph{french}.
 
 This enables French hyphenation, if you have configured your
 \LaTeX{} system accordingly. It also changes all automatic text into
@@ -671,10 +668,12 @@ easily. Check out table \ref{cmd-french} for inspiration.
 \end{table}
 
 You will also notice that the layout of lists changes when switching to the
-French language. For more information on what the \texttt{frenchb}
+French language. For more information on what the \texttt{francais}
 option of \textsf{babel} does and how to customize its behaviour, run
 \LaTeX{} on file \texttt{frenchb.dtx} and read the produced file
 \texttt{frenchb.dvi}.
+
+Recent versions of \pai{frenchb} rely on \pai{numprint} to implement the \ci{nombre} command.
 
 \subsection{Support for German}
 

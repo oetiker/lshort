@@ -1,3 +1,16 @@
+* integrated suggestions from the  Manuel Pégourié-Gonnard and Samuel Colin
+  * make CTAN links more uniform throughout the document
+  * do not type ASCII in tt
+  * be less opinionated on \[ vs equation
+  * add note on how to deal with accented characters and makeindex
+    sorting limitations. 
+  * update notes on how todo documents that work in both latex and pdflatex
+  * replace acrobat reader by pdf reader and acrobat distiller by pdf
+    convertor
+  * use francais instead of frenchb and mention numprint.
+  * note about linux distros splitting tex distors up into many packages
+  * do not mention java in math-graphics
+
 4.27 2009.11.16
 ---------------
 

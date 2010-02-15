@@ -9,7 +9,9 @@
 %save pageref an label
 \let\lsspageref\pageref
 \ProvidesPackage{lshort}
-\RequirePackage[english,frenchb,german]{babel}
+\RequirePackage{etex}
+\RequirePackage{numprint}
+\RequirePackage[english,francais,german]{babel}
 \RequirePackage{mflogo}
 \RequirePackage{verbatim}
 \RequirePackage{fancyhea}
@@ -107,6 +109,7 @@
 % Adapted from TeX FAQ
 \renewcommand{\Email}{\begingroup \def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}\Url}     % email address
 \def\mailto|#1|{\href{mailto:#1}{\Email|#1|}}        % url to mail somewhere
+%\newcommand{\CTANref}{\begingroup \urlstyle{tt}\Url}     % 
 \newcommand{\CTANref}{\begingroup \urlstyle{tt}\Url}     % 
 \def\CTAN|#1|{\href{http://www.ctan.org/get/#1}{\CTANref|CTAN://#1|}}  
 \newcommand\Newsgroup{\begingroup \urlstyle{tt}\Url} % newsgroup
@@ -189,7 +192,7 @@
 \pdfstringdefDisableCommands{\edef\ldots{... }}%
 \fi
 
-%\noindent\addvspace{1ex}\small #1 $<$\texttt{#2}$>$\par\addvspace{2ex}\noindnet\ignorespaces}
+%\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}
 %
 %
 % Symbol Entry for Math Symbol Tables
