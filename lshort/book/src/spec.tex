@@ -33,13 +33,13 @@ easy to do and widely used.  In order to use pictures in the EPS format, you
 must have a \PSi{} printer\footnote{Another
   possibility to output \PSi{} is the \textsc{\wi{GhostScript}}
   program available from
-  \CTANref|support/ghostscript|. Windows and OS/2 users might
+  \CTAN|support/ghostscript|. Windows and OS/2 users might
   want to look for \textsc{GSview}.} available for output.
 
 A good set of commands for inclusion of graphics is provided in the
 \pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
 of packages called the ``graphics''
-bundle.\footnote{\CTANref|macros/latex/required/graphics|}
+bundle.\footnote{\CTAN|macros/latex/required/graphics|}
 
 When working on a system with a
 \PSi{} printer available for output and with the \textsf{graphicx}
@@ -237,11 +237,15 @@ to Word\index{Word}. Note the
 position of the full stop.
 \end{example}
 
+\texttt{makeindex} has no clue about characters outside the ASCII range. To
+get the sorting correct, use the \verb|@| character as shown in the K\"ase
+and \'ecole examples above.
+
 \section{Fancy Headers}
 \label{sec:fancy}
 
 The \pai{fancyhdr} package,\footnote{Available from
-  \CTANref|macros/latex/contrib/supported/fancyhdr|.} written by
+  \CTAN|macros/latex/contrib/supported/fancyhdr|.} written by
 Piet van Oostrum, provides a few simple commands that allow you to
 customize the header and footer lines of your document.  Look
 at the top of this page, for an application of this
@@ -393,7 +397,7 @@ time before moving on to step~\ref{step:final}.
 
 \section{Working with pdf\LaTeX} \label{sec:pdftex}\index{PDF}
 \secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}%
-PDF is a \wi{hypertext} document format. Much like in a web page,
+PDF is a portable \wi{hypertext} document format. Much like in a web page,
 some words in the document are marked as hyperlinks. They link to other
 places in the document or even to other documents. If you click
 on such a hyperlink you get transported to the destination of the
@@ -491,9 +495,9 @@ other than English, you might want to use EC, LH, or CB fonts (see the
 discussion about \texttt{OT1} fonts on the page~\pageref{OT1}). 
 Vladimir Volovich has created the cm-super font bundle which covers the
 entire EC/TC, EC Concrete, EC Bright and LH font sets. It is available from
-\texttt{CTAN:/fonts/ps-type1/cm-super} and is included with \TeX{}Live7
+\CTAN|fonts/ps-type1/cm-super| and is included with \TeX{}Live
 and Mik\TeX. Similar type~1 CB Greek fonts created by Apostolos
-Syropoulos are available at \texttt{CTAN:/tex-archive/fonts/greek/cb}.
+Syropoulos are available at \CTAN|fonts/greek/cb|.
 Unfortunately, both of these font sets are not of the same typographic
 quality as the Type1 CM fonts by Blue Sky/Y\&Y. They were automatically
 hinted, and the document might look not as neat on the screen as the ones using
@@ -579,12 +583,10 @@ pdf output with full support for the full Latin character set.
 \label{ssec:pdfgraph}
 
 Including graphics into a document works best with the 
-\pai{graphicx} package (see page~\pageref{eps}). 
-By using the special \emph{driver} option \texttt{pdftex} the
-package will work with pdf\LaTeX{} as well:
+\pai{graphicx} package (see page~\pageref{eps}):
 \begin{code}
 \begin{verbatim}
-\usepackage[pdftex]{color,graphicx}
+\usepackage{xcolor,graphicx}
 \end{verbatim}
 \end{code}
 In the sample above I have included the color package, as using color in
@@ -634,8 +636,7 @@ optional and allow you to change the default behaviour of hyperref.\footnote{It
 is worth noting that the \pai{hyperref} package is not limited to
 work with pdf\TeX{}. It can also be configured to embed PDF-specific
 information into the DVI output of normal \LaTeX{}, which then gets put
-into the PS file by \texttt{dvips} and is finally picked up by Adobe
-Distiller when it is used to turn the PS file into PDF.} In the following
+into the PS file by \texttt{dvips} and is finally picked up by the pdf convertor when turning the PS file into PDF.} In the following
 list the default values are written in an upright font.
 
 \begin{flushleft}
@@ -815,27 +816,14 @@ Math expressions are a prime candidate for this kind of problem:
         {E = mc ** 2}}
 \end{verbatim}
 \end{code}
-which turns \verb+\section{$E=mc^2$}+ to ``E=mc2'' in the bookmark area.
-
-Color changes also do not travel well into bookmarks:
-\begin{code}
-\verb+\section{\textcolor{red}{Red !}}+
-\end{code}
-produces the string ``redRed!''. The command \verb+\textcolor+ gets ignored
-but its argument (red) gets printed. 
-
-If you use
-\begin{code}
-\verb+\section{\texorpdfstring{\textcolor{red}{Red !}}{Red\ !}}+
-\end{code}
-the result will be much more legible.
+which turns \verb+\section{$E=mc^2$}+ to ``E = mc ** 2'' in the bookmark area.
 
 If you write your document in unicode and use the \verb+unicode+ option for
 the \pai{hyperref} package to use unicode characters in bookmarks. This
 will give you a much larger selection of characters to pick from when
 when using \ci{texorpdfstring}.
 
-\subsubsection{Source Compatibility Between \LaTeX{} and pdf\LaTeX{}}
+\subsection{Source Compatibility Between \LaTeX{} and pdf\LaTeX{}}
 \label{sec:pdfcompat}
 
 Ideally your document would compile equally well with \LaTeX{} and
@@ -863,23 +851,21 @@ version to be black and white due to the printing costs but we want
 the PDF version for online viewing to be colourful.
 \begin{code}
 \begin{verbatim}
-\RequirePackage{ifpdf} % running on pdfTeX?
-\ifpdf
-  \documentclass[a4paper,12pt,pdftex]{book}
-\else
-  \documentclass[a4paper,12pt,dvips]{book}
-\fi
-
-\ifpdf
-  \usepackage{lmodern}
-\fi
-\usepackage[bookmarks, % add hyperlinks
-            colorlinks,
-            plainpages=false]{hyperref}                    
-\usepackage[T1]{fontenc}
+\RequirePackage{ifpdf} % are we producing PDF ?
+\documentclass[a4paper,12pt]{book}
 \usepackage[latin1]{inputenc}
-\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[bookmarks, % tune hyperref
+            colorlinks,
+            plainpages=false]{hyperref}
 \usepackage{graphicx}
+\ifpdf
+  \hypersetup{linkscolor=blue}
+\else
+  \hypersetup{linkscolors=black}
+\fi
+\usepackage[english]{babel}
 ...
 \end{verbatim}
 \end{code}
@@ -888,10 +874,9 @@ non-PDF version. The effect of this is to make the \ci{href} command
 work in all cases, which saves me from wrapping every occurrence into a
 conditional statement.
 
-Note that in recent \TeX{} distributions (\TeX{}Live for example), the
+Note that in recent \TeX{} distributions (like \TeX{}Live, Mac\TeX{} and MiK\TeX{}), the
 normal \TeX{} program is actually pdf\TeX{} it will automatically switch
-between producing pdf and dvi according to the settings in the document
-class. If you use the code above you can still use the \verb|pdflatex|
+between producing pdf and dvi according to the name it is called with: use the \verb|pdflatex|
 command to get pdf output and \verb|latex| for normal dvi output.
 
 
@@ -905,7 +890,7 @@ presentation software.
 \wi{pdf\LaTeX} combined with the \pai{beamer} class allows you to
 create presentations in PDF, looking much like something you might be
 able to generate with PowerPoint if you had a very good day, but much
-more portable because Acrobat Reader is available on many more
+more portable because pdf readers are available on many more
 systems.
 
 The \pai{beamer} class uses \pai{graphicx}, \pai{color} and

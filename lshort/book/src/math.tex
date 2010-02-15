@@ -54,7 +54,7 @@ in some cases inconsistent.
 
 \AmS-\LaTeX{} is a part of the required distribution and is provided
 with all recent \LaTeX{} distributions.\footnote{If yours is missing it, go to
-  \texttt{CTAN:macros/latex/required/amslatex}.} In this chapter, we assume
+  \CTAN|macros/latex/required/amslatex|.} In this chapter, we assume
   \pai{amsmath} is loaded in the preamble; \verb|\usepackage{amsmath}|.
 
 \section{Single Equations}
@@ -127,9 +127,8 @@ or you can type less for the
 same effect:
  \[ a^2 + b^2 = c^2 \]
 \end{example}
-However, note that if you have many equations in a document the
-\LaTeX{} source code will become poorly readable if you use \ci{[} and
-\ci{]}. So we recommend to use \ei{equation} and \ei{equation*}.
+While \ci{[} is short and sweet, it does not allow to switch between numbered and not numbered style as easily as
+nicely \ei{equation} and \ei{equation*}.
 
 Note the difference in typesetting style between \wi{text style} and \wi{display style}
 equations: 
@@ -709,7 +708,7 @@ lower-case \texttt{c}) and the third column left-justified:
 \end{example}
 
 However, we can specify any number of needed columns. \emph{E.g.},
-\texttt{{c}} will give only one column with all entries centered, or
+\verb+{c}+ will give only one column with all entries centered, or
 \verb+{rCll}+ will add a fourth, left-justified column, \emph{e.g.},
 for comments. Moreover, beside \texttt{l}, \texttt{c}, \texttt{r}, \texttt{L},
 \texttt{C}, \texttt{R} for math mode entries there also exists \texttt{s},
