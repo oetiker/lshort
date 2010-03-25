@@ -28,16 +28,15 @@ then derives the typographical form of the text according to the
 
 The most important text unit in \LaTeX{} (and in typography) is the
 \wi{paragraph}.  We call it ``text unit'' because a paragraph is the
-typographical form that should reflect one coherent thought, or one
-idea.  You will learn in the following sections how to force
-line breaks with e.g.{} \texttt{\bs\bs}, and paragraph breaks with e.g.{} 
-leaving an empty line in the source code.  Therefore, if a new thought
-begins, a new paragraph should begin, and if not, only line breaks
-should be used.  If in doubt about paragraph breaks, think about your
-text as a conveyor of ideas and thoughts.  If you have a paragraph
-break, but the old thought continues, it should be removed.  If some
-totally new line of thought occurs in the same paragraph, then it
-should be broken.
+typographical form that should reflect one coherent thought, or one idea. 
+You will learn in the following sections how to force line breaks with
+e.g.\ \texttt{\bs\bs}, and paragraph breaks with e.g.\ leaving an empty line
+in the source code.  Therefore, if a new thought begins, a new paragraph
+should begin, and if not, only line breaks should be used.  If in doubt
+about paragraph breaks, think about your text as a conveyor of ideas and
+thoughts.  If you have a paragraph break, but the old thought continues, it
+should be removed.  If some totally new line of thought occurs in the same
+paragraph, then it should be broken.
 
 Most people completely underestimate the importance of well-placed
 paragraph breaks.  Many people do not even know what the meaning of
@@ -99,7 +98,7 @@ comma.
 Finally, the paragraphs of a text should also be structured logically
 at a higher level, by putting them into chapters, sections,
 subsections, and so on.  However, the typographical effect of writing
-e.g.{} \verb|\section{The| \texttt{Structure of Text and Language}\verb|}| is
+e.g.\ \verb|\section{The| \texttt{Structure of Text and Language}\verb|}| is
 so obvious that it is almost self-evident how these high-level
 structures should be used.
 
@@ -204,7 +203,7 @@ Example:
 The command \ci{-} inserts a discretionary hyphen into a word. This
 also becomes the only point hyphenation is allowed in this word. This
 command is especially useful for words containing special characters
-(e.g.{} accented characters), because \LaTeX{} does not automatically
+(e.g.\ accented characters), because \LaTeX{} does not automatically
 hyphenate words containing special characters.
 %\footnote{Unless you are using the new
 %\wi{DC fonts}.}.
@@ -965,7 +964,7 @@ commands to facilitate hyphenation, see Table~\ref{Cyrillic}.
    \verb|"--~| & Cyrillic emdash in compound names (surnames).       \\
    \verb|"--*| & Cyrillic emdash for denoting direct speech.         \\
    \verb|""| & like \verb|"-|, but producing no hyphen sign
-               (for compound words with hyphen, e.g.\verb|x-""y|
+               (for compound words with hyphen, e.g.\ \verb|x-""y|
                or some other signs  as ``disable/enable'').     \\
    \verb|"~| & for a compound word mark without a breakpoint.        \\
    \verb|"=| & for a compound word mark with a breakpoint, allowing
@@ -1653,7 +1652,7 @@ on this in table \ref{units} on page \pageref{units}.
 \end{minipage}
 \end{table}
 
-A table could be started with the following line e.g.{}
+A table could be started with the following line e.g.\
 \begin{code}
 \verb|\begin{table}[!hbp]|
 \end{code}
@@ -1765,7 +1764,7 @@ drawings into your \LaTeXe{} documents later in this introduction.
 \section{Protecting Fragile Commands}
 
 Text given as arguments of commands like \ci{caption} or \ci{section} may
-show up more than once in the document (e.g. in the table of contents as
+show up more than once in the document (e.g.\ in the table of contents as
 well as in the body of the document). Some commands will break when used in
 the argument of \ci{section}-like commands. Compilation of your document
 will fail. These commands are called \wi{fragile commands}---for example,

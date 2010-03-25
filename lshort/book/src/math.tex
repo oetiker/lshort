@@ -575,7 +575,7 @@ To group multiple equations the
   also be used to group several blocks of equations beside each other.
   However, for this rather rare situation we also recommend to use the
   \ei{IEEEeqnarray} environment with an argument like,
-  \emph{e.g.}, \texttt{\{rCl+rCl\}}.} could be used:
+  \texttt{\{rCl+rCl\}}.} could be used:
 \begin{example}
 \begin{align}
   a & = b + c \\
@@ -595,7 +595,7 @@ However, this approach does not work once a single line is too long:
 \end{example}
 \noindent
 Here $+\:m$ should be below $d$ and not below the equality sign. Of
-course, one could add some space by, \emph{e.g.}, \verb+\hspace{...}+,
+course, one could add some space (\verb+\hspace{...}+),
 but this will never yield a precise arrangement (and is bad
 style\ldots).
 
@@ -700,18 +700,17 @@ lower-case \texttt{c}) and the third column left-justified:
 \end{IEEEeqnarray}
 \end{example}
 
-However, we can specify any number of needed columns. \emph{E.g.},
+However, any number of columns can be specified:
 \verb+{c}+ will give only one column with all entries centered, or
-\verb+{rCll}+ will add a fourth, left-justified column, \emph{e.g.},
+\verb+{rCll}+ would add a fourth, left-justified column to use
 for comments. Moreover, beside \texttt{l}, \texttt{c}, \texttt{r}, \texttt{L},
-\texttt{C}, \texttt{R} for math mode entries there also exists \texttt{s},
-\texttt{t}, \texttt{u} for left, centered, and right text mode entries,
-respectively. Moreover, we can add additional space by \texttt{.} and
+\texttt{C}, \texttt{R} for math mode entries there are also \texttt{s},
+\texttt{t}, \texttt{u} for left, centered, and right text mode entries.
+Additional space can be added with \texttt{.} and
 \texttt{/} and \texttt{?} in increasing order.\footnote{For more spacing
-  types we refer to Section~\ref{sec:putting-qed-right} and the
-  official manual.}
+  types refer to Section~\ref{sec:putting-qed-right}.}
 
-Note that in contrast to \texttt{eqnarry} the spaces around the equality
+In contrast to \texttt{eqnarry} the spaces around the equality
 signs are correct!
 
 \subsection{Common Usage}
