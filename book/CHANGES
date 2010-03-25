@@ -1,3 +1,4 @@
+* spaceing after e.g. fixed as suggested by Mike Lee
 * it is --update-fndb not -update-fndb (Rockrush Engch)
 * integrated suggestions from the  Manuel Pégourié-Gonnard and Samuel Colin
   * make CTAN links more uniform throughout the document
