@@ -13,15 +13,16 @@ get \TeX{} working.
 
 \section{What to Install}
 
-For using LaTeX on any computer system, you need 3 essential pieces of
-software:
+For using LaTeX on any computer system, you need several programs.
 
 \begin{enumerate}
 
-\item A text editor for editing your LaTeX source files.
 
 \item The \TeX{}/\LaTeX{} program for processing your \LaTeX{} source files
 into typeset PDF or DVI documents.
+
+\item A text editor for editing your LaTeX source files. Some products even let
+you start the latex program from within the editor.
 
 \item A PDF/DVI viewer program for previewing and printing your
 documents.
@@ -37,27 +38,29 @@ with.
 
 \section{\TeX{} on Mac OS X}
 
-\subsection{Picking an Editor}
-
-Base your LaTeX environment on the \wi{TextMate} editor! TextMate is not
-only a highly customizable, general purpose text editor, it also provides
-excellent LaTeX support and integrates tightly with the PDFView previewer.
-This combination of tools, lets you use LaTeX in a convenient and Mac-like
-manner. You can download a free trial version from the Textmate website on
-\url{http://macromates.com/} and purchase a full version for 39 EUR. If you
-know an equivalent OpenSource tool for the Mac, please let us know.
-
 \subsection{Get a \TeX{} Distribution}
+
+Just download \wi{MacTeX}. It is a
+precompiled LaTeX distribution for OS X. \wi{MacTeX} provides a full LaTeX
+installation plus a number of additional tools. Get MaxTeX from
+\url{http://www.tug.org/mactex/}.
 
 If you are already using Macports or Fink for installing Unix software under
 OS X, install LaTeX using these package managers. Macport users install
 LaTeX with \framebox{\texttt{port install tetex}},
 Fink users use the command \framebox{\texttt{fink install tetex}}.
 
-If you are neither using Macports nor Fink, download \wi{MacTeX}, which is a
-precompiled LaTeX distribution for OS X. \wi{MacTeX} provides a full LaTeX
-installation plus a number of additional tools. Get MaxTeX from
-\url{http://www.tug.org/mactex/}.
+\subsection{Picking an Editor}
+
+The most popular open source editor for \LaTeX{} on the mac seems to be
+\TeX{}shop.  Get a copy from \url{http://www.uoregon.edu/~koch/texshop}. It
+is also contained in the \wi{MacTeX} distribution.
+
+Another fine editor is Texmaker. Apart from being a useful editor it has the
+advantage of running on Windows, Mac and Unix/Linux equally well. Go to
+\url{http://www.xm1math.net/texmaker} for further Information. Note there is
+also a forked version of Texmaker called TexmakerX on
+\url{http://texmakerx.sourceforge.net/} it promises addional functionality.
 
 \subsection{Treat yourself to \wi{PDFView}}
 
@@ -87,8 +90,10 @@ efficient \LaTeX{} writing environment in Windows. Get your copy from\\
 \url{http://www.toolscenter.org}. TeXnicCenter integrates nicely with
 MiKTeX.
 
-An another excellent choice is the editor provided by the LEd project available on
-\url{http://www.latexeditor.org}.
+Other excellent choice is the editor provided by the LEd project available
+on \url{http://www.latexeditor.org}.
+
+See the note on Texmaker in the Mac section above for a third choice.
 
 \subsection{Working with graphics}
 
@@ -116,6 +121,9 @@ setup. Use your package manager to install the following packages:
 \item gimp -- a free photoshop look-a-like.
 \item inkscape -- a free illustrator/corel draw look-a-like.
 \end{itemize}
+
+If you are looking for a more windows like graphical editing environment,
+check out Texmaker. See the note in the Mac section above.
 
 Most Linux distros insist on splitting up their \TeX{} environments into a
 large number of optional packages, so if something is missing after your

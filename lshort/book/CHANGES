@@ -1,3 +1,11 @@
+4.30 2010.06.18
+---------------
+* Updated installation appendig. Remove Texmate since it is not OSS software
+  and add Texshop and Texmaker instead.
+* use microtype for optimized character positioning
+* updated graphics chapter with more emphasis on PGF/TikZ
+  integrated several examples by  Andras Salamon
+* add note about the layouts package to the  layout page
 * spaceing after e.g. fixed as suggested by Mike Lee
 * it is --update-fndb not -update-fndb (Rockrush Engch)
 * integrated suggestions from the  Manuel Pégourié-Gonnard and Samuel Colin
