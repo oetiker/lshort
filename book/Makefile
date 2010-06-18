@@ -14,7 +14,7 @@ MAKEINDEX=makeindex
 DVIPS=dvips
 
 # The default targets
-all: lshort.ps lshort-book.ps lshort.pdf lshort-a5book.pdf
+all: lshort.ps lshort-book.ps lshort.pdf lshort-a5book.pdf lshort-letter.pdf lshort-a5.pdf
 
 
 lshort.dvi: $(FILES)
@@ -58,6 +58,15 @@ lshort.pdf: $(FILES)
 	mv lshort.pdf .. )
 	rm pdfbuild/*
 
+lshort-a5.pdf: $(FILES)
+	-mkdir pdfbuild
+	(T1FONTS=.:`pwd`/eurofont: && export T1FONTS && TEXINPUTS=.:`pwd`/src:`pwd`/euro:${TEXINPUTS:-:}&&export TEXINPUTS&& cd pdfbuild&& \
+	$(PDFLATEX) lshort-a5&& $(PDFLATEX) lshort-a5&& \
+	$(MAKEINDEX) -s ../src/lshort.ist lshort-a5&&$(PDFLATEX) lshort-a5&& \
+	(thumbpdf --resolution 10 lshort-a5.pdf && $(PDFLATEX) lshort-a5)&& \
+	mv lshort-a5.pdf .. )
+	rm pdfbuild/*
+
 lshort-letter.pdf: $(FILES)
 	-mkdir pdfbuild
 	(T1FONTS=.:`pwd`/eurofont: && export T1FONTS && TEXINPUTS=.:`pwd`/src:`pwd`/euro:${TEXINPUTS:-:}&&export TEXINPUTS&& cd pdfbuild&& \
@@ -80,10 +89,12 @@ tar:	$(FILES)
 	tar -zcvf lshort-$(VERS).src.tar.gz `awk '{print "lshort-$(VERS)/"$$1}' MANIFEST`
 	rm lshort-$(VERS)
 
-dist:	all tar
+rsync:  all tar
 	echo press enter to rsync
 	read x
-	rsync  lshort-$(VERS).src.tar.gz CHANGES README lshort.pdf lshort-a5book.pdf james:public_html/latex/
+	rsync  lshort-$(VERS).src.tar.gz CHANGES README lshort.pdf lshort-letter.pdf lshort-a5.pdf lshort-a5book.pdf james:public_html/latex/
+
+dist:	rsync
 	lftp -e 'cd incoming;mkdir lshort-$(VERS);cd lshort-$(VERS);mput lshort-$(VERS).src.tar.gz CHANGES README lshort-book.ps lshort.dvi lshort.pdf lshort.ps;quit' ftp.tex.ac.uk
 	(echo -e "Robin,\n\nI have uploaded lshort-$(VERS) to ftp.tex.ac.uk:/incoming/lshort-$(VERS).\n\nIf you think it is appropriate, announce it please.\n\nThanks and cheers\ntobi\n\n\n--";fortune -s shakes goethe) | mailx -s "Lshort Upload (note the quote)" ctan@dante.de
 	(echo -e "Folks,\n\nI have created lshort-$(VERS). It is available from http://tobi.oetiker.ch/latex.\n\nCheers tobi\n\n\n--";fortune -s shakes goethe) | mailx -s "Lshort $(VERS)" `cat TRLIST`
