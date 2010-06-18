@@ -20,45 +20,47 @@ few of them.
 
 \section{Overview}
 
-The \ei{picture} environment allows programming pictures directly in
-\LaTeX. A detailed
-description can be found in the \manual. On the one hand, there are rather
-severe constraints, as the slopes of line segments as well as the radii of
-circles are restricted to a narrow choice of values.  On the other hand, the
-\ei{picture} environment of \LaTeXe\ brings with it the \ci{qbezier}
-command, ``\texttt{q}'' meaning ``quadratic''.  Many frequently used curves
-such as circles, ellipses, or catenaries can be satisfactorily approximated
-by quadratic B\'ezier curves, although this may require some mathematical
-toil. If, in addition, a programming language is used to generate
-\ci{qbezier} blocks of \LaTeX\ input files, the \ei{picture} environment
-becomes quite powerful.
+Creating graphical output with \LaTeX{} has a long tradition. It started out
+with the \ei{picture} environment which allows you to create graphics by
+cleverly placing predefined elemements onto the canvas. A complete
+description can be found in the \manual. The \ei{picture} environment of
+\LaTeXe\ brings with it the \ci{qbezier} command, ``\texttt{q}'' meaning
+``quadratic''.  Many frequently used curves such as circles, ellipses, or
+catenaries can be satisfactorily approximated by quadratic B\'ezier curves,
+although this may require some mathematical toil. If, in addition, a
+programming language is used to generate \ci{qbezier} blocks of \LaTeX\
+input files, the \ei{picture} environment becomes quite powerful.
 
 Although programming pictures directly in \LaTeX\ is severely restricted,
 and often rather tiresome, there are still reasons for doing so. The documents
 thus produced are ``small'' with respect to bytes, and there are no additional
 graphics files to be dragged along.
 
-Packages like \pai{epic} and \pai{eepic} (described, for instance, in \companion), or
-\pai{pstricks} help to eliminate the restrictions hampering the original \ei{picture} 
-environment, and greatly strengthen the graphical power of \LaTeX.
+This has been the state of things until a few years ago when Till Tantau of
+\pai{beamer} fame came up with the Portable Grafics Format \pai{pgf} and its
+companion package TikZ (\pai{tikz}). This system lets you create high
+quality vector graphics with all current \TeX{} systems including fulll
+support for pdf.
 
-While the former two packages just enhance the \ei{picture} environment, the \pai{pstricks}
-package has its own drawing environment, \ei{pspicture}. The power of \pai{pstricks} stems
-from the fact that this package makes extensive use of \PSi{} possibilities.
-In addition, numerous packages have been written for specific purposes. A wide variety of these
-packages is described in detail in \graphicscompanion{} (not to be confused with \companion).
+Building on these basic, numerous packages have been written for specific
+purposes. A wide variety of these packages is described in detail in
+\graphicscompanion{}.
 
-Perhaps the most powerful graphical tool related with \LaTeX\ is \MP, the twin of
-Donald E. Knuth's \MF. \MP{} has the very powerful and 
-mathematically sophisticated programming language of \MF. Contrary to \MF,
-which generates bitmaps, \MP{} generates encapsulated \PSi{} files, 
-which can be imported in \LaTeX. For an introduction, see \hobby, or the tutorial on \cite{ursoswald}.
+Perhaps the most advanced graphical tool related with \LaTeX\ is \MP. It is a stand-alone application
+based on Donald E. Knuth's \MF. \MP{} has the very powerful and 
+mathematically sophisticated programming language of \MF but ontrary to \MF,
+it generates encapsulated \PSi{} files, 
+which can be imported in \LaTeX and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on \cite{ursoswald}.
 
 A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can 
 be found in \hoenig.
 
 \section{The \texttt{picture} Environment}
 \secby{Urs Oswald}{osurs@bluewin.ch}
+
+As mentioned above the picture environment is part of standard \LaTeX{} and it is great for simple tasks and also if you want
+to control the exact positoning of individual elements on a page. But if you are about to do any serious graphics work, you should
+look at TikZ as presented in section \ref{sec:tikz} on page \pageref{sec:tikz}.
 
 \subsection{Basic Commands}
 
@@ -502,21 +504,26 @@ The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2
 Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
 is assigned the mathematical coordinates $(-3,-2)$ (black disk).
 
-\section{The TikZ \& PGF Graphics Package}
+\section{The PGF and TikZ Graphics Packages}
+\label{sec:tikz}
 
 Today every \LaTeX{} output generation system can create nice vector graphics,
 it's just the interfaces that are rather diverse. The PGF package provides an
-abstraction layer over these interface and lets you use simple commands to
-conveniently create complex vector graphics right from inside your document. The
+abstraction layer over these interface. The
 PGF package comes with its own 500+ page documentation
 \cite{pgfplot}. So we are only going to scratch the surface of the package with this little
 section.
 
-For high level access to 
-the PGF functions you should load the \pai{tikz} package.
-With the \pai{tikz} package you can use highly efficient commands to
+Pgf comes with a high level access language provided by the  \pai{tikz} package.
+TikZ provides highly efficient commands to
 draw graphics right from inside your document. Use the \ei{tikzpicture}
-environment to wrap your instructions.
+environment to wrap your TikZ commans.
+
+As mentioned above, there is an excellent manual for PGF and frieds. So
+instead of actually explaining how it works, I will just show you a few examples
+so that you can get a first impression of how this tool works.
+
+First a simple non-sense diagram.
 \begin{example}
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2)
@@ -532,9 +539,53 @@ environment to wrap your instructions.
          arc (0:30:3mm) -- cycle;
 \end{tikzpicture}
 \end{example}
-If you know other programming languages you
-may notice the familiar semicolon (\texttt{;}) character that is used
-to separate the different commands. With the \ci{usetikzlibrary}
+Not the semicolon (\texttt{;}) character. It separates the individual commands.
+
+A simple Venn diagram.
+\begin{example}
+\shorthandoff{:}
+\begin{tikzpicture}
+  \node[circle,draw,
+        minimum size=3cm,
+        label=120:{economics}]
+         at (0,0) {};
+  \node[circle,draw,
+        minimum size=3cm,
+        label=60:{psychology}]
+         at (1,0) {};
+  \node (i) at (0.5,-1) {};
+  \node at (0.6,-2.5) 
+    {behavioural economics}
+    edge[->,thick,
+         out=60,in=-60] (i);
+\end{tikzpicture}
+\end{example}
+If you are using \pai{tikz} in connection with bable some of the characters used in the
+TikZ language may get modified by babel, leading to odd errors. To counter act this, add 
+the \ci{shorthandoff} command to your code.
+
+Note the foreach loops in the next example.
+\begin{example}
+\begin{tikzpicture}[scale=0.8]
+  \tikzstyle{v}=[circle, minimum size=2mm,inner sep=0pt,draw]
+  \foreach \i in {1,...,8}
+    \foreach \j in {1,...,3}
+      \node[v] 
+        (G-\i-\j) at (\i,\j) {};
+  \foreach \i in {1,...,8}
+    \foreach \j/\o in {1/2,2/3}
+      \draw[->] 
+        (G-\i-\j) -- (G-\i-\o);
+  \foreach \i/\n in 
+    {1/2,2/3,3/4,4/5,5/6,6/7,7/8}
+    \foreach \j/\o in {1/2,2/3} {
+       \draw[->] (G-\i-\j) -- (G-\n-\o);
+       \draw[->] (G-\n-\j) -- (G-\i-\o);
+    }
+\end{tikzpicture}
+\end{example}
+
+With the \ci{usetikzlibrary}
 command in the preamble you can enable a wide variety of additional
 features for drawing special shapes, like this box which is slightly bent.
 \begin{example}
@@ -543,13 +594,32 @@ features for drawing special shapes, like this box which is slightly bent.
 \begin{tikzpicture}[
      decoration={bent,aspect=.3}]
  \draw [decorate,fill=lightgray]
-        (0,0) rectangle (5.5,2);
+        (0,0) rectangle (5.5,4);
  \node[circle,draw] 
         (A) at (.5,.5) {A};
  \node[circle,draw] 
-        (B) at (5,1.5) {B};
+        (B) at (5,3.5) {B};
  \draw[->,decorate] (A) -- (B);
  \draw[->,decorate] (B) -- (A);
+\end{tikzpicture}
+\end{example}
+
+\begin{example}
+\usetikzlibrary{positioning}
+\begin{tikzpicture}[xscale=6,
+     yscale=8,>=stealth]
+  \tikzstyle{v}=[circle,
+     minimum size=1mm,draw,thick]
+  \node[v] (a) {$1$};
+  \node[v] (b) [right=of a] {$2$};
+  \node[v] (c) [below=of a] {$2$};
+  \node[v] (d) [below=of b] {$1$};
+  \draw[thick,->] 
+        (a) to node {} (c);
+  \draw[thick,->] 
+        (a) to node {} (d);
+  \draw[thick,->] 
+        (b) to node {} (d);
 \end{tikzpicture}
 \end{example}
 
@@ -624,12 +694,14 @@ you will find a detailed tutorial on drawing this exact diagram.
 \end{tikzpicture}
 \end{center}
 
-\pagebreak
 And there is more, if you have to draw plots of numerical data or
 functions, you should have a closer look at the  \pai{pgfplot}
 package. It provides everything you need to draw plots. It can even
 call the external \texttt{gnuplot} command to evaluate actual
 functions you wrote into the graph.
+
+For more inspiration make sure to visit Kjell Magne Fauske's excellent \url{http://www.texample.net/tikz/}.
+it contains an ever expanding store of beautiful graphs and other \LaTeX{} code.
 
 %%% Local Variables:
 %%% TeX-master: "lshort.tex"
