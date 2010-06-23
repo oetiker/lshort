@@ -508,18 +508,18 @@ is assigned the mathematical coordinates $(-3,-2)$ (black disk).
 \label{sec:tikz}
 
 Today every \LaTeX{} output generation system can create nice vector graphics,
-it's just the interfaces that are rather diverse. The PGF package provides an
+it's just the interfaces that are rather diverse. The \pai{pgf} package provides an
 abstraction layer over these interface. The
-PGF package comes with its own 500+ page documentation
+\pai{pdf} package comes with its own 500+ page documentation
 \cite{pgfplot}. So we are only going to scratch the surface of the package with this little
 section.
 
-Pgf comes with a high level access language provided by the  \pai{tikz} package.
+The \pai{pgf} package comes with a high level access language provided by the  \pai{tikz} package.
 TikZ provides highly efficient commands to
 draw graphics right from inside your document. Use the \ei{tikzpicture}
 environment to wrap your TikZ commands.
 
-As mentioned above, there is an excellent manual for PGF and friends. So
+As mentioned above, there is an excellent manual for \pai{pgf} and friends. So
 instead of actually explaining how it works, I will just show you a few examples
 so that you can get a first impression of how this tool works.
 
@@ -539,7 +539,7 @@ First a simple non-sense diagram.
          arc (0:30:3mm) -- cycle;
 \end{tikzpicture}
 \end{example}
-Not the semicolon (\texttt{;}) character. It separates the individual commands.
+Note the semicolon (\texttt{;}) character. It separates the individual commands.
 
 A simple Venn diagram.
 \begin{example}
@@ -560,8 +560,8 @@ A simple Venn diagram.
          out=60,in=-60] (i);
 \end{tikzpicture}
 \end{example}
-If you are using \pai{tikz} in connection with bable some of the characters used in the
-TikZ language may get modified by babel, leading to odd errors. To counter act this, add 
+If you are using \pai{tikz} in connection with \pai{babel} some of the characters used in the
+TikZ language may get modified by \pai{babel}, leading to odd errors. To counteract this, add 
 the \ci{shorthandoff} command to your code.
 
 Note the foreach loops in the next example.
@@ -623,9 +623,9 @@ features for drawing special shapes, like this box which is slightly bent.
 \end{tikzpicture}
 \end{example}
 
-You can even draw diagrams that look as if they came straight from a book on
-pascal programming. The code is a bit more daunting than the example above,
-so I will just show you the result. If you have a look at the PGF documentation
+You can even draw syntax diagrams that look as if they came straight from a book on
+Pascal programming. The code is a bit more daunting than the example above,
+so I will just show you the result. If you have a look at the \pai{pdf} documentation
 you will find a detailed tutorial on drawing this exact diagram.
 
 \begin{center}
