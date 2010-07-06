@@ -259,13 +259,13 @@ $\sqrt{x} \Leftrightarrow x^{1/2}
 \index{dots!three}
 \index{vertical!dots}
 \index{horizontal!dots}
-Usually you don't typeset an explicit \textbf{\wi{dot}} sign to indicate
-the multiplication operation when handling symbols; however sometimes it is written
-to help the reader's eyes in grouping a formula.
-You should use \ci{cdot} which typesets a single dot centered. \ci{cdots} is
+While the \textbf{\wi{dot}} sign to indicate
+the multiplication operation is normally left out, it is sometimes written
+to help the eye in grouping a formula.
+Use \ci{cdot} to typesets a single centered dot. \ci{cdots} is
 three centered \textbf{\wi{dots}} while \ci{ldots} sets the dots on the
 baseline. Besides that, there are \ci{vdots} for 
-vertical and \ci{ddots} for \wi{diagonal dots}. You can find another example in
+vertical and \ci{ddots} for \wi{diagonal dots}. There are more examples in 
 section~\ref{sec:arraymat}.
 \begin{example}
 $\Psi = v_1 \cdot v_2
@@ -510,10 +510,10 @@ done by putting a \verb+\\+ on those places where the equation needs
 to be wrapped. Similarly to \ei{equation*} there also exists a
 \ei{multline*} version for preventing an equation number.
 
-However, in spite of its ease in use, often the
+Often the
 \ei{IEEEeqnarray} environment (see section~\ref{sec:IEEEeqnarray})
-will yield better results.  Particularly, consider the following
-common situation:
+will yield better results.  Consider the following
+situation:
 \begin{example}
 \begin{equation}
   a = b + c + d + e + f 
@@ -524,7 +524,7 @@ common situation:
 \end{example}
 \noindent
 Here it is actually the RHS that is too long to fit on one line. The
-\ei{multline} environment will now yield the following:
+\ei{multline} environment creates the following output:
 \begin{example}
 \begin{multline}
   a = b + c + d + e + f 
@@ -533,26 +533,12 @@ Here it is actually the RHS that is too long to fit on one line. The
 \end{multline}
 \end{example}
 
-This is of course much better than \eqref{eq:equation_too_long}, but
+This is better than \eqref{eq:equation_too_long}, but
 it has the disadvantage that the equality sign loses its natural
 stronger importance with respect to the plus operator in front of
 $k$. The better solution is provided by the
 \ei{IEEEeqnarray} environment that will be discussed in detail in
-Section~\ref{sec:IEEEeqnarray}: 
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c + d + e + f 
-  + g + h + i + j \nonumber\\
-  && +\: k + l + m + n + o + p 
-  \label{eq:dont_use_multline}
-\end{IEEEeqnarray}
-\end{example}
-In this case the second line is vertically aligned to the first line:
-the $+$ in front of $k$ is exactly below $b$, \emph{i.e.}, the RHS is
-clearly visible as contrast to the LHS of the equation.
-
-
-
+Section~\ref{sec:IEEEeqnarray}.
 
 \section{Multiple Equations}
 \index{equation!multiple}
@@ -573,8 +559,8 @@ bad examples that show the biggest drawbacks of some common solutions.
 To group multiple equations the
 \ei{align} environment\footnote{The \texttt{align}-environment can
   also be used to group several blocks of equations beside each other.
-  However, for this rather rare situation we also recommend to use the
-  \ei{IEEEeqnarray} environment with an argument like,
+  Another excellent use case for
+  \ei{IEEEeqnarray} environment. Try an argument like,
   \texttt{\{rCl+rCl\}}.} could be used:
 \begin{example}
 \begin{align}
@@ -583,7 +569,7 @@ To group multiple equations the
 \end{align}
 \end{example}
 
-However, this approach does not work once a single line is too long:
+this approach fails once a single line is too long:
 \begin{example}
 \begin{align}
   a & = b + c \\
@@ -610,8 +596,7 @@ A better solution is offered by the \ei{eqnarray} environment:
 \end{eqnarray}
 \end{example}
 
-The \ei{eqnarray} environment, however, has a few very severe
-disadvantages:
+This is still not optimal though:
 \begin{itemize}
 \item The spaces around the equality signs are too big.
   Particularly, they are \textbf{not} the same as in the
@@ -645,7 +630,7 @@ disadvantages:
   & = & n + o + p + q + r + s
 \end{eqnarray}
 \end{example}
-Unfortunately, this command is faulty: if the RHS is too short, the array is
+again, this is not optimald as the RHS is too short and the array is
 not properly centered:
 \begin{example}
 \begin{eqnarray}
@@ -655,12 +640,9 @@ not properly centered:
   & = & i + j 
 \end{eqnarray}
 \end{example}
-Moreover, it is very complicated to change the vertical alignment of
-the equality sign on the second line.
 \end{itemize}
 
 Fortunately there is a better way\ldots.
-
 
 \subsection{IEEEeqnarray-Environment}
 \label{sec:IEEEeqnarray_intro}
@@ -700,7 +682,7 @@ lower-case \texttt{c}) and the third column left-justified:
 \end{IEEEeqnarray}
 \end{example}
 
-However, any number of columns can be specified:
+any number of columns can be specified:
 \verb+{c}+ will give only one column with all entries centered, or
 \verb+{rCll}+ would add a fourth, left-justified column to use
 for comments. Moreover, beside \texttt{l}, \texttt{c}, \texttt{r}, \texttt{L},
@@ -710,8 +692,8 @@ Additional space can be added with \texttt{.} and
 \texttt{/} and \texttt{?} in increasing order.\footnote{For more spacing
   types refer to Section~\ref{sec:putting-qed-right}.}
 
-In contrast to \texttt{eqnarry} the spaces around the equality
-signs are correct!
+Note the spaces around the equality signs in contrast to the space produced
+by the \texttt{eqnarray} environment.
 
 \subsection{Common Usage}
 \label{sec:common-usage}
@@ -837,8 +819,7 @@ the depth of the equation signs,\footnote{I think that one quad is the
   number can be suppressed using \ci{nonumber} (or
   \ci{IEEEnonumber}). If on such a line a label
   \verb+\label{eq:...}+ is defined, then this label is passed on
-  further to the next equation number that is not suppressed. However,
-  it is recommended to put the labels right before the line-break
+  further to the next equation number that is not suppressed. Put the labels right before the line-break
   \verb+\\+ or the end of the equation it belongs to. Apart from
   improving the readability of the source code this prevents a
   compilation error in the situation of a \ci{IEEEmulticol} command
@@ -900,7 +881,7 @@ using a ``\verb|.|'' as an invisible \ci{right} delimiter:
     \end{array} \right.
 \end{equation*}
 \end{example}
-However the \ei{cases} environment from \textsf{amsmath} simplifies
+The \ei{cases} environment from \textsf{amsmath} simplifies
 the syntax, so it is worth a look:
 \begin{example}
   \begin{equation*}
@@ -1215,8 +1196,8 @@ that the equation array is horizontally centered. The
 stretchable space, but this does not happen as these columns are
 invisible to the user.
 
-There is, however, a very simple remedy: we define these stretching
-columns ourselves!
+There is a very simple remedy. Define the stretching
+explicitly!
 \begin{example}
 \begin{proof}
   This is a proof that ends
