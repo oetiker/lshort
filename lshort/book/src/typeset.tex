@@ -288,7 +288,7 @@ The names for these dashes are:
 \subsection{Tilde ($\sim$)}
 \index{www}\index{URL}\index{tilde}
 A character often seen in web addresses is the tilde. To generate
-this in \LaTeX{} use \verb|\~| but the result: \~{} is not really
+this in \LaTeX{} use \verb|\~{}| but the result (\~) is not really
 what you want. Try this instead:
 
 \begin{example}
@@ -376,7 +376,7 @@ On a typewriter, a \wi{comma} or a \wi{period} takes the same amount of
 space as any other letter. In book printing, these characters occupy
 only a little space and are set very close to the preceding letter.
 Therefore, entering `\wi{ellipsis}' by just typing three
-dots would be wrong produce the wrong result. Instead, there is a special
+dots would produce the wrong result. Instead, there is a special
 command for these dots. It is called
 
 \begin{lscommand}
@@ -509,9 +509,9 @@ languageB). Use the command
 \newcommand{\fei}[1]{%
 \feih{#1}\texttt{#1}}
 
-Most of the modern computer systems allow you to input letter of
+Most modern computer systems allow you to input letters of
 national alphabets  directly from the keyboard. In order to 
-handle variety of input encoding used for different groups of 
+handle a variety of input encodings used for different groups of 
 languages and/or on different computer platforms \LaTeX{} employs the
 \pai{inputenc} package:
 \begin{lscommand}
@@ -557,7 +557,7 @@ as little as one byte and as many as four bytes.
 
 Font encoding is a different matter. It defines at which position inside
 a \TeX-font each letter is stored. Multiple input encodings could be mapped into 
-one font encoding, which reduces number of required font sets.
+one font encoding, which reduces the number of required font sets.
 Font encodings are handled through 
 \pai{fontenc} package: \label{fontenc}
 \begin{lscommand}
@@ -572,19 +572,19 @@ characters of the 7-bit ASCII character set. When accented characters
 are required, \TeX{} creates them by combining a normal character with
 an accent. While the resulting output looks perfect, this approach stops
 the automatic hyphenation from working inside words containing accented
-characters. Besides, some of Latin letters could not be created by
+characters. Besides, some Latin letters could not be created by
 combining a normal character with an accent, to say nothing about letters of
 non-Latin alphabets, such as Greek or Cyrillic.
 
 To overcome these shortcomings, several 8-bit CM-like font sets were created.
 \emph{Extended Cork} (EC) fonts in \fei{T1} encoding contains 
 letters and punctuation characters for most of the European
-languages based on Latin script. The LH font set contains letters necessary
+languages using Latin script. The LH font set contains letters necessary
 to typeset documents in languages using Cyrillic script. Because of the large
 number of Cyrillic glyphs, they are arranged into four font
 encodings---\fei{T2A}, \fei{T2B}, \fei{T2C},
-and~\fei{X2}.\footnote{The list of languages supported by each of these
-encodings could be found in \cite{cyrguide}.} The CB bundle contains fonts
+and~\fei{X2}.\footnote{Find a list of languages supported by each of these
+encodings in \cite{cyrguide}.} The CB bundle contains fonts
 in \fei{LGR} encoding for the composition of Greek text.
 
 Improve/enable hyphenation in non-English
@@ -600,7 +600,7 @@ To enable hyphenation and change all automatic text to \wi{Portuguese},
 \begin{lscommand}
 \verb|\usepackage[portuguese]{babel}|
 \end{lscommand}
-Or if you are in Brazil, substitute the language for \texttt{\wi{brazilian}}.
+Or if you are in Brazil, substitute \texttt{\wi{brazilian}} as the language.
 
 As there are a lot of accents in Portuguese you might want to use
 \begin{lscommand}
@@ -613,9 +613,8 @@ to be able to input them correctly as well as
 to get the hyphenation right.
 
 See table~\ref{portuguese} for the preamble you need to write in the
-Portuguese language. Note that we are using the latin1 input encoding here,
-so this will not work on a Mac or on DOS. Just use
-the appropriate encoding for your system.
+Portuguese language. Note that the example is for the latin1 input encoding.
+Modern systems might be using utf8 instead.
 
 \begin{table}[btp]
 \caption{Preamble for Portuguese documents.} \label{portuguese}

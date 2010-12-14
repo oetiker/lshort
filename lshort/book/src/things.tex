@@ -104,7 +104,7 @@ commands.''
 
 This is quite different from the \wi{WYSIWYG}\footnote{What you see is
   what you get.} approach that most modern word processors, such as
-\emph{MS Word} or \emph{Corel WordPerfect}, take. With these
+\emph{MS Word} or \emph{LibreOffice}, take. With these
 applications, authors specify the document layout interactively while
 typing text into the computer. They can see on the
 screen how the final work will look when it is printed.
@@ -196,9 +196,11 @@ able to fully grasp the concept of Logical Markup.
 
 \section{\LaTeX{} Input Files}
 
-The input for \LaTeX{} is a plain ASCII text file. Create it
-with any text editor. It contains the text of the document, as well as
-the commands that tell \LaTeX{} how to typeset the text.
+The input for \LaTeX{} is a plain text file. On Unix/Linux text files are
+pretty common. On windows, one would use Notepad to create a text file. It
+contains the text of the document, as well as the commands that tell
+\LaTeX{} how to typeset the text. If you are working with a LaTeX IDE, it will contain a program for creating
+\LaTeX{} input files in text format.
 
 \subsection{Spaces}
 
@@ -235,7 +237,7 @@ but rather coerce \LaTeX{} to do things you did not intend.
 \end{code}
 
 As you will see, these characters can be used in your documents all
-the same by adding a prefix backslash:
+the same by using a prefix backslash:
 
 \begin{example}
 \# \$ \% \^{} \& \_ \{ \} \~{}
