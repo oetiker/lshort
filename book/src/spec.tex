@@ -59,7 +59,7 @@ include a picture into your document:
 \begin{lscommand}
 \verb|\usepackage[|\emph{driver}\verb|]{graphicx}|
 \end{lscommand}
-\noindent where \emph{driver} is the name of your ``dvi to postscript''
+\noindent where \emph{driver} is the name of your ``dvi to \PSi{}''
 converter program. The most
 widely used program is called \texttt{dvips}. The name of the driver is
 required, because there is no standard on how graphics are included in
@@ -351,8 +351,8 @@ the documentation.  Here's how you do the first part:
   direction of the slashes).
 \item Refresh your distribution's file-name database. The command
   depends on the \LaTeX distribution you use:
-  teTeX, fpTeX -- \texttt{texhash}; web2c -- \texttt{maktexlsr};
-  MikTeX -- \texttt{initexmf -{}-update-fndb} or use the GUI.
+  \TeX{}live -- \texttt{texhash}; web2c -- \texttt{maktexlsr};
+  Mik\TeX{} -- \texttt{initexmf -{}-update-fndb} or use the GUI.
 \end{enumerate}
 
 \noindent Now extract the documentation from the
@@ -591,7 +591,7 @@ In the sample above I have included the color package, as using color in
 documents displayed on the web comes quite naturally.
 
 So much for the good news. The bad news is that graphics in \EPSi{}
-format do not work with Pdf\LaTeX{}. If you don't define a file extension
+format do not work with pdf\LaTeX{}. If you don't define a file extension
 in the \ci{includegraphics} command, \pai{graphicx} will go
 looking for a suitable file on its own, depending on the setting of
 the \emph{driver} option. For \texttt{pdftex} this is
@@ -838,13 +838,13 @@ will try to include a file with the extension
 For the cases where you want to use different code for the
 PDF version of your document, simply add the package \pai{ifpdf}%
 \footnote{If you want the whole story on why to use this package then
-   go to the \TeX{} FAQ under the item\\
+   go to the \TeX{} FAQ under the item
    \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ifpdf}.}  to
 your preamble. Chances are that you already have it installed; if not
 then you're probably using MiK\TeX{} which will install it for you
 automatically the first time you try to use it. This package defines
 the special command \ci{ifpdf} that will allow you to write
-conditional code easily. In this example, we want the PostScript
+conditional code easily. In this example, we want the \PSi{}
 version to be black and white due to the printing costs but we want
 the PDF version for online viewing to be colourful.
 \begin{code}
@@ -940,12 +940,12 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 \end{figure}
 
 When you compile the code presented in figure \ref{fig:code-beamer}
-with \wi{PDF\LaTeX} you get a PDF file with a title page and a second page
+with \wi{pdf\LaTeX} you get a PDF file with a title page and a second page
 showing several items that will be reveled one at a time as you step
 though your presentation.
 
 One of the advantages of the beamer class is that it produces a PDF
-file that is directly usable without first going through a PostScript
+file that is directly usable without first going through a \PSi{}
 stage like \pai{prosper} or requiring additional post processing like
 presentations created with the \pai{ppower4} package.
 
