@@ -14,7 +14,9 @@ MAKEINDEX=makeindex
 DVIPS=dvips
 
 # The default targets
-all: lshort.ps lshort-book.ps lshort.pdf lshort-a5book.pdf lshort-letter.pdf lshort-a5.pdf
+all: lshort.pdf lshort-letter.pdf lshort-a5.pdf
+
+lulu: lshort-body.pdf lshort-title.pdf
 
 
 lshort.dvi: $(FILES)
@@ -56,6 +58,21 @@ lshort.pdf: $(FILES)
 	$(MAKEINDEX) -s ../src/lshort.ist lshort&&$(PDFLATEX) lshort&& \
 	(thumbpdf --resolution 10 lshort.pdf && $(PDFLATEX) lshort)&& \
 	mv lshort.pdf .. )
+	rm pdfbuild/*
+
+lshort-body.pdf: $(FILES)
+	-mkdir pdfbuild
+	(T1FONTS=.:`pwd`/eurofont: && export T1FONTS && TEXINPUTS=.:`pwd`/src:`pwd`/euro:${TEXINPUTS:-:}&&export TEXINPUTS&& cd pdfbuild&& \
+	$(PDFLATEX) lshort-body && $(PDFLATEX) lshort-body && \
+	$(MAKEINDEX) -s ../src/lshort.ist lshort-body &&$(PDFLATEX) lshort-body&& \
+	mv lshort-body.pdf .. )
+	rm pdfbuild/*
+
+lshort-title.pdf: $(FILES)
+	-mkdir pdfbuild
+	(T1FONTS=.:`pwd`/eurofont: && export T1FONTS && TEXINPUTS=.:`pwd`/src:`pwd`/euro:${TEXINPUTS:-:}&&export TEXINPUTS&& cd pdfbuild&& \
+	$(PDFLATEX) lshort-title && $(PDFLATEX) lshort-title && \
+	mv lshort-title.pdf .. )
 	rm pdfbuild/*
 
 lshort-a5.pdf: $(FILES)
