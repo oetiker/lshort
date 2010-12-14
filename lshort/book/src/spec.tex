@@ -877,6 +877,136 @@ normal \TeX{} program is actually pdf\TeX{} it will automatically switch
 between producing pdf and dvi according to the name it is called with: use the \verb|pdflatex|
 command to get pdf output and \verb|latex| for normal dvi output.
 
+\section{Working with \hologo{XeLaTeX}}
+\label{sec:xetex}\index{PDF}\index{XeTeX@\hologo{XeTeX}}\index{XeLaTeX@\hologo{XeLaTeX}}
+
+\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
+Most of the things said about pdf\LaTeX\ are valid for \hologo{XeLaTeX} as well.
+
+There is a Wiki at \url{http://wiki.xelatex.org/doku.php} that collects
+information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}. 
+
+\subsection{The Fonts}
+
+In addition to the normal \texttt{tfm} based fonts, \hologo{XeLaTeX} is able
+to use any font known to the operating system. If you have the \texttt{Linux
+Libertine} fonts installed, you can simply say
+
+\begin{code}
+\begin{verbatim}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine}
+\end{verbatim}
+\end{code}
+%
+in the preamble. This will normally detect the italic and bold version as
+well, thus \verb|\textit| and \verb|\textbf| will work as usual. When the
+font is using OpenType technology you have access to many features which
+required switching to a separate font or using virtual fonts in the past.
+The main feature is the extended character set; a font may contain Latin,
+Greek and Cyrillic characters and the corresponding ligatures.
+
+Many fonts contain at least two kinds of numerals, the normal lining
+numerals and so called old style (or lower case) numerals, which partly
+extend below the baseline. They may contain proportional numerals (the ``1''
+takes less space than the ``0'') or monospaced numerals which are suitable
+for tables.
+
+\begin{code}
+\begin{verbatim}
+\newfontfamily\LLln[Numbers=Lining]{(font)}
+\newfontfamily\LLos[Numbers=OldStyle]{(font)}
+\newfontfamily\LLlnm[Numbers=Lining,Numbers=Monospaced]{(font)}
+\newfontfamily\LLosm[Numbers=OldStyle,Numbers=Monospaced]{(font)}
+\end{verbatim}
+\end{code}
+
+Almost all OpenType fonts contain the standard ligatures (fl fi ffi) but
+there are also some rare or historical ligatures like st, ct and tz. You may
+not want to use them in a technical report but they are fine for a novel. To
+enable these ligatures use either of the following lines:
+
+\begin{code}
+\begin{verbatim}
+\setmainfont[Ligatures=Rare]{(font)}
+\setmainfont[Ligatures=Historic]{(font)}
+\setmainfont[Ligatures=Historic,Ligature=Rare]{(font)}
+\end{verbatim}
+\end{code}
+
+Not every font contains both sets of ligature, consult the font
+documentation or just try it out. Sometimes these ligatures are language
+dependent, a ligature used in Polish (fk) is not used in English. You have
+to add
+
+\begin{code}
+\begin{verbatim}
+\setmainfont[Language=Polish]{(font)}
+\end{verbatim}
+\end{code}
+%
+to enable the Polish ligatures.
+
+Some fonts (like the commercial Adobe Garamond Premier Pro) contain
+alternative glyphs that are activated by default in \hologo{XeLaTeX}
+distributed with \TeX Live~2010\footnote{The behavior has changed with this
+version, it was of by default in earlier releases.}. The result is a stylish
+``Q'' with a descender reaching below the following ``u''. To disable this
+feature you have to define the font with disabled contextuals:
+
+\begin{code}
+\begin{verbatim}
+\setmainfont[Contextuals=NoAlternate]{(font)}
+\end{verbatim}
+\end{code}
+
+To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
+
+\subsubsection{Where do I get OpenType fonts?}
+
+If you have \texttt{TeXLive} installed, you already have some at:
+\url{.../texmf-dist/fonts/opentype} just install them in you operating
+system. This collection does not include \texttt{DejaVu}, which is available
+at \url{http://dejavu-fonts.org/}.
+
+Make sure that each font is only installed \emph{once}, otherwise
+interesting results may happen.
+
+You can use every font installed on your computer, but remember that other
+users may not have these fonts. The Zapfino font used in the \pai{fontspec}
+manual is included in Mac OSX, but is not available on Windows
+computers.\footnote{A commercial version of the font called Zapfino Extra is
+available.} 
+
+\subsubsection{Entering Unicode Characters}
+
+The number of characters in a font has grown but the number of keys on a
+regular keyboard has not. So, how do I enter non-ASCII characters?
+
+If you write a large amount of text in a foreign language, you can install a
+keyboard for that language and print out the character positions. (Most
+operating system have some sort of virtual keyboard, just make a
+screenshot.) 
+
+If you rarely need an exotic character, you can simply pick it in the
+character palette.
+
+Some environments (e.\,g. The X Window System) offer many methods to enter
+non-ASCII characters. Some editors (e.\,g. Vim and Emacs) offer ways to
+enter these characters. Read the manual for the tools you are using.
+
+\subsection{Compatibility Between \hologo{XeLaTeX} and \hologo{pdfLaTeX}}
+
+There are a few things that are different between \hologo{XeLaTeX} and \hologo{pdfLaTeX}.
+
+\begin{itemize}
+	\item A \hologo{XeLaTeX} document has to be written in
+	Unicode (UTF-8) while \hologo{pdfLaTeX} may use different input encodings.
+\item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
+	support for character protrusion is already under development.
+\item Everything font related has to be reviewed. (Unless you want to stick
+	to Latin Modern.) 
+\end{itemize}
 
 \section{Creating Presentations}
 \label{sec:beamer}
