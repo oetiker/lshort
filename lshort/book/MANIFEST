@@ -25,3 +25,6 @@ src/spec.tex
 src/things.tex 
 src/title.tex 
 src/typeset.tex 
+src/preamble.tex
+src/lshort-title.tex
+src/lshort-body.tex
