@@ -296,6 +296,15 @@ http://www.rich.edu/\~{}bush \\
 http://www.clever.edu/$\sim$demo
 \end{example}  
  
+\subsection{Slash (/)}
+\index{Slash}
+In order to typeset a slash between two words, one can simply type e.g.\
+\texttt{read/write}, but this makes \LaTeX{} treat the two words as one. 
+Hyphenation is disabled for these two words, so there may be `overfull'
+errors.  To overcome this, use \ci{slash}.  For example type
+`\verb|read\slash write|' which allows hyphenation.  But normal `\texttt{/}'
+character may be still used for ratios or units, e.g.\ \texttt{5 MB/s}.
+
 \subsection{Degree Symbol \texorpdfstring{($\circ$)}{}}
 
 Printing the \wi{degree symbol} in pure \LaTeX{}.
@@ -550,7 +559,7 @@ DOS, OS/2  &  \iei{cp850} & \iei{cp866nav}
 \iei{utf8}, a multi-byte encoding in which each character can be encoded in
 as little as one byte and as many as four bytes. 
 
-Since the turn of the Century most Operating Systems are based on Unicode (Windows XP, MacOS X). Therefore it is recommended to use to use \iei{utf8} for any new project. The \iei{utf8} encoding used by \pai{inputenc} only defines the characters that are actually provided by the fonts used. If you need more (non-latin) characters have a look at \hologo{XeLaTeX} in section \ref{sec:xetex} a Unicode based \TeX-engine.
+Since the turn of the Century most Operating Systems are based on Unicode (Windows XP, MacOS X). Therefore it is recommended to use \iei{utf8} for any new project. The \iei{utf8} encoding used by \pai{inputenc} only defines the characters that are actually provided by the fonts used. If you need more (non-latin) characters have a look at \hologo{XeLaTeX} in section \ref{sec:xetex} a Unicode based \TeX-engine.
 
 Font encoding is a different matter. It defines at which position inside
 a \TeX-font each letter is stored. Multiple input encodings could be mapped into 
