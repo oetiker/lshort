@@ -595,18 +595,17 @@ A better solution is offered by the \ei{eqnarray} environment:
 \end{eqnarray}
 \end{example}
 
-This is still not optimal though:
-\begin{itemize}
-\item The spaces around the equality signs are too big.
-  Particularly, they are \textbf{not} the same as in the
-  \ei{multline} and \ei{equation} environments:
+This is still not optimal though as
+he spaces around the equality signs are too big.
+Particularly, they are \textbf{not} the same as in the
+\ei{multline} and \ei{equation} environments:
 \begin{example}
 \begin{eqnarray}
   a & = & a = a
 \end{eqnarray}
 \end{example}
 
-\item The expression sometimes overlaps with the equation number even
+\noindent \ldots and the expression sometimes overlaps with the equation number even
   though there would be enough room on the left:
 \begin{example}
 \begin{eqnarray}
@@ -618,7 +617,7 @@ This is still not optimal though:
 \end{eqnarray}
 \end{example}
 
-\item The environment offers a command \ci{lefteqn} that can
+\noindent While the environment offers a command \ci{lefteqn} that can
   be used when the LHS is too long:
 \begin{example}
 \begin{eqnarray}
@@ -629,7 +628,7 @@ This is still not optimal though:
   & = & n + o + p + q + r + s
 \end{eqnarray}
 \end{example}
-again, this is not optimald as the RHS is too short and the array is
+this is not optimal either as the RHS is too short and the array is
 not properly centered:
 \begin{example}
 \begin{eqnarray}
@@ -639,9 +638,8 @@ not properly centered:
   & = & i + j 
 \end{eqnarray}
 \end{example}
-\end{itemize}
 
-Fortunately there is a better way\ldots.
+\noindent enter \ldots
 
 \subsection{IEEEeqnarray Environment}
 \label{sec:IEEEeqnarray_intro}
