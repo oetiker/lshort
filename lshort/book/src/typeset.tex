@@ -139,7 +139,7 @@ line break.
 \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
 \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
 \end{lscommand}
-\noindent suggest places where a break may (or may not happen). They enable the author to influence their
+\noindent suggest places where a break may (or may not) happen. They enable the author to influence their
 actions with the optional argument \emph{n}, which can be set to a number
 between zero and four. By setting \emph{n} to a value below 4, you leave
 \LaTeX{} the option of ignoring your command if the result would look very
@@ -389,7 +389,7 @@ dots would produce the wrong result. Instead, there is a special
 command for these dots. It is called
 
 \begin{lscommand}
-\ci{ldots}
+\ci{ldots} (low dots)
 \end{lscommand}
 \index{...@\ldots}
 
@@ -773,7 +773,7 @@ Korean%,
  represents a syllable. An unlimited number of syllables can be
  formed out of this finite set of vowels and consonants. Modern Korean
  orthographic standards (both in South Korea and  North Korea), however,
- put some restriction on the formation of these clusters.
+ put some restrictions on the formation of these clusters.
  Therefore only a finite number of  orthographically correct syllables exist.
  The Korean Character encoding defines individual code points for each of these syllables (KS~X~1001:1998 and KS~X~1002:1992). So Hangul, albeit alphabetic, is
  treated like the Chinese and Japanese writing systems with tens of thousands of
@@ -783,12 +783,9 @@ Korean%,
  in addition to encoding all the orthographically allowed Hangul syllables in
  \emph{modern} Korean (\url{http://www.unicode.org/charts/PDF/UAC00.pdf}).
  One of the most daunting challenges in Korean typesetting with
- \LaTeX{} and related typesetting system is supporting Middle Korean---and possibly future Korean---syllables that can be only represented
+ \LaTeX{} and its related typesetting system is supporting Middle Korean---and possibly future Korean---syllables that can only be represented
  by conjoining Jamos in Unicode. It is hoped that future \TeX{} engines like $\Omega$ and
- $\Lambda$ will eventually provide solutions to this
- so that some Korean linguists and historians
- will defect from MS Word that already has  a pretty good support 
- for Middle Korean.}
+ $\Lambda$ will eventually provide solutions to this.}
 or Chinese, a subfont mechanism was developed.
 It divides a single CJK font with  thousands or tens of thousands of
 glyphs into a set of subfonts with 256 glyphs each. 
@@ -802,7 +799,7 @@ H\LaTeX{} and h\LaTeX{}p are specific to Korean and provide
 Korean localization on top of the font support.
 They both can process Korean input text files encoded in EUC-KR. H\LaTeX{} can
 even process input files encoded in CP949/Windows-949/UHC and UTF-8
-when used along with $\Lambda$, $\Omega$.
+when used along with $\Lambda$ or $\Omega$.
 
 The CJK package is not specific to Korean. It can
 process input files in UTF-8 as well as in various CJK encodings
@@ -851,7 +848,7 @@ every time you add/remove references or simply shuffle  parts
 of your document around.
 H\LaTeX{} relieves its users from this boring and error-prone process.
 
-In case you don't need Korean localization features
+If you don't need Korean localization features
 but just want 
 to  typeset Korean text, put the following line in the 
 preamble, instead.
@@ -873,7 +870,7 @@ changes all automatic text to Greek.\footnote{If you select the
 \texttt{utf8x}
 option for the package \texttt{inputenc}, \LaTeX{} will understand Greek and polytonic
 Greek
-unicode characters.}
+Unicode characters.}
 
 \begin{table}[btp]
 \caption{Preamble for Greek documents.} \label{preamble-greek}
@@ -988,7 +985,7 @@ commands to facilitate hyphenation, see Table~\ref{Cyrillic}.
 
 
 The Russian and Ukrainian options of \pai{babel} define the commands \ci{Asbuk}
-and \ci{asbuk}, which act like \ci{Alph} and \ci{alph}, but produce capital
+and \ci{asbuk}, which act like \ci{Alph} and \ci{alph}\footnote{the commands for turning counters into a, b, c, \ldots}, but produce capital
 and small letters of Russian or Ukrainian alphabets (whichever is the
 active language of the document). The Bulgarian option of \pai{babel} 
 provides the commands \ci{enumBul} and \ci{enumLat} (\ci{enumEng}), which
@@ -1011,7 +1008,7 @@ Mongolian Script. In order to access the commands of Mon\TeX{}, add:
 \ci{usepackage}\verb|[|\emph{language},\emph{encoding}\verb|]{mls}|
 \end{lscommand}
 \noindent to the preamble. Choose the \emph{language} option \pai{xalx} to generate
-captions and the dates in Modern Mongolian. To write a complete document in the traditional Mongolian script
+captions and dates in Modern Mongolian. To write a complete document in the traditional Mongolian script
 you have to choose \pai{bicig} for the \emph{language} option. The document
 language option \pai{bicig} enables the ``Simplified Transliteration'' input method.
 
@@ -1042,7 +1039,7 @@ invoke \iei{utf8} instead.
 \subsection{The Unicode option}
 
 \secby{Axel Kielhorn}{A.Kielhorn@web.de}
-Unicode it the way to go if you want to include several languages in one
+Unicode is the way to go if you want to include several languages in one
 document, especially when these languages are not using the latin script.
 There are two \hologo{TeX}-engines that are capable of processing Unicode
 input:
@@ -1360,12 +1357,12 @@ Figure~\ref{document} on page~\pageref{document}.
 Apart from the sectioning commands explained above, \LaTeXe{}
 introduced three additional commands for use with the \verb|book| class. 
 They are useful for dividing your publication. The commands alter
-chapter headings and page numbering to work as you would expect it in
+chapter headings and page numbering to work as you would expect in
 a book:
 \begin{description}
 \item[\ci{frontmatter}] should be the very first command after
   the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
-    numerals and sections be non-enumerated. As if you were using 
+    numerals and sections be non-enumerated as if you were using 
     the starred sectioning commands (eg \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
 \item[\ci{mainmatter}] comes right before the first chapter of
@@ -1394,8 +1391,9 @@ table, or theorem after which the corresponding \verb|\label| command
 was issued. \verb|\pageref| prints the page number of the
 page where the \verb|\label| command occurred.\footnote{Note that these commands
   are not aware of what they refer to. \ci{label} just saves the last
-  automatically generated number.} As with the section titles, the
-numbers from the previous run are used.
+  automatically generated number.} As with section titles and page numbers for the table of contents,
+the numbers from the previous compile cycle are used.
+
 
 \begin{example}
 A reference to this subsection
@@ -1451,20 +1449,6 @@ its argument depends on the context:
   emphasizing.}
 \end{example}
 
-Please note the difference between telling \LaTeX{} to
-\emph{emphasize} something and telling it to use a different
-\emph{font}:
-
-\begin{example}
-\textit{You can also
-  \emph{emphasize} text if 
-  it is set in italics,} 
-\textsf{in a 
-  \emph{sans-serif} font,}
-\texttt{or in 
-  \emph{typewriter} style.}
-\end{example}
-
 \section{Environments} \label{env}
 
 % To typeset special purpose text, \LaTeX{} defines many different
@@ -1493,7 +1477,7 @@ The \ei{itemize} environment is suitable for simple lists, the
 \begin{example}
 \flushleft
 \begin{enumerate}
-\item You can mix the list
+\item You can next the list
 environments to your taste:
 \begin{itemize}
 \item But it might start to
@@ -1665,14 +1649,14 @@ automatically wrap it. Using \mfr{p\{\emph{width}\}} you can define
 a special type of column which will wrap-around the text as in a normal paragraph.
 
 The \emph{pos} argument specifies the vertical position of the table
-relative to the baseline of the surrounding text.  Use either of the
+relative to the baseline of the surrounding text.  Use one of the
 letters \mfr{t}, \mfr{b} and \mfr{c} to specify table
 alignment at the top, bottom or center.
  
 Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
 column, \ci{\bs} starts a new line and \ci{hline} inserts a horizontal
-line.  Add partial lines by using the \ci{cline}\texttt{\{}\emph{j}\texttt{-}\emph{i}\texttt{\}},
-where j and i are the column numbers the line should extend over.
+line.  Add partial lines by using \ci{cline}\texttt{\{}$i$\texttt{-}$j$\texttt{\}},
+where $i$ and $j$ are the column numbers the line should extend over.
 
 \index{"|@ \verb."|.}
 
@@ -1796,6 +1780,9 @@ this is called a \wi{strut}.}. Use a zero width \ci{rule} to implement this tric
 \end{tabular}
 \end{example}
 
+The \texttt{pt} and \texttt{em} in the example above are \TeX{} units. Read more
+on units in table \ref{units} on page \pageref{units}.
+
 \section{Floating Bodies}
 Today most publications contain a lot of figures and tables. These
 elements need special treatment, because they cannot be broken across
@@ -1846,12 +1833,10 @@ Spec&Permission to place the float \ldots\\
   float from being placed.
 \end{tabular}
 \end{center}
-Note that \texttt{pt} and \texttt{em} are \TeX{} units. Read more
-on this in table \ref{units} on page \pageref{units}.
 \end{minipage}
 \end{table}
 
-A table could be started with the following line e.g.\
+For example, a table could be started with the following line
 \begin{code}
 \verb|\begin{table}[!hbp]|
 \end{code}
@@ -1865,7 +1850,7 @@ classes assume \verb|[tbp]|.
 \LaTeX{} will place every float it encounters according to the
 placement specifier supplied by the author. If a float cannot be
 placed on the current page it is deferred either to the
-\emph{figures} or the \emph{tables} queue.\footnote{These are FIFO---`first in first out'---queues!}  When a new page is started,
+\emph{figures} queue or the \emph{tables} queue.\footnote{These are FIFO---`first in first out'---queues!}  When a new page is started,
 \LaTeX{} first checks if it is possible to fill a special `float'
 page with floats from the queues. If this is not possible, the first
 float on each queue is treated as if it had just occurred in the
@@ -1958,7 +1943,7 @@ floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
 
 You will learn how to include \PSi{}
-drawings into your \LaTeXe{} documents later in this introduction.
+drawings in your \LaTeXe{} documents later in this introduction.
 
 \section{Protecting Fragile Commands}
 
@@ -1969,7 +1954,7 @@ the argument of \ci{section}-like commands. Compilation of your document
 will fail. These commands are called \wi{fragile commands}---for example,
 \ci{footnote} or \ci{phantom}. These fragile commands need protection (don't
 we all?). Protect them by putting the \ci{protect} command in front
-of them.
+of them. Now they will work properly even when used in moving arguments.
 
 \ci{protect} only refers to the command that follows right behind, not even
 to its arguments. In most cases a superfluous \ci{protect} won't hurt.

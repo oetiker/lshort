@@ -41,7 +41,7 @@ common word, pronounced `tyekh'. But I believe the most proper pronunciation
 is heard in Greece, where you have the harsher ch of ach and Loch.}}
 or in the Scottish ``Loch.'' The ``ch'' originates from the Greek
 alphabet where X is the letter ``ch'' or ``chi''. \TeX{} is also the first syllable
-of the Greek word texnologia (technology). In an ASCII environment, \TeX{}
+of the Greek word {\greektext teknolog'ia} (technology). In an ASCII environment, \TeX{}
 becomes \texttt{TeX}.
 
 \subsection{\LaTeX}
@@ -260,6 +260,8 @@ two formats:
  consisting of letters only. Command names are terminated by a
  space, a number or any other `non-letter.'
 \item They consist of a backslash and exactly one non-letter.
+\item Many commands exist in a `starred variant' where a star is appended
+to the command name.
 \end{itemize}
 
 %
@@ -273,8 +275,8 @@ two formats:
 
 \LaTeX{} ignores whitespace after commands. If you want to get a
 \index{whitespace!after commands}space after a command, you have to
-put either \verb|{}| and a blank or a special spacing command after the
-command name. The \verb|{}| stops \LaTeX{} from eating up all the space after
+put either an empty parameter \verb|{}| and a blank or a special spacing command after the
+command name. The empty parameter \verb|{}| stops \LaTeX{} from eating up all the white space after
 the command name. 
 
 \begin{example}
@@ -284,10 +286,14 @@ people working with \TeX{} into
 Today is \today.
 \end{example}
 
-Some commands need a \wi{parameter}, which has to be given between
-\wi{curly braces} \verb|{ }| after the command name. Some commands support
-\wi{optional parameters}, which are added after the command name in
-\wi{square brackets}~\verb|[ ]|. The next examples use some \LaTeX{}
+Some commands require a \wi{parameter}, which has to be given between
+\wi{curly braces} \verb|{ }| after the command name. Some commands take
+\wi{optional parameters}, which are inserted after the command name in
+\wi{square brackets}~\verb|[ ]|.
+\begin{code}
+\verb|\|\textit{command}\verb|[|\textit{optinal parameter}\verb|]{|\textit{parameter}\verb|}|
+\end{code}
+The next examples use some \LaTeX{}
 commands. Don't worry about them; they will be explained later.
 
 \begin{example}
