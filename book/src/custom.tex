@@ -445,6 +445,19 @@ identifying all the occurrences of \verb|\textbf| and then figuring out
 for each one whether it was used for pointing out danger or for some other
 reason.
 
+Please note the difference between telling \LaTeX{} to
+\emph{emphasize} something and telling it to use a different
+\emph{font}. The \ci{emph} command is context aware, while the font commands are absolute.
+
+\begin{example}
+\textit{You can also
+  \emph{emphasize} text if 
+  it is set in italics,}
+\textsf{in a 
+  \emph{sans-serif} font,}
+\texttt{or in 
+  \emph{typewriter} style.}
+\end{example}
 
 \subsection{Advice}
 

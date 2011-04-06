@@ -5,7 +5,7 @@
  
 \chapter{Specialities}
 \begin{intro}
-  When putting together a large document, \LaTeX{} will help you
+  When putting together a large document, \LaTeX{} will help
   with some special features like index generation,
   bibliography management, and other things.
   A much more complete description of specialities and
@@ -26,7 +26,7 @@ that subject.
 
 A much easier way to get graphics into a document is to generate them with a
 specialised software package\footnote{Such as XFig, Gnuplot, Gimp, Xara X
-\ldots} and then include the finished graphics into the document. Here
+\ldots} and then include the finished graphics in the document. Here
 again, \LaTeX{} packages offer many ways to do this, but this introduction
 will only discuss the use of \EPSi{} (EPS) graphics, because it is quite
 easy to do and widely used.  In order to use pictures in the EPS format, you
@@ -48,7 +48,7 @@ include a picture into your document:
 
 \begin{enumerate}
 \item Export the picture from your graphics program in EPS
-  format.\footnote{If your software can not export into EPS format, you
+  format.\footnote{If your software cannot export into EPS format, you
     can try to install a \PSi{} printer driver (such as an Apple
     LaserWriter, for example) and then print to a file with this
     driver. With some luck this file will be in EPS format. Note that
@@ -151,8 +151,7 @@ For larger projects, you might want to check out the Bib\TeX{}
 program. Bib\TeX{} is included with most \TeX{} distributions. It
 allows you to maintain a bibliographic database and then extract the
 references relevant to things you cited in your paper. The visual
-presentation of Bib\TeX{} generated bibliographies is based on a style
-sheets concept that allows you to create bibliographies following
+presentation of Bib\TeX{}-generated bibliographies is based on a style-sheets concept that allows you to create bibliographies following
 a wide range of established designs.
 
 \section{Indexing} \label{sec:indexing}
@@ -165,8 +164,8 @@ introduction will only explain the basic index generation commands.
 For a more in-depth view, please refer to \companion.  \index{makeindex
   program} \index{makeidx package}
 
-To enable the indexing feature of \LaTeX{}, the \pai{makeidx} package
-must be loaded in the preamble with:
+To enable their indexing feature of \LaTeX{}, the \pai{makeidx} package
+must be loaded in the preamble with
 \begin{lscommand}
 \verb|\usepackage{makeidx}|
 \end{lscommand}
@@ -175,7 +174,7 @@ the
 \begin{lscommand}
   \ci{makeindex}
 \end{lscommand}
-\noindent command into the input file preamble.
+\noindent command in the preamble.
 
 The content of the index is specified with
 \begin{lscommand}
@@ -210,7 +209,7 @@ command writes an appropriate index entry, together with the current
 page number, to a special file. The file has the same name as the
 \LaTeX{} input file, but a different extension (\verb|.idx|). This
 \eei{.idx} file can then be processed with the \texttt{makeindex}
-program.
+program:
 
 \begin{lscommand}
   \texttt{makeindex} \emph{filename}
@@ -352,7 +351,7 @@ the documentation.  Here's how you do the first part:
 \item Refresh your distribution's file-name database. The command
   depends on the \LaTeX distribution you use:
   \TeX{}live -- \texttt{texhash}; web2c -- \texttt{maktexlsr};
-  Mik\TeX{} -- \texttt{initexmf -{}-update-fndb} or use the GUI.
+  MiK\TeX{} -- \texttt{initexmf -{}-update-fndb} or use the GUI.
 \end{enumerate}
 
 \noindent Now extract the documentation from the
@@ -395,7 +394,7 @@ time before moving on to step~\ref{step:final}.
 
 \section{Working with pdf\LaTeX} \label{sec:pdftex}\index{PDF}
 \secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}%
-PDF is a portable \wi{hypertext} document format. Much like in a web page,
+PDF is a portable \wi{hypertext} document format. Much as in a web page,
 some words in the document are marked as hyperlinks. They link to other
 places in the document or even to other documents. If you click
 on such a hyperlink you get transported to the destination of the
@@ -430,7 +429,7 @@ direct display of PDF documents.
 
 Even though there are DVI and PS viewers for almost every platform, you will find that
 \wi{Acrobat Reader} and \wi{Xpdf} for viewing PDF documents 
-are more widely deployed. So providing PDF versions of your documents will
+are more widely deployed\footnote{\href{http://pdfreaders.org}}. So providing PDF versions of your documents will
 make them much more accessible to your potential readers.
 
 \subsection{PDF Documents for the Web}
@@ -448,7 +447,7 @@ Mik\TeX, \TeX{}Live and CMac\TeX{}.
 To produce a PDF instead of DVI, it is sufficient to replace the
 command \texttt{latex file.tex} by
 \texttt{pdflatex file.tex}. On systems where \LaTeX{} is not called from the
-command line, you may find a special button in the \TeX{}ControlCenter.
+command line, you may find a special button in the \TeX{} GUI.
 
 Set the paper size with an 
 optional documentclass argument such as \texttt{a4paper} or
@@ -482,50 +481,24 @@ documents that display well. \emph{Modern TeX installations will be setup so tha
 this happens automatically. Best is to try. If it works for you,
 just skip this whole section.}
 
-The \PSi{} Type 1 implementation of the Computer Modern and AMSFonts
-was produced by Blue Sky Research and Y\&Y, Inc., who then transferred
-copyright to the American Mathematical Society. The fonts were made
-publicly available in early 1997 and currently come with most of \TeX{}
-distributions. 
+The Type 1 font set most widely used today is called Latin Modern (LM). 
+If you have a recent \TeX{} installation, chances are that you
+already have a copy of them installed; all you need todo is to add
+\begin{code}
+\begin{verbatim}  
+\usepackage{lmodern}
+\usepackage[T1]{fontenc} 
+\usepackage{textcomp}
+\end{verbatim}
+\end{code}
+to the preamble of your document and you are all set for creating excellent
+PDF output with full support for the full Latin character set. If you are working with a stripped down
+setup, you may have to add the lm fonts explicitly.
 
-However, if you are using \LaTeX{} to create documents in languages 
-other than English, you might want to use EC, LH, or CB fonts (see the
-discussion about \texttt{OT1} fonts on the page~\pageref{OT1}). 
-Vladimir Volovich has created the cm-super font bundle which covers the
-entire EC/TC, EC Concrete, EC Bright and LH font sets. It is available from
-\CTAN|fonts/ps-type1/cm-super| and is included with \TeX{}Live
-and Mik\TeX. Similar type~1 CB Greek fonts created by Apostolos
-Syropoulos are available at \CTAN|fonts/greek/cb|.
-Unfortunately, both of these font sets are not of the same typographic
-quality as the Type1 CM fonts by Blue Sky/Y\&Y. They were automatically
-hinted, and the document might look not as neat on the screen as the ones using
-Blue Sky/Y\&Y type 1 CM fonts, on high resolution output devices they
-produce results identical to the original bitmap EC/LH/CB fonts. 
-
-If you are creating document in one of Latin-based languages, you have
-several other options. 
-\begin{itemize}
-\item You might want to use \pai{aeguill} package, aka
-  \emph{Almost European Computer Modern with Guillemets}. Just put the
-  line\newline \verb+\usepackage{aeguill}+\paih{aeguill}  into the preamble of  
-  your document, to enable AE virtual fonts instead of EC fonts.  
-\item Alternatively, use \pai{mltex} package, but this only works when  
-  your pdf\TeX{} has been compiled with the \wi{mltex} option.
-\end{itemize}
-The AE virtual fontset, like the {Ml\TeX} system, makes \TeX{} believe
-it has a full 256 character fontset at its disposal by creating most of
-the missing letters from characters of the CM font and rearranging them
-in the EC order, this allows to use the excellent type 1 format CM
-fonts available on most systems. As the font is now in T1 encoding,
-hyphenation will work well in Latin-based European languages.  The only
-disadvantage of this approach is that the artificial AE characters do
-not work with Acrobat Reader's \texttt{Find} function, so you cannot
-search for words with accented characters in your final PDF file.
-
-For the Russian language a similar solution is to use C1 virtual fonts 
+For the Russian language you may want to use C1 virtual fonts,
 available at \texttt{ftp://ftp.vsu.ru/pub/tex/font-packs/c1fonts}. 
 These fonts combine the standard CM type~1                                 
-fonts from Bluesky collection and CMCYR type~1 fonts from  Paradissa and
+fonts from Bluesky collection and CMCYR type~1 fonts from the Paradissa and
 BaKoMa collection, all available on CTAN. Because Paradissa fonts
 contain only Russian letters, C1 fonts are                                  
 missing other Cyrillic glyphs. 
@@ -551,30 +524,15 @@ document:
 \end{verbatim}
 \end{code}
 
-Note: you may find lines like
+You may find lines like
 \begin{verbatim}
 Warning: pdftex (file eurmo10): Font eur... not found
 \end{verbatim}
 in the  \texttt{.log} file after compiling your input file. They mean
-that some font used in the document has not been found. You really have
-to fix these problems, as the resulting PDF document may 
+that some font used in the document has not been found. Make sure you identify and
+fix the offending parts of your document, as the resulting PDF document may 
 \emph{not display the pages with the missing characters at all}.
 
-That whole font business, especially the lack of a good EC
-fontset equivalent in quality to the CM font in type~1 format, has been
-occupying many peoples minds. Recently a new set of high quality outline
-fonts called Latin Modern (LM) has become available. It puts an end to the
-misery. If you have a recent \TeX{} installation, chances are that you
-already have a copy of them installed all you need todo is to add
-\begin{code}
-\begin{verbatim}  
-\usepackage{lmodern}
-\usepackage[T1]{fontenc} 
-\usepackage{textcomp}
-\end{verbatim}
-\end{code}
-to the preamble of your document and you are all set for creating excellent
-pdf output with full support for the full Latin character set.
 
 
 \subsection{Using Graphics}
@@ -595,15 +553,14 @@ format do not work with pdf\LaTeX{}. If you don't define a file extension
 in the \ci{includegraphics} command, \pai{graphicx} will go
 looking for a suitable file on its own, depending on the setting of
 the \emph{driver} option. For \texttt{pdftex} this is
-formats \texttt{.png}, \texttt{.pdf}, \texttt{.jpg} and \texttt{.mps} (
-\MP\index{metapost@\MP})---but \emph{not} \texttt{.eps}.
+formats \texttt{.png}, \texttt{.pdf}, \texttt{.jpg} and \texttt{.mps} (\MP\index{metapost@\MP})---but \emph{not} \texttt{.eps}.
 
 The simple way out of this problem is to just convert your EPS files
 into PDF format using the \texttt{epstopdf} utility found on many
 systems. For vector graphics (drawings) this is a great solution. For
 bitmaps (photos, scans) this is not ideal, because the PDF format
 natively supports the inclusion of PNG and JPEG images. PNG is
-good for screenshots and other images with few colors. JPEG is great
+good for screenshots and other images with few colours. JPEG is great
 for photos, as it is very space-efficient.
 
 It may even be desirable not to draw certain geometric figures, 
@@ -641,7 +598,7 @@ list the default values are written in an upright font.
 \begin{description}
   \item [\texttt{bookmarks (=true,\textit{false})}] show or hide the
     bookmarks bar when displaying the document
-  \item [\texttt{unicode (=false,\textit{true})}] allows to use 
+  \item [\texttt{unicode (=false,\textit{true})}] allows the use of
     characters of non-latin based languages in Acrobat's bookmarks
   \item [\texttt{pdftoolbar (=true,\textit{false})}] show or hide
     Acrobat's toolbar
@@ -652,21 +609,21 @@ list the default values are written in an upright font.
   \item [\texttt{pdftitle (=\{text\})}] define the title that gets
     displayed in the \texttt{Document Info} window of Acrobat
   \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
-  \item [\texttt{pdfnewwindow (=false,\textit{true})}] define if a new
-    window should get opened when a link leads out of the current
+  \item [\texttt{pdfnewwindow (=false,\textit{true})}] define whether a new
+    window should be opened when a link leads out of the current
     document
   \item [\texttt{colorlinks (=false,\textit{true})}] surround the  
-    links by color frames (\texttt{false}) or colors the text of the links 
-    (\texttt{true}). The color of these links can be configured
-    using the following options (default colors are shown):
+    links by colour frames (\texttt{false}) or colour the text of the links 
+    (\texttt{true}). The colour of these links can be configured
+    using the following options (default colours are shown):
     \begin{description}
-    \item [\texttt{linkcolor (=red)}] color of internal
-      links (sections, pages, etc.),
-    \item [\texttt{citecolor (=green)}] color of
+    \item [\texttt{linkcolor (=red)}] colour of internal
+      links (sections, pages, etc.)
+    \item [\texttt{citecolor (=green)}] colour of
       citation links (bibliography)
-    \item [\texttt{filecolor (=magenta)}] color of file
+    \item [\texttt{filecolor (=magenta)}] colour of file
       links
-    \item [\texttt{urlcolor (=cyan)}] color of URL
+    \item [\texttt{urlcolor (=cyan)}] colour of URL
       links (mail, web)
     \end{description}
 \end{description}
@@ -679,7 +636,7 @@ If you are happy with the defaults, use
 \end{verbatim}
 \end{code}
 
-To have the bookmark list open and links in color
+To have the bookmark list open and links in colour
 (the \texttt{=true} values are optional):
 \begin{code}
 \begin{verbatim}
@@ -687,9 +644,9 @@ To have the bookmark list open and links in color
 \end{verbatim}
 \end{code}
 
-When creating PDFs destined for printing, colored links are not a
+When creating PDFs destined for printing, coloured links are not a
   good thing as they end up in gray in the final output, making it
-  difficult to read. Use color frames, which are not printed:
+  difficult to read. Use colour frames, which are not printed:
 \begin{code}
 \begin{verbatim}
 \usepackage{hyperref}
@@ -738,11 +695,11 @@ a click on the word ``\textcolor{magenta}{CTAN}''
 will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
-  use the \ci{href} command: 
+  use the \ci{href} command without the 'http://' bit: 
 \begin{verbatim}
   The complete document is \href{manual.pdf}{here}
 \end{verbatim}
-Which produces the text ``The complete document is \textcolor{cyan}{here}''.
+which produces the text ``The complete document is \textcolor{cyan}{here}''.
 A click on the word
 ``\textcolor{cyan}{here}''
 will open the file \texttt{manual.pdf}. (The filename is relative to
@@ -791,7 +748,7 @@ the index to stop working.
 \subsection{Problems with Bookmarks}
 
 The text displayed by bookmarks does not always look like you expect
-it to look. Because bookmarks are ``just text,'' much fewer
+it to look. Because bookmarks are ``just text,'' fewer
 characters are available for bookmarks than for normal \LaTeX{} text.
 Hyperref will normally notice such problems and put up a warning:
 \begin{code}
@@ -816,8 +773,8 @@ Math expressions are a prime candidate for this kind of problem:
 \end{code}
 which turns \verb+\section{$E=mc^2$}+ to ``E = mc ** 2'' in the bookmark area.
 
-If you write your document in unicode and use the \verb+unicode+ option for
-the \pai{hyperref} package to use unicode characters in bookmarks. This
+If you write your document in Unicode and use the \verb+unicode+ option for
+the \pai{hyperref} package to use Unicode characters in bookmarks, this
 will give you a much larger selection of characters to pick from when
 when using \ci{texorpdfstring}.
 
@@ -873,7 +830,7 @@ work in all cases, which saves me from wrapping every occurrence into a
 conditional statement.
 
 Note that in recent \TeX{} distributions (like \TeX{}Live, Mac\TeX{} and MiK\TeX{}), the
-normal \TeX{} program is actually pdf\TeX{} it will automatically switch
+normal \TeX{} program is actually pdf\TeX{} and it will automatically switch
 between producing pdf and dvi according to the name it is called with: use the \verb|pdflatex|
 command to get pdf output and \verb|latex| for normal dvi output.
 
@@ -899,8 +856,8 @@ Libertine} fonts installed, you can simply say
 \end{verbatim}
 \end{code}
 %
-in the preamble. This will normally detect the italic and bold version as
-well, thus \verb|\textit| and \verb|\textbf| will work as usual. When the
+in the preamble. This will normally detect the italic and bold versions as
+well, so \verb|\textit| and \verb|\textbf| will work as usual. When the
 font is using OpenType technology you have access to many features which
 required switching to a separate font or using virtual fonts in the past.
 The main feature is the extended character set; a font may contain Latin,
@@ -936,21 +893,19 @@ enable these ligatures use either of the following lines:
 
 Not every font contains both sets of ligature, consult the font
 documentation or just try it out. Sometimes these ligatures are language
-dependent, a ligature used in Polish (fk) is not used in English. You have
+dependent; for example a ligature used in Polish (fk) is not used in English. You have
 to add
-
 \begin{code}
 \begin{verbatim}
 \setmainfont[Language=Polish]{(font)}
 \end{verbatim}
 \end{code}
-%
 to enable the Polish ligatures.
 
 Some fonts (like the commercial Adobe Garamond Premier Pro) contain
 alternative glyphs that are activated by default in \hologo{XeLaTeX}
 distributed with \TeX Live~2010\footnote{The behavior has changed with this
-version, it was of by default in earlier releases.}. The result is a stylish
+version, it was off by default in earlier releases.}. The result is a stylish
 ``Q'' with a descender reaching below the following ``u''. To disable this
 feature you have to define the font with disabled contextuals:
 
@@ -964,8 +919,8 @@ To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
 
 \subsubsection{Where do I get OpenType fonts?}
 
-If you have \texttt{TeXLive} installed, you already have some at:
-\url{.../texmf-dist/fonts/opentype} just install them in you operating
+If you have \texttt{TeXLive} installed, you already have some at
+\url{.../texmf-dist/fonts/opentype}, just install them in your operating
 system. This collection does not include \texttt{DejaVu}, which is available
 at \url{http://dejavu-fonts.org/}.
 
@@ -985,13 +940,13 @@ regular keyboard has not. So, how do I enter non-ASCII characters?
 
 If you write a large amount of text in a foreign language, you can install a
 keyboard for that language and print out the character positions. (Most
-operating system have some sort of virtual keyboard, just make a
+operatings system have some sort of virtual keyboard, just make a
 screenshot.) 
 
 If you rarely need an exotic character, you can simply pick it in the
 character palette.
 
-Some environments (e.\,g. The X Window System) offer many methods to enter
+Some environments (e.\,g. the X Window System) offer many methods to enter
 non-ASCII characters. Some editors (e.\,g. Vim and Emacs) offer ways to
 enter these characters. Read the manual for the tools you are using.
 
@@ -1017,8 +972,8 @@ presentation software.
 
 \wi{pdf\LaTeX} combined with the \pai{beamer} class allows you to
 create presentations in PDF, looking much like something you might be
-able to generate with PowerPoint if you had a very good day, but much
-more portable because pdf readers are available on many more
+able to generate with LibreOffice or PowerPoint if you had a very good day, but much
+more portable because PDF readers are available on many more
 systems.
 
 The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
@@ -1069,9 +1024,9 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
   \label{fig:code-beamer}
 \end{figure}
 
-When you compile the code presented in figure \ref{fig:code-beamer}
+When you compile the code presented in figure~\ref{fig:code-beamer}
 with \wi{pdf\LaTeX} you get a PDF file with a title page and a second page
-showing several items that will be reveled one at a time as you step
+showing several items that will be revealed one at a time as you step
 though your presentation.
 
 One of the advantages of the beamer class is that it produces a PDF
@@ -1082,12 +1037,11 @@ presentations created with the \pai{ppower4} package.
 With the \pai{beamer} class you can produce several versions (modes) of your
 document from the same input file. The input file may contain special
 instructions for the different modes in angular brackets. The
-following modes are available.
-
+following modes are available:
 \begin{description}
 \item[beamer] for the presentation PDF
   discussed above.
-\item[trans] for slides.
+\item[trans] for transparencies.
 \item[handout] for the printed version.
 \end{description}
 The default mode is \texttt{beamer}, change it by setting a
@@ -1099,11 +1053,11 @@ The look of the screen presentation depends on the theme you choose. Pick one of
 create your own. See the beamer class documentation in
 \texttt{beameruserguide.pdf} for more information on this.
 
-Lets have a closer look at the code in figure~\ref{fig:code-beamer}.
+Let's have a closer look at the code in figure~\ref{fig:code-beamer}.
 
 For the screen version of the presentation \verb|\mode<beamer>| we
 have chosen the \emph{Goettingen} theme to show a navigation panel
-integrated into the table of contents. The options allow to choose the
+integrated into the table of contents. The options allow us to choose the
 size of the panel (22~mm in this case) and its position (on the right
 side of the body text). The option \emph{hideothersubsections}, shows
 the chapter titles, but only the subsections of the present
@@ -1126,7 +1080,7 @@ you choose.
 
 The contents of each slide or screen has to be placed inside a
 \ei{frame} environment. There is an optional argument in angular
-brackets (\verb|<| and \verb|>|), it allows to suppress a particular
+brackets (\verb|<| and \verb|>|), it allows us to suppress a particular
 frame in one of the versions of the presentation. In the example the
 first page would not be shown in the handout version due to the
 \verb|<handout:0>| argument.
@@ -1140,10 +1094,10 @@ and \verb|\subsection{}| do not produce output on the slide proper.
 The command \verb|\pause| in the itemize environment lets you reveal
 the items one by one. For other presentation effects check out the
 commands \verb|\only|, \verb|\uncover|, \verb|\alt| and
-\verb|\temporal|. In many place it is possible to use angular brakes to
+\verb|\temporal|. In many place it is possible to use angular brackets to
 further customize the presentation.
 
-In any case make sure you read through the beamer class documentation
+In any case make sure to read through the beamer class documentation
 \texttt{beameruserguide.pdf} to get a complete picture of what is in
 store for you. This package is being actively developed, check out their website
 to get the latest information. (\href{http://latex-beamer.sourceforge.net/}{http://latex-beamer.sourceforge.net/})

@@ -1,7 +1,14 @@
+5.01 2011.4.6
+------------
+* many minor wording fixes by Robert Funnell
+* massive language surgery on the math and pdf sections by Robert Funnell
+* simplified pdf font section
+* use {\greektext teknolog'ia} 
+* better explain the empty parameter for stopping space gobbling 
 * Added missing source files
 * added section on / - Nikos Pothitos
 
-5.0 2010.12.14
+5.00 2010.12.14
 --------------
 *a XeLaTeX documentation added by Axel Kielhorn
 * misc language fixes suggested by Robert Funnell

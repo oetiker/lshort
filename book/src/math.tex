@@ -59,9 +59,8 @@ with all recent \LaTeX{} distributions.\footnote{If yours is missing it, go to
 
 \section{Single Equations}
   
-There are two ways to typeset mathematical \wi{formulae}: in-line within a paragraph
-(\emph{\wi{text style}}), or the paragraph can be broken to 
-typeset it separately (\textit{\wi{display style}}). Mathematical \wi{equation}s 
+A mathematical formula can be typeset in-line within a paragraph (\emph{\wi{text style}}), or the paragraph can be broken and the formula typeset separately
+(\emph{\wi{display style}}). Mathematical \wi{equation}s 
 \emph{within} a paragraph are entered \index{$@\texttt{\$}} %$
 between \texttt{\$} and \texttt{\$}:
 \begin{example}
@@ -120,8 +119,8 @@ or you can type less for the
 same effect:
  \[ a^2 + b^2 = c^2 \]
 \end{example}
-While \ci{[} is short and sweet, it does not allow to switch between numbered and not numbered style as easily as
-nicely \ei{equation} and \ei{equation*}.
+While \ci{[} is short and sweet, it does not allow switching between numbered and not numbered style as easily as
+\ei{equation} and \ei{equation*}.
 
 Note the difference in typesetting style between \wi{text style} and \wi{display style}
 equations: 
@@ -212,9 +211,8 @@ typesetting. Most of the commands in this section will not require
 \textbf{Lowercase \wi{Greek letters}} are entered as \verb|\alpha|,
  \verb|\beta|, \verb|\gamma|, \ldots, uppercase letters
 are entered as \verb|\Gamma|, \verb|\Delta|, \ldots\footnote{There is no
-  uppercase Alpha, Beta etc. defined in \LaTeXe{} because it looks the same as a 
-  normal roman A, B\ldots{} Once the new math coding is done, things will
-  change.} 
+  uppercase Alpha, Beta etc. defined in \LaTeXe{} because it looks the same as a
+  normal roman A, B\ldots{}} 
 
 Take a look at Table~\ref{greekletters} on page~\pageref{greekletters} for a
 list of Greek letters.
@@ -224,18 +222,19 @@ $\lambda,\xi,\pi,\theta,
 \end{example}
 
 
-\textbf{Exponents and Subscripts} can be specified using\index{exponent}\index{subscript}
-the \verb|^|\index{^@\verb"|^"|} and the \verb|_|\index{_@\verb"|_"|} character.
+\textbf{Exponents, Superscripts and Subscripts} can be specified using\index{exponent}\index{subscript}\index{superscript}
+the \verb|^|\index{^@\verb"|^"|} and the \verb|_|\index{_@\verb"|_"|} characters.
 Most math mode commands act only on the next character, so if you
 want a command to affect several characters, you have to group them
 together using curly braces: \verb|{...}|.
 
-Table~\ref{binaryrel} on page \pageref{binaryrel} lists a lot of other binary
+Table~\ref{binaryrel} on page \pageref{binaryrel} lists a lot of binary
 relations like $\subseteq$ and $\perp$.
 
 \begin{example}
-$p^3_{ij} \qquad
- m_\text{Knuth} \\[5pt]
+$p^3_{ij} \qquad 
+ m_\text{Knuth}\qquad
+\sum_{k=1}^3 k \\[5pt]
  a^x+y \neq a^{x+y}\qquad 
  e^{x^2} \neq {e^x}^2$
 \end{example}
@@ -246,7 +245,7 @@ $n^\text{th}$ root is generated with \verb|\sqrt[|$n$\verb|]|. The size of
 the root sign is determined automatically by \LaTeX. If just the sign
 is needed, use \verb|\surd|.
 
-See other kinds of arrows like $\hookrightarrow$ and $\rightleftharpoons$ on
+See various kinds of arrows like $\hookrightarrow$ and $\rightleftharpoons$ on
 Table~\ref{tab:arrows} on page \pageref{tab:arrows}. 
 \begin{example}
 $\sqrt{x} \Leftrightarrow x^{1/2}
@@ -262,9 +261,9 @@ $\sqrt{x} \Leftrightarrow x^{1/2}
 While the \textbf{\wi{dot}} sign to indicate
 the multiplication operation is normally left out, it is sometimes written
 to help the eye in grouping a formula.
-Use \ci{cdot} to typesets a single centered dot. \ci{cdots} is
-three centered \textbf{\wi{dots}} while \ci{ldots} sets the dots on the
-baseline. Besides that, there are \ci{vdots} for 
+Use \ci{cdot} to typeset a single centered dot. \ci{cdots} is
+three centered \textbf{\wi{dots}} while \ci{ldots} sets the dots low (on the
+baseline). Besides that, there are \ci{vdots} for 
 vertical and \ci{ddots} for \wi{diagonal dots}. There are more examples in 
 section~\ref{sec:arraymat}.
 \begin{example}
@@ -308,7 +307,7 @@ $f(x) = x^2 \qquad f'(x)
 
 
 \textbf{Vectors}\index{vectors} are often specified by adding small
-\wi{arrow symbols} on top of a variable. This is done with the
+\wi{arrow symbols} on the tops of variables. This is done with the
 \ci{vec} command. The two commands \ci{overrightarrow} and
 \ci{overleftarrow} are useful to denote the vector from $A$ to $B$:
 \begin{example}
@@ -318,9 +317,9 @@ $\vec{a} \qquad
 \end{example}
 
 
-Names of log-like functions are often typeset in an upright
+Names of functions are often typeset in an upright
 font, and not in italics as variables are, so \LaTeX{} supplies the
-following commands to typeset the most important function names:
+following commands to typeset the most common function names:
 \index{mathematical!functions}
 
 \begin{tabular}{llllll}
@@ -435,9 +434,9 @@ expressions, \pai{amsmath} provides the \ci{substack} command:
 
 
 
-\LaTeX{} provides all sorts of symbols for \textbf{\wi{braces}} and other
+\LaTeX{} provides all sorts of symbols for \textbf{\wi{bracketing}} and other
 \textbf{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$).
-Round and square braces can be entered with the corresponding keys and
+Round and square brackets can be entered with the corresponding keys and
 curly braces with \verb|\{|, but all other delimiters are generated with
 special commands (e.g.~\verb|\updownarrow|).
 \begin{example}
@@ -490,7 +489,7 @@ the wrapping:
   any operator.
 \item A wrap before a plus- or minus-operator is preferable to a wrap
   before a multiplication-operator.
-\item Any other type of wrap should be avoided if ever possible.
+\item Any other type of wrap should be avoided if at all possible.
 \end{enumerate}
 The easiest way to achieve such a wrapping is the use of the
 \ei{multline} en\-vi\-ron\-ment:\footnote{The
@@ -504,7 +503,7 @@ The easiest way to achieve such a wrapping is the use of the
 \end{multline}
 \end{example}
 \noindent
-The difference to the \ei{equation} environment is that an arbitrary
+The difference from the \ei{equation} environment is that an arbitrary
 line-break (or also multiple line-breaks) can be introduced. This is
 done by putting a \verb+\\+ on those places where the equation needs
 to be wrapped. Similarly to \ei{equation*} there also exists a
@@ -535,7 +534,7 @@ Here it is actually the RHS that is too long to fit on one line. The
 
 This is better than \eqref{eq:equation_too_long}, but
 it has the disadvantage that the equality sign loses its natural
-stronger importance with respect to the plus operator in front of
+greater importance with respect to the plus operator in front of
 $k$. The better solution is provided by the
 \ei{IEEEeqnarray} environment that will be discussed in detail in
 Section~\ref{sec:IEEEeqnarray}.
@@ -559,8 +558,8 @@ bad examples that show the biggest drawbacks of some common solutions.
 To group multiple equations the
 \ei{align} environment\footnote{The \texttt{align}-environment can
   also be used to group several blocks of equations beside each other.
-  Another excellent use case for
-  \ei{IEEEeqnarray} environment. Try an argument like,
+  Another excellent use case for the
+  \ei{IEEEeqnarray} environment. Try an argument like
   \texttt{\{rCl+rCl\}}.} could be used:
 \begin{example}
 \begin{align}
@@ -644,7 +643,7 @@ not properly centered:
 
 Fortunately there is a better way\ldots.
 
-\subsection{IEEEeqnarray-Environment}
+\subsection{IEEEeqnarray Environment}
 \label{sec:IEEEeqnarray_intro}
 
 The \ei{IEEEeqnarray} environment is a very powerful command with
@@ -656,7 +655,7 @@ manual.\footnote{The official manual is called
 
 First of all, in order to be able to use the
 \ei{IEEEeqnarray} environment one needs to load the
-package\footnote{This package can be found on CTAN.}
+package\footnote{The \pai{IEEEtrantools} package may not be included in your setup, it can be found on CTAN.}
 \pai{IEEEtrantools}. Include the following line in the header of
 your document: \small
 \begin{verbatim}
@@ -664,7 +663,7 @@ your document: \small
 \end{verbatim}
 \normalsize
 
-The strength of \ei{IEEEeqnarray} is the possibility of specifying
+The strength of \ei{IEEEeqnarray} is the ability to specify
 the number of \emph{columns} in the equation array. Usually, this
 specification will be \verb+{rCl}+, \emph{i.e.}, three columns, the
 first column right-justified, the middle one centered with a little
@@ -681,7 +680,6 @@ lower-case \texttt{c}) and the third column left-justified:
   & = & p + q + r + s
 \end{IEEEeqnarray}
 \end{example}
-
 any number of columns can be specified:
 \verb+{c}+ will give only one column with all entries centered, or
 \verb+{rCll}+ would add a fourth, left-justified column to use
@@ -691,7 +689,6 @@ for comments. Moreover, beside \texttt{l}, \texttt{c}, \texttt{r}, \texttt{L},
 Additional space can be added with \texttt{.} and
 \texttt{/} and \texttt{?} in increasing order.\footnote{For more spacing
   types refer to Section~\ref{sec:putting-qed-right}.}
-
 Note the spaces around the equality signs in contrast to the space produced
 by the \texttt{eqnarray} environment.
 
@@ -699,9 +696,9 @@ by the \texttt{eqnarray} environment.
 \label{sec:common-usage}
 
 In the following we will describe how we use \texttt{IEEEeqnarray} to
-solve the most common situations.
-\begin{itemize}
-\item If a line overlaps with the equation number as in
+solve the most common problems.
+
+If a line overlaps with the equation number as in
   \eqref{eq:faultyeqnarray}, the command 
 \small
 \begin{verbatim}
@@ -734,7 +731,7 @@ solve the most common situations.
 \end{IEEEeqnarray}
 \end{example}
 
-\item If the LHS is too long, as a replacement for the faulty
+If the LHS is too long, as a replacement for the faulty
   \ci{lefteqn} command, \texttt{IEEEeqnarray} offers the
   \ci{IEEEeqnarraymulticol} command which works in all situations:
 \begin{example}
@@ -750,10 +747,10 @@ solve the most common situations.
 \end{example}
 The usage is identical to the \ci{multicolumns} command in the
 \texttt{tabular}-en\-vi\-ron\-ment. The first argument \verb+{3}+
-specifies that three columns shall be combined to one which will be
+specifies that three columns shall be combined into one which will be
 left-justified \verb+{l}+.
 
-Note that by adapting the \ci{quad} command one can easily adapt
+Note that by inserting \ci{quad} commands one can easily adapt
 the depth of the equation signs,\footnote{I think that one quad is the
   distance that looks good for most cases.} \emph{e.g.},
 \begin{example}
@@ -768,8 +765,8 @@ the depth of the equation signs,\footnote{I think that one quad is the
 \end{IEEEeqnarray}
 \end{example}
 
-\item If an equation is split into two or more lines, \LaTeX\
-  interprets the first $+$ or $-$ as sign instead of operator.
+If an equation is split into two or more lines, \LaTeX\
+  interprets the first $+$ or $-$ as a sign instead of operator.
   Therefore, it is necessary to add an additional space \ci{:}
   between the operator and the term: instead of
 \begin{example}
@@ -795,10 +792,9 @@ the depth of the equation signs,\footnote{I think that one quad is the
   & = & p + q + r + s
 \end{IEEEeqnarray}
 \end{example}
-  (Compare the space between $+$ and $l$!)
+\noindent Note the space difference between $+$ and $l$!
   
-  \textbf{Attention:} \LaTeX\ is not completely silly: in certain
-  situations like, \emph{e.g.}, in front of
+And sometimes spacing just work \emph{e.g.}, in front of
   \begin{itemize}
   \item an operator name like \ci{log}, \ci{sin}, \ci{det},
     \ci{max}, \emph{etc.},
@@ -810,22 +806,18 @@ the depth of the equation signs,\footnote{I think that one quad is the
   a $+$ or $-$ cannot be a sign, but must be an operator. In those
   situations \LaTeX\ will add the correct spacing and no additional
   space is needed.
-  \begin{itemize}
-  \item[$\rhd$] \it Whenever you wrap a line, quickly check the result
-    and verify that the spacing is correct!
-  \end{itemize}
 
-\item If a particular line should not have an equation number, the
+If a particular line should not have an equation number, the
   number can be suppressed using \ci{nonumber} (or
   \ci{IEEEnonumber}). If on such a line a label
   \verb+\label{eq:...}+ is defined, then this label is passed on
-  further to the next equation number that is not suppressed. Put the labels right before the line-break
-  \verb+\\+ or the end of the equation it belongs to. Apart from
+  further to the next equation number that is not suppressed. Place the labels right before the line-break
+  \verb+\\+ or the next to the equation it belongs to. Apart from
   improving the readability of the source code this prevents a
   compilation error in the situation of a \ci{IEEEmulticol} command
   after the label-definition.
   
-\item There also exists a *-version where all equation numbers are
+There also exists a *-version where all equation numbers are
   suppressed. In this case an equation number can be made to appear
   using the command \ci{IEEEyesnumber}:
 \begin{example}
@@ -836,7 +828,7 @@ the depth of the equation signs,\footnote{I think that one quad is the
 \end{IEEEeqnarray*}
 \end{example}
 
-\item Sub-numbers are also easily possible using 
+Sub-numbers are also easily possible using 
   \ci{IEEEyessubnumber}:
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
@@ -849,10 +841,6 @@ the depth of the equation signs,\footnote{I think that one quad is the
 \end{IEEEeqnarray}
 \end{example}
   
-\end{itemize}
-
-
-
 \section{Arrays and Matrices} \label{sec:arraymat}
 
 To typeset \textbf{arrays}, use the \ei{array} environment. It works
@@ -895,7 +883,7 @@ the syntax, so it is worth a look:
 \end{example}
 
 
-Matrices\index{matrix} can also be typeset by \ei{array}, but
+Matrices\index{matrix} can be typeset by \ei{array}, but
 \pai{amsmath} provides a better solution using the different \ei{matrix}
 environments. There are six versions with different delimiters: \ei{matrix}
 (none), \ei{pmatrix} $($, \ei{bmatrix} $[$, \ei{Bmatrix} $\{$, \ei{vmatrix} $\vert$ and
@@ -938,7 +926,6 @@ character `M' of the current font. \verb|\!|\cih{"!} produces a
 negative space of $-\frac{3}{18}\:\textrm{quad}$
 ($-$\demowidth{0.166em}).
 
-Note that `d' in the differential is conventionally set in roman:
 \begin{example}
 \begin{equation*}
   \int_1^2 \ln x \mathrm{d}x 
@@ -947,8 +934,8 @@ Note that `d' in the differential is conventionally set in roman:
 \end{equation*}
 \end{example}
 
-
-In the next example, we define a new command \ci{ud} which produces
+Note that `d' in the differential is conventionally set in roman.
+In the next example, we define a new command \ci{ud} (upright d) which produces
 ``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
 $\text{d}$), so we don't have to write it every time. The \ci{newcommand} is
 placed in the preamble. %  More on
@@ -1057,7 +1044,7 @@ $\mu, M \qquad
 \end{example}
 
 The package \pai{amsbsy} (included by \pai{amsmath}) as well as the
-\pai{bm} from the \texttt{tools} bundle make this much easier as they include
+package \pai{bm} from the \texttt{tools} bundle make this much easier as they include
 a \ci{boldsymbol} command:
 
 \begin{example}
@@ -1213,12 +1200,12 @@ Note that the \verb=+= in \verb={+rCl+x*}= denotes stretchable spaces, one
 on the left of the equations (which, if not specified, will be done
 automatically by \texttt{IEEEeqnarray}!) and one on the right of the
 equations. But now on the right, \emph{after} the stretching column,
-we add an empty column \verb=x=. This column will be only needed on
-the last line when we will put the \ci{qedhere} command
+we add an empty column \verb=x=. This column will only be needed on
+the last line if the \ci{qedhere} command is put
 there. Finally, we specify a \verb=*=. This is a null-space that
-prevents \texttt{IEEEeqnarray} to add another unwanted \verb=+=-space!
+prevents \texttt{IEEEeqnarray} from adding another unwanted \verb=+=-space!
 
-In case of equation numbering, we have a similar problem. If you compare
+In the case of equation numbering, there is a similar problem. Comparing
 \begin{example}
 \begin{proof}
   This is a proof that ends
