@@ -21,67 +21,59 @@
 
 \begin{frame}
 \begin{itemize}
-\item \LaTeX{} Hintergrund
-\item Funktionsprinzip
-\item \LaTeX{}-Beispiele
+\item Features
+\item How it works
+\item \LaTeX{}-Examples
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{\LaTeX Hintergrund}
+\begin{frame}[fragile]{\LaTeX{} Features}
 \begin{itemize}
-\item Professionelle Standard-Layouts (WYGLRG)
-\item Satz mathematischer Formeln
-\item Logisches \verb+\emph{+Mark-Up\verb+}+\\
-      im Gegensatz zu optischem \underline{\textbf{\textrm{Mark-Up}}}
-\item Inhaltsverzeichnis, Bibliographie, 
-  Stichwortverzeichnis, Querverweise, Graphikeinbindung
-\item Auf verschiedenen Plattformen frei verfügbar.
-\item Langzeitstabile Sprache (seit 1985).
+\item Professional Standard-Layouts (WYGLRG)
+\item Typesetting mathematical formul\ae
+\item Logical \verb+\emph{+Mark-Up\verb+}+\\
+      as opposed to optical \underline{\textbf{\textrm{Mark-Up}}}
+\item Table of content, Bibliography, 
+  Index, Cross references, graphics inclusion
+\item Cross platform and free
+\item Long-term stable language (since 1985).
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Funktionsprinzip}
+\begin{frame}{How \LaTeX{} Works}
 \includegraphics[width=\textwidth]{process}
 \end{frame}
 
-\begin{frame}[fragile]{Dokument}
+\begin{frame}[fragile]{Text Input}
 \begin{verbatim}
 \documentclass[a4paper]{article}
 \usepackage[german]{babel}
 \usepackage[latin1]{inputenc}
 \begin{document}
-\section{Ich bin Blindtex}
-Von Geburt an. Es hat lange gedauert, bis ich
-begriffen habe, was es bedeutet, ein blinder Text zu
-sein: Man macht keinen Sinn. Man wirkt hier und da aus
-dem Zusammenhang gerissen. Oft wird man gar nicht erst
-gelesen ...
+\section{Lore Ipsum}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Fusce pulvinar ante in enim rhoncus ut suscipit sapien
+luctus. Sed ipsum urna, scelerisque vitae laoreet eleifend,
+congue in nibh.
 
-Aber ich bin gerne Text. Und sollten Sie mich jetzt
-tatsächlich zu Ende lesen, dann habe ich etwas
-geschafft, was den meisten
+Nulla blandit ligula et lorem hendrerit ac tincidunt
+massa scelerisque. Vestibulum vitae sem enim. Nullam
+ornare consequat pellentesque. Praesent placerat,
+lacus at varius auctor, magna turpis tempus tellus,
+consectetur sodales metus arcu ac justo.
 \end{document}
 \end{verbatim}
 \end{frame} 
 
-\begin{frame}{Dokument Resultat}
-\textbf{\large 1. Ich bin Blindtext}\\[1em]
-        
-Von Geburt an. Es hat lange gedauert, bis ich
-begriffen habe, was es bedeutet, ein blinder Text zu
-sein: Man macht keinen Sinn. Man wirkt hier und da aus
-dem Zusammenhang gerissen. Oft wird man gar nicht erst
-gelesen. Aber bin ich deshalb ein schlechter Text? Ich
-weiss, dass ich nie die Chance haben werde im Stern zu
-erscheinen. Aber bin ich darum weniger wichtig? Ich
-bin blind!
+\begin{frame}{Typeset Document}
+\textbf{\large 1. Lore Ipsum}\\[1em]
 
-\hspace*{1em}Aber ich bin gerne Text. Und sollten Sie
-mich jetzt tatsächlich zu Ende lesen, dann habe ich
-etwas geschafft, was den meisten
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pulvinar ante in enim rhoncus ut suscipit sapien luctus. Sed ipsum urna, scelerisque vitae laoreet eleifend, congue in nibh.
+
+\hspace*{1em}Nulla blandit ligula et lorem hendrerit ac tincidunt massa scelerisque. Vestibulum vitae sem enim. Nullam ornare consequat pellentesque. Praesent placerat, lacus at varius auctor, magna turpis tempus tellus, consectetur sodales metus arcu ac justo.
 \end{frame}
 
-\begin{frame}[fragile]{Mathematik}
+\begin{frame}[fragile]{Math I}
 
 \setlength{\fboxsep}{1em}
 \begin{minipage}{0.5\textwidth}
@@ -97,7 +89,7 @@ etwas geschafft, was den meisten
 \end{displaymath}}}
 \end{frame}
 
-\begin{frame}{Mathematik II}
+\begin{frame}{Math II}
 \begin{displaymath}
 \frac{\prod _{n=1}^{\infty }(1-{x^{2 n}})}
   {\prod _{n=1}^{\infty}(1-{x^n})}
