@@ -1433,11 +1433,12 @@ If a text is typed using a typewriter, important words are
 \end{lscommand}
 In printed books,
 however, words are emphasized by typesetting them in an \emph{italic}
-font.  \LaTeX{} provides the command
+font.  As an author you shouldn't care either way. The important bit is, to tell \LaTeX{} that a praticular
+bit of text is important and should be emphasized. Hence the command
 \begin{lscommand}
 \ci{emph}\verb|{|\emph{text}\verb|}|
 \end{lscommand}
-\noindent to emphasize text.  What the command actually does with 
+\noindent to emphasize text. What the command actually does with 
 its argument depends on the context:
 
 \begin{example}
@@ -1448,6 +1449,9 @@ its argument depends on the context:
   \emph{normal} font for 
   emphasizing.}
 \end{example}
+
+If you want control over font and font size, section \ref{sec:fontsize} on
+page \pageref{sec:fontsize} might provide some inspiration.
 
 \section{Environments} \label{env}
 
