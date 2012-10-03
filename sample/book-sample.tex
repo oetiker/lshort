@@ -115,7 +115,7 @@ Sometimes an enumerated list just makes things so much clearer to the user \ldot
   \item Third
 \end{enumerate}
 
-Or if it's more material, maybe a description list is in order.
+\noindent Or if it's more material, maybe a description list is in order.
 
 \begin{description}
   \item[Vivamus] sit amet est dui, vitae tristique metus. Donec felis risus,
@@ -153,17 +153,16 @@ Test    &
 
 \begin{table}[htbp]
 \begin{center}
-\begin{tabular}{@{}llr@{}} \toprule
-\multicolumn{2}{c}{Item} \\ \cmidrule(r){1-2}
-Animal & Description & Price (\$)\\ \midrule
-Gnat  & per gram  & 13.65 \\
-      & each      & 0.01 \\
-Gnu   & stuffed   & 92.50 \\
-Emu   & stuffed   & 33.33 \\
-Armadillo & frozen & 8.99 \\ \bottomrule
+ \begin{tabular}{||l|lr||} \hline
+gnats     & gram      & \$13.65 \\ \cline{2-3}
+          & each      & .01 \\ \hline
+gnu       & stuffed   & 92.50 \\ \cline{1-1} \cline{3-3}
+emu       &           & 33.33 \\ \hline
+armadillo & frozen    & 8.99 \\ \hline
 \end{tabular}
 \end{center}
 
+\vspace{2ex}
 \begin{center}
 \begin{tabular}{@{}llr@{}} \toprule
 \multicolumn{2}{c}{Item} \\ \cmidrule(r){1-2}
