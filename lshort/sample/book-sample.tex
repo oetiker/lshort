@@ -2,6 +2,8 @@
 % Sample LaTeX file to get started writing a large document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% use UTF-8 encoding - äöü
+
 \documentclass[a4paper,12pt]{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,31 +19,64 @@ IT Support Gruppe D-ITET (ISG.EE), ETH Z\"urich}
 % Load some sensible packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage[bookmarks,        % add hyperlinks to the document
+\usepackage[bookmarks,         % add hyperlinks to the document
             colorlinks,
             plainpages=false]{hyperref}                    
-\usepackage[english]{babel}   % use german hyphenation
+
+\usepackage[english]{babel}    % use english hyphenation
+
+
 \usepackage{booktabs}
-\usepackage{iftex}              % which tex am I running on
+
+\usepackage{iftex}             % which tex am I running on
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use these settings when running on pdflatex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifPDFTeX
-  \usepackage{lmodern}          % use the Latin Modern Font
-  \usepackage[T1]{fontenc}      % understand 8 bit fonts
-  \usepackage[latin1]{inputenc} % understand 8 bit latin1 input
-\else
-   \ifXeTeX
-     \usepackage{xltxtra}
-   \else 
-     \usepackage{luatextra}
-   \fi
-   \defaultfontfeatures{Ligatures=TeX}
+  \usepackage{lmodern}         % use the Latin Modern Font
+  \usepackage[T1]{fontenc}     % understand 8 bit fonts
+  \usepackage[utf8]{inputenc}  % expect input in utf8 encoding
 \fi
 
-% \usepackage[utf8]{inputenc} % understand utf8 input
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use these settings when running on xelatex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifXeTeX
+  \usepackage{xltxtra}
+  \defaultfontfeatures{Ligatures=TeX}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% use these settings when running on lualatex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifLuaTeX 
+  \usepackage{luatextra}
+  \defaultfontfeatures{Ligatures=TeX}
+\fi
+
+
 \usepackage{graphicx}         % learn how to include graphics
 \usepackage{calc}             % teach latex to calculate
+
 \usepackage{makeidx}          % lets have an index
 \makeindex                    % and enable the index
-\usepackage{verbatim}         % a better verbatim environment
+
+\usepackage{verbatim}         % required for \verbinput
+
+\usepackage{listings}         % syntax hilighting code
+
+% some default configuration for code listings
+
+\lstset{
+   numbers=left,
+   basicstyle=\ttfamily\footnotesize,
+   keywordstyle=\bfseries\color{red},
+   numberstyle=\ttfamily\scriptsize,
+   commentstyle=\color[gray]{0.8},
+   stringstyle=\color{blue},
+   showstringspaces=false
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,6 +106,8 @@ IT Support Gruppe D-ITET (ISG.EE), ETH Z\"urich}
 
 \begin{document}
 \maketitle
+
+tobi@oetiker.ch
 
 \frontmatter % This is all the stuff that comes at the front of the
              % book
@@ -235,9 +272,13 @@ consequat vel, convallis non, consequat sed, neque. Quisque euismod,
 mi in iaculis convallis, velit mauris auctor leo, sed nonummy sapien
 sapien non arcu. Pellentesque sagittis laoreet nunc.
 
+\chapter{Listings}
+
+\lstinputlisting[language=Matlab]{fibonacci.m}
+
 \chapter{The Source}
 
-{\tiny \verbatiminput{sample.tex}}
+{\tiny \verbatiminput{book-sample.tex}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
