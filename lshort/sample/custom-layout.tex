@@ -3,11 +3,12 @@
 % custom borders for my page
 \usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
 \usepackage{iftex}
-\RequireLuaTeX
+\ifLuaTeX
 % use system fonts in latex
 \usepackage{fontspec}
 % funky font
 \newfontface\mollefont[ Scale = 1 ]{Molle-Regular.otf}
+\fi
 % no headers
 \usepackage{rotating}
 \usepackage{color}
@@ -19,7 +20,7 @@
 \pagecolor[rgb]{0.8,0.9,0.9}
 \vspace*{\stretch{1}}
 \begin{center}
-\rotatebox{30}{\mollefont\fontsize{2cm}{1.2ex}\selectfont Hello World}
+\rotatebox{30}{\ifLuaTeX\mollefont\fi\fontsize{2cm}{1.2ex}\selectfont Hello World}
 \end{center}
 \vspace*{\stretch{1}}
 \setlength{\unitlength}{1mm}
