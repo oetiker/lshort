@@ -41,7 +41,7 @@ common word, pronounced `tyekh'. But I believe the most proper pronunciation
 is heard in Greece, where you have the harsher ch of ach and Loch.}}
 or in the Scottish ``Loch.'' The ``ch'' originates from the Greek
 alphabet where X is the letter ``ch'' or ``chi''. \TeX{} is also the first syllable
-of the Greek word {\greektext teqnolog'ia} (technology). In an ASCII environment, \TeX{}
+of the Greek word {\greektext teqnik'h} (technique). In an ASCII environment, \TeX{}
 becomes \texttt{TeX}.
 
 \subsection{\LaTeX}
@@ -280,10 +280,11 @@ command name. The empty parameter \verb|{}| stops \LaTeX{} from eating up all th
 the command name. 
 
 \begin{example}
-I read that Knuth divides the 
-people working with \TeX{} into 
-\TeX{}nicians and \TeX perts.\\
-Today is \today.
+New \TeX users may miss whitespaces
+after a command. % renders wrong
+Experienced \TeX{} users are
+\TeX perts, and know how to use
+whitespaces. % renders correct
 \end{example}
 
 Some commands require a \wi{parameter}, which has to be given between
@@ -344,7 +345,7 @@ comments in your document.
 Note that this won't work inside complex environments, like math for example.
 
 \section{Input File Structure}
-
+\label{sec:structure}
 When \LaTeXe{} processes an input file, it expects it to follow a
 certain \wi{structure}. Thus every input file must start with the
 command
@@ -590,7 +591,10 @@ Packages are activated with the
 \end{lscommand}
 \noindent command, where \emph{package} is the name of the package and
 \emph{options} is a list of keywords that trigger special features in
-the package. Some packages come with the \LaTeXe{} base distribution
+the package. The \ci{usepackage} command goes into the preamble of the
+document. See section \ref{sec:structure} for details.
+
+Some packages come with the \LaTeXe{} base distribution
 (See Table~\ref{packages}). Others are provided separately. You may
 find more information on the packages installed at your site in your
 \guide. The prime source for information about \LaTeX{} packages is \companion.
@@ -600,6 +604,7 @@ information of how to write your own extensions to \LaTeXe.
 Modern \TeX{} distributions come with a large number of packages
 preinstalled. If you are working on a Unix system, use the command
 \texttt{texdoc} for accessing package documentation.
+
 
 \begin{table}[btp]
 \caption{Some of the Packages Distributed with \LaTeX.} \label{packages}

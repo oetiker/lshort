@@ -31,35 +31,43 @@ your documents.
 
 \end{enumerate}
 
-For all platforms there are many programs that fit the requirements above.
+For all platforms there are several programs that fit the requirements above.
 Here we just tell about the ones we know, like and have some experience
 with.
 
+\section{Cross Platform Editor}
+\label{sec:texmaker}
+
+While \TeX{} is available on many different computing platforms, \LaTeX{}
+editors have long been highly platform specific.
+
+Over the past few years I have come to like Texmaker quite a lot.
+Apart from being very a useful editor with integrated pdf-preview and syntax
+high-lighting, it has the advantage of running on Windows, Mac and
+Unix/Linux equally well.  See \url{http://www.xm1math.net/texmaker} for
+further information.  There is also a forked version of Texmaker called
+TeXstudio on \url{http://texstudio.sourceforge.net/}.  It also seems well
+maintained and is also available for all three major platforms.
+
+You will find some platform specific editor suggestions in the OS sections
+below.
+
 \section{\TeX{} on Mac OS X}
 
-\subsection{Get a \TeX{} Distribution}
+\subsection{\TeX{} Distribution}
 
 Just download \wi{MacTeX}. It is a
 pre-compiled \LaTeX{} distribution for OS X. \wi{MacTeX} provides a full \LaTeX{}
 installation plus a number of additional tools. Get Mac\TeX{} from
 \url{http://www.tug.org/mactex/}.
 
-If you are already using Macports or Fink for installing Unix software under
-OS~X, install \LaTeX{} using these package managers. Macport users install
-\LaTeX{} with \framebox{\texttt{port install texlive}},
-Fink users use the command \framebox{\texttt{fink install texlive}}.
+\subsection{OSX \TeX{} Editor}
 
-\subsection{Picking an Editor}
-
+If you are not happy with our crossplatform suggestion Texmaker (section \ref{sec:texmaker}).
+ 
 The most popular open source editor for \LaTeX{} on the mac seems to be
 \TeX{}shop.  Get a copy from \url{http://www.uoregon.edu/~koch/texshop}. It
 is also contained in the \wi{MacTeX} distribution.
-
-Another fine editor is Texmaker. Apart from being a useful editor it has the
-advantage of running on Windows, Mac and Unix/Linux equally well. Go to
-\url{http://www.xm1math.net/texmaker} for further Information. Note there is
-also a forked version of Texmaker called TexmakerX on
-\url{http://texmakerx.sourceforge.net/} it promises additional functionality.
 
 Recent \TeX Live distributions contain the \TeX{}works editor 
 \url{http://texworks.org/} which is a multi-platform editor based on the \TeX{}Shop
@@ -88,17 +96,12 @@ get your base setup going \url{http://www.tug.org/texlive/}.
 
 \subsection{A \LaTeX{} editor}
 
-\LaTeX{} is a programming language for text documents. \wi{TeXnicCenter}
-uses many concepts from the programming-world to provide a nice and
+If you are not happy with our crossplatform suggestion Texmaker (section \ref{sec:texmaker}).
+
+\wi{TeXnicCenter} uses many concepts from the programming-world to provide a nice and
 efficient \LaTeX{} writing environment in Windows. Get your copy from\\
 \url{http://www.texniccenter.org/}. TeXnicCenter integrates nicely with
-MiKTeX. Version 2.0 of TeXnicCenter will support Unicode, the recent alpha version
-seems to be quite stable.
-
-Other excellent choice is the editor provided by the LEd project available
-on \url{http://www.latexeditor.org}.
-
-See the note on Texmaker in the Mac section above for a third choice.
+MiKTeX.
 
 Recent \TeX Live distributions contain the \TeX{}works Editor
 \url{http://texworks.org/}. It supports Unicode and requires at least Windows XP.
@@ -139,7 +142,7 @@ setup. Use your package manager to install the following packages:
 \end{itemize}
 
 If you are looking for a more windows like graphical editing environment,
-check out Texmaker or \TeX{}works. See the note in the Mac section above.
+check out Texmaker. See section \ref{sec:texmaker}.
 
 Most Linux distros insist on splitting up their \TeX{} environments into a
 large number of optional packages, so if something is missing after your
