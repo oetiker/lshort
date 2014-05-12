@@ -1,9 +1,18 @@
+* add reference to structure section when introducing 'usepackage'
+
+5.03 2014.4.25
+--------------
+* fixed fixes in appendix
+
+5.02 2014.4.21
+--------------
+* better example for spaceing
 * fix spelling of Photoshop and AUCTeX
 * correctly spell greek technology
 * fix CTAN links
 * mention booktabs package
 * minor typos
-* improved wording in the installing appendix
+* improved logic in appendix on installation
 
 5.01 2011.4.6
 ------------
