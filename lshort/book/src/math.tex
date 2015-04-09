@@ -627,7 +627,7 @@ Particularly, they are \textbf{not} the same as in the
   & = & n + o + p + q + r + s
 \end{eqnarray}
 \end{example}
-\noindent this is not optimal either as the RHS is too short and the array is
+\noindent This is not optimal either as the RHS is too short and the array is
 not properly centered:
 \begin{example}
 \begin{eqnarray}
@@ -638,14 +638,14 @@ not properly centered:
 \end{eqnarray}
 \end{example}
 
-\noindent having badmouthed the competition sufficiently, I can now steer you gently towards the glorious \ldots
+\noindent Having badmouthed the competition sufficiently, I can now steer you gently towards the glorious \ldots
 
 \subsection{IEEEeqnarray Environment}
 \label{sec:IEEEeqnarray_intro}
 
 The \ei{IEEEeqnarray} environment is a very powerful command with
 many options. Here, we will only introduce its basic
-functionalities. For more information we refer to the
+functionalities. For more information please refer to the
 manual.\footnote{The official manual is called
   \CTAN|macros/latex/contrib/IEEEtran/IEEEtran_HOWTO.pdf|. The part about \texttt{IEEEeqnarray}
   can be found in Appendix~F.}
@@ -672,12 +672,12 @@ lower-case \texttt{c}) and the third column left-justified:
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && +\: l + m + n + o 
+  && \negmedspace {} + l + m + n + o 
   \\
   & = & p + q + r + s
 \end{IEEEeqnarray}
 \end{example}
-any number of columns can be specified:
+Any number of columns can be specified:
 \verb+{c}+ will give only one column with all entries centered, or
 \verb+{rCll}+ would add a fourth, left-justified column to use
 for comments. Moreover, beside \texttt{l}, \texttt{c}, \texttt{r}, \texttt{L},
@@ -784,14 +784,18 @@ If an equation is split into two or more lines, \LaTeX\
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && +\: l + m + n + o 
+  && \negmedspace {} + l + m + n + o 
   \\
   & = & p + q + r + s
 \end{IEEEeqnarray}
 \end{example}
 \noindent Note the space difference between $+$ and $l$!
-  
-And sometimes spacing just work \emph{e.g.}, in front of
+The construction \verb|{} + l| forces the \verb|+|-sign to be a binary operator rather
+than just a sign, and the unwanted ensuing space between
+\verb|{}| and \verb|+| is compensated by a negative medium space
+\ci{negmedspace}.
+
+And sometimes spacing just works \emph{e.g.}, in front of
   \begin{itemize}
   \item an operator name like \ci{log}, \ci{sin}, \ci{det},
     \ci{max}, \emph{etc.},
@@ -808,11 +812,11 @@ If a particular line should not have an equation number, the
   number can be suppressed using \ci{nonumber} (or
   \ci{IEEEnonumber}). If on such a line a label
   \verb+\label{eq:...}+ is defined, then this label is passed on
-  further to the next equation number that is not suppressed. Place the labels right before the line-break
+  to the next equation number that is not suppressed. Place the labels right before the line-break
   \verb+\\+ or the next to the equation it belongs to. Apart from
   improving the readability of the source code this prevents a
-  compilation error in the situation of a \ci{IEEEmulticol} command
-  after the label-definition.
+  compilation error when a \ci{IEEEmulticol} command
+  follows the label-definition.
   
 There also exists a *-version where all equation numbers are
   suppressed. In this case an equation number can be made to appear
@@ -841,7 +845,7 @@ Sub-numbers are also easily possible using
 \section{Arrays and Matrices} \label{sec:arraymat}
 
 To typeset \textbf{arrays}, use the \ei{array} environment. It works
-somewhat similar to the \texttt{tabular} environment. The \verb|\\| command is
+in a similar way to the \texttt{tabular} environment. The \verb|\\| command is
 used to break the lines:
 \begin{example}
   \begin{equation*}
