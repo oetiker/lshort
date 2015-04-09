@@ -1111,7 +1111,7 @@ non-\hologo{TeX} font, you have to fake them. The option
 
 So far there has been no advantage to using a Unicode \hologo{TeX} engine.
 This changes when we leave the Latin script and move to a more interesting
-language like Greek and Russian.  With a Unicode based system, you can
+language like Greek or Russian.  With a Unicode based system, you can
 simply\footnote{For small values of simple.} enter the characters in your
 editor and \hologo{TeX} will understand them.
 
@@ -1125,7 +1125,7 @@ Writing in different languages is easy, just specify the languages in the preamb
 To write a paragraph in German, you can use the German environment:
 
 \begin{lscommand}
-Englisch text.\\
+English text.\\
 \verb|\begin{german}|\\
 Deutscher Text.\\
 \verb|\end{german}|\\
@@ -1162,7 +1162,7 @@ Since this document is written in Latin1-encoding, I cannot show the actual
 Cyrillic\index{Russian}\index{Cyrillic} letters.
 
 The package \pai{xgreek}\index{Greek}\cite{xgreek} offers support for
-writing either ancient or modern (monotonic or politonic) greek.
+writing either ancient or modern (monotonic or polytonic) greek.
 
 \subsubsection{Right to Left (RTL) languages.}
 
@@ -1228,7 +1228,7 @@ Remember to select the correct script:
 \index{Chinese}\index{Japanese}\index{Korean}
 
 The package \pai{xeCJK}\cite{xecjk} takes care of font selection and
-punctuation of these languages.
+punctuation for these languages.
 
 \section{The Space Between Words}
 
@@ -1260,7 +1260,7 @@ The additional space after periods can be disabled with the command
 \ci{frenchspacing}
 \end{lscommand}
 \noindent which tells \LaTeX{} \emph{not} to insert more space after a
-period than after ordinary character. This is very common in
+period than after an ordinary character. This is very common in
 non-English languages, except bibliographies. If you use
 \ci{frenchspacing}, the command \verb|\@| is not necessary.
 
@@ -1282,7 +1282,7 @@ The following sectioning commands are available for the
 \ci{subparagraph}\verb|{...}|
 \end{lscommand}
 
-If you want to split your document in parts without influencing the
+If you want to split your document into parts without influencing the
 section or chapter numbering use
 \begin{lscommand}
 \ci{part}\verb|{...}|
@@ -1362,7 +1362,7 @@ a book:
 \begin{description}
 \item[\ci{frontmatter}] should be the very first command after
   the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
-    numerals and sections be non-enumerated as if you were using 
+    numerals and sections will be non-enumerated as if you were using 
     the starred sectioning commands (eg \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
 \item[\ci{mainmatter}] comes right before the first chapter of
@@ -1655,7 +1655,7 @@ a special type of column which will wrap-around the text as in a normal paragrap
 The \emph{pos} argument specifies the vertical position of the table
 relative to the baseline of the surrounding text.  Use one of the
 letters \mfr{t}, \mfr{b} and \mfr{c} to specify table
-alignment at the top, bottom or center.
+alignment at the top, bottom or centre.
  
 Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
 column, \ci{\bs} starts a new line and \ci{hline} inserts a horizontal
@@ -1789,7 +1789,7 @@ on units in table \ref{units} on page \pageref{units}.
 
 A number of extra commands, enhancing the tabular environment are available
 in the \pai{booktabs} package. It makes the creation of professional looking
-tables with proper spacing quite a bit simples.
+tables with proper spacing quite a bit simpler.
 
 
 \section{Floating Bodies}
@@ -1838,7 +1838,7 @@ Spec&Permission to place the float \ldots\\
 \texttt{b} & at the \emph{bottom} of a page\\[0.3ex]
 \texttt{p} & on a special \emph{page} containing only floats.\\[0.3ex]
 \texttt{!} & without considering most of the  internal parameters\footnote{Such as the
-    maximum number of floats allowed  on one page.}, which could stop this
+    maximum number of floats allowed  on one page.}, which could otherwhise stop this
   float from being placed.
 \end{tabular}
 \end{center}
@@ -1965,7 +1965,7 @@ will fail. These commands are called \wi{fragile commands}---for example,
 we all?). Protect them by putting the \ci{protect} command in front
 of them. Now they will work properly even when used in moving arguments.
 
-\ci{protect} only refers to the command that follows right behind, not even
+\ci{protect} only affects the next command, not even
 to its arguments. In most cases a superfluous \ci{protect} won't hurt.
 
 \begin{code}

@@ -1,3 +1,8 @@
+* better spaceing trick for multiline equations
+
+5.0.4 2014.10.29
+----------------
+* a ton of language fixes by Martin Jenkins
 * add reference to structure section when introducing 'usepackage'
 
 5.03 2014.4.25

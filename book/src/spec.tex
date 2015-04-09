@@ -363,8 +363,8 @@ the documentation.  Here's how you do the first part:
   several times before it gets the cross-references right.
 \item Check to see if \LaTeX\ has produced a \texttt{.idx} file
   among the various files you now have.
-  If you do not see this file, then you may proceed to
-  step~\ref{step:final}.
+  If you do not see this file, then the documentation has no index. Continue
+  with step~\ref{step:final}.
 \item In order to generate the index, type the following:\\
         \fbox{\texttt{makeindex -s gind.ist \textit{name}}}\\
         (where \textit{name} stands for the main-file name without any
@@ -605,7 +605,7 @@ list the default values are written in an upright font.
   \item [\texttt{pdfmenubar (=true,\textit{false})}] show or hide
     Acrobat's menu
   \item [\texttt{pdffitwindow (=false,\textit{true})}] adjust the
-    initial magnification of the pdf when displayed
+    initial magnification of the PDF when displayed
   \item [\texttt{pdftitle (=\{text\})}] define the title that gets
     displayed in the \texttt{Document Info} window of Acrobat
   \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
