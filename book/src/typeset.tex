@@ -28,7 +28,7 @@ then derives the typographical form of the text according to the
 
 The most important text unit in \LaTeX{} (and in typography) is the
 \wi{paragraph}.  We call it ``text unit'' because a paragraph is the
-typographical form that should reflect one coherent thought, or one idea. 
+typographical form that should reflect one coherent thought, or one idea.
 You will learn in the following sections how to force line breaks with
 e.g.\ \texttt{\bs\bs}, and paragraph breaks with e.g.\ leaving an empty line
 in the source code.  Therefore, if a new thought begins, a new paragraph
@@ -52,19 +52,19 @@ this section again.)
 \begin{code}
 \begin{verbatim}
 % Example 1
-\ldots when Einstein introduced his formula 
-\begin{equation} 
-  e = m \cdot c^2 \; , 
-\end{equation} 
-which is at the same time the most widely known 
-and the least well understood physical formula. 
+\ldots when Einstein introduced his formula
+\begin{equation}
+  e = m \cdot c^2 \; ,
+\end{equation}
+which is at the same time the most widely known
+and the least well understood physical formula.
 
 
 % Example 2
 \ldots from which follows Kirchhoff's current law:
-\begin{equation} 
+\begin{equation}
   \sum_{k=1}^{n} I_k = 0 \; .
-\end{equation} 
+\end{equation}
 
 Kirchhoff's voltage law can be derived \ldots
 
@@ -72,12 +72,12 @@ Kirchhoff's voltage law can be derived \ldots
 % Example 3
 \ldots which has several advantages.
 
-\begin{equation} 
+\begin{equation}
   I_D = I_F - I_R
-\end{equation} 
+\end{equation}
 is the core of a very different transistor model. \ldots
 \end{verbatim}
-\end{code} 
+\end{code}
 
 The next smaller text unit is a sentence.  In English texts, there is
 a larger space after a period that ends a sentence than after one
@@ -103,7 +103,7 @@ so obvious that it is almost self-evident how these high-level
 structures should be used.
 
 \section{Line Breaking and Page Breaking}
- 
+
 \subsection{Justified Paragraphs}
 
 Books are often typeset with each line having the same length.
@@ -116,26 +116,26 @@ additional space between two paragraphs. Refer to section~\ref{parsp}
 for more information.
 
 In special cases it might be necessary to order \LaTeX{} to break a
-line: 
+line:
 \begin{lscommand}
-\ci{\bs} or \ci{newline} 
+\ci{\bs} or \ci{newline}
 \end{lscommand}
-\noindent starts a new line without starting a new paragraph. 
+\noindent starts a new line without starting a new paragraph.
 
 \begin{lscommand}
 \ci{\bs*}
 \end{lscommand}
 \noindent additionally prohibits a page break after the forced
-line break. 
+line break.
 
 \begin{lscommand}
 \ci{newpage}
 \end{lscommand}
-\noindent starts a new page. 
+\noindent starts a new page.
 
 \begin{lscommand}
 \ci{linebreak}\verb|[|\emph{n}\verb|]|,
-\ci{nolinebreak}\verb|[|\emph{n}\verb|]|, 
+\ci{nolinebreak}\verb|[|\emph{n}\verb|]|,
 \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
 \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
 \end{lscommand}
@@ -224,8 +224,8 @@ Several words can be kept together on one line with the command
 My phone number will change soon.
 It will be \mbox{0116 291 2319}.
 
-The parameter 
-\mbox{\emph{filename}} should 
+The parameter
+\mbox{\emph{filename}} should
 contain the name of the file.
 \end{example}
 
@@ -252,7 +252,7 @@ Command&Example&Description\\
 \end{tabular}
 
 \section{Special Characters and Symbols}
- 
+
 \subsection{Quotation Marks}
 
 You should \emph{not} use the \verb|"| for \wi{quotation marks}
@@ -281,7 +281,7 @@ pages 13--67\\
 yes---or no? \\
 $0$, $1$ and $-1$
 \end{example}
-The names for these dashes are: 
+The names for these dashes are:
 `-' \wi{hyphen}, `--' \wi{en-dash}, `---' \wi{em-dash} and
 `$-$' \wi{minus sign}.
 
@@ -294,12 +294,12 @@ what you want. Try this instead:
 \begin{example}
 http://www.rich.edu/\~{}bush \\
 http://www.clever.edu/$\sim$demo
-\end{example}  
- 
+\end{example}
+
 \subsection{Slash (/)}
 \index{Slash}
 In order to typeset a slash between two words, one can simply type e.g.\
-\texttt{read/write}, but this makes \LaTeX{} treat the two words as one. 
+\texttt{read/write}, but this makes \LaTeX{} treat the two words as one.
 Hyphenation is disabled for these two words, so there may be `overfull'
 errors.  To overcome this, use \ci{slash}.  For example type
 `\verb|read\slash write|' which allows hyphenation.  But normal `\texttt{/}'
@@ -328,7 +328,7 @@ The \pai{textcomp} package makes the degree symbol also available as
 When writing about money these days, you need the Euro symbol. Many current
 fonts contain a Euro symbol. After loading the \pai{textcomp} package in the preamble of your document
 \begin{lscommand}
-\ci{usepackage}\verb|{textcomp}| 
+\ci{usepackage}\verb|{textcomp}|
 \end{lscommand}
 use the command
 \begin{lscommand}
@@ -398,7 +398,7 @@ command for these dots. It is called
 Not like this ... but like this:\\
 New York, Tokyo, Budapest, \ldots
 \end{example}
- 
+
 \subsection{Ligatures}
 
 Some letter combinations are typeset not just by setting the
@@ -416,9 +416,9 @@ words built from two words.
 \Large Not shelfful\\
 but shelf\mbox{}ful
 \end{example}
- 
+
 \subsection{Accents and Special Characters}
- 
+
 \LaTeX{} supports the use of \wi{accent}s and \wi{special character}s
 from many languages. Table~\ref{accents} shows all sorts of accents
 being applied to the letter o. Naturally other letters work too.
@@ -427,9 +427,9 @@ To place an accent on top of an i or a j, its dots have to be
 removed. This is accomplished by typing \verb|\i| and \verb|\j|.
 
 \begin{example}
-H\^otel, na\"\i ve, \'el\`eve,\\ 
+H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\~norita!,\\
-Sch\"onbrunner Schlo\ss{} 
+Sch\"onbrunner Schlo\ss{}
 Stra\ss e
 \end{example}
 
@@ -444,7 +444,7 @@ Stra\ss e
 \A{\oe}  &  \A{\OE} & \A{\ae} & \A{\AE} \\
 \A{\aa} &  \A{\AA} \\[6pt]
 \A{\o}  & \A{\O} & \A{\l} & \A{\L} \\
-\A{\i}  & \A{\j} & !` & \verb|!`| & ?` & \verb|?`| 
+\A{\i}  & \A{\j} & !` & \verb|!`| & ?` & \verb|?`|
 \end{tabular}
 \index{dotless \i{} and \j}\index{Scandinavian letters}
 \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
@@ -494,7 +494,7 @@ enter an \"o by typing \verb|"o| instead of~\verb|\"o|.
 
 If you call babel with multiple languages
 \begin{lscommand}
-\ci{usepackage}\verb|[|\emph{languageA}\verb|,|\emph{languageB}\verb|]{babel}| 
+\ci{usepackage}\verb|[|\emph{languageA}\verb|,|\emph{languageB}\verb|]{babel}|
 \end{lscommand}
 \noindent then the last language in the option list will be active (i.e.
 languageB). Use the command
@@ -519,8 +519,8 @@ languageB). Use the command
 \feih{#1}\texttt{#1}}
 
 Most modern computer systems allow you to input letters of
-national alphabets  directly from the keyboard. In order to 
-handle a variety of input encodings used for different groups of 
+national alphabets  directly from the keyboard. In order to
+handle a variety of input encodings used for different groups of
 languages and/or on different computer platforms \LaTeX{} employs the
 \pai{inputenc} package:
 \begin{lscommand}
@@ -546,25 +546,25 @@ Operating & \multicolumn{2}{c}{encodings}\\
 system  & western Latin      & Cyrillic\\
 \hline
 Mac     &  \iei{applemac} & \iei{macukr}  \\
-Unix    &  \iei{latin1}   & \iei{koi8-ru}  \\ 
+Unix    &  \iei{latin1}   & \iei{koi8-ru}  \\
 Windows &  \iei{ansinew}  & \iei{cp1251}    \\
 DOS, OS/2  &  \iei{cp850} & \iei{cp866nav}
-\end{tabular}                
-\end{center}                            
+\end{tabular}
+\end{center}
 
 \begin{lscommand}
-\ci{usepackage}\verb|[|\iei{utf8}\verb|]{inputenc}| 
+\ci{usepackage}\verb|[|\iei{utf8}\verb|]{inputenc}|
 \end{lscommand}
-\noindent will enable you to create \LaTeX{} input files in 
+\noindent will enable you to create \LaTeX{} input files in
 \iei{utf8}, a multi-byte encoding in which each character can be encoded in
-as little as one byte and as many as four bytes. 
+as little as one byte and as many as four bytes.
 
 Since the turn of the Century most Operating Systems are based on Unicode (Windows XP, MacOS X). Therefore it is recommended to use \iei{utf8} for any new project. The \iei{utf8} encoding used by \pai{inputenc} only defines the characters that are actually provided by the fonts used. If you need more (non-latin) characters have a look at \hologo{XeLaTeX} in section \ref{sec:xetex} a Unicode based \TeX-engine.
 
 Font encoding is a different matter. It defines at which position inside
-a \TeX-font each letter is stored. Multiple input encodings could be mapped into 
+a \TeX-font each letter is stored. Multiple input encodings could be mapped into
 one font encoding, which reduces the number of required font sets.
-Font encodings are handled through 
+Font encodings are handled through
 \pai{fontenc} package: \label{fontenc}
 \begin{lscommand}
 \ci{usepackage}\verb|[|\emph{encoding}\verb|]{fontenc}| \index{font encodings}
@@ -583,7 +583,7 @@ combining a normal character with an accent, to say nothing about letters of
 non-Latin alphabets, such as Greek or Cyrillic.
 
 To overcome these shortcomings, several 8-bit CM-like font sets were created.
-\emph{Extended Cork} (EC) fonts in \fei{T1} encoding contains 
+\emph{Extended Cork} (EC) fonts in \fei{T1} encoding contains
 letters and punctuation characters for most of the European
 languages using Latin script. The LH font set contains letters necessary
 to typeset documents in languages using Cyrillic script. Because of the large
@@ -594,9 +594,9 @@ encodings in \cite{cyrguide}.} The CB bundle contains fonts
 in \fei{LGR} encoding for the composition of Greek text.
 
 Improve/enable hyphenation in non-English
-documents by using these fonts. Another advantage of using new CM-like fonts is that they 
+documents by using these fonts. Another advantage of using new CM-like fonts is that they
 provide fonts of CM families in all weights, shapes, and optically
-scaled font sizes. 
+scaled font sizes.
 
 \subsection{Support for Portuguese}
 
@@ -612,7 +612,7 @@ As there are a lot of accents in Portuguese you might want to use
 \begin{lscommand}
 \verb|\usepackage[latin1]{inputenc}|
 \end{lscommand}
-to be able to input them correctly as well as 
+to be able to input them correctly as well as
 \begin{lscommand}
 \verb|\usepackage[T1]{fontenc}|
 \end{lscommand}
@@ -650,7 +650,7 @@ This enables French hyphenation, if you have configured your
 French: \verb+\chapter+ prints Chapitre, \verb+\today+ prints the current
 date in French and so on. A set of new commands also
 becomes available, which allows you to write French input files more
-easily. Check out table \ref{cmd-french} for inspiration. 
+easily. Check out table \ref{cmd-french} for inspiration.
 
 \begin{table}[!htbp]
 \caption{Special commands for French.} \label{cmd-french}
@@ -694,7 +694,7 @@ This enables German hyphenation, if you have configured your
 German. Eg. ``Chapter'' becomes ``Kapitel.'' A set of new commands also
 becomes available, which allows you to write German input files more quickly
 even when you don't use the inputenc package. Check out table
-\ref{german} for inspiration. With inputenc, all this becomes moot, but your 
+\ref{german} for inspiration. With inputenc, all this becomes moot, but your
 text also is locked in a particular encoding world.
 
 \begin{table}[!htbp]
@@ -719,148 +719,69 @@ would look like \frqq this\flqq. In the German speaking part of Switzerland,
 typesetters use \flqq guillemets\frqq~the same way the French do.
 
 A major problem arises from the use of commands
-like \verb+\flq+: If you use the OT1 font (which is the default font) the  
+like \verb+\flq+: If you use the OT1 font (which is the default font) the
 guillemets will look like the math symbol ``$\ll$'', which turns a typesetter's stomach.
 T1 encoded fonts, on the other hand, do contain the required symbols. So if you are using this type
 of quote, make sure you use the T1 encoding. (\verb|\usepackage[T1]{fontenc}|)
 
 \subsection[Support for Korean]{Support for Korean\footnotemark}\label{support_korean}%
-\footnotetext{%
-Considering a number of issues  Korean \LaTeX{} users
-have to cope with.
-This section was written by Karnes KIM on behalf of the
-Korean lshort translation team. It  was translated into English
-by SHIN Jungshik and shortened by Tobi Oetiker.}
+\footnotetext{Written by Karnes Kim $<$\href{mailto:karnes@ktug.org}{karnes@ktug.org}$>$ and Kihwang Lee $<$\href{mailto:leekh@ktug.org}{leekh@ktug.org}$>$ on behalf of the Korean \TeX{} Users Group and the Korean \TeX{} Society.}
 
-To use \LaTeX{} for typesetting  \wi{Korean}, 
-we need to solve three problems: 
+To process Hangul\footnote{Hangul is the name of the Korean writing system. Refer to \url{http://en.wikipedia.org/wiki/Hangul} for more information.} characters or prepare a document written in Korean using \LaTeX, put the following code in the preamble of the document.
 
-\begin{enumerate}
-\item 
-We must be able to 
-edit \wi{Korean input files}.
-Korean input files must be in plain text format, but because Korean
-uses its own character set outside the
-repertoire of US-ASCII, they will look rather strange with a normal ASCII editor.  The two most widely used encodings for
-Korean text files are  EUC-KR and its upward compatible
-extension used in Korean MS-Windows, CP949/Windows-949/UHC.
-In these encodings each US-ASCII character represents its normal ASCII
-character similar to other ASCII compatible encodings such as
-ISO-8859-\textit{x}, EUC-JP, Big5, or Shift\_JIS. On the other hand, Hangul
-syllables, Hanjas (Chinese characters as used in Korea), Hangul Jamos,
-Hiraganas, Katakanas, Greek and Cyrillic characters and other
-symbols and letters drawn from KS~X~1001 are represented by two
-consecutive octets. The first has its MSB set.
-Until the mid-1990's, it took a considerable amount of time and effort to
-set up a Korean-capable environment under a non-localized (non-Korean)
-operating system. 
-Skim through the now much-outdated \url{http://jshin.net/faq} to get 
-a glimpse of what it was like to use Korean under non-Korean OS in mid-1990's.
-These days all three major operating systems (Mac OS, Unix, Windows) come equipped
-with pretty decent multilingual support and internationalization features
-so that editing Korean text file is not so much of a problem anymore, even
-on non-Korean operating systems.
-
-\item \TeX{} and \LaTeX{} were originally written for
-scripts with no more than 256 characters in their alphabet.
-To make them work for languages with considerably 
-more characters such as
-Korean%,
- \footnote{Korean Hangul is an alphabetic script with 14 basic consonants
- and 10 basic vowels (Jamos). Unlike Latin or Cyrillic scripts, the
- individual characters have to be arranged in rectangular
- clusters about the same size as Chinese characters. Each cluster
- represents a syllable. An unlimited number of syllables can be
- formed out of this finite set of vowels and consonants. Modern Korean
- orthographic standards (both in South Korea and  North Korea), however,
- put some restrictions on the formation of these clusters.
- Therefore only a finite number of  orthographically correct syllables exist.
- The Korean Character encoding defines individual code points for each of these syllables (KS~X~1001:1998 and KS~X~1002:1992). So Hangul, albeit alphabetic, is
- treated like the Chinese and Japanese writing systems with tens of thousands of
- ideographic/logographic characters.  ISO~10646/Unicode offers both ways of
- representing Hangul used for \emph{modern} Korean by encoding Conjoining
- Hangul Jamos (alphabets: \url{http://www.unicode.org/charts/PDF/U1100.pdf})
- in addition to encoding all the orthographically allowed Hangul syllables in
- \emph{modern} Korean (\url{http://www.unicode.org/charts/PDF/UAC00.pdf}).
- One of the most daunting challenges in Korean typesetting with
- \LaTeX{} and its related typesetting system is supporting Middle Korean---and possibly future Korean---syllables that can only be represented
- by conjoining Jamos in Unicode. It is hoped that future \TeX{} engines like $\Omega$ and
- $\Lambda$ will eventually provide solutions to this.}
-or Chinese, a subfont mechanism was developed.
-It divides a single CJK font with  thousands or tens of thousands of
-glyphs into a set of subfonts with 256 glyphs each. 
-For Korean, there are three widely used packages;  \wi{H\LaTeX}
-by UN~Koaunghi, \wi{h\LaTeX{}p} by CHA~Jaechoon and the \wi{CJK package}
-by Werner~Lemberg.\footnote{% 
-They can be obtained at \CTANref|language/korean/HLaTeX/|\\
-   \CTANref|language/korean/CJK/| and
-   \texttt{http://knot.kaist.ac.kr/htex/}}
-H\LaTeX{} and h\LaTeX{}p are specific to Korean and provide
-Korean localization on top of the font support.
-They both can process Korean input text files encoded in EUC-KR. H\LaTeX{} can
-even process input files encoded in CP949/Windows-949/UHC and UTF-8
-when used along with $\Lambda$ or $\Omega$.
-
-The CJK package is not specific to Korean. It can
-process input files in UTF-8 as well as in various CJK encodings
-including EUC-KR and CP949/Windows-949/UHC, it can be used to typeset documents with
-multilingual content (especially Chinese, Japanese and Korean).
-The CJK package has no Korean localization such as the one offered by H\LaTeX{} and it
-does not come with as many special Korean fonts as H\LaTeX.
-
-\item The ultimate purpose of using typesetting programs like \TeX{}
-and \LaTeX{} is to get documents typeset in an `aesthetically' satisfying way.
-Arguably the most important element in typesetting is  a set of
-well-designed fonts. The H\LaTeX{} distribution
-includes \index{Korean font!UHC font}UHC \PSi{} fonts 
-of 10
-different families and
-Munhwabu\footnote{Korean Ministry of Culture.}
-fonts (TrueType) of 5 different families.
-The CJK package works with a set of fonts used by earlier versions
-of H\LaTeX{} and it can use Bitstream's cyberbit TrueType
-font.
-\end{enumerate}
-
-To use the  H\LaTeX{} package for typesetting your Korean text, put the following
-declaration into the preamble of your document:
 \begin{lscommand}
-\verb+\usepackage{hangul}+
+\verb|\usepackage{kotex}|
 \end{lscommand}
 
-This command turns the Korean localization on. The headings
-of chapters, sections, subsections, table of content and table of
-figures are all translated into Korean and the formatting of the document
-is changed to follow Korean conventions. 
-The package also provides automatic ``particle selection.''
-In Korean, there are pairs of post-fix particles 
-grammatically equivalent but different in form. Which 
-of any given pair is correct depends on 
-whether the preceding syllable ends with a  vowel or a consonant.
-(It is a bit more complex than this, but this should give you
-a good picture.)
-Native Korean speakers have no problem picking the right particle, but
-it cannot be determined which particle to use for references and other automatic
-text that will change while you edit the document.
-It 
-takes a painstaking effort to place appropriate particles manually
-every time you add/remove references or simply shuffle  parts
-of your document around.
-H\LaTeX{} relieves its users from this boring and error-prone process.
+A document containing the declaration above will have to be processed by
+pdf\LaTeX, \hologo{XeLaTeX}, or Lua\LaTeX{}.  Make sure that the input file
+written in Hangul is encoded in Unicode UTF-8.  The package called
+ko.\TeX\footnote{Reads ``Korean \TeX{}''. ko.\TeX{} is the name of a
+collection of packages including \texttt{cjk-ko}, \texttt{kotex-utf},
+\texttt{xetexko}, and \texttt{luatexko}.} is under continuous development by
+the Korean \TeX{} Users Group\footnote{\url{http://ktug.org}} and the Korean
+\TeX{} Society.\footnote{\url{http://ktug.kr}} Many people use this package
+to create Korean documents for their everyday needs.  ko.\TeX\ has been
+available on CTAN since 2014.  It is included \TeX\,Live, MiK\TeX{} and
+other modern \TeX{} distributions.  So in all likelyhood you can start
+working right away without installing any extra packages.
 
-If you don't need Korean localization features
-but just want 
-to  typeset Korean text, put the following line in the 
-preamble, instead.
+ko.\TeX\ does not use the \texttt{babel} package. Many functions related to
+Korean can be activated using the options and configuration commands
+provided by the \pai{kotex} package.  If you want to compose a real world
+Korean document, you are advised to consult the package documentation (These
+documents are written in Korean).
+
+With ko.\TeX, you also get \pai{oblivoir}, a \pai{memoir}-based document
+class, tailored for Korean document preparation. So your Korean document
+would start like this:
+
 \begin{lscommand}
-\verb+\usepackage{hfont}+
+\verb|\documentclass{oblivoir}|
 \end{lscommand}
 
-For more details on typesetting  Korean with H\LaTeX{}, refer to
-the \emph{H\LaTeX{} Guide}.  Check out the web site of the Korean
-\TeX{} User Group (KTUG) at  \url{http://www.ktug.or.kr/}.
-There is also a Korean translation
-of this manual available.
+To generate an index for a Korean document, execute \texttt{komkindex}
+instead of \texttt{makeindex}.  It is a version of the \texttt{makeindex}
+utility modified for Korean processing.  For lexicographical sorting of the
+Korean index items, you can use index style \texttt{kotex.ist} provided by
+ko.\TeX{} as follows:
+
+\begin{lscommand}
+\verb|komkindex -s kotex foo.idx|
+\end{lscommand}
+
+You can also use \texttt{xindy} for index generation as the Korean module for \texttt{xindy} is included in \TeX\,Live.
+
+There is another Korean/Hangul typesetting package called CJK. As the name of the package suggests, it has facilities for typesetting Chinese, Japanese, and Korean characters. It supports multiple encodings of the CJK characters. The following is a simple example of typesetting UTF-8 encoded Hangul using CJK package. It is useful when you submit a manuscript to some academic journals that allow typesetting author names in native languages.
+
+\begin{verbatim}
+\usepackage{CJK}
+
+\begin{CJK*}{UTF8}{}
+\CJKfamily{nanummj}
+...
+\end{CJK*}
+\end{verbatim}
 
 \subsection{Writing in Greek}
 \secby{Nikolaos Pothitos}{pothitos@di.uoa.gr}
@@ -887,7 +808,7 @@ A set of new commands also becomes available, which allows you to write
 Greek input files more easily.  In order to temporarily switch to English
 and vice versa, one can use the commands \verb|\textlatin{|\emph{english
 text}\verb|}| and \verb|\textgreek{|\emph{greek text}\verb|}| that both take
-one argument which is then typeset using the requested font encoding. 
+one argument which is then typeset using the requested font encoding.
 Otherwise use the command \verb|\selectlanguage{...}| described in a
 previous section.  Check out table~\ref{sym-greek} for some Greek
 punctuation characters.  Use \verb|\euro| for the Euro symbol.
@@ -912,12 +833,12 @@ punctuation characters.  Use \verb|\euro| for the Euro symbol.
 \secby{Maksym Polyakov}{polyama@myrealbox.com}
 Version~3.7h of \pai{babel} includes support for the
 \fei{T2*}~encodings and for typesetting Bulgarian, Russian and
-Ukrainian texts using Cyrillic letters.  
+Ukrainian texts using Cyrillic letters.
 
 Support for Cyrillic is based on standard \LaTeX{} mechanisms plus
 the \pai{fontenc} and \pai{inputenc} packages. But, if you are going to
 use Cyrillics in math mode, you need to load \pai{mathtext} package
-before \pai{fontenc}:\footnote{If you use \AmS-\LaTeX{} packages, 
+before \pai{fontenc}:\footnote{If you use \AmS-\LaTeX{} packages,
 load them before \pai{fontenc} and \pai{babel} as well.}
 \begin{lscommand}
 \verb+\usepackage{mathtext}+\\
@@ -934,10 +855,10 @@ encoding explicitly. \pai{babel} will take care of switching to the appropriate
 font encoding when a different language is selected within the document.
 
 In addition to enabling hyphenations, translating automatically
-generated text strings, and activating some language specific 
-typographic rules (like \ci{frenchspacing}), \pai{babel} provides some 
-commands allowing typesetting according to the standards of 
-Bulgarian, Russian, or Ukrainian languages. 
+generated text strings, and activating some language specific
+typographic rules (like \ci{frenchspacing}), \pai{babel} provides some
+commands allowing typesetting according to the standards of
+Bulgarian, Russian, or Ukrainian languages.
 
 
 For all three languages, language specific punctuation is provided:
@@ -948,13 +869,13 @@ commands to facilitate hyphenation, see Table~\ref{Cyrillic}.
 % Table borrowed from Ukrainian.dtx
 \begin{table}[htb]
   \begin{center}
-  \index{""-@\texttt{""}\texttt{-}} 
-  \index{""---@\texttt{""}\texttt{-}\texttt{-}\texttt{-}} 
-  \index{""=@\texttt{""}\texttt{=}} 
-  \index{""`@\texttt{""}\texttt{`}} 
-  \index{""'@\texttt{""}\texttt{'}} 
-  \index{"">@\texttt{""}\texttt{>}} 
-  \index{""<@\texttt{""}\texttt{<}} 
+  \index{""-@\texttt{""}\texttt{-}}
+  \index{""---@\texttt{""}\texttt{-}\texttt{-}\texttt{-}}
+  \index{""=@\texttt{""}\texttt{=}}
+  \index{""`@\texttt{""}\texttt{`}}
+  \index{""'@\texttt{""}\texttt{'}}
+  \index{"">@\texttt{""}\texttt{>}}
+  \index{""<@\texttt{""}\texttt{<}}
   \caption[Bulgarian, Russian, and Ukrainian]{The extra definitions made
            by Bulgarian, Russian, and Ukrainian options of \pai{babel}}\label{Cyrillic}
   \begin{tabular}{@{}p{.1\hsize}@{}p{.9\hsize}@{}}
@@ -987,15 +908,15 @@ commands to facilitate hyphenation, see Table~\ref{Cyrillic}.
 The Russian and Ukrainian options of \pai{babel} define the commands \ci{Asbuk}
 and \ci{asbuk}, which act like \ci{Alph} and \ci{alph}\footnote{the commands for turning counters into a, b, c, \ldots}, but produce capital
 and small letters of Russian or Ukrainian alphabets (whichever is the
-active language of the document). The Bulgarian option of \pai{babel} 
+active language of the document). The Bulgarian option of \pai{babel}
 provides the commands \ci{enumBul} and \ci{enumLat} (\ci{enumEng}), which
 make \ci{Alph} and \ci{alph} produce letters of either
 Bulgarian or Latin (English) alphabets. The default behaviour of
 \ci{Alph}  and \ci{alph} for the Bulgarian language option is to
-produce letters from the Bulgarian alphabet. 
+produce letters from the Bulgarian alphabet.
 
 %Finally, math alphabets are redefined and  as well as the commands for math
-%operators according to Cyrillic typesetting traditions. 
+%operators according to Cyrillic typesetting traditions.
 
 \subsection{Support for Mongolian}
 
@@ -1048,7 +969,7 @@ input:
 \item[\hologo{XeTeX}] was developed for MacOS X but is now available for all
 	architectures. It was first included into TexLive 2007.
 \item[\hologo{LuaTeX}] is the successor of pdf\TeX.  It was first included
-	into TexLive 2008.  
+	into TexLive 2008.
 \end{description}
 
 The following describes \hologo{XeLaTeX} as distributed with TexLive 2010.
@@ -1183,7 +1104,7 @@ Syriac which uses a similar algorithm is under development.
 
 The IranNastaliq font provided by the SCICT\footnote{Supreme Council of
 Information and Communication Technology} is available at their website
-\url{http://www.scict.ir/Portal/Home/Default.aspx}. 
+\url{http://www.scict.ir/Portal/Home/Default.aspx}.
 
 The \pai{arabxetex}\cite{arabxetex} package supports several languages with
 an Arabic script:
@@ -1297,12 +1218,12 @@ an additional top-level sectioning command becomes available
 As the \texttt{article} class does not know about chapters, it is quite easy
 to add articles as chapters to a book.
 The spacing between sections, the numbering and the font size of the
-titles will be set automatically by \LaTeX. 
+titles will be set automatically by \LaTeX.
 
-Two of the sectioning commands are a bit special: 
+Two of the sectioning commands are a bit special:
 \begin{itemize}
 \item The \ci{part} command does
-  not influence the numbering sequence of chapters.  
+  not influence the numbering sequence of chapters.
 \item The \ci{appendix} command does not take an argument. It just
   changes the chapter numbering to letters.\footnote{For the article
     style it changes the section numbering.}
@@ -1311,10 +1232,10 @@ Two of the sectioning commands are a bit special:
 
 
 \LaTeX{} creates a table of contents by taking the section headings
-and page numbers from the last compile cycle of the document. The command 
-\begin{lscommand} 
+and page numbers from the last compile cycle of the document. The command
+\begin{lscommand}
 \ci{tableofcontents}
-\end{lscommand} 
+\end{lscommand}
 \noindent expands to a table of contents at the place it
 is issued. A new
 document has to be compiled (``\LaTeX ed'') twice to get a
@@ -1338,31 +1259,31 @@ optional argument in front of the actual heading.
 \begin{code}
 \verb|\chapter[Title for the table of contents]{A long|\\
 \verb|    and especially boring title, shown in the text}|
-\end{code} 
+\end{code}
 
-The \wi{title} of the whole document is generated by issuing a 
+The \wi{title} of the whole document is generated by issuing a
 \begin{lscommand}
 \ci{maketitle}
 \end{lscommand}
 \noindent command. The contents of the title have to be defined by the commands
 \begin{lscommand}
-\ci{title}\verb|{...}|, \ci{author}\verb|{...}| 
-and optionally \ci{date}\verb|{...}| 
+\ci{title}\verb|{...}|, \ci{author}\verb|{...}|
+and optionally \ci{date}\verb|{...}|
 \end{lscommand}
-\noindent before calling \verb|\maketitle|. In the argument to \ci{author}, you can supply several names separated by \ci{and} commands. 
+\noindent before calling \verb|\maketitle|. In the argument to \ci{author}, you can supply several names separated by \ci{and} commands.
 
 An example of some of the commands mentioned above can be found in
 Figure~\ref{document} on page~\pageref{document}.
 
 Apart from the sectioning commands explained above, \LaTeXe{}
-introduced three additional commands for use with the \verb|book| class. 
+introduced three additional commands for use with the \verb|book| class.
 They are useful for dividing your publication. The commands alter
 chapter headings and page numbering to work as you would expect in
 a book:
 \begin{description}
 \item[\ci{frontmatter}] should be the very first command after
   the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
-    numerals and sections will be non-enumerated as if you were using 
+    numerals and sections will be non-enumerated as if you were using
     the starred sectioning commands (eg \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
 \item[\ci{mainmatter}] comes right before the first chapter of
@@ -1378,11 +1299,11 @@ a book:
 
 \section{Cross References}
 
-In books, reports and articles, there are often 
+In books, reports and articles, there are often
 \wi{cross-references} to figures, tables and special segments of text.
 \LaTeX{} provides the following commands for cross referencing
 \begin{lscommand}
-\ci{label}\verb|{|\emph{marker}\verb|}|, \ci{ref}\verb|{|\emph{marker}\verb|}| 
+\ci{label}\verb|{|\emph{marker}\verb|}|, \ci{ref}\verb|{|\emph{marker}\verb|}|
 and \ci{pageref}\verb|{|\emph{marker}\verb|}|
 \end{lscommand}
 \noindent where \emph{marker} is an identifier chosen by the user. \LaTeX{}
@@ -1398,10 +1319,10 @@ the numbers from the previous compile cycle are used.
 \begin{example}
 A reference to this subsection
 \label{sec:this} looks like:
-``see section~\ref{sec:this} on 
+``see section~\ref{sec:this} on
 page~\pageref{sec:this}.''
 \end{example}
- 
+
 \section{Footnotes}
 With the command
 \begin{lscommand}
@@ -1419,11 +1340,11 @@ the comma or period.\footnote{Note that footnotes
 \footnotetext{A guidepost doesn't necessarily go where it's pointing to :-).}
 
 \begin{example}
-Footnotes\footnote{This is 
-  a footnote.} are often used 
+Footnotes\footnote{This is
+  a footnote.} are often used
 by people using \LaTeX.
 \end{example}
- 
+
 \section{Emphasized Words}
 
 If a text is typed using a typewriter, important words are
@@ -1438,15 +1359,15 @@ particular bit of text is important and should be emphasized. Hence the command
 \begin{lscommand}
 \ci{emph}\verb|{|\emph{text}\verb|}|
 \end{lscommand}
-\noindent to emphasize text. What the command actually does with 
+\noindent to emphasize text. What the command actually does with
 its argument depends on the context:
 
 \begin{example}
-\emph{If you use 
+\emph{If you use
   emphasizing inside a piece
-  of emphasized text, then 
+  of emphasized text, then
   \LaTeX{} uses the
-  \emph{normal} font for 
+  \emph{normal} font for
   emphasizing.}
 \end{example}
 
@@ -1485,7 +1406,7 @@ The \ei{itemize} environment is suitable for simple lists, the
 environments to your taste:
 \begin{itemize}
 \item But it might start to
-look silly. 
+look silly.
 \item[-] With a dash.
 \end{itemize}
 \item Therefore remember:
@@ -1499,7 +1420,7 @@ in a list.
 \end{description}
 \end{enumerate}
 \end{example}
- 
+
 \subsection{Flushleft, Flushright, and Center}
 
 The environments \ei{flushleft} and \ei{flushright} generate
@@ -1510,15 +1431,15 @@ automatically determine line breaks.
 
 \begin{example}
 \begin{flushleft}
-This text is\\ left-aligned. 
-\LaTeX{} is not trying to make 
+This text is\\ left-aligned.
+\LaTeX{} is not trying to make
 each line the same length.
 \end{flushleft}
 \end{example}
 
 \begin{example}
 \begin{flushright}
-This text is right-\\aligned. 
+This text is right-\\aligned.
 \LaTeX{} is not trying to make
 each line the same length.
 \end{flushright}
@@ -1542,7 +1463,7 @@ for the line length is:
 On average, no line should
 be longer than 66 characters.
 \end{quote}
-This is why \LaTeX{} pages have 
+This is why \LaTeX{} pages have
 such large borders by default
 and also why multicolumn print
 is used in newspapers.
@@ -1558,12 +1479,12 @@ verse.
 
 
 \begin{example}
-I know only one English poem by 
+I know only one English poem by
 heart. It is about Humpty Dumpty.
 \begin{flushleft}
 \begin{verse}
 Humpty Dumpty sat on a wall:\\
-Humpty Dumpty had a great fall.\\ 
+Humpty Dumpty had a great fall.\\
 All the King's horses and all
 the King's men\\
 Couldn't put Humpty together
@@ -1615,7 +1536,7 @@ The \verb|\ldots| command \ldots
 \begin{example}
 \begin{verbatim*}
 the starred version of
-the      verbatim   
+the      verbatim
 environment emphasizes
 the spaces   in the text
 \end{verbatim*}
@@ -1630,7 +1551,7 @@ The \ci{verb} command can be used in a similar fashion with a star:
 The \texttt{verbatim} environment and the \verb|\verb| command may not be used
 within parameters of other commands.
 
- 
+
 \subsection{Tabular}
 
 \newcommand{\mfr}[1]{\framebox{\rule{0pt}{0.7em}\texttt{#1}}}
@@ -1639,10 +1560,10 @@ The \ei{tabular} environment can be used to typeset beautiful
 \wi{table}s with optional horizontal and vertical lines. \LaTeX{}
 determines the width of the columns automatically.
 
-The \emph{table spec} argument of the 
+The \emph{table spec} argument of the
 \begin{lscommand}
 \verb|\begin{tabular}[|\emph{pos}\verb|]{|\emph{table spec}\verb|}|
-\end{lscommand} 
+\end{lscommand}
 \noindent command defines the format of the table. Use an \mfr{l} for a column of
 left-aligned text, \mfr{r} for right-aligned text, and \mfr{c} for
 centred text; \mfr{p\{\emph{width}\}} for a column containing justified
@@ -1656,7 +1577,7 @@ The \emph{pos} argument specifies the vertical position of the table
 relative to the baseline of the surrounding text.  Use one of the
 letters \mfr{t}, \mfr{b} and \mfr{c} to specify table
 alignment at the top, bottom or centre.
- 
+
 Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
 column, \ci{\bs} starts a new line and \ci{hline} inserts a horizontal
 line.  Add partial lines by using \ci{cline}\texttt{\{}$i$\texttt{-}$j$\texttt{\}},
@@ -1680,9 +1601,9 @@ where $i$ and $j$ are the column numbers the line should extend over.
 \begin{tabular}{|p{4.7cm}|}
 \hline
 Welcome to Boxy's paragraph.
-We sincerely hope you'll 
+We sincerely hope you'll
 all enjoy the show.\\
-\hline 
+\hline
 \end{tabular}
 \end{example}
 
@@ -1695,7 +1616,7 @@ Another possible application is to suppress leading space in a table with
 
 \begin{example}
 \begin{tabular}{@{} l @{}}
-\hline 
+\hline
 no leading space\\
 \hline
 \end{tabular}
@@ -1724,7 +1645,7 @@ decimal-point-justified column.  Don't forget to replace the decimal
 point in your numbers with a column separator (\verb|&|)! A column label
 can be placed above our numeric ``column'' by using the
 \ci{multicolumn} command.
- 
+
 \begin{example}
 \begin{tabular}{c r @{.} l}
 Pi expression       &
@@ -1849,8 +1770,8 @@ For example, a table could be started with the following line
 \begin{code}
 \verb|\begin{table}[!hbp]|
 \end{code}
-\noindent The \wi{placement specifier} \verb|[!hbp]| allows \LaTeX{} to 
-place the table right here (\texttt{h}) or at the bottom (\texttt{b}) 
+\noindent The \wi{placement specifier} \verb|[!hbp]| allows \LaTeX{} to
+place the table right here (\texttt{h}) or at the bottom (\texttt{b})
 of some page
 or on a special floats page (\texttt{p}), and all this even if it does not
 look that good (\texttt{!}). If no placement specifier is given, the standard
@@ -1874,7 +1795,7 @@ Therefore:
 \begin{quote}
 If \LaTeX{} is not placing the floats as you expected,
 it is often only one float jamming one of the two float queues.
-\end{quote}                 
+\end{quote}
 
 While it is possible to give \LaTeX{}  single-location placement
 specifiers, this causes problems.  If the float does not fit in the
@@ -1886,7 +1807,7 @@ that in more recent versions of \LaTeX, it is automatically replaced by
 \bigskip
 \noindent Having explained the difficult bit, there are some more things to
 mention about the \ei{table} and \ei{figure} environments.
-Use the 
+Use the
 
 \begin{lscommand}
 \ci{caption}\verb|{|\emph{caption text}\verb|}|
@@ -1898,7 +1819,7 @@ the string ``Figure'' or ``Table'' will be added by \LaTeX.
 The two commands
 
 \begin{lscommand}
-\ci{listoffigures} and \ci{listoftables} 
+\ci{listoffigures} and \ci{listoftables}
 \end{lscommand}
 
 \noindent operate analogously to the \verb|\tableofcontents| command,
@@ -1908,7 +1829,7 @@ you must have a shorter version of the caption for the lists.
 This is accomplished by entering the short version in brackets after
 the \verb|\caption| command.
 \begin{code}
-\verb|\caption[Short]{LLLLLoooooonnnnnggggg}| 
+\verb|\caption[Short]{LLLLLoooooonnnnnggggg}|
 \end{code}
 
 Use \ci{label} and \ci{ref} to create a reference to a float within
@@ -1930,7 +1851,7 @@ Figure~\ref{white} is an example of Pop-Art.
 \end{verbatim}
 \end{code}
 
-\noindent In the example above, 
+\noindent In the example above,
 \LaTeX{} will try \emph{really hard}~(\texttt{!})\ to place the figure
 right \emph{here}~(\texttt{h}).\footnote{assuming the figure queue is
   empty.} If this is not possible, it tries to place the figure at the
@@ -1941,13 +1862,13 @@ queue. If there is not enough material for a special float page,
 \LaTeX{} starts a new page, and once more treats the figure as if it
 had just occurred in the text.
 
-Under certain circumstances it might be necessary to use the 
+Under certain circumstances it might be necessary to use the
 
 \begin{lscommand}
-\ci{clearpage} or even the \ci{cleardoublepage} 
+\ci{clearpage} or even the \ci{cleardoublepage}
 \end{lscommand}
 
-\noindent command. It orders \LaTeX{} to immediately place all 
+\noindent command. It orders \LaTeX{} to immediately place all
 floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
 
