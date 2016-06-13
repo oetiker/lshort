@@ -1,4 +1,9 @@
+5.0.6 2015.06.13
+----------------
+* fix super vs subscript in math chapter
+* added note on github
 * improvement to the align text
+
 5.0.5 2015.07.18
 ----------------
 * new text for korean support
