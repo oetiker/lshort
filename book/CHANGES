@@ -1,3 +1,6 @@
+* update inputenc fontenc info
+* dropped portugese section since it does not contain any special  information apart from the things already mentioned in international language support
+
 5.0.6 2015.06.13
 ----------------
 * fix super vs subscript in math chapter

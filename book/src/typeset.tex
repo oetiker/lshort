@@ -546,7 +546,8 @@ system  & western Latin      & Cyrillic\\
 Mac     &  \iei{applemac} & \iei{macukr}  \\
 Unix    &  \iei{latin1}   & \iei{koi8-ru}  \\
 Windows &  \iei{ansinew}  & \iei{cp1251}    \\
-DOS, OS/2  &  \iei{cp850} & \iei{cp866nav}
+DOS, OS/2  &  \iei{cp850} & \iei{cp866nav} \\
+Unicode  &  \iei{utf8} &  \iei{utf8}
 \end{tabular}
 \end{center}
 
@@ -596,42 +597,13 @@ documents by using these fonts. Another advantage of using new CM-like fonts is 
 provide fonts of CM families in all weights, shapes, and optically
 scaled font sizes.
 
-\subsection{Support for Portuguese}
+The order of loading of these two packages is important, since the
+\pai{inputenc} package will only set the encoding for defined characters.
 
-\secby{Demerson Andre Polli}{polli@linux.ime.usp.br}
-To enable hyphenation and change all automatic text to \wi{Portuguese},
-\index{Portugu\^es} use the command:
 \begin{lscommand}
-\verb|\usepackage[portuguese]{babel}|
+\verb|\usepackage[T1]{fontenc}|\\
+\verb|\usepackage[utf8]{inputenc}|
 \end{lscommand}
-Or if you are in Brazil, substitute \texttt{\wi{brazilian}} as the language.
-
-As there are a lot of accents in Portuguese you might want to use
-\begin{lscommand}
-\verb|\usepackage[latin1]{inputenc}|
-\end{lscommand}
-to be able to input them correctly as well as
-\begin{lscommand}
-\verb|\usepackage[T1]{fontenc}|
-\end{lscommand}
-to get the hyphenation right.
-
-See table~\ref{portuguese} for the preamble you need to write in the
-Portuguese language. Note that the example is for the latin1 input encoding.
-Modern systems might be using utf8 instead.
-
-\begin{table}[btp]
-\caption{Preamble for Portuguese documents.} \label{portuguese}
-\begin{lined}{5cm}
-\begin{verbatim}
-\usepackage[portuguese]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
-\end{verbatim}
-\bigskip
-\end{lined}
-\end{table}
-
 
 \subsection{Support for French}
 
