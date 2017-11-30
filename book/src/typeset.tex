@@ -17,10 +17,10 @@ The main point of writing a text, is to convey ideas, information, or
 knowledge to the reader.  The reader will understand the text better
 if these ideas are well-structured, and will see and feel this
 structure much better if the typographical form reflects the logical
-and semantical structure of the content.
+and semantic structure of the content.
 
 \LaTeX{} is different from other typesetting systems in that you just
-have to tell it the logical and semantical structure of a text.  It
+have to tell it the logical and semantic structure of a text.  It
 then derives the typographical form of the text according to the
 ``rules'' given in the document class file and in various style files.
 
@@ -558,7 +558,12 @@ Unicode  &  \iei{utf8} &  \iei{utf8}
 \iei{utf8}, a multi-byte encoding in which each character can be encoded in
 as little as one byte and as many as four bytes.
 
-Since the turn of the Century most Operating Systems are based on Unicode (Windows XP, MacOS X). Therefore it is recommended to use \iei{utf8} for any new project. The \iei{utf8} encoding used by \pai{inputenc} only defines the characters that are actually provided by the fonts used. If you need more (non-latin) characters have a look at \hologo{XeLaTeX} in section \ref{sec:xetex} a Unicode based \TeX-engine.
+Since the turn of the Century most Operating Systems are based on Unicode
+(Windows XP, Mac OS X, Linux). Therefore it is recommended to use \iei{utf8}
+for any new project. The \iei{utf8} encoding used by \pai{inputenc} only
+defines the characters that are actually provided by the fonts used. If you
+need more (non-latin) characters have a look at \hologo{XeLaTeX} in section
+\ref{sec:xetex} a Unicode based \TeX-engine.
 
 Font encoding is a different matter. It defines at which position inside
 a \TeX-font each letter is stored. Multiple input encodings could be mapped into
@@ -936,7 +941,7 @@ There are two \hologo{TeX}-engines that are capable of processing Unicode
 input:
 
 \begin{description}
-\item[\hologo{XeTeX}] was developed for MacOS X but is now available for all
+\item[\hologo{XeTeX}] was developed for Mac OS X but is now available for all
 	architectures. It was first included into TexLive 2007.
 \item[\hologo{LuaTeX}] is the successor of pdf\TeX.  It was first included
 	into TexLive 2008.
@@ -1027,7 +1032,7 @@ If you just need a word in a foreign language you can use the
 \verb|\text|\emph{language} command:
 
 \begin{lscommand}
-\verb|Englisch text. \textgerman{Gesundheit} is actually a German word.|
+\verb|English text. \textgerman{Gesundheit} is actually a German word.|
 \end{lscommand}
 
 This may look unnecessary since the only advantage is a correct hyphenation,
