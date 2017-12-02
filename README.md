@@ -1,11 +1,8 @@
 # The Not So Short Introduction to LaTeX
 
 by Tobias Oetiker <tobi@oetiker.ch>
-    
-If you want to learn how to write your documents with LaTeX,
-this introduction is for you. It is not about setting up a
-LaTeX system. While it is not as comprehensive as Lamport's book,   
-it should be sufficient in most cases.
+
+If you want to learn how to write your documents with LaTeX, this introduction is for you. It is not about setting up a LaTeX system. While it is not as comprehensive as Lamport's book, it should be sufficient in most cases.
 
 This repo contains 4 separate areas
 
