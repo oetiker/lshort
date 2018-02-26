@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setcounter{chapter}{4}
-\newcommand{\graphicscompanion}{\emph{The \LaTeX{} Graphics Companion}~\cite{graphicscompanion}} 
+\newcommand{\graphicscompanion}{\emph{The \LaTeX{} Graphics Companion}~\cite{graphicscompanion}}
 \newcommand{\hobby}{\emph{A User's Manual for \MP{}}~\cite{metapost}}
 \newcommand{\hoenig}{\emph{\TeX{} Unbound}~\cite{unbound}}
 \newcommand{\graphicsinlatex}{\emph{Graphics in \LaTeXe{}}~\cite{ursoswald}}
@@ -11,9 +11,9 @@
 
 \begin{intro}
 Most people use \LaTeX\ for typesetting their text. And since the structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
-if somewhat restricted, means for producing graphical output from textual 
-descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created 
-in order to overcome these restrictions. In this section, you will learn about a 
+if somewhat restricted, means for producing graphical output from textual
+descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created
+in order to overcome these restrictions. In this section, you will learn about a
 few of them.
 \end{intro}
 
@@ -46,12 +46,12 @@ purposes. A wide variety of these packages is described in detail in
 \graphicscompanion{}.
 
 Perhaps the most advanced graphical tool related with \LaTeX\ is \MP. It is a stand-alone application
-based on Donald E. Knuth's \MF. \MP{} has the very powerful and 
+based on Donald E. Knuth's \MF. \MP{} has the very powerful and
 mathematically sophisticated programming language of \MF{} but contrary to \MF,
-it generates encapsulated \PSi{} files, 
+it generates encapsulated \PSi{} files,
 which can be imported in \LaTeX{} and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on \cite{ursoswald}.
 
-A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can 
+A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can
 be found in \hoenig.
 
 \section{The \texttt{picture} Environment}
@@ -80,7 +80,7 @@ The numbers $x,\,y,\,x_0,\,y_0$ refer to \ci{unitlength}, which can be reset any
 The default value of \ci{unitlength} is \texttt{1pt}. The first pair, $(x,y)$, effects
 the reservation, within the document, of rectangular space for the picture. The optional
 second pair, $(x_0,y_0)$, assigns arbitrary coordinates to the bottom left corner of the
-reserved rectangle. 
+reserved rectangle.
 
 Most drawing commands have one of the two forms
 \begin{lscommand}
@@ -99,22 +99,22 @@ B\'ezier curves are an exception. They are drawn with the command
 \setlength{\unitlength}{5cm}
 \begin{picture}(1,1)
   \put(0,0){\line(0,1){1}}
-  \put(0,0){\line(1,0){1}}  
-  \put(0,0){\line(1,1){1}}  
+  \put(0,0){\line(1,0){1}}
+  \put(0,0){\line(1,1){1}}
   \put(0,0){\line(1,2){.5}}
   \put(0,0){\line(1,3){.3333}}
-  \put(0,0){\line(1,4){.25}}  
+  \put(0,0){\line(1,4){.25}}
   \put(0,0){\line(1,5){.2}}
   \put(0,0){\line(1,6){.1667}}
   \put(0,0){\line(2,1){1}}
   \put(0,0){\line(2,3){.6667}}
   \put(0,0){\line(2,5){.4}}
-  \put(0,0){\line(3,1){1}}  
+  \put(0,0){\line(3,1){1}}
   \put(0,0){\line(3,2){1}}
   \put(0,0){\line(3,4){.75}}
   \put(0,0){\line(3,5){.6}}
   \put(0,0){\line(4,1){1}}
-  \put(0,0){\line(4,3){1}}  
+  \put(0,0){\line(4,3){1}}
   \put(0,0){\line(4,5){.8}}
   \put(0,0){\line(5,1){1}}
   \put(0,0){\line(5,2){1}}
@@ -184,7 +184,7 @@ Components also have to be coprime (no common divisor except 1). Notice the effe
   \put(20,30){\circle{8}}
   \put(20,30){\circle{16}}
   \put(20,30){\circle{32}}
-  
+
   \put(40,30){\circle{1}}
   \put(40,30){\circle{2}}
   \put(40,30){\circle{3}}
@@ -199,7 +199,7 @@ Components also have to be coprime (no common divisor except 1). Notice the effe
   \put(40,30){\circle{12}}
   \put(40,30){\circle{13}}
   \put(40,30){\circle{14}}
-  
+
   \put(15,10){\circle*{1}}
   \put(20,10){\circle*{2}}
   \put(25,10){\circle*{3}}
@@ -216,14 +216,14 @@ The \ei{picture} environment only admits diameters up to approximately 14\,mm,
 and even below this limit, not all diameters are possible. The \ci{circle*}
 command produces disks (filled circles).
 
-As in the case of line segments, one may have to resort to additional packages, 
-such as \pai{eepic} or \pai{pstricks}. 
+As in the case of line segments, one may have to resort to additional packages,
+such as \pai{eepic} or \pai{pstricks}.
 For a thorough description of these packages, see \graphicscompanion.
 
 There is also a possibility within the
 \ei{picture} environment. If one is not afraid of doing the necessary calculations
 (or leaving them to a program), arbitrary circles and ellipses can be patched
-together from quadratic B\'ezier curves. 
+together from quadratic B\'ezier curves.
 See \graphicsinlatex\ for examples and Java source files.
 
 \subsection{Text and Formulas}
@@ -242,7 +242,7 @@ See \graphicsinlatex\ for examples and Java source files.
   \put(1.3,1.7){$b$}
   \put(2.5,1.05){$c$}
   \put(0.3,4){$F=
-    \sqrt{s(s-a)(s-b)(s-c)}$}  
+    \sqrt{s(s-a)(s-b)(s-c)}$}
   \put(3.5,0.4){$\displaystyle
     s:=\frac{a+b+c}{2}$}
 \end{picture}
@@ -260,12 +260,12 @@ the \ci{put} command in the usual way.
     {\line(0,1){20}}
   \multiput(0,0)(0,1){21}%
     {\line(1,0){25}}
-  \linethickness{0.15mm}    
+  \linethickness{0.15mm}
   \multiput(0,0)(5,0){6}%
     {\line(0,1){20}}
   \multiput(0,0)(0,5){5}%
     {\line(1,0){25}}
-  \linethickness{0.3mm}    
+  \linethickness{0.3mm}
   \multiput(5,0)(10,0){2}%
     {\line(0,1){20}}
   \multiput(0,5)(0,10){2}%
@@ -276,9 +276,9 @@ The command
 \begin{lscommand}
   \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
 \end{lscommand}
-\noindent has 4 arguments: the starting point, the translation vector from one object to the next, 
-the number of objects, and the object to be drawn. The \ci{linethickness} command applies to 
-horizontal and vertical line segments, but neither to oblique line segments, nor to circles. 
+\noindent has 4 arguments: the starting point, the translation vector from one object to the next,
+the number of objects, and the object to be drawn. The \ci{linethickness} command applies to
+horizontal and vertical line segments, but neither to oblique line segments, nor to circles.
 It does, however, apply to quadratic B\'ezier curves!
 
 \subsection{Ovals}
@@ -292,14 +292,14 @@ It does, however, apply to quadratic B\'ezier curves!
   \multiput(0,0)(0,1){5}%
     {\line(1,0){6}}
   \thicklines
-  \put(2,3){\oval(3,1.8)} 
+  \put(2,3){\oval(3,1.8)}
   \thinlines
-  \put(3,2){\oval(3,1.8)} 
+  \put(3,2){\oval(3,1.8)}
   \thicklines
-  \put(2,1){\oval(3,1.8)[tl]} 
-  \put(4,1){\oval(3,1.8)[b]} 
-  \put(4,3){\oval(3,1.8)[r]} 
-  \put(3,1.5){\oval(1.8,0.4)}     
+  \put(2,1){\oval(3,1.8)[tl]}
+  \put(4,1){\oval(3,1.8)[b]}
+  \put(4,3){\oval(3,1.8)[r]}
+  \put(3,1.5){\oval(1.8,0.4)}
 \end{picture}
 \end{example}
 The command
@@ -310,15 +310,15 @@ The command
 \begin{lscommand}
   \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
 \end{lscommand}
-\noindent produces an oval centered at $(x,y)$ and having width $w$ and height $h$. The optional 
-\emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to 
-``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates. 
+\noindent produces an oval centered at $(x,y)$ and having width $w$ and height $h$. The optional
+\emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to
+``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates.
 
-Line thickness can be controlled by two kinds of commands: \\ 
+Line thickness can be controlled by two kinds of commands: \\
 \ci{linethickness}\verb|{|\emph{length}\verb|}|
 on the one hand, \ci{thinlines} and \ci{thicklines} on the other. While \ci{linethickness}\verb|{|\emph{length}\verb|}|
 applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \ci{thinlines} and \ci{thicklines}
-apply to oblique line segments as well as to circles and ovals. 
+apply to oblique line segments as well as to circles and ovals.
 
 
 \subsection{Multiple Use of Predefined Picture Boxes}
@@ -328,7 +328,7 @@ apply to oblique line segments as well as to circles and ovals.
 \begin{picture}(120,168)
 \newsavebox{\foldera}
 \savebox{\foldera}
-  (40,32)[bl]{% definition 
+  (40,32)[bl]{% definition
   \multiput(0,0)(0,28){2}
     {\line(1,0){40}}
   \multiput(0,0)(40,0){2}
@@ -339,25 +339,25 @@ apply to oblique line segments as well as to circles and ovals.
   \put(9,32){\line(1,0){8}}
   \put(17,29){\oval(6,6)[tr]}
   \put(20,29){\line(1,0){19}}
-  \put(39,28){\oval(2,2)[tr]}  
+  \put(39,28){\oval(2,2)[tr]}
 }
 \newsavebox{\folderb}
 \savebox{\folderb}
-  (40,32)[l]{%         definition 
+  (40,32)[l]{%         definition
   \put(0,14){\line(1,0){8}}
   \put(8,0){\usebox{\foldera}}
 }
-\put(34,26){\line(0,1){102}} 
+\put(34,26){\line(0,1){102}}
 \put(14,128){\usebox{\foldera}}
 \multiput(34,86)(0,-37){3}
-  {\usebox{\folderb}} 
+  {\usebox{\folderb}}
 \end{picture}
 \end{example}
 A picture box can be \emph{declared} by the command
 \begin{lscommand}
   \ci{newsavebox}\verb|{|\emph{name}\verb|}|
 \end{lscommand}
-\noindent then \emph{defined} by  
+\noindent then \emph{defined} by
 \begin{lscommand}
   \ci{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
 \end{lscommand}
@@ -376,7 +376,7 @@ of a command nature (which accounts for the backslashes in the current
 example). Boxed pictures can be nested: In this example, \ci{foldera} is
 used within the definition of \ci{folderb}.
 
-The \ci{oval} command had to be used as the \ci{line} command does not work if the segment length is less than 
+The \ci{oval} command had to be used as the \ci{line} command does not work if the segment length is less than
 about 3\,mm.
 
 \subsection{Quadratic B\'ezier Curves}
@@ -390,10 +390,10 @@ about 3\,mm.
   \multiput(0,0)(0,1){5}
     {\line(1,0){6}}
   \thicklines
-  \put(0.5,0.5){\line(1,5){0.5}}    
-  \put(1,3){\line(4,1){2}} 
+  \put(0.5,0.5){\line(1,5){0.5}}
+  \put(1,3){\line(4,1){2}}
   \qbezier(0.5,0.5)(1,3)(3,3.5)
-  \thinlines   
+  \thinlines
   \put(2.5,2){\line(2,-1){3}}
   \put(5.5,0.5){\line(-1,5){0.5}}
   \linethickness{1mm}
@@ -407,13 +407,13 @@ about 3\,mm.
 \end{example}
 As this example illustrates, splitting up a circle into 4 quadratic B\'ezier curves
 is not satisfactory. At least 8 are needed. The figure again shows the effect of
-the \ci{linethickness} command on horizontal or vertical lines, and of the 
-\ci{thinlines} and the \ci{thicklines} commands on oblique line segments. It also 
+the \ci{linethickness} command on horizontal or vertical lines, and of the
+\ci{thinlines} and the \ci{thicklines} commands on oblique line segments. It also
 shows that both kinds of commands affect quadratic B\'ezier curves, each command
 overriding all previous ones.
 
 Let $P_1=(x_1,\,y_1),\,P_2=(x_2,\,y_2)$ denote the end points, and $m_1,\,m_2$ the
-respective slopes, of a quadratic B\'ezier curve. The intermediate control point 
+respective slopes, of a quadratic B\'ezier curve. The intermediate control point
 $S=(x,\,y)$ is then given by the equations
 \begin{equation} \label{zwischenpunkt}
   \left\{
@@ -436,7 +436,7 @@ the necessary \ci{qbezier} command line.
 \put(0,0){\vector(0,1){3.2}}
 \put(0,3.35){\makebox(0,0){$y$}}
 \qbezier(0.0,0.0)(1.2384,0.0)
-  (2.0,2.7622) 
+  (2.0,2.7622)
 \qbezier(0.0,0.0)(-1.2384,0.0)
   (-2.0,2.7622)
 \linethickness{.075mm}
@@ -462,19 +462,19 @@ the necessary \ci{qbezier} command line.
 \end{example}
 
 In this figure, each symmetric half of the catenary $y=\cosh x -1$ is approximated by a quadratic
-B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value 
-\(m=3.6269\). Using again equation (\ref{zwischenpunkt}), we can 
-calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$. 
-The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less 
+B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value
+\(m=3.6269\). Using again equation (\ref{zwischenpunkt}), we can
+calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$.
+The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less
 than one percent.
 
 This example points out the use of the optional argument of the \\
 \verb|\begin{picture}| command.
 The picture is defined in convenient ``mathematical'' coordinates, whereas by the command
-\begin{lscommand} 
+\begin{lscommand}
   \ci{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
 \end{lscommand}
-\noindent its lower left corner (marked by the black disk) is assigned the coordinates $(-2.5,-0.25)$. 
+\noindent its lower left corner (marked by the black disk) is assigned the coordinates $(-2.5,-0.25)$.
 
 \subsection{Rapidity in the Special Theory of Relativity}
 
@@ -533,7 +533,7 @@ First a simple nonsense diagram.
   \draw (0,0) circle (1cm);
   \filldraw[fill=green!20!white,
             draw=green!50!black]
-    (0,0) -- (3mm,0mm) 
+    (0,0) -- (3mm,0mm)
          arc (0:30:3mm) -- cycle;
 \end{tikzpicture}
 \end{example}
@@ -541,7 +541,6 @@ Note the semicolon (\texttt{;}) character. It separates the individual commands.
 
 A simple Venn diagram.
 \begin{example}
-\shorthandoff{:}
 \begin{tikzpicture}
   \node[circle,draw,
         minimum size=3cm,
@@ -552,15 +551,12 @@ A simple Venn diagram.
         label=60:{psychology}]
          at (1,0) {};
   \node (i) at (0.5,-1) {};
-  \node at (0.6,-2.5) 
+  \node at (0.6,-2.5)
     {behavioral economics}
     edge[->,thick,
          out=60,in=-60] (i);
 \end{tikzpicture}
 \end{example}
-If you are using \pai{tikz} in connection with \pai{babel} some of the characters used in the
-TikZ language may get modified by \pai{babel}, leading to odd errors. To counteract this, add 
-the \ci{shorthandoff} command to your code.
 
 Note the foreach loops in the next example.
 \begin{example}
@@ -568,13 +564,13 @@ Note the foreach loops in the next example.
   \tikzstyle{v}=[circle, minimum size=2mm,inner sep=0pt,draw]
   \foreach \i in {1,...,8}
     \foreach \j in {1,...,3}
-      \node[v] 
+      \node[v]
         (G-\i-\j) at (\i,\j) {};
   \foreach \i in {1,...,8}
     \foreach \j/\o in {1/2,2/3}
-      \draw[->] 
+      \draw[->]
         (G-\i-\j) -- (G-\i-\o);
-  \foreach \i/\n in 
+  \foreach \i/\n in
     {1/2,2/3,3/4,4/5,5/6,6/7,7/8}
     \foreach \j/\o in {1/2,2/3} {
        \draw[->] (G-\i-\j) -- (G-\n-\o);
@@ -593,9 +589,9 @@ features for drawing special shapes, like this box which is slightly bent.
      decoration={bent,aspect=.3}]
  \draw [decorate,fill=lightgray]
         (0,0) rectangle (5.5,4);
- \node[circle,draw] 
+ \node[circle,draw]
         (A) at (.5,.5) {A};
- \node[circle,draw] 
+ \node[circle,draw]
         (B) at (5,3.5) {B};
  \draw[->,decorate] (A) -- (B);
  \draw[->,decorate] (B) -- (A);
@@ -612,11 +608,11 @@ features for drawing special shapes, like this box which is slightly bent.
   \node[v] (b) [right=of a] {$2$};
   \node[v] (c) [below=of a] {$2$};
   \node[v] (d) [below=of b] {$1$};
-  \draw[thick,->] 
+  \draw[thick,->]
         (a) to node {} (c);
-  \draw[thick,->] 
+  \draw[thick,->]
         (a) to node {} (d);
-  \draw[thick,->] 
+  \draw[thick,->]
         (b) to node {} (d);
 \end{tikzpicture}
 \end{example}

@@ -2,20 +2,20 @@
 % Contents: Things you need to know
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \chapter{Things You Need to Know}
 \begin{intro}
-The first part of this chapter presents a short 
+The first part of this chapter presents a short
 overview of the philosophy and history of \LaTeXe. The second part
-focuses on the basic structures of a \LaTeX{} document. 
+focuses on the basic structures of a \LaTeX{} document.
 After reading this chapter, you should have a rough knowledge
 of how \LaTeX{} works, which you will need to understand the rest
-of this book.  
+of this book.
 \end{intro}
 
-\section{The Name of the Game}
+\section{A Bit of History}
 \subsection{\TeX}
- 
+
 \TeX{} is a computer program created by \index{Knuth, Donald E.}Donald
 E. Knuth \cite{texbook}. It is aimed at typesetting text and
 mathematical formulae. Knuth started writing the \TeX{} typesetting
@@ -29,7 +29,8 @@ characters and multiple languages. \TeX{} is renowned for being
 extremely stable, for running on many different kinds of computers,
 and for being virtually bug free. The version number of \TeX{} is
 converging to $\pi$ and is now at $3.141592653$.
-                                                                       
+
+
 \TeX{} is pronounced ``Tech,'' with a ``ch'' as in the German word
 ``Ach''\footnote{In german there are actually two pronunciations for ``ch''
 and one might assume that the soft ``ch'' sound from ``Pech'' would be a
@@ -41,16 +42,16 @@ common word, pronounced `tyekh'. But I believe the most proper pronunciation
 is heard in Greece, where you have the harsher ch of ach and Loch.}}
 or in the Scottish ``Loch.'' The ``ch'' originates from the Greek
 alphabet where X is the letter ``ch'' or ``chi''. \TeX{} is also the first syllable
-of the Greek word {\greektext teqnik'h} (technique). In an ASCII environment, \TeX{}
+of the Greek word technique. In an ASCII environment, \TeX{}
 becomes \texttt{TeX}.
 
 \subsection{\LaTeX}
- 
+
 \LaTeX{} enables authors to typeset and print their work at the highest
 typographical quality, using a predefined, professional layout. \LaTeX{} was
 originally written by \index{Lamport, Leslie}Leslie Lamport~\cite{manual}.
 It uses the \TeX{} formatter as its typesetting engine. These days \LaTeX{}
-is maintained by \index{Mittelbach, Frank}Frank Mittelbach.
+is maintained by \index{The \LaTeX{} Project}the \LaTeX{} Project.
 
 %In 1994 the \LaTeX{} package was updated by the \index{LaTeX3@\LaTeX
 %  3}\LaTeX 3 team, led by \index{Mittelbach, Frank}Frank Mittelbach,
@@ -80,7 +81,7 @@ is maintained by \index{Mittelbach, Frank}Frank Mittelbach.
 %\end{figure}
 
 \section{Basics}
- 
+
 \subsection{Author, Book Designer, and Typesetter}
 
 To publish something, authors give their typed manuscript to a
@@ -120,9 +121,9 @@ Typographical design is a craft. Unskilled authors often commit
 serious formatting errors by assuming that book design is mostly a
 question of aesthetics---``If a document looks good artistically,
 it is well designed.'' But as a document has to be read and not hung
-up in a picture gallery, the readability and understandability is 
+up in a picture gallery, the readability and understandability is
 much more important than the beautiful look of it.
-Examples: 
+Examples:
 \begin{itemize}
 \item The font size and the numbering of headings have to be chosen to make
   the structure of chapters and sections clear to the reader.
@@ -168,7 +169,7 @@ of \LaTeX{} over normal word processors are the following:
   because this is how \LaTeX{} works---by specifying structure.
 \item \TeX, the formatting engine of \LaTeXe, is highly portable and free.
   Therefore the system runs on almost any hardware platform
-  available. 
+  available.
 
 %
 % Add examples ...
@@ -222,16 +223,16 @@ It does not matter whether you
 enter one or several     spaces
 after a word.
 
-An empty line starts a new 
+An empty line starts a new
 paragraph.
 \end{example}
- 
+
 \subsection{Special Characters}
 
 The following symbols are \wi{reserved characters} that either have a
 special meaning under \LaTeX{} or are not available in all the fonts.
 If you enter them directly in your text, they will normally not print,
-but rather coerce \LaTeX{} to do things you did not intend. 
+but rather coerce \LaTeX{} to do things you did not intend.
 \begin{code}
 \verb.#  $  %  ^  &  _  {  }  ~  \ . %$
 \end{code}
@@ -277,7 +278,7 @@ to the command name.
 \index{whitespace!after commands}space after a command, you have to
 put either an empty parameter \verb|{}| and a blank or a special spacing command after the
 command name. The empty parameter \verb|{}| stops \LaTeX{} from eating up all the white space after
-the command name. 
+the command name.
 
 \begin{example}
 New \TeX users may miss whitespaces
@@ -394,7 +395,7 @@ Small is beautiful.
 \end{lined}
 \caption{A Minimal \LaTeX{} File.} \label{mini}
 \end{figure}
- 
+
 \begin{figure}[!bp]
 \begin{lined}{10cm}
 \begin{verbatim}
@@ -404,7 +405,7 @@ Small is beautiful.
 \title{Minimalism}
 \begin{document}
 % generates the title
-\maketitle 
+\maketitle
 % insert the table of contents
 \tableofcontents
 \section{Some Interesting Words}
@@ -435,48 +436,30 @@ your computer.\footnote{This is the case with most well groomed Unix
 Systems, and \ldots{} Real Men use Unix, so \ldots{} \texttt{;-)}}
 
 \begin{enumerate}
-\item 
-  
+\item
+
   Edit/Create your \LaTeX{} input file. This file must be plain ASCII
   text.  On Unix all the editors will create just that. On Windows you
   might want to make sure that you save the file in ASCII or
   \emph{Plain Text} format.  When picking a name for your file, make
   sure it bears the extension \eei{.tex}.
 
-\item 
+\item
 
-Open a shell or cmd window, cd to the directory where your input file is located and run \LaTeX{} on your input file. If successful you will end up with a
-\texttt{.dvi} file. It may be necessary to run \LaTeX{} several times to get
+Open a shell or cmd window, \texttt{cd} to the directory where your input file is located and run \LaTeX{} on your input file. If successful you will end up with a
+\texttt{.pdf} file. It may be necessary to run \LaTeX{} several times to get
 the table of contents and all internal references right. When your input
 file has a bug \LaTeX{} will tell you about it and stop processing your
 input file. Type \texttt{ctrl-D} to get back to the command line.
 \begin{lscommand}
-\verb+latex foo.tex+
-\end{lscommand}
-
-\item 
-Now you may view the DVI file. There are several ways to do that. Look at the file on screen with
-\begin{lscommand}
-\verb+xdvi foo.dvi &+
-\end{lscommand}
-This only works on Unix with X11. If you are on Windows you might want to try \texttt{yap} (yet another previewer).
-
-Convert the dvi file to \PSi{} for printing or viewing with \wi{GhostScript}.
-\begin{lscommand}
-\verb+dvips -Pcmz foo.dvi -o foo.ps+
-\end{lscommand}
-
-If you are lucky your \LaTeX{} system even comes with the \texttt{dvipdf} tool, which allows
-you to convert your \texttt{.dvi} files straight into pdf.
-\begin{lscommand}
-\verb+dvipdf foo.dvi+
+\verb+xelatex foo.tex+
 \end{lscommand}
 
 \end{enumerate}
 
- 
+
 \section{The Layout of the Document}
- 
+
 \subsection {Document Classes}\label{sec:documentclass}
 
 The first information \LaTeX{} needs to know when processing an
@@ -489,7 +472,7 @@ is specified with the \ci{documentclass} command.
 Table~\ref{documentclasses} lists the document classes explained in
 this introduction. The \LaTeXe{} distribution provides additional
 classes for other documents, including letters and slides.  The
-\emph{\wi{option}s} parameter customises the behaviour of the document
+\emph{\wi{option}s} parameter customizes the behavior of the document
 class. The options have to be separated by commas. The most common options for the standard document
 classes are listed in
 Table~\ref{options}.
@@ -499,7 +482,7 @@ Table~\ref{options}.
 \caption{Document Classes.} \label{documentclasses}
 \begin{lined}{\textwidth}
 \begin{description}
- 
+
 \item [\normalfont\texttt{article}] for articles in scientific journals, presentations,
   short reports, program documentation, invitations, \ldots
   \index{article class}
@@ -618,38 +601,38 @@ preinstalled. If you are working on a Unix system, use the command
    other files mentioned in this table.}  and in \companion.
 
 \item[\normalfont\pai{exscale}] Provides scaled versions of the
-  math extension  font.\\ 
+  math extension  font.\\
   Described in \texttt{ltexscale.dtx}.
 
 \item[\normalfont\pai{fontenc}] Specifies which \wi{font encoding}
   \LaTeX{} should use.\\
   Described in \texttt{ltoutenc.dtx}.
 
-\item[\normalfont\pai{ifthen}] Provides commands of the form\\ 
+\item[\normalfont\pai{ifthen}] Provides commands of the form\\
   `if\ldots then do\ldots otherwise do\ldots.'\\ Described in
   \texttt{ifthen.dtx} and \companion.
 
 \item[\normalfont\pai{latexsym}] To access the \LaTeX{} symbol
   font, you should use the \texttt{latexsym} package. Described in
   \texttt{latexsym.dtx} and in \companion.
- 
+
 \item[\normalfont\pai{makeidx}] Provides commands for producing
   indexes.  Described in section~\ref{sec:indexing} and in \companion.
 
 \item[\normalfont\pai{syntonly}] Processes a document without
   typesetting it.
-  
+
 \item[\normalfont\pai{inputenc}] Allows the specification of an
   input encoding such as ASCII, ISO Latin-1, ISO Latin-2, 437/850 IBM
   code pages,  Apple Macintosh, Next, ANSI-Windows or user-defined one.
-  Described in \texttt{inputenc.dtx}. 
+  Described in \texttt{inputenc.dtx}.
 \end{description}
 \end{lined}
 \end{table}
 
 
 \subsection{Page Styles}
- 
+
 \LaTeX{} supports three predefined \wi{header}/\wi{footer}
 combinations---so-called \wi{page style}s. The \emph{style} parameter
 of the \index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}
@@ -658,7 +641,7 @@ of the \index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}
 \begin{lscommand}
 \ci{pagestyle}\verb|{|\emph{style}\verb|}|
 \end{lscommand}
-\noindent command defines which one to use. 
+\noindent command defines which one to use.
 Table~\ref{pagestyle}
 lists the predefined page styles.
 
@@ -702,7 +685,7 @@ a complete list of extensions, but if you find one missing that you
 think is important, please drop me a line.
 
 \begin{description}
-  
+
 \item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
   \texttt{latex}.
 \item[\eei{.sty}] \LaTeX{} Macro package. Load this
@@ -723,10 +706,10 @@ The following files are generated when you run \LaTeX{} on your input
 file:
 
 \begin{description}
-\item[\eei{.dvi}] Device Independent File. This is the main result of a \LaTeX{}
+\item[\eei{.dvi}] Device Independent File. This is the main result of a classical \LaTeX{}
   compile run. Look at its content with a DVI previewer
   program or send it to a printer with \texttt{dvips} or a
-  similar application.
+  similar application. If you are using \hologo{pdfLaTeX} then you should not see any of these files.
 \item[\eei{.log}] Gives a detailed account of what happened during the
   last compiler run.
 \item[\eei{.toc}] Stores all your section headers. It gets read in for the
@@ -786,13 +769,13 @@ Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
 \ci{input}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
-\noindent command. It simply includes the file specified. 
+\noindent command. It simply includes the file specified.
 No flashy suits, no strings attached.
 
 
 To make \LaTeX{} quickly check your document use the \pai{syntonly}
 package. This makes \LaTeX{} skim through your document only checking for
-proper syntax and usage of the commands, but doesn't produce any (DVI) output.
+proper syntax and usage of the commands, but doesn't produce any (pdf) output.
 As \LaTeX{} runs faster in this mode you may save yourself valuable time.
 Usage is very simple:
 

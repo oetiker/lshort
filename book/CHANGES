@@ -1,3 +1,9 @@
+6.0 2018.02.26
+--------------
+* removed most mentions of dvi
+* moved bable into the appendix and point people to polyglossia
+* have people use xelatex
+* assume pdf everywhere ...
 * update inputenc fontenc info
 * dropped portugese section since it does not contain any special  information apart from the things already mentioned in international language support
 
@@ -36,8 +42,8 @@
 * many minor wording fixes by Robert Funnell
 * massive language surgery on the math and pdf sections by Robert Funnell
 * simplified pdf font section
-* use {\greektext teknolog'ia} 
-* better explain the empty parameter for stopping space gobbling 
+* use {\greektext teknolog'ia}
+* better explain the empty parameter for stopping space gobbling
 * Added missing source files
 * added section on / - Nikos Pothitos
 
@@ -62,12 +68,12 @@
 * add note about the layouts package to the  layout page
 * spaceing after e.g. fixed as suggested by Mike Lee
 * it is --update-fndb not -update-fndb (Rockrush Engch)
-* integrated suggestions from the  Manuel Pégourié-Gonnard and Samuel Colin
+* integrated suggestions from the  Manuel Pï¿½gouriï¿½-Gonnard and Samuel Colin
   * make CTAN links more uniform throughout the document
   * do not type ASCII in tt
   * be less opinionated on \[ vs equation
   * add note on how to deal with accented characters and makeindex
-    sorting limitations. 
+    sorting limitations.
   * update notes on how todo documents that work in both latex and pdflatex
   * replace acrobat reader by pdf reader and acrobat distiller by pdf
     convertor
@@ -84,9 +90,9 @@
 * add a second argument to the example of the new command
 * better explanation of the textcomp degree symbol commands
 * Now that barack is in office we do not need all these 'you can's in the text
-  anymore removed about 1k of them. 
+  anymore removed about 1k of them.
 * fix documentation on hyperref default settings by Gust Eilinger
-* better english for the apppendix by Tobias Vidarssønn Langhoff.
+* better english for the apppendix by Tobias Vidarssï¿½nn Langhoff.
 * use \textbackslash instead of $\backslash$.
 * added notes on mongolian support by Dorjgotov Batumongke
 * added big update to math from stefan m. moser
@@ -161,13 +167,13 @@ Math Chapter reworked by Lan Thuy Pham:
 4.21 2007.06.26
 ---------------
 * removed eurofont from the archive since the license does not allow us
-  to redistribut them ... 
+  to redistribut them ...
 * added \mathring to list of math accents
 * make a note that label must come after the caption.
 * changed wording in the descriprion of the stretch command by tobi
 * replace metafont and metapost with their logos by tobi
 * improved wording for pagebreak, linebreak commands by Robin Fairbairns
-* fix the last page counter by Morten Høgholm
+* fix the last page counter by Morten Hï¿½gholm
 
 4.20 2006.05.31
 ---------------
@@ -181,7 +187,7 @@ Math Chapter reworked by Lan Thuy Pham:
 ---------------
 * section headings should be leftaligned
 * added notes on amsthm suggested by Daniel Flipo
-* improved explanation ifpdf package 
+* improved explanation ifpdf package
 * use  \textasciigrave for ` and \textquotesingle for ' by Tahir Hassan <tah16@leicester.ac.uk>
 * Reworde the mentioning of the preamble where I introduce the comment command.
 * updated eurofonts again based on Daniel Flipo's work for the french lshort
@@ -198,7 +204,7 @@ Math Chapter reworked by Lan Thuy Pham:
 * added note on Latin modern outline fonts to replace EC in pdfs
 * added proc and minimal class
 * mention companion 2nd edition
-* update for ifpdf section from Morten Høgholm
+* update for ifpdf section from Morten Hï¿½gholm
 * print from 4.1 to chapter 5 for pure latex graphics
 
 4.16 2005.05.08
@@ -209,11 +215,11 @@ Math Chapter reworked by Lan Thuy Pham:
 ----
 * replaced pdfscreen with beamer for presentations. Used text from the french
   lshort by Daniel Flipo as a basis for this.
-* eqref requires amslatex 
+* eqref requires amslatex
 * use \centering to  put figure into the center as begin/end{center} adds
   extra vertical space as suggested in http://www.ctan.org/tex-archive/info/l2tabu/english/l2tabuen.pdf
 * fixed missing , after pdfauthor on page 77
-* added note on texdoc 
+* added note on texdoc
 * renames longtabular to longtable
 * added notes on greek TeX -- Dimitrios 'sehh' Michelinakis <dimitrios@michelinakis.gr>
 * added notes about pronunciation of ch in ach
@@ -225,7 +231,7 @@ Math Chapter reworked by Lan Thuy Pham:
 * added caption to includegraphics example
 * better examples for math fonts -- Vadym Lepetyuk <lepetyuk@econ.umn.edu>
 * note in pdf fonts section that fonts may work just fine in a modern tex installation
-* have label inside caption 
+* have label inside caption
 * rephrase the back-tick grave stuff
 * it's textcomp and not texcomp
 
@@ -240,7 +246,7 @@ Math Chapter reworked by Lan Thuy Pham:
 ----
 * fixed order of hebrwe letters to be 'alphabetic'
 * fixed colons in table 3.7 (Rightarrow was captured by marovsym)
-* added cyrguide bibliogrphay entry back in ... 
+* added cyrguide bibliogrphay entry back in ...
 * table head in eurotable translated to english
 * remove kees.fig from Makefile
 * some wording fixes to the cirillic section.
@@ -260,7 +266,7 @@ Math Chapter reworked by Lan Thuy Pham:
 * updates to the hyperref syntax table -- Maksym Polyakov
 * rewritten sectons on fontencoding, inputencoding -- Maksym Polyakov
 * section on cyrillic support -- Maksym Polyakov
-* turned CTAN references into URLs as suggested by Maksym Polyakov    
+* turned CTAN references into URLs as suggested by Maksym Polyakov
 * minor updates to pdfscreen section as suggested by Maksym Polyakov
 * other little spellers
 * get rid of color in ps output ... we do not need it ... tobi
@@ -274,7 +280,7 @@ Math Chapter reworked by Lan Thuy Pham:
 * many minor fixes and edits in pagebreaks
 * added note on cm-super
 * punctuation, wording, big patch from Baron Schwartz
-* Translated and integreated the pdfTeX description from the 
+* Translated and integreated the pdfTeX description from the
   franch version of lshort.
 * Added descrion of the .fd files
 * \part is available in article too
@@ -298,7 +304,7 @@ Math Chapter reworked by Lan Thuy Pham:
 ----
 From Tobi
 * Added some notes on problems when running latex to section 1.5
-* added oddsidemargin to layout graphics 
+* added oddsidemargin to layout graphics
 * added note on the AE package
 * added extension and font indexes
 * mention optional label in bibitem
@@ -340,7 +346,7 @@ From Many
 
 3.19
 ----
-changed wording on \apendix \frontmatter \backmatter ... 
+changed wording on \apendix \frontmatter \backmatter ...
 fixed pagebreaks in math chapter
 
 3.18
@@ -370,7 +376,7 @@ Updated old URLs
 
 3.15
 ----
-Integrated a number of spelling and logic fixes by Björn Hvittfeldt
+Integrated a number of spelling and logic fixes by Bjï¿½rn Hvittfeldt
 
 3.14
 ----
@@ -402,7 +408,7 @@ pointer to whitespace after non argument commands information in custom.tex
 
 3.10
 ----
-removed some exess files from tar files 
+removed some exess files from tar files
 
 
 3.9
@@ -416,13 +422,13 @@ removed some exess files from tar files
 * Added section on lines in array environments ... thanks Alex
 * rephrased newcommand section ... again thnaks to Alex
 
-3.7 
+3.7
 ---
-* re-release to for some even spelling :-) 
+* re-release to for some even spelling :-)
 
 3.6
 ---
-* released on CTAN ... 
+* released on CTAN ...
 
 3.5
 ---
@@ -434,14 +440,14 @@ removed some exess files from tar files
 
 3.3
 ---
-* lots of small patches from Prof Ripley ... 
+* lots of small patches from Prof Ripley ...
 * fixed compile problem on first run ...
 * properly packaged the whole thing ....
 
 3.2
 ---
 
-* added better explanation of the difference between newline and linebreak 
+* added better explanation of the difference between newline and linebreak
 * added about 1000 spell and detail fixed contributed by Hanspeter Schmid
 * added new section: The Structure of Text and Language contributed by
   Hanspeter Schmid
@@ -450,14 +456,14 @@ removed some exess files from tar files
 
 3.1
 ---
-* Var spell and other fixes. Especially the ftp.shsu.edu reference 
+* Var spell and other fixes. Especially the ftp.shsu.edu reference
   has been fixed.
 
 3.0
 ---
-* Restructuring of the Chapter 4 for didactical reasons ... 
-* moved some bits to the new Chapter 5. 
-* added 15 pages of new material ... 
+* Restructuring of the Chapter 4 for didactical reasons ...
+* moved some bits to the new Chapter 5.
+* added 15 pages of new material ...
 
 
 2.3
@@ -507,7 +513,7 @@ Rasmus Borup Hansen:
  * tonns of spelling mistakes and some suggestions for more logic ...
 
 Josef Tkadlec:
- * some spellings 
+ * some spellings
  * all new hopefully even more usefull maths tables ...
 
 2.0 5/6/1995
@@ -547,7 +553,7 @@ Elliot:
 David Jones:
 * "Whitespace Description" ...
 
-Byron: 
+Byron:
 * Many Spelling fixes Some requests for examples
 
 Partl:
@@ -559,7 +565,7 @@ Martien:
 Claus:
 * ref to indexing without backslash ...
 
- 
+
 1.1:  17/11/94
 ------------------
 Eric:
@@ -573,7 +579,7 @@ Mike:
 
 David:
 * Letter case in \hyphenation ignored
-* `|-|.'' 
+* `|-|.''
 * shelf\mbox{}ful because TeX can `forget' {} after hyphenation attempt
 * pointer to dcolumn package
 * standard calsses assume [tbp] !
@@ -590,4 +596,3 @@ Tobi:
 * pagestyle index entries
 * Commented out display style example, to keep total size down to 58 Pages
 * Fixed eufrak problem thanks David and Martien
-

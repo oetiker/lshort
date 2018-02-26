@@ -435,14 +435,14 @@ Stra\ss e
 \caption{Accents and Special Characters.} \label{accents}
 \begin{lined}{10cm}
 \begin{tabular}{*4{cl}}
-\A{\`o} & \A{\'o} & \A{\^o} & \A{\~o} \\
-\A{\=o} & \A{\.o} & \A{\"o} & \B{\c}{c}\\[6pt]
-\B{\u}{o} & \B{\v}{o} & \B{\H}{o} & \B{\c}{o} \\
-\B{\d}{o} & \B{\b}{o} & \B{\t}{oo} \\[6pt]
-\A{\oe}  &  \A{\OE} & \A{\ae} & \A{\AE} \\
-\A{\aa} &  \A{\AA} \\[6pt]
-\A{\o}  & \A{\O} & \A{\l} & \A{\L} \\
-\A{\i}  & \A{\j} & !` & \verb|!`| & ?` & \verb|?`|
+\mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
+\mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
+\mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
+\mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} \\[6pt]
+\mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
+\mstA{\aa} &  \mstA{\AA} \\[6pt]
+\mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
+\mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`|
 \end{tabular}
 \index{dotless \i{} and \j}\index{Scandinavian letters}
 \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
@@ -471,535 +471,79 @@ configured appropriately:
   mandatory space before each colon character (:).
 \end{enumerate}
 
-If your system is already configured appropriately, activate
-the \pai{babel} package by adding the command
-\begin{lscommand}
-\ci{usepackage}\verb|[|\emph{language}\verb|]{babel}|
-\end{lscommand}
-\noindent after the \verb|\documentclass| command. A list of the
-\emph{language}s built into your \LaTeX{} system will be displayed
-every time the compiler is started. Babel will
-automatically activate the appropriate hyphenation rules for the
-language you choose. If your \LaTeX{} format does not support
-hyphenation in the language of your choice, babel will still work but
-will disable hyphenation, which has quite a negative effect on the
-appearance of the typeset document.
+Also entering text in your language of choice might be a bit cumbersome using all the
+commands from figure~\ref{accents}. To overcome this problem, until recently you had to delve
+deep into the abyss of language specific encodings both for input as well as fonts. These days,
+with modern \TeX{} engines speaking UTF-8 natively, these problems have relaxed considerably.
 
-\textsf{Babel} also specifies new commands for some languages, which
-simplify the input of special characters. The \wi{German} language, for
-example, contains a lot of umlauts (\"a\"o\"u).  With \textsf{babel} loaded,
-enter an \"o by typing \verb|"o| instead of~\verb|\"o|.
+So without any further ado, here are the settings you have to put into the preamble of your document
+to make it fit for non-english content.
 
-If you call babel with multiple languages
-\begin{lscommand}
-\ci{usepackage}\verb|[|\emph{languageA}\verb|,|\emph{languageB}\verb|]{babel}|
-\end{lscommand}
-\noindent then the last language in the option list will be active (i.e.
-languageB). Use the command
-\begin{lscommand}
-\ci{selectlanguage}\verb|{|\emph{languageA}\verb|}|
-\end{lscommand}
-\noindent to change the active language.
-
-%Input Encoding
-\newcommand{\ieih}[1]{%
-\index{encodings!input!#1@\texttt{#1}}%
-\index{input encodings!#1@\texttt{#1}}%
-\index{#1@\texttt{#1}}}
-\newcommand{\iei}[1]{%
-\ieih{#1}\texttt{#1}}
-%Font Encoding
-\newcommand{\feih}[1]{%
-\index{encodings!font!#1@\texttt{#1}}%
-\index{font encodings!#1@\texttt{#1}}%
-\index{#1@\texttt{#1}}}
-\newcommand{\fei}[1]{%
-\feih{#1}\texttt{#1}}
-
-Most modern computer systems allow you to input letters of
-national alphabets  directly from the keyboard. In order to
-handle a variety of input encodings used for different groups of
-languages and/or on different computer platforms \LaTeX{} employs the
-\pai{inputenc} package:
-\begin{lscommand}
-\ci{usepackage}\verb|[|\emph{encoding}\verb|]{inputenc}|
-\end{lscommand}
-
-When using this package, you should consider that other people might not
-be able to display your input files on their computer, because they use
-a different encoding. For example, the German umlaut \"a on OS/2 is
-encoded as 132, on Unix systems using ISO-LATIN~1 it is encoded as 228,
-while in Cyrillic encoding cp1251 for Windows this letter does not exist
-at all; therefore you should use this feature with care. The following
-encodings may come in handy, depending on the type of system you are
-working on\footnote{To learn more about supported  input
-encodings for Latin-based and Cyrillic-based languages, read the
-documentation for \texttt{inputenc.dtx} and \texttt{cyinpenc.dtx}
-respectively. Section~\ref{sec:Packages} tells how to produce package
-documentation.}
-
-\begin{center}
-\begin{tabular}{l | r | r }
-Operating & \multicolumn{2}{c}{encodings}\\
-system  & western Latin      & Cyrillic\\
-\hline
-Mac     &  \iei{applemac} & \iei{macukr}  \\
-Unix    &  \iei{latin1}   & \iei{koi8-ru}  \\
-Windows &  \iei{ansinew}  & \iei{cp1251}    \\
-DOS, OS/2  &  \iei{cp850} & \iei{cp866nav} \\
-Unicode  &  \iei{utf8} &  \iei{utf8}
-\end{tabular}
-\end{center}
-
-\begin{lscommand}
-\ci{usepackage}\verb|[|\iei{utf8}\verb|]{inputenc}|
-\end{lscommand}
-\noindent will enable you to create \LaTeX{} input files in
-\iei{utf8}, a multi-byte encoding in which each character can be encoded in
-as little as one byte and as many as four bytes.
-
-Since the turn of the Century most Operating Systems are based on Unicode
-(Windows XP, Mac OS X, Linux). Therefore it is recommended to use \iei{utf8}
-for any new project. The \iei{utf8} encoding used by \pai{inputenc} only
-defines the characters that are actually provided by the fonts used. If you
-need more (non-latin) characters have a look at \hologo{XeLaTeX} in section
-\ref{sec:xetex} a Unicode based \TeX-engine.
-
-Font encoding is a different matter. It defines at which position inside
-a \TeX-font each letter is stored. Multiple input encodings could be mapped into
-one font encoding, which reduces the number of required font sets.
-Font encodings are handled through
-\pai{fontenc} package: \label{fontenc}
-\begin{lscommand}
-\ci{usepackage}\verb|[|\emph{encoding}\verb|]{fontenc}| \index{font encodings}
-\end{lscommand}
-\noindent where \emph{encoding} is font encoding. It is possible to load several
-encodings simultaneously.
-
-The default \LaTeX{} font encoding is \label{OT1} \fei{OT1}, the encoding of the
-original Computer Modern \TeX{} font. It contains only the 128
-characters of the 7-bit ASCII character set. When accented characters
-are required, \TeX{} creates them by combining a normal character with
-an accent. While the resulting output looks perfect, this approach stops
-the automatic hyphenation from working inside words containing accented
-characters. Besides, some Latin letters could not be created by
-combining a normal character with an accent, to say nothing about letters of
-non-Latin alphabets, such as Greek or Cyrillic.
-
-To overcome these shortcomings, several 8-bit CM-like font sets were created.
-\emph{Extended Cork} (EC) fonts in \fei{T1} encoding contains
-letters and punctuation characters for most of the European
-languages using Latin script. The LH font set contains letters necessary
-to typeset documents in languages using Cyrillic script. Because of the large
-number of Cyrillic glyphs, they are arranged into four font
-encodings---\fei{T2A}, \fei{T2B}, \fei{T2C},
-and~\fei{X2}.\footnote{Find a list of languages supported by each of these
-encodings in \cite{cyrguide}.} The CB bundle contains fonts
-in \fei{LGR} encoding for the composition of Greek text.
-
-Improve/enable hyphenation in non-English
-documents by using these fonts. Another advantage of using new CM-like fonts is that they
-provide fonts of CM families in all weights, shapes, and optically
-scaled font sizes.
-
-The order of loading of these two packages is important, since the
-\pai{inputenc} package will only set the encoding for defined characters.
+For \hologo{pdfLaTeX}:
 
 \begin{lscommand}
 \verb|\usepackage[T1]{fontenc}|\\
-\verb|\usepackage[utf8]{inputenc}|
+\verb|\usepackage[utf8]{inputenc}|\\
+\verb|\usepackage{lmodern}|
 \end{lscommand}
 
-\subsection{Support for French}
-
-\secby{Daniel Flipo}{daniel.flipo@univ-lille1.fr}
-Some hints for those creating \wi{French} documents with \LaTeX{}:
-load French language support with the following command:
+For \hologo{XeLaTeX}:
 
 \begin{lscommand}
-\verb|\usepackage[francais]{babel}|
+\verb|\usepackage{fontspec}|\\
+\verb|\defaultfontfeatures{Ligatures=TeX}|
 \end{lscommand}
 
-This enables French hyphenation, if you have configured your
-\LaTeX{} system accordingly. It also changes all automatic text into
-French: \verb+\chapter+ prints Chapitre, \verb+\today+ prints the current
-date in French and so on. A set of new commands also
-becomes available, which allows you to write French input files more
-easily. Check out table \ref{cmd-french} for inspiration.
-
-\begin{table}[!htbp]
-\caption{Special commands for French.} \label{cmd-french}
-\begin{lined}{9cm}
-\selectlanguage{french}
-\begin{tabular}{ll}
-\verb+\og guillemets \fg{}+         \quad &\og guillemets \fg \\[1ex]
-\verb+M\up{me}, D\up{r}+            \quad &M\up{me}, D\up{r}  \\[1ex]
-\verb+1\ier{}, 1\iere{}, 1\ieres{}+ \quad &1\ier{}, 1\iere{}, 1\ieres{}\\[1ex]
-\verb+2\ieme{} 4\iemes{}+           \quad &2\ieme{} 4\iemes{}\\[1ex]
-\verb+\No 1, \no 2+                 \quad &\No 1, \no 2   \\[1ex]
-\verb+20~\degres C, 45\degres+      \quad &20~\degres C, 45\degres \\[1ex]
-\verb+\bsc{M. Durand}+              \quad &\bsc{M.~Durand} \\[1ex]
-\verb+\nombre{1234,56789}+          \quad &\nombre{1234,56789}
-\end{tabular}
-\selectlanguage{english}
-\bigskip
-\end{lined}
-\end{table}
-
-You will also notice that the layout of lists changes when switching to the
-French language. For more information on what the \texttt{francais}
-option of \textsf{babel} does and how to customize its behaviour, run
-\LaTeX{} on file \texttt{frenchb.dtx} and read the produced file
-\texttt{frenchb.dvi}.
-
-Recent versions of \pai{frenchb} rely on \pai{numprint} to implement the \ci{nombre} command.
-
-\subsection{Support for German}
-
-Some hints for those creating \wi{German}\index{Deutsch}
-documents with \LaTeX{}: load German language support with the following
-command:
+For \hologo{LuaLaTeX}:
 
 \begin{lscommand}
-\verb|\usepackage[german]{babel}|
+\verb|\usepackage{luatextra}|\\
+\verb|\defaultfontfeatures{Ligatures=TeX}|
 \end{lscommand}
 
-This enables German hyphenation, if you have configured your
-\LaTeX{} system accordingly. It also changes all automatic text into
-German. Eg. ``Chapter'' becomes ``Kapitel.'' A set of new commands also
-becomes available, which allows you to write German input files more quickly
-even when you don't use the inputenc package. Check out table
-\ref{german} for inspiration. With inputenc, all this becomes moot, but your
-text also is locked in a particular encoding world.
+Figure~\ref{allinone} on page~\pageref{allinone} shows a sample preamble that takes care of all the necessary settings.
 
-\begin{table}[!htbp]
-\caption{German Special Characters.} \label{german}
-\begin{lined}{8cm}
-\selectlanguage{german}
-\begin{tabular}{*2{ll}}
-\verb|"a| & "a \hspace*{1ex} & \verb|"s| & "s \\[1ex]
-\verb|"`| & "` & \verb|"'| & "' \\[1ex]
-\verb|"<| or \ci{flqq} & "<  & \verb|">| or \ci{frqq} & "> \\[1ex]
-\ci{flq} & \flq & \ci{frq} & \frq \\[1ex]
-\ci{dq} & " \\
-\end{tabular}
-\selectlanguage{english}
-\bigskip
-\end{lined}
-\end{table}
-
-In German books you often find French quotation marks (\flqq guil\-le\-mets\frqq).
-German typesetters, however, use them differently. A quote in a German book
-would look like \frqq this\flqq. In the German speaking part of Switzerland,
-typesetters use \flqq guillemets\frqq~the same way the French do.
-
-A major problem arises from the use of commands
-like \verb+\flq+: If you use the OT1 font (which is the default font) the
-guillemets will look like the math symbol ``$\ll$'', which turns a typesetter's stomach.
-T1 encoded fonts, on the other hand, do contain the required symbols. So if you are using this type
-of quote, make sure you use the T1 encoding. (\verb|\usepackage[T1]{fontenc}|)
-
-\subsection[Support for Korean]{Support for Korean\footnotemark}\label{support_korean}%
-\footnotetext{Written by Karnes Kim $<$\href{mailto:karnes@ktug.org}{karnes@ktug.org}$>$ and Kihwang Lee $<$\href{mailto:leekh@ktug.org}{leekh@ktug.org}$>$ on behalf of the Korean \TeX{} Users Group and the Korean \TeX{} Society.}
-
-To process Hangul\footnote{Hangul is the name of the Korean writing system. Refer to \url{http://en.wikipedia.org/wiki/Hangul} for more information.} characters or prepare a document written in Korean using \LaTeX, put the following code in the preamble of the document.
-
-\begin{lscommand}
-\verb|\usepackage{kotex}|
-\end{lscommand}
-
-A document containing the declaration above will have to be processed by
-pdf\LaTeX, \hologo{XeLaTeX}, or Lua\LaTeX{}.  Make sure that the input file
-written in Hangul is encoded in Unicode UTF-8.  The package called
-ko.\TeX\footnote{Reads ``Korean \TeX{}''. ko.\TeX{} is the name of a
-collection of packages including \texttt{cjk-ko}, \texttt{kotex-utf},
-\texttt{xetexko}, and \texttt{luatexko}.} is under continuous development by
-the Korean \TeX{} Users Group\footnote{\url{http://ktug.org}} and the Korean
-\TeX{} Society.\footnote{\url{http://ktug.kr}} Many people use this package
-to create Korean documents for their everyday needs.  ko.\TeX\ has been
-available on CTAN since 2014.  It is included \TeX\,Live, MiK\TeX{} and
-other modern \TeX{} distributions.  So in all likelihood you can start
-working right away without installing any extra packages.
-
-ko.\TeX\ does not use the \texttt{babel} package. Many functions related to
-Korean can be activated using the options and configuration commands
-provided by the \pai{kotex} package.  If you want to compose a real world
-Korean document, you are advised to consult the package documentation (These
-documents are written in Korean).
-
-With ko.\TeX, you also get \pai{oblivoir}, a \pai{memoir}-based document
-class, tailored for Korean document preparation. So your Korean document
-would start like this:
-
-\begin{lscommand}
-\verb|\documentclass{oblivoir}|
-\end{lscommand}
-
-To generate an index for a Korean document, execute \texttt{komkindex}
-instead of \texttt{makeindex}.  It is a version of the \texttt{makeindex}
-utility modified for Korean processing.  For lexicographical sorting of the
-Korean index items, you can use index style \texttt{kotex.ist} provided by
-ko.\TeX{} as follows:
-
-\begin{lscommand}
-\verb|komkindex -s kotex foo.idx|
-\end{lscommand}
-
-You can also use \texttt{xindy} for index generation as the Korean module for \texttt{xindy} is included in \TeX\,Live.
-
-There is another Korean/Hangul typesetting package called CJK. As the name of the package suggests, it has facilities for typesetting Chinese, Japanese, and Korean characters. It supports multiple encodings of the CJK characters. The following is a simple example of typesetting UTF-8 encoded Hangul using CJK package. It is useful when you submit a manuscript to some academic journals that allow typesetting author names in native languages.
-
+\begin{figure}[!bp]
+\begin{lined}{10cm}
 \begin{verbatim}
-\usepackage{CJK}
-
-\begin{CJK}{UTF8}{}
-\CJKfamily{nanummj}
-...
-\end{CJK}
+\usepackage{iftex}
+\ifPDFTeX
+   \usepackage[utf8]{inputenc}
+   \usepackage[T1]{fontenc}
+   \usepackage{lmodern}
+\else
+   \ifXeTeX
+     \usepackage{fontspec}
+   \else
+     \usepackage{luatextra}
+   \fi
+   \defaultfontfeatures{Ligatures=TeX}
+\fi
 \end{verbatim}
-
-\subsection{Writing in Greek}
-\secby{Nikolaos Pothitos}{pothitos@di.uoa.gr}
-See table~\ref{preamble-greek} for the preamble you need to write in the
-\wi{Greek} \index{Greek} language.  This preamble enables hyphenation and
-changes all automatic text to Greek.\footnote{If you select the
-\texttt{utf8x}
-option for the package \texttt{inputenc}, \LaTeX{} will understand Greek and polytonic
-Greek
-Unicode characters.}
-
-\begin{table}[btp]
-\caption{Preamble for Greek documents.} \label{preamble-greek}
-\begin{lined}{7cm}
-\begin{verbatim}
-\usepackage[english,greek]{babel}
-\usepackage[iso-8859-7]{inputenc}
-\end{verbatim}
-\bigskip
 \end{lined}
-\end{table}
+\caption[All in one preamble]{All in one preamble that takes care of all three pdf generating \TeX{} engines.} \label{allinone}
+\end{figure}
 
-A set of new commands also becomes available, which allows you to write
-Greek input files more easily.  In order to temporarily switch to English
-and vice versa, one can use the commands \verb|\textlatin{|\emph{english
-text}\verb|}| and \verb|\textgreek{|\emph{greek text}\verb|}| that both take
-one argument which is then typeset using the requested font encoding.
-Otherwise use the command \verb|\selectlanguage{...}| described in a
-previous section.  Check out table~\ref{sym-greek} for some Greek
-punctuation characters.  Use \verb|\euro| for the Euro symbol.
-
-\begin{table}[!htbp]
-\caption{Greek Special Characters.} \label{sym-greek}
-\begin{lined}{4cm}
-\selectlanguage{french}
-\begin{tabular}{*2{ll}}
-\verb|;| \hspace*{1ex}  &  $\cdot$ \hspace*{1ex}  &  \verb|?| \hspace*{1ex}&  ;   \\[1ex]
-\verb|((|               &  \og                    &  \verb|))|&  \fg \\[1ex]
-\verb|``|               &  `                      &  \verb|''| &  '   \\
-\end{tabular}
-\selectlanguage{english}
-\bigskip
-\end{lined}
-\end{table}
-
-
-\subsection{Support for Cyrillic}
-
-\secby{Maksym Polyakov}{polyama@myrealbox.com}
-Version~3.7h of \pai{babel} includes support for the
-\fei{T2*}~encodings and for typesetting Bulgarian, Russian and
-Ukrainian texts using Cyrillic letters.
-
-Support for Cyrillic is based on standard \LaTeX{} mechanisms plus
-the \pai{fontenc} and \pai{inputenc} packages. But, if you are going to
-use Cyrillics in math mode, you need to load \pai{mathtext} package
-before \pai{fontenc}:\footnote{If you use \AmS-\LaTeX{} packages,
-load them before \pai{fontenc} and \pai{babel} as well.}
-\begin{lscommand}
-\verb+\usepackage{mathtext}+\\
-\verb+\usepackage[+\fei{T1}\verb+,+\fei{T2A}\verb+]{fontenc}+\\
-\verb+\usepackage[+\iei{koi8-ru}\verb+]{inputenc}+\\
-\verb+\usepackage[english,bulgarian,russian,ukranian]{babel}+
-\end{lscommand}
-
-Generally, \pai{babel} will automatically choose the default font encoding,
-for the above three languages this is \fei{T2A}.  However, documents are not
-restricted to a single font encoding. For multi-lingual documents using
-Cyrillic and Latin-based languages it makes sense to include Latin font
-encoding explicitly. \pai{babel} will take care of switching to the appropriate
-font encoding when a different language is selected within the document.
-
-In addition to enabling hyphenations, translating automatically
-generated text strings, and activating some language specific
-typographic rules (like \ci{frenchspacing}), \pai{babel} provides some
-commands allowing typesetting according to the standards of
-Bulgarian, Russian, or Ukrainian languages.
-
-
-For all three languages, language specific punctuation is provided:
-The Cyrillic dash for the text (it is little narrower than Latin dash and
-surrounded by tiny spaces), a dash for direct speech, quotes, and
-commands to facilitate hyphenation, see Table~\ref{Cyrillic}.
-
-% Table borrowed from Ukrainian.dtx
-\begin{table}[htb]
-  \begin{center}
-  \index{""-@\texttt{""}\texttt{-}}
-  \index{""---@\texttt{""}\texttt{-}\texttt{-}\texttt{-}}
-  \index{""=@\texttt{""}\texttt{=}}
-  \index{""`@\texttt{""}\texttt{`}}
-  \index{""'@\texttt{""}\texttt{'}}
-  \index{"">@\texttt{""}\texttt{>}}
-  \index{""<@\texttt{""}\texttt{<}}
-  \caption[Bulgarian, Russian, and Ukrainian]{The extra definitions made
-           by Bulgarian, Russian, and Ukrainian options of \pai{babel}}\label{Cyrillic}
-  \begin{tabular}{@{}p{.1\hsize}@{}p{.9\hsize}@{}}
-   \hline
-   \verb="|= & disable ligature at this position.               \\
-   \verb|"-| & an explicit hyphen sign, allowing hyphenation
-               in the rest of the word.                         \\
-   \verb|"---| & Cyrillic emdash in plain text.                      \\
-   \verb|"--~| & Cyrillic emdash in compound names (surnames).       \\
-   \verb|"--*| & Cyrillic emdash for denoting direct speech.         \\
-   \verb|""| & like \verb|"-|, but producing no hyphen sign
-               (for compound words with hyphen, e.g.\ \verb|x-""y|
-               or some other signs  as ``disable/enable'').     \\
-   \verb|"~| & for a compound word mark without a breakpoint.        \\
-   \verb|"=| & for a compound word mark with a breakpoint, allowing
-          hyphenation in the composing words.                   \\
-   \verb|",| & thinspace for initials with a breakpoint
-           in following surname.                                \\
-   \verb|"`| & for German left double quotes
-               (looks like ,\kern-0.08em,).                     \\
-   \verb|"'| & for German right double quotes (looks like ``).       \\%''
-   \verb|"<| & for French left double quotes (looks like $<\!\!<$).  \\
-   \verb|">| & for French right double quotes (looks like $>\!\!>$). \\
-   \hline
-  \end{tabular}
-  \end{center}
-\end{table}
-
-
-The Russian and Ukrainian options of \pai{babel} define the commands \ci{Asbuk}
-and \ci{asbuk}, which act like \ci{Alph} and \ci{alph}\footnote{the commands for turning counters into a, b, c, \ldots}, but produce capital
-and small letters of Russian or Ukrainian alphabets (whichever is the
-active language of the document). The Bulgarian option of \pai{babel}
-provides the commands \ci{enumBul} and \ci{enumLat} (\ci{enumEng}), which
-make \ci{Alph} and \ci{alph} produce letters of either
-Bulgarian or Latin (English) alphabets. The default behaviour of
-\ci{Alph}  and \ci{alph} for the Bulgarian language option is to
-produce letters from the Bulgarian alphabet.
-
-%Finally, math alphabets are redefined and  as well as the commands for math
-%operators according to Cyrillic typesetting traditions.
-
-\subsection{Support for Mongolian}
-
-To use \LaTeX{} for typesetting Mongolian you have a choice between two packages:
-Multilingual Babel and Mon\TeX{} by Oliver Corff.
-
-Mon\TeX{} includes support for both Cyrillic and traditional
-Mongolian Script. In order to access the commands of Mon\TeX{}, add:
-\begin{lscommand}
-\ci{usepackage}\verb|[|\emph{language},\emph{encoding}\verb|]{mls}|
-\end{lscommand}
-\noindent to the preamble. Choose the \emph{language} option \pai{xalx} to generate
-captions and dates in Modern Mongolian. To write a complete document in the traditional Mongolian script
-you have to choose \pai{bicig} for the \emph{language} option. The document
-language option \pai{bicig} enables the ``Simplified Transliteration'' input method.
-
-Enable and disable Latin Transliteration Mode with
-\begin{lscommand}
-\verb|\SetDocumentEncodingLMC|
-\end{lscommand}
-and
-\begin{lscommand}
-\verb|\SetDocumentEncodingNeutral|
-\end{lscommand}
-
-More information about Mon\TeX{} is available from
-\CTAN|language/mongolian/montex/doc|.
-
-Mongolian Cyrillic script is supported by \pai{babel}. Activate
-Mongolian language support with the following commands:
-
-\begin{lscommand}
-\verb|\usepackage[T2A]{fontenc}|\\
-\verb|\usepackage[mn]{inputenc}|\\
-\verb|\usepackage[mongolian]{babel}|
-\end{lscommand}
-
-\noindent where \iei{mn} is the \iei{cp1251} input encoding. For a more modern approach
-invoke \iei{utf8} instead.
-
-\subsection{The Unicode option}
-
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}
-Unicode is the way to go if you want to include several languages in one
-document, especially when these languages are not using the latin script.
-There are two \hologo{TeX}-engines that are capable of processing Unicode
-input:
-
-\begin{description}
-\item[\hologo{XeTeX}] was developed for Mac OS X but is now available for all
-	architectures. It was first included into TexLive 2007.
-\item[\hologo{LuaTeX}] is the successor of pdf\TeX.  It was first included
-	into TexLive 2008.
-\end{description}
-
-The following describes \hologo{XeLaTeX} as distributed with TexLive 2010.
-
-\subsubsection{Quickstart}
-
-To convert an existing \LaTeX\ file to \hologo{XeLaTeX} the following needs to be done:
-
-\begin{enumerate}
-\item Save the file as UTF-8
-\item Remove
-\begin{lscommand}
-\verb|\usepackage{inputenc}|\\
-\verb|\usepackage{fontenc}|\\
-\verb|\usepackage{textcomp}|
-\end{lscommand}
-from the preamble.
-\item Change
-\begin{lscommand}
-\verb|\usepackage[|\emph{languageA}\verb|]{babel}|
-\end{lscommand}
-to
-\begin{lscommand}
-\verb|\usepackage{polyglossia}|\\
-\verb|\setdefaultlanguage[babelshorthands]{|\emph{languageA}\verb|}|
-\end{lscommand}
-\item Add
-\begin{lscommand}
-\verb|\usepackage[Ligatures=TeX]{fontspec}|
-\end{lscommand}
-to the preamble.
-\end{enumerate}
-
+\section{Multilingual Texts with Polyglossia}
+\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
 The package \pai{polyglossia}\cite{polyglossia} is a replacement for
-\pai{babel}. It takes care of the hyphenation patterns and automatically
-generated text strings. The option \verb|babelshorthands| enables
+venerable \pai{babel} package. It takes care of the hyphenation patterns and automatically
+generated text strings in your non-english documents. The option \verb|babelshorthands| enables
 \pai{babel} compatible shorthands for german and catalan.
 
 The package \pai{fontspec}\cite{fontspec} handles font loading for
 \hologo{XeLaTeX} and \hologo{LuaTeX}. The default font is Latin Modern
-Roman. It is a little known fact that some \hologo{TeX} command are ligatures
+Roman.
+
+Note that some \hologo{TeX} command are ligatures
 defined in the Computer Modern fonts. If you want to use them with a
 non-\hologo{TeX} font, you have to fake them. The option
 \texttt{Ligatures=TeX} defines the following ligatures:
 
-\begin{tabular}{rr}
-\verb|--|	& --\\
-\verb|---|	& ---\\
-\verb|''|	& ''\\
-\verb|``|	& ``\\
-\verb|!`|	& !`\\
-\verb|?`|	& ?`\\
-\verb|,,|	& ,,\\
-\verb|<<|	& <<\\
-\verb|>>|	& >>\\
+\begin{tabular}{rr@{~~~~}rr@{~~~~}rr}
+\verb|--|	& -- & \verb|---|	& --- & \verb|''|	& ''\\
+\verb|``|	& `` & \verb|!`|	& !`  &  \verb|?`|	& ?`\\
+\verb|,,|	& ,, & \verb|<<|	& <<\\ & \verb|>>|	& >>\\
 \end{tabular}
 
 \subsubsection{It's all $\Gamma\rho\epsilon\epsilon\kappa$ to me}
@@ -1008,7 +552,7 @@ non-\hologo{TeX} font, you have to fake them. The option
 So far there has been no advantage to using a Unicode \hologo{TeX} engine.
 This changes when we leave the Latin script and move to a more interesting
 language like Greek or Russian.  With a Unicode based system, you can
-simply\footnote{For small values of simple.} enter the characters in your
+simply\footnote{For small values of simple.} enter the native characters in your
 editor and \hologo{TeX} will understand them.
 
 Writing in different languages is easy, just specify the languages in the preamble:
@@ -1203,8 +747,6 @@ Two of the sectioning commands are a bit special:
   changes the chapter numbering to letters.\footnote{For the article
     style it changes the section numbering.}
 \end{itemize}
-
-
 
 \LaTeX{} creates a table of contents by taking the section headings
 and page numbers from the last compile cycle of the document. The command
@@ -1847,8 +1389,79 @@ Under certain circumstances it might be necessary to use the
 floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
 
-You will learn how to include \PSi{}
-drawings in your \LaTeXe{} documents later in this introduction.
+\section{Including Graphics and Images}\label{eps}
+
+As explained in the previous section \LaTeX{} provides the facilities to work with floating bodies,
+such as images or graphics, with the \texttt{figure} and
+\texttt{table} environments.
+
+A good set of commands for inclusion of graphics into these floating boddies is provided in the
+\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
+of packages called the ``graphics''
+bundle.\footnote{\CTAN|pkg/graphics|}
+
+Use the following step by step guide to
+include a picture into your document:
+
+\begin{enumerate}
+\item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
+\item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
+prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
+Note that it may be sensible to export EPS eventhough your software can export PDF too, as PDFs often are full page and will
+this get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
+\item Load the \textsf{graphicx} package in the preamble of the input
+  file with
+\begin{lscommand}
+\verb|\usepackage{graphicx}|
+\end{lscommand}
+\item Use the command
+\begin{lscommand}
+\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
+\end{lscommand}
+\noindent to include \emph{file} into your document. The optional parameter
+accepts a comma separated list of \emph{keys} and associated
+\emph{values}. The \emph{keys} can be used to alter the width, height
+and rotation of the included graphic. Table~\ref{keyvals} lists the
+most important keys.
+\end{enumerate}
+
+\begin{table}[tb]
+\caption{Key Names for \textsf{graphicx} Package.}
+\label{keyvals}
+\begin{lined}{9cm}
+\begin{tabular}{@{}ll}
+\texttt{width}& scale graphic to the specified width\\
+\texttt{height}& scale graphic to the specified height\\
+\texttt{angle}& rotate graphic counterclockwise\\
+\texttt{scale}& scale graphic \\
+\end{tabular}
+
+\bigskip
+\end{lined}
+\end{table}
+
+The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
+\begin{figure}
+\begin{lined}{9cm}
+\begin{verbatim}
+\begin{figure}
+\centering
+\includegraphics[angle=90,
+                 width=0.5\textwidth]{test.png}
+\caption{This is a test.}
+\end{figure}
+\end{verbatim}
+\end{lined}
+\caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
+\end{figure}
+It includes the graphic stored in the file \texttt{test.png}. The
+graphic is \emph{first} rotated by an angle of 90 degrees and
+\emph{then} scaled to the final width of 0.5 times the width of a
+standard paragraph.  The aspect ratio is $1.0$, because no special
+height is specified.  The width and height parameters can also be
+specified in absolute dimensions. Refer to Table~\ref{units} on
+page~\pageref{units} for more information. If you want to know more
+about this topic, make sure to read \cite{graphics}.
 
 \section{Protecting Fragile Commands}
 

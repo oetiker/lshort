@@ -1,6 +1,6 @@
 #	pstops "4:0L@0.8(22.5cm,-0.6cm)+1L@0.8(22.5cm,13.3cm),2L@0.8(22.5cm,-0.6cm)+3L@0.8(22.5cm,13.3cm)" \
 SHELL = /bin/sh
-VERS = 5.06
+VERS = 6.0
 
 OTHER = README CHANGES
 FILES = src/biblio.tex src/math.tex src/things.tex src/contrib.tex src/lshort.sty src/mylayout.sty src/title.tex \
@@ -9,7 +9,7 @@ FILES = src/biblio.tex src/math.tex src/things.tex src/contrib.tex src/lshort.st
 
 # Define some variables
 LATEX=latex
-PDFLATEX=pdflatex
+PDFLATEX=xelatex
 MAKEINDEX=makeindex
 DVIPS=dvips
 
@@ -18,38 +18,6 @@ all: lshort.pdf lshort-letter.pdf lshort-a5.pdf
 
 lulu: lshort-body.pdf lshort-title.pdf
 
-
-lshort.dvi: $(FILES)
-	-mkdir texbuild
-	(TEXINPUTS=.:`pwd`/src:`pwd`/euro:`pwd`/oberdiek:${TEXINPUTS:-:} && export TEXINPUTS && cd texbuild && \
-	$(LATEX) lshort && $(LATEX) lshort && $(MAKEINDEX) -s ../src/lshort.ist lshort; \
-	$(LATEX) lshort && $(LATEX) lshort && mv lshort.dvi ..)
-
-lshort-a5.dvi: $(FILES)
-	-mkdir texbuild
-	(TEXINPUTS=.:`pwd`/src:`pwd`/euro:`pwd`/oberdiek:${TEXINPUTS:-:} && export TEXINPUTS && cd texbuild && \
-	$(LATEX) lshort-a5 && $(LATEX) lshort-a5 && $(MAKEINDEX) -s ../src/lshort.ist lshort-a5; \
-	$(LATEX) lshort-a5 && $(LATEX) lshort-a5 && mv lshort-a5.dvi ..)
-
-lshort.ps: lshort.dvi
-	(T1FONTS=.: && TEXFONTMAPS=.: && export T1FONTS TEXFONTMAPS && $(DVIPS) -j -Pcmz -olshort.ps lshort.dvi )
-	rm texbuild/*
-
-lshort-a5.ps: lshort-a5.dvi
-	(T1FONTS=.: && TEXFONTMAPS=.: && export T1FONTS TEXFONTMAPS  && $(DVIPS) -j -Pcmz -ta5 -olshort-a5.ps lshort-a5.dvi )
-	rm texbuild/*
-
-lshort-book.ps: lshort.ps
-	psbook lshort.ps out.ps 
-	pstops "4:0L@0.8(22.76cm,-0.6cm)+1L@0.8(22.76cm,13.45cm),3R@0.8(-1.38cm,16.25cm)+2R@0.8(-1.38cm,30.3cm)" \
-			out.ps lshort-book.ps
-	rm out.ps
-
-lshort-a5book.ps: lshort-a5.ps
-	( psbook lshort-a5.ps | psnup -pa4 -s1 -2 | pstops "2:0,1U(21cm,29.7cm)" >lshort-a5book.ps )
-
-lshort-a5book.pdf: lshort-a5book.ps
-	 ps2pdf14 -sPAPERSIZE=a4 lshort-a5book.ps lshort-a5book.pdf
 
 lshort.pdf: $(FILES)
 	-mkdir pdfbuild

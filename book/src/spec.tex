@@ -2,7 +2,7 @@
 % Contents: Specialities of the LaTeX system
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
+
 \chapter{Specialities}
 \begin{intro}
   When putting together a large document, \LaTeX{} will help
@@ -13,109 +13,9 @@
   {\normalfont\manual{}} and {\normalfont \companion}.
 \end{intro}
 
-\section{Including \EPSi{}}\label{eps}
-\LaTeX{} provides the basic facilities to work with floating bodies,
-such as images or graphics, with the \texttt{figure} and
-\texttt{table} environments.
-
-There are several ways to generate the actual
-\wi{graphics} with basic \LaTeX{} or a \LaTeX{} extension package,
-a few of them are described in chapter \ref{chap:graphics}.
-Please refer to \companion{} and the \manual{} for more information on
-that subject.
-
-A much easier way to get graphics into a document is to generate them with a
-specialised software package\footnote{Such as XFig, Gnuplot, Gimp, Xara X
-\ldots} and then include the finished graphics in the document. Here
-again, \LaTeX{} packages offer many ways to do this, but this introduction
-will only discuss the use of \EPSi{} (EPS) graphics, because it is quite
-easy to do and widely used.  In order to use pictures in the EPS format, you
-must have a \PSi{} printer\footnote{Another
-  possibility to output \PSi{} is the \textsc{\wi{GhostScript}}
-  program available from
-  \CTAN|support/ghostscript|. Windows and OS/2 users might
-  want to look for \textsc{GSview}.} available for output.
-
-A good set of commands for inclusion of graphics is provided in the
-\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
-of packages called the ``graphics''
-bundle.\footnote{\CTAN|pkg/graphics|}
-
-When working on a system with a
-\PSi{} printer available for output and with the \textsf{graphicx}
-package installed, use the following step by step guide to
-include a picture into your document:
-
-\begin{enumerate}
-\item Export the picture from your graphics program in EPS
-  format.\footnote{If your software cannot export into EPS format, you
-    can try to install a \PSi{} printer driver (such as an Apple
-    LaserWriter, for example) and then print to a file with this
-    driver. With some luck this file will be in EPS format. Note that
-    an EPS must not contain more than one page. Some printer drivers
-    can be explicitly configured to produce EPS format.}
-\item Load the \textsf{graphicx} package in the preamble of the input
-  file with
-\begin{lscommand}
-\verb|\usepackage[|\emph{driver}\verb|]{graphicx}|
-\end{lscommand}
-\noindent where \emph{driver} is the name of your ``dvi to \PSi{}''
-converter program. The most
-widely used program is called \texttt{dvips}. The name of the driver is
-required, because there is no standard on how graphics are included in
-\TeX{}. Knowing the name of the \emph{driver}, the
-\textsf{graphicx} package can choose the correct method to insert
-information about the graphics into the \eei{.dvi}~file, so that the
-printer understands it and can correctly include the \eei{.eps} file.
-\item Use the command 
-\begin{lscommand}
-\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file}\verb|}|
-\end{lscommand}
-\noindent to include \emph{file} into your document. The optional parameter
-accepts a comma separated list of \emph{keys} and associated
-\emph{values}. The \emph{keys} can be used to alter the width, height
-and rotation of the included graphic. Table~\ref{keyvals} lists the
-most important keys.
-\end{enumerate}
-
-\begin{table}[htb]
-\caption{Key Names for \textsf{graphicx} Package.}
-\label{keyvals}
-\begin{lined}{9cm}
-\begin{tabular}{@{}ll}
-\texttt{width}& scale graphic to the specified width\\
-\texttt{height}& scale graphic to the specified height\\
-\texttt{angle}& rotate graphic counterclockwise\\
-\texttt{scale}& scale graphic \\
-\end{tabular}
-
-\bigskip
-\end{lined}
-\end{table}
-
-\pagebreak
-The following example code may help to clarify things:
-\begin{code}
-\begin{verbatim}
-\begin{figure}
-\centering
-\includegraphics[angle=90,
-                 width=0.5\textwidth]{test}
-\caption{This is a test.}
-\end{figure}
-\end{verbatim}
-\end{code}
-It includes the graphic stored in the file \texttt{test.eps}. The
-graphic is \emph{first} rotated by an angle of 90 degrees and
-\emph{then} scaled to the final width of 0.5 times the width of a
-standard paragraph.  The aspect ratio is $1.0$, because no special
-height is specified.  The width and height parameters can also be
-specified in absolute dimensions. Refer to Table~\ref{units} on
-page~\pageref{units} for more information. If you want to know more
-about this topic, make sure to read \cite{graphics} and \cite{eps}.
 
 \section{Bibliography}
- 
+
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
@@ -133,10 +33,10 @@ command defines how much space to reserve for the number of labels. In the examp
 than the number 99.
 \enlargethispage{2cm}
 \begin{example}
-Partl~\cite{pa} has 
-proposed that \ldots 
+Partl~\cite{pa} has
+proposed that \ldots
 \begin{thebibliography}{99}
-\bibitem{pa} H.~Partl: 
+\bibitem{pa} H.~Partl:
 \emph{German \TeX},
 TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
@@ -169,7 +69,7 @@ must be loaded in the preamble with
 \begin{lscommand}
 \verb|\usepackage{makeidx}|
 \end{lscommand}
-\noindent and the special indexing commands must be enabled by putting 
+\noindent and the special indexing commands must be enabled by putting
 the
 \begin{lscommand}
   \ci{makeindex}
@@ -192,11 +92,11 @@ point to.  Table~\ref{index} explains the syntax with several examples.
 \begin{center}
 \begin{tabular}{@{}lll@{}}
   \textbf{Example} &\textbf{Index Entry} &\textbf{Comment}\\\hline
-  \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\ 
-\verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\ 
-\verb|\index{Sam@\textsl{Sam}}|     &\textsl{Sam}, 2& Formatted entry\\ 
-\verb|\index{Lin@\textbf{Lin}}|     &\textbf{Lin}, 7& Formatted entry\\ 
-\verb|\index{Kaese@K\"ase}|     &\textbf{K\"ase}, 33& Formatted entry\\ 
+  \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\
+\verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\
+\verb|\index{Sam@\textsl{Sam}}|     &\textsl{Sam}, 2& Formatted entry\\
+\verb|\index{Lin@\textbf{Lin}}|     &\textbf{Lin}, 7& Formatted entry\\
+\verb|\index{Kaese@K\"ase}|     &\textbf{K\"ase}, 33& Formatted entry\\
 \verb.\index{ecole@\'ecole}.     &\'ecole, 4& Formatted entry\\
 \verb.\index{Jenny|textbf}.     &Jenny, \textbf{3}& Formatted page number\\
 \verb.\index{Joe|textit}.     &Joe, \textit{5}& Formatted page number
@@ -282,7 +182,7 @@ accomplishes this with a two-stage approach. In the header and footer
 definition, you use the commands \ci{rightmark} and \ci{leftmark} to
 represent the current section and chapter heading, respectively.
 The values of these two commands are overwritten whenever a chapter or
-section command is processed. 
+section command is processed.
 
 For ultimate flexibility, the \verb|\chapter| command and its friends
 do not redefine \ci{rightmark} and \ci{leftmark} themselves. They call
@@ -294,11 +194,11 @@ If you want to change the look of the chapter
 name in the header line, you need only ``renew'' the \ci{chaptermark}
 command. \cih{sectionmark}\cih{subsectionmark}
 
- 
+
 Figure~\ref{fancyhdr} shows a possible setup for the \pai{fancyhdr}
 package that makes the headers look about the same as they look in
 this booklet. In any case, I suggest you fetch the documentation for
-the package at the address mentioned in the footnote. 
+the package at the address mentioned in the footnote.
 
 \section{The Verbatim Package}
 
@@ -358,8 +258,8 @@ the documentation.  Here's how you do the first part:
 \texttt{.dtx} file:
 
 \begin{enumerate}
-\item Run \LaTeX\ on the \texttt{.dtx} file.  This will generate a
-  \texttt{.dvi} file. Note that you may have to run \LaTeX\
+\item Run \hologo{XeLaTeX} on the \texttt{.dtx} file.  This will generate a
+  \texttt{.pdf} file. Note that you may have to run \hologo{XeLaTeX}
   several times before it gets the cross-references right.
 \item Check to see if \LaTeX\ has produced a \texttt{.idx} file
   among the various files you now have.
@@ -370,10 +270,10 @@ the documentation.  Here's how you do the first part:
         (where \textit{name} stands for the main-file name without any
     extension).
  \item Run \LaTeX\ on the \texttt{.dtx} file once again. \label{step:next}
-    
+
 \item Last but not least, make a \texttt{.ps} or \texttt{.pdf}
   file to increase your reading pleasure.\label{step:final}
-  
+
 \end{enumerate}
 
 Sometimes you will see that a \texttt{.glo}
@@ -392,7 +292,7 @@ time before moving on to step~\ref{step:final}.
 % French original by Daniel Flipo 14/07/2004
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Working with pdf\LaTeX} \label{sec:pdftex}\index{PDF}
+\section{\LaTeX{} and PDF}\label{sec:pdftex}\index{PDF}
 \secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}%
 PDF is a portable \wi{hypertext} document format. Much as in a web page,
 some words in the document are marked as hyperlinks. They link to other
@@ -422,176 +322,36 @@ all of them cut corners left and right to get the job done. As soon as
 you start using more complex \LaTeX{} features and external packages
 things tend to fall apart. Authors wishing to preserve the unique
 typographic quality of their documents even when publishing on the web
-turn to PDF \emph{(Portable Document Format)}, which preserves the 
+turn to PDF \emph{(Portable Document Format)}, which preserves the
 layout of the document and permits hypertext
 navigation. Most modern browsers come with plugins that allow the
 direct display of PDF documents.
 
-Even though there are DVI and PS viewers for almost every platform, you will find that
-\wi{Acrobat Reader} and \wi{Xpdf} for viewing PDF documents 
-are more widely deployed\footnote{\url{http://pdfreaders.org}}. So providing PDF versions of your documents will
-make them much more accessible to your potential readers.
-
-\subsection{PDF Documents for the Web}
-
-The creation of a PDF file from \LaTeX{} source is very simple,
-thanks to the pdf\TeX{} program developed by
-H\`an~Th\'{\^e}~Th\`anh. pdf\TeX{} produces PDF output where normal
-\TeX{} produces DVI. There is also a pdf\LaTeX{}, which produces
-  PDF output from \LaTeX{} sources. \index{pdftex@pdf\TeX}\index{pdftex@pdf\LaTeX}
-
-Both pdf\TeX{} and pdf\LaTeX{} are installed automatically by most
-modern \TeX{} distributions, such as te\TeX{}, fp\TeX{},
-Mik\TeX, \TeX{}Live and CMac\TeX{}.
-
-To produce a PDF instead of DVI, it is sufficient to replace the
-command \texttt{latex file.tex} by
-\texttt{pdflatex file.tex}. On systems where \LaTeX{} is not called from the
-command line, you may find a special button in the \TeX{} GUI.
-
-Set the paper size with an 
-optional documentclass argument such as \texttt{a4paper} or
-\texttt{letterpaper}. This works in pdf\LaTeX{} too, but on top of this
-pdf\TeX{} also needs to know the physical size of the paper to determine the physical
-size of the pages in the pdf file.
-\index{paper size}
-If you use the
-\pai{hyperref} package (see page \pageref{ssec:pdfhyperref}), the
-papersize will be adjusted automatically. Otherwise you have to do this
-manually by putting the following lines into the preamble of the document:
-\begin{code}
-\begin{verbatim}
-\pdfpagewidth=\paperwidth
-\pdfpageheight=\paperheight
-\end{verbatim}
-\end{code}
-
-The following section will go into more detail regarding the differences
-between normal \LaTeX{} and pdf\LaTeX{}. The main differences concern
-three areas: the fonts to use, the format of images to include, and the
-manual configuration of hyperlinks.
-
-\subsection{The Fonts}
-
-\wi{pdf\LaTeX} can deal with all sorts of fonts (PK bitmaps, TrueType,
-\PSi{} type~1\dots) but the normal \LaTeX{} font format, the bitmap PK
-fonts produce very ugly results when the document is displayed with Acrobat
-Reader. It is best to use \PSi{} Type 1 fonts exclusively to produce
-documents that display well. \emph{Modern TeX installations will be set up so that
-this happens automatically. Best is to try. If it works for you,
-just skip this whole section.}
-
-The Type 1 font set most widely used today is called Latin Modern (LM). 
-If you have a recent \TeX{} installation, chances are that you
-already have a copy of them installed; all you need to do is to add
-\begin{code}
-\begin{verbatim}  
-\usepackage{lmodern}
-\usepackage[T1]{fontenc} 
-\usepackage{textcomp}
-\end{verbatim}
-\end{code}
-to the preamble of your document and you are all set for creating excellent
-PDF output with full support for the full Latin character set. If you are working with a stripped down
-setup, you may have to add the lm fonts explicitly.
-
-For the Russian language you may want to use C1 virtual fonts,
-available at \texttt{ftp://ftp.vsu.ru/pub/tex/font-packs/c1fonts}. 
-These fonts combine the standard CM type~1                                 
-fonts from Bluesky collection and CMCYR type~1 fonts from the Paradissa and
-BaKoMa collection, all available on CTAN. Because Paradissa fonts
-contain only Russian letters, C1 fonts are                                  
-missing other Cyrillic glyphs. 
-
-Another solution is to switch to other \PSi{} type~1 fonts.
-Actually, some of them are even included with every copy of Acrobat
-Reader. Because these fonts have different character sizes, the text
-layout on your pages will change. Generally these other fonts will use more space than
-the CM fonts, which are very space-efficient.  Also, the overall visual
-coherence of your document will suffer because Times, Helvetica and
-Courier (the primary candidates for such a replacement job) have not
-been designed to work in harmony in a single document.
- 
-Two ready-made font sets are available for this purpose:
-\pai{pxfonts}, which is based on \emph{Palatino} as its main text body font,
-and the \pai{txfonts} package, which is based on \emph{Times}. To use them it is
-sufficient to put the following lines into the preamble of your
-document:
-\begin{code}
-\begin{verbatim}
-\usepackage[T1]{fontenc}
-\usepackage{pxfonts}
-\end{verbatim}
-\end{code}
-
-You may find lines like
-\begin{verbatim}
-Warning: pdftex (file eurmo10): Font eur... not found
-\end{verbatim}
-in the  \texttt{.log} file after compiling your input file. They mean
-that some font used in the document has not been found. Make sure you identify and
-fix the offending parts of your document, as the resulting PDF document may 
-\emph{not display the pages with the missing characters at all}.
-
-
-
-\subsection{Using Graphics}
-\label{ssec:pdfgraph}
-
-Including graphics into a document works best with the 
-\pai{graphicx} package (see page~\pageref{eps}):
-\begin{code}
-\begin{verbatim}
-\usepackage{xcolor,graphicx}
-\end{verbatim}
-\end{code}
-In the sample above I have included the color package, as using color in
-documents displayed on the web comes quite naturally.
-
-So much for the good news. The bad news is that graphics in \EPSi{}
-format do not work with pdf\LaTeX{}. If you don't define a file extension
-in the \ci{includegraphics} command, \pai{graphicx} will go
-looking for a suitable file on its own, depending on the setting of
-the \emph{driver} option. For \texttt{pdftex} this is
-formats \texttt{.png}, \texttt{.pdf}, \texttt{.jpg} and \texttt{.mps} (\MP\index{metapost@\MP})---but \emph{not} \texttt{.eps}.
-
-The simple way out of this problem is to just convert your EPS files
-into PDF format using the \texttt{epstopdf} utility found on many
-systems. For vector graphics (drawings) this is a great solution. For
-bitmaps (photos, scans) this is not ideal, because the PDF format
-natively supports the inclusion of PNG and JPEG images. PNG is
-good for screenshots and other images with few colours. JPEG is great
-for photos, as it is very space-efficient.
-
-It may even be desirable not to draw certain geometric figures, 
-but rather describe the figure with a specialized command language, such as
- \MP\index{metapost@\MP}, which can be found in most \TeX{} distributions, and
-comes with its own extensive manual.
+All modern \TeX{} engines can generate PDF files out of the box. If you worked through this introduction until here you will already be familiar with the process.
 
 \subsection{Hypertext Links}
 \label{ssec:pdfhyperref}
 
-The \pai{hyperref} package will take care of turning all internal
-references of your document into hyperlinks. For this to work
-properly some magic is necessary, so you have to put
-\verb+\usepackage[pdftex]{hyperref}+ as the \emph{last} command into
+The \pai{hyperref} adds two cool features to your \LaTeX{} PDF files:
+
+\begin{enumerate}
+\item The paper size is set according to your specification in the document class call.
+\item All references in your your document turn into hyperlinks.
+\end{enumerate}
+
+Just add \verb+\usepackage[pdftex]{hyperref}+ as the \emph{last} command into
 the preamble of your document.
 
 Many options are available to customize the behaviour of the
 \pai{hyperref} package:
 \begin{itemize}
 \item either as a comma separated list after the pdftex option\\
-  \verb+\usepackage[pdftex]{hyperref}+
+  \verb+\usepackage{hyperref}+
 \item or on individual lines with the command
   \verb+\hypersetup{+\emph{options}\verb+}+.
 \end{itemize}
 
-The only required option is \texttt{pdftex}; the others are
-optional and allow you to change the default behaviour of hyperref.\footnote{It
-is worth noting that the \pai{hyperref} package is not limited to
-work with pdf\TeX{}. It can also be configured to embed PDF-specific
-information into the DVI output of normal \LaTeX{}, which then gets put
-into the PS file by \texttt{dvips} and is finally picked up by the pdf convertor when turning the PS file into PDF.} In the following
+In the following
 list the default values are written in an upright font.
 
 \begin{flushleft}
@@ -612,8 +372,8 @@ list the default values are written in an upright font.
   \item [\texttt{pdfnewwindow (=false,\textit{true})}] define whether a new
     window should be opened when a link leads out of the current
     document
-  \item [\texttt{colorlinks (=false,\textit{true})}] surround the  
-    links by colour frames (\texttt{false}) or colour the text of the links 
+  \item [\texttt{colorlinks (=false,\textit{true})}] surround the
+    links by colour frames (\texttt{false}) or colour the text of the links
     (\texttt{true}). The colour of these links can be configured
     using the following options (default colours are shown):
     \begin{description}
@@ -632,7 +392,7 @@ list the default values are written in an upright font.
 If you are happy with the defaults, use
 \begin{code}
 \begin{verbatim}
-\usepackage[pdftex]{hyperref}
+\usepackage{hyperref}
 \end{verbatim}
 \end{code}
 
@@ -640,7 +400,7 @@ To have the bookmark list open and links in colour
 (the \texttt{=true} values are optional):
 \begin{code}
 \begin{verbatim}
-\usepackage[pdftex,bookmarks,colorlinks]{hyperref}
+\usepackage[bookmarks,colorlinks]{hyperref}
 \end{verbatim}
 \end{code}
 
@@ -695,7 +455,7 @@ a click on the word ``\textcolor{magenta}{CTAN}''
 will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
-  use the \ci{href} command without the 'http://' bit: 
+  use the \ci{href} command without the 'http://' bit:
 \begin{verbatim}
   The complete document is \href{manual.pdf}{here}
 \end{verbatim}
@@ -753,7 +513,7 @@ characters are available for bookmarks than for normal \LaTeX{} text.
 Hyperref will normally notice such problems and put up a warning:
 \begin{code}
 \begin{verbatim}
-Package hyperref Warning: 
+Package hyperref Warning:
 Token not allowed in a PDFDocEncoded string:
 \end{verbatim}
 \end{code}
@@ -778,70 +538,14 @@ the \pai{hyperref} package to use Unicode characters in bookmarks, this
 will give you a much larger selection of characters to pick from when
 when using \ci{texorpdfstring}.
 
-\subsection{Source Compatibility Between \LaTeX{} and pdf\LaTeX{}}
-\label{sec:pdfcompat}
-
-Ideally your document would compile equally well with \LaTeX{} and
-pdf\LaTeX{}. The main problem in this respect is the inclusion of
-graphics. The simple solution is to \emph{systematically drop} the
-file extension from \ci{includegraphics} commands. They will then
-automatically look for a file of a suitable format in the current
-directory. All you have to do is create appropriate versions of the
-graphics files. \LaTeX{} will look for \texttt{.eps}, and pdf\LaTeX{}
-will try to include a file with the extension
-\texttt{.png}, \texttt{.pdf}, \texttt{.jpg} or \texttt{.mps}
-(in that order).
-
-For the cases where you want to use different code for the
-PDF version of your document, simply add the package \pai{ifpdf}%
-\footnote{If you want the whole story on why to use this package then
-   go to the \TeX{} FAQ under the item
-   \url{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ifpdf}.}  to
-your preamble. Chances are that you already have it installed; if not
-then you're probably using MiK\TeX{} which will install it for you
-automatically the first time you try to use it. This package defines
-the special command \ci{ifpdf} that will allow you to write
-conditional code easily. In this example, we want the \PSi{}
-version to be black and white due to the printing costs but we want
-the PDF version for online viewing to be colourful.
-\begin{code}
-\begin{verbatim}
-\RequirePackage{ifpdf} % are we producing PDF ?
-\documentclass[a4paper,12pt]{book}
-\usepackage[latin1]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[bookmarks, % tune hyperref
-            colorlinks,
-            plainpages=false]{hyperref}
-\usepackage{graphicx}
-\ifpdf
-  \hypersetup{linkscolor=blue}
-\else
-  \hypersetup{linkscolors=black}
-\fi
-\usepackage[english]{babel}
-...
-\end{verbatim}
-\end{code}
-In the example above I have included the \pai{hyperref} package even in the
-non-PDF version. The effect of this is to make the \ci{href} command
-work in all cases, which saves me from wrapping every occurrence into a
-conditional statement.
-
-Note that in recent \TeX{} distributions (like \TeX{}Live, Mac\TeX{} and MiK\TeX{}), the
-normal \TeX{} program is actually pdf\TeX{} and it will automatically switch
-between producing pdf and dvi according to the name it is called with: use the \verb|pdflatex|
-command to get pdf output and \verb|latex| for normal dvi output.
-
-\section{Working with \hologo{XeLaTeX}}
+\section{Working with \hologo{XeLaTeX} and PDF}
 \label{sec:xetex}\index{PDF}\index{XeTeX@\hologo{XeTeX}}\index{XeLaTeX@\hologo{XeLaTeX}}
 
 \secby{Axel Kielhorn}{A.Kielhorn@web.de}%
-Most of the things said about pdf\LaTeX\ are valid for \hologo{XeLaTeX} as well.
+Most of the things said in the previous section are valid for \hologo{XeLaTeX} as well.
 
 There is a Wiki at \url{http://wiki.xelatex.org/doku.php} that collects
-information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}. 
+information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}.
 
 \subsection{The Fonts}
 
@@ -931,7 +635,7 @@ You can use every font installed on your computer, but remember that other
 users may not have these fonts. The Zapfino font used in the \pai{fontspec}
 manual is included in Mac OSX, but is not available on Windows
 computers.\footnote{A commercial version of the font called Zapfino Extra is
-available.} 
+available.}
 
 \subsubsection{Entering Unicode Characters}
 
@@ -941,7 +645,7 @@ regular keyboard has not. So, how do I enter non-ASCII characters?
 If you write a large amount of text in a foreign language, you can install a
 keyboard for that language and print out the character positions. (Most
 operatings system have some sort of virtual keyboard, just make a
-screenshot.) 
+screenshot.)
 
 If you rarely need an exotic character, you can simply pick it in the
 character palette.
@@ -960,7 +664,7 @@ There are a few things that are different between \hologo{XeLaTeX} and \hologo{p
 \item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
 	support for character protrusion is already under development.
 \item Everything font related has to be reviewed. (Unless you want to stick
-	to Latin Modern.) 
+	to Latin Modern.)
 \end{itemize}
 
 \section{Creating Presentations}
@@ -968,7 +672,7 @@ There are a few things that are different between \hologo{XeLaTeX} and \hologo{p
 \secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}
 You can present the results of your scientific work on a blackboard,
 with transparencies, or directly from your laptop using some
-presentation software. 
+presentation software.
 
 \wi{pdf\LaTeX} combined with the \pai{beamer} class allows you to
 create presentations in PDF, looking much like something you might be
@@ -978,11 +682,11 @@ systems.
 
 The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 \pai{hyperref} with options adapted to screen presentations.
-%La figure~\ref{fig:pdfscr} contient un exemple de fichier minimal à
-%compiler avec \wi{pdf\LaTeX} et le 
-%résultat produit.
+%La figure~\ref{fig:pdfscr} contient un exemple de fichier minimal
+%compiler avec \wi{pdf\LaTeX} et le
+%rsultat produit.
 
-% Écran capturé par ImageMagick (man ImageMagick) fonction « import »
+% cran captur par ImageMagick (man ImageMagick) fonction  import
 % et convertie en jpg toujours par ImageMagick.
 
 \begin{figure}[htbp]
@@ -1016,7 +720,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
       \item confuse a cat\pause
     \end{itemize}
   \end{block}
-  and many other things 
+  and many other things
 \end{frame}
 \end{document}
 \end{verbatim}
