@@ -47,7 +47,7 @@ a box any more, I can simply change the definition of the
 \texttt{lscommand} environment to create a new look. This is much
 easier than going through the whole document to hunt down all the
 places where I have used some generic \LaTeX{} commands to draw a
-box around some word. 
+box around some word.
 
 
 \subsection{New Commands}
@@ -57,7 +57,7 @@ To add your own commands, use the
 \ci{newcommand}\verb|{|%
        \emph{name}\verb|}[|\emph{num}\verb|]{|\emph{definition}\verb|}|
 \end{lscommand}
-\noindent command. 
+\noindent command.
 Basically, the command requires two arguments: the \emph{name} of the
 command you want to create, and the \emph{definition} of the command.
 The \emph{num} argument in square brackets is optional and specifies the number
@@ -67,14 +67,14 @@ If missing it defaults to 0, i.e. no argument allowed.
 The following two examples should help you to get the idea.
 The first example defines a new command called \ci{tnss}. This is
 short for ``The Not So Short Introduction to \LaTeXe.'' Such a command
-could come in handy if you had to write the title of this book over 
-and over again. 
+could come in handy if you had to write the title of this book over
+and over again.
 
 \begin{example}
 \newcommand{\tnss}{The not
     so Short Introduction to
     \LaTeXe}
-This is ``\tnss'' \ldots{} 
+This is ``\tnss'' \ldots{}
 ``\tnss''
 \end{example}
 
@@ -86,9 +86,9 @@ so on.
 
 \begin{example}
 \newcommand{\txsit}[2]
- {This is the \emph{#1} 
+ {This is the \emph{#1}
   #2 Introduction to \LaTeXe}
-% in the document body: 
+% in the document body:
 \begin{itemize}
 \item \txsit{not so}{short}
 \item \txsit{very}{long}
@@ -121,12 +121,12 @@ following syntax:
 
 Again \ci{newenvironment} can have
 an optional argument. The material specified
-in the \emph{before} argument is processed before the text in the 
+in the \emph{before} argument is processed before the text in the
 environment gets processed. The material in the \emph{after} argument gets
 processed when the \verb|\end{|\emph{name}\verb|}| command is encountered.
 
 The example below illustrates the usage of the \ci{newenvironment}
-command. 
+command.
 \begin{example}
 \newenvironment{king}
  {\rule{1ex}{1ex}%
@@ -134,7 +134,7 @@ command.
  {\hspace{\stretch{1}}%
       \rule{1ex}{1ex}}
 
-\begin{king} 
+\begin{king}
 My humble subjects \ldots
 \end{king}
 \end{example}
@@ -222,9 +222,9 @@ command to make the package available in your document.
 \begin{verbatim}
 % Demo Package by Tobias Oetiker
 \ProvidesPackage{demopack}
-\newcommand{\tnss}{The not so Short Introduction 
+\newcommand{\tnss}{The not so Short Introduction
                    to \LaTeXe}
-\newcommand{\txsit}[1]{The \emph{#1} Short 
+\newcommand{\txsit}[1]{The \emph{#1} Short
                        Introduction to \LaTeXe}
 \newenvironment{king}{\begin{quote}}{\end{quote}}
 \end{verbatim}
@@ -253,14 +253,14 @@ and font size based on the logical structure of the document
 (sections, footnotes, \ldots).  In some cases, one might like to change
 fonts and sizes by hand. To do this, use the commands listed in
 Tables~\ref{fonts} and~\ref{sizes}. The actual size of each font
-is a design issue and depends on the document class and its options. 
+is a design issue and depends on the document class and its options.
 Table~\ref{tab:pointsizes} shows the absolute point size for these
 commands as implemented in the standard document classes.
 
 \begin{example}
-{\small The small and 
+{\small The small and
 \textbf{bold} Romans ruled}
-{\Large all of great big 
+{\Large all of great big
 \textit{Italy}.}
 \end{example}
 
@@ -384,10 +384,10 @@ significant role. They are used to build \emph{groups}.  Groups
 limit the scope of most \LaTeX{} commands.\index{grouping}
 
 \begin{example}
-He likes {\LARGE large and 
-{\small small} letters}. 
+He likes {\LARGE large and
+{\small small} letters}.
 \end{example}
- 
+
 The font size commands also change the line spacing, but only if the
 paragraph ends within the scope of the font size command. The closing curly
 brace \verb|}| should therefore not come too early.  Note the position of
@@ -396,7 +396,7 @@ is equivalent to a blank line}
 
 
 \begin{example}
-{\Large Don't read this! 
+{\Large Don't read this!
  It is not true.
  You can believe me!\par}
 \end{example}
@@ -411,7 +411,7 @@ of text or even more, you might want to use the environment syntax for
 font changing commands.
 
 \begin{example}
-\begin{Large} 
+\begin{Large}
 This is not true.
 But then again, what is these
 days \ldots
@@ -452,11 +452,11 @@ Please note the difference between telling \LaTeX{} to
 
 \begin{example}
 \textit{You can also
-  \emph{emphasize} text if 
+  \emph{emphasize} text if
   it is set in italics,}
-\textsf{in a 
+\textsf{in a
   \emph{sans-serif} font,}
-\texttt{or in 
+\texttt{or in
   \emph{typewriter} style.}
 \end{example}
 
@@ -474,7 +474,7 @@ here is a little word of advice:\nopagebreak
 \end{quote}
 
 \section{Spacing}
- 
+
 \subsection{Line Spacing}
 
 \index{line spacing} If you want to use larger inter-line spacing in a
@@ -488,7 +488,7 @@ spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
 the lines are not spread, so the default line spread factor
 is~1.\index{double line spacing}
 
-Note that the effect of the \ci{linespread} command is rather drastic and     
+Note that the effect of the \ci{linespread} command is rather drastic and
 not appropriate for published work. So if you have a good reason for
 changing the line spacing you might want to use the command:
 \begin{lscommand}
@@ -520,7 +520,7 @@ By placing a definition like
 \end{code}
 in the preamble of the input file, you can change the layout of
 paragraphs. These two commands increase the space between two paragraphs
-while setting the paragraph indent to zero.  
+while setting the paragraph indent to zero.
 
 The \texttt{plus} and \texttt{minus} parts of the length above tell
 \TeX{} that it can compress and expand the inter-paragraph skip by the
@@ -537,7 +537,7 @@ because you'll find that most professional books use indenting and not
 spacing to separate paragraphs.
 
 
-If you want to indent a paragraph that is not indented, use 
+If you want to indent a paragraph that is not indented, use
 \begin{lscommand}
 \ci{indent}
 \end{lscommand}
@@ -546,7 +546,7 @@ If you want to indent a paragraph that is not indented, use
 this will only have an effect when \verb|\parindent| is not set to
 zero.
 
-To create a non-indented paragraph, use 
+To create a non-indented paragraph, use
 \begin{lscommand}
 \ci{noindent}
 \end{lscommand}
@@ -564,17 +564,17 @@ automatically. To add horizontal space, use: \index{horizontal!space}
 If such a space should be kept even if it falls at the end or the
 start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
 \emph{length} in the simplest case is just a number plus a unit.  The
-most important units are listed in Table~\ref{units}. 
+most important units are listed in Table~\ref{units}.
 \index{units}\index{dimensions}
 
 \begin{example}
-This\hspace{1.5cm}is a space 
-of 1.5 cm. 
+This\hspace{1.5cm}is a space
+of 1.5 cm.
 \end{example}
 \suppressfloats
 \begin{table}[tbp]
 \caption{\TeX{} Units.} \label{units}\index{units}
-\begin{lined}{9.5cm} 
+\begin{lined}{9.5cm}
 \begin{tabular}{@{}ll@{}}
 \texttt{mm} & millimetre $\approx 1/25$~inch \quad \demowidth{1mm} \\
 \texttt{cm} & centimetre = 10~mm  \quad \demowidth{1cm}                     \\
@@ -588,11 +588,11 @@ of 1.5 cm.
 \end{lined}
 \end{table}
 
-\label{cmd:stretch} 
+\label{cmd:stretch}
 The command
 \begin{lscommand}
 \ci{stretch}\verb|{|\emph{n}\verb|}|
-\end{lscommand} 
+\end{lscommand}
 \noindent generates a special rubber space. It stretches until all the
 remaining space on a line is filled up. If multiple
 \verb|\hspace{\stretch{|\emph{n}\verb|}}| commands are issued on the same
@@ -614,7 +614,7 @@ This can be done by using the text-relative units \texttt{em} and
 {\Large{}big\hspace{1em}y}\\
 {\tiny{}tin\hspace{1em}y}
 \end{example}
- 
+
 \subsection{Vertical Space}
 The space between paragraphs, sections, subsections, \ldots\ is
 determined automatically by \LaTeX. If necessary, additional vertical
@@ -645,7 +645,7 @@ within a table is specified with the
 \begin{lscommand}
 \ci{\bs}\verb|[|\emph{length}\verb|]|
 \end{lscommand}
-\noindent command. 
+\noindent command.
 
 With \ci{bigskip} and \ci{smallskip} you can skip a predefined amount of
 vertical space without having to worry about exact numbers.
@@ -675,9 +675,9 @@ vertical space without having to worry about exact numbers.
 \end{figure}
 \index{page layout}
 \LaTeXe{} allows you to specify the \wi{paper size} in the
-\verb|\documentclass| command. It then automatically picks the right 
-text \wi{margins}, but sometimes you may not be happy with 
-the predefined values. Naturally, you can change them. 
+\verb|\documentclass| command. It then automatically picks the right
+text \wi{margins}, but sometimes you may not be happy with
+the predefined values. Naturally, you can change them.
 %no idea why this is needed here ...
 \thispagestyle{fancyplain}
 Figure~\ref{fig:layout} shows all the parameters that can be changed.
@@ -703,7 +703,7 @@ This is also why newspapers are typeset in multiple columns.
 So if you increase the width of your body text, keep in mind that you
 are making life difficult for the readers of your paper. But enough
 of the cautioning, I promised to tell you how you do it \ldots
- 
+
 \LaTeX{} provides two commands to change these parameters. They are
 usually used in the document preamble.
 
@@ -715,7 +715,7 @@ The first command assigns a fixed value to any of the parameters:
 The second command adds a length to any of the parameters:
 \begin{lscommand}
 \ci{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
-\end{lscommand} 
+\end{lscommand}
 
 This second command is actually more useful than the \ci{setlength}
 command, because it works relative to the existing settings.
@@ -759,14 +759,14 @@ depth of a text string.
 a^2+b^2=c^2
 \end{displaymath}
 
-\begin{vardesc}{Where}$a$, 
-$b$ -- are adjacent to the right 
-angle of a right-angled triangle.  
+\begin{vardesc}{Where}$a$,
+$b$ -- are adjacent to the right
+angle of a right-angled triangle.
 
-$c$ -- is the hypotenuse of 
+$c$ -- is the hypotenuse of
 the triangle and feels lonely.
 
-$d$ -- finally does not show up 
+$d$ -- finally does not show up
 here at all. Isn't that puzzling?
 \end{vardesc}
 \end{example}
@@ -776,7 +776,7 @@ here at all. Isn't that puzzling?
 letter is a little box, which is then glued to other letters to form
 words. These are again glued to other words, but with special glue,
 which is elastic so that a series of words can be squeezed or
-stretched as to exactly fill a line on the page. 
+stretched as to exactly fill a line on the page.
 
 I admit, this is a very simplistic version of what really happens, but the
 point is that \TeX{} operates on glue and boxes. Letters are not the only
@@ -846,12 +846,12 @@ the \ci{makebox} and \ci{framebox} commands.
     c e n t r a l}\par
 \makebox[\textwidth][s]{%
     s p r e a d}\par
-\framebox[1.1\width]{Guess I'm 
+\framebox[1.1\width]{Guess I'm
     framed now!} \par
-\framebox[0.8\width][r]{Bummer, 
+\framebox[0.8\width][r]{Bummer,
     I am too wide} \par
-\framebox[1cm][l]{never 
-    mind, so am I} 
+\framebox[1cm][l]{never
+    mind, so am I}
 Can you read this?
 \end{example}
 

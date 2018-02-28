@@ -1,3 +1,14 @@
+6.2 2018.02.28
+--------------
+* drop the babel apppendix
+* switch to using polyglossia for lshort itself
+* rearranged the multilanguage section again
+
+6.1 2018.02.27
+--------------
+* rearranged the multilanguage section
+* moved the graphicx section into the 2nd chapter
+
 6.0 2018.02.26
 --------------
 * removed most mentions of dvi

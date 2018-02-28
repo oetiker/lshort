@@ -13,9 +13,34 @@
 \else
    \ifXeTeX
      \RequirePackage{fontspec}
+     \setmainfont{cmun}[
+      Extension=.otf,
+      UprightFont=*rm,
+      ItalicFont=*ti,
+      BoldFont=*bx,
+      BoldItalicFont=*bi,
+    ]
+    \setsansfont{cmun}[
+      Extension=.otf,
+      UprightFont=*ss,
+      ItalicFont=*si,
+      BoldFont=*sx,
+      BoldItalicFont=*so,
+    ]
+    \setmonofont{cmun}[
+      Extension=.otf,
+      UprightFont=*btl,% light version
+      ItalicFont=*bto,%  light version
+      BoldFont=*tb,
+      BoldItalicFont=*tx,
+    ]
    \else
-     \RequirePackage{luatextra}
+    \setsansfont{CMU Sans Serif}
+    \setmonofont{CMU Typewriter Text}
+    \setmainfont{CMU Serif}
+    \RequirePackage{luatextra}
    \fi
+
    \defaultfontfeatures{Ligatures=TeX}
 \fi
 %save pageref an label
@@ -23,11 +48,16 @@
 \ProvidesPackage{lshort}
 \RequirePackage{etex}
 \RequirePackage[autolanguage]{numprint}
-\RequirePackage[english,francais,german,greek]{babel}
+\RequirePackage{polyglossia}
+\setdefaultlanguage{english}
+\setotherlanguage{german}
+\setotherlanguage{greek}
+\setotherlanguage{russian}
+\RequirePackage[autostyle]{csquotes}
 \RequirePackage{mflogo}
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
-\RequirePackage{fancyhea}
+\RequirePackage{fancyhdr}
 \RequirePackage{calc}
 \RequirePackage{lastpage}
 \RequirePackage{amsmath,latexsym,amsthm}

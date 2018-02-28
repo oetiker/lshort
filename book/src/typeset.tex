@@ -185,8 +185,8 @@ stored for the language that is active when the hyphenation command
 occurs. This means that if you place a hyphenation command into the preamble
 of your document it will influence the English language hyphenation. If you
 place the command after the \verb|\begin{document}| and you are using some
-package for national language support like \pai{babel}, then the hyphenation
-hints will be active in the language activated through \pai{babel}.
+package for national language support like \pai{polyglossia}, then the hyphenation
+hints will be active in the language activated through \pai{polyglossia}.
 
 The example below will allow ``hyphenation'' to be hyphenated as well as
 ``Hyphenation'', and it prevents ``FORTRAN'', ``Fortran'' and ``fortran''
@@ -453,6 +453,7 @@ Stra\ss e
 \end{table}
 
 \section{International Language Support}
+\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
 \index{international} When you write documents in \wi{language}s
 other than English, there are three areas where \LaTeX{} has to be
 configured appropriately:
@@ -460,13 +461,8 @@ configured appropriately:
 \begin{enumerate}
 \item All automatically generated text strings\footnote{Table of
     Contents, List of Figures, \ldots} have to be adapted to the new
-  language.  For many languages, these changes can be accomplished by
-  using the \pai{babel} package by Johannes Braams.
-\item \LaTeX{} needs to know the hyphenation rules for the new
-  language. Getting hyphenation rules into \LaTeX{} is a bit more
-  tricky. It means rebuilding the format file with different
-  hyphenation patterns enabled. Your \guide{} should give more
-  information on this.
+  language.
+\item \LaTeX{} needs to know the hyphenation rules for the current language.
 \item Language specific typographic rules. In French for example, there is a
   mandatory space before each colon character (:).
 \end{enumerate}
@@ -476,78 +472,35 @@ commands from figure~\ref{accents}. To overcome this problem, until recently you
 deep into the abyss of language specific encodings both for input as well as fonts. These days,
 with modern \TeX{} engines speaking UTF-8 natively, these problems have relaxed considerably.
 
-So without any further ado, here are the settings you have to put into the preamble of your document
-to make it fit for non-english content.
-
-For \hologo{pdfLaTeX}:
-
-\begin{lscommand}
-\verb|\usepackage[T1]{fontenc}|\\
-\verb|\usepackage[utf8]{inputenc}|\\
-\verb|\usepackage{lmodern}|
-\end{lscommand}
-
-For \hologo{XeLaTeX}:
-
-\begin{lscommand}
-\verb|\usepackage{fontspec}|\\
-\verb|\defaultfontfeatures{Ligatures=TeX}|
-\end{lscommand}
-
-For \hologo{LuaLaTeX}:
-
-\begin{lscommand}
-\verb|\usepackage{luatextra}|\\
-\verb|\defaultfontfeatures{Ligatures=TeX}|
-\end{lscommand}
-
-Figure~\ref{allinone} on page~\pageref{allinone} shows a sample preamble that takes care of all the necessary settings.
-
-\begin{figure}[!bp]
-\begin{lined}{10cm}
-\begin{verbatim}
-\usepackage{iftex}
-\ifPDFTeX
-   \usepackage[utf8]{inputenc}
-   \usepackage[T1]{fontenc}
-   \usepackage{lmodern}
-\else
-   \ifXeTeX
-     \usepackage{fontspec}
-   \else
-     \usepackage{luatextra}
-   \fi
-   \defaultfontfeatures{Ligatures=TeX}
-\fi
-\end{verbatim}
-\end{lined}
-\caption[All in one preamble]{All in one preamble that takes care of all three pdf generating \TeX{} engines.} \label{allinone}
-\end{figure}
-
-\section{Multilingual Texts with Polyglossia}
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
 The package \pai{polyglossia}\cite{polyglossia} is a replacement for
 venerable \pai{babel} package. It takes care of the hyphenation patterns and automatically
-generated text strings in your non-english documents. The option \verb|babelshorthands| enables
-\pai{babel} compatible shorthands for german and catalan.
+generated text strings in your documents.
 
 The package \pai{fontspec}\cite{fontspec} handles font loading for
 \hologo{XeLaTeX} and \hologo{LuaTeX}. The default font is Latin Modern
 Roman.
 
-Note that some \hologo{TeX} command are ligatures
-defined in the Computer Modern fonts. If you want to use them with a
-non-\hologo{TeX} font, you have to fake them. The option
-\texttt{Ligatures=TeX} defines the following ligatures:
+\subsection{Polyglossia Usage}
 
-\begin{tabular}{rr@{~~~~}rr@{~~~~}rr}
-\verb|--|	& -- & \verb|---|	& --- & \verb|''|	& ''\\
-\verb|``|	& `` & \verb|!`|	& !`  &  \verb|?`|	& ?`\\
-\verb|,,|	& ,, & \verb|<<|	& <<\\ & \verb|>>|	& >>\\
-\end{tabular}
+Depending on the \TeX{} engine you use slighly different commands are
+necessary in the preamble of your document to properly enable multilingual
+processing. Figure~\ref{allinone} on page~\pageref{allinone} shows a sample preamble that takes care of all the necessary settings.
 
-\subsubsection{It's all $\Gamma\rho\epsilon\epsilon\kappa$ to me}
-%\subsubsection{It's all \textgreek{Ellenik'a} to me} % this requires greek babel.
+\begin{figure}[!bp]
+\begin{lined}{10cm}
+\begin{verbatim}
+\usepackage{iftex}
+\ifXeTeX
+   \usepackage{fontspec}
+\else
+   \usepackage{luatextra}
+\fi
+\defaultfontfeatures{Ligatures=TeX}
+\usepackage{polyglossia}
+\end{verbatim}
+\end{lined}
+\caption[All in one preamble]{All in one preamble that takes care of \hologo{LuaLaTeX} and \hologo{XeLaTeX}} \label{allinone}
+\end{figure}
 
 So far there has been no advantage to using a Unicode \hologo{TeX} engine.
 This changes when we leave the Latin script and move to a more interesting
@@ -555,51 +508,76 @@ language like Greek or Russian.  With a Unicode based system, you can
 simply\footnote{For small values of simple.} enter the native characters in your
 editor and \hologo{TeX} will understand them.
 
-Writing in different languages is easy, just specify the languages in the preamble:
+Writing in different languages is easy, just specify the languages in the
+preamble. This example uses the \pai{csquotes} package which generates
+the right kind of quotes according to the language you are writing in. Note
+that it needs to be loaded \emph{before} loading the language support.
 
 \begin{lscommand}
+\verb|\usepackage[autostyle=true]{csquotes}|\\
 \verb|\setdefaultlanguage{english}|\\
-\verb|\setotherlanguage[babelshorthands]{german}|
+\verb|\setotherlanguage{german}|
 \end{lscommand}
 %
 To write a paragraph in German, you can use the German environment:
 
-\begin{lscommand}
-English text.\\
-\verb|\begin{german}|\\
-Deutscher Text.\\
-\verb|\end{german}|\\
-More English text.
-\end{lscommand}
+\begin{example}
+English text.
+\begin{german}
+Deutscher \enquote{Text}.
+\end{german}
+More English \enquote{text}.
+\end{example}
 
 If you just need a word in a foreign language you can use the
 \verb|\text|\emph{language} command:
 
-\begin{lscommand}
-\verb|English text. \textgerman{Gesundheit} is actually a German word.|
-\end{lscommand}
+\begin{example}
+Did you know that
+\textgerman{Gesundheit} is
+actually a German word.
+\end{example}
 
 This may look unnecessary since the only advantage is a correct hyphenation,
 but when the second language is a little bit more exotic it will be worth
 the effort.
 
 Sometimes the font used in the main document does not contain glyphs that
-are required in the second language\footnote{Latin Modern does not contain
-Cyrillic letters}. The solution is to define a font that will be used for
+are required in the second language. Latin Modern for example does not contain
+Cyrillic letters. The solution is to define a font that will be used for
 that language. Whenever a new language is activated, \pai{polyglossia} will
-first check whether a font has been defined for that language.
+first check whether a font has been defined for that language. If you are happy with the computer modern font, you may want to try the \enquote{Computer Modern Unicode} font by adding the following commands to the preamble of your document.
 
-\begin{lscommand}
-\verb|\newfontfamily\russianfont[Script=Cyrillic,(...)]{(font)}|
-\end{lscommand}
+\medskip\noindent For \hologo{LuaLaTeX} it is pretty simple
+\begin{verbatim}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+\end{verbatim}
+\noindent For \hologo{XeLaTeX} you have to be a bit more explicit:
+\begin{verbatim}
+\setmainfont{cmun}[
+   Extension=.otf,UprightFont=*rm,ItalicFont=*ti,
+   BoldFont=*bx,BoldItalicFont=*bi,
+ ]
+ \setsansfont{cmun}[
+   Extension=.otf,UprightFont=*ss,ItalicFont=*si,
+   BoldFont=*sx,BoldItalicFont=*so,
+ ]
+ \setmonofont{cmun}[
+   Extension=.otf,UprightFont=*btl,ItalicFont=*bto,
+   BoldFont=*tb,BoldItalicFont=*tx,
+ ]
+\end{verbatim}
 
-Now you can write
+With the appropriate fonts loaded, you can now write:
 
-\begin{lscommand} \verb|\textrussian{Pravda} is a russian newspaper.|
-\end{lscommand}
-%
-Since this document is written in Latin1-encoding, I cannot show the actual
-Cyrillic\index{Russian}\index{Cyrillic} letters.
+\begin{example}
+\textrussian{Правда} is
+a russian newspaper.
+\textgreek{ἀλήθεια} is truth
+or disclosure in philosophy
+\end{example}
 
 The package \pai{xgreek}\index{Greek}\cite{xgreek} offers support for
 writing either ancient or modern (monotonic or polytonic) greek.
@@ -1230,6 +1208,76 @@ in the \pai{booktabs} package. It makes the creation of professional looking
 tables with proper spacing quite a bit simpler.
 
 
+
+\section{Including Graphics and Images}\label{eps}
+
+As explained in the previous section \LaTeX{} provides the facilities to work with floating bodies,
+such as images or graphics, with the \texttt{figure} and
+\texttt{table} environments.
+
+A good set of commands for inclusion of graphics into these floating boddies is provided in the
+\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
+of packages called the ``graphics''
+bundle.\footnote{\CTAN|pkg/graphics|}
+
+Use the following step by step guide to
+include a picture into your document:
+
+\begin{enumerate}
+\item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
+\item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
+prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
+Note that it may be sensible to export EPS eventhough your software can export PDF too, as PDFs often are full page and will
+this get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
+\item Load the \textsf{graphicx} package in the preamble of the input
+  file with
+\begin{lscommand}
+\verb|\usepackage{graphicx}|
+\end{lscommand}
+\item Use the command
+\begin{lscommand}
+\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
+\end{lscommand}
+\noindent to include \emph{file} into your document. The optional parameter
+accepts a comma separated list of \emph{keys} and associated
+\emph{values}. The \emph{keys} can be used to alter the width, height
+and rotation of the included graphic. Table~\ref{keyvals} lists the
+most important keys.
+\end{enumerate}
+
+\begin{table}[tb]
+\caption{Key Names for \textsf{graphicx} Package.}
+\label{keyvals}
+\begin{lined}{9cm}
+\begin{tabular}{@{}ll}
+\texttt{width}& scale graphic to the specified width\\
+\texttt{height}& scale graphic to the specified height\\
+\texttt{angle}& rotate graphic counterclockwise\\
+\texttt{scale}& scale graphic \\
+\end{tabular}
+
+\bigskip
+\end{lined}
+\end{table}
+
+The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
+\begin{figure}
+\begin{lined}{9cm}
+\begin{verbatim}
+\includegraphics[angle=90,width=\textwidth]{test.png}
+\end{verbatim}
+\end{lined}
+\caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
+\end{figure}
+It includes the graphic stored in the file \texttt{test.png}. The
+graphic is \emph{first} rotated by an angle of 90 degrees and
+\emph{then} scaled to the final width of 0.5 times the width of a
+standard paragraph.  The aspect ratio is $1.0$, because no special
+height is specified.  The width and height parameters can also be
+specified in absolute dimensions. Refer to Table~\ref{units} on
+page~\pageref{units} for more information. If you want to know more
+about this topic, make sure to read \cite{graphics}.
+
 \section{Floating Bodies}
 Today most publications contain a lot of figures and tables. These
 elements need special treatment, because they cannot be broken across
@@ -1362,8 +1410,8 @@ you are going to paste into the finished document.
 \begin{verbatim}
 Figure~\ref{white} is an example of Pop-Art.
 \begin{figure}[!hbtp]
-\makebox[\textwidth]{\framebox[5cm]{\rule{0pt}{5cm}}}
-\caption{Five by Five in Centimetres.\label{white}}
+\includegraphics[angle=90,width=\textwidth]{white-box.pdf}
+\caption{White Box by Peter Markus Paulian.\label{white}}
 \end{figure}
 \end{verbatim}
 \end{code}
@@ -1388,99 +1436,6 @@ Under certain circumstances it might be necessary to use the
 \noindent command. It orders \LaTeX{} to immediately place all
 floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
-
-\section{Including Graphics and Images}\label{eps}
-
-As explained in the previous section \LaTeX{} provides the facilities to work with floating bodies,
-such as images or graphics, with the \texttt{figure} and
-\texttt{table} environments.
-
-A good set of commands for inclusion of graphics into these floating boddies is provided in the
-\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
-of packages called the ``graphics''
-bundle.\footnote{\CTAN|pkg/graphics|}
-
-Use the following step by step guide to
-include a picture into your document:
-
-\begin{enumerate}
-\item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
-\item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
-prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
-Note that it may be sensible to export EPS eventhough your software can export PDF too, as PDFs often are full page and will
-this get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
-\item Load the \textsf{graphicx} package in the preamble of the input
-  file with
-\begin{lscommand}
-\verb|\usepackage{graphicx}|
-\end{lscommand}
-\item Use the command
-\begin{lscommand}
-\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
-\end{lscommand}
-\noindent to include \emph{file} into your document. The optional parameter
-accepts a comma separated list of \emph{keys} and associated
-\emph{values}. The \emph{keys} can be used to alter the width, height
-and rotation of the included graphic. Table~\ref{keyvals} lists the
-most important keys.
-\end{enumerate}
-
-\begin{table}[tb]
-\caption{Key Names for \textsf{graphicx} Package.}
-\label{keyvals}
-\begin{lined}{9cm}
-\begin{tabular}{@{}ll}
-\texttt{width}& scale graphic to the specified width\\
-\texttt{height}& scale graphic to the specified height\\
-\texttt{angle}& rotate graphic counterclockwise\\
-\texttt{scale}& scale graphic \\
-\end{tabular}
-
-\bigskip
-\end{lined}
-\end{table}
-
-The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
-\begin{figure}
-\begin{lined}{9cm}
-\begin{verbatim}
-\begin{figure}
-\centering
-\includegraphics[angle=90,
-                 width=0.5\textwidth]{test.png}
-\caption{This is a test.}
-\end{figure}
-\end{verbatim}
-\end{lined}
-\caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
-\end{figure}
-It includes the graphic stored in the file \texttt{test.png}. The
-graphic is \emph{first} rotated by an angle of 90 degrees and
-\emph{then} scaled to the final width of 0.5 times the width of a
-standard paragraph.  The aspect ratio is $1.0$, because no special
-height is specified.  The width and height parameters can also be
-specified in absolute dimensions. Refer to Table~\ref{units} on
-page~\pageref{units} for more information. If you want to know more
-about this topic, make sure to read \cite{graphics}.
-
-\section{Protecting Fragile Commands}
-
-Text given as arguments of commands like \ci{caption} or \ci{section} may
-show up more than once in the document (e.g.\ in the table of contents as
-well as in the body of the document). Some commands will break when used in
-the argument of \ci{section}-like commands. Compilation of your document
-will fail. These commands are called \wi{fragile commands}---for example,
-\ci{footnote} or \ci{phantom}. These fragile commands need protection (don't
-we all?). Protect them by putting the \ci{protect} command in front
-of them. Now they will work properly even when used in moving arguments.
-
-\ci{protect} only affects the next command, not even
-to its arguments. In most cases a superfluous \ci{protect} won't hurt.
-
-\begin{code}
-\verb|\section{I am considerate|\\
-\verb|      \protect\footnote{and protect my footnotes}}|
-\end{code}
 
 % Local Variables:
 % TeX-master: "lshort2e"
