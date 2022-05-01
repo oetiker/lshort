@@ -5,7 +5,7 @@ VERS = 6.4
 OTHER = README CHANGES
 FILES = src/biblio.tex src/math.tex src/things.tex src/contrib.tex src/lshort.sty src/mylayout.sty src/title.tex \
 	src/custom.tex src/lshort.tex src/overview.tex src/typeset.tex src/lssym.tex src/spec.tex \
-	src/lshort-base.tex src/lshort-letter.tex src/lshort-a5.tex src/graphic.tex src/appendix.tex
+	src/lshort-base.tex src/lshort-letter.tex src/lshort-a5.tex src/graphic.tex src/appendix.tex src/license.tex
 
 # Define some variables
 LATEX=latex
