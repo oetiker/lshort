@@ -433,7 +433,9 @@ there might be some typing involved, so here is how to coax \LaTeX{} into
 compiling your input file on a text based system. Please note: this
 description assumes that a working \LaTeX{} installation already sits on
 your computer.\footnote{This is the case with most well groomed Unix
-Systems, and \ldots{} Real Men use Unix, so \ldots{} \texttt{;-)}}
+Systems, and \ldots{} Real Men use Unix, so \ldots{} \texttt{;-)}} If this is 
+not the case you may want to look at Appendix~\ref{installinglatex} 
+on page~\pageref{installinglatex} first.
 
 \begin{enumerate}
 \item
@@ -519,7 +521,7 @@ purposes.
     paper}\index{B5 paper}\index{executive paper}
 
 \item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
-  instead of cenetred.
+  instead of centred.
 
 \item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
   left hand side instead of the right.
@@ -596,7 +598,7 @@ preinstalled. If you are working on a Unix system, use the command
 \item[\normalfont\pai{doc}] Allows the documentation of \LaTeX{} programs.\\
  Described in \texttt{doc.dtx}\footnote{This file should be installed
    on your system, and you should be able to get a \texttt{dvi} file
-   by typing \texttt{xelatex doc.dtx} in any directory where you have
+   by typing \texttt{latex doc.dtx} in any directory where you have
    write permission. The same is true for all the
    other files mentioned in this table.}  and in \companion.
 
@@ -636,7 +638,7 @@ preinstalled. If you are working on a Unix system, use the command
 \LaTeX{} supports three predefined \wi{header}/\wi{footer}
 combinations---so-called \wi{page style}s. The \emph{style} parameter
 of the \index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}
-\index{page style!headings@\texttt{headings}}\index{headings@\texttt{headings}}
+\index{page style!headings@\texttt{headings}}\index{headings@texttt{headings}}
 \index{page style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
 \begin{lscommand}
 \ci{pagestyle}\verb|{|\emph{style}\verb|}|
@@ -687,7 +689,7 @@ think is important, please drop me a line.
 \begin{description}
 
 \item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
-  \texttt{xelatex}.
+  \texttt{latex}.
 \item[\eei{.sty}] \LaTeX{} Macro package. Load this
   into your \LaTeX{} document using the \ci{usepackage} command.
 \item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
