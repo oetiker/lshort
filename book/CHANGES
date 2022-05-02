@@ -1,3 +1,11 @@
+UNRELEASED
+----------
+* add full text of license for easier distribution / marcin-serwin
+* switch to biblatex for bibliography generation / marcin-serwin
+* replace bunch of links with citations / marcin-serwin
+* use booktabs for table typesetting / marcin-serwin
+* replace most of direct text formatting with logical markup in math chapter / marcin-serwin
+
 6.4 2021.03.09
 --------------
 * a bunch of spelling issues fixed
