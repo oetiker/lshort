@@ -360,9 +360,10 @@ If you prefer a Euro symbol that matches your font, use the option
 %slanted and bold variants of the Euro symbol.
 
 \begin{table}[!htbp]
+  \centering
 \caption{A bag full of Euro symbols} \label{eurosymb}
-\begin{lined}{10cm}
-\begin{tabular}{llccc}
+\begin{tabular}{@{}llccc@{}}
+\toprule
 LM+textcomp  &\verb+\texteuro+ & \huge\texteuro &\huge\sffamily\texteuro
                                                 &\huge\ttfamily\texteuro\\
 eurosym      &\verb+\euro+ & \huge\officialeuro &\huge\sffamily\officialeuro
@@ -375,9 +376,9 @@ $[$gen$]$eurosym &\verb+\euro+ & \huge\geneuro  &\huge\sffamily\geneuro
 %                                             & \huge\ttfamily\EUROSANS \\
 %marvosym     &\verb+\EURtm+  & \huge\mvchr101  &\huge\mvchr101
 %                                               &\huge\mvchr101
+\bottomrule
 \end{tabular}
 \medskip
-\end{lined}
 \end{table}
 
 \subsection{Ellipsis (\texorpdfstring{\ldots}{...})}
@@ -433,9 +434,10 @@ Sch\"onbrunner Schlo\ss{}
 Stra\ss e
 \end{example}
 \begin{table}[!hbp]
+  \centering
 \caption{Accents and Special Characters.} \label{accents}
-\begin{lined}{10cm}
-\begin{tabular}{*4{cl}}
+\begin{tabular}{@{}*4{cl}@{}}
+  \toprule
 \mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
 \mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
 \mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
@@ -443,14 +445,14 @@ Stra\ss e
 \mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
 \mstA{\aa} &  \mstA{\AA} \\[6pt]
 \mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
-\mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`|
+\mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
+\bottomrule
 \end{tabular}
 \index{dotless \i{} and \j}\index{Scandinavian letters}
 \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
 \index{oe@\oe}\index{aa@\aa}
 
 \bigskip
-\end{lined}
 \end{table}
 
 \section{International Language Support}
@@ -1246,18 +1248,19 @@ most important keys.
 \end{enumerate}
 
 \begin{table}[tb]
+\centering
 \caption{Key Names for \textsf{graphicx} Package.}
 \label{keyvals}
-\begin{lined}{9cm}
-\begin{tabular}{@{}ll}
+\begin{tabular}{@{}ll@{}}
+  \toprule
 \texttt{width}& scale graphic to the specified width\\
 \texttt{height}& scale graphic to the specified height\\
 \texttt{angle}& rotate graphic counterclockwise\\
 \texttt{scale}& scale graphic \\
+\bottomrule
 \end{tabular}
 
 \bigskip
-\end{lined}
 \end{table}
 
 The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
@@ -1311,23 +1314,23 @@ is allowed to be moved.  A \emph{placement specifier} is constructed by building
 of \emph{float-placing permissions}. See Table~\ref{tab:permiss}.
 
 \begin{table}[!bp]
+\begin{minipage}{\textwidth}
+\centering
 \caption{Float Placing Permissions.}\label{tab:permiss}
-\noindent \begin{minipage}{\textwidth}
-\medskip
-\begin{center}
 \begin{tabular}{@{}cp{8cm}@{}}
+  \toprule
 Spec&Permission to place the float \ldots\\
-\hline
-\rule{0pt}{1.05em}\texttt{h} & \emph{here} at the very place in the text
+\midrule
+\texttt{h} & \emph{here} at the very place in the text
   where it occurred.  This is useful mainly for small floats.\\[0.3ex]
 \texttt{t} & at the \emph{top} of a page\\[0.3ex]
 \texttt{b} & at the \emph{bottom} of a page\\[0.3ex]
 \texttt{p} & on a special \emph{page} containing only floats.\\[0.3ex]
 \texttt{!} & without considering most of the  internal parameters\footnote{Such as the
     maximum number of floats allowed  on one page.}, which could otherwise stop this
-  float from being placed.
+  float from being placed. \\
+  \bottomrule
 \end{tabular}
-\end{center}
 \end{minipage}
 \end{table}
 

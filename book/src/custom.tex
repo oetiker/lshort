@@ -274,14 +274,15 @@ switch to another font for math typesetting you need another
 special set of commands; refer to Table~\ref{mathfonts}.
 
 \begin{table}[!bp]
-\caption{Fonts.} \label{fonts}
-\begin{lined}{12cm}
+  \centering
+  \caption{Fonts.} \label{fonts}
 %
 % Alan suggested not to tell about the other form of the command
 % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
 %
 \begin{tabular}{@{}rl@{\qquad}rl@{}}
-\fni{textrm}\verb|{...}|        &       \textrm{\wi{roman}}&
+  \toprule
+  \fni{textrm}\verb|{...}|        &       \textrm{\wi{roman}}&
 \fni{textsf}\verb|{...}|        &       \textsf{\wi{sans serif}}\\
 \fni{texttt}\verb|{...}|        &       \texttt{typewriter}\\[6pt]
 \fni{textmd}\verb|{...}|        &       \textmd{medium}&
@@ -290,46 +291,46 @@ special set of commands; refer to Table~\ref{mathfonts}.
 \fni{textit}\verb|{...}|        &       \textit{\wi{italic}}\\
 \fni{textsl}\verb|{...}|        &       \textsl{\wi{slanted}}&
 \fni{textsc}\verb|{...}|        &       \textsc{\wi{Small Caps}}\\[6pt]
-\fni{textnormal}\verb|{...}|    &       \textnormal{document} font &&
+\fni{textnormal}\verb|{...}|    &       \textnormal{document} font && \\
+  \bottomrule
 \end{tabular}
 
 \bigskip
-\end{lined}
 \end{table}
 
 
 \begin{table}[!bp]
+  \centering
 \index{font size}
 \caption{Font Sizes.} \label{sizes}
-\begin{lined}{12cm}
-\begin{tabular}{@{}ll}
-\fni{tiny}      & \tiny        tiny font \\
-\fni{scriptsize}   & \scriptsize  very small font\\
-\fni{footnotesize} & \footnotesize  quite small font \\
-\fni{small}        &  \small            small font \\
-\fni{normalsize}   &  \normalsize  normal font \\
-\fni{large}        &  \large       large font
+\begin{tabular}{@{}llll@{}}
+  \toprule
+  \fni{tiny}      & \tiny        tiny font &
+  \fni{Large}        &  \Large       larger font \\
+  \fni{scriptsize}   & \scriptsize  very small font &
+  \fni{LARGE}        &  \LARGE       very large font \\
+  \fni{footnotesize} & \footnotesize  quite small font &
+  \multirow{2}{*}{\fni{huge}}         &  \multirow{2}{*}{\huge        huge} \\
+  \fni{small}        &  \small            small font && \\
+  \fni{normalsize}   &  \normalsize  normal font &
+  \multirow{2}{*}{\fni{Huge}}         &  \multirow{2}{*}{\Huge        largest} \\
+  \fni{large}        &  \large       large font  && \\
+  \bottomrule
 \end{tabular}%
-\qquad\begin{tabular}{ll@{}}
-\fni{Large}        &  \Large       larger font \\[5pt]
-\fni{LARGE}        &  \LARGE       very large font \\[5pt]
-\fni{huge}         &  \huge        huge \\[5pt]
-\fni{Huge}         &  \Huge        largest
-\end{tabular}
-
 \bigskip
-\end{lined}
 \end{table}
 
-\begin{table}[!tbp]
-\caption{Absolute Point Sizes in Standard Classes.}\label{tab:pointsizes}
+\begin{table}[!tb]
+  \centering
+  \caption{Absolute Point Sizes in Standard Classes.}\label{tab:pointsizes}
 \label{tab:sizes}
-\begin{lined}{12cm}
-\begin{tabular}{lrrr}
-\multicolumn{1}{c}{size} &
+\begin{tabular}{@{}lrrr@{}}
+  \toprule
+  \multicolumn{1}{c}{size} &
 \multicolumn{1}{c}{10pt (default) } &
            \multicolumn{1}{c}{11pt option}  &
            \multicolumn{1}{c}{12pt option}\\
+           \midrule
 \verb|\tiny|       & 5pt  & 6pt & 6pt\\
 \verb|\scriptsize| & 7pt  & 8pt & 8pt\\
 \verb|\footnotesize| & 8pt & 9pt & 10pt \\
@@ -340,24 +341,26 @@ special set of commands; refer to Table~\ref{mathfonts}.
 \verb|\LARGE|      & 17pt & 17pt & 20pt\\
 \verb|\huge|       & 20pt & 20pt & 25pt\\
 \verb|\Huge|       & 25pt & 25pt & 25pt\\
+  \bottomrule
 \end{tabular}
 
 \bigskip
-\end{lined}
 \end{table}
 
 
 \begin{table}[!bp]
-\caption{Math Fonts.} \label{mathfonts}
-\begin{lined}{0.7\textwidth}
-\begin{tabular}{@{}ll@{}}
-\fni{mathrm}\verb|{...}|&     $\mathrm{Roman\ Font}$\\
-\fni{mathbf}\verb|{...}|&     $\mathbf{Boldface\ Font}$\\
-\fni{mathsf}\verb|{...}|&     $\mathsf{Sans\ Serif\ Font}$\\
-\fni{mathtt}\verb|{...}|&     $\mathtt{Typewriter\ Font}$\\
-\fni{mathit}\verb|{...}|&     $\mathit{Italic\ Font}$\\
-\fni{mathcal}\verb|{...}|&    $\mathcal{CALLIGRAPHIC\ FONT}$\\
-\fni{mathnormal}\verb|{...}|& $\mathnormal{Normal\ Font}$\\
+  \centering
+  \caption{Math Fonts.} \label{mathfonts}
+  \begin{tabular}{@{}ll@{}}
+  \toprule
+  \fni{mathrm}\verb|{...}|&     $\mathrm{Roman\ Font}$\\
+  \fni{mathbf}\verb|{...}|&     $\mathbf{Boldface\ Font}$\\
+  \fni{mathsf}\verb|{...}|&     $\mathsf{Sans\ Serif\ Font}$\\
+  \fni{mathtt}\verb|{...}|&     $\mathtt{Typewriter\ Font}$\\
+  \fni{mathit}\verb|{...}|&     $\mathit{Italic\ Font}$\\
+  \fni{mathcal}\verb|{...}|&    $\mathcal{CALLIGRAPHIC\ FONT}$\\
+  \fni{mathnormal}\verb|{...}|& $\mathnormal{Normal\ Font}$\\
+  \bottomrule
 \end{tabular}
 
 %\begin{tabular}{@{}lll@{}}
@@ -374,7 +377,6 @@ special set of commands; refer to Table~\ref{mathfonts}.
 %\end{tabular}
 
 \bigskip
-\end{lined}
 \end{table}
 
 In connection with the font size commands, \wi{curly braces} play a
@@ -572,18 +574,18 @@ of 1.5 cm.
 \suppressfloats
 \begin{table}[tbp]
 \caption{\TeX{} Units.} \label{units}\index{units}
-\begin{lined}{9.5cm}
 \begin{tabular}{@{}ll@{}}
+\toprule
 \texttt{mm} & millimetre $\approx 1/25$~inch \quad \demowidth{1mm} \\
 \texttt{cm} & centimetre = 10~mm  \quad \demowidth{1cm}                     \\
 \texttt{in} & inch $=$ 25.4~mm \quad \demowidth{1in}                    \\
 \texttt{pt} & point $\approx 1/72$~inch $\approx \frac{1}{3}$~mm  \quad\demowidth{1pt}\\
 \texttt{em} & approx width of an `M' in the current font \quad \demowidth{1em}\\
-\texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}
+\texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}\\
+\bottomrule
 \end{tabular}
 
 \bigskip
-\end{lined}
 \end{table}
 
 \label{cmd:stretch}
