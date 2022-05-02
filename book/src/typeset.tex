@@ -253,7 +253,7 @@ Command&Example&Description\\
 
 \subsection{Quotation Marks}
 
-You should \emph{not} use the \verb|"| for \wi{quotation marks}
+You should \emph{never} use the \verb|"| for \wi{quotation marks}
 \index{""@\texttt{""}} as you would on a typewriter.  In publishing
 there are special opening and closing quotation marks.  In \LaTeX{},
 use two~\textasciigrave~(grave accent) for opening quotation marks and
@@ -266,6 +266,9 @@ Yes I know the rendering is not ideal, it's really a back-tick or grave accent
 (\textasciigrave) for
 opening quotes and vertical quote (\textquotesingle) for closing, despite what the font chosen might suggest.
 
+This is not to indicate that we never type \verb|"|. One reason to use this is
+when you need to display a letter with an umlaut. We cover displaying
+special characters such as these in Section 2.4.9.
 \subsection{Dashes and Hyphens}
 
 \LaTeX{} knows four kinds of \wi{dash}es. Access three of
@@ -313,7 +316,7 @@ I will soon start to
 super-conduct.
 \end{example}
 
-The \pai{textcomp} package makes the degree symbol also available as
+The \pai{textcomp} package makes the degree symbol also available under the command
 \ci{textdegree} or in combination with the C by using the \ci{textcelsius}.
 
 \begin{example}
@@ -404,7 +407,7 @@ different letters one after the other, but by actually using special
 symbols.
 \begin{code}
 {\large ff fi fl ffi\ldots}\quad
-instead of\quad {\large f{}f f{}i f{}l f{}f{}i \ldots}
+instead of\quad {\large f\mbox{}f f\mbox{}i f\mbox{}l f\mbox{}f\mbox{}i \ldots}
 \end{code}
 These so-called \wi{ligature}s can be prohibited by inserting an \ci{mbox}\verb|{}|
 between the two letters in question. This might be necessary with
@@ -423,14 +426,12 @@ being applied to the letter o. Naturally other letters work too.
 
 To place an accent on top of an i or a j, its dots have to be
 removed. This is accomplished by typing \verb|\i| and \verb|\j|.
-
 \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\~norita!,\\
 Sch\"onbrunner Schlo\ss{}
 Stra\ss e
 \end{example}
-
 \begin{table}[!hbp]
 \caption{Accents and Special Characters.} \label{accents}
 \begin{lined}{10cm}
@@ -529,7 +530,7 @@ Deutscher \enquote{Text}.
 More English \enquote{text}.
 \end{example}
 
-If you just need a word in a foreign language you can use the
+If you just need a word or a short phrase in a foreign language you can use the
 \verb|\text|\emph{language} command:
 
 \begin{example}
@@ -582,10 +583,10 @@ or disclosure in philosophy
 The package \pai{xgreek}\index{Greek}\cite{xgreek} offers support for
 writing either ancient or modern (monotonic or polytonic) greek.
 
-\subsubsection{Right to Left (RTL) languages.}
+\subsubsection{Right to Left (RTL) languages}
 
 Some languages are written left to right, others are written right to
-left(RTL). \pai{polyglossia} needs the \pai{bidi}\cite{bidi}
+left (RTL). \pai{polyglossia} needs the \pai{bidi}\cite{bidi}
 package\footnote{\texttt{bidi} does not support \hologo{LuaTeX}.} in order
 to support RTL languages. The \pai{bidi} package should be the last package
 you load, even after \pai{hyperref} which is usually the last package.
@@ -779,7 +780,7 @@ a book:
 \item[\ci{frontmatter}] should be the very first command after
   the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
     numerals and sections will be non-enumerated as if you were using
-    the starred sectioning commands (eg \verb|\chapter*{Preface}|)
+    the starred sectioning commands (e.g.\ \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
 \item[\ci{mainmatter}] comes right before the first chapter of
   the book. It turns on Arabic page numbering and restarts the page
@@ -895,7 +896,6 @@ The \ei{itemize} environment is suitable for simple lists, the
 \cih{item}
 
 \begin{example}
-\flushleft
 \begin{enumerate}
 \item You can nest the list
 environments to your taste:
@@ -920,7 +920,7 @@ in a list.
 
 The environments \ei{flushleft} and \ei{flushright} generate
 paragraphs that are either left- or \wi{right-aligned}. \index{left
-  aligned} The \ei{center} environment generates centred text. If you
+  aligned} The \ei{center} environment generates cenetred text. If you
 do not issue \ci{\bs} to specify line breaks, \LaTeX{} will
 automatically determine line breaks.
 
@@ -1061,7 +1061,7 @@ The \emph{table spec} argument of the
 \end{lscommand}
 \noindent command defines the format of the table. Use an \mfr{l} for a column of
 left-aligned text, \mfr{r} for right-aligned text, and \mfr{c} for
-centred text; \mfr{p\{\emph{width}\}} for a column containing justified
+centered text; \mfr{p\{\emph{width}\}} for a column containing justified
 text with line breaks, and \mfr{|} for a vertical line.
 
 If the text in a column is too wide for the page, \LaTeX{} won't
