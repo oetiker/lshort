@@ -22,6 +22,10 @@
 \keys_define:nn { lshortexample } {
   standalone .bool_set:N = \__lshortexample_standalone_bool,
 
+  extend .bool_set:N = \__lshortexample_extend,
+  noextend .bool_set_inverse:N = \__lshortexample_extend,
+  extend .initial:n = true,
+
   cache .bool_set:N = \__lshortexample_cache_bool,
   nocache .bool_set_inverse:N = \__lshortexample_cache_bool,
 
@@ -50,32 +54,42 @@
   \tl_set:Nn \l_tmpa_tl {\c_sys_jobname_str.exa}
   \group_begin:
   \iow_open:Nn \g_tmpa_iow {\l_tmpa_tl}
+  \iow_open:Nn \g_tmpb_iow {\l_tmpa_tl _hidden}
   \seq_map_inline:Nn \l_char_special_seq {\char_set_catcode_other:N ##1}
   \char_set_catcode_active:N \^^M
   \verbatim_set_processline:n {
     \iow_now:Nx \g_tmpa_iow {##1}
+    \exp_args:Nx \str_if_in:nnF {##1} {!hide} {
+      \iow_now:Nx \g_tmpb_iow {##1}
+    }
   }
   \verbatim_start:
 } {
   \iow_close:N \g_tmpa_iow
+  \iow_close:N \g_tmpb_iow
   \group_end:
 
   \tl_set:Nx \__lshortexample_example_label {example@\int_use:N\__lshortexample_example_counter}
 
-  \int_if_odd:nTF {\getpagerefnumber{\__lshortexample_example_label}} {
-    \dim_set:Nn \l_tmpa_dim {0pt}
-    \dim_set:Nn \l_tmpb_dim {-1cm}
+  \bool_if:NTF \__lshortexample_extend {
+    \int_if_odd:nTF {\getpagerefnumber{\__lshortexample_example_label}} {
+      \dim_set:Nn \l_tmpa_dim {0pt}
+      \dim_set:Nn \l_tmpb_dim {-1cm}
+    } {
+      \dim_set:Nn \l_tmpa_dim {-1cm}
+      \dim_set:Nn \l_tmpb_dim {0pt}
+    }
   } {
-    \dim_set:Nn \l_tmpa_dim {-1cm}
+    \dim_set:Nn \l_tmpa_dim {0pt}
     \dim_set:Nn \l_tmpb_dim {0pt}
   }
 
   \medskip
   \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
     \bool_if:NTF \__lshortexample_standalone_bool {
-      \lshortexample_typeset_standalone_example:n {\l_tmpa_tl}
+      \lshortexample_typeset_standalone_example:nn {\l_tmpa_tl} {\l_tmpa_tl _hidden}
     } {
-      \lshortexample_typeset_example:n {\l_tmpa_tl}
+      \lshortexample_typeset_example:nn {\l_tmpa_tl} {\l_tmpa_tl _hidden}
     }
   \end{adjustwidth}
   \label{\__lshortexample_example_label}
@@ -109,10 +123,10 @@
   }
 }
 
-\cs_new:Nn \lshortexample_typeset_standalone_example:n {
+\cs_new:Nn \lshortexample_typeset_standalone_example:nn {
   \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
   \begin{minipage}{\linewidth-\dim_use:N \__lshortexample_paperwidth-0.2pt}
-    \small\verbatiminput{#1}
+    \small\verbatiminput{#2}
   \end{minipage}
   \fancyframebox{0.1pt}{0pt}{
     \begin{minipage}{\dim_use:N \__lshortexample_paperwidth}
@@ -133,9 +147,9 @@
   }
 }
 
-\cs_new:Nn \lshortexample_typeset_example:n {
+\cs_new:Nn \lshortexample_typeset_example:nn {
   \begin{minipage}{0.48\linewidth}
-    \small\verbatiminput{#1}
+    \small\verbatiminput{#2}
   \end{minipage}
   \fancyframebox{0.1pt}{3mm}{
     \begin{minipage}{0.52\linewidth-0.2pt-6mm}
