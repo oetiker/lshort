@@ -31,7 +31,7 @@ automatically.  The parameter after the \verb|\begin{thebibliography}|
 command defines how much space to reserve for the number of labels. In the example below,
 \verb|{99}| tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
 than the number 99.
-\begin{example}
+\begin{example}[standalone, paperwidth=7cm, paperheight=4cm]
 Partl~\cite{pa} has
 proposed that \ldots
 \begin{thebibliography}{99}
@@ -40,11 +40,6 @@ proposed that \ldots
 TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
 \end{example}
-
-\chaptermark{Specialities} % w need to fix the damage done by the
-                           %bibliography example.
-\thispagestyle{fancyplain}
-
 
 For larger projects, you might want to check out the Bib\TeX{}
 program. Bib\TeX{} is included with most \TeX{} distributions. It

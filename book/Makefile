@@ -6,10 +6,11 @@ OTHER = README CHANGES
 
 FILES = src/biblio.bib src/math.tex src/things.tex src/contrib.tex src/lshort.sty src/mylayout.sty src/title.tex \
 	src/custom.tex src/lshort.tex src/overview.tex src/typeset.tex src/lssym.tex src/spec.tex src/preamble.tex \
-	src/lshort-base.tex src/lshort-letter.tex src/lshort-a5.tex src/graphic.tex src/appendix.tex src/license.tex
+	src/lshort-base.tex src/lshort-letter.tex src/lshort-a5.tex src/graphic.tex src/appendix.tex src/license.tex\
+	src/lshortexample.sty src/templates/default.tex
 # Define some variables
 LATEX=latex
-PDFLATEX=xelatex
+PDFLATEX=xelatex --shell-escape
 MAKEINDEX=makeindex
 DVIPS=dvips
 
@@ -25,7 +26,6 @@ lulu: lshort-body.pdf lshort-title.pdf
 	$(MAKEINDEX) -s ../src/lshort.ist $(basename $@) && biber $(basename $@) &&$(PDFLATEX) $(basename $@)&& \
 	(thumbpdf --resolution 10 $@ && $(PDFLATEX) $(basename $@))&& \
 	mv $@ .. )
-	rm pdfbuild/*
 
 src/title.tex: Makefile fixdate.pl
 	perl fixdate.pl $(VERS) < src/title.tex > src/title.tex2 && mv src/title.tex2 src/title.tex

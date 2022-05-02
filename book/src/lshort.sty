@@ -328,64 +328,8 @@
 % \end{example}
 % This Part is stolen from the verbaim.sty by FMi
 %
-\newwrite\example@out
-\newcounter{exacnt}
-\setcounter{exacnt}{1}
-\newlength{\savefboxrule}
-\newlength{\savefboxsep}
-\newlength{\outdent}
-\setlength{\outdent}{1cm}
-\addtolength{\headwidth}{\outdent}
-\newenvironment{example}%
-{\begingroup% Lets Keep the Changes Local
-  \@bsphack
-  \immediate\openout \example@out \jobname.exa
-  \let\do\@makeother\dospecials\catcode`\^^M\active
-  \def\verbatim@processline{%
-    \immediate\write\example@out{\the\verbatim@line}}%
-  \verbatim@start}%
-{\immediate\closeout\example@out\@esphack\endgroup%
-                                %
-                                % And here comes my part. :-
-                                %
-  \stepcounter{exacnt}%
-  \setlength{\parindent}{0pt}%
-  \par\addvspace{3.0ex plus 0.8ex minus 0.5ex}\vskip -\parskip
-%  Page \lsspageref{exa:\theexacnt}
-\expandafter\ifx\csname r@exa\theexacnt\endcsname\relax\else
-%\ifx\pdfoutput\undefined % We're not running pdftex
-%  \ifodd\lsspageref{exa\theexacnt}\hspace*{0pt}\else\hspace*{-\outdent}\fi%
-%\else
-%% HyPsd@pageref internal hyperref command v6.69c
-  \ifodd\HyPsd@pageref{exa\theexacnt}\hspace*{0pt}\else\hspace*{-\outdent}\fi%
-%\fi
-\fi
-\makebox[\linewidth][l]{%
-%\raisebox{-\height}[0pt][\totalheight]{%
-  \begin{minipage}[c]{0.5\outdent+0.46\linewidth-3mm}%
-    \small\verbatiminput{\jobname.exa}
-  \end{minipage}%
-                                %}%
-  \hspace{5mm}%
-  \setlength{\savefboxrule}{\fboxrule}%
-  \setlength{\fboxrule}{0.1pt}%
-  \setlength{\savefboxsep}{\fboxsep}%
-  \setlength{\fboxsep}{3mm}%
-                                %  \raisebox{-\height}[0pt][\totalheight]{%
-  \fbox{%
-    \begin{minipage}{0.5\outdent+0.54\linewidth-3.5mm-2\fboxrule-2\fboxsep}%
-      \setlength{\fboxrule}{\savefboxrule}%
-      \setlength{\fboxsep}{\savefboxsep}%
-      \setlength{\fboxrule}{0.5pt}%
-      \setlength{\parskip}{1ex plus 0.4ex minus 0.2ex}%
-      \begin{trivlist}\item\small\input{\jobname.exa}
-      \end{trivlist}
-    \end{minipage}
-    }%
-%  }%
-}\label{exa\theexacnt}%
-\par\addvspace{3ex plus 0.8ex minus 0.5ex}\vskip -\parskip
-}
+\RequirePackage{lshortexample}
+\addtolength{\headwidth}{1cm}
 
 \newenvironment{lined}[1]%
  {\begin{center}\begin{minipage}{#1}\hrule\medskip}

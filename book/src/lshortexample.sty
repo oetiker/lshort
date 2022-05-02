@@ -1,0 +1,145 @@
+\ProvidesExplPackage{lshortexample}{2022-05-02}{0.1}{
+  Macros for lshort book written in LaTeX3
+}
+
+\RequirePackage{changepage}
+\RequirePackage{frame}
+\RequirePackage{graphicx}
+\RequirePackage{verbatim}
+% L3 interface for verbatim
+\cs_new_eq:NN \verbatim_start: \verbatim@start
+
+\cs_new_protected:Nn \verbatim_set_processline:n {
+  \cs_set_protected:Nn \__lshortexample_func_temp:n {#1}
+  \tl_set:Nn \verbatim@processline {
+    \__lshortexample_func_temp:n {\the\verbatim@line}
+  }
+}
+
+\tl_new:N \__lshortexample_example_label
+\int_new:N \__lshortexample_example_counter
+
+\keys_define:nn { lshortexample } {
+  standalone .bool_set:N = \__lshortexample_standalone_bool,
+
+  cache .bool_set:N = \__lshortexample_cache_bool,
+  nocache .bool_set_inverse:N = \__lshortexample_cache_bool,
+
+  cache_dir .tl_set:N  = \__lshortexample_cache_dir_tl,
+  cache_dir .initial:n  = example_cache/,
+
+  template_dir .tl_set:N  = \__lshortexample_template_dir_tl,
+  template_dir .initial:n  = ../src/templates/,
+
+  template .tl_set:N  = \__lshortexample_template_tl,
+  template .initial:n  = default,
+
+  paperwidth .dim_set:N = \__lshortexample_paperwidth,
+  paperwidth .initial:n = 5cm,
+
+  paperheight .dim_set:N = \__lshortexample_paperheight,
+  paperheight .initial:n = {\fp_to_dim:n {sqrt(2) * \__lshortexample_paperwidth}},
+}
+
+\NewDocumentEnvironment{example}{!o} {
+  \group_begin:
+  \IfValueT {#1} {
+    \keys_set:nn { lshortexample } { #1 }
+  }
+
+  \tl_set:Nn \l_tmpa_tl {\c_sys_jobname_str.exa}
+  \group_begin:
+  \iow_open:Nn \g_tmpa_iow {\l_tmpa_tl}
+  \seq_map_inline:Nn \l_char_special_seq {\char_set_catcode_other:N ##1}
+  \char_set_catcode_active:N \^^M
+  \verbatim_set_processline:n {
+    \iow_now:Nx \g_tmpa_iow {##1}
+  }
+  \verbatim_start:
+} {
+  \iow_close:N \g_tmpa_iow
+  \group_end:
+
+  \tl_set:Nx \__lshortexample_example_label {example@\int_use:N\__lshortexample_example_counter}
+
+  \int_if_odd:nTF {\getpagerefnumber{\__lshortexample_example_label}} {
+    \dim_set:Nn \l_tmpa_dim {0pt}
+    \dim_set:Nn \l_tmpb_dim {-1cm}
+  } {
+    \dim_set:Nn \l_tmpa_dim {-1cm}
+    \dim_set:Nn \l_tmpb_dim {0pt}
+  }
+
+  \medskip
+  \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
+    \bool_if:NTF \__lshortexample_standalone_bool {
+      \lshortexample_typeset_standalone_example:n {\l_tmpa_tl}
+    } {
+      \lshortexample_typeset_example:n {\l_tmpa_tl}
+    }
+  \end{adjustwidth}
+  \label{\__lshortexample_example_label}
+  \int_gincr:N \__lshortexample_example_counter
+  \medskip
+  \group_end:
+}
+
+\cs_new:Nn \lshortexample_compile_command:nnn {
+  xelatex~
+  --output-directory=\__lshortexample_cache_dir_tl\c_space_tl
+  --jobname=#1~'
+  \c_backslash_str def\c_backslash_str file{#2}
+  \c_backslash_str newlength{\c_backslash_str width}
+  \c_backslash_str setlength{\c_backslash_str width}{\dim_use:N \__lshortexample_paperwidth}
+  \c_backslash_str newlength{\c_backslash_str height}
+  \c_backslash_str setlength{\c_backslash_str height}{\dim_use:N \__lshortexample_paperheight}
+  \c_backslash_str input{#3}
+  '
+}
+
+\cs_new:Nn \lshortexample_compile_example:nn {
+  \sys_shell_now:x {
+    mkdir~-p~\__lshortexample_cache_dir_tl;
+    \lshortexample_compile_command:nnn {#2} {#1} {
+      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+    };
+    \lshortexample_compile_command:nnn {#2} {#1} {
+      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+    }
+  }
+}
+
+\cs_new:Nn \lshortexample_typeset_standalone_example:n {
+  \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
+  \begin{minipage}{\linewidth-\dim_use:N \__lshortexample_paperwidth-0.2pt}
+    \small\verbatiminput{#1}
+  \end{minipage}
+  \fancyframebox{0.1pt}{0pt}{
+    \begin{minipage}{\dim_use:N \__lshortexample_paperwidth}
+      \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
+        \bool_set:Nn \l_tmpa_bool {\c_false_bool}
+      }{
+        \bool_set:Nn \l_tmpa_bool {\c_true_bool}
+      }
+      \bool_if:nT {
+        !\__lshortexample_cache_bool || \l_tmpa_bool
+      } {
+        \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+      }
+      \includegraphics[width=\dim_use:N \__lshortexample_paperwidth]{
+        \__lshortexample_cache_dir_tl\l_tmpb_tl
+      }
+    \end{minipage}
+  }
+}
+
+\cs_new:Nn \lshortexample_typeset_example:n {
+  \begin{minipage}{0.48\linewidth}
+    \small\verbatiminput{#1}
+  \end{minipage}
+  \fancyframebox{0.1pt}{3mm}{
+    \begin{minipage}{0.52\linewidth-0.2pt-6mm}
+      \input{#1}
+    \end{minipage}
+  }
+}
