@@ -141,8 +141,8 @@ My humble subjects \ldots
 The \emph{num} argument is used the same way as in the
 \verb|\newcommand| command. \LaTeX{} makes sure that you do not define
 an environment that already exists. If you ever want to change an
-existing command, use the \ci{renewenvironment} command. It
-uses the same syntax as the \ci{newenvironment} command.
+existing command, use the \ci{renewenvironment} command. Its arguments 
+are exactly the same as the \ci{newenvironment} command.
 
 The commands used in this example will be explained later. For the
 \ci{rule} command see page \pageref{sec:rule}, for \ci{stretch} go to
@@ -202,7 +202,7 @@ parameters. If you add the following structure to your document:
 
 Now call \LaTeX{} like this:
 \begin{verbatim}
-latex '\newcommand{\blackandwhite}{true}\input{test.tex}'
+xelatex '\newcommand{\blackandwhite}{true}\input{test.tex}'
 \end{verbatim}
 
 First the command \verb|\blackandwhite| gets defined and then the actual file is read with input.
@@ -290,8 +290,7 @@ special set of commands; refer to Table~\ref{mathfonts}.
 \fni{textit}\verb|{...}|        &       \textit{\wi{italic}}\\
 \fni{textsl}\verb|{...}|        &       \textsl{\wi{slanted}}&
 \fni{textsc}\verb|{...}|        &       \textsc{\wi{Small Caps}}\\[6pt]
-\ci{emph}\verb|{...}|           &       \emph{emphasized} &
-\fni{textnormal}\verb|{...}|    &       \textnormal{document} font
+\fni{textnormal}\verb|{...}|    &       \textnormal{document} font &&
 \end{tabular}
 
 \bigskip
@@ -749,7 +748,6 @@ depth of a text string.
 \noindent The example below shows a possible application of these commands.
 
 \begin{example}
-\flushleft
 \newenvironment{vardesc}[1]{%
   \settowidth{\parindent}{#1:\ }
   \makebox[0pt][r]{#1:\ }}{}
