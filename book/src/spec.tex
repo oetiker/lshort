@@ -86,11 +86,12 @@ commands at the points in the text that you want the final index entries to
 point to.  Table~\ref{index} explains the syntax with several examples.
 
 \begin{table}[!tp]
+  \centering
 \caption{Index Key Syntax Examples.}
 \label{index}
-\begin{center}
 \begin{tabular}{@{}lll@{}}
-  \textbf{Example} &\textbf{Index Entry} &\textbf{Comment}\\\hline
+  \toprule
+  Example &Index Entry &Comment\\\midrule
   \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\
 \verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\
 \verb|\index{Sam@\textsl{Sam}}|     &\textsl{Sam}, 2& Formatted entry\\
@@ -98,9 +99,9 @@ point to.  Table~\ref{index} explains the syntax with several examples.
 \verb|\index{Kaese@\textbf{K\"ase}}|     &\textbf{K\"ase}, 33& Formatted entry\\
 \verb.\index{ecole@\'ecole}.     &\'ecole, 4& Formatted entry\\
 \verb.\index{Jenny|textbf}.     &Jenny, \textbf{3}& Formatted page number\\
-\verb.\index{Joe|textit}.     &Joe, \textit{5}& Formatted page number
+\verb.\index{Joe|textit}.     &Joe, \textit{5}& Formatted page number\\
+\bottomrule
 \end{tabular}
-\end{center}
 \end{table}
 
 When the input file is processed with \LaTeX{}, each \verb|\index|
