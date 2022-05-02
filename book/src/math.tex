@@ -80,7 +80,7 @@ If you want your larger equations to be set apart
 from the rest of the paragraph, it is preferable to \emph{display} them
 rather than to break the paragraph apart.
 To do this, you enclose them between \verb|\begin{|\ei{equation}\verb|}| and
-\verb|\end{equation}|.\footnote{This is an \textsf{amsmath} command. If you don't
+\verb|\end{equation}|.\footnote{This is an \textsf{amsmath} environment. If you don't
 have access to the package for some obscure reason, you can use \LaTeX's own
 \ei{displaymath} environment instead.} You can then \ci{label} an equation number and refer to
 it somewhere else in the text by using the \ci{eqref} command. If you want to
@@ -173,7 +173,7 @@ page \pageref{sec:fontsz}).
 
 \end{enumerate}
 \begin{example}
-$\forall x \in \mathbf{R}:
+$\forall x \in \mathbf{R}\colon
  \qquad x^{2} \geq 0$
 \end{example}
 \begin{example}
@@ -672,7 +672,8 @@ lower-case \texttt{c}) and the third column left-justified:
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && \negmedspace {} + l + m + n + o 
+  && \negmedspace {} + l 
+  + m + n + o 
   \\
   & = & p + q + r + s
 \end{IEEEeqnarray}
@@ -783,7 +784,8 @@ If an equation is split into two or more lines, \LaTeX\
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && \negmedspace {} + l + m + n + o 
+  && \negmedspace {} + l 
+  + m + n + o 
   \\
   & = & p + q + r + s
 \end{IEEEeqnarray}
@@ -955,8 +957,8 @@ commands.
 \end{IEEEeqnarray*}
 \end{example}
 
-See the electronic document \texttt{testmath.tex} (distributed with
-\AmS-\LaTeX) or Chapter 8 of \companion{} for further details.
+For further details see the document \texttt{testmath.tex} (distributed with
+\AmS-\LaTeX) or Chapter 8 of \companion{}.
 
 \subsection{Phantoms}
 
@@ -1069,7 +1071,9 @@ This is my interesting theorem\\
 \end{code}
 
 The \pai{amsthm} package (part of \AmS-\LaTeX) provides the 
+\begin{lscommand}
 \ci{theoremstyle}\verb|{|\emph{style}\verb|}|
+\end{lscommand}
 command which lets you define what the theorem is all about by picking
 from three predefined styles: \texttt{definition} (fat title, roman body),
 \texttt{plain} (fat title, italic body) or \texttt{remark} (italic
