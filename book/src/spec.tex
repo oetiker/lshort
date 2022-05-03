@@ -224,7 +224,7 @@ include sorting by citation order (\carg{none}) and by the number of citations
   biber,
   biber_dir=../src/examples/,
   paperwidth=6.5cm,
-  paperheight=5cm,
+  paperheight=5.5cm,
 ]
 \documentclass{article} %!hide
 % In preamble
@@ -232,6 +232,7 @@ include sorting by citation order (\carg{none}) and by the number of citations
 
 % ...
 %!hidebegin
+\sloppy
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 
@@ -251,7 +252,7 @@ several variations.
   biber,
   biber_dir=../src/examples/,
   paperwidth=6.5cm,
-  paperheight=7cm,
+  paperheight=7.2cm,
 ]
 \documentclass{article} %!hide
 % In preamble
@@ -264,6 +265,7 @@ several variations.
 %!hidebegin
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
+\sloppy
 
 \begin{document}
 %!hideend
