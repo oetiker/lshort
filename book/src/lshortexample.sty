@@ -29,6 +29,7 @@
 
   cache .bool_set:N = \__lshortexample_cache_bool,
   nocache .bool_set_inverse:N = \__lshortexample_cache_bool,
+  cache .initial:n = true,
 
   biber .bool_set:N = \__lshortexample_biber_run,
   biber_dir .tl_set:N = \__lshortexample_biber_dir,
@@ -106,8 +107,8 @@
     } {
       \lshortexample_typeset_example:nn {\l_tmpa_tl} {\l_tmpa_tl _hidden}
     }
+    \label{\__lshortexample_example_label}
   \end{adjustwidth}
-  \label{\__lshortexample_example_label}
   \int_gincr:N \__lshortexample_example_counter
   \medskip
   \group_end:
