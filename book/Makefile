@@ -4,7 +4,7 @@ VERS = 6.4
 
 OTHER = README CHANGES
 
-FILES ::= $(shell find src -type f)
+FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name "*.sty" \)  -print) src/title.tex
 
 # Define some variables
 LATEX=latex
