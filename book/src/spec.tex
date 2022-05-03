@@ -476,9 +476,10 @@ be subject in a sentence), \ci{smartcite} (context dependent).
 Indicate page in citation~\cite[25]{lshort}. 
 This citation is in
 parentheses~\parencite{curie}.
-Footnote cite~\footcite{dream}. Smart in 
-text~\smartcite{lshort}.\footnote{Smart in
-footnote \smartcite{dream}.}
+Footnote cite~\footcite{dream}.
+Smart \smartcite[See][78]{lshort}.
+Again\footnote{Smart
+\smartcite[12--56]{dream}.}.
 ``\Textcite{curie} was an important paper.''
 %!hidebegin
 \end{document}
@@ -569,6 +570,63 @@ This is auto citation \autocite{curie}.
 \begin{document}
 \noindent
 This is auto citation \autocite{curie}.
+\end{document}
+\end{example}
+
+\subsubsection{More about entries}
+
+\hologo{biber} uses ``and'' as a separator in author entries. In order to prevent
+this behavior you must enclose ``and'' in curly braces like so
+\begin{verbatim}
+@book{
+  author = {Kruger {and} sons}
+}
+\end{verbatim}
+The same trick may be useful when \hologo{biber} changes capitalization, even
+though it shouldn't.
+
+When writing about certain subject it often happens that the same author or
+publishing company released several books. In order to reuse the information in
+the \eei{.bib} file, a special entry \cargv{xdata} is available. It may be used
+like this
+
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  paperwidth=6cm,
+  paperheight=7cm,
+]
+%!hidebegin
+\documentclass{article}
+\begin{filecontents}{example2.bib} 
+%!hideend
+@xdata{krugers,
+  author    = {Kruger {and} sons},
+  publisher = {Krugers Inc.},
+  location  = {Paris}
+}
+
+@book{kru21,
+  title = {Why is \LaTeX{} so hard?},
+  year  = {2021},
+  xdata = {krugers}
+}
+
+@book{kru22,
+  title = {\LaTeX{} is awesome!},
+  year  = {2022},
+  xdata = {krugers}
+}
+\end{filecontents} %!hidebegin
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example2.bib}
+\sloppy
+\begin{document}
+\nocite{*}
+\noindent
+\printbibliography
 \end{document}
 \end{example}
 
