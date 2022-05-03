@@ -443,6 +443,134 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 \end{document}
 \end{example}
 
+\subsubsection{Citing commands}
+
+Until now we have only used the basic \ci{cite} command. \pai{biblatex} extends
+the command set thus allowing us to be much more expressive when it comes to
+citations.
+
+Most of the citing commands (\ci{cite} included) allows us to insert notes
+around the citations:
+\begin{lscommand}
+  \ci*{cite}[pre:o ! post:o ! marker:m]
+\end{lscommand}
+Other standard citation commands include \ci{parencite} (citation in
+parentheses), \ci{footcite} (in footnotes), \ci{textcite} (citation intended to
+be subject in a sentence), \ci{smartcite} (context dependent).
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=5cm,
+]
+%!hidebegin
+\documentclass{article}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+%!hideend
+Indicate page in citation~\cite[25]{lshort}. 
+This citation is in
+parentheses~\parencite{curie}.
+Footnote cite~\footcite{dream}. Smart in 
+text~\smartcite{lshort}.\footnote{Smart in
+footnote \smartcite{dream}.}
+``\Textcite{curie} was an important paper.''
+%!hidebegin
+\end{document}
+\end{example}
+
+Another set of commands allows us to extract a given information from
+bibliographic entry. This is includes commands such as \ci{citeauthor},
+\ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=4cm,
+]
+%!hidebegin
+\documentclass{article}
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+%!hideend
+\Citetitle{lshort} is a book by
+\citeauthor{lshort}. Latest version was
+released in \citeyear{lshort}, or to
+be more precise on \citedate{lshort}. It
+is available at \citeurl{lshort}.
+%!hidebegin
+\end{document}
+\end{example}
+
+If we want to be less tied to a specific style, there also exist \ci{autocite}
+command which allows us to specify citation style in package options.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=4cm,
+]
+%!hidebegin
+\documentclass{article}
+%!hideend
+\usepackage[
+  style=verbose,
+  autocite=footnote,
+]{biblatex}
+
+% ...
+
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+%!hideend
+This is auto citation \autocite{curie}.
+%!hidebegin
+\end{document}
+\end{example}
+
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=2cm,
+]
+%!hidebegin
+\documentclass{article}
+%!hideend
+\usepackage[
+  style=authoryear,
+  autocite=inline,
+]{biblatex}
+
+% ...
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+This is auto citation \autocite{curie}.
+\end{document}
+\end{example}
 
 \section{Indexing} \label{sec:indexing}
 A very useful feature of many books is their \wi{index}. With \LaTeX{}
