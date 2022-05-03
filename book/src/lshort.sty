@@ -208,6 +208,8 @@
       \exp_args:Nx \str_case:nnF {\l_tmpb_tl} {
         {o} {\texttt{[}\emph{\l_tmpa_tl}\texttt{]}}
         {m} {\texttt{\{}\emph{\l_tmpa_tl}\texttt{\}}}
+        {vo} {\texttt{[\l_tmpa_tl]}}
+        {vm} {\texttt{\{\l_tmpa_tl\}}}
       }{
         \msg_error:nnx {lshort} {invalidtype} {\l_tmpb_tl}
       }

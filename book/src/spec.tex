@@ -16,20 +16,35 @@
 
 \section{Bibliography}
 
+When writing articles or books concerned with some topic you will often need to
+reference other books and articles to point out where some information might be
+found. You have already seen this done multiple times throughout this book.
+Doing this by hand would be tedious, so \LaTeX{} comes with an option to manage
+the bibliographic data of our document. We will describe two approaches to
+doing it:
+\begin{description}
+  \item[\ei{thebibliography} environment] which is suitable for rather small
+  bibliographies
+  \item[\pai{biblatex} with \hologo{biber}] which is an advanced bibliography
+  managament system that is suitable for professional books and publications
+\end{description}
+
+\subsection{\ei{thebibliography} environment}
+
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
-\ci{bibitem}\verb|[|\emph{label}\verb|]{|\emph{marker}\verb|}|
+\ci{bibitem}[label][marker]
 \end{lscommand}
-The \emph{marker} is then used to cite the book, article or paper
+The \carg{marker} is then used to cite the book, article or paper
 within the document.
 \begin{lscommand}
-\ci{cite}\verb|{|\emph{marker}\verb|}|
+\ci{cite}[marker]
 \end{lscommand}
-If you do not use the \emph{label} option, the entries will get enumerated
+If you do not use the \carg{label} option, the entries will get enumerated
 automatically.  The parameter after the \verb|\begin{thebibliography}|
 command defines how much space to reserve for the number of labels. In the example below,
-\verb|{99}| tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
+\cargv{\{99\}} tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
 than the number 99.
 \begin{example}[standalone, paperwidth=7cm, paperheight=4cm]
 Partl~\cite{pa} has
@@ -41,12 +56,158 @@ TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
 \end{example}
 
-For larger projects, you might want to check out the Bib\TeX{}
-program. Bib\TeX{} is included with most \TeX{} distributions. It
-allows you to maintain a bibliographic database and then extract the
-references relevant to things you cited in your paper. The visual
-presentation of Bib\TeX{}-generated bibliographies is based on a style-sheets concept that allows you to create bibliographies following
-a wide range of established designs.
+In order to get the citations typeset properly, two passes of \LaTeX{} compiler
+are needed similarly to table of contents.
+
+This approach has the advantage that it is simple and entirely self
+contained---no outer packages and programs are needed since it is supported out
+of the box by \LaTeX{}. There are however many problems:
+\begin{itemize}
+  \item Each entry has to be formatted manually, which may lead to inconsistent
+  styling. Moreover simple changes in format will require editing each entry by
+  hand.
+  \item There is no logical/structural markup to imply which part of
+  bibliographic entry is author, title, journal, etc.
+  \item No sorting is performed. If you want the entries to be processed in
+  citation order, you have to ensure this manually.
+  \item If you want to use different citation style than numeric, you have to
+  manually set all the labels.
+\end{itemize}
+Thus for all projects that contain more than few citations \pai{biblatex} is
+recommended.
+
+% For larger projects, you might want to check out the Bib\TeX{}
+% program. Bib\TeX{} is included with most \TeX{} distributions. It
+% allows you to maintain a bibliographic database and then extract the
+% references relevant to things you cited in your paper. The visual
+% presentation of Bib\TeX{}-generated bibliographies is based on a style-sheets concept that allows you to create bibliographies following
+% a wide range of established designs.
+
+\subsection{\pai{biblatex} with \hologo{biber}}
+
+\subsubsection{Database files}
+The \pai*{biblatex} package uses a separate program, \pai*{biber}, for
+bibliography management. The bibliographic database is stored in special
+\eei{.bib} files with their own syntax. Single bibliographic entry is of the
+form
+\begin{lscommand}
+\texttt{@}\carg{entry type}\texttt{\{}\carg{marker},\\
+\hspace*{1em}\carg{field1}\texttt{ = \{}\carg{value1}\texttt{\}},\\
+\hspace*{1em}\carg{field2}\texttt{ = \{}\carg{value2}\texttt{\}},\\
+\hspace*{1em}\carg{field3}\texttt{ = \{}\carg{value3}\texttt{\}},\\
+\hspace*{3em}\vdots\\
+\texttt{\}}
+\end{lscommand}
+The exact values allowed are dependent on the bibliographic style chosen, but a
+reasonable style (including default style of \pai{biblatex}) will accept handle
+at least the following \carg{entry type}s:
+\begin{description}
+  \item[\cargv{article}] for articles from journals or other periodicals. Some
+  of its fields are \cargv{author}, \cargv{title}, \cargv{journaltitle},
+  \cargv{date}, \cargv{url}, \cargv{doi}.
+  \item[\cargv{book}] for single-volume book. Some of its fields are
+  \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
+  \cargv{volume}.
+  \item[\cargv{online}] for accessed online resources. Some of its fields are
+   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{urldate}.
+  \item[\cargv{maual}] for technical documentation. Some of its fields are
+   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{version}.
+  \item[\cargv{misc}] for entries that do not fit any of the predefined
+   categories. Some of its fields are \cargv{author}, \cargv{title},
+   \cargv{date}, \cargv{howpublished}, \cargv{note}.
+\end{description}
+Note that the above list is far from exahaustive both in terms of \carg{entry
+type}s and the entries mentioned. For a full list check the \pai{biblatex}
+manual or the style you are using.
+
+Each \eei{.bib} file will typically contain multiple entries. See
+figure~\ref{fig:bibfile} for an example.
+
+\begin{figure}
+  \caption[An example of bibliography database]{An example of bibliography
+  database for \hologo{biber} (\eei{.bib} file)} \label{fig:bibfile}
+  \begin{lined}{\textwidth}
+    \verbatiminput{examples/example.bib}
+  \end{lined}
+\end{figure}
+
+\subsubsection{Using \pai{biblatex}}
+
+In order to use biblatex, the following three commands are necessary.
+
+The \pai{biblatex} package must be loaded with the
+\begin{lscommand}
+  \ci*{usepackage}[options:o ! biblatex:vm]
+\end{lscommand}
+command. The \carg{options} are comma delimited key vaule pairs that allow to
+customize the behaviour of biblatex package. Some of them will be explained
+later.
+
+The command
+\begin{lscommand}
+  \ci*{addbibresource}[options:o ! file:m]
+\end{lscommand}
+must be put in the preamble. The \carg{file} is the name of the \eei{.bib} file
+containing bibliographic entries. You may also specify a remote location here,
+but then you must also put \cargv{location=remote} in the \carg{options}.
+
+Finally the
+\begin{lscommand}
+  \ci*{printbibliography}[options:o]
+\end{lscommand}
+typesets the loaded bibliography. The \carg{options} may be used to alter the
+title or filter the entries included.
+
+Processing files requires three \LaTeX{} passes in addition to the biber
+command. A typical command line run may look like this:
+\begin{code}
+\begin{verbatim}
+$ xelatex document.tex
+$ biber document
+$ xelatex document.tex
+$ xelatex document.tex
+\end{verbatim}
+\end{code}
+The first \LaTeX{} pass extracts the citation data from the document which are
+then read by \hologo{biber}. In the second pass, bibliography is placed in the
+document and the third one finally typesets the correct citations.
+
+After executing the procedure on the following file we may apprecieate the
+result
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=9.9cm,
+]
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
+\usepackage{biblatex}
+\addbibresource{example.bib}
+
+\begin{document}
+\setlength{\parindent}{0pt} %!hide
+\ldots{} Recently I was
+learning to use Bib\LaTeX{}
+from~\cite{lshort}. It seems
+very useful. \ldots
+
+\ldots{} which was already
+shown by Mrs.~Curie
+in~\cite{curie}.
+\ldots
+
+\ldots{} this can be
+easily explained by
+the fact that Einstein
+was a time traveller~\cite{dream}.
+\ldots
+
+\printbibliography
+\end{document}
+\end{example}
 
 \section{Indexing} \label{sec:indexing}
 A very useful feature of many books is their \wi{index}. With \LaTeX{}

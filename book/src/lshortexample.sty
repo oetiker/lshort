@@ -18,6 +18,7 @@
 
 \tl_new:N \__lshortexample_example_label
 \int_new:N \__lshortexample_example_counter
+\bool_new:N \__lshortexample_hide_switch
 
 \keys_define:nn { lshortexample } {
   standalone .bool_set:N = \__lshortexample_standalone_bool,
@@ -28,6 +29,10 @@
 
   cache .bool_set:N = \__lshortexample_cache_bool,
   nocache .bool_set_inverse:N = \__lshortexample_cache_bool,
+
+  biber .bool_set:N = \__lshortexample_biber_run,
+  biber_dir .tl_set:N = \__lshortexample_biber_dir,
+  biber_dir .initial:n  = .,
 
   cache_dir .tl_set:N  = \__lshortexample_cache_dir_tl,
   cache_dir .initial:n  = example_cache/,
@@ -59,8 +64,18 @@
   \char_set_catcode_active:N \^^M
   \verbatim_set_processline:n {
     \iow_now:Nx \g_tmpa_iow {##1}
-    \exp_args:Nx \str_if_in:nnF {##1} {!hide} {
-      \iow_now:Nx \g_tmpb_iow {##1}
+
+    \exp_args:Nx \str_if_in:nnT {##1} {!hidebegin} {
+      \bool_set:Nn \__lshortexample_hide_switch {\c_true_bool}
+    }
+    \exp_args:Nx \str_if_in:nnT {##1} {!hideend} {
+      \bool_set:Nn \__lshortexample_hide_switch {\c_false_bool}
+    }
+
+    \bool_if:NF \__lshortexample_hide_switch {
+      \exp_args:Nx \str_if_in:nnF {##1} {!hide} {
+        \iow_now:Nx \g_tmpb_iow {##1}
+      }
     }
   }
   \verbatim_start:
@@ -123,6 +138,22 @@
   }
 }
 
+\cs_new:Nn \lshortexample_compile_biber_example:nn {
+  \sys_shell_now:x {
+    mkdir~-p~\__lshortexample_cache_dir_tl;
+    \lshortexample_compile_command:nnn {#2} {#1} {
+      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+    };
+    biber~--input-directory~\__lshortexample_biber_dir~\c_space_tl~\__lshortexample_cache_dir_tl #2;
+    \lshortexample_compile_command:nnn {#2} {#1} {
+      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+    };
+    \lshortexample_compile_command:nnn {#2} {#1} {
+      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+    }
+  }
+}
+
 \cs_new:Nn \lshortexample_typeset_standalone_example:nn {
   \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
   \begin{minipage}{\linewidth-\dim_use:N \__lshortexample_paperwidth-0.2pt}
@@ -138,7 +169,11 @@
       \bool_if:nT {
         !\__lshortexample_cache_bool || \l_tmpa_bool
       } {
-        \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+        \bool_if:NTF \__lshortexample_biber_run {
+          \lshortexample_compile_biber_example:nn {#1} {\l_tmpb_tl}
+        } {
+          \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+        }
       }
       \includegraphics[width=\dim_use:N \__lshortexample_paperwidth]{
         \__lshortexample_cache_dir_tl\l_tmpb_tl
