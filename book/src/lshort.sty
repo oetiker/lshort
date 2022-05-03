@@ -332,8 +332,8 @@
 \addtolength{\headwidth}{1cm}
 
 \newenvironment{lined}[1]%
- {\begin{center}\begin{minipage}{#1}\hrule\medskip}
- {\vspace{-1ex}\hrule \end{minipage}\end{center}}
+ {\begin{center}\begin{tabular}{@{}p{#1}@{}}\toprule\begin{minipage}{#1}}
+ {\end{minipage}\\\bottomrule\end{tabular}\end{center}}
 % I want no headers on pages created by clearpage
 
 \renewcommand{\cleardoublepage}
