@@ -98,26 +98,26 @@ form
 \hspace*{3em}\vdots\\
 \texttt{\}}
 \end{lscommand}
-The exact values allowed are dependent on the bibliographic style chosen, but a
-reasonable style (including default style of \pai{biblatex}) will accept handle
-at least the following \carg{entry type}s:
+The fields required dependend on the bibliography style you choose,
+the default style of \pai{biblatex} will accept
+the following \carg{entry type}s:
 \begin{description}
-  \item[\cargv{article}] for articles from journals or other periodicals. Some
-  of its fields are \cargv{author}, \cargv{title}, \cargv{journaltitle},
+  \item[\cargv{article}] for articles from journals or other periodicals. Important fields are
+   are \cargv{author}, \cargv{title}, \cargv{journaltitle},
   \cargv{date}, \cargv{url}, \cargv{doi}.
-  \item[\cargv{book}] for single-volume book. Some of its fields are
+  \item[\cargv{book}] for single-volume book. With the fields
   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
   \cargv{volume}.
-  \item[\cargv{online}] for accessed online resources. Some of its fields are
+  \item[\cargv{online}] for accessed online resources. With
    \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{urldate}.
-  \item[\cargv{maual}] for technical documentation. Some of its fields are
+  \item[\cargv{manual}] for technical documentation. With
    \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{version}.
   \item[\cargv{misc}] for entries that do not fit any of the predefined
-   categories. Some of its fields are \cargv{author}, \cargv{title},
+   categories. With \cargv{author}, \cargv{title},
    \cargv{date}, \cargv{howpublished}, \cargv{note}.
 \end{description}
 Note that the above list is far from exhaustive both in terms of \carg{entry
-type}s and the entries mentioned. For a full list check the \pai{biblatex}
+type}s and the field names mentioned. For a full list check the \pai{biblatex}
 manual or the style you are using.
 
 Each \eei{.bib} file will typically contain multiple entries. See
@@ -127,7 +127,7 @@ figure~\ref{fig:bibfile} for an example.
   \begin{lined}{\textwidth}
     \verbatiminput{examples/example.bib}
   \end{lined}
-  \caption[An example of bibliography database]{An example of bibliography
+  \caption[An example of bibliography database]{An example bibliography
   database for \hologo{biber} (\eei{.bib} file)} \label{fig:bibfile}
 \end{figure}
 
@@ -169,12 +169,10 @@ $ xelatex document.tex
 \end{verbatim}
 \end{code}
 The first \LaTeX{} pass extracts the citation data from the document which are
-then read by \hologo{biber}. In the second pass, bibliography is placed in the
-document and the third one finally typesets the correct citations.
+then read by \hologo{biber}. In the second pass, the bibliography is placed in the
+document and the third pass finally typesets the document with all the correct citations.
 
-After executing the procedure on the following file we may appreciate the
-result (in this and all the following examples, the \texttt{example.bib} file
-is assumed to be the same as in~\ref{fig:bibfile})
+Here is a complete example to show how the bits work together. Iin this and all the following examples, the \texttt{example.bib} file is assumed to be the same as in~\ref{fig:bibfile}.
 \begin{example}[standalone,
   template=empty,
   biber,
@@ -215,9 +213,9 @@ traveller~\cite{dream}.
 
 The default sorting order is \emph{N}ame (author\slash editor), \emph{T}itle,
 \emph{Y}ear or \carg{nty} in short. This order can be changed by passing
-\cargv{sorting=}\carg{order} as a package option. For example in order to order
-entries in chronological order we may pass \carg{ynt} option. Other options
-include sorting by citation order (\carg{none}) and by the number of citations
+\cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
+entries in chronological order simply pass the \carg{ynt} option. Other options
+allow sorting by citation order (\carg{none}) and by the number of citations
 (\carg{count}).
 \begin{example}[standalone,
   template=empty,
@@ -242,10 +240,10 @@ include sorting by citation order (\carg{none}) and by the number of citations
 \end{document}
 \end{example}
 
-While the default citation style is numeric, this can be easily changed by
-passing the preferred style to \carg{style} option. The default is
-\carg{numeric}, while alternatives include \carg{alphabetic},
-\carg{authoryear}, \carg{authortitle}, \carg{verbose}. Some styles come in
+While the default citation style is \carg{numeric}, this can be easily changed by
+setting the preferred style via the \carg{style} option. Choose from
+\carg{alphabetic},
+\carg{authoryear}, \carg{authortitle} or \carg{verbose}. Some styles come in
 several variations.
 \begin{example}[standalone,
   template=empty,
@@ -281,12 +279,12 @@ in~\cite{curie}.
 \end{document}
 \end{example}
 
-In contrast with \ei{thebibliography}, the \pai{biblatex}'s
+In contrast the \ei{thebibliography} environment, \pai{biblatex}'s
 \ci{printbibliography} command only prints entries that were referenced in the
 document. If you want to print entries not mentioned in the document, you may
-use \ci{nocite}[marker] command. It will insert invisible citations thus
-instructing \pai{biblatex} to put them in the bibliography. Special value
-\cargv{*} can be passed as a \carg{marker} if we want to print all entries in
+use the \ci{nocite}[marker] command. It will insert invisible citations, thus
+instructing \pai{biblatex} to put them in the bibliography. The special value
+\cargv{*} can be passed as a \carg{marker} if you want to print all entries in
 the database.
 \begin{example}[standalone,
   template=empty,
@@ -312,7 +310,7 @@ I've only cited~\cite{lshort}.
 \end{example}
 
 If your bibliography gets really large it may make sense to split it into
-several ones. This can be done by passing filter options to
+several parts. This can be done by passing filter options to the
 \ci{printbibliography} command. Available filters include \cargv{type},
 \cargv{category}, \cargv{keyword}. It may be useful to also change the titles of
 different categories using \cargv{title} option.
@@ -348,7 +346,7 @@ different categories using \cargv{title} option.
 
 By default the bibliography does not appear in the table of contents. This is
 because it is using starred version of \ci{chapter}\slash\ci{section}
-(depending on class) to generate its heading. In order to change the default we
+(depending on the class) to generate its heading. In order to change the default we
 may pass the option \cargv{heading} to \ci{printbibliography}. Available
 options include
 \begin{description}
@@ -399,8 +397,8 @@ options include
 \end{document}
 \end{example}
 
-As you may have noticed when the entries have many authors, then not all of
-them will be printed; instead of them ``et al.'' will be printed. This behavior
+As you may have noticed, when entries have many authors, then not all of
+them will be printed; instead ``et al.'' shows up at the end of the author list. This behavior
 may be controlled via \cargv{maxnames} (default $3$) and \cargv{minnames}
 (default $1$) options. If the number of names is greater than \carg{maxnames}
 then it will be shortened to \carg{minnames} and ``et al.'' will be added.
@@ -448,10 +446,10 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 \subsubsection{Citing commands}
 
 Until now we have only used the basic \ci{cite} command. \pai{biblatex} extends
-the command set thus allowing us to be much more expressive when it comes to
+the command set to allow extra control with
 citations.
 
-Most of the citing commands (\ci{cite} included) allows us to insert notes
+Most of the citing commands (\ci{cite} included) allows to insert notes
 around the citations:
 \begin{lscommand}
   \ci*{cite}[pre:o ! post:o ! marker:m]
@@ -487,8 +485,8 @@ Again\footnote{Smart
 \end{document}
 \end{example}
 
-Another set of commands allows us to extract a given information from
-bibliographic entry. This is includes commands such as \ci{citeauthor},
+Another set of commands allows us to extract specific information from
+the bibliographic entry, and use the information directly in the text. This is includes commands such as \ci{citeauthor},
 \ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
 
 \begin{example}[standalone,
@@ -516,8 +514,8 @@ is available at \citeurl{lshort}.
 \end{document}
 \end{example}
 
-If we want to be less tied to a specific style, there also exist \ci{autocite}
-command which allows us to specify citation style in package options.
+If you want to be less tied to a specific style, the \ci{autocite}
+command follows the citation style specified in the package options.
 
 \begin{example}[standalone,
   template=empty,
@@ -577,8 +575,8 @@ This is auto citation \autocite{curie}.
 
 \subsubsection{More about entries}
 
-\hologo{biber} uses ``and'' as a separator in author entries. In order to prevent
-this behavior you must enclose ``and'' in curly braces like so
+\hologo{biber} uses ``and'' as a separator in author entries. To prevent
+this behavior, enclose ``and'' in curly brackets
 \begin{verbatim}
 @book{
   author = {Kruger {and} sons}
@@ -589,7 +587,7 @@ though it shouldn't.
 
 When writing about certain subject it often happens that the same author or
 publishing company released several books. In order to reuse the information in
-the \eei{.bib} file, a special entry \cargv{xdata} is available. It may be used
+several entries in the \eei{.bib} file, a special entry \cargv{xdata} is available. It may be used
 like this
 
 
