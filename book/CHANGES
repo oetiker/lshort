@@ -6,6 +6,8 @@ UNRELEASED
 * use booktabs for table typesetting / marcin-serwin
 * replace most of direct text formatting with logical markup in math chapter / marcin-serwin
 * add biblatex tutorial / marcin-serwin
+* use the new syntax for defining commands and environments in customizig LaTeX
+  chapter / marcin-serwin
 
 6.4 2021.03.09
 --------------
