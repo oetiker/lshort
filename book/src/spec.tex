@@ -26,7 +26,9 @@ doing it:
   \item[\ei{thebibliography} environment] which is suitable for rather small
   bibliographies
   \item[\pai{biblatex} with \hologo{biber}] which is an advanced bibliography
-  managament system that is suitable for books and publications with extensive bibliographies. These systems also make it easy to format all bibliography entries in exactly the style required by the publisher.
+  management system that is suitable for books and publications with extensive
+  bibliographies. These systems also make it easy to format all bibliography
+  entries in exactly the style required by the publisher.
 \end{description}
 
 \subsection{\ei{thebibliography} environment}
@@ -98,7 +100,7 @@ form
 \hspace*{3em}\vdots\\
 \texttt{\}}
 \end{lscommand}
-The fields required dependend on the bibliography style you choose,
+The fields required depend on the bibliography style you choose,
 the default style of \pai{biblatex} will accept
 the following \carg{entry type}s:
 \begin{description}
@@ -123,7 +125,7 @@ manual or the style you are using.
 Each \eei{.bib} file will typically contain multiple entries. See
 figure~\ref{fig:bibfile} for an example.
 
-\begin{figure}[ht]
+\begin{figure}[htp]
   \begin{lined}{\textwidth}
     \verbatiminput{examples/example.bib}
   \end{lined}
@@ -140,7 +142,7 @@ The \pai{biblatex} package must be loaded with the
   \ci*{usepackage}[options:o ! biblatex:vm]
 \end{lscommand}
 command. The \carg{options} are comma delimited key value pairs that allow to
-customize the behavior of biblatex package. Some of them will be explained
+customise the behaviour of biblatex package. Some of them will be explained
 later.
 
 The command
@@ -172,7 +174,7 @@ The first \LaTeX{} pass extracts the citation data from the document which are
 then read by \hologo{biber}. In the second pass, the bibliography is placed in the
 document and the third pass finally typesets the document with all the correct citations.
 
-Here is a complete example to show how the bits work together. Iin this and all the following examples, the \texttt{example.bib} file is assumed to be the same as in~\ref{fig:bibfile}.
+Here is a complete example to show how the bits work together. In this and all the following examples, the \texttt{example.bib} file is assumed to be the same as in~\ref{fig:bibfile}.
 \begin{example}[standalone,
   template=empty,
   biber,
@@ -212,11 +214,11 @@ traveller~\cite{dream}.
 \subsubsection{Controlling the bibliography}
 
 The default sorting order is \emph{N}ame (author\slash editor), \emph{T}itle,
-\emph{Y}ear or \carg{nty} in short. This order can be changed by passing
+\emph{Y}ear or \cargv{nty} in short. This order can be changed by passing
 \cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
-entries in chronological order simply pass the \carg{ynt} option. Other options
-allow sorting by citation order (\carg{none}) and by the number of citations
-(\carg{count}).
+entries in chronological order simply pass the \cargv{ynt} option. Other options
+allow sorting by citation order (\cargv{none}) and by the number of citations
+(\cargv{count}).
 \begin{example}[standalone,
   template=empty,
   biber,
@@ -240,10 +242,10 @@ allow sorting by citation order (\carg{none}) and by the number of citations
 \end{document}
 \end{example}
 
-While the default citation style is \carg{numeric}, this can be easily changed by
+While the default citation style is \cargv{numeric}, this can be easily changed by
 setting the preferred style via the \carg{style} option. Choose from
-\carg{alphabetic},
-\carg{authoryear}, \carg{authortitle} or \carg{verbose}. Some styles come in
+\cargv{alphabetic},
+\cargv{authoryear}, \cargv{authortitle} or \cargv{verbose}. Some styles come in
 several variations.
 \begin{example}[standalone,
   template=empty,
@@ -398,7 +400,7 @@ options include
 \end{example}
 
 As you may have noticed, when entries have many authors, then not all of
-them will be printed; instead ``et al.'' shows up at the end of the author list. This behavior
+them will be printed; instead ``et al.'' shows up at the end of the author list. This behaviour
 may be controlled via \cargv{maxnames} (default $3$) and \cargv{minnames}
 (default $1$) options. If the number of names is greater than \carg{maxnames}
 then it will be shortened to \carg{minnames} and ``et al.'' will be added.
@@ -576,13 +578,13 @@ This is auto citation \autocite{curie}.
 \subsubsection{More about entries}
 
 \hologo{biber} uses ``and'' as a separator in author entries. To prevent
-this behavior, enclose ``and'' in curly brackets
+this behaviour, enclose ``and'' in curly brackets
 \begin{verbatim}
 @book{
   author = {Kruger {and} sons}
 }
 \end{verbatim}
-The same trick may be useful when \hologo{biber} changes capitalization, even
+The same trick may be useful when \hologo{biber} changes capitalisation, even
 though it shouldn't.
 
 When writing about certain subject it often happens that the same author or
