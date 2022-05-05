@@ -16,22 +16,37 @@
 
 \section{Bibliography}
 
+When writing articles or books concerned with some topic you will often need to
+reference other books and articles to point out where some information might be
+found. You have already seen this done multiple times throughout this book.
+Doing this by hand would be tedious, so \LaTeX{} comes with an option to manage
+the bibliographic data of our document. We will describe two approaches to
+doing it:
+\begin{description}
+  \item[\ei{thebibliography} environment] which is suitable for rather small
+  bibliographies
+  \item[\pai{biblatex} with \hologo{biber}] which is an advanced bibliography
+  managament system that is suitable for books and publications with extensive bibliographies. These systems also make it easy to format all bibliography entries in exactly the style required by the publisher.
+\end{description}
+
+\subsection{\ei{thebibliography} environment}
+
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
-\ci{bibitem}\verb|[|\emph{label}\verb|]{|\emph{marker}\verb|}|
+\ci{bibitem}[label][marker]
 \end{lscommand}
-The \emph{marker} is then used to cite the book, article or paper
+The \carg{marker} is then used to cite the book, article or paper
 within the document.
 \begin{lscommand}
-\ci{cite}\verb|{|\emph{marker}\verb|}|
+\ci{cite}[marker]
 \end{lscommand}
-If you do not use the \emph{label} option, the entries will get enumerated
+If you do not use the \carg{label} option, the entries will get enumerated
 automatically.  The parameter after the \verb|\begin{thebibliography}|
 command defines how much space to reserve for the number of labels. In the example below,
-\verb|{99}| tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
+\cargv{\{99\}} tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
 than the number 99.
-\begin{example}
+\begin{example}[standalone, paperwidth=7cm, paperheight=4cm]
 Partl~\cite{pa} has
 proposed that \ldots
 \begin{thebibliography}{99}
@@ -41,17 +56,579 @@ TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
 \end{example}
 
-\chaptermark{Specialities} % w need to fix the damage done by the
-                           %bibliography example.
-\thispagestyle{fancyplain}
+In order to get the citations typeset properly, two passes of \LaTeX{} compiler
+are needed similarly to table of contents.
+
+This approach has the advantage that it is simple and entirely self
+contained---no outer packages and programs are needed since it is supported out
+of the box by \LaTeX{}. There are however many problems:
+\begin{itemize}
+  \item Each entry has to be formatted manually, which may lead to inconsistent
+  styling. Moreover simple changes in format will require editing each entry by
+  hand.
+  \item There is no logical/structural markup to imply which part of
+  bibliographic entry is author, title, journal, etc.
+  \item No sorting is performed. If you want the entries to be processed in
+  citation order, you have to ensure this manually.
+  \item If you want to use different citation style than numeric, you have to
+  manually set all the labels.
+\end{itemize}
+Thus for all projects that contain more than few citations \pai{biblatex} is
+strongly recommended.
+
+% For larger projects, you might want to check out the Bib\TeX{}
+% program. Bib\TeX{} is included with most \TeX{} distributions. It
+% allows you to maintain a bibliographic database and then extract the
+% references relevant to things you cited in your paper. The visual
+% presentation of Bib\TeX{}-generated bibliographies is based on a style-sheets concept that allows you to create bibliographies following
+% a wide range of established designs.
+
+\subsection{\pai{biblatex} with \hologo{biber}}
+
+\subsubsection{Database files}
+The \pai*{biblatex} package uses a separate program, \pai*{biber}, for
+bibliography management. The bibliographic database is stored in special
+\eei{.bib} files with their own syntax. A single bibliographic entry is of the
+form
+\begin{lscommand}
+\texttt{@}\carg{entry type}\texttt{\{}\carg{marker},\\
+\hspace*{1em}\carg{field1}\texttt{ = \{}\carg{value1}\texttt{\}},\\
+\hspace*{1em}\carg{field2}\texttt{ = \{}\carg{value2}\texttt{\}},\\
+\hspace*{1em}\carg{field3}\texttt{ = \{}\carg{value3}\texttt{\}},\\
+\hspace*{3em}\vdots\\
+\texttt{\}}
+\end{lscommand}
+The fields required dependend on the bibliography style you choose,
+the default style of \pai{biblatex} will accept
+the following \carg{entry type}s:
+\begin{description}
+  \item[\cargv{article}] for articles from journals or other periodicals. Important fields are
+   are \cargv{author}, \cargv{title}, \cargv{journaltitle},
+  \cargv{date}, \cargv{url}, \cargv{doi}.
+  \item[\cargv{book}] for single-volume book. With the fields
+  \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
+  \cargv{volume}.
+  \item[\cargv{online}] for accessed online resources. With
+   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{urldate}.
+  \item[\cargv{manual}] for technical documentation. With
+   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{version}.
+  \item[\cargv{misc}] for entries that do not fit any of the predefined
+   categories. With \cargv{author}, \cargv{title},
+   \cargv{date}, \cargv{howpublished}, \cargv{note}.
+\end{description}
+Note that the above list is far from exhaustive both in terms of \carg{entry
+type}s and the field names mentioned. For a full list check the \pai{biblatex}
+manual or the style you are using.
+
+Each \eei{.bib} file will typically contain multiple entries. See
+figure~\ref{fig:bibfile} for an example.
+
+\begin{figure}[ht]
+  \begin{lined}{\textwidth}
+    \verbatiminput{examples/example.bib}
+  \end{lined}
+  \caption[An example of bibliography database]{An example bibliography
+  database for \hologo{biber} (\eei{.bib} file)} \label{fig:bibfile}
+\end{figure}
+
+\subsubsection{Using \pai{biblatex}}
+
+In order to use biblatex, the following three commands are necessary.
+
+The \pai{biblatex} package must be loaded with the
+\begin{lscommand}
+  \ci*{usepackage}[options:o ! biblatex:vm]
+\end{lscommand}
+command. The \carg{options} are comma delimited key value pairs that allow to
+customize the behavior of biblatex package. Some of them will be explained
+later.
+
+The command
+\begin{lscommand}
+  \ci*{addbibresource}[options:o ! file:m]
+\end{lscommand}
+must be put in the preamble. The \carg{file} is the name of the \eei{.bib} file
+containing bibliographic entries. You may also specify a remote location here,
+but then you must also put \cargv{location=remote} in the \carg{options}.
+
+Finally the
+\begin{lscommand}
+  \ci*{printbibliography}[options:o]
+\end{lscommand}
+typesets the loaded bibliography. The \carg{options} may be used to alter the
+title or filter the entries included.
+
+Processing files requires three \LaTeX{} passes in addition to the biber
+command. A typical command line run may look like this:
+\begin{code}
+\begin{verbatim}
+$ xelatex document.tex
+$ biber document
+$ xelatex document.tex
+$ xelatex document.tex
+\end{verbatim}
+\end{code}
+The first \LaTeX{} pass extracts the citation data from the document which are
+then read by \hologo{biber}. In the second pass, the bibliography is placed in the
+document and the third pass finally typesets the document with all the correct citations.
+
+Here is a complete example to show how the bits work together. Iin this and all the following examples, the \texttt{example.bib} file is assumed to be the same as in~\ref{fig:bibfile}.
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=9.9cm,
+]
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
+\usepackage{biblatex}
+\addbibresource{example.bib}
+
+\begin{document}
+\setlength{\parindent}{0pt} %!hide
+\ldots{} Recently I was
+learning to use Bib\LaTeX{}
+from~\cite{lshort}. It seems
+very useful. \ldots
+
+\ldots{} which was already
+shown by Mrs.~Curie
+in~\cite{curie}.
+\ldots
+
+\ldots{} this can be
+easily explained by
+the fact that Einstein
+was a time
+traveller~\cite{dream}.
+\ldots
+
+\printbibliography
+\end{document}
+\end{example}
+
+\subsubsection{Controlling the bibliography}
+
+The default sorting order is \emph{N}ame (author\slash editor), \emph{T}itle,
+\emph{Y}ear or \carg{nty} in short. This order can be changed by passing
+\cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
+entries in chronological order simply pass the \carg{ynt} option. Other options
+allow sorting by citation order (\carg{none}) and by the number of citations
+(\carg{count}).
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=6.5cm,
+  paperheight=5.5cm,
+]
+\documentclass{article} %!hide
+% In preamble
+\usepackage[sorting=ynt]{biblatex}
+
+% ...
+%!hidebegin
+\sloppy
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+
+\begin{document}
+\nocite{*}
+\printbibliography[heading=none]
+\end{document}
+\end{example}
+
+While the default citation style is \carg{numeric}, this can be easily changed by
+setting the preferred style via the \carg{style} option. Choose from
+\carg{alphabetic},
+\carg{authoryear}, \carg{authortitle} or \carg{verbose}. Some styles come in
+several variations.
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=6.5cm,
+  paperheight=7.2cm,
+]
+\documentclass{article} %!hide
+% In preamble
+\usepackage[
+  style=alphabetic
+]{biblatex}
+
+% ...
+
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+
+\begin{document}
+%!hideend
+\setlength{\parindent}{0pt} %!hide
+The validity of~\cite{dream} as a
+scientific source was
+recently called into question
+though it correctly claims that
+polonium was first described
+in~\cite{curie}.
+%!hidebegin
+\printbibliography
+\end{document}
+\end{example}
+
+In contrast the \ei{thebibliography} environment, \pai{biblatex}'s
+\ci{printbibliography} command only prints entries that were referenced in the
+document. If you want to print entries not mentioned in the document, you may
+use the \ci{nocite}[marker] command. It will insert invisible citations, thus
+instructing \pai{biblatex} to put them in the bibliography. The special value
+\cargv{*} can be passed as a \carg{marker} if you want to print all entries in
+the database.
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=7cm,
+]
+%!hidebegin
+\documentclass{article} %!hide
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\begin{document}
+\setlength{\parindent}{0pt}
+%!hideend
+I've only cited~\cite{lshort}.
+
+\nocite{*}
+\printbibliography
+%!hidebegin
+\end{document}
+\end{example}
+
+If your bibliography gets really large it may make sense to split it into
+several parts. This can be done by passing filter options to the
+\ci{printbibliography} command. Available filters include \cargv{type},
+\cargv{category}, \cargv{keyword}. It may be useful to also change the titles of
+different categories using \cargv{title} option.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=6cm,
+]
+%!hidebegin
+\documentclass{article} %!hide
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\begin{document}
+\setlength{\parindent}{0pt}
+\nocite{*}
+%!hideend
+\printbibliography[
+  type=book,
+  title=Books I've referenced
+]
+
+\printbibliography[
+  keyword=unreliable,
+  title=Don't trust those
+]
+%!hidebegin
+\end{document}
+\end{example}
+
+By default the bibliography does not appear in the table of contents. This is
+because it is using starred version of \ci{chapter}\slash\ci{section}
+(depending on the class) to generate its heading. In order to change the default we
+may pass the option \cargv{heading} to \ci{printbibliography}. Available
+options include
+\begin{description}
+  \item[\cargv{bibliography}] the default, starred version of heading
+  \item[\cargv{bibintoc}] starred version of heading, will appear in table of contents
+  \item[\cargv{subbibliography}] will drop the bibliography one level in
+  hierarchy (\ci{section*} instead of \ci{chapter*} and so on)
+  \item[\cargv{bibnumbered}] will use non starred version for heading, thus
+  numbering it and appearing in table of contents
+  \item[\cargv{subbibintoc}] will drop the bibliography one level and put it in
+  table of contents
+  \item[\cargv{subbibnumbered}] will drop the bibliography one level and use
+  non starred version of heading
+  \item[\cargv{none}] will not print the heading
+\end{description}
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7.6cm,
+  paperheight=7.5cm,
+]
+%!hidebegin
+\documentclass{article} %!hide
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\begin{document}
+\setlength{\parindent}{0pt}
+\nocite{curie}
+%!hideend
+\tableofcontents
+\section{Important section}
+
+% ...
+
+\section{Other}
+
+\printbibliography[
+  heading=subbibnumbered,
+  title=Bibliography
+]
+
+% ...
+
+%!hidebegin
+\end{document}
+\end{example}
+
+As you may have noticed, when entries have many authors, then not all of
+them will be printed; instead ``et al.'' shows up at the end of the author list. This behavior
+may be controlled via \cargv{maxnames} (default $3$) and \cargv{minnames}
+(default $1$) options. If the number of names is greater than \carg{maxnames}
+then it will be shortened to \carg{minnames} and ``et al.'' will be added.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=3cm,
+]
+\documentclass{article} %!hide
+\usepackage[maxnames=4]{biblatex}
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\nocite{lshort}
+\printbibliography[heading=none]
+
+\end{document}
+\end{example}
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=7cm,
+  paperheight=3cm,
+]
+\documentclass{article} %!hide
+\usepackage[minnames=2]{biblatex}
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\nocite{lshort}
+\printbibliography[heading=none]
+
+\end{document}
+\end{example}
+
+\subsubsection{Citing commands}
+
+Until now we have only used the basic \ci{cite} command. \pai{biblatex} extends
+the command set to allow extra control with
+citations.
+
+Most of the citing commands (\ci{cite} included) allows to insert notes
+around the citations:
+\begin{lscommand}
+  \ci*{cite}[pre:o ! post:o ! marker:m]
+\end{lscommand}
+Other standard citation commands include \ci{parencite} (citation in
+parentheses), \ci{footcite} (in footnotes), \ci{textcite} (citation intended to
+be subject in a sentence), \ci{smartcite} (context dependent).
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=5cm,
+]
+%!hidebegin
+\documentclass{article}
+\usepackage[style=alphabetic]{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+%!hideend
+Indicate page in citation~\cite[25]{lshort}. 
+This citation is in
+parentheses~\parencite{curie}.
+Footnote cite~\footcite{dream}.
+Smart \smartcite[See][78]{lshort}.
+Again\footnote{Smart
+\smartcite[12--56]{dream}.}.
+``\Textcite{curie} was an important paper.''
+%!hidebegin
+\end{document}
+\end{example}
+
+Another set of commands allows us to extract specific information from
+the bibliographic entry, and use the information directly in the text. This is includes commands such as \ci{citeauthor},
+\ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=4cm,
+]
+%!hidebegin
+\documentclass{article}
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+%!hideend
+\Citetitle{lshort} is a book by
+\citeauthor{lshort}. Latest version was
+released in \citeyear{lshort}, or to
+be more precise on \citedate{lshort}. It
+is available at \citeurl{lshort}.
+%!hidebegin
+\end{document}
+\end{example}
+
+If you want to be less tied to a specific style, the \ci{autocite}
+command follows the citation style specified in the package options.
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=4cm,
+]
+%!hidebegin
+\documentclass{article}
+%!hideend
+\usepackage[
+  style=verbose,
+  autocite=footnote,
+]{biblatex}
+
+% ...
+
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+%!hideend
+This is auto citation \autocite{curie}.
+%!hidebegin
+\end{document}
+\end{example}
 
 
-For larger projects, you might want to check out the Bib\TeX{}
-program. Bib\TeX{} is included with most \TeX{} distributions. It
-allows you to maintain a bibliographic database and then extract the
-references relevant to things you cited in your paper. The visual
-presentation of Bib\TeX{}-generated bibliographies is based on a style-sheets concept that allows you to create bibliographies following
-a wide range of established designs.
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  biber_dir=../src/examples/,
+  paperwidth=5cm,
+  paperheight=2cm,
+]
+%!hidebegin
+\documentclass{article}
+%!hideend
+\usepackage[
+  style=authoryear,
+  autocite=inline,
+]{biblatex}
+
+% ...
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example.bib}
+\sloppy
+\begin{document}
+\noindent
+This is auto citation \autocite{curie}.
+\end{document}
+\end{example}
+
+\subsubsection{More about entries}
+
+\hologo{biber} uses ``and'' as a separator in author entries. To prevent
+this behavior, enclose ``and'' in curly brackets
+\begin{verbatim}
+@book{
+  author = {Kruger {and} sons}
+}
+\end{verbatim}
+The same trick may be useful when \hologo{biber} changes capitalization, even
+though it shouldn't.
+
+When writing about certain subject it often happens that the same author or
+publishing company released several books. In order to reuse the information in
+several entries in the \eei{.bib} file, a special entry \cargv{xdata} is available. It may be used
+like this
+
+
+\begin{example}[standalone,
+  template=empty,
+  biber,
+  paperwidth=6cm,
+  paperheight=7cm,
+]
+%!hidebegin
+\documentclass{article}
+\begin{filecontents}{example2.bib} 
+%!hideend
+@xdata{krugers,
+  author    = {Kruger {and} sons},
+  publisher = {Krugers Inc.},
+  location  = {Paris}
+}
+
+@book{kru21,
+  title = {Why is \LaTeX{} so hard?},
+  year  = {2021},
+  xdata = {krugers}
+}
+
+@book{kru22,
+  title = {\LaTeX{} is awesome!},
+  year  = {2022},
+  xdata = {krugers}
+}
+\end{filecontents} %!hidebegin
+\usepackage{biblatex}
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
+\addbibresource{example2.bib}
+\sloppy
+\begin{document}
+\nocite{*}
+\noindent
+\printbibliography
+\end{document}
+\end{example}
 
 \section{Indexing} \label{sec:indexing}
 A very useful feature of many books is their \wi{index}. With \LaTeX{}

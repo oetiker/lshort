@@ -4,14 +4,15 @@ VERS = 6.4
 
 OTHER = README CHANGES
 
-FILES = src/biblio.bib src/math.tex src/things.tex src/contrib.tex src/lshort.sty src/mylayout.sty src/title.tex \
-	src/custom.tex src/lshort.tex src/overview.tex src/typeset.tex src/lssym.tex src/spec.tex src/preamble.tex \
-	src/lshort-base.tex src/lshort-letter.tex src/lshort-a5.tex src/graphic.tex src/appendix.tex src/license.tex
+FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name "*.sty" \)  -print) src/title.tex
+
 # Define some variables
 LATEX=latex
-PDFLATEX=xelatex
+PDFLATEX=xelatex --enable-write18
 MAKEINDEX=makeindex
 DVIPS=dvips
+
+.PHONY: quick all lulu
 
 # The default targets
 all: lshort.pdf lshort-letter.pdf lshort-a5.pdf
@@ -25,14 +26,14 @@ lulu: lshort-body.pdf lshort-title.pdf
 	$(MAKEINDEX) -s ../src/lshort.ist $(basename $@) && biber $(basename $@) &&$(PDFLATEX) $(basename $@)&& \
 	(thumbpdf --resolution 10 $@ && $(PDFLATEX) $(basename $@))&& \
 	mv $@ .. )
-	rm pdfbuild/*
 
-src/title.tex: Makefile fixdate.pl
-	perl fixdate.pl $(VERS) < src/title.tex > src/title.tex2 && mv src/title.tex2 src/title.tex
+src/title.tex: Makefile fixdate.pl src/title.template.tex
+	perl fixdate.pl $(VERS) < src/title.template.tex > src/title.tex
 
 quick: $(FILES)
-	(TEXINPUTS=`pwd`/src:$(TEXINPUTS)&& export TEXINPUTS&& cd texbuild&& \
-        $(LATEX) lshort&& mv lshort.dvi ..)
+	-mkdir pdfbuild
+	(TEXINPUTS=.:`pwd`/src:${TEXINPUTS:-:}&&export TEXINPUTS && cd pdfbuild &&\
+	$(PDFLATEX) lshort && mv lshort.pdf .. )
 
 
 tar:	$(FILES)

@@ -385,21 +385,23 @@ slightly more complicated \wi{input file} is given in
 Figure~\ref{document}.
 
 \begin{figure}[!bp]
-\begin{lined}{6cm}
-\begin{verbatim}
+\begin{lined}{10cm}
+\begin{example}[standalone, template=empty, noextend]
 \documentclass{article}
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry} %!hide
 \begin{document}
 Small is beautiful.
 \end{document}
-\end{verbatim}
+\end{example}
 \end{lined}
 \caption{A Minimal \LaTeX{} File.} \label{mini}
 \end{figure}
 
 \begin{figure}[!bp]
-\begin{lined}{10cm}
-\begin{verbatim}
+\begin{lined}{\textwidth}
+\begin{example}[standalone, template=empty, noextend]
 \documentclass[a4paper,11pt]{article}
+\usepackage[paperheight=2\height,paperwidth=2\width,margin=0.8cm,includefoot]{geometry} %!hide
 % define the title
 \author{H.~Partl}
 \title{Minimalism}
@@ -413,7 +415,7 @@ Well, and here begins my lovely article.
 \section{Good Bye World}
 \ldots{} and here it ends.
 \end{document}
-\end{verbatim}
+\end{example}
 \end{lined}
 \caption[Example of a Realistic Journal Article.]{Example of a Realistic
 Journal Article. Note that all the commands you see in this example will be

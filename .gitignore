@@ -1,0 +1,10 @@
+pdfbuild
+
+title.tex
+
+lshort.pdf
+lshort-a5.pdf
+lshort-letter.pdf
+lshort-body.pdf
+lshort-title.pdf
+*.log
