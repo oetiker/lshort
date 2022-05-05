@@ -115,20 +115,20 @@ package.
 \pagestyle{fancy}
 % with this we ensure that the chapter and section
 % headings are in lowercase.
-\renewcommand{\chaptermark}[1]{%
+\RenewDocumentCommand{\chaptermark}{m}{%
         \markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{%
+\RenewDocumentCommand{\sectionmark}{m}{%
         \markright{\thesection\ #1}}
 \fancyhf{}  % delete current header and footer
 \fancyhead[LE,RO]{\bfseries\thepage}
 \fancyhead[LO]{\bfseries\rightmark}
 \fancyhead[RE]{\bfseries\leftmark}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0pt}
+\RenewDocumentCommand{\headrulewidth}{}{0.5pt}
+\RenewDocumentCommand{\footrulewidth}{}{0pt}
 \addtolength{\headheight}{0.5pt} % space for the rule
 \fancypagestyle{plain}{%
    \fancyhead{} % get rid of headers on plain pages
-   \renewcommand{\headrulewidth}{0pt} % and the line
+   \RenewDocumentCommand{\headrulewidth}{}{0pt} % and the line
 }
 \end{verbatim}
 \end{lined}
