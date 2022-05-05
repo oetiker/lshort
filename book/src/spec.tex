@@ -87,11 +87,16 @@ strongly recommended.
 
 \subsection{\pai{biblatex} with \hologo{biber}}
 
-\subsubsection{Database files}
 The \pai*{biblatex} package uses a separate program, \pai*{biber}, for
-bibliography management. The bibliographic database is stored in special
-\eei{.bib} files with their own syntax. A single bibliographic entry is of the
-form
+bibliography management. \hologo{biber} is a successor of a popular
+\hologo{BibTeX} program. Its main advantage is UTF-8 support, which was lacking
+in the original \hologo{BibTeX}. The database format is largely backward
+compatible, so on many sites you can find ``BibTeX entry'' or ``Export Bibtex
+Citation'' , which will be useful when compiling your own citation database.
+
+\subsubsection{Database files}
+The bibliographic database is stored in special \eei{.bib} files with their own
+syntax. A single bibliographic entry is of the form
 \begin{lscommand}
 \texttt{@}\carg{entry type}\texttt{\{}\carg{marker},\\
 \hspace*{1em}\carg{field1}\texttt{ = \{}\carg{value1}\texttt{\}},\\
