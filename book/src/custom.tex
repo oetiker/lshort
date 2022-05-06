@@ -437,7 +437,10 @@ differences in the way this mode is handled. The most visible change is the
 fact that all whitespace is ignored. You may have noticed that in a lot of
 examples above we had to end most lines with \ai{\%} in order to get correct
 spacing. This change forces us to insert spaces explicitly as they are usually
-much rarer when writing a package.
+much rarer when writing a package. In order to insert spaces you have to use
+the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
+  you want to insert non-breaking space in the \emph{expl mode} you have to use
+  \ci{nobreakspace}.} Paragraphs can be started with the \ci{par} command.
 
 The arguments are used to provide information about package in the log file. If
 you used this package and looked at the log file you would find
