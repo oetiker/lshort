@@ -23,11 +23,11 @@ that looks different from what is provided by default.
 \section{New Commands, Environments and Packages}
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
-write documents using logical markup, such as \ci{emph} or \ci{section}. There
-may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.```
+write documents using logical markup, with commands like \ci{emph} or \ci{section}. There
+may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.
 You may have noticed that all the
 commands I introduce in this book are typeset in a box, and that they show up
-in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define new commands. Thus I
+in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. Thus I
 can write:
 
 \begin{example}
@@ -63,8 +63,7 @@ you want to create, the \carg{arg}ument \carg{spec}ification and the
 \emph{definition} of the command.
 
 The \carg{argspec} argument specifies the number and types of arguments the
-command receives. Two most important types are \cargv{m} and \cargv{o} which
-stand for, respectively, mandatory and optional. Thus if you want to create a
+command receives. The two most important types are \cargv{m}, for \emph{mandatory} and \cargv{o} for \emph{optional}. To create a
 command that takes two optional arguments, then two mandatory, then again one
 optional and finally three mandatory you would write \cargv{oommommm}. If the
 \carg{argspec} argument is empty then the command will take no arguments.
@@ -130,7 +129,7 @@ macro.
 \end{example}
 
 There are two variations of it: \ci{IfValueT} and \ci{IfValueF} which may
-be used if you only need output for one of the branches. Thus the example with
+be used if you only need output for one of the branches. The example with
 \cargv{-NoValue-} in the output could be fixed by writing
 \begin{example}
 \NewDocumentCommand{\txsit}{om}
@@ -144,14 +143,14 @@ be used if you only need output for one of the branches. Thus the example with
 \item \txsit[very]{long}
 \end{itemize}
 \end{example}
-There are also commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
-which work exactly the same, but the value\slash no-value branches are swapped.
+The commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
+work exactly the same, but the value\slash no-value branches are swapped.
 
 Often you will want to use optional arguments when present but use some default
 values when the user does not provide them. This could be achieved by
-\ci{IfValueTF}, but a much better approach exists: \cargv{O} argument
-specification. It works like \cargv{o} but allows us to specify default value
-if no value is supplied. Thus we can write
+\ci{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
+It works like \cargv{o} but allows to set a default
+if no value is supplied. Write
 
 \begin{example}
 \NewDocumentCommand{\txsit}{O{not so}m}
@@ -166,9 +165,9 @@ if no value is supplied. Thus we can write
 \end{example}
 
 Another useful argument specification is \cargv{s}, short for star. This
-argument enables us to provide different definitions based on whether the
+argument allows to provide different definitions based on whether the
 starred or non-starred version of command was issued by the user. It uses
-\ci{IfBooleanTF} command (and its variations \cih{IfBooleanT} \cih{IfBooleanF})
+\ci{IfBooleanTF} command (and its variations\cih{IfBooleanT}\cih{IfBooleanF})
 that works analogously to the \ci{IfValueTF} command. 
 
 \begin{example}
@@ -187,10 +186,10 @@ that works analogously to the \ci{IfValueTF} command.
 \end{itemize}
 \end{example}
 
-These are just the most common argument specifications. For a full overview of
-those take a look at the documentation of \pai*{xparse} package.\footnote{This
-package is included by default in new \LaTeX{} versions, so you probably do not
-need to include it manually.}
+These are just the most common argument specifications. For a full description,
+take a look at the \pai*{xparse} package documentation.\footnote{This
+package is loaded automatically in new \LaTeX{} releases, so you probably do not
+need to put \texttt{\textbackslash usepackage\{xparse\}} in your preamble. }
 
 \LaTeX{} will not allow you to create a new command that would
 overwrite an existing one. But there is a special command in case you
@@ -203,8 +202,7 @@ command. It works like \ci{NewDocumentCommand}, but if the command is
 already defined, \LaTeXe{} will silently ignore it.
 
 \subsection{New Environments}
-Just as with the \ci{NewDocumentCommand} command, there is a command to create
-your own environments. The \ci{NewDocumentEnvironment} command uses the
+The \ci{NewDocumentEnvironment} command lets you create your own environments. It has the
 following syntax:
 
 \begin{lscommand}
@@ -234,7 +232,7 @@ My humble subjects \ldots
 \end{king}
 \end{example}
 
-Note that when environment argument are read they are read \emph{after} the
+Note that when environment argument are read, they are read \emph{after} the
 \ci{begin}[name] command. This may be especially counter intuitive when we
 consider the \cargv{s} specification. Below is an example that illustrates
 this.
@@ -291,7 +289,7 @@ This will be printed twice!
 \end{twice}
 \end{example}
 While this makes one of the \carg{at begin}, \carg{at end} arguments redundant,
-they are still required. (In the example above we provided empty \carg{at
+they are still required. (In the example above we provided an empty \carg{at
 end}.)
 
 Do not overuse \cargv{+b} as this will both make the environments subject to
@@ -325,7 +323,7 @@ In the next stage it will again replace the \ci*{emph}[foo:vm] yielding
 \begin{verbatim}
 \emph{foo}~(``foo'' is emphasised)~(``foo'' is emphasised)
 \end{verbatim}
-It is easy to see that this process will never end and at some point \TeX{}
+This process will never end and at some point \TeX{}
 simply gives up.
 
 Note that 
@@ -336,15 +334,13 @@ Note that
 }
 \end{verbatim}
 will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
-with \verb|\emph{...}| and the cycle continues.
+with \verb|\emph{...}| and the cycle repeats.
 
 In order to avoid this problem a special command exists
 \begin{lscommand}
-  \ci*{NewCommandCopy}[name:m ! command:m]
+  \ci*{NewCommandCopy}[\texttt{\bs}name:m ! \texttt{\bs}command:m]
 \end{lscommand}
-It makes the \carg{name} the exact copy of the \carg{command}. You may
-appropriate the difference between this and \ci{NewDocumentCommand} in the
-following example
+It makes the \carg{name} the exact copy of the \carg{command}. The following example shows how this works
 \begin{example}[examplewidth=0.40\linewidth]
 \NewDocumentCommand{\foo}{}{Batman!}
 
@@ -432,18 +428,17 @@ preamble (with minor adjustments) into a separate file with a name ending in
 \ci*{ProvidesExplPackage}[package name:m ! date:m ! version:m ! description:m]
 \end{lscommand}
 \noindent for use at the very beginning of your package file. This command
-switches the \LaTeX{} to process the  file in \emph{expl mode}. There are some
-differences in the way this mode is handled. The most visible change is the
-fact that all whitespace is ignored. You may have noticed that in a lot of
-examples above we had to end most lines with \ai{\%} in order to get correct
-spacing. This change forces us to insert spaces explicitly as they are usually
-much rarer when writing a package. In order to insert spaces you have to use
+tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
+that all whitespace is ignored. You may have noticed that in many of the
+examples above we had to end most lines with \ai{\%} to get correct
+spacing in the output. In \emph{expl mode}, spaces have to be added explicitly if needed at all. They are usually
+quite rare when writing a package. To insert spaces, use
 the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
-  you want to insert non-breaking space in the \emph{expl mode} you have to use
+  you want to insert non-breaking space in \emph{expl mode}, use
   \ci{nobreakspace}.} Paragraphs can be started with the \ci{par} command.
 
 The arguments are used to provide information about package in the log file. If
-you used this package and looked at the log file you would find
+you use this package and look at the log file you will find
 \begin{verbatim}
 Package: demopack 2022-05-05 v0.1 Demo Package by Tobias Oetiker
 \end{verbatim}
