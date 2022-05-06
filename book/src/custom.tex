@@ -24,11 +24,10 @@ that looks different from what is provided by default.
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
 write documents using logical markup, such as \ci{emph} or \ci{section}. There
-may be however situations where a command to produce the logical unit of your
-document is not provided by \LaTeX{}. You may have noticed that all the
+may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.```
+You may have noticed that all the
 commands I introduce in this book are typeset in a box, and that they show up
-in the index at the end of the book. There is no \LaTeX{} markup for element
-``this is a command introduction'', bu \LaTeX{} allows me to define one. Thus I
+in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define new commands. Thus I
 can write:
 
 \begin{example}
@@ -435,7 +434,7 @@ preamble (with minor adjustments) into a separate file with a name ending in
 \noindent for use at the very beginning of your package file. This command
 switches the \LaTeX{} to process the  file in \emph{expl mode}. There are some
 differences in the way this mode is handled. The most visible change is the
-fact that whitespaces are ignored. You may have noticed that in a lot of
+fact that all whitespace is ignored. You may have noticed that in a lot of
 examples above we had to end most lines with \ai{\%} in order to get correct
 spacing. This change forces us to insert spaces explicitly as they are usually
 much rarer when writing a package.
