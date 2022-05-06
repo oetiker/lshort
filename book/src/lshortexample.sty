@@ -49,6 +49,9 @@
 
   paperheight .dim_set:N = \__lshortexample_paperheight,
   paperheight .initial:n = {\fp_to_dim:n {sqrt(2) * \__lshortexample_paperwidth}},
+
+  examplewidth .tl_set:N = \__lshortexample_examplewidth,
+  examplewidth .initial:n = 0.48\linewidth,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -184,11 +187,11 @@
 }
 
 \cs_new:Nn \lshortexample_typeset_example:nn {
-  \begin{minipage}{0.48\linewidth}
+  \begin{minipage}{\linewidth-\__lshortexample_examplewidth-0.2pt-6mm}
     \small\verbatiminput{#2}
   \end{minipage}
   \fancyframebox{0.1pt}{3mm}{
-    \begin{minipage}{0.52\linewidth-0.2pt-6mm}
+    \begin{minipage}{\__lshortexample_examplewidth}
       \input{#1}
     \end{minipage}
   }

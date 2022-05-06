@@ -22,11 +22,13 @@ that looks different from what is provided by default.
 
 \section{New Commands, Environments and Packages}
 
-You may have noticed that all the commands I introduce in this
-book are typeset in a box, and that they show up in the index at the end
-of the book. Instead of directly using the necessary \LaTeX{} commands
-to achieve this, I have created a \wi{package} in which I defined new
-commands and environments for this purpose. Now I can simply write:
+At the beginning of this book we have mentioned that \LaTeX{} allows us to
+write documents using logical markup, with commands like \ci{emph} or \ci{section}. There
+may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.
+You may have noticed that all the
+commands I introduce in this book are typeset in a box, and that they show up
+in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. Thus I
+can write:
 
 \begin{example}
 \begin{lscommand}
@@ -34,7 +36,7 @@ commands and environments for this purpose. Now I can simply write:
 \end{lscommand}
 \end{example}
 
-In this example, I am using both a new environment called\\
+In this example, I am using both a new environment called
 \ei{lscommand}, which is responsible for drawing the box around the
 command, and a new command named \ci{ci}, which typesets the command
 name and makes a corresponding entry in the index. Check
@@ -44,7 +46,7 @@ every page where I mentioned the \ci{dum} command.
 
 If I ever decide that I do not like having the commands typeset in
 a box any more, I can simply change the definition of the
-\texttt{lscommand} environment to create a new look. This is much
+\ei{lscommand} environment to create a new look. This is much
 easier than going through the whole document to hunt down all the
 places where I have used some generic \LaTeX{} commands to draw a
 box around some word.
@@ -54,39 +56,40 @@ box around some word.
 
 To add your own commands, use the
 \begin{lscommand}
-\ci{newcommand}\verb|{|%
-       \emph{name}\verb|}[|\emph{num}\verb|]{|\emph{definition}\verb|}|
+\ci*{NewDocumentCommand}[\texttt{\bs}name:m ! argspec:m ! definition:m]
 \end{lscommand}
-\noindent command.
-Basically, the command requires two arguments: the \emph{name} of the
-command you want to create, and the \emph{definition} of the command.
-The \emph{num} argument in square brackets is optional and specifies the number
-of arguments the new command takes (up to 9 are possible).
-If missing it defaults to 0, i.e. no argument allowed.
+\noindent command. It requires three arguments: the \carg{name} of the command
+you want to create, the \carg{arg}ument \carg{spec}ification and the
+\emph{definition} of the command.
 
-The following two examples should help you to get the idea.
-The first example defines a new command called \ci{tnss}. This is
+The \carg{argspec} argument specifies the number and types of arguments the
+command receives. The two most important types are \cargv{m}, for \emph{mandatory} and \cargv{o} for \emph{optional}. To create a
+command that takes two optional arguments, then two mandatory, then again one
+optional and finally three mandatory you would write \cargv{oommommm}. If the
+\carg{argspec} argument is empty then the command will take no arguments.
+
+This example defines a new command called \ci{tnss}. This is
 short for ``The Not So Short Introduction to \LaTeXe.'' Such a command
 could come in handy if you had to write the title of this book over
 and over again.
 
 \begin{example}
-\newcommand{\tnss}{The not
-    so Short Introduction to
+\NewDocumentCommand{\tnss}{}{%
+  The not so Short Introduction to
     \LaTeXe}
 This is ``\tnss'' \ldots{}
 ``\tnss''
 \end{example}
 
 The next example illustrates how to define a new
-command that takes two arguments.
-The \verb|#1| tag gets replaced by the first argument you specify,
-\verb|#2| with the second argument, and so on.
+command that takes two arguments. In order to refer to the received arguments
+you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
 
 \begin{example}
-\newcommand{\txsit}[2]
+\NewDocumentCommand{\txsit}{mm}
  {This is the \emph{#1}
   #2 Introduction to \LaTeXe}
+
 % in the document body:
 \begin{itemize}
 \item \txsit{not so}{short}
@@ -94,94 +97,270 @@ The \verb|#1| tag gets replaced by the first argument you specify,
 \end{itemize}
 \end{example}
 
+If your command accepts an optional argument but the user does not supply one,
+a special marker \cargv{-NoValue-} will be inserted instead.
+\begin{example}
+\NewDocumentCommand{\txsit}{om}
+{This is the \emph{#1}
+  #2 Introduction to \LaTeXe}
+
+% in the document body:
+\begin{itemize}
+\item \txsit{definitive}
+\item \txsit[very]{long}
+\end{itemize}
+\end{example}
+In order to test whether the user supplied a value, use
+\begin{lscommand}
+  \ci*{IfValueTF}[argument:m ! value version:m ! no value version:m] 
+\end{lscommand}
+macro.
+\begin{example}
+\NewDocumentCommand{\MyCommand}{o}{%
+  \IfValueTF {#1} {%
+    Optional argument: #1.%
+  } {
+    No optional argument given.%
+  }%
+}
+
+\MyCommand\\
+\MyCommand[hello]
+\end{example}
+
+There are two variations of it: \ci{IfValueT} and \ci{IfValueF} which may
+be used if you only need output for one of the branches. The example with
+\cargv{-NoValue-} in the output could be fixed by writing
+\begin{example}
+\NewDocumentCommand{\txsit}{om}
+{This is the
+  \IfValueT{#1}{\emph{#1} }%
+  #2 Introduction to \LaTeXe}
+
+% in the document body:
+\begin{itemize}
+\item \txsit{definitive}
+\item \txsit[very]{long}
+\end{itemize}
+\end{example}
+The commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
+work exactly the same, but the value\slash no-value branches are swapped.
+
+Often you will want to use optional arguments when present but use some default
+values when the user does not provide them. This could be achieved by
+\ci{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
+It works like \cargv{o} but allows to set a default
+if no value is supplied. Write
+
+\begin{example}
+\NewDocumentCommand{\txsit}{O{not so}m}
+{This is the \emph{#1}
+  #2 Introduction to \LaTeXe}
+
+% in the document body:
+\begin{itemize}
+\item \txsit{definitive}
+\item \txsit[very]{long}
+\end{itemize}
+\end{example}
+
+Another useful argument specification is \cargv{s}, short for star. This
+argument allows to provide different definitions based on whether the
+starred or non-starred version of command was issued by the user. It uses
+\ci{IfBooleanTF} command (and its variations\cih{IfBooleanT}\cih{IfBooleanF})
+that works analogously to the \ci{IfValueTF} command. 
+
+\begin{example}
+\NewDocumentCommand{\txsit}{sO{not so}m}
+{This is the \emph{#2}
+  #3 Introduction to \LaTeXe%
+  \IfBooleanT{#1}{%
+    : Superstar Edition%
+  }%
+}
+
+% in the document body:
+\begin{itemize}
+\item \txsit{long}
+\item \txsit*{long}
+\end{itemize}
+\end{example}
+
+These are just the most common argument specifications. For a full description,
+take a look at the \pai*{xparse} package documentation.\footnote{This
+package is loaded automatically in new \LaTeX{} releases, so you probably do not
+need to put \texttt{\textbackslash usepackage\{xparse\}} in your preamble. }
+
 \LaTeX{} will not allow you to create a new command that would
 overwrite an existing one. But there is a special command in case you
-explicitly want this: \ci{renewcommand}.
-It uses the same syntax as the \verb|\newcommand|
+explicitly want this: \ci{RenewDocumentCommand}.
+It uses the same syntax as the \ci{NewDocumentCommand}
 command.
 
-In certain cases you might also want to use the \ci{providecommand}
-command. It works like \ci{newcommand}, but if the command is
+In certain cases you might also want to use the \ci{ProvideDocumentCommand}
+command. It works like \ci{NewDocumentCommand}, but if the command is
 already defined, \LaTeXe{} will silently ignore it.
 
-There are some points to note about whitespace following \LaTeX{} commands. See
-page \pageref{whitespace} for more information.
-
 \subsection{New Environments}
-Just as with the \verb|\newcommand| command, there is a command
-to create your own environments. The \ci{newenvironment} command uses the
+The \ci{NewDocumentEnvironment} command lets you create your own environments. It has the
 following syntax:
 
 \begin{lscommand}
-\ci{newenvironment}\verb|{|%
-       \emph{name}\verb|}[|\emph{num}\verb|]{|%
-       \emph{before}\verb|}{|\emph{after}\verb|}|
+\ci*{NewDocumentEnvironment}[name:m ! argspec:m ! at begin:m ! at end:m]
 \end{lscommand}
 
-Again \ci{newenvironment} can have
-an optional argument. The material specified
-in the \emph{before} argument is processed before the text in the
-environment gets processed. The material in the \emph{after} argument gets
-processed when the \verb|\end{|\emph{name}\verb|}| command is encountered.
+The \carg{argspec} argument accepts the same arguments as the
+\ci{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
+end} arguments will be inserted respectively when the commands
+\ci{begin}[name] and \ci{end}[name] is encountered.
 
-The example below illustrates the usage of the \ci{newenvironment}
+The example below illustrates the usage of the \ci{NewDocumentEnvironment}
 command.
 \begin{example}
-\newenvironment{king}
- {\rule{1ex}{1ex}%
-      \hspace{\stretch{1}}}
- {\hspace{\stretch{1}}%
-      \rule{1ex}{1ex}}
+\NewDocumentEnvironment{king}{}{%
+  \emph{Listen! For the
+    king made a statement:}%
+  \\[1em]%
+} {%
+  \\[1em]%
+  \emph{This concludes
+    the king's statement.}%
+}
 
 \begin{king}
 My humble subjects \ldots
 \end{king}
 \end{example}
 
-The \emph{num} argument is used the same way as in the
-\verb|\newcommand| command. \LaTeX{} makes sure that you do not define
-an environment that already exists. If you ever want to change an
-existing command, use the \ci{renewenvironment} command. Its arguments 
-are exactly the same as the \ci{newenvironment} command.
-
-The commands used in this example will be explained later. For the
-\ci{rule} command see page \pageref{sec:rule}, for \ci{stretch} go to
-page \pageref{cmd:stretch}, and more information on \ci{hspace} can be
-found on page \pageref{sec:hspace}.
-
-\subsection{Extra Space}
-
-When creating a new environment you may easily get bitten by extra spaces
-creeping in, which can potentially have fatal effects, for example when you
-want to create a title environment which supresses its own indentation as
-well as the one on the following paragraph. The \ci{ignorespaces} command in
-the begin block of the environment will make it ignore any space after
-executing the begin block. The end block is a bit more tricky as special
-processing occurs at the end of an environment. With the
-\ci{ignorespacesafterend} \LaTeX{} will issue an \ci{ignorespaces} after the
-special `end' processing has occurred.
+Note that when environment argument are read, they are read \emph{after} the
+\ci{begin}[name] command. This may be especially counter intuitive when we
+consider the \cargv{s} specification. Below is an example that illustrates
+this.
 
 \begin{example}
-\newenvironment{simple}%
- {\noindent}%
- {\par\noindent}
+\NewDocumentEnvironment{king}{s}{%
+  \IfBooleanTF{#1}{
+    \begin{center}
+      \emph{Thus spoke Charles I:}
+      \\[1em]%
+    \end{center}%
+  } {
+    \emph{Listen! For the
+      king made a statement:}%
+      \\[1em]%
+  }%
+} {%
+  \\[1em]%
+  \emph{This concludes
+    the king's statement.}%
+}
 
-\begin{simple}
-See the space\\to the left.
-\end{simple}
-Same\\here.
+\begin{king}*
+My humble subjects \ldots
+\end{king}
 \end{example}
 
-\begin{example}
-\newenvironment{correct}%
- {\noindent\ignorespaces}%
- {\par\noindent%
-   \ignorespacesafterend}
+If you want to create a starred version of an environment (similarly to some
+\hologo{AmSLaTeX} environments) you have to define it separately.
+\begin{verbatim}
+\NewDocumentEnvironment{king}{moo} { ... } { ... }
+\NewDocumentEnvironment{king*}{moo} { ... } { ... }
+\end{verbatim}
+Obviously you can use the same internal commands to define them, for example
+renaming the previous implementation to \cargv{kinginternal} making the
+\cargv{king} and \cargv{king*} a thin wrapper around it.
 
-\begin{correct}
-No space\\to the left.
-\end{correct}
-Same\\here.
+The \ci{NewDocumentEnvironment} also introduces a special argument
+specification: \cargv{+b}, short for body.\footnote{The \cargv{+} indicates
+that it may contain multiple paragraphs.} It is only allowed as the last
+argument in the \carg{argspec}. It allows you to receive the body of the
+environment as an argument.
+\begin{example}
+\NewDocumentEnvironment{twice}{+b} {%
+  First time:\\
+  #1
+
+  Second time:\\
+  #1
+} {}
+
+\begin{twice}
+This will be printed twice!
+\end{twice}
+\end{example}
+While this makes one of the \carg{at begin}, \carg{at end} arguments redundant,
+they are still required. (In the example above we provided an empty \carg{at
+end}.)
+
+Do not overuse \cargv{+b} as this will both make the environments subject to
+some limitations (e.g.\ \ci{verb} will not be allowed inside) and slow down the
+typesetting.
+
+Similarly to the \ci{NewDocumentCommand} \LaTeX{} makes sure that you do not
+define an environment that already exists. If you ever want to change an
+existing environment, use the \ci{RenewDocumentEnvironment} command. Its
+arguments are exactly the same as the \ci{NewDocumentEnvironment} command.
+
+\subsection{Copying commands}
+
+When redefining commands you may want to use the original version of the
+command. Your initial code may look like this
+\begin{verbatim}
+\RenewDocumentCommand{\emph}{m}{%
+  \emph{#1}~(``#1'' is emphasised)%
+}
+\end{verbatim}
+but when you try to compile the document you will receive the error
+\begin{verbatim}
+! TeX capacity exceeded, sorry [input stack size=5000].
+\end{verbatim}
+
+To understand why this happens it is instructive to consider how \TeX{} expands
+the defined commands. The above \ci{RenewDocumentCommand} tells the \TeX{}
+engine that whenever \ci*{emph}[foo:vm] is seen it must replace it with
+\verb|\emph{foo}~(``foo'' is emphasised)|. You may already see the problem here.
+In the next stage it will again replace the \ci*{emph}[foo:vm] yielding
+\begin{verbatim}
+\emph{foo}~(``foo'' is emphasised)~(``foo'' is emphasised)
+\end{verbatim}
+This process will never end and at some point \TeX{}
+simply gives up.
+
+Note that 
+\begin{verbatim}
+\NewDocumentCommand{\oldemph}{m}{\emph{#1}}
+\RenewDocumentCommand{\emph}{m}{%
+  \oldemph{#1}~(``#1'' is emphasised)%
+}
+\end{verbatim}
+will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
+with \verb|\emph{...}| and the cycle repeats.
+
+In order to avoid this problem a special command exists
+\begin{lscommand}
+  \ci*{NewCommandCopy}[\texttt{\bs}name:m ! \texttt{\bs}command:m]
+\end{lscommand}
+It makes the \carg{name} the exact copy of the \carg{command}. The following example shows how this works
+\begin{example}[examplewidth=0.40\linewidth]
+\NewDocumentCommand{\foo}{}{Batman!}
+
+\NewDocumentCommand{\newfoo}{}{\foo}
+\NewCommandCopy{\copiedfoo}{\foo}
+
+\RenewDocumentCommand{\foo}{}{Na Na Na}
+
+\foo{} \newfoo{} \copiedfoo{}
+\end{example}
+
+This is precisely the behaviour we need in order to redefine the \ci{emph}
+command as we have tried to do earlier.
+\begin{example}[examplewidth=0.4\linewidth]
+\NewCommandCopy{\oldemph}{\emph}
+\RenewDocumentCommand{\emph}{m}{%
+  \oldemph{#1}~(``#1'' is emphasised)%
+}
+
+And here it \emph{comes}.
 \end{example}
 
 \subsection{Command-line \LaTeX}
@@ -192,21 +371,23 @@ different versions of the same document by calling \LaTeX{} with command-line
 parameters. If you add the following structure to your document:
 
 \begin{verbatim}
-\usepackage{ifthen}
-\ifthenelse{\equal{\blackandwhite}{true}}{
-  % "black and white" mode; do something..
-}{
-  % "color" mode; do something different..
+\IfBooleanTF{\blackandwhite} {
+  % "black and white" mode; do something...
+} {
+  % "color" mode; do something different...
 }
 \end{verbatim}
 
-Now call \LaTeX{} like this:
+Now compile document like this:
 \begin{verbatim}
-xelatex '\newcommand{\blackandwhite}{true}\input{test.tex}'
+xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
+  \input{test.tex}'
 \end{verbatim}
 
-First the command \verb|\blackandwhite| gets defined and then the actual file is read with input.
-By setting \verb|\blackandwhite| to false the color version of the document would be produced.
+First the command \verb|\blackandwhite| gets defined as the copy of
+\ci{BooleanTrue} which is a special value used in \ci{IfBooleanTF} checks. Then
+the actual file is read with input. By setting \verb|\blackandwhite| to
+\ci{BooleanFalse} the colour version of the document would be produced.
 
 \subsection{Your Own Package}
 
@@ -219,29 +400,53 @@ command to make the package available in your document.
 \begin{figure}[!htbp]
 \begin{lined}{\textwidth}
 \begin{verbatim}
-% Demo Package by Tobias Oetiker
-\ProvidesPackage{demopack}
-\newcommand{\tnss}{The not so Short Introduction
-                   to \LaTeXe}
-\newcommand{\txsit}[1]{The \emph{#1} Short
-                       Introduction to \LaTeXe}
-\newenvironment{king}{\begin{quote}}{\end{quote}}
+\ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
+  Demo Package by Tobias Oetiker
+}
+
+\NewDocumentCommand{\tnss}{} {
+  The~not~so~Short~Introduction~to~\LaTeXe
+}
+\NewDocumentCommand{\txsit}{O{not~so}} {
+  The~\emph{#1}~Short~Introduction~to~\LaTeXe
+}
+
+\NewDocumentEnvironment{king}{} {
+  \begin{quote}
+} {
+  \end{quote}
+}
 \end{verbatim}
 \end{lined}
 \caption{Example Package.} \label{package}
 \end{figure}
 
-Writing a package basically consists of copying the contents of
-your document preamble into a separate file with a name ending in
+Writing a package basically consists of copying the contents of your document
+preamble (with minor adjustments) into a separate file with a name ending in
 \texttt{.sty}. There is one special command,
 \begin{lscommand}
-\ci{ProvidesPackage}\verb|{|\emph{package name}\verb|}|
+\ci*{ProvidesExplPackage}[package name:m ! date:m ! version:m ! description:m]
 \end{lscommand}
-\noindent for use at the very beginning of your package
-file. \verb|\ProvidesPackage| tells \LaTeX{} the name of the package
-and will allow it to issue a sensible error message when you try to
-include a package twice. Figure~\ref{package} shows a small example
-package that contains the commands defined in the examples above.
+\noindent for use at the very beginning of your package file. This command
+tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
+that all whitespace is ignored. You may have noticed that in many of the
+examples above we had to end most lines with \ai{\%} to get correct
+spacing in the output. In \emph{expl mode}, spaces have to be added explicitly if needed at all. They are usually
+quite rare when writing a package. To insert spaces, use
+the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
+  you want to insert non-breaking space in \emph{expl mode}, use
+  \ci{nobreakspace}.} Paragraphs can be started with the \ci{par} command.
+
+The arguments are used to provide information about package in the log file. If
+you use this package and look at the log file you will find
+\begin{verbatim}
+Package: demopack 2022-05-05 v0.1 Demo Package by Tobias Oetiker
+\end{verbatim}
+in the \eei{.log} file.
+
+\ci{ProvidesExplPackage} will also issue a sensible error message when you try
+to include a package twice. Figure~\ref{package} shows a small example package
+that contains the commands defined in the examples above.
 
 \section{Fonts and Sizes}
 \label{sec:fontsize}
@@ -428,11 +633,11 @@ opposition to the basic idea of \LaTeX{}, which is to separate the
 logical and visual markup of your document.  This means that if you
 use the same font changing command in several places in order to
 typeset a special kind of information, you should use
-\verb|\newcommand| to define a ``logical wrapper command'' for the font
+\ci{NewDocumentCommand} to define a ``logical wrapper command'' for the font
 changing command.
 
 \begin{example}
-\newcommand{\oops}[1]{%
+\NewDocumentCommand{\oops}{m}{%
  \textbf{#1}}
 Do not \oops{enter} this room,
 it's occupied by \oops{machines}

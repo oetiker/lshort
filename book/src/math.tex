@@ -934,11 +934,11 @@ negative space of $-\frac{3}{18}\:\textrm{quad}$
 Note that `d' in the differential is conventionally set in roman.
 In the next example, we define a new command \ci{ud} (upright d) which produces
 ``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
-$\text{d}$), so we don't have to write it every time. The \ci{newcommand} is
+$\text{d}$), so we don't have to write it every time. The \ci{NewDocumentCommand} is
 placed in the preamble.  More on
-\ci{newcommand} in section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
+\ci{NewDocumentCommand} in section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
 \begin{example}
-\newcommand{\ud}{\,\mathrm{d}}
+\NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
 \begin{equation*}
  \int_a^b f(x)\ud x 
@@ -952,7 +952,7 @@ the spacing, namely the \ci{iint}, \ci{iiint}, \ci{iiiint}, and \ci{idotsint}
 commands.
 
 \begin{example}
-\newcommand{\ud}{\,\mathrm{d}}
+\NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
 \begin{IEEEeqnarray*}{c}
   \int\int f(x)g(y) 
