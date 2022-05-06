@@ -837,8 +837,393 @@ Sub-numbers are also easily possible using
   \IEEEyessubnumber  
 \end{IEEEeqnarray}
 \end{example}
-  
-\section{Arrays and Matrices} \label{sec:arraymat}
+
+\section{Units}
+
+When dealing with real world data you will often find yourself writing units
+such as \qty{10}{\kg} or \qty{25}{\coulomb\per\mole}. In technical writing it
+is crucial to accurately convey the values so errors and ambiguity are avoided.
+Therefore a system of units known as \emph{International System of Units}, also
+known simply as \emph{SI}, was defined \cite{si}. Along with it a detailed set
+of typesetting rules is defined. For example you may have noticed that in the
+first sentence the space between \num{10} and \unit{\kg} is smaller than
+between the words.
+
+Fortunately thanks to the logical nature of \LaTeX{} markup and the excellent
+\pai*{siunitx} package you do not need to know most of the rules. If you
+consequently use \pai{siunitx} commands then units in your document will be
+typeset correctly.
+
+\subsection{Pitfalls of naively entered units}
+
+When initially writing units you may have simply written
+\begin{example}[examplewidth=6cm]
+The speed of light
+is 299792458 m/s.
+\end{example}
+
+This may look fine initially but if your document gets longer you will probably
+get into situation where unfortunate linebreak will occur 
+\begin{example}[examplewidth=6cm]
+\ldots{} The speed of light
+is 299792458 m/s. Thus we
+can calculate \ldots
+\end{example}
+
+Obviously we can use non-breaking space in order to fix it, but this is not the
+end of the problems. Another thing is spacing between the numbers. Digits of
+long numbers should be grouped to make them easier to read. The above example
+should then written like this.
+\begin{example}[examplewidth=6cm]
+The speed of light is
+299\,792\,458~m/s.
+\end{example}
+
+Yet another problem is encountered when trying to write the units inside math
+mode
+\begin{example}[examplewidth=6cm]
+$10~\frac{m}{s} \cdot 12~s = 120~m$
+\end{example}
+Here we also need to make sure that the units are written in roman font.
+The above example should be then written as
+\begin{example}[examplewidth=6cm]
+$10~\frac{\mathrm{m}}{\mathrm{s}} 
+  \cdot 12~\mathrm{s} 
+  = 120~\mathrm{m}$
+\end{example}
+Hopefully these examples illustrate why a better method is needed.
+
+\subsection{Basic commands of the \pai{siunitx} package}
+
+The basic commands of \pai{siunitx} package are
+\begin{lscommand}
+  \ci{num}[options][number]\\
+  \ci{unit}[options][unit]\\
+  \ci*{qty}[options:o ! number:m ! unit:m] 
+\end{lscommand}
+The \ci{num} command typesets a number, \ci{unit} typesets a unit, and \ci{qty}
+typesets quantity, i.e.\ number followed by unit. All of the commands provide
+optional \carg{options} argument, which is a comma delimited key value list
+that can influence the output of the command. The \carg{unit} argument can be
+provided in one of two styles, either \enquote{literal} or
+\enquote{interpreted}.
+
+In literal mode units are entered as string of letters 
+\begin{example}
+\unit{kg} is a unit,
+\qty{10}{m/s} is a quantity
+\end{example}
+Spaces in literal mode are ignored. If you want to insert a product of units,
+use either dot \ai{.} or tilde \ai{\~}.
+\begin{example}
+\unit{N} is 
+not \unit{kg m / s^2},
+but \unit{kg.m / s^2}
+or \unit{kg~m / s^2}
+\end{example}
+
+On the other hand, in interpreted mode units are entered using predefined
+macros
+\begin{example}
+\unit{\kilo\gram} is a unit,
+\qty{10}{\metre\per\second}
+is a quantity
+\end{example}
+At first glance this may seem less convenient, but this enables the package to
+recognize the logical structure of the units, which means that the formatting
+can be changed on the fly.
+\begin{example}[examplewidth=0.32\linewidth]
+Which one do you prefer? \\
+$\unit{\newton} = \unit{
+  \kilo\gram\metre\per\square\second}$ \\
+$\unit{\newton} = \unit[per-mode = fraction]{
+  \kilo\gram\metre\per\second\squared}$ \\
+$\unit{\N} = \unit[per-mode = symbol]{
+  \kg\m\per\s\tothe{2}}$
+\end{example}
+The commands \ci{gram}, \ci{kilo}, \ci{per} are rather self explanatory. As you
+can see we have also used the \cargv{per-mode} option to influence the unit
+style. While the command \ci{tothe} typesets arbitrary superscripts, the
+command \ci{of} typesets arbitrary subscripts, known as qualifiers.
+\begin{example}[examplewidth=0.32\linewidth]
+\unit{\kg\of{mol}}, \unit{\bel\of{i}}
+\end{example}
+
+Note that the \ci{per} command only works on the next unit. If we want it to
+apply to all following units we may use \cargv{sticky-per} option.
+\begin{example}[examplewidth=0.4\linewidth]
+The unit of thermal conductivity is
+\unit{\watt\per\metre\per\kelvin}
+or equivalently
+\unit[sticky-per]{\m\kg\per\s\cubed\K}. 
+\end{example}
+
+Sometimes you may want to make the units use a different color so they stick
+out more. This can be done using \cargv{unit-color}. Options
+\cargv{number-color} and \cargv{color} may be used to color only the numeric
+values or whole quantities. If you want to highlight a single unit in a
+compound unit, you may use the \ci{highlight} command.
+\begin{example}[examplewidth=0.2\linewidth]
+\qty[unit-color = red]{9.81}{\m\per\s\squared} \\
+\qty[number-color = blue]{9.81}{\m\per\s\squared} \\
+\qty[color = green]{9.81}{\m\per\s\squared}
+\qty{9.81}{\m\per\highlight{orange}\s\squared}
+\end{example}
+
+Now let's turn our attention to numbers. The numeric values will always use dot
+as a decimal separator, regardless of entered symbol. If you want to use comma
+as a decimal separator, change the \cargv{output-decimal-marker} option.
+\begin{example}[examplewidth=0.2\linewidth]
+$\pi \approx \num{3.14159}$ \\
+$\pi \approx \num{3,14159}$ \\
+$\pi \approx \num[output-decimal-marker={,}]{3.14159}$
+\end{example}
+
+The numbers may also be entered using exponent notation. The symbol before
+exponent and base may be controlled using \cargv{exponent-product} and
+\cargv{exponent-base} options 
+\begin{example}[examplewidth=0.25\linewidth]
+$\qty{1}{\tonne} = \qty{1e6}{\g}$ \\
+$\qty{1}{\gibi\byte} =
+  \qty[exponent-base = 2]{1e30}{\byte}$ \\
+$\qty{1}{\L} =
+  \qty[exponent-product = \cdot]{1e-3}{\cubic\m}$
+\end{example}
+
+If we want all numbers to be formatted using exponent notation, regardless of
+their entered form, we may use \cargv{exponent-mode} option.
+\begin{example}[examplewidth=0.3\linewidth]
+$2^{16} = \num{65536}$ \\
+$2^{16} = \num[
+  exponent-mode = scientific]{65536}$ \\
+$2^{16} = \num[
+  exponent-mode = engineering]{65536}$ \\
+$2^{16} = \num[
+  exponent-mode = fixed]{65.536e3}$ \\
+$2^{16} = \num[
+  exponent-mode = fixed,
+  fixed-exponent = 7]{65.536e3}$
+\end{example}
+
+In some fields it may be common to write uncertainty next to numbers. This may
+also be done in several ways. In order to customize the appearance of
+uncertainty use the \cargv{uncertainty-mode} option.
+\begin{example}[examplewidth=0.4\linewidth]
+$M_\oplus = \qty{
+  5.9722(6) e24}{\kg}$ \\
+$M_\oplus = \qty{
+  5.9722 +- 0.0006 e24}{\kg}$ \\
+$M_\oplus = \qty{
+  5.9722 \pm 0.0006 e24}{\kg}$ \\
+$M_\oplus = \qty[
+    uncertainty-mode = separate
+  ]{5.9722(6) e24}{\kg}$ \\
+$M_\oplus = \qty[
+  uncertainty-mode = full
+]{5.9722(6) e24}{\kg}$
+\end{example}
+
+The behaviour of the commands may be customized even further. For a full list
+of options check out the \pai{siunitx} package documentation.
+
+To avoid repeating the options with every use of commands, use
+\begin{lscommand}
+\ci{sisetup}[options]
+\end{lscommand}
+command. It can be used in the preamble to ensure consistent style throughout
+the document, or inside the document when the style needs to be changed just
+in a given element, such as table. These options may be also passed as package
+options. Figure~\ref{sistandaloneexa} shows an example usage of the package in
+a full document.
+\begin{figure}[htp]
+\begin{example}[standalone, template=empty, paperwidth=6cm, nocache]
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
+\usepackage{booktabs} %!hide
+\sloppy %!hide
+\usepackage[
+  output-decimal-marker={,},
+  per-mode = fraction,
+  unit-color = red,
+]{siunitx}
+
+\begin{document}
+All the units in the document are
+typeset according to setup in the
+preamble: \qty{9.81}{\m\per\s\squared}.
+
+\begin{table}[h]
+  \centering %!hide
+  \sisetup{
+    exponent-mode = fixed,
+    fixed-exponent = 1,
+  }
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    No. & Result (\unit{\kg}) \\
+    \midrule
+    1 & \num{12.3} \\ 
+    2 & \num{0.3} \\ 
+    3 & \num{1e2} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Measurement results}
+  \label{table}
+\end{table}
+
+In table~\ref{table} custom
+options are used, but now we
+are back to normal:
+\qty{3.637e-4}{\m\squared\per\s}.
+\end{document}
+\end{example}
+\caption{An example of using \pai{siunitx} in a document.}
+\label{sistandaloneexa}
+\end{figure}
+
+\subsection{Other \pai{siunitx} commands} \label{sec:arraymat}
+
+Besides the basic commands described above \pai{siunitx} also defines several
+other useful commands.
+
+Angles are special in that they use base $60$ instead of base ten when
+subdividing. The command
+\begin{lscommand}
+  \ci{ang}[options][angle]
+\end{lscommand}
+exists in order to simplify entering them. If they are entered using semicolon
+as a separator, then the following numbers are treated as minutes and seconds.
+If they are given as a decimal number, they will be displayed as such.
+\begin{example}
+\ang{10} \\
+\ang{1;2;3} \\
+\ang{;;20} \\
+\ang{32.5} \\
+\qty{60}{\degree}
+\end{example}
+
+When listing several numbers we may use the \ci{numlist}[options][numbers]
+where \carg{number} are delimited by semicolons. This command is context aware
+which means it will produce correct results when used with \pai{polyglossia}.
+\begin{example}
+\numlist{1;2;3;4}
+
+\begin{german}
+  \numlist{1;2;3;4}
+\end{german}
+\end{example}
+
+The package contains also dedicated commands for dealing with products and
+ranges of numbers. The numbers in product should be delimited with the \verb|x|
+letter.
+\begin{example}
+Pick a number from
+range \numrange{1}{10}. \\
+\numproduct{2x5} is $10$. \\
+\begin{german}
+  \numrange{1}{10}
+\end{german}
+\end{example}
+
+All these commands also have quantity versions.
+\begin{example}
+Obtained results:
+\qtylist{2;5;7}{\L}.\\
+Acceptable range is
+range \qtyrange{1}{10}{\kg}. \\
+Area is \qtyproduct{2x5}{\metre}.
+\end{example}
+
+If we are dealing with quantum mechanics then complex numbers may be useful.
+To typeset them use \ci{complexnum} and \ci{complexqty}. They can be entered in
+both Cartesian form and polar coordinates.
+
+\begin{example}[examplewidth=0.4\linewidth]
+The conjugate of \complexnum{2+3i} is
+\complexnum{2-3i} which is approximately
+\complexnum{3.6056:-56.310}. \\
+Why is my scale showing my
+weight is \complexqty{65+i21}{\kg}?
+\end{example}
+
+Sometimes the required unit that we want to use is missing. For example
+throughout this book the unit of typographical point is used when talking about
+font sizes. To define it we may use the
+\begin{lscommand}
+  \ci*{DeclareSIUnit}[options:o ! \texttt{t}unit:m ! symbol:m]
+\end{lscommand}
+command. The \carg{unit} is the macro we will use in the interpreted mode,
+while the \carg{symbol} is the typeset symbol. The \carg{options} allows us to
+define default options concerning, for example, the spacing of the unit in
+quantities.
+\begin{example}
+\DeclareSIUnit{\pt}{pt}
+The default font size
+in \LaTeX{} is \qty{10}{\pt}.
+\end{example}
+
+This command may also be used when we want to adjust the appearance of
+predefined unit. For example, the default litre is typeset using uppercase
+\enquote*{L} and you may want to change it to use lowercase \enquote*{l}
+instead.
+\begin{example}[examplewidth=0.4\linewidth]
+Litre before redefining: \unit{\L}. \\
+\DeclareSIUnit{\litre}{l}
+Litre after redefining: \unit{\L}.
+\end{example}
+
+Similarly the commands \ci{DeclareSIPrefix}, \ci{DeclareSIPower} and
+\ci{DeclareSIQualifier} allos definition of macros in case additional are
+needed.
+\begin{example}[examplewidth=0.4\linewidth]
+\DeclareSIUnit{\pt}{pt}
+\DeclareSIPower\quartic\tothefourth{4}
+\DeclareSIPrefix\decakilo{dk}{4}
+\DeclareSIQualifier\polymer{pol}
+
+It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
+\end{example}
+
+\subsection{Table columns with numbers}
+
+When typesetting tables which contain numeric data it is often useful to align
+them along the decimal point, so they can be compared easily. The \pai{siunitx}
+package adds the special column specifier \cargv{S} for the \ei{tabular}
+environment, that can be used for such purpose. Non numeric data must be
+surrounded by curly brackets in such columns.
+\begin{example}[examplewidth=0.45\linewidth]
+\begin{tabular}{@{}lS@{}}
+  \toprule
+  Day & {Candy eaten (\unit{\g})} \\
+  \midrule
+  Monday & 0.3011 \\
+  Tuesday & 54.86 \\
+  Wednesday & 1000.9722 \\
+  Thursday & -1000.9722 \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+All the numbers in such columns are automatically parsed by \pai{siunitx}. It
+is also possible to align the numbers inside a \ci{multicol} column, using the
+\ci{tablenum} command.
+\begin{example}[examplewidth=0.30\linewidth]
+\begin{tabular}{@{}lr@{}}
+  \toprule
+  Candy & Friend \\
+  \midrule
+  Chocolate & Peter \\
+  Lollipop & Jane \\
+  \multicolumn{2}{c}{\tablenum{12,34}} \\
+  \multicolumn{2}{c}{\tablenum{333.5567}} \\
+  \multicolumn{2}{c}{\tablenum{4563.21 e2}} \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+\section{Arrays and Matrices}
+\label{sec:arraymat}
 
 To typeset \emph{arrays}, use the \ei{array} environment. It works
 in a similar way to the \ei{tabular} environment. The \ci{\bs} command is
