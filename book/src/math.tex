@@ -838,7 +838,7 @@ Sub-numbers are also easily possible using
 \end{IEEEeqnarray}
 \end{example}
 
-\section{Units}
+\section{Units} \label{sec:units} \index{units (SI)}\index{SI}
 
 When dealing with real world data you will often find yourself writing units
 such as \qty{10}{\kg} or \qty{25}{\coulomb\per\mole}. In technical writing it
@@ -902,10 +902,10 @@ The basic commands of \pai{siunitx} package are
   \ci*{qty}[options:o ! number:m ! unit:m] 
 \end{lscommand}
 The \ci{num} command typesets a number, \ci{unit} typesets a unit, and \ci{qty}
-typesets quantity, i.e.\ number followed by unit. All of the commands provide
-optional \carg{options} argument, which is a comma delimited key value list
-that can influence the output of the command. The \carg{unit} argument can be
-provided in one of two styles, either \enquote{literal} or
+typesets a quantity, i.e.\ a number followed by a unit. All of the commands
+provide optional \carg{options} argument, which is a comma delimited key value
+list that can influence the output of the command. The \carg{unit} argument can
+be provided in one of two styles, either \enquote{literal} or
 \enquote{interpreted}.
 
 In literal mode units are entered as string of letters 
@@ -1023,6 +1023,20 @@ $M_\oplus = \qty[
 ]{5.9722(6) e24}{\kg}$
 \end{example}
 
+By default \pai{siunitx} typesets the quantities in math mode. This may be
+especially jarring if you use different font for the document text. One simple
+solution is to set the \cargv{mode} option to \cargv{text}.
+% TODO: Add pointer to changing math fonts section when written.
+\begin{example}[examplewidth=0.4\linewidth]
+\setmainfont{Liberation Sans}
+
+\qty{1}{\degreeCelsius} is
+equal to \qty{1}{\kelvin}, but
+\qty[mode = text]{0}{\degreeCelsius}
+is \qty[mode = text]{-273.15}{\kelvin}.
+Bizzare, isn't it?
+\end{example}
+
 The behaviour of the commands may be customized even further. For a full list
 of options check out the \pai{siunitx} package documentation.
 
@@ -1131,8 +1145,9 @@ All these commands also have quantity versions.
 Obtained results:
 \qtylist{2;5;7}{\L}.\\
 Acceptable range is
-range \qtyrange{1}{10}{\kg}. \\
-Area is \qtyproduct{2x5}{\metre}.
+\qtyrange{1}{10}{\kg}. \\
+This area is
+\qtyproduct{2x5}{\metre}.
 \end{example}
 
 If we are dealing with quantum mechanics then complex numbers may be useful.

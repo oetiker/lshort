@@ -303,26 +303,10 @@ In order to typeset a slash between two words, one can simply type e.g.\
 \texttt{read/write}, but this makes \LaTeX{} treat the two words as one.
 Hyphenation is disabled for these two words, so there may be `overfull'
 errors.  To overcome this, use \ci{slash}.  For example type
-`\verb|read\slash write|' which allows hyphenation.  But normal `\texttt{/}'
-character may be still used for ratios or units, e.g.\ \texttt{5 MB/s}.
-
-\subsection{Degree Symbol \texorpdfstring{($\circ$)}{}}
-
-Printing the \wi{degree symbol} in pure \LaTeX{}.
-
-\begin{example}
-It's $-30\,^{\circ}\mathrm{C}$.
-I will soon start to
-super-conduct.
-\end{example}
-
-The \pai{textcomp} package makes the degree symbol also available under the command
-\ci{textdegree} or in combination with the C by using the \ci{textcelsius}.
-
-\begin{example}
-30 \textcelsius{} is
-86 \textdegree{}F.
-\end{example}
+`\verb|read\slash write|' which allows hyphenation.  Normal `\texttt{/}'
+character may be still used for inline fractions. Typesetting units,
+such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be described in
+section~\ref{sec:units}.
 
 \subsection{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
 
