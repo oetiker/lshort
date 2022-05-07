@@ -930,7 +930,7 @@ macros
 is a quantity
 \end{example}
 At first glance this may seem less convenient, but this enables the package to
-recognize the logical structure of the units, which means that the formatting
+recognise the logical structure of the units, which means that the formatting
 can be changed on the fly.
 \begin{example}[examplewidth=0.32\linewidth]
 Which one do you prefer? \\
@@ -958,9 +958,9 @@ or equivalently
 \unit[sticky-per]{\m\kg\per\s\cubed\K}. 
 \end{example}
 
-Sometimes you may want to make the units use a different color so they stick
+Sometimes you may want to make the units use a different colour so they stick
 out more. This can be done using \cargv{unit-color}. Options
-\cargv{number-color} and \cargv{color} may be used to color only the numeric
+\cargv{number-color} and \cargv{color} may be used to colour only the numeric
 values or whole quantities. If you want to highlight a single unit in a
 compound unit, you may use the \ci{highlight} command.
 \begin{example}[examplewidth=0.2\linewidth]
@@ -1006,7 +1006,7 @@ $2^{16} = \num[
 \end{example}
 
 In some fields it may be common to write uncertainty next to numbers. This may
-also be done in several ways. In order to customize the appearance of
+also be done in several ways. In order to customise the appearance of
 uncertainty use the \cargv{uncertainty-mode} option.
 \begin{example}[examplewidth=0.4\linewidth]
 $M_\oplus = \qty{
@@ -1034,10 +1034,10 @@ solution is to set the \cargv{mode} option to \cargv{text}.
 equal to \qty{1}{\kelvin}, but
 \qty[mode = text]{0}{\degreeCelsius}
 is \qty[mode = text]{-273.15}{\kelvin}.
-Bizzare, isn't it?
+Bizarre, isn't it?
 \end{example}
 
-The behaviour of the commands may be customized even further. For a full list
+The behaviour of the commands may be customised even further. For a full list
 of options check out the \pai{siunitx} package documentation.
 
 To avoid repeating the options with every use of commands, use
@@ -1189,7 +1189,7 @@ Litre after redefining: \unit{\L}.
 \end{example}
 
 Similarly the commands \ci{DeclareSIPrefix}, \ci{DeclareSIPower} and
-\ci{DeclareSIQualifier} allos definition of macros in case additional are
+\ci{DeclareSIQualifier} allow definition of macros in case additional are
 needed.
 \begin{example}[examplewidth=0.4\linewidth]
 \DeclareSIUnit{\pt}{pt}
@@ -1220,19 +1220,141 @@ surrounded by curly brackets in such columns.
 \end{tabular}
 \end{example}
 
-All the numbers in such columns are automatically parsed by \pai{siunitx}. It
-is also possible to align the numbers inside a \ci{multicol} column, using the
-\ci{tablenum} command.
+All the numbers in such columns are automatically parsed by \pai{siunitx} using
+current settings. In order to influence parsing\slash displaying options of a
+single column, pass them in square brackets to the column specification.
+\begin{example}[examplewidth=0.38\linewidth]
+\DeclareSIUnit{\eur}{\euro}
+\begin{tabular} {
+    @{}
+    l
+    S[
+      output-decimal-marker={,},
+      per-mode=symbol,
+    ]
+    @{}
+  }
+  \toprule
+  Candy & {Price (\unit{\eur\per\kg})} \\
+  \midrule
+  Chocolate & 11.30 \\
+  Lollipops & 15.86 \\
+  Marshmallows & 5.97 \\
+  Golden taffy & 1125.12 \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+Besides standard options there are also table specific options that can be
+passed to the columns. An important one is \cargv{table-format}. By default the
+\cargv{S} specifier centres the decimal point leaving equal space to the left
+and to the right of it. This leads to a lot of empty space if lengths of
+integer and fraction parts are widely different.
+\begin{example}[examplewidth=0.5\linewidth]
+\sisetup{exponent-mode = fixed}
+\begin{tabular} {@{}SS@{}}
+  \toprule
+  \multicolumn{2}{c}{Weight} \\
+  \midrule
+  {\unit{\ug}} & {\unit{\kg}} \\
+  \midrule
+  1 & 1e-9 \\
+  0.2 & 2e-10 \\
+  35 & 35e-8 \\
+  -100 & -1e-7 \\
+  \bottomrule
+\end{tabular}
+\end{example}
+We can then use
+\cargv{table-format} to instruct \LaTeX{} how much space should be reserved
+before and after dot. For example \cargv{6.2} means that it should reserve
+space for 6 digits before the decimal point, and for two after. The format may
+also contain information about signs, exponents or text around numbers.
+\begin{example}[examplewidth=0.5\linewidth]
+\sisetup{exponent-mode = fixed}
+\begin{tabular} {
+    @{}
+    S[table-format = +3.1]
+    S[table-format = +1.10]
+    @{}
+  }
+  \toprule
+  \multicolumn{2}{c}{Weight} \\
+  \midrule
+  {\unit{\ug}} & {\unit{\kg}} \\
+  \midrule
+  1 & 1e-9 \\
+  0.2 & 2e-10 \\
+  35 & 35e-8 \\
+  -100 & -1e-7 \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+By default numbers and text within the \cargv{S} columns and centered. If you
+want to change the alignment use the \cargv{table-number-alignment} and
+\cargv{table-text-alignment} options.
+\begin{example}[examplewidth=0.45\linewidth]
+\begin{tabular} {
+    @{}
+    S[
+      table-format = 2.1(1.1),
+      table-number-alignment = left,
+      uncertainty-mode = separate,
+    ]
+    S[
+      table-format = 2.2e2{ big!},
+      table-text-alignment = right,
+    ]
+    @{}
+  }
+  \toprule
+  {Confidence (\unit{\percent})}
+    & {Value} \\
+  \midrule
+  57.1(2) & 10e2 \\
+  25.3(0) & 2e-1 \\
+  0(0.1)  & 99.99e99{ big!} \\
+  92(1)      & 7.2e10 \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+It is also possible to align the numbers inside a \ci{multicol} and
+\ci{multirow}, using the \ci{tablenum} command.
 \begin{example}[examplewidth=0.30\linewidth]
+\sisetup{
+  table-format = 4.4e1
+}
 \begin{tabular}{@{}lr@{}}
   \toprule
   Candy & Friend \\
   \midrule
   Chocolate & Peter \\
   Lollipop & Jane \\
-  \multicolumn{2}{c}{\tablenum{12,34}} \\
-  \multicolumn{2}{c}{\tablenum{333.5567}} \\
+  \multicolumn{2}{c}{\tablenum{12,34 e0}} \\
+  \multicolumn{2}{c}{\tablenum{333.5567 e1}} \\
   \multicolumn{2}{c}{\tablenum{4563.21 e2}} \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+If you don't want the decimal alignment but still would like to have
+numbers in columns formatted by \pai{siunitx}, change the
+\cargv{table-alignment-mode} to \cargv{none}.
+\begin{example}[examplewidth=0.45\linewidth]
+\sisetup{
+  table-alignment-mode = none,
+  output-decimal-marker = {,},
+  unit-color = red,
+}
+\begin{tabular} {@{}cS@{}}
+  \toprule
+  Variable & {Value} \\
+  \midrule
+  foo & 101.892 \\
+  bar & 2e-1 \\
+  baz & \qty{2.1}{\kg}  \\
   \bottomrule
 \end{tabular}
 \end{example}
