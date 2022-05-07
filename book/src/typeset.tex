@@ -1090,9 +1090,8 @@ all enjoy the show.\\
 
 The column separator can be specified with the \mfr{@\{...\}}
 construct. This command kills the inter-column space and replaces it
-with whatever is between the curly braces.  One common use for
-this command is explained below in the decimal alignment problem.
-Another possible application is to suppress leading space in a table with
+with whatever is between the curly braces. 
+Common application is to suppress leading space in a table with
 \mfr{@\{\}}.
 
 \begin{example}
@@ -1115,28 +1114,8 @@ leading space left and right\\
 % This part by Mike Ressler
 %
 
-\index{decimal alignment} Since there is no built-in way to align
-numeric columns to a decimal point,\footnote{If the `tools' bundle is
-  installed on your system, have a look at the \pai{dcolumn} package.}
-we can ``cheat'' and do it by using two columns: a right-aligned
-integer and a left-aligned fraction. The \verb|@{.}| command in the
-\verb|\begin{tabular}| line replaces the normal inter-column spacing with
-just a ``.'', giving the appearance of a single,
-decimal-point-justified column.  Don't forget to replace the decimal
-point in your numbers with a column separator (\verb|&|)! A column label
-can be placed above our numeric ``column'' by using the
-\ci{multicolumn} command.
-
-\begin{example}
-\begin{tabular}{c r @{.} l}
-Pi expression       &
-\multicolumn{2}{c}{Value} \\
-\hline
-$\pi$               & 3&1416  \\
-$\pi^{\pi}$         & 36&46   \\
-$(\pi^{\pi})^{\pi}$ & 80662&7 \\
-\end{tabular}
-\end{example}
+When typesetting numerical data in the table, you may want to align it by
+decimal point. A way to do this will be described in section~\ref{sec:sitables}.
 
 \begin{example}
 \begin{tabular}{|c|c|}
@@ -1156,7 +1135,7 @@ Sometimes the default \LaTeX{} tables do feel a bit cramped. So you may want
 to give them a bit more breathing space by setting a higher
 \ci{arraystretch} and \ci{tabcolsep} value.
 
-\begin{example}
+\begin{example}[examplewidth=0.3\linewidth]
 \begin{tabular}{|l|}
 \hline
 These lines\\\hline
