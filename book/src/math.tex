@@ -842,21 +842,19 @@ Sub-numbers are also easily possible using
 
 When dealing with real world data you will often find yourself writing units
 such as \qty{10}{\kg} or \qty{25}{\coulomb\per\mole}. In technical writing it
-is crucial to accurately convey the values so errors and ambiguity are avoided.
-Therefore a system of units known as \emph{International System of Units}, also
-known simply as \emph{SI}, was defined \cite{si}. Along with it a detailed set
-of typesetting rules is defined. For example you may have noticed that in the
+is crucial to accurately convey values to avoid errors and ambiguity.
+The \emph{International System of Units} (\emph{SI}) \cite{si}, comes with a detailed set
+of typesetting rules. For example you may have noticed that in the
 first sentence the space between \num{10} and \unit{\kg} is smaller than
 between the words.
 
 Fortunately thanks to the logical nature of \LaTeX{} markup and the excellent
-\pai*{siunitx} package you do not need to know most of the rules. If you
-consequently use \pai{siunitx} commands then units in your document will be
+\pai*{siunitx} package you do not need to know most of the rules. Just use the special unit-commands provided by the package and all the units in your document will be
 typeset correctly.
 
-\subsection{Pitfalls of naively entered units}
+\subsection{Pitfalls of naïvely entered units}
 
-When initially writing units you may have simply written
+Naïvely, one might write units like this:
 \begin{example}[examplewidth=6cm]
 The speed of light
 is 299792458 m/s.
@@ -870,8 +868,7 @@ is 299792458 m/s. Thus we
 can calculate \ldots
 \end{example}
 
-Obviously we can use non-breaking space in order to fix it, but this is not the
-end of the problems. Another thing is spacing between the numbers. Digits of
+A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
 long numbers should be grouped to make them easier to read. The above example
 should then written like this.
 \begin{example}[examplewidth=6cm]
@@ -879,12 +876,12 @@ The speed of light is
 299\,792\,458~m/s.
 \end{example}
 
-Yet another problem is encountered when trying to write the units inside math
+Yet another problem arises when trying to write the units inside math
 mode
 \begin{example}[examplewidth=6cm]
 $10~\frac{m}{s} \cdot 12~s = 120~m$
 \end{example}
-Here we also need to make sure that the units are written in roman font.
+Here we need to make sure that the units are written in roman font.
 The above example should be then written as
 \begin{example}[examplewidth=6cm]
 $10~\frac{\mathrm{m}}{\mathrm{s}} 
@@ -903,7 +900,7 @@ The basic commands of \pai{siunitx} package are
 \end{lscommand}
 The \ci{num} command typesets a number, \ci{unit} typesets a unit, and \ci{qty}
 typesets a quantity, i.e.\ a number followed by a unit. All of the commands
-provide optional \carg{options} argument, which is a comma delimited key value
+provide optional \carg{options} argument, which is a comma delimited key-value pair
 list that can influence the output of the command. The \carg{unit} argument can
 be provided in one of two styles, either \enquote{literal} or
 \enquote{interpreted}.
@@ -958,8 +955,7 @@ or equivalently
 \unit[sticky-per]{\m\kg\per\s\cubed\K}. 
 \end{example}
 
-Sometimes you may want to make the units use a different colour so they stick
-out more. This can be done using \cargv{unit-color}. Options
+Sometimes you may want to make the units use a different colour so they figure more prominently. This can be done using \cargv{unit-color}. Options
 \cargv{number-color} and \cargv{color} may be used to colour only the numeric
 values or whole quantities. If you want to highlight a single unit in a
 compound unit, you may use the \ci{highlight} command.
@@ -1040,13 +1036,13 @@ Bizarre, isn't it?
 The behaviour of the commands may be customised even further. For a full list
 of options check out the \pai{siunitx} package documentation.
 
-To avoid repeating the options with every use of commands, use
+To avoid repeating the options with every use of commands, use the
 \begin{lscommand}
 \ci{sisetup}[options]
 \end{lscommand}
 command. It can be used in the preamble to ensure consistent style throughout
 the document, or inside the document when the style needs to be changed just
-in a given element, such as table. These options may be also passed as package
+in a given element, such as a table. These options may be also passed as package
 options. Figure~\ref{sistandaloneexa} shows an example usage of the package in
 a full document.
 \begin{figure}[htp]
@@ -1054,8 +1050,8 @@ a full document.
 \documentclass{article}
 
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
-\usepackage{booktabs} %!hide
 \sloppy %!hide
+\usepackage{booktabs}
 \usepackage[
   output-decimal-marker={,},
   per-mode = fraction,
@@ -1073,15 +1069,17 @@ preamble: \qty{9.81}{\m\per\s\squared}.
     exponent-mode = fixed,
     fixed-exponent = 1,
   }
-  \begin{tabular}{@{}lr@{}}
-    \toprule
-    No. & Result (\unit{\kg}) \\
-    \midrule
-    1 & \num{12.3} \\ 
-    2 & \num{0.3} \\ 
-    3 & \num{1e2} \\
-    \bottomrule
-  \end{tabular}
+  \begin{center}  
+    \begin{tabular}{@{}lr@{}}
+      \toprule
+      No. & Result (\unit{\kg}) \\
+      \midrule
+      1 & \num{12.3} \\ 
+      2 & \num{0.3} \\ 
+      3 & \num{1e2} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
   \caption{Measurement results}
   \label{table}
 \end{table}
@@ -1204,8 +1202,8 @@ It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
 
 When typesetting tables which contain numeric data it is often useful to align
 them along the decimal point, so they can be compared easily. The \pai{siunitx}
-package adds the special column specifier \cargv{S} for the \ei{tabular}
-environment, that can be used for such purpose. Non numeric data must be
+package adds the special column specifier \cargv{S} for this purpose to the \ei{tabular}
+environment. Non numeric data must be
 surrounded by curly brackets in such columns.
 \begin{example}[examplewidth=0.45\linewidth]
 \begin{tabular}{@{}lS@{}}
