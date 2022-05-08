@@ -9,16 +9,21 @@
 % L3 interface for verbatim
 \cs_new_eq:NN \verbatim_start: \verbatim@start
 
-\cs_new_protected:Nn \verbatim_set_processline:n {
-  \cs_set_protected:Nn \__lshortexample_func_temp:n {#1}
+\cs_new_protected:Nn \verbatim_set_processline:N {
   \tl_set:Nn \verbatim@processline {
-    \__lshortexample_func_temp:n {\the\verbatim@line}
+    #1 {\the\verbatim@line}
   }
+}
+
+\cs_new_protected:Nn \verbatim_set_processline_inline:n {
+  \cs_set_protected:Nn \__lshortexample_func_temp:n {#1}
+  \verbatim_set_processline:N \__lshortexample_func_temp:n
 }
 
 \tl_new:N \__lshortexample_example_label
 \int_new:N \__lshortexample_example_counter
 \bool_new:N \__lshortexample_hide_switch
+\bool_new:N \__lshortexample_show_switch
 
 \keys_define:nn { lshortexample } {
   standalone .bool_set:N = \__lshortexample_standalone_bool,
@@ -70,22 +75,7 @@
   \iow_open:Nn \g_tmpb_iow {\__lshortexample_verbatim_output_file}
   \seq_map_inline:Nn \l_char_special_seq {\char_set_catcode_other:N ##1}
   \char_set_catcode_active:N \^^M
-  \verbatim_set_processline:n {
-    \iow_now:Nx \g_tmpa_iow {##1}
-
-    \exp_args:Nx \str_if_in:nnT {##1} {!hidebegin} {
-      \bool_set:Nn \__lshortexample_hide_switch {\c_true_bool}
-    }
-    \exp_args:Nx \str_if_in:nnT {##1} {!hideend} {
-      \bool_set:Nn \__lshortexample_hide_switch {\c_false_bool}
-    }
-
-    \bool_if:NF \__lshortexample_hide_switch {
-      \exp_args:Nx \str_if_in:nnF {##1} {!hide} {
-        \iow_now:Nx \g_tmpb_iow {##1}
-      }
-    }
-  }
+  \verbatim_set_processline:N \lshortexample_verbatim_processline:n
   \verbatim_start:
 } {
   \iow_close:N \g_tmpa_iow
@@ -212,5 +202,34 @@
     \begin{minipage}{\__lshortexample_examplewidth}
       \input{#1}
     \end{minipage}
+  }
+}
+
+\cs_new:Nn \lshortexample_verbatim_processline:n {
+
+  \exp_args:Nx \str_if_in:nnT {#1} {!showbegin} {
+    \bool_set:Nn \__lshortexample_show_switch {\c_true_bool}
+  }
+  \exp_args:Nx \str_if_in:nnT {#1} {!showend} {
+    \bool_set:Nn \__lshortexample_show_switch {\c_false_bool}
+  }
+
+  \bool_if:NF \__lshortexample_show_switch {
+    \exp_args:Nx \str_if_in:nnF {#1} {!show} {
+      \iow_now:Nx \g_tmpa_iow {#1}
+    }
+  }
+
+  \exp_args:Nx \str_if_in:nnT {#1} {!hidebegin} {
+    \bool_set:Nn \__lshortexample_hide_switch {\c_true_bool}
+  }
+  \exp_args:Nx \str_if_in:nnT {#1} {!hideend} {
+    \bool_set:Nn \__lshortexample_hide_switch {\c_false_bool}
+  }
+
+  \bool_if:NF \__lshortexample_hide_switch {
+    \exp_args:Nx \str_if_in:nnF {#1} {!hide} {
+      \iow_now:Nx \g_tmpb_iow {#1}
+    }
   }
 }
