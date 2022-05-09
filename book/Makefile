@@ -9,6 +9,7 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 # Define some variables
 LATEX=latex
 PDFLATEX=xelatex --enable-write18
+PDFLATEX_DEBUG_ARGS=-synctex=1 -interaction=nonstopmode -file-line-error
 MAKEINDEX=makeindex
 DVIPS=dvips
 
@@ -33,7 +34,7 @@ src/title.tex: Makefile fixdate.pl src/title.template.tex
 quick: $(FILES)
 	-mkdir pdfbuild
 	(TEXINPUTS=.:`pwd`/src:${TEXINPUTS:-:}&&export TEXINPUTS && cd pdfbuild &&\
-	$(PDFLATEX) lshort && mv lshort.pdf .. )
+	$(PDFLATEX) $(PDFLATEX_DEBUG_ARGS) lshort)
 
 
 tar:	$(FILES)
