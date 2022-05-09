@@ -481,6 +481,8 @@ $\big( \Big( \bigg( \Bigg( \quad
  For a list of all delimiters available, see Table~\ref{tab:delimiters} on page
 \pageref{tab:delimiters}. 
 
+You can find large list of symbols supported in math mode in
+Appendix \ref{symbols}.
 
 \section{Single Equations that are Too Long: multline}
 \index{long equations}
@@ -859,36 +861,33 @@ Naïvely, one might write units like this:
 The speed of light
 is 299792458 m/s.
 \end{example}
-
-This may look fine initially but if your document gets longer you will probably
-get into situation where unfortunate linebreak will occur 
+\noindent This may look fine initially but if your document gets longer you will probably
+get into a situation where an unfortunate linebreak occurs.
 \begin{example}[examplewidth=6cm]
 \ldots{} The speed of light
 is 299792458 m/s. Thus we
 can calculate \ldots
 \end{example}
-
-A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
+\noindent A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
 long numbers should be grouped to make them easier to read. The above example
-should then written like this.
+should then written like this:
 \begin{example}[examplewidth=6cm]
 The speed of light is
 299\,792\,458~m/s.
 \end{example}
-
-Yet another problem arises when trying to write the units inside math
+\noindent Yet another problem arises when trying to write the units inside math
 mode
 \begin{example}[examplewidth=6cm]
 $10~\frac{m}{s} \cdot 12~s = 120~m$
 \end{example}
-Here we need to make sure that the units are written in roman font.
+\noindent Here we need to make sure that the units are written in roman font.
 The above example should be then written as
 \begin{example}[examplewidth=6cm]
 $10~\frac{\mathrm{m}}{\mathrm{s}} 
   \cdot 12~\mathrm{s} 
   = 120~\mathrm{m}$
 \end{example}
-Hopefully these examples illustrate why a better method is needed.
+\noindent Hopefully these examples illustrate why a better method is needed.
 
 \subsection{Basic commands of the \pai{siunitx} package}
 

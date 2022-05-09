@@ -1,6 +1,6 @@
 #	pstops "4:0L@0.8(22.5cm,-0.6cm)+1L@0.8(22.5cm,13.3cm),2L@0.8(22.5cm,-0.6cm)+3L@0.8(22.5cm,13.3cm)" \
 SHELL = /bin/sh
-VERS = 6.4
+VERS = 7.0
 
 OTHER = README CHANGES
 
@@ -44,14 +44,14 @@ tar:	$(FILES)
 rsync:  all tar
 	echo press enter to rsync
 	read x
-	rsync  lshort-$(VERS).src.tar.gz CHANGES README lshort.pdf lshort-letter.pdf lshort-a5.pdf james:public_html/latex/
+	rsync  lshort-$(VERS).src.tar.gz CHANGES README lshort.pdf lshort-letter.pdf lshort-a5.pdf freddie:public_html/latex/
 
 dist:   rsync
 	-rm lshort-english
 	ln -s . lshort-english
 	zip lshort-$(VERS).zip lshort-english/lshort-$(VERS).src.tar.gz lshort-english/CHANGES lshort-english/README lshort-english/lshort.pdf lshort-english/lshort-letter.pdf lshort-english/lshort-a5.pdf
 	-rm lshort-english
-	echo upload lshort-$(VERS).zip to http://www.ctan.org/upload
+	echo upload lshort-$(VERS).zip to https://ctan.org/pkg/lshort-english
 
 clean:
 	rm -rf texbuild pdfbuild
