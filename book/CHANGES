@@ -8,6 +8,7 @@ UNRELEASED
 * add biblatex tutorial / marcin-serwin
 * use the new syntax for defining commands and environments in customizig LaTeX
   chapter / marcin-serwin
+* add siunitx tutorial / marcin-serwin
 
 6.4 2021.03.09
 --------------

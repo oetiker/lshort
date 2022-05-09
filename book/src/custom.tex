@@ -770,21 +770,27 @@ If such a space should be kept even if it falls at the end or the
 start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
 \emph{length} in the simplest case is just a number plus a unit.  The
 most important units are listed in Table~\ref{units}.
-\index{units}\index{dimensions}
+\index{units (\TeX)}\index{dimensions}
 
 \begin{example}
 This\hspace{1.5cm}is a space
-of 1.5 cm.
+of \qty{1.5}{\cm}.
 \end{example}
 \suppressfloats
-\begin{table}[tbp]
+\begin{table}[htp]
+  \centering
+  \DeclareSIUnit{\in}{in}
+  \sisetup{
+    parse-numbers = false
+  }
+
 \caption{\TeX{} Units.} \label{units}\index{units}
 \begin{tabular}{@{}ll@{}}
 \toprule
-\texttt{mm} & millimetre $\approx 1/25$~inch \quad \demowidth{1mm} \\
-\texttt{cm} & centimetre = 10~mm  \quad \demowidth{1cm}                     \\
-\texttt{in} & inch $=$ 25.4~mm \quad \demowidth{1in}                    \\
-\texttt{pt} & point $\approx 1/72$~inch $\approx \frac{1}{3}$~mm  \quad\demowidth{1pt}\\
+\texttt{mm} & millimetre $\approx$ \qty{1/25}{\in} \quad \demowidth{1mm} \\
+\texttt{cm} & centimetre = \qty{10}{mm}  \quad \demowidth{1cm} \\
+\texttt{in} & inch $=$ \qty{25.4}{\mm} \quad \demowidth{1in}                    \\
+\texttt{pt} & point $\approx$ \qty{1/72}{\in} $\approx$ \qty{\frac{1}{3}}{\mm} \quad\demowidth{1pt}\\
 \texttt{em} & approx width of an `M' in the current font \quad \demowidth{1em}\\
 \texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}\\
 \bottomrule
