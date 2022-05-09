@@ -527,9 +527,15 @@ You can also pass \carg{options} as an optional argument the environment.
 \end{example}
 
 If you just need a word or a short phrase in a foreign language you can use
-either the \ci*{text\textit{language}}[options:o ! text:m] or the
-\ci*{textlang}[options:o ! language:m ! text:m] command:
-
+either the
+\begin{lscommand}
+  \ci*{text\textit{language}}[options:o ! text:m]
+\end{lscommand}
+\noindent or the
+\begin{lscommand}
+  \ci*{textlang}[options:o ! language:m ! text:m]
+\end{lscommand}
+\noindent command:
 \begin{example}[examplewidth=0.33\linewidth]
 In Austria they write
 \textlang[variant=austrian]{de}{Jänner}
@@ -644,28 +650,41 @@ Fonts will be explored in more detail in section~\ref{sec:fontspec}.
 
 \subsubsection{Right to Left (RTL) languages}
 
-Some languages are written left to right, others are written right to
-left (RTL). \pai{polyglossia} needs the \pai{bidi}\cite{bidi}
-package\footnote{\texttt{bidi} does not support \hologo{LuaTeX}.} in order
-to support RTL languages. The \pai{bidi} package should be the last package
-you load, even after \pai{hyperref} which is usually the last package.
-(Since \pai{polyglossia} loads \pai{bidi} this means that \pai{polyglossia}
-should be the last package loaded.)
+Some languages are written left to right, others are written right to left
+(RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
+supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
+\pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
+much more limitited than \pai{bidi}.} in order to support RTL languages. The
+\pai{bidi} package should be the last package you load, even after
+\pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
+loads \pai{bidi} this means that \pai{polyglossia} should be the last package
+loaded.)
 
-The package \pai{xepersian}\index{Persian}\cite{xepersian} offers support
-for the Persian language. It supplies Persian \LaTeX-commands that allows
-you to enter commands like \verb|\section| in Persian, which makes this
-really attractive to native speakers. \pai{xepersian} is the only package
-that supports kashida\index{kashida} with \hologo{XeLaTeX}. A package for
-Syriac which uses a similar algorithm is under development.
+\begin{example}[standalone, template=empty, paperheight=4cm, nocache]
+\documentclass{article}
 
-The IranNastaliq font provided by the SCICT\footnote{Supreme Council of
-Information and Communication Technology} is available at their website
-\url{http://www.scict.ir/Portal/Home/Default.aspx}.
+\usepackage{polyglossia}
+\setdefaultlanguage{arabic}
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}%!hide 
 
-The \pai{arabxetex}\cite{arabxetex} package supports several languages with
+\begin{document}
+This text will be typeset right to left.
+\end{document}
+\end{example}
+
+The package \pai*{xepersian}\footnote{Works only with
+\hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
+supplies Persian \LaTeX-commands that allows you to enter commands like
+\ci{section} in Persian, which makes this really attractive to native speakers.
+\pai{xepersian} is the only package that supports kashida\index{kashida} with
+\hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
+development.
+
+The IranNastaliq font developed by the SCICT and updated by Mohammad Saleh
+Souzanchi is available at~\cite{font:IranNastaliq}.
+
+The \pai*{arabxetex} package supports several languages with
 an Arabic script:
-
 \begin{itemize}
 \item arab (Arabic)\index{Arabic}
 \item persian\index{Persian}
@@ -680,32 +699,19 @@ an Arabic script:
 \end{itemize}
 
 It offers a font mapping that enables \hologo{XeLaTeX} to process input
-using the Arab\TeX\ ASCII transcription.
+using the Arab\TeX{} ASCII transcription.
 
-Fonts that support several Arabic laguages are offered by the
-IRMUG\footnote{Iranian Mac User Group} at
-\url{http://wiki.irmug.org/index.php/X_Series_2}.
-
-There is no package available for Hebrew\index{Hebrew} because none is
-needed. The Hebrew support in \pai{polyglossia} should be sufficient. But
-you do need a suitable font with real Unicode Hebrew. SBL Hebrew is free for
-non-commercial use and available at
-\url{http://www.sbl-site.org/educational/biblicalfonts.aspx}. Another font
-available under the Open Font License is Ezra SIL, available at
-\url{http://www.sil.org/computing/catalog/show_software.asp?id=76}.
-
-Remember to select the correct script:
-
-\begin{lscommand}
-\verb|\newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}| \\
-\verb|\newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}|
-\end{lscommand}
-
+There is no package available for Hebrew\index{Hebrew} because none is needed.
+The Hebrew support in \pai{polyglossia} should be sufficient. But you do need a
+suitable font with real Unicode Hebrew. SBL Hebrew~\cite{font:sblhebrew} is a
+non-free font available for non-commercial use. Another font, available under
+the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
 
 \subsubsection{Chinese, Japanese and Korean (CJK)}
 \index{Chinese}\index{Japanese}\index{Korean}
 
-The package \pai{xeCJK}\cite{xecjk} takes care of font selection and
+The package \pai*{xeCJK}\footnote{Works only with
+\hologo{XeLaTeX}.} takes care of font selection and
 punctuation for these languages.
 
 \section{The Space Between Words}
@@ -1301,7 +1307,7 @@ most important keys.
 
 The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
 \begin{figure}
-\begin{lined}{9cm}
+\begin{lined}{11cm}
 \begin{verbatim}
 \includegraphics[angle=90,width=\textwidth]{test.png}
 \end{verbatim}
@@ -1449,7 +1455,7 @@ you are going to paste into the finished document.
 \begin{verbatim}
 Figure~\ref{white} is an example of Pop-Art.
 \begin{figure}[!hbtp]
-\includegraphics[angle=90,width=\textwidth]{white-box.pdf}
+\includegraphics[angle=90,width=\textwidth]{wbox.pdf}
 \caption{White Box by Peter Markus Paulian.\label{white}}
 \end{figure}
 \end{verbatim}
