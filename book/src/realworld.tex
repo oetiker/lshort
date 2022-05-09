@@ -460,7 +460,7 @@ recently you had to delve deep into the abyss of language specific encodings
 both for input as well as fonts. These days, with modern \TeX{} engines
 speaking UTF-8 natively, these problems have relaxed considerably.
 
-The package \pai*{polyglossia} is a replacement for venerable \pai{babel}
+The package \pai*{polyglossia} is a replacement for the venerable \pai{babel}
 package. It takes care of the hyphenation patterns and automatically generated
 text strings in your documents. Polyglossia works only with \hologo{XeTeX}
 and \hologo{LuaTeX} engines.
@@ -479,8 +479,8 @@ and specify the languages in the preamble using
   \ci{setdefaultlanguage}[options][language] \\
   \ci{setotherlanguage}[options][language]
 \end{lscommand}
-where language is either the name of the language to use such as \cargv{gaelic}
-or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
+where \carg{language} is either the name of the language to use such as
+\cargv{gaelic} or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
 \cargv{ru-luna1918}. When specifying language via its name you may pass
 additional \carg{options} to decide between its variants for example
 \cargv{variant=british} or \cargv{script=Arabic}. Note that when loading a
@@ -531,11 +531,11 @@ either the
 \begin{lscommand}
   \ci*{text\textit{language}}[options:o ! text:m]
 \end{lscommand}
-\noindent or the
+or the
 \begin{lscommand}
   \ci*{textlang}[options:o ! language:m ! text:m]
 \end{lscommand}
-\noindent command:
+command:
 \begin{example}[examplewidth=0.33\linewidth]
 In Austria they write
 \textlang[variant=austrian]{de}{Jänner}
@@ -551,28 +551,29 @@ such as \ci{today} adjust their output. However the further we stray from
 English, the more useful will this commands become.
 
 Sometimes the font used in the main document does not contain glyphs that are
-required in the second language. The default Latin Modern for example does not
-contain Cyrillic letters. The solution is to define a font that will be used
+required in the second language. The default Latin Modern font for example does not
+contain Cyrillic letters. The solution is to define a custom font that will be used
 for that language. 
 
-To set the fonts we will use the command
+To set the fonts use the command
 \begin{lscommand}
   \ci*{newfontfamily}[familyname:M ! options:o ! font:m]
 \end{lscommand}
-\noindent from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded by
-\pai{polyglossia} so you do not need to load it manually.} that will be
-described in much more detail in section~\ref{sec:fontspec}.
+from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
+by \pai{polyglossia} so you do not need to add it to a the preamble of your
+document.} which is described in much more detail in
+section~\ref{sec:fontspec}.
 
-When changing text language, polyglossia checks whether a font family named
+When changing the text language, \pai{polyglossia} checks whether a font family named
 \cargv{\textit{language}font} exists and changes to it if it's available.
 
-If you are happy with the default font, then for Cyrillic or Greek letters you
-may want to try the \enquote{CMU} font which contains some additional glyphs
-while looking nearly identical to the Latin Modern.\footnote{Both fonts are
-actually based off of Computer Modern which was the original font used by
+If you are happy with the default Latin Modern font, you may want to try the \enquote{CMU} font
+which contains some additional Cyrillic or Greek glyphs
+while looking nearly identical to Latin Modern.\footnote{Both fonts are
+actually based on the Computer Modern font, designed by Donald Knuth for
 the first \TeX{} versions.}
 
-If you have CMU font installed in your system (unlikely) or you are using 
+If you have the CMU font installed in your system (unlikely) or you are using 
 \hologo{LuaLaTeX} then you can simply write
 \begin{verbatim}
 \newfontfamily\greekfont{CMU Serif}
@@ -610,10 +611,10 @@ or disclosure in philosophy.
 \LaTeX{} actually uses three different fonts for typesetting documents. The
 above commands only set the default serif font used for the body text. The
 other fonts are \textsf{sans serif} (used in presentations slides) and
-\texttt{monospace} (used when displaying code). In order to adjust them for
-language define \cargv{\textit{language}fontsf} family for sans serif and
+\texttt{monospace} (used when displaying code). In order to adjust the fonts used for
+a particular language, define \cargv{\textit{language}fontsf} family for sans serif and
 \cargv{\textit{language}fonttt} for monospace. For example, to define CMU as a
-font for Greek in all three fonts you would write
+font for Greek in all three fonts when using \hologo{LuaLaTeX} you would write
 \begin{verbatim}
 \newfontfamily\greekfont{CMU Serif}
 \newfontfamily\greekfontsf{CMU Sans Serif}
@@ -636,17 +637,18 @@ or in \hologo{XeLaTeX}
 ]{cmun}
 \end{verbatim}
 
-Above commands redefine the fonts for languages used as other in polyglossia.
-If you want to influence the font of the main document language use the
-\ci{setmainfont}, \ci{setsansfont} and \ci{setmonofont} that work the same way
-but without the \carg{familyname} argument.
+The commands above redefine the fonts for languages used as \enquote*{other} in
+polyglossia. If you want to influence the font of the main document language
+use the \ci{setmainfont}, \ci{setsansfont} and \ci{setmonofont} that work the
+same way but without the \carg{familyname} argument.
 \begin{verbatim}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
 \end{verbatim}
 
-Fonts will be explored in more detail in section~\ref{sec:fontspec}.
+If you want to learn even more about fonts, have a look at
+section~\ref{sec:fontspec}.
 
 \subsubsection{Right to Left (RTL) languages}
 
@@ -680,8 +682,8 @@ supplies Persian \LaTeX-commands that allows you to enter commands like
 \hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
 development.
 
-The IranNastaliq font developed by the SCICT and updated by Mohammad Saleh
-Souzanchi is available at~\cite{font:IranNastaliq}.
+To typeset Arabic you may use the IranNastaliq font~\cite{font:IranNastaliq}
+developed by the SCICT and updated by Mohammad Saleh Souzanchi.
 
 The \pai*{arabxetex} package supports several languages with
 an Arabic script:

@@ -203,7 +203,7 @@
 \index{packages!#1@\textsf{#1}}%
 \index{#1@\textsf{#1}}}
 \NewDocumentCommand{\pai}{sm}{%
-  \paih{#2}\textsf{#2}\IfBooleanT{#1}{ \cite{pack:#2}}%
+  \paih{#2}\textsf{#2}\IfBooleanT{#1}{\,\cite{pack:#2}}%
 }
 % Active characters
 \NewDocumentCommand{\ai}{m}{\index{#1@\texttt{#1{}}}\texttt{#1{}}}
