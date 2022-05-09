@@ -1606,11 +1606,6 @@ This should be enough theory. The following examples should
 remove any remaining doubt, and make it clear that the
 \ci{newtheorem} command is way too complex to understand.
 
-% actually define things
-\theoremstyle{definition} \newtheorem{law}{Law}
-\theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
-\theoremstyle{remark}     \newtheorem*{marg}{Margaret}
-
 First define the theorems:
 
 \begin{verbatim}
@@ -1638,7 +1633,9 @@ theorem, so it gets a number that is in sequence with
 the other ``Laws''. The argument in square brackets is used to specify 
 a title or something similar for the theorem.
 \begin{example}
+%!showbegin !hide
 \newtheorem{mur}{Murphy}[section]
+%!showend !hide
 
 \begin{mur} If there are two or 
 more ways to do something, and 
