@@ -52,6 +52,12 @@
 
   examplewidth .tl_set:N = \__lshortexample_examplewidth,
   examplewidth .initial:n = 0.48\linewidth,
+
+  verbatim_input_file_name .tl_set:N = \__lshortexample_verbatim_input_file,
+  verbatim_input_file_name .initial:n = {\c_sys_jobname_str _input.exa},
+
+  verbatim_output_file_name .tl_set:N = \__lshortexample_verbatim_output_file,
+  verbatim_output_file_name .initial:n = {\c_sys_jobname_str _output.exa},
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -60,10 +66,8 @@
     \keys_set:nn { lshortexample } { #1 }
   }
 
-  \tl_set:Nn \l_tmpa_tl {\c_sys_jobname_str.exa}
-  \group_begin:
-  \iow_open:Nn \g_tmpa_iow {\l_tmpa_tl}
-  \iow_open:Nn \g_tmpb_iow {\l_tmpa_tl _hidden}
+  \iow_open:Nn \g_tmpa_iow {\__lshortexample_verbatim_input_file}
+  \iow_open:Nn \g_tmpb_iow {\__lshortexample_verbatim_output_file}
   \seq_map_inline:Nn \l_char_special_seq {\char_set_catcode_other:N ##1}
   \char_set_catcode_active:N \^^M
   \verbatim_set_processline:n {
@@ -88,33 +92,47 @@
   \iow_close:N \g_tmpb_iow
   \group_end:
 
-  \tl_set:Nx \__lshortexample_example_label {example@\int_use:N\__lshortexample_example_counter}
+  \begin{trivlist}
+    \item\relax
+    \group_begin:
+    \IfValueT {#1} {
+      \keys_set:nn { lshortexample } { #1 }
+    }
 
-  \bool_if:NTF \__lshortexample_extend {
-    \int_if_odd:nTF {\getpagerefnumber{\__lshortexample_example_label}} {
-      \dim_set:Nn \l_tmpa_dim {0pt}
-      \dim_set:Nn \l_tmpb_dim {-1cm}
+    \tl_set:Nx \__lshortexample_example_label {example@\int_use:N\__lshortexample_example_counter}
+
+    \bool_if:NTF \__lshortexample_extend {
+      \int_if_odd:nTF {\getpagerefnumber{\__lshortexample_example_label}} {
+        \dim_set:Nn \l_tmpa_dim {0pt}
+        \dim_set:Nn \l_tmpb_dim {-1cm}
+      } {
+        \dim_set:Nn \l_tmpa_dim {-1cm}
+        \dim_set:Nn \l_tmpb_dim {0pt}
+      }
     } {
-      \dim_set:Nn \l_tmpa_dim {-1cm}
+      \dim_set:Nn \l_tmpa_dim {0pt}
       \dim_set:Nn \l_tmpb_dim {0pt}
     }
-  } {
-    \dim_set:Nn \l_tmpa_dim {0pt}
-    \dim_set:Nn \l_tmpb_dim {0pt}
-  }
 
-  \medskip
-  \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
-    \bool_if:NTF \__lshortexample_standalone_bool {
-      \lshortexample_typeset_standalone_example:nn {\l_tmpa_tl} {\l_tmpa_tl _hidden}
-    } {
-      \lshortexample_typeset_example:nn {\l_tmpa_tl} {\l_tmpa_tl _hidden}
-    }
-    \label{\__lshortexample_example_label}
-  \end{adjustwidth}
-  \int_gincr:N \__lshortexample_example_counter
-  \medskip
-  \group_end:
+    \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
+      \bool_if:NTF \__lshortexample_standalone_bool {
+        \lshortexample_typeset_standalone_example:nn {
+          \__lshortexample_verbatim_input_file
+        } {
+          \__lshortexample_verbatim_output_file
+        }
+      } {
+        \lshortexample_typeset_example:nn {
+          \__lshortexample_verbatim_input_file
+        } {
+          \__lshortexample_verbatim_output_file
+        }
+      }
+      \label{\__lshortexample_example_label}
+    \end{adjustwidth}
+    \int_gincr:N \__lshortexample_example_counter
+    \group_end:
+  \end{trivlist}
 }
 
 \cs_new:Nn \lshortexample_compile_command:nnn {
