@@ -251,14 +251,22 @@
 %
 % Typesetting Commands
 %
-\newenvironment{lscommand}%
-    {\nopagebreak\par\small\addvspace{3.2ex plus 0.8ex minus 0.2ex}%
-     \vskip -\parskip
-     \noindent%
-     \begin{tabular}{|l|}\hline\rule{0pt}{1em}\ignorespaces}%
-    {\\\hline\end{tabular}\par\nopagebreak\addvspace{3.2ex plus 0.8ex
-        minus 0.2ex}%
-     \vskip -\parskip}
+\ExplSyntaxOn
+\NewDocumentEnvironment{lscommand}{} {
+  \nopagebreak\smallskip
+  \begin{trivlist}
+    \@beginparpenalty=10000
+    \@endparpenalty=10000
+    \item\relax
+    \begin{tabular}{|l|}
+      \hline\rule{0pt}{1em}\ignorespaces
+} {
+      \\\hline
+    \end{tabular}
+  \end{trivlist}
+  \smallskip
+}
+\ExplSyntaxOff
 %
 % Type setting Code Fragments
 %
