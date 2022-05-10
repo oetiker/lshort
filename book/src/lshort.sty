@@ -272,12 +272,19 @@
 %
 % propper bookmark entries in pdftex
 
-\ifx\hypersetup\undefined\else
-\pdfstringdefDisableCommands{\edef\ci{\textbackslash}}%
-\pdfstringdefDisableCommands{\edef\sim{\textasciitilde}}%
-\pdfstringdefDisableCommands{\edef\circ{\textdegree}}%
-\pdfstringdefDisableCommands{\edef\ldots{... }}%
+\ExplSyntaxOn
+\ifx\hypersetup\undefined\else  
+  \pdfstringdefDisableCommands {
+    \edef\ci{\textbackslash}
+    \edef\sim{\textasciitilde}
+    \edef\circ{\textdegree}
+    \edef\ldots{...}
+    \edef\ei{}
+    \edef\({}
+    \edef\){}  
+  }
 \fi
+\ExplSyntaxOff
 
 %\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}
 %
