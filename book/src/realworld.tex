@@ -1116,28 +1116,259 @@ within parameters of other commands.
 
 \subsection{Tabular}
 
-\newcommand{\mfr}[1]{\framebox{\rule{0pt}{0.7em}\texttt{#1}}}
+In \LaTeX{} the environment to typeset tables (and more) is called
+\ei{tabular}. While it can be used on its own, there are some spacing issues,
+so it is recommended to load \pai*{booktabs} which introduces some commands
+that solve the problem. Moreover to achieve some more advanced table layouts
+\pai*{longtable}, \pai*{array} and \pai*{multirow} will also be used in this
+chapter. If your document relies heavily on tables, then it is a good idea to
+put all of those in the preamble.
 
-The \ei{tabular} environment can be used to typeset beautiful
-\wi{table}s with optional horizontal and vertical lines. \LaTeX{}
-determines the width of the columns automatically.
+In addition to commands description, the \pai{booktabs} package documentation
+contains guidelines on typesetting professionally looking tables. These will be
+presented here and you are encouraged to follow them if you want to present
+information contained within the tables clearly.
+
+\subsubsection{Basic tables} \label{foo}
+
+The environment \ei{tabular} has the following form
+\begin{lscommand}
+  \ei*{tabular}[pos:o ! colspec:m]
+\end{lscommand} %
+The \carg{colspec} argument, which stands for columns specifiers, defines the
+format of the table. Use an \cargv{l} for a column of left-aligned text,
+\cargv{r} for right-aligned text, and \cargv{c} for centered text. Inside the
+environment use \ai{\&} to go to next cell within the row and
+\ci{\textbackslash} to go to the next row.
+\begin{example}
+\begin{tabular}{lcr}
+  left & center & right \\
+  1    & 2      & 3     \\
+\end{tabular}
+\end{example}
+Note that the text inside the cells will not be wrapped. If you the column to
+contain justified text with linebreaks use the \cargv{p\{\carg{dim}\}} column
+specifier, where \carg{dim} is the width of the column.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lrp{3cm}}
+  left & right & very long paragraph
+                 that gets broken into
+                 multiple lines \\
+  1    & 2     & another one,
+                 but shorter \\
+\end{tabular}
+\end{example}
+
+The optional \carg{pos} argument specifies the vertical position of the table
+with respect to baseline of the text. There are three possible alignments:
+\cargv{c} center the table (the default), \cargv{t} matches the baseline of the
+top row and \cargv{b} matches the baseline of the bottom row.
+\begin{example}[examplewidth=0.55\linewidth]
+text
+\begin{tabular}{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\begin{tabular}[t]{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\begin{tabular}[b]{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\end{example}
+
+
+What we have shown so far allows aligning some items in rows and columns,
+but real tables need visible headings. To insert them use commands
+\ci{toprule}, \ci{midrule} and \ci{bottomrule} from the \pai{booktabs} package.
+All of those accept one optional argument that specifies their thickness, but
+usually their defaults are sufficient.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lcl}
+  \toprule
+  Alignment & Letter & Niceness  \\
+  \midrule
+  Left      & l      & Very nice \\
+  Cener     & c      & Very nice \\
+  Right     & r      & Very nice \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+With these commands you are already able to produce simple, yet nicely looking
+tables. At this point you may be thinking that this table still needs vertical
+lines between the columns but it is not the case. In fact the first rule of
+producing professionally looking tables is that you must \emph{not} use
+vertical lines.
+
+The second rule is to never use double lines such as these:
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lll}
+  \toprule[0.1cm]
+  \toprule
+  Person      & Face & Table    \\
+  \midrule
+  \midrule
+  Me          & :(   & Not nice \\
+  You         & :[   & Awful    \\
+  Your reader & :<   & Terrible \\
+  \bottomrule
+  \bottomrule[0.1cm]
+\end{tabular}
+\end{example}
+As you can see the lines are already of different weight in order to sifnigy
+their meaning. Using more lines than is necessary means cluttering the space
+without adding information. If you stick to these two rules your tables will
+look \emph{much} better.
+
+To make the tables a bit more sleek you may want to remove the padding in the
+first and last column. To control the space between the columns use the
+\cargv{\@\{\carg{sep}\}} column specifier, where \carg{sep} is either text or
+space. Space of arbitrary length can be inserted using the \ci{hspace}{width}
+command. The contents of the \carg{sep} arguments will be put between cells in
+the relevant column.
+\begin{example}[examplewidth=0.3\linewidth]
+\begin{tabular}{
+  @{a} c @{\hspace{1cm}} c @{|} c @{ b}
+}
+  1 & 2 & 3 \\
+  4 & 5 & 6\\
+  7 & 8 & 9\\
+\end{tabular}
+\end{example}
+If you leave the \carg{sep} empty it will suppress the padding between the
+columns.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Person      & Face & Table       \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & :>   & Informative \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+Sometimes it may make sense to group two or more headings. To achieve this we
+need two things: the description of the group must span multiple columns and
+the line underneath the description should span only the affected columns. In
+order to achieve the first task the 
+\begin{lscommand}
+  \ci*{multicolumn}[ncols:m ! colspec:m ! text:m]
+\end{lscommand}
+command is used. The \carg{ncols} argument indicates how many columns should
+the \carg{text} span, while the \carg{colspec} is the column specification, the
+same as in \ei{tabular}, for the single column the \carg{text} will be put in.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Person      & Face & Table       \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & \multicolumn{2}{c}{
+                  Not available}   \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+To achive a horizontal line that spans multiple columns, use the command
+\begin{lscommand}
+  \ci*{cmidrule}[dim:o ! trim:p ! a--b:m]
+\end{lscommand}
+While the command uses nonstandard syntax for \carg{trim}, this is just an
+optional argument with different pair of delimiters.\footnote{This syntax
+allows to specify the second optional argument without specifying the first,
+which would be impossible if square brackets were used for both.} The
+\carg{dim} allows us to specify the thickness of the line. The \carg{trim}
+argument accepts any combination of \cargv{r}, \cargv{r\{\carg{dim}\}},
+\cargv{l} or \cargv{l\{\carg{dim}\}}. This allows you trim the rule from right
+or left, either by the package default or the specified \carg{dim}. It is
+usually recommended to trim the rules from the side where they touch other
+columns. Finally the only required argument \carg{a--b} is the span of columns
+to draw the line over.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+              & \multicolumn{2}{c}{
+                  Reaction}        \\
+  \cmidrule(l){2-3}
+  Person      & Face & Exclamation \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & \multicolumn{2}{c}{
+                  Not available}   \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+If you need a cell to span multiple rows instead of columns, then you have to
+use package \pai{multirow}. Its main command is a little more complicated
+\begin{lscommand}
+  \ci*{multirow}[vpos:o ! nrows:m ! bigstruts:o ! width:m ! vmove:o ! text:m]
+\end{lscommand}
+The arguments are
+\begin{description}
+  \item[\carg{vpos}] is the vertical position of the text within the cell.
+    Can be either \cargv{c} for center (the default), \cargv{t} for top or
+    \cargv{b} for bottom.
+  \item[\carg{nrows}] is the number of rows for cell to span.
+  \item[\carg{bigstruts}] is only useful if used with the \pai{bigstrut}
+    package. It will not be discussed here.
+  \item[\carg{width}] is the width of cell. In addition to lengths, you may
+    pass two special arguments here: \cargv{*} for the text natural length and
+    \cargv{=} for the same width as the column (only makes sense if the column
+    width was specified, for example via \cargv{p\{3cm\}}).
+  \item[\carg{vmove}] allows adjusting the position of the text if it is too
+    low or too high. By default no adjusting is done.
+  \item[\carg{text}] is the text to be put in the cell.
+\end{description}
+Unlike with \ci{multicolumn} you still have to write all the cells in remaining
+rows, but they should be empty.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+                & \multicolumn{2}{c}{
+                    Reaction}        \\
+  \cmidrule(l){2-3}
+  Person        & Face & Exclamation \\
+  \midrule
+  \multirow[t]{
+    2}{*}{VIPs} & :)   & Nice        \\
+                & :]   & Sleek       \\
+  Others        & \multicolumn{2}{c}{
+                    Not available}   \\
+  \bottomrule
+\end{tabular}
+\end{example}
+Do not overuse the \ci{multirow} when indicating values common to more than one
+row. Usually repeating the values in question makes it more readable.
+
+
+
+The \ei{tabular} environment can be used to typeset beautiful \wi{table}s.
+\LaTeX{} determines the width of the columns automatically.
 
 The \emph{table spec} argument of the
 \begin{lscommand}
 \verb|\begin{tabular}[|\emph{pos}\verb|]{|\emph{table spec}\verb|}|
 \end{lscommand}
-\noindent command defines the format of the table. Use an \mfr{l} for a column of
-left-aligned text, \mfr{r} for right-aligned text, and \mfr{c} for
-centered text; \mfr{p\{\emph{width}\}} for a column containing justified
-text with line breaks, and \mfr{|} for a vertical line.
+\noindent 
 
 If the text in a column is too wide for the page, \LaTeX{} won't
-automatically wrap it. Using \mfr{p\{\emph{width}\}} you can define
+automatically wrap it. Using \cargv{p\{\emph{width}\}} you can define
 a special type of column which will wrap-around the text as in a normal paragraph.
 
 The \emph{pos} argument specifies the vertical position of the table
 relative to the baseline of the surrounding text.  Use one of the
-letters \mfr{t}, \mfr{b} and \mfr{c} to specify table
+letters \cargv{t}, \cargv{b} and \cargv{c} to specify table
 alignment at the top, bottom or centre.
 
 Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
@@ -1169,11 +1400,11 @@ all enjoy the show.\\
 \end{tabular}
 \end{example}
 
-The column separator can be specified with the \mfr{@\{...\}}
+The column separator can be specified with the \cargv{@\{...\}}
 construct. This command kills the inter-column space and replaces it
 with whatever is between the curly braces. 
 Common application is to suppress leading space in a table with
-\mfr{@\{\}}.
+\cargv{@\{\}}.
 
 \begin{example}
 \begin{tabular}{@{} l @{}}

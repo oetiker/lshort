@@ -162,25 +162,30 @@
 \index{#1@\texttt{\hspace*{-1.2ex}\bs #1}}}
 \ExplSyntaxOn
 \msg_new:nnn {lshort} {invalidtype} {Invalid~argument~type~specifier:~'#1'.}
+\NewDocumentCommand{\lshort@arglist}{m}{
+  \seq_set_split:Nnn \l_tmpa_seq {!} {#1}
+  \seq_map_inline:Nn \l_tmpa_seq {
+    \exp_args:Nnx \seq_set_split:Nnn \l_tmpb_seq {\char_generate:nn{58}{12}} {##1}
+    \seq_get_left:NN \l_tmpb_seq \l_tmpa_tl
+    \seq_get_right:NN \l_tmpb_seq \l_tmpb_tl
+
+    \exp_args:Nx \str_case:nnF {\l_tmpb_tl} {
+      {o} {\texttt{[}\carg{\l_tmpa_tl}\texttt{]}}
+      {m} {\texttt{\{}\carg{\l_tmpa_tl}\texttt{\}}}
+      {p} {\texttt{(}\carg{\l_tmpa_tl}\texttt{)}}
+      {M} {\texttt{\{}\carg{\texttt{\textbackslash}\l_tmpa_tl}\texttt{\}}}
+      {vo} {\texttt{[\l_tmpa_tl]}}
+      {vm} {\texttt{\{\l_tmpa_tl\}}}
+    }{
+      \msg_error:nnx {lshort} {invalidtype} {\l_tmpb_tl}
+    }
+  }
+}
+
 \NewDocumentCommand{\ci}{smoo}{
   \cih{#2}\texttt{\bs #2}
   \IfBooleanTF {#1} {
-    \seq_set_split:Nnn \l_tmpa_seq {!} {#3}
-    \seq_map_inline:Nn \l_tmpa_seq {
-      \exp_args:Nnx \seq_set_split:Nnn \l_tmpb_seq {\char_generate:nn{58}{12}} {##1}
-      \seq_get_left:NN \l_tmpb_seq \l_tmpa_tl
-      \seq_get_right:NN \l_tmpb_seq \l_tmpb_tl
-
-      \exp_args:Nx \str_case:nnF {\l_tmpb_tl} {
-        {o} {\texttt{[}\carg{\l_tmpa_tl}\texttt{]}}
-        {m} {\texttt{\{}\carg{\l_tmpa_tl}\texttt{\}}}
-        {M} {\texttt{\{}\carg{\texttt{\textbackslash}\l_tmpa_tl}\texttt{\}}}
-        {vo} {\texttt{[\l_tmpa_tl]}}
-        {vm} {\texttt{\{\l_tmpa_tl\}}}
-      }{
-        \msg_error:nnx {lshort} {invalidtype} {\l_tmpb_tl}
-      }
-    }
+    \lshort@arglist{#3}
   }{
     \IfValueT {#3} {
       \IfValueTF {#4} {
@@ -208,10 +213,29 @@
 % Active characters
 \NewDocumentCommand{\ai}{m}{\index{#1@\texttt{#1{}}}\texttt{#1{}}}
 % Index entry for an environment
-\newcommand{\ei}[1]{%
-\index{environments!\texttt{#1}}%
-\index{#1@\texttt{#1}}%
-\texttt{#1}}
+\ExplSyntaxOn
+\NewDocumentCommand{\eih}{m} {
+  \index{environments!#1@\texttt{#1}}
+  \index{#1@\texttt{#1}}
+}
+\NewDocumentCommand{\ei}{smo} {
+  \eih{#2}
+  \IfValueTF {#3} {
+    \textbackslash{}begin\{\texttt{#2}\}
+    \IfValueT {#3} {
+      \lshort@arglist{#3}
+    }
+    \\
+    \scriptsize
+    \textbackslash{}end\{\texttt{#2}\}
+  } {
+    \texttt{#2}
+    \IfValueT {#3} {
+      \lshort@arglist{#3}
+    }
+  }
+}
+\ExplSyntaxOff
 % Indexentry for a word (Word inserted into the text)
 \newcommand{\wi}[1]{\index{#1}#1}
 %
