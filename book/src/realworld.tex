@@ -1,3 +1,4 @@
+% !TEX root = ./lshort.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Contents: Typesetting Part of LaTeX2e Introduction
 % $Id$
@@ -446,153 +447,246 @@ other than English, there are three areas where \LaTeX{} has to be
 configured appropriately:
 
 \begin{enumerate}
-\item All automatically generated text strings\footnote{Table of
-    Contents, List of Figures, \ldots} have to be adapted to the new
-  language.
+\item All automatically generated text strings (\enquote{Table of Contents},
+    \enquote{List of Figures}, \ldots) have to be adapted to the new language.
 \item \LaTeX{} needs to know the hyphenation rules for the current language.
 \item Language specific typographic rules. In French for example, there is a
   mandatory space before each colon character (:).
 \end{enumerate}
 
-Also entering text in your language of choice might be a bit cumbersome using all the
-commands from figure~\ref{accents}. To overcome this problem, until recently you had to delve
-deep into the abyss of language specific encodings both for input as well as fonts. These days,
-with modern \TeX{} engines speaking UTF-8 natively, these problems have relaxed considerably.
+Also entering text in your language of choice might be a bit cumbersome using
+all the commands from figure~\ref{accents}. To overcome this problem, until
+recently you had to delve deep into the abyss of language specific encodings
+both for input as well as fonts. These days, with modern \TeX{} engines
+speaking UTF-8 natively, these problems have relaxed considerably.
 
-The package \pai{polyglossia}\cite{polyglossia} is a replacement for
-venerable \pai{babel} package. It takes care of the hyphenation patterns and automatically
-generated text strings in your documents.
-
-The package \pai{fontspec}\cite{fontspec} handles font loading for
-\hologo{XeLaTeX} and \hologo{LuaTeX}. The default font is Latin Modern
-Roman.
+The package \pai*{polyglossia} is a replacement for the venerable \pai{babel}
+package. It takes care of the hyphenation patterns and automatically generated
+text strings in your documents. Polyglossia works only with \hologo{XeTeX}
+and \hologo{LuaTeX} engines.
 
 \subsection{Polyglossia Usage}
 
-Depending on the \TeX{} engine you use slightly different commands are
-necessary in the preamble of your document to properly enable multilingual
-processing. Figure~\ref{allinone} on page~\pageref{allinone} shows a sample preamble that takes care of all the necessary settings.
+So far there has been no advantage to using a Unicode \hologo{TeX} engine. This
+changes when we leave English and move to a language that uses non-Latin
+alphabet like Greek or Russian. With a Unicode based system, you can
+simply\footnote{For small values of simple.} enter the native characters in
+your editor and \hologo{TeX} will understand them.
 
-\begin{figure}[!bp]
-\begin{lined}{10cm}
-\begin{verbatim}
-\usepackage{iftex}
-\ifXeTeX
-   \usepackage{fontspec}
-\else
-   \usepackage{luatextra}
-\fi
-\defaultfontfeatures{Ligatures=TeX}
-\usepackage{polyglossia}
-\end{verbatim}
-\end{lined}
-\caption[All in one preamble]{All in one preamble that takes care of \hologo{LuaLaTeX} and \hologo{XeLaTeX}} \label{allinone}
-\end{figure}
-
-So far there has been no advantage to using a Unicode \hologo{TeX} engine.
-This changes when we leave the Latin script and move to a more interesting
-language like Greek or Russian.  With a Unicode based system, you can
-simply\footnote{For small values of simple.} enter the native characters in your
-editor and \hologo{TeX} will understand them.
-
-Writing in different languages is easy, just specify the languages in the
-preamble. This example uses the \pai{csquotes} package which generates
-the right kind of quotes according to the language you are writing in. Note
-that it needs to be loaded \emph{before} loading the language support.
-
+Writing in different languages is easy, just load the \pai{polyglossia} package
+and specify the languages in the preamble using
 \begin{lscommand}
-\verb|\usepackage[autostyle=true]{csquotes}|\\
-\verb|\setdefaultlanguage{english}|\\
-\verb|\setotherlanguage{german}|
+  \ci{setdefaultlanguage}[options][language] \\
+  \ci{setotherlanguage}[options][language]
 \end{lscommand}
-%
-To write a paragraph in German, you can use the German environment:
+where \carg{language} is either the name of the language to use such as
+\cargv{gaelic} or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
+\cargv{ru-luna1918}. When specifying language via its name you may pass
+additional \carg{options} to decide between its variants for example
+\cargv{variant=british} or \cargv{script=Arabic}. Note that when loading a
+language, either via tag or with options, all variants are loaded and the
+tag\slash options specified are just the defaults. For a full list of supported
+languages and variants see the \pai{polyglossia} package documentation.
+
+To write a paragraph in German, you can use the \ei{german} environment:
 
 \begin{example}
-English text.
+%!showbegin !hide
+% In the preamble
+\setdefaultlanguage{english}
+\setotherlanguage{german}
+% ...
+%!showend !hide
+\year=3022 \month=1 \day=19 %!hide
+Today is not \today.
+
 \begin{german}
-Deutscher \enquote{Text}.
+  Heute ist nicht \today.
 \end{german}
-More English \enquote{text}.
 \end{example}
 
-If you just need a word or a short phrase in a foreign language you can use the
-\verb|\text|\emph{language} command:
+You may also use \ei{lang} environment that accepts the \carg{language} as its
+first argument. This is especially useful if you prefer to specify the language
+via BCP-47 tag since environment names cannot contain the
+\enquote*{\texttt{-}} symbol.
 
 \begin{example}
-Did you know that
-\textgerman{Gesundheit} is
-actually a German word.
+\year=3022 \month=1 \day=19 %!hide
+\begin{lang}{de-AT}
+  Heute ist nicht \today.
+\end{lang}
 \end{example}
 
-This may look unnecessary since the only advantage is a correct hyphenation,
-but when the second language is a little bit more exotic it will be worth
-the effort.
+You can also pass \carg{options} as an optional argument to the environment.
 
-Sometimes the font used in the main document does not contain glyphs that
-are required in the second language. Latin Modern for example does not contain
-Cyrillic letters. The solution is to define a font that will be used for
-that language. Whenever a new language is activated, \pai{polyglossia} will
-first check whether a font has been defined for that language. If you are happy with the computer modern font, you may want to try the \enquote{Computer Modern Unicode} font by adding the following commands to the preamble of your document.
+\begin{example}
+\year=3023 \month=8 \day=17 %!hide
+\begin{german}[script=blackletter]
+  Heute ist nicht \today.
+\end{german}
+\end{example}
 
-\medskip\noindent For \hologo{LuaLaTeX} it is pretty simple
+If you just need a word or a short phrase in a foreign language you can use
+either the
+\begin{lscommand}
+  \ci*{text\textit{language}}[options:o ! text:m]
+\end{lscommand}
+or the
+\begin{lscommand}
+  \ci*{textlang}[options:o ! language:m ! text:m]
+\end{lscommand}
+command:
+\begin{example}[examplewidth=0.33\linewidth]
+In Austria they write
+\textlang[variant=austrian]{de}{Jänner}
+instead of \textgerman{Januar}.
+And in the olden days \textlang{de}{August}
+was written
+\textgerman[script=blackletter]{Auguſt}.
+\end{example}
+
+For languages that are not very different from English, the results are not
+very impressive. We get correct hyphenation and some context aware commands
+such as \ci{today} adjust their output. However the further we stray from
+English, the more useful will this commands become.
+
+Sometimes the font used in the main document does not contain glyphs that are
+required in the second language. The default Latin Modern font for example does not
+contain Cyrillic letters. The solution is to define a custom font that will be used
+for that language. 
+
+To set the fonts use the command
+\begin{lscommand}
+  \ci*{newfontfamily}[familyname:M ! options:o ! font:m]
+\end{lscommand}
+from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
+by \pai{polyglossia} so you do not need to add it to a the preamble of your
+document.} which is described in much more detail in
+section~\ref{sec:fontspec}.
+
+When changing the text language, \pai{polyglossia} checks whether a font family named
+\cargv{\textit{language}font} exists and changes to it if it's available.
+
+If you are happy with the default Latin Modern font, you may want to try the \enquote{CMU} font
+which contains some additional Cyrillic or Greek glyphs
+while looking nearly identical to Latin Modern.\footnote{Both fonts are
+actually based on the Computer Modern font, designed by Donald Knuth for
+the first \TeX{} versions.}
+
+If you have the CMU font installed in your system (unlikely) or you are using 
+\hologo{LuaLaTeX} then you can simply write
+\begin{verbatim}
+\newfontfamily\greekfont{CMU Serif}
+\end{verbatim}
+
+If you are using \hologo{XeLaTeX} and don't have the font installed then you
+need to specify the font by its file name.
+\begin{verbatim}
+\newfontfamily\greekfont[
+  Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+  BoldFont=*bx, BoldItalicFont=*bi,
+]{cmun}
+\end{verbatim}
+
+With the appropriate fonts loaded, you can now write:
+{
+  \setmonofont{cmuntt.otf}
+  \begin{example}[examplewidth=0.4\linewidth]
+%!showbegin !hide
+% In the preamble (LuaLaTeX)
+\setotherlanguage{greek}
+\newfontfamily\greekfont{CMU Serif}
+\setotherlanguage{russian}
+\newfontfamily\russianfont{CMU Serif}
+% ...
+%!showend !hide
+
+\textrussian{Правда} is
+a Russian newspaper.
+\textlang{greek}{ἀλήθεια} is truth
+or disclosure in philosophy.
+  \end{example}
+}
+
+\LaTeX{} actually uses three different fonts for typesetting documents. The
+above commands only set the default serif font used for the body text. The
+other fonts are \textsf{sans serif} (used in presentations slides) and
+\texttt{monospace} (used when displaying code). In order to adjust the fonts used for
+a particular language, define \cargv{\textit{language}fontsf} family for sans serif and
+\cargv{\textit{language}fonttt} for monospace. For example, to define CMU as a
+font for Greek in all three fonts when using \hologo{LuaLaTeX} you would write
+\begin{verbatim}
+\newfontfamily\greekfont{CMU Serif}
+\newfontfamily\greekfontsf{CMU Sans Serif}
+\newfontfamily\greekfonttt{CMU Typewriter Text}
+\end{verbatim}
+\pagebreak[3]
+or in \hologo{XeLaTeX}
+\begin{verbatim}
+\newfontfamily\greekfont[
+  Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+  BoldFont=*bx, BoldItalicFont=*bi,
+]{cmun}
+\newfontfamily\greekfontsf[
+  Extension=.otf, UprightFont=*ss, ItalicFont=*si,
+  BoldFont=*sx, BoldItalicFont=*so, 
+]{cmun}
+\newfontfamily\greekfonttt[
+  Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
+  BoldFont=*tb, BoldItalicFont=*tx, 
+]{cmun}
+\end{verbatim}
+
+The commands above redefine the fonts for languages used as \enquote*{other} in
+polyglossia. If you want to influence the font of the main document language
+use the \ci{setmainfont}, \ci{setsansfont} and \ci{setmonofont} that work the
+same way but without the \carg{familyname} argument.
 \begin{verbatim}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
 \end{verbatim}
-\noindent For \hologo{XeLaTeX} you have to be a bit more explicit:
-\begin{verbatim}
-\setmainfont{cmun}[
-   Extension=.otf,UprightFont=*rm,ItalicFont=*ti,
-   BoldFont=*bx,BoldItalicFont=*bi,
- ]
- \setsansfont{cmun}[
-   Extension=.otf,UprightFont=*ss,ItalicFont=*si,
-   BoldFont=*sx,BoldItalicFont=*so,
- ]
- \setmonofont{cmun}[
-   Extension=.otf,UprightFont=*btl,ItalicFont=*bto,
-   BoldFont=*tb,BoldItalicFont=*tx,
- ]
-\end{verbatim}
 
-With the appropriate fonts loaded, you can now write:
-
-\begin{example}
-\textrussian{Правда} is
-a russian newspaper.
-\textgreek{ἀλήθεια} is truth
-or disclosure in philosophy
-\end{example}
-
-The package \pai{xgreek}\index{Greek}\cite{xgreek} offers support for
-writing either ancient or modern (monotonic or polytonic) greek.
+If you want to learn even more about fonts, have a look at
+section~\ref{sec:fontspec}.
 
 \subsubsection{Right to Left (RTL) languages}
 
-Some languages are written left to right, others are written right to
-left (RTL). \pai{polyglossia} needs the \pai{bidi}\cite{bidi}
-package\footnote{\texttt{bidi} does not support \hologo{LuaTeX}.} in order
-to support RTL languages. The \pai{bidi} package should be the last package
-you load, even after \pai{hyperref} which is usually the last package.
-(Since \pai{polyglossia} loads \pai{bidi} this means that \pai{polyglossia}
-should be the last package loaded.)
+Some languages are written left to right, others are written right to left
+(RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
+supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
+\pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
+much more limited than \pai{bidi}.} in order to support RTL languages. The
+\pai{bidi} package should be the last package you load, even after
+\pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
+loads \pai{bidi} this means that \pai{polyglossia} should be the last package
+loaded.)
 
-The package \pai{xepersian}\index{Persian}\cite{xepersian} offers support
-for the Persian language. It supplies Persian \LaTeX-commands that allows
-you to enter commands like \verb|\section| in Persian, which makes this
-really attractive to native speakers. \pai{xepersian} is the only package
-that supports kashida\index{kashida} with \hologo{XeLaTeX}. A package for
-Syriac which uses a similar algorithm is under development.
+\begin{example}[standalone, template=empty, paperheight=4cm, nocache]
+\documentclass{article}
 
-The IranNastaliq font provided by the SCICT\footnote{Supreme Council of
-Information and Communication Technology} is available at their website
-\url{http://www.scict.ir/Portal/Home/Default.aspx}.
+\usepackage{polyglossia}
+\setdefaultlanguage{arabic}
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}%!hide 
 
-The \pai{arabxetex}\cite{arabxetex} package supports several languages with
+\begin{document}
+This text will be typeset right to left.
+\end{document}
+\end{example}
+
+The package \pai*{xepersian}\footnote{Works only with
+\hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
+supplies Persian \LaTeX-commands that allows you to enter commands like
+\ci{section} in Persian, which makes this really attractive to native speakers.
+\pai{xepersian} is the only package that supports kashida\index{kashida} with
+\hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
+development.
+
+To typeset Arabic you may use the IranNastaliq font~\cite{font:IranNastaliq}
+developed by the SCICT and updated by Mohammad Saleh Souzanchi.
+
+The \pai*{arabxetex} package supports several languages with
 an Arabic script:
-
 \begin{itemize}
 \item arab (Arabic)\index{Arabic}
 \item persian\index{Persian}
@@ -607,32 +701,19 @@ an Arabic script:
 \end{itemize}
 
 It offers a font mapping that enables \hologo{XeLaTeX} to process input
-using the Arab\TeX\ ASCII transcription.
+using the Arab\TeX{} ASCII transcription.
 
-Fonts that support several Arabic laguages are offered by the
-IRMUG\footnote{Iranian Mac User Group} at
-\url{http://wiki.irmug.org/index.php/X_Series_2}.
-
-There is no package available for Hebrew\index{Hebrew} because none is
-needed. The Hebrew support in \pai{polyglossia} should be sufficient. But
-you do need a suitable font with real Unicode Hebrew. SBL Hebrew is free for
-non-commercial use and available at
-\url{http://www.sbl-site.org/educational/biblicalfonts.aspx}. Another font
-available under the Open Font License is Ezra SIL, available at
-\url{http://www.sil.org/computing/catalog/show_software.asp?id=76}.
-
-Remember to select the correct script:
-
-\begin{lscommand}
-\verb|\newfontfamily\hebrewfont[Script=Hebrew]{SBL Hebrew}| \\
-\verb|\newfontfamily\hebrewfont[Script=Hebrew]{Ezra SIL}|
-\end{lscommand}
-
+There is no package available for Hebrew\index{Hebrew} because none is needed.
+The Hebrew support in \pai{polyglossia} should be sufficient. But you do need a
+suitable font with real Unicode Hebrew. SBL Hebrew~\cite{font:sblhebrew} is a
+non-free font available for non-commercial use. Another font, available under
+the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
 
 \subsubsection{Chinese, Japanese and Korean (CJK)}
 \index{Chinese}\index{Japanese}\index{Korean}
 
-The package \pai{xeCJK}\cite{xecjk} takes care of font selection and
+The package \pai*{xeCJK}\footnote{Works only with
+\hologo{XeLaTeX}.} takes care of font selection and
 punctuation for these languages.
 
 \section{The Space Between Words}
@@ -1228,7 +1309,7 @@ most important keys.
 
 The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
 \begin{figure}
-\begin{lined}{9cm}
+\begin{lined}{11cm}
 \begin{verbatim}
 \includegraphics[angle=90,width=\textwidth]{test.png}
 \end{verbatim}
@@ -1376,7 +1457,7 @@ you are going to paste into the finished document.
 \begin{verbatim}
 Figure~\ref{white} is an example of Pop-Art.
 \begin{figure}[!hbtp]
-\includegraphics[angle=90,width=\textwidth]{white-box.pdf}
+\includegraphics[angle=90,width=\textwidth]{wbox.pdf}
 \caption{White Box by Peter Markus Paulian.\label{white}}
 \end{figure}
 \end{verbatim}

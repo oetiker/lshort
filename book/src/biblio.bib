@@ -133,54 +133,11 @@
   title        = {TikZ\&PGF Manual}
 }
 
-@misc{polyglossia,
-  author       = {Fran\c{c}ois Charette},
-  howpublished = {Comes with the \TeX Live distribution as \texttt{polyglossia.pdf}.
-                  (Type \texttt{texdoc polyglossia} on the command line.)},
-  title        = {Polyglossia: A Babel Replacement for \hologo{XeLaTeX}}
-}
-
-@misc{arabxetex,
-  author       = {Fran\c{c}ois Charette},
-  howpublished = {Comes with the \TeX Live distribution as \texttt{arabxetex.pdf}.
-                  (Type \texttt{texdoc arabxetex} on the command line.)},
-  title        = {An Arab\TeX-like interface for typesetting languages
-                  in Arabic script with \hologo{XeLaTeX}}
-}
-
 @misc{fontspec,
   author       = {Will Robertson and Khaled Hosny},
   howpublished = {Comes with the \TeX Live distribution as
                   \texttt{fontspec.pdf}. (Type \texttt{texdoc fontspec} on the command line.)},
   title        = {The \texttt{fontspec} package}
-}
-
-@misc{xgreek,
-  author       = {Apostolos Syropoulos},
-  howpublished = {Comes with the \TeX Live distribution as
-                  \texttt{xgreek.pdf}. (Type \texttt{texdoc xgreek} on the command line.)},
-  title        = {The \texttt{xgreek} package}
-}
-
-@misc{bidi,
-  author       = {Vafa Khalighi},
-  howpublished = {Comes with the \TeX Live distribution as
-                  \texttt{bidi.pdf}. (Type \texttt{texdoc bidi} on the command line.)},
-  title        = {The \texttt{bidi} package}
-}
-
-@misc{xepersian,
-  author       = {Vafa Khalighi},
-  howpublished = {Comes with the \TeX Live distribution as
-                  \texttt{xepersian-doc.pdf}. (Type \texttt{texdoc xepersian} on the command line.)},
-  title        = {The \texttt{XePersian} package}
-}
-
-@misc{xecjk,
-  author       = {Wenchang Sun},
-  howpublished = {Comes with the \TeX Live distribution as
-                  \texttt{xeCJK.pdf}. (Type \texttt{texdoc xecjk} on the command line.)},
-  title        = {The \texttt{xeCJK} package}
 }
 
 @software{texmaker,
@@ -383,4 +340,83 @@
   url     = {https://www.bipm.org/en/measurement-units/},
   date    = {2019-05-20},
   edition = {5}
+}
+
+@software{pack:polyglossia,
+  title   = {polyglossia -- An alternative to babel for \hologo{XeLaTeX}
+             and \hologo{LuaLaTeX}},
+  author  = {François Charette and Arthur Reutenauer and Elie Roux and
+             Jürgen Spitzmüller and Bastien Roucariès},
+  version = {1.56},
+  date    = {2022-04-20},
+  url     = {https://www.ctan.org/pkg/polyglossia},
+  license = {LPPL-1.3c, MIT, CC0-1.0}
+}
+
+@software{pack:bidi,
+  title   = {bidi -- Bidirectional typesetting in plain \TeX{} and \LaTeX, using \hologo{XeTeX}},
+  author  = {Vafa Khalighi and {bidi-tex GitHub Organisation}},
+  version = {36.7},
+  date    = {2022-02-18},
+  url     = {https://www.ctan.org/pkg/bidi},
+  license = {LPPL-1.3c}
+}
+
+@software{pack:luabidi,
+  title   = {luabidi -- Bidi functions for \hologo{LuaTeX}},
+  author  = {Vafa Khalighi and Arthur Reutenauer and Jürgen Spitzmüller},
+  version = {0.5},
+  date    = {2019-10-27},
+  url     = {https://www.ctan.org/pkg/luabidi},
+  license = {LPPL-1.3c, MIT}
+}
+
+@software{pack:xepersian,
+  title   = {XePersian -- Persian for \LaTeX, using \hologo{XeTeX}},
+  author  = {Vafa Khalighi and {bidi-tex GitHub Organisation}},
+  version = {23.7},
+  date    = {2022-02-20},
+  url     = {https://www.ctan.org/pkg/xepersian},
+  license = {LPPL-1.3c}
+}
+
+@misc{font:IranNastaliq,
+  author = {Supreme Council of Information and Communication Technology and Mohammad Saleh Souzanchi},
+  url    = {https://github.com/font-store/font-IranNastaliq},
+  title  = {Iran Nastaliq font},
+  year   = {2020}
+}
+
+@software{pack:arabxetex,
+  title   = {arabxetex -- An Arab\TeX-like interface for \hologo{XeTeX}},
+  author  = {François Charette},
+  version = {1.2.1},
+  date    = {2015-09-04},
+  url     = {https://www.ctan.org/pkg/arabxetex},
+  license = {LPPL}
+}
+
+@misc{font:ezrasil,
+  title   = {Ezra SIL},
+  author  = {SIL Language Technology},
+  version = {2.51},
+  date    = {2007-10-04},
+  url     = {https://software.sil.org/ezra/},
+  license = {OFL-1.1}
+}
+
+@misc{font:sblhebrew,
+  title   = {SBL Hebrew Font},
+  author  = {The Society of Biblical Literature},
+  url     = {https://www.sbl-site.org/educational/biblicalfonts.aspx},
+  license = {proprietary}
+}
+
+@software{pack:xeCJK,
+  title   = {xecjk -- Support for CJK documents in XeLaTeX},
+  author  = {Wenchang Sun and Leo Liu and Qing Lee},
+  version = {3.8.8},
+  date    = {2021-12-14},
+  url     = {https://github.com/CTeX-org/ctex-kit},
+  license = {LPPL-1.3c}
 }

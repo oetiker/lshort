@@ -10,6 +10,8 @@ UNRELEASED
 * use the new syntax for defining commands and environments in customizig LaTeX
   chapter / marcin-serwin
 * add siunitx tutorial / marcin-serwin
+* change document font back to Latin Modern / marcin-serwin
+* update polyglossia tutorial / marcin-serwin
 
 6.4 2021.03.09
 --------------
