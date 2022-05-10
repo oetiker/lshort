@@ -1327,7 +1327,7 @@ The arguments are
     \cargv{=} for the same width as the column (only makes sense if the column
     width was specified, for example via \cargv{p\{3cm\}}).
   \item[\carg{vmove}] allows adjusting the position of the text if it is too
-    low or too high. By default no adjusting is done.
+    low or too tall. By default no adjusting is done.
   \item[\carg{text}] is the text to be put in the cell.
 \end{description}
 Unlike with \ci{multicolumn} you still have to write all the cells in remaining
@@ -1351,7 +1351,187 @@ rows, but they should be empty.
 Do not overuse the \ci{multirow} when indicating values common to more than one
 row. Usually repeating the values in question makes it more readable.
 
+When typesetting numerical data in the table, you may want to align it by
+decimal point. A way to do this (and more) is described in
+section~\ref{sec:sitables}.
 
+\subsubsection{Long tables}
+
+Material typeset with the tabular environment always stays together on one
+page. This poses a problem for especially long tables. If your table is not
+very wide you may get away with it by typesetting its rows side by side. You
+should then put a bigger space between those to indicate that these are
+separate either by using \cargv{@\{...\}} or by putting empty column between
+those.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{@{}cllcl@{}}
+  \toprule
+  Digit & Word  && Digit & Word  \\
+  \midrule
+  0     & Zero  && 5     & Five  \\
+  1     & One   && 6     & Six   \\
+  2     & Two   && 7     & Seven \\
+  3     & Trhee && 8     & Eight \\
+  4     & Four  && 9     & Nine  \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+This approach will obviously not work for \emph{really} long tables. If you
+must tackle one of those, use the \pai{longtable} package. It defines a new
+\ei{longtable} environment that works similarly to \ei{tabular} environment,
+but allows pagebreaks inside.
+
+\begin{lscommand}
+  \ei*{longtable}[align:o ! colspec:m]
+\end{lscommand}
+In contrast to \ei{tabular}, the \ei{longtable} always starts a new paragraph
+and is centered by default. Thus the optional argument \carg{align} specifies
+whether the table should be centered, on the left or on the right. Use
+\cargv{c}, \cargv{l} and \cargv{r} to specify this. The \carg{colspec} argument
+is the same as in the \ei{tabular} environment.
+
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \toprule
+  Number & Word   \\
+  \midrule
+  0      & Zero   \\
+  1      & One    \\
+  2      & Two    \\
+  % ...
+%!hidebegin
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten       \\
+  11     & Eleven    \\
+  12     & Twelve    \\
+  13     & Thirteen  \\
+  14     & Fourteen  \\
+  15     & Fifteen   \\
+  16     & Sixteen   \\
+  17     & Seventeen \\
+  18     & Eighteen  \\
+  19     & Nineteen  \\
+%!hideend
+  20     & Twenty \\
+  \bottomrule
+\end{longtable}
+\end{document} %!hide
+\end{example}
+
+Note that the pagebreaks are always placed between rows. If you have some tall
+row thanks to \cargv{p\{...\}} specification, it will not broken. 
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{
+  cp{1cm}
+}
+  \toprule
+  Number & Words  \\
+  \midrule
+  0      & Zero   \\
+  1      & Multi
+           paragraph
+           text.
+
+           It makes
+           the table
+           cell very
+           tall.  \\
+  2      & Two    \\
+  \bottomrule
+\end{longtable}
+\end{document} %!hide
+\end{example}
+
+The \ei{longtable} environment defines also some additional commands that end
+table rows. One of them is \ci{\textbackslash*} which, similarly to its
+paragraph use, prohibits pagebreak after the row. Another useful commands are
+\ci{endhead}, \ci{endfirsthead}, \ci{endfoot} and \ci{endlastfoot}. If you end
+the row with them they will set the preceding rows as headers and footers of
+the table. The \ci{endhead} and \ci{endfoot} put the headers and footers on
+every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
+and last page. An example of using these commands is presented in
+figure~\ref{ex:longtable} on page~\pageref{ex:longtable}.
+\begin{figure}[htp]
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm,nocache] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \toprule
+  \multicolumn{2}{c}{
+    V.~Important Table} \\
+  Number & Word         \\
+  \midrule \endfirsthead
+
+  \toprule
+  \multicolumn{2}{c}{
+    VIT (continued)} \\
+  Number & Word      \\
+  \midrule \endhead
+
+  \midrule
+  \multicolumn{2}{c}{
+    Not the end} \\
+  \bottomrule \endfoot
+
+  \midrule
+  \multicolumn{2}{c}{
+    The end of VIT} \\
+  \bottomrule \endlastfoot
+
+  0      & Zero   \\
+  1      & One    \\
+  % ...
+%!hidebegin
+  2      & Two     \\
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten    \\
+  11     & Eleven \\
+  %!hideend
+  12     & Twelve \\
+\end{longtable}
+\end{document} %!hide 
+\end{example}
+\caption{An example of \ei{longtable} with running headers and footers.} \label{ex:longtable}
+\end{figure}
+
+Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
+the \ei{longtable} environemnt, the table may get very complicated and \LaTeX{}
+will then need several passes to properly calculate the column widths.
 
 The \ei{tabular} environment can be used to typeset beautiful \wi{table}s.
 \LaTeX{} determines the width of the columns automatically.
@@ -1425,9 +1605,6 @@ leading space left and right\\
 %
 % This part by Mike Ressler
 %
-
-When typesetting numerical data in the table, you may want to align it by
-decimal point. A way to do this will be described in section~\ref{sec:sitables}.
 
 \begin{example}
 \begin{tabular}{|c|c|}
@@ -1714,6 +1891,63 @@ Under certain circumstances it might be necessary to use the
 \noindent command. It orders \LaTeX{} to immediately place all
 floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
+
+\subsection{The \ei{longtable} environment}
+
+Floating bodies occupy only a single page, thus putting \ei{longtable} into
+them does not make sense. Still you may want to have the \ei{longtable} listed
+in the list of tables with some caption. The \pai{longtable} package defines
+its own \ci{caption} command that you may use inside the environment. Its use
+is similar to the standard \ci{caption} command except that they are treated as
+rows. If you pass empty optional argument to the \ci{caption} command it will
+typeset normally but it won't be put in the list of tables, which is useful if
+you want to have a running caption.
+
+
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.1cm,nocache] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \caption{Numbers} \\
+  \toprule
+  Number & Word         \\
+  \midrule \endfirsthead
+
+  \caption[]{(continued)} \\
+  \toprule
+  Number & Word      \\
+  \midrule \endhead
+
+  \bottomrule \endfoot
+  \bottomrule \endlastfoot
+
+  0      & Zero   \\
+  1      & One    \\
+  % ...
+%!hidebegin
+  2      & Two     \\
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten    \\
+  11     & Eleven \\
+  %!hideend
+  12     & Twelve \\
+\end{longtable}
+\end{document} %!hide 
+\end{example}
+
 
 % Local Variables:
 % TeX-master: "lshort2e"
