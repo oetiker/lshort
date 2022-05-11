@@ -117,20 +117,20 @@ for more information.
 In special cases it might be necessary to order \LaTeX{} to break a
 line:
 \begin{lscommand}
-\ci{\bs} or \ci{newline}
+\ci*{\bs}[length:o] or \ci{newline}
 \end{lscommand}
-\noindent starts a new line without starting a new paragraph.
+starts a new line without starting a new paragraph. The optional \carg{length}
+argument adds additional space after the line. 
 
 \begin{lscommand}
-\ci{\bs*}
+\ci*{\bs*}[length:o]
 \end{lscommand}
-\noindent additionally prohibits a page break after the forced
-line break.
+additionally prohibits a page break after the forced line break.
 
 \begin{lscommand}
 \ci{newpage}
 \end{lscommand}
-\noindent starts a new page.
+starts a new page.
 
 \begin{lscommand}
 \ci{linebreak}\verb|[|\emph{n}\verb|]|,
@@ -138,7 +138,8 @@ line break.
 \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
 \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
 \end{lscommand}
-\noindent suggest places where a break may (or may not) happen. They enable the author to influence their
+suggest places where a break may (or may not) happen.
+They enable the author to influence their
 actions with the optional argument \emph{n}, which can be set to a number
 between zero and four. By setting \emph{n} to a value below 4, you leave
 \LaTeX{} the option of ignoring your command if the result would look very
@@ -148,7 +149,17 @@ right border of the line and the total length of the page, as described in
 the next section; this can lead to unpleasant gaps in your text.
 If you really want to start a ``new line'' or a ``new page'', then use the
 corresponding command. Guess their names!
-
+\begin{example}[examplewidth=0.4\linewidth]
+  Lorem ipsum dolor sit amet,\\
+  consectetur adipiscing elit,\\[1cm]
+  sed do eiusmod tempor\linebreak
+  incididunt ut labore\linebreak[1]
+  et dolore magna aliqua. Ut enim
+  ad minim veniam, quis \linebreak[3]
+  nostrud exercitation ullamco laboris
+  nisi ut aliquip\linebreak
+   ex ea commodo consequat. 
+\end{example}
 
 \LaTeX{} always tries to produce the best line breaks possible. If it
 cannot find a way to break the lines in a manner that meets its high
@@ -662,7 +673,7 @@ much more limited than \pai{bidi}.} in order to support RTL languages. The
 loads \pai{bidi} this means that \pai{polyglossia} should be the last package
 loaded.)
 
-\begin{example}[standalone, template=empty, paperheight=4cm, nocache]
+\begin{example}[standalone, template=empty, paperheight=4cm]
 \documentclass{article}
 
 \usepackage{polyglossia}
@@ -1137,18 +1148,18 @@ The environment \ei{tabular} has the following form
 \end{lscommand} %
 The \carg{colspec} argument, which stands for columns specifiers, defines the
 format of the table. Use an \cargv{l} for a column of left-aligned text,
-\cargv{r} for right-aligned text, and \cargv{c} for centered text. Inside the
+\cargv{r} for right-aligned text, and \cargv{c} for centred text. Inside the
 environment use \ai{\&} to go to next cell within the row and
 \ci{\textbackslash} to go to the next row.
 \begin{example}
 \begin{tabular}{lcr}
-  left & center & right \\
+  left & centre & right \\
   1    & 2      & 3     \\
 \end{tabular}
 \end{example}
-Note that the text inside the cells will not be wrapped. If you the column to
-contain justified text with linebreaks use the \cargv{p\{\carg{dim}\}} column
-specifier, where \carg{dim} is the width of the column.
+Note that the text inside the cells will not be wrapped. If you want the column
+to contain justified text with linebreaks use the \cargv{p\{\carg{width}\}}
+column specifier, where \carg{width} is the width of the column.
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{lrp{3cm}}
   left & right & very long paragraph
@@ -1161,7 +1172,7 @@ specifier, where \carg{dim} is the width of the column.
 
 The optional \carg{pos} argument specifies the vertical position of the table
 with respect to baseline of the text. There are three possible alignments:
-\cargv{c} center the table (the default), \cargv{t} matches the baseline of the
+\cargv{c} centre the table (the default), \cargv{t} matches the baseline of the
 top row and \cargv{b} matches the baseline of the bottom row.
 \begin{example}[examplewidth=0.55\linewidth]
 text
@@ -1194,7 +1205,7 @@ usually their defaults are sufficient.
   Alignment & Letter & Niceness  \\
   \midrule
   Left      & l      & Very nice \\
-  Cener     & c      & Very nice \\
+  Centre     & c      & Very nice \\
   Right     & r      & Very nice \\
   \bottomrule
 \end{tabular}
@@ -1203,7 +1214,7 @@ usually their defaults are sufficient.
 With these commands you are already able to produce simple, yet nicely looking
 tables. At this point you may be thinking that this table still needs vertical
 lines between the columns but it is not the case. In fact the first rule of
-producing professionally looking tables is that you must \emph{not} use
+producing professionally looking tables is that you \emph{must not} use
 vertical lines.
 
 The second rule is to never use double lines such as these:
@@ -1221,7 +1232,7 @@ The second rule is to never use double lines such as these:
   \bottomrule[0.1cm]
 \end{tabular}
 \end{example}
-As you can see the lines are already of different weight in order to sifnigy
+As you can see the lines are already of different weight in order to signify
 their meaning. Using more lines than is necessary means cluttering the space
 without adding information. If you stick to these two rules your tables will
 look \emph{much} better.
@@ -1278,7 +1289,7 @@ same as in \ei{tabular}, for the single column the \carg{text} will be put in.
 \end{tabular}
 \end{example}
 
-To achive a horizontal line that spans multiple columns, use the command
+To achieve a horizontal line that spans multiple columns, use the command
 \begin{lscommand}
   \ci*{cmidrule}[dim:o ! trim:p ! a--b:m]
 \end{lscommand}
@@ -1317,7 +1328,7 @@ use package \pai{multirow}. Its main command is a little more complicated
 The arguments are
 \begin{description}
   \item[\carg{vpos}] is the vertical position of the text within the cell.
-    Can be either \cargv{c} for center (the default), \cargv{t} for top or
+    Can be either \cargv{c} for centre (the default), \cargv{t} for top or
     \cargv{b} for bottom.
   \item[\carg{nrows}] is the number of rows for cell to span.
   \item[\carg{bigstruts}] is only useful if used with the \pai{bigstrut}
@@ -1353,7 +1364,8 @@ row. Usually repeating the values in question makes it more readable.
 
 When typesetting numerical data in the table, you may want to align it by
 decimal point. A way to do this (and more) is described in
-section~\ref{sec:sitables}.
+section~\ref{sec:sitables}. The section also contains some guidelines about
+typesetting numerical data in tables.
 
 \subsubsection{Long tables}
 
@@ -1371,7 +1383,7 @@ those.
   0     & Zero  && 5     & Five  \\
   1     & One   && 6     & Six   \\
   2     & Two   && 7     & Seven \\
-  3     & Trhee && 8     & Eight \\
+  3     & Three && 8     & Eight \\
   4     & Four  && 9     & Nine  \\
   \bottomrule
 \end{tabular}
@@ -1386,8 +1398,8 @@ but allows pagebreaks inside.
   \ei*{longtable}[align:o ! colspec:m]
 \end{lscommand}
 In contrast to \ei{tabular}, the \ei{longtable} always starts a new paragraph
-and is centered by default. Thus the optional argument \carg{align} specifies
-whether the table should be centered, on the left or on the right. Use
+and is centred by default. Thus the optional argument \carg{align} specifies
+whether the table should be centred, on the left or on the right. Use
 \cargv{c}, \cargv{l} and \cargv{r} to specify this. The \carg{colspec} argument
 is the same as in the \ei{tabular} environment.
 
@@ -1475,7 +1487,7 @@ every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
 and last page. An example of using these commands is presented in
 figure~\ref{ex:longtable} on page~\pageref{ex:longtable}.
 \begin{figure}[htp]
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm,nocache] 
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm] 
 %!hidebegin
 \documentclass{article}
 
@@ -1530,17 +1542,17 @@ figure~\ref{ex:longtable} on page~\pageref{ex:longtable}.
 \end{figure}
 
 Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
-the \ei{longtable} environemnt, the table may get very complicated and \LaTeX{}
+the \ei{longtable} environment, the table may get very complicated and \LaTeX{}
 will then need several passes to properly calculate the column widths.
 
 \subsubsection{Advanced tables and non-tables}
 
-The \ci{\textbackslash} behaves very similarly to its text version. In the
-text we were able to specify the length of space between the lines. Can the
-same be done within the table? It turns out that it can, but there is one
-caveat. If you use it together with \cargv{p\{...\}} column, the space
-specified will be different depending on column order.
-\begin{example}[standalone, paperheight=2.6cm, nocache]
+In the text we were able to specify the length of space between the lines as an
+optional argument to the \ci{\textbackslash} command. Can the same be done
+within the table? It turns out that it can, but there is one caveat. If you use
+it together with \cargv{p\{...\}} column, the space specified will be different
+depending on column order.
+\begin{example}[standalone, paperheight=2.6cm]
 \noindent %!hide
 \begin{tabular}{lp{1cm}}
   1 & 2\newline x \\[1cm]
@@ -1560,7 +1572,7 @@ to avoid breaking tables that rely on the original behaviour later. The
 
 The \cargv{p\{...\}} specifier allows to insert text with linebreaks into the
 table. The text always starts from the top though, so the \pai{array} package
-defines two additional specifiers \cargv{m\{...\}} for vertically cenetred text
+defines two additional specifiers \cargv{m\{...\}} for vertically centred text
 and \cargv{b\{...\}} for text put vertically at the bottom.
 \begin{example}
 \begin{tabular}{
@@ -1568,7 +1580,7 @@ and \cargv{b\{...\}} for text put vertically at the bottom.
 }
   Cell                 &
   Top matches cell.    &
-  Center matches cell. &
+  Centre matches cell. &
   Bottom matches cell. \\
 \end{tabular}
 \end{example}
@@ -1584,14 +1596,14 @@ can be used to put some code before and after a column.
   l
   >{\begin{em}}l<{\end{em}}
 }
-  normal text & emphasized text \\
-  normal text & emphasized text \\
-  normal text & emphasized text \\
+  normal text & emphasised text \\
+  normal text & emphasised text \\
+  normal text & emphasised text \\
 \end{tabular}
 \end{example}
 
 Some environments change the meaning of the \ci{\textbackslash} command thus
-making it unavailable to go to the next row. In such ocasions you may use the
+making it unavailable to go to the next row. In such occasions you may use the
 \ci{tabularnewline} command.
 \begin{example}
 \begin{tabular}{
@@ -1632,18 +1644,18 @@ it.
 \begin{tabular}{ee}
   This cell will
     be flushed left
-    and emphasized. &
+    and emphasised. &
   This cell will
     be flushed left
-    and emphasized.
+    and emphasised.
   \tabularnewline
 
   This cell will
     be flushed left
-    and emphasized. &
+    and emphasised. &
   This cell will
     be flushed left
-    and emphasized.
+    and emphasised.
   \tabularnewline
 \end{tabular}
 \end{example}
@@ -1692,7 +1704,7 @@ include a picture into your document:
 \item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
 \item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
 prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
-Note that it may be sensible to export EPS eventhough your software can export PDF too, as PDFs often are full page and will
+Note that it may be sensible to export EPS even though your software can export PDF too, as PDFs often are full page and will
 thus get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
 \item Load the \textsf{graphicx} package in the preamble of the input
   file with
@@ -1914,8 +1926,7 @@ rows. If you pass empty optional argument to the \ci{caption} command it will
 typeset normally but it won't be put in the list of tables, which is useful if
 you want to have a running caption.
 
-
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.1cm,nocache] 
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.1cm] 
 %!hidebegin
 \documentclass{article}
 
