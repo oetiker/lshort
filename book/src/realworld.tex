@@ -1533,135 +1533,146 @@ Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
 the \ei{longtable} environemnt, the table may get very complicated and \LaTeX{}
 will then need several passes to properly calculate the column widths.
 
-The \ei{tabular} environment can be used to typeset beautiful \wi{table}s.
-\LaTeX{} determines the width of the columns automatically.
+\subsubsection{Advanced tables and non-tables}
 
-The \emph{table spec} argument of the
+The \ci{\textbackslash} behaves very similarly to its text version. In the
+text we were able to specify the length of space between the lines. Can the
+same be done within the table? It turns out that it can, but there is one
+caveat. If you use it together with \cargv{p\{...\}} column, the space
+specified will be different depending on column order.
+\begin{example}[standalone, paperheight=2.6cm, nocache]
+\noindent %!hide
+\begin{tabular}{lp{1cm}}
+  1 & 2\newline x \\[1cm]
+  3 & 4           \\
+\end{tabular}
+\begin{tabular}{p{1cm}l}
+  2\newline x & 1 \\[1cm]
+  4           & 3 \\
+\end{tabular}
+\end{example}
+This counterintuitive behaviour is caused by the fact that the space to add is
+calculated based on the last column. In order to prevent that simply add
+\verb|\usepackage{array}| to your preamble. Since there are no downsides to
+this, it is recommended to always use this package when starting a new document
+to avoid breaking tables that rely on the original behaviour later. The
+\pai{array} package also defines some additional column specifiers.
+
+The \cargv{p\{...\}} specifier allows to insert text with linebreaks into the
+table. The text always starts from the top though, so the \pai{array} package
+defines two additional specifiers \cargv{m\{...\}} for vertically cenetred text
+and \cargv{b\{...\}} for text put vertically at the bottom.
+\begin{example}
+\begin{tabular}{
+  lp{1.4cm}m{1.4cm}b{1.4cm}
+}
+  Cell                 &
+  Top matches cell.    &
+  Center matches cell. &
+  Bottom matches cell. \\
+\end{tabular}
+\end{example}
+
+When a certain column must be formatted a certain way it is inconvenient to put
+the same commands in every cell. Moreover if you decide that something needs to
+be changed about the formatting, then you would have to edit every cell
+individually. To avoid that, the \pai{array} package defines
+\cargv{>\{\carg{cmds}\}} and \cargv{<\{\carg{cmds}\}} column specifiers which
+can be used to put some code before and after a column.
+\begin{example}
+\begin{tabular}{
+  l
+  >{\begin{em}}l<{\end{em}}
+}
+  normal text & emphasized text \\
+  normal text & emphasized text \\
+  normal text & emphasized text \\
+\end{tabular}
+\end{example}
+
+Some environments change the meaning of the \ci{\textbackslash} command thus
+making it unavailable to go to the next row. In such ocasions you may use the
+\ci{tabularnewline} command.
+\begin{example}
+\begin{tabular}{
+  >{\begin{flushleft}}
+    p{2cm}
+  <{\end{flushleft}}
+  >{\begin{flushright}}
+    p{2cm}
+  <{\end{flushright}}
+}
+  This cell will
+    be flushed left. &
+  This cell will
+    be flushed right.
+  \tabularnewline
+
+  This \\ is newline &
+  Here \\ too
+  \tabularnewline
+\end{tabular}
+\end{example}
+
+While using \cargv{>\{...\}} and \cargv{<\{...\}} comes handy if we only have
+one such column, it quickly becomes inconvenient when many column of the same
+type appear in any tables. In that case it may be desirable to use the command
 \begin{lscommand}
-\verb|\begin{tabular}[|\emph{pos}\verb|]{|\emph{table spec}\verb|}|
+  \ci*{newcolumntype}[newcolspec:m ! definition:m]
 \end{lscommand}
-\noindent 
-
-If the text in a column is too wide for the page, \LaTeX{} won't
-automatically wrap it. Using \cargv{p\{\emph{width}\}} you can define
-a special type of column which will wrap-around the text as in a normal paragraph.
-
-The \emph{pos} argument specifies the vertical position of the table
-relative to the baseline of the surrounding text.  Use one of the
-letters \cargv{t}, \cargv{b} and \cargv{c} to specify table
-alignment at the top, bottom or centre.
-
-Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
-column, \ci{\bs} starts a new line and \ci{hline} inserts a horizontal
-line.  Add partial lines by using \ci{cline}\texttt{\{}$i$\texttt{-}$j$\texttt{\}},
-where $i$ and $j$ are the column numbers the line should extend over.
-
-\index{"|@ \verb."|.}
-
+where \carg{newcolspec} is a single letter used for specification of columns
+and the \carg{definition} is what should be inserted in the table when using
+it.
 \begin{example}
-\begin{tabular}{|r|l|}
-\hline
-7C0 & hexadecimal \\
-3700 & octal \\ \cline{2-2}
-11111000000 & binary \\
-\hline \hline
-1984 & decimal \\
-\hline
+\newcolumntype{e}{
+  >{\begin{em}\begin{flushleft}}
+  p{2.5cm}
+  <{\end{flushleft}\end{em}}
+}
+\begin{tabular}{ee}
+  This cell will
+    be flushed left
+    and emphasized. &
+  This cell will
+    be flushed left
+    and emphasized.
+  \tabularnewline
+
+  This cell will
+    be flushed left
+    and emphasized. &
+  This cell will
+    be flushed left
+    and emphasized.
+  \tabularnewline
 \end{tabular}
 \end{example}
 
+In order to create a tic-tac-toe grid you need to put some vertical and
+horizontal lines of the same width. In order to do so you may use the \cargv{|}
+column specifier for vertical rules and \ci{hline} for horizontal rules.
 \begin{example}
-\begin{tabular}{|p{4.7cm}|}
-\hline
-Welcome to Boxy's paragraph.
-We sincerely hope you'll
-all enjoy the show.\\
-\hline
+\begin{tabular}{c|c|c}
+  O & X & O \\
+  \hline
+  X & X & O \\
+  \hline
+  X & O & X \\
 \end{tabular}
-\end{example}
-
-The column separator can be specified with the \cargv{@\{...\}}
-construct. This command kills the inter-column space and replaces it
-with whatever is between the curly braces. 
-Common application is to suppress leading space in a table with
-\cargv{@\{\}}.
-
-\begin{example}
-\begin{tabular}{@{} l @{}}
-\hline
-no leading space\\
-\hline
+\end{example} 
+In case your grid gets more complicated you may also need the \ci{cline}[a--b]
+command which draws horizontal line that spans only over the specified rows.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{|cccc|}
+  \cline{4-4}
+  a & a & \multicolumn{1}{c|}{a} & b \\
+  \cline{2-3}
+  a & \multicolumn{1}{|c}{b} & b & b \\
+  \cline{2-2}
+  a & a & \multicolumn{1}{|c}{b} & b \\
+  \cline{1-2}
 \end{tabular}
-\end{example}
-
-\begin{example}
-\begin{tabular}{l}
-\hline
-leading space left and right\\
-\hline
-\end{tabular}
-\end{example}
-
-%
-% This part by Mike Ressler
-%
-
-\begin{example}
-\begin{tabular}{|c|c|}
-\hline
-\multicolumn{2}{|c|}{Ene} \\
-\hline
-Mene & Muh! \\
-\hline
-\end{tabular}
-\end{example}
-
-Material typeset with the tabular environment always stays together on one
-page. If you want to typeset long tables, you might want to use the
-\pai{longtable} environments.
-
-Sometimes the default \LaTeX{} tables do feel a bit cramped. So you may want
-to give them a bit more breathing space by setting a higher
-\ci{arraystretch} and \ci{tabcolsep} value.
-
-\begin{example}[examplewidth=0.3\linewidth]
-\begin{tabular}{|l|}
-\hline
-These lines\\\hline
-are tight\\\hline
-\end{tabular}
-
-{\RenewDocumentCommand{\arraystretch}{}{1.5}
-\RenewDocumentCommand{\tabcolsep}{}{0.2cm}
-\begin{tabular}{|l|}
-\hline
-less cramped\\\hline
-table layout\\\hline
-\end{tabular}}
-
-\end{example}
-
-If you just want to grow the height of a single row in your table add an invisible vertical bar\footnote{In professional typesetting,
-this is called a \wi{strut}.}. Use a zero width \ci{rule} to implement this trick.
-
-\begin{example}
-\begin{tabular}{|c|}
-\hline
-\rule{1pt}{4ex}Pitprop \ldots\\
-\hline
-\rule{0pt}{4ex}Strut\\
-\hline
-\end{tabular}
-\end{example}
-
-The \texttt{pt} and \texttt{ex} in the example above are \TeX{} units. Read more
-on units in table \ref{units} on page \pageref{units}.
-
-A number of extra commands, enhancing the tabular environment are available
-in the \pai{booktabs} package. It makes the creation of professional looking
-tables with proper spacing quite a bit simpler.
-
-
+\end{example} 
 
 \section{Including Graphics and Images}\label{eps}
 
