@@ -12,6 +12,7 @@ UNRELEASED
 * add siunitx tutorial / marcin-serwin
 * change document font back to Latin Modern / marcin-serwin
 * update polyglossia tutorial / marcin-serwin
+* rewrite tables intro / marcin-serwin
 
 6.4 2021.03.09
 --------------
