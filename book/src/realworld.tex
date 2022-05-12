@@ -249,17 +249,18 @@ In some of the examples on the previous pages, you have seen
 some very simple \LaTeX{} commands for typesetting special
 text strings:
 
-\vspace{2ex}
-
-\noindent
-\begin{tabular}{@{}lll@{}}
-Command&Example&Description\\
-\hline
-\ci{today} & \today   & Current date\\
-\ci{TeX} & \TeX       & Your favorite typesetter\\
-\ci{LaTeX} & \LaTeX   & The Name of the Game\\
-\ci{LaTeXe} & \LaTeXe & The current incarnation\\
-\end{tabular}
+\begin{center}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Command     & Example & Description\\
+    \midrule
+    \ci{today}  & \today  & Current date\\
+    \ci{TeX}    & \TeX    & Your favorite typesetter\\
+    \ci{LaTeX}  & \LaTeX  & The Name of the Game\\
+    \ci{LaTeXe} & \LaTeXe & The current incarnation\\
+    \bottomrule
+  \end{tabular}
+\end{center}
 
 \section{Special Characters and Symbols}
 
@@ -357,14 +358,19 @@ If you prefer a Euro symbol that matches your font, use the option
 
 \begin{table}[!htbp]
   \centering
-\caption{A bag full of Euro symbols} \label{eurosymb}
+\caption[Available Euro symbols]{The appearance of available Euro symbols based
+on the loaded package and the used font.} \label{eurosymb}
 \begin{tabular}{@{}llccc@{}}
 \toprule
-LM+textcomp  &\verb+\texteuro+ & \huge\texteuro &\huge\sffamily\texteuro
+&& \multicolumn{3}{c}{Symbol used} \\
+\cmidrule(l){3-5}
+Package & Command & Roman & Sans serif & Monospace \\
+\midrule
+LM+textcomp  &\ci{texteuro} & \huge\texteuro &\huge\sffamily\texteuro
                                                 &\huge\ttfamily\texteuro\\
-eurosym      &\verb+\euro+ & \huge\officialeuro &\huge\sffamily\officialeuro
+eurosym      &\ci{euro} & \huge\officialeuro &\huge\sffamily\officialeuro
                                                 &\huge\ttfamily\officialeuro\\
-$[$gen$]$eurosym &\verb+\euro+ & \huge\geneuro  &\huge\sffamily\geneuro
+$[$gen$]$eurosym &\ci{euro} & \huge\geneuro  &\huge\sffamily\geneuro
                                                 &\huge\ttfamily\geneuro\\
 %europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
 %                                                &\huge\EURcr\\
@@ -432,17 +438,19 @@ Stra\ss e
 \begin{table}[!hbp]
   \centering
 \caption{Accents and Special Characters.} \label{accents}
-\begin{tabular}{@{}*4{cl}@{}}
+\begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
   \toprule
-\mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
-\mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
-\mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
-\mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} \\[6pt]
-\mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
-\mstA{\aa} &  \mstA{\AA} \\[6pt]
-\mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
-\mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
-\bottomrule
+  Code & Effect & Code & Effect & Code& Effect & Code & Effect \\
+  \midrule
+  \mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
+  \mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
+  \mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
+  \mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} && \\[6pt]
+  \mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
+  \mstA{\aa} &  \mstA{\AA} &&&& \\[6pt]
+  \mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
+  \mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
+  \bottomrule
 \end{tabular}
 \index{dotless \i{} and \j}\index{Scandinavian letters}
 \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
@@ -1728,10 +1736,12 @@ most important keys.
 \label{keyvals}
 \begin{tabular}{@{}ll@{}}
   \toprule
-\texttt{width}& scale graphic to the specified width\\
-\texttt{height}& scale graphic to the specified height\\
-\texttt{angle}& rotate graphic counterclockwise\\
-\texttt{scale}& scale graphic \\
+  Key & Effect \\
+  \midrule
+  \cargv{width}& scale graphic to the specified width\\
+  \cargv{height}& scale graphic to the specified height\\
+  \cargv{angle}& rotate graphic counterclockwise\\
+  \cargv{scale}& scale graphic \\
 \bottomrule
 \end{tabular}
 

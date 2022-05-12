@@ -318,14 +318,16 @@ font, and not in italics as variables are, so \LaTeX{} supplies the
 following commands to typeset the most common function names:
 \index{mathematical!functions}
 
-\begin{tabular}{llllll}
-\ci{arccos} &  \ci{cos}  &  \ci{csc} &  \ci{exp} &  \ci{ker}    & \ci{limsup} \\
-\ci{arcsin} &  \ci{cosh} &  \ci{deg} &  \ci{gcd} &  \ci{lg}     & \ci{ln}     \\
-\ci{arctan} &  \ci{cot}  &  \ci{det} &  \ci{hom} &  \ci{lim}    & \ci{log}    \\
-\ci{arg}    &  \ci{coth} &  \ci{dim} &  \ci{inf} &  \ci{liminf} & \ci{max}    \\
-\ci{sinh}   & \ci{sup}   &  \ci{tan}  & \ci{tanh}&  \ci{min}    & \ci{Pr}     \\
-\ci{sec}    & \ci{sin} \\
-\end{tabular}
+\begin{center}
+  \begin{tabular}{llllll}
+    \ci{arccos} &  \ci{cos}  &  \ci{csc} &  \ci{exp} &  \ci{ker}    & \ci{limsup} \\
+    \ci{arcsin} &  \ci{cosh} &  \ci{deg} &  \ci{gcd} &  \ci{lg}     & \ci{ln}     \\
+    \ci{arctan} &  \ci{cot}  &  \ci{det} &  \ci{hom} &  \ci{lim}    & \ci{log}    \\
+    \ci{arg}    &  \ci{coth} &  \ci{dim} &  \ci{inf} &  \ci{liminf} & \ci{max}    \\
+    \ci{sinh}   & \ci{sup}   &  \ci{tan}  & \ci{tanh}&  \ci{min}    & \ci{Pr}     \\
+    \ci{sec}    & \ci{sin} \\
+  \end{tabular}
+\end{center}
 
 \begin{example}
 \begin{equation*}
@@ -1362,7 +1364,7 @@ numbers in columns formatted by \pai{siunitx}, change the
   output-decimal-marker = {,},
   unit-color = red,
 }
-\begin{tabular} {@{}cS@{}}
+\begin{tabular}{@{}cS@{}}
   \toprule
   Variable & {Value} \\
   \midrule

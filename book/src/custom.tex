@@ -116,7 +116,7 @@ In order to test whether the user supplied a value, use
   \ci*{IfValueTF}[argument:m ! value version:m ! no value version:m] 
 \end{lscommand}
 macro.
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \NewDocumentCommand{\MyCommand}{o}{%
   \IfValueTF {#1} {%
     Optional argument: #1.%
@@ -153,7 +153,7 @@ values when the user does not provide them. This could be achieved by
 It works like \cargv{o} but allows to set a default
 if no value is supplied. Write
 
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \NewDocumentCommand{\txsit}{O{not so}m}
 {This is the \emph{#1}
   #2 Introduction to \LaTeXe}
@@ -171,7 +171,7 @@ starred or non-starred version of command was issued by the user. It uses
 \ci{IfBooleanTF} command (and its variations\cih{IfBooleanT}\cih{IfBooleanF})
 that works analogously to the \ci{IfValueTF} command. 
 
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \NewDocumentCommand{\txsit}{sO{not so}m}
 {This is the \emph{#2}
   #3 Introduction to \LaTeXe%
@@ -198,7 +198,7 @@ explicitly want this: \ci{RenewDocumentCommand}.
 It uses the same syntax as the \ci{NewDocumentCommand}
 command.
 
-In certain cases you might also want to use the \ci{ProvideDocumentCommand}
+In certain cases you might want to use the \ci{ProvideDocumentCommand}
 command. It works like \ci{NewDocumentCommand}, but if the command is
 already defined, \LaTeXe{} will silently ignore it.
 
@@ -209,14 +209,12 @@ following syntax:
 \begin{lscommand}
 \ci*{NewDocumentEnvironment}[name:m ! argspec:m ! at begin:m ! at end:m]
 \end{lscommand}
-
-The \carg{argspec} argument accepts the same arguments as the
+The \carg{argspec} argument is the same as in the
 \ci{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
 end} arguments will be inserted respectively when the commands
 \ci{begin}[name] and \ci{end}[name] is encountered.
 
-The example below illustrates the usage of the \ci{NewDocumentEnvironment}
-command.
+The example below illustrates the usage of this command.
 \begin{example}
 \NewDocumentEnvironment{king}{}{%
   \emph{Listen! For the
@@ -276,7 +274,7 @@ specification: \cargv{+b}, short for body.\footnote{The \cargv{+} indicates
 that it may contain multiple paragraphs.} It is only allowed as the last
 argument in the \carg{argspec}. It allows you to receive the body of the
 environment as an argument.
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \NewDocumentEnvironment{twice}{+b} {%
   First time:\\
   #1
@@ -384,11 +382,10 @@ Now compile document like this:
 xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
   \input{test.tex}'
 \end{verbatim}
-
-First the command \verb|\blackandwhite| gets defined as the copy of
-\ci{BooleanTrue} which is a special value used in \ci{IfBooleanTF} checks. Then
-the actual file is read with input. By setting \verb|\blackandwhite| to
-\ci{BooleanFalse} the colour version of the document would be produced.
+First the command \verb|\blackandwhite| is defined as the \ci{BooleanTrue} macro which
+holds a special value used in \ci{IfBooleanTF} checks. Then the actual file is
+read with input. By setting \verb|\blackandwhite| to \ci{BooleanFalse} the
+colour version of the document would be produced.
 
 \subsection{Your Own Package}
 
@@ -402,7 +399,7 @@ command to make the package available in your document.
 \begin{lined}{\textwidth}
 \begin{verbatim}
 \ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
-  Demo Package by Tobias Oetiker
+  Package by Tobias Oetiker
 }
 
 \NewDocumentCommand{\tnss}{} {
@@ -441,7 +438,7 @@ the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
 The arguments are used to provide information about package in the log file. If
 you use this package and look at the log file you will find
 \begin{verbatim}
-Package: demopack 2022-05-05 v0.1 Demo Package by Tobias Oetiker
+Package: demopack 2022-05-05 v0.1 Package by Tobias Oetiker
 \end{verbatim}
 in the \eei{.log} file.
 
@@ -486,9 +483,11 @@ special set of commands; refer to Table~\ref{mathfonts}.
 % Alan suggested not to tell about the other form of the command
 % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
 %
-\begin{tabular}{@{}rl@{\qquad}rl@{}}
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
   \toprule
-  \fni{textrm}\verb|{...}|        &       \textrm{\wi{roman}}&
+  Command & Font &  Command & Font \\
+  \midrule
+\fni{textrm}\verb|{...}|        &       \textrm{\wi{roman}}&
 \fni{textsf}\verb|{...}|        &       \textsf{\wi{sans serif}}\\
 \fni{texttt}\verb|{...}|        &       \texttt{typewriter}\\[6pt]
 \fni{textmd}\verb|{...}|        &       \textmd{medium}&
@@ -509,18 +508,20 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \centering
 \index{font size}
 \caption{Font Sizes.} \label{sizes}
-\begin{tabular}{@{}llll@{}}
+\begin{tabular}{@{}ll@{\qquad}ll@{}}
   \toprule
-  \fni{tiny}      & \tiny        tiny font &
-  \fni{Large}        &  \Large       larger font \\
-  \fni{scriptsize}   & \scriptsize  very small font &
-  \fni{LARGE}        &  \LARGE       very large font \\
-  \fni{footnotesize} & \footnotesize  quite small font &
+  Command & Size &  Command & Size \\
+  \midrule
+  \fni{tiny}      & \tiny        tiny &
+  \fni{Large}        &  \Large       larger \\
+  \fni{scriptsize}   & \scriptsize  very small &
+  \fni{LARGE}        &  \LARGE       very large \\
+  \fni{footnotesize} & \footnotesize  quite small &
   \multirow{2}{*}{\fni{huge}}         &  \multirow{2}{*}{\huge        huge} \\
-  \fni{small}        &  \small            small font && \\
-  \fni{normalsize}   &  \normalsize  normal font &
-  \multirow{2}{*}{\fni{Huge}}         &  \multirow{2}{*}{\Huge        largest} \\
-  \fni{large}        &  \large       large font  && \\
+  \fni{small}        &  \small            small && \\
+  \fni{normalsize}   &  \normalsize  normal &
+  \multirow{2}{*}{\fni{Huge}}         &  \multirow{2.2}{*}{\Huge        largest} \\
+  \fni{large}        &  \large       large  && \\
   \bottomrule
 \end{tabular}%
 \bigskip
@@ -528,25 +529,28 @@ special set of commands; refer to Table~\ref{mathfonts}.
 
 \begin{table}[!tb]
   \centering
-  \caption{Absolute Point Sizes in Standard Classes.}\label{tab:pointsizes}
+  \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
+  Standard Classes depending on the class option. The default class option is
+  \cargv{10pt}.}
+  \label{tab:pointsizes}
 \label{tab:sizes}
-\begin{tabular}{@{}lrrr@{}}
+\sisetup{table-format=2.0}
+\begin{tabular}{@{}lSSS@{}}
   \toprule
-  \multicolumn{1}{c}{size} &
-\multicolumn{1}{c}{10pt (default) } &
-           \multicolumn{1}{c}{11pt option}  &
-           \multicolumn{1}{c}{12pt option}\\
+  & \multicolumn{3}{c}{Size (\unit{pt})} \\
+  \cmidrule(l){2-4}
+  Command & {\cargv{10pt}} & {\cargv{11pt}} & {\cargv{12pt}} \\ 
            \midrule
-\verb|\tiny|       & 5pt  & 6pt & 6pt\\
-\verb|\scriptsize| & 7pt  & 8pt & 8pt\\
-\verb|\footnotesize| & 8pt & 9pt & 10pt \\
-\verb|\small|        & 9pt & 10pt & 11pt \\
-\verb|\normalsize| & 10pt & 11pt & 12pt \\
-\verb|\large|      & 12pt & 12pt & 14pt \\
-\verb|\Large|      & 14pt & 14pt & 17pt \\
-\verb|\LARGE|      & 17pt & 17pt & 20pt\\
-\verb|\huge|       & 20pt & 20pt & 25pt\\
-\verb|\Huge|       & 25pt & 25pt & 25pt\\
+\ci{tiny}       & 5  & 6 & 6\\
+\ci{scriptsize} & 7  & 8 & 8\\
+\ci{footnotesize} & 8 & 9 & 10 \\
+\ci{small}        & 9 & 10 & 11 \\
+\ci{normalsize} & 10 & 11 & 12 \\
+\ci{large}      & 12 & 12 & 14 \\
+\ci{Large}      & 14 & 14 & 17 \\
+\ci{LARGE}      & 17 & 17 & 20\\
+\ci{huge}       & 20 & 20 & 25\\
+\ci{Huge}       & 25 & 25 & 25\\
   \bottomrule
 \end{tabular}
 
@@ -557,8 +561,10 @@ special set of commands; refer to Table~\ref{mathfonts}.
 \begin{table}[!bp]
   \centering
   \caption{Math Fonts.} \label{mathfonts}
-  \begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}ll@{}}
   \toprule
+  Command & Font \\
+  \midrule
   \fni{mathrm}\verb|{...}|&     $\mathrm{Roman\ Font}$\\
   \fni{mathbf}\verb|{...}|&     $\mathbf{Boldface\ Font}$\\
   \fni{mathsf}\verb|{...}|&     $\mathsf{Sans\ Serif\ Font}$\\
@@ -788,6 +794,8 @@ of \qty{1.5}{\cm}.
 \caption{\TeX{} Units.} \label{units}\index{units}
 \begin{tabular}{@{}ll@{}}
 \toprule
+Unit & Meaning \\
+\midrule
 \texttt{mm} & millimetre $\approx$ \qty{1/25}{\in} \quad \demowidth{1mm} \\
 \texttt{cm} & centimetre = \qty{10}{mm}  \quad \demowidth{1cm} \\
 \texttt{in} & inch $=$ \qty{25.4}{\mm} \quad \demowidth{1in}                    \\

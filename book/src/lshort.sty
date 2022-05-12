@@ -296,8 +296,8 @@
 % normal text ....
 \newcommand{\mstSC}[1]{#1&\texttt{\string#1}\hspace*{1ex}}
 % for accents in text mode
-\newcommand{\mstA}[1]{#1&\texttt{\string#1}\hspace*{1ex}}
-\newcommand{\mstB}[2]{#1#2&\texttt{\string#1{} #2}\hspace*{1ex}}
+\newcommand{\mstA}[1]{\texttt{\string#1}&#1}
+\newcommand{\mstB}[2]{\texttt{\string#1{} #2}&#1#2}
 
 \newcommand{\mstW}[2]{$#1{#2}$&
   \texttt{\string#1}\texttt{\string{\string#2\string}}\hspace*{1ex}}
