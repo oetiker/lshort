@@ -1136,17 +1136,18 @@ within parameters of other commands.
 \subsection{Tabular}
 
 In \LaTeX{} the environment to typeset tables (and more) is called
-\ei{tabular}. While it can be used on its own, there are some spacing issues,
-so it is recommended to load \pai*{booktabs} which introduces some commands
-that solve the problem. Moreover to achieve some more advanced table layouts
-\pai*{longtable}, \pai*{array} and \pai*{multirow} will also be used in this
-chapter. If your document relies heavily on tables, then it is a good idea to
-put all of those in the preamble.
+\ei{tabular}. While it can be used on its own, the resulting table layouts look
+extremely old fashioned. We recommend to add the \pai*{booktabs} package which
+provides several commands that let you typeset beautiful modern looking tables.
+To achieve some more advanced table layouts you will also learn about the
+\pai*{longtable}, \pai*{array} and \pai*{multirow} packages in this section.
+They are so useful, that you probably want to put them all into the preamble of
+your document right away.
 
-In addition to commands description, the \pai{booktabs} package documentation
-contains guidelines on typesetting professionally looking tables. These will be
-presented here and you are encouraged to follow them if you want to present
-information contained within the tables clearly.
+In addition to the description description of the commands, the \pai{booktabs}
+package documentation \cite{pack:booktabs} contains guidelines on typesetting
+professional-looking tables. We have taken these guidelines to heart when
+writing this booklet. You will find some of them in this section.
 
 \subsubsection{Basic tables} \label{foo}
 
@@ -1155,7 +1156,7 @@ The environment \ei{tabular} has the following form
   \ei*{tabular}[pos:o ! colspec:m]
 \end{lscommand} %
 The \carg{colspec} argument, which stands for columns specifiers, defines the
-format of the table. Use an \cargv{l} for a column of left-aligned text,
+format of the columns in the table. Use an \cargv{l} for a column of left-aligned text,
 \cargv{r} for right-aligned text, and \cargv{c} for centred text. Inside the
 environment use \ai{\&} to go to next cell within the row and
 \ci{\textbackslash} to go to the next row.
@@ -1170,18 +1171,18 @@ to contain justified text with linebreaks use the \cargv{p\{\carg{width}\}}
 column specifier, where \carg{width} is the width of the column.
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{lrp{3cm}}
-  left & right & very long paragraph
+  left & right & Very long paragraph
                  that gets broken into
-                 multiple lines \\
-  1    & 2     & another one,
-                 but shorter \\
+                 multiple lines. \\
+  1    & 2     & Another one,
+                 but shorter. \\
 \end{tabular}
 \end{example}
 
 The optional \carg{pos} argument specifies the vertical position of the table
 with respect to baseline of the text. There are three possible alignments:
-\cargv{c} centre the table (the default), \cargv{t} matches the baseline of the
-top row and \cargv{b} matches the baseline of the bottom row.
+\cargv{c} centres the table (the default), \cargv{t} matches the baseline of
+the top row and \cargv{b} matches the baseline of the bottom row.
 \begin{example}[examplewidth=0.55\linewidth]
 text
 \begin{tabular}{ll}
@@ -1203,10 +1204,10 @@ text
 
 
 What we have shown so far allows aligning some items in rows and columns,
-but real tables need visible headings. To insert them use commands
+but real tables need visible headings. To insert them use the commands
 \ci{toprule}, \ci{midrule} and \ci{bottomrule} from the \pai{booktabs} package.
-All of those accept one optional argument that specifies their thickness, but
-usually their defaults are sufficient.
+All of these accept an optional argument that specifies their thickness, but
+usually the default settings are just fine.
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{lcl}
   \toprule
@@ -1220,9 +1221,9 @@ usually their defaults are sufficient.
 \end{example}
 
 With these commands you are already able to produce simple, yet nicely looking
-tables. At this point you may be thinking that this table still needs vertical
-lines between the columns but it is not the case. In fact the first rule of
-producing professionally looking tables is that you \emph{must not} use
+tables. You may be are wondering why we have not mentioned how to add vertical
+lines between the columns. Well, we did not mention them because the first rule
+of producing professional-looking tables is that you \emph{must not} use
 vertical lines.
 
 The second rule is to never use double lines such as these:
@@ -1243,12 +1244,12 @@ The second rule is to never use double lines such as these:
 As you can see the lines are already of different weight in order to signify
 their meaning. Using more lines than is necessary means cluttering the space
 without adding information. If you stick to these two rules your tables will
-look \emph{much} better.
+look quite good already.
 
-To make the tables a bit more sleek you may want to remove the padding in the
+To make the tables look even more sleek you may want to remove the padding in the
 first and last column. To control the space between the columns use the
-\cargv{\@\{\carg{sep}\}} column specifier, where \carg{sep} is either text or
-space. Space of arbitrary length can be inserted using the \ci{hspace}{width}
+\cargv{@\{\carg{sep}\}} column specifier, where \carg{sep} is either text or
+space. Space of arbitrary length can be inserted using the \ci{hspace}[width]
 command. The contents of the \carg{sep} arguments will be put between cells in
 the relevant column.
 \begin{example}[examplewidth=0.3\linewidth]
@@ -1274,16 +1275,15 @@ columns.
 \end{tabular}
 \end{example}
 
-Sometimes it may make sense to group two or more headings. To achieve this we
-need two things: the description of the group must span multiple columns and
-the line underneath the description should span only the affected columns. In
-order to achieve the first task the 
+Sometimes it may make sense to group columns under one heading. To achieve this
+we need two things: a way to group multiple heading columns and have a line
+covering the same columns, to sit underneath the merged heading cell. Use the 
 \begin{lscommand}
   \ci*{multicolumn}[ncols:m ! colspec:m ! text:m]
 \end{lscommand}
-command is used. The \carg{ncols} argument indicates how many columns should
-the \carg{text} span, while the \carg{colspec} is the column specification, the
-same as in \ei{tabular}, for the single column the \carg{text} will be put in.
+merge the cells. The \carg{ncols} argument indicates how many columns should
+the \carg{text} span, while the \carg{colspec} is the column specification for
+the new content---the same as when starting a \ei{tabular} environment.
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
@@ -1297,7 +1297,7 @@ same as in \ei{tabular}, for the single column the \carg{text} will be put in.
 \end{tabular}
 \end{example}
 
-To achieve a horizontal line that spans multiple columns, use the command
+To get a horizontal line to span multiple columns, use the command
 \begin{lscommand}
   \ci*{cmidrule}[dim:o ! trim:p ! a--b:m]
 \end{lscommand}
@@ -1331,22 +1331,21 @@ to draw the line over.
 If you need a cell to span multiple rows instead of columns, then you have to
 use package \pai{multirow}. Its main command is a little more complicated
 \begin{lscommand}
-  \ci*{multirow}[vpos:o ! nrows:m ! bigstruts:o ! width:m ! vmove:o ! text:m]
+  \ci*{multirow}[vpos:o ! nrows:m ! width:m ! vmove:o ! text:m]
 \end{lscommand}
 The arguments are
 \begin{description}
   \item[\carg{vpos}] is the vertical position of the text within the cell.
     Can be either \cargv{c} for centre (the default), \cargv{t} for top or
     \cargv{b} for bottom.
-  \item[\carg{nrows}] is the number of rows for cell to span.
-  \item[\carg{bigstruts}] is only useful if used with the \pai{bigstrut}
-    package. It will not be discussed here.
-  \item[\carg{width}] is the width of cell. In addition to lengths, you may
-    pass two special arguments here: \cargv{*} for the text natural length and
-    \cargv{=} for the same width as the column (only makes sense if the column
-    width was specified, for example via \cargv{p\{3cm\}}).
-  \item[\carg{vmove}] allows adjusting the position of the text if it is too
-    low or too tall. By default no adjusting is done.
+  \item[\carg{nrows}] is the number of rows for the new cell to span.
+  \item[\carg{width}] is the width of the cell. Apart from a regular length,
+    you can also pass two special arguments here: \cargv{*} for the natural
+    length of the text and \cargv{=} for the same width as the column (this
+    only makes sense if the column width was specified, for example via
+    \cargv{p\{3cm\}}).
+  \item[\carg{vmove}] allows adjusting the position of the text if it sits too
+    low or too high.
   \item[\carg{text}] is the text to be put in the cell.
 \end{description}
 Unlike with \ci{multicolumn} you still have to write all the cells in remaining
@@ -1367,8 +1366,9 @@ rows, but they should be empty.
   \bottomrule
 \end{tabular}
 \end{example}
-Do not overuse the \ci{multirow} when indicating values common to more than one
-row. Usually repeating the values in question makes it more readable.
+In general it is not a good idea to use the \ci{multirow} command for showing
+values common to multiple rows. Usually repeating the values in question makes
+the table more readable.
 
 When typesetting numerical data in the table, you may want to align it by
 decimal point. A way to do this (and more) is described in
@@ -1381,7 +1381,7 @@ Material typeset with the tabular environment always stays together on one
 page. This poses a problem for especially long tables. If your table is not
 very wide you may get away with it by typesetting its rows side by side. You
 should then put a bigger space between those to indicate that these are
-separate either by using \cargv{@\{...\}} or by putting empty column between
+separate either by using \cargv{@\{...\}} or by putting an empty column between
 those.
 \begin{example}[examplewidth=0.4\linewidth]
 \begin{tabular}{@{}cllcl@{}}
@@ -1397,10 +1397,10 @@ those.
 \end{tabular}
 \end{example}
 
-This approach will obviously not work for \emph{really} long tables. If you
-must tackle one of those, use the \pai{longtable} package. It defines a new
-\ei{longtable} environment that works similarly to \ei{tabular} environment,
-but allows pagebreaks inside.
+This approach will obviously not work for \emph{really} long tables. This is
+where the \pai{longtable} package shines. It defines a \ei{longtable}
+environment that works similarly to \ei{tabular} environment, but allows
+pagebreaks inside.
 
 \begin{lscommand}
   \ei*{longtable}[align:o ! colspec:m]
@@ -1493,7 +1493,7 @@ the row with them they will set the preceding rows as headers and footers of
 the table. The \ci{endhead} and \ci{endfoot} put the headers and footers on
 every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
 and last page. An example of using these commands is presented in
-figure~\ref{ex:longtable} on page~\pageref{ex:longtable}.
+figure~\ref{ex:longtable}.
 \begin{figure}[htp]
 \begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm] 
 %!hidebegin
@@ -1555,10 +1555,10 @@ will then need several passes to properly calculate the column widths.
 
 \subsubsection{Advanced tables and non-tables}
 
-In the text we were able to specify the length of space between the lines as an
+In regular text you can specify the amount of space between two lines as an
 optional argument to the \ci{\textbackslash} command. Can the same be done
 within the table? It turns out that it can, but there is one caveat. If you use
-it together with \cargv{p\{...\}} column, the space specified will be different
+it together with a \cargv{p\{...\}} column, the space specified will be different
 depending on column order.
 \begin{example}[standalone, paperheight=2.6cm]
 \noindent %!hide
@@ -1593,7 +1593,7 @@ and \cargv{b\{...\}} for text put vertically at the bottom.
 \end{tabular}
 \end{example}
 
-When a certain column must be formatted a certain way it is inconvenient to put
+When a column must be formatted a certain way it is inconvenient to put
 the same commands in every cell. Moreover if you decide that something needs to
 be changed about the formatting, then you would have to edit every cell
 individually. To avoid that, the \pai{array} package defines
@@ -1669,8 +1669,9 @@ it.
 \end{example}
 
 In order to create a tic-tac-toe grid you need to put some vertical and
-horizontal lines of the same width. In order to do so you may use the \cargv{|}
-column specifier for vertical rules and \ci{hline} for horizontal rules.
+horizontal lines of the same width. In order to do so you may use the
+\cargv{|}~(vertical bar) column specifier for vertical rules and \ci{hline} for
+horizontal rules.
 \begin{example}
 \begin{tabular}{c|c|c}
   O & X & O \\
