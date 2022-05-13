@@ -29,7 +29,7 @@ lulu: lshort-body.pdf lshort-title.pdf
 	mv $@ .. )
 
 src/title.tex: Makefile fixdate.pl src/title.template.tex
-	perl fixdate.pl $(VERS) < src/title.template.tex > src/title.tex
+	perl fixdate.pl $(VERS) $(GITHUB_SHA) < src/title.template.tex > src/title.tex
 
 quick: $(FILES)
 	-mkdir pdfbuild
