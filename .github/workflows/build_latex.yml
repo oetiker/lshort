@@ -1,0 +1,24 @@
+name: Build latex
+
+on: [push, pull_request]
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: xu-cheng/texlive-action/full@v1
+        with:
+          run: |
+            apk add make
+            cd book
+            make all
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: result
+          path: |
+            book/*.pdf
+            book/pdfbuild/*.log
