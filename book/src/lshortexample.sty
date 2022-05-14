@@ -63,6 +63,12 @@
 
   verbatim_output_file_name .tl_set:N = \__lshortexample_verbatim_output_file,
   verbatim_output_file_name .initial:n = {\c_sys_jobname_str _output.exa},
+
+  from_page .int_set:N  = \__lshortexample_from_page,
+  from_page .initial:n  = 1,
+
+  to_page .int_set:N  = \__lshortexample_to_page,
+  to_page .initial:n  = 1,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -168,31 +174,40 @@
 }
 
 \cs_new:Nn \lshortexample_typeset_standalone_example:nn {
+  \group_begin:
   \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
-  \begin{minipage}{\linewidth-\dim_use:N \__lshortexample_paperwidth-0.2pt}
+  \begin{minipage}{\dim_eval:n {
+    \linewidth - (\__lshortexample_paperwidth + 0.2pt) * (
+    \__lshortexample_to_page - \__lshortexample_from_page + 1)
+  }}
     \small\verbatiminput{#2}
   \end{minipage}
-  \fancyframebox{0.1pt}{0pt}{
-    \begin{minipage}{\dim_use:N \__lshortexample_paperwidth}
-      \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
-        \bool_set:Nn \l_tmpa_bool {\c_false_bool}
-      }{
-        \bool_set:Nn \l_tmpa_bool {\c_true_bool}
-      }
-      \bool_if:nT {
-        !\__lshortexample_cache_bool || \l_tmpa_bool
-      } {
-        \bool_if:NTF \__lshortexample_biber_run {
-          \lshortexample_compile_biber_example:nn {#1} {\l_tmpb_tl}
-        } {
-          \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
-        }
-      }
-      \includegraphics[width=\dim_use:N \__lshortexample_paperwidth]{
-        \__lshortexample_cache_dir_tl\l_tmpb_tl
-      }
-    \end{minipage}
+  \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
+    \bool_set:Nn \l_tmpa_bool {\c_false_bool}
+  }{
+    \bool_set:Nn \l_tmpa_bool {\c_true_bool}
   }
+  \bool_if:nT {
+    !\__lshortexample_cache_bool || \l_tmpa_bool
+  } {
+    \bool_if:NTF \__lshortexample_biber_run {
+      \lshortexample_compile_biber_example:nn {#1} {\l_tmpb_tl}
+    } {
+      \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+    }
+  }
+  \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
+    \fancyframebox{0.1pt}{0pt}{
+      \begin{minipage}{\__lshortexample_paperwidth}
+        \includegraphics[
+          width=\__lshortexample_paperwidth,
+          page=##1]{
+          \__lshortexample_cache_dir_tl\l_tmpb_tl
+        }
+      \end{minipage}
+    }
+  }
+  \group_end:
 }
 
 \cs_new:Nn \lshortexample_typeset_example:nn {

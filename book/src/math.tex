@@ -318,14 +318,16 @@ font, and not in italics as variables are, so \LaTeX{} supplies the
 following commands to typeset the most common function names:
 \index{mathematical!functions}
 
-\begin{tabular}{llllll}
-\ci{arccos} &  \ci{cos}  &  \ci{csc} &  \ci{exp} &  \ci{ker}    & \ci{limsup} \\
-\ci{arcsin} &  \ci{cosh} &  \ci{deg} &  \ci{gcd} &  \ci{lg}     & \ci{ln}     \\
-\ci{arctan} &  \ci{cot}  &  \ci{det} &  \ci{hom} &  \ci{lim}    & \ci{log}    \\
-\ci{arg}    &  \ci{coth} &  \ci{dim} &  \ci{inf} &  \ci{liminf} & \ci{max}    \\
-\ci{sinh}   & \ci{sup}   &  \ci{tan}  & \ci{tanh}&  \ci{min}    & \ci{Pr}     \\
-\ci{sec}    & \ci{sin} \\
-\end{tabular}
+\begin{center}
+  \begin{tabular}{llllll}
+    \ci{arccos} &  \ci{cos}  &  \ci{csc} &  \ci{exp} &  \ci{ker}    & \ci{limsup} \\
+    \ci{arcsin} &  \ci{cosh} &  \ci{deg} &  \ci{gcd} &  \ci{lg}     & \ci{ln}     \\
+    \ci{arctan} &  \ci{cot}  &  \ci{det} &  \ci{hom} &  \ci{lim}    & \ci{log}    \\
+    \ci{arg}    &  \ci{coth} &  \ci{dim} &  \ci{inf} &  \ci{liminf} & \ci{max}    \\
+    \ci{sinh}   & \ci{sup}   &  \ci{tan}  & \ci{tanh}&  \ci{min}    & \ci{Pr}     \\
+    \ci{sec}    & \ci{sin} \\
+  \end{tabular}
+\end{center}
 
 \begin{example}
 \begin{equation*}
@@ -1114,8 +1116,11 @@ If they are given as a decimal number, they will be displayed as such.
 \qty{60}{\degree}
 \end{example}
 
-When listing several numbers we may use the \ci{numlist}[options][numbers]
-where \carg{number} are delimited by semicolons. This command is context aware
+When listing several numbers we may use the
+\begin{lscommand}
+  \ci{numlist}[options][numbers]
+\end{lscommand}
+where \carg{numbers} are delimited by semicolons. This command is context aware
 which means it will produce correct results when used with \pai{polyglossia}.
 \begin{example}
 \numlist{1;2;3;4}
@@ -1185,31 +1190,37 @@ Litre before redefining: \unit{\L}. \\
 Litre after redefining: \unit{\L}.
 \end{example}
 
-Similarly the commands \ci{DeclareSIPrefix}, \ci{DeclareSIPower} and
-\ci{DeclareSIQualifier} allow definition of macros in case additional are
-needed.
+Similarly the commands
+\begin{lscommand}
+  \ci{DeclareSIPrefix}    \\
+  \ci{DeclareSIPower}     \\
+  \ci{DeclareSIQualifier}
+\end{lscommand}
+allow definition of unit-related macros in case additional are needed.
 \begin{example}[examplewidth=0.4\linewidth]
 \DeclareSIUnit{\pt}{pt}
 \DeclareSIPower\quartic\tothefourth{4}
 \DeclareSIPrefix\decakilo{dk}{4}
 \DeclareSIQualifier\polymer{pol}
 
-It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
+It's over
+\qty{9000}{\quartic\decakilo\pt\polymer}!
 \end{example}
 
-\subsection{Table columns with numbers} \label{sec:sitables} \index{decimal alignment}
+\subsection{Table columns with numbers} \label{sec:sitables} \index{decimal
+alignment}
 
 When typesetting tables which contain numeric data it is often useful to align
 them along the decimal point, so they can be compared easily. The \pai{siunitx}
-package adds the special column specifier \cargv{S} for this purpose to the \ei{tabular}
-environment. Non numeric data must be
-surrounded by curly brackets in such columns.
+package adds the special column specifier \cargv{S} for this purpose to the
+\ei{tabular} environment. Non numeric data must be surrounded by curly brackets
+in such columns.
 \begin{example}[examplewidth=0.45\linewidth]
 \begin{tabular}{@{}lS@{}}
   \toprule
   Day & {Candy eaten (\unit{\g})} \\
   \midrule
-  Monday & 0.3011 \\
+  Monday & .3011 \\
   Tuesday & 54.86 \\
   Wednesday & 1000.9722 \\
   Thursday & -1000.9722 \\
@@ -1217,8 +1228,16 @@ surrounded by curly brackets in such columns.
 \end{tabular}
 \end{example}
 
-All the numbers in such columns are automatically parsed by \pai{siunitx} using
-current settings. In order to influence parsing\slash displaying options of a
+When presenting numeric data, such as above, it is good to remember the
+following two rules
+\begin{itemize}
+  \item Never drop the leading zero before the decimal point.
+  \item If the unit is the same in all cells put it in the heading.
+\end{itemize}
+All the numbers in \cargv{S} columns are automatically parsed by \pai{siunitx},
+which means that if we use it, the first rule will be enforced for us.
+
+In order to influence parsing\slash displaying options of a
 single column, pass them in square brackets to the column specification.
 \begin{example}[examplewidth=0.38\linewidth]
 \DeclareSIUnit{\eur}{\euro}
@@ -1317,8 +1336,8 @@ want to change the alignment use the \cargv{table-number-alignment} and
 \end{tabular}
 \end{example}
 
-It is also possible to align the numbers inside a \ci{multicol} and
-\ci{multirow}, using the \ci{tablenum} command.
+The numbers may also be aligned inside a \ci{multicol} or \ci{multirow},
+using the \ci{tablenum} command.
 \begin{example}[examplewidth=0.30\linewidth]
 \sisetup{
   table-format = 4.4e1
@@ -1345,7 +1364,7 @@ numbers in columns formatted by \pai{siunitx}, change the
   output-decimal-marker = {,},
   unit-color = red,
 }
-\begin{tabular} {@{}cS@{}}
+\begin{tabular}{@{}cS@{}}
   \toprule
   Variable & {Value} \\
   \midrule
@@ -1456,7 +1475,7 @@ In the next example, we define a new command \ci{ud} (upright d) which produces
 $\text{d}$), so we don't have to write it every time. The \ci{NewDocumentCommand} is
 placed in the preamble.  More on
 \ci{NewDocumentCommand} in section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
-\begin{example}
+\begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
 \begin{equation*}
@@ -1470,7 +1489,7 @@ between the integrals is too wide. You can correct it using \ci{!}, but
 the spacing, namely the \ci{iint}, \ci{iiint}, \ci{iiiint}, and \ci{idotsint}
 commands.
 
-\begin{example}
+\begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
 \begin{IEEEeqnarray*}{c}
@@ -1606,11 +1625,6 @@ This should be enough theory. The following examples should
 remove any remaining doubt, and make it clear that the
 \ci{newtheorem} command is way too complex to understand.
 
-% actually define things
-\theoremstyle{definition} \newtheorem{law}{Law}
-\theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
-\theoremstyle{remark}     \newtheorem*{marg}{Margaret}
-
 First define the theorems:
 
 \begin{verbatim}
@@ -1638,7 +1652,9 @@ theorem, so it gets a number that is in sequence with
 the other ``Laws''. The argument in square brackets is used to specify 
 a title or something similar for the theorem.
 \begin{example}
+%!showbegin !hide
 \newtheorem{mur}{Murphy}[section]
+%!showend !hide
 
 \begin{mur} If there are two or 
 more ways to do something, and 

@@ -117,20 +117,20 @@ for more information.
 In special cases it might be necessary to order \LaTeX{} to break a
 line:
 \begin{lscommand}
-\ci{\bs} or \ci{newline}
+\ci*{\bs}[length:o] or \ci{newline}
 \end{lscommand}
-\noindent starts a new line without starting a new paragraph.
+starts a new line without starting a new paragraph. The optional \carg{length}
+argument adds additional space after the line. 
 
 \begin{lscommand}
-\ci{\bs*}
+\ci*{\bs*}[length:o]
 \end{lscommand}
-\noindent additionally prohibits a page break after the forced
-line break.
+additionally prohibits a page break after the forced line break.
 
 \begin{lscommand}
 \ci{newpage}
 \end{lscommand}
-\noindent starts a new page.
+starts a new page.
 
 \begin{lscommand}
 \ci{linebreak}\verb|[|\emph{n}\verb|]|,
@@ -138,7 +138,8 @@ line break.
 \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
 \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
 \end{lscommand}
-\noindent suggest places where a break may (or may not) happen. They enable the author to influence their
+suggest places where a break may (or may not) happen.
+They enable the author to influence their
 actions with the optional argument \emph{n}, which can be set to a number
 between zero and four. By setting \emph{n} to a value below 4, you leave
 \LaTeX{} the option of ignoring your command if the result would look very
@@ -148,7 +149,17 @@ right border of the line and the total length of the page, as described in
 the next section; this can lead to unpleasant gaps in your text.
 If you really want to start a ``new line'' or a ``new page'', then use the
 corresponding command. Guess their names!
-
+\begin{example}[examplewidth=0.4\linewidth]
+  Lorem ipsum dolor sit amet,\\
+  consectetur adipiscing elit,\\[1cm]
+  sed do eiusmod tempor\linebreak
+  incididunt ut labore\linebreak[1]
+  et dolore magna aliqua. Ut enim
+  ad minim veniam, quis \linebreak[3]
+  nostrud exercitation ullamco laboris
+  nisi ut aliquip\linebreak
+   ex ea commodo consequat. 
+\end{example}
 
 \LaTeX{} always tries to produce the best line breaks possible. If it
 cannot find a way to break the lines in a manner that meets its high
@@ -238,17 +249,18 @@ In some of the examples on the previous pages, you have seen
 some very simple \LaTeX{} commands for typesetting special
 text strings:
 
-\vspace{2ex}
-
-\noindent
-\begin{tabular}{@{}lll@{}}
-Command&Example&Description\\
-\hline
-\ci{today} & \today   & Current date\\
-\ci{TeX} & \TeX       & Your favorite typesetter\\
-\ci{LaTeX} & \LaTeX   & The Name of the Game\\
-\ci{LaTeXe} & \LaTeXe & The current incarnation\\
-\end{tabular}
+\begin{center}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Command     & Example & Description\\
+    \midrule
+    \ci{today}  & \today  & Current date\\
+    \ci{TeX}    & \TeX    & Your favorite typesetter\\
+    \ci{LaTeX}  & \LaTeX  & The Name of the Game\\
+    \ci{LaTeXe} & \LaTeXe & The current incarnation\\
+    \bottomrule
+  \end{tabular}
+\end{center}
 
 \section{Special Characters and Symbols}
 
@@ -287,7 +299,7 @@ The names for these dashes are:
 `-' \wi{hyphen}, `--' \wi{en-dash}, `---' \wi{em-dash} and
 `$-$' \wi{minus sign}.
 
-\subsection{Tilde ($\sim$)}
+\subsection{Tilde (\(\sim\))}
 \index{URL link}\index{tilde}
 A character often seen in web addresses is the tilde. To generate
 this in \LaTeX{} use \verb|\~{}| but the result (\~{}) is not really
@@ -346,14 +358,19 @@ If you prefer a Euro symbol that matches your font, use the option
 
 \begin{table}[!htbp]
   \centering
-\caption{A bag full of Euro symbols} \label{eurosymb}
+\caption[Available Euro symbols]{The appearance of available Euro symbols based
+on the loaded package and the used font.} \label{eurosymb}
 \begin{tabular}{@{}llccc@{}}
 \toprule
-LM+textcomp  &\verb+\texteuro+ & \huge\texteuro &\huge\sffamily\texteuro
+&& \multicolumn{3}{c}{Symbol used} \\
+\cmidrule(l){3-5}
+Package & Command & Roman & Sans serif & Monospace \\
+\midrule
+LM+textcomp  &\ci{texteuro} & \huge\texteuro &\huge\sffamily\texteuro
                                                 &\huge\ttfamily\texteuro\\
-eurosym      &\verb+\euro+ & \huge\officialeuro &\huge\sffamily\officialeuro
+eurosym      &\ci{euro} & \huge\officialeuro &\huge\sffamily\officialeuro
                                                 &\huge\ttfamily\officialeuro\\
-$[$gen$]$eurosym &\verb+\euro+ & \huge\geneuro  &\huge\sffamily\geneuro
+$[$gen$]$eurosym &\ci{euro} & \huge\geneuro  &\huge\sffamily\geneuro
                                                 &\huge\ttfamily\geneuro\\
 %europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
 %                                                &\huge\EURcr\\
@@ -366,7 +383,7 @@ $[$gen$]$eurosym &\verb+\euro+ & \huge\geneuro  &\huge\sffamily\geneuro
 \medskip
 \end{table}
 
-\subsection{Ellipsis (\texorpdfstring{\ldots}{...})}
+\subsection{Ellipsis (\ldots)}
 
 On a typewriter, a \wi{comma} or a \wi{period} takes the same amount of
 space as any other letter. In book printing, these characters occupy
@@ -421,17 +438,19 @@ Stra\ss e
 \begin{table}[!hbp]
   \centering
 \caption{Accents and Special Characters.} \label{accents}
-\begin{tabular}{@{}*4{cl}@{}}
+\begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
   \toprule
-\mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
-\mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
-\mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
-\mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} \\[6pt]
-\mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
-\mstA{\aa} &  \mstA{\AA} \\[6pt]
-\mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
-\mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
-\bottomrule
+  Code & Effect & Code & Effect & Code& Effect & Code & Effect \\
+  \midrule
+  \mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
+  \mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
+  \mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
+  \mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} && \\[6pt]
+  \mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
+  \mstA{\aa} &  \mstA{\AA} &&&& \\[6pt]
+  \mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
+  \mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
+  \bottomrule
 \end{tabular}
 \index{dotless \i{} and \j}\index{Scandinavian letters}
 \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
@@ -662,7 +681,7 @@ much more limited than \pai{bidi}.} in order to support RTL languages. The
 loads \pai{bidi} this means that \pai{polyglossia} should be the last package
 loaded.)
 
-\begin{example}[standalone, template=empty, paperheight=4cm, nocache]
+\begin{example}[standalone, template=empty, paperheight=4cm]
 \documentclass{article}
 
 \usepackage{polyglossia}
@@ -1116,144 +1135,565 @@ within parameters of other commands.
 
 \subsection{Tabular}
 
-\newcommand{\mfr}[1]{\framebox{\rule{0pt}{0.7em}\texttt{#1}}}
+In \LaTeX{} the environment to typeset tables (and more) is called
+\ei{tabular}. While it can be used on its own, the resulting table layouts look
+extremely old fashioned. We recommend to add the \pai*{booktabs} package which
+provides several commands that let you typeset beautiful modern looking tables.
+To achieve some more advanced table layouts you will also learn about the
+\pai*{longtable}, \pai*{array} and \pai*{multirow} packages in this section.
+They are so useful, that you probably want to put them all into the preamble of
+your document right away.
 
-The \ei{tabular} environment can be used to typeset beautiful
-\wi{table}s with optional horizontal and vertical lines. \LaTeX{}
-determines the width of the columns automatically.
+In addition to the description description of the commands, the \pai{booktabs}
+package documentation \cite{pack:booktabs} contains guidelines on typesetting
+professional-looking tables. We have taken these guidelines to heart when
+writing this booklet. You will find some of them in this section.
 
-The \emph{table spec} argument of the
+\subsubsection{Basic tables} \label{foo}
+
+The environment \ei{tabular} has the following form
 \begin{lscommand}
-\verb|\begin{tabular}[|\emph{pos}\verb|]{|\emph{table spec}\verb|}|
+  \ei*{tabular}[pos:o ! colspec:m]
+\end{lscommand} %
+The \carg{colspec} argument, which stands for columns specifiers, defines the
+format of the columns in the table. Use an \cargv{l} for a column of left-aligned text,
+\cargv{r} for right-aligned text, and \cargv{c} for centred text. Inside the
+environment use \ai{\&} to go to next cell within the row and
+\ci{\textbackslash} to go to the next row.
+\begin{example}
+\begin{tabular}{lcr}
+  left & centre & right \\
+  1    & 2      & 3     \\
+\end{tabular}
+\end{example}
+Note that the text inside the cells will not be wrapped. If you want the column
+to contain justified text with linebreaks use the \cargv{p\{\carg{width}\}}
+column specifier, where \carg{width} is the width of the column.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lrp{3cm}}
+  left & right & Very long paragraph
+                 that gets broken into
+                 multiple lines. \\
+  1    & 2     & Another one,
+                 but shorter. \\
+\end{tabular}
+\end{example}
+
+The optional \carg{pos} argument specifies the vertical position of the table
+with respect to baseline of the text. There are three possible alignments:
+\cargv{c} centres the table (the default), \cargv{t} matches the baseline of
+the top row and \cargv{b} matches the baseline of the bottom row.
+\begin{example}[examplewidth=0.55\linewidth]
+text
+\begin{tabular}{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\begin{tabular}[t]{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\begin{tabular}[b]{ll}
+  1 & 2 \\
+  3 & 4 \\
+\end{tabular}
+text
+\end{example}
+
+
+What we have shown so far allows aligning some items in rows and columns,
+but real tables need visible headings. To insert them use the commands
+\ci{toprule}, \ci{midrule} and \ci{bottomrule} from the \pai{booktabs} package.
+All of these accept an optional argument that specifies their thickness, but
+usually the default settings are just fine.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lcl}
+  \toprule
+  Alignment & Letter & Niceness  \\
+  \midrule
+  Left      & l      & Very nice \\
+  Centre     & c      & Very nice \\
+  Right     & r      & Very nice \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+With these commands you are already able to produce simple, yet nicely looking
+tables. You may be are wondering why we have not mentioned how to add vertical
+lines between the columns. Well, we did not mention them because the first rule
+of producing professional-looking tables is that you \emph{must not} use
+vertical lines.
+
+The second rule is to never use double lines such as these:
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{lll}
+  \toprule[0.1cm]
+  \toprule
+  Person      & Face & Table    \\
+  \midrule
+  \midrule
+  Me          & :(   & Not nice \\
+  You         & :[   & Awful    \\
+  Your reader & :<   & Terrible \\
+  \bottomrule
+  \bottomrule[0.1cm]
+\end{tabular}
+\end{example}
+As you can see the lines are already of different weight in order to signify
+their meaning. Using more lines than is necessary means cluttering the space
+without adding information. If you stick to these two rules your tables will
+look quite good already.
+
+To make the tables look even more sleek you may want to remove the padding in the
+first and last column. To control the space between the columns use the
+\cargv{@\{\carg{sep}\}} column specifier, where \carg{sep} is either text or
+space. Space of arbitrary length can be inserted using the \ci{hspace}[width]
+command. The contents of the \carg{sep} arguments will be put between cells in
+the relevant column.
+\begin{example}[examplewidth=0.3\linewidth]
+\begin{tabular}{
+  @{a} c @{\hspace{1cm}} c @{|} c @{ b}
+}
+  1 & 2 & 3 \\
+  4 & 5 & 6\\
+  7 & 8 & 9\\
+\end{tabular}
+\end{example}
+If you leave the \carg{sep} empty it will suppress the padding between the
+columns.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Person      & Face & Table       \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & :>   & Informative \\
+  \bottomrule
+\end{tabular}
+\end{example}
+
+Sometimes it may make sense to group columns under one heading. To achieve this
+we need two things: a way to group multiple heading columns and have a line
+covering the same columns, to sit underneath the merged heading cell. Use the 
+\begin{lscommand}
+  \ci*{multicolumn}[ncols:m ! colspec:m ! text:m]
 \end{lscommand}
-\noindent command defines the format of the table. Use an \mfr{l} for a column of
-left-aligned text, \mfr{r} for right-aligned text, and \mfr{c} for
-centered text; \mfr{p\{\emph{width}\}} for a column containing justified
-text with line breaks, and \mfr{|} for a vertical line.
-
-If the text in a column is too wide for the page, \LaTeX{} won't
-automatically wrap it. Using \mfr{p\{\emph{width}\}} you can define
-a special type of column which will wrap-around the text as in a normal paragraph.
-
-The \emph{pos} argument specifies the vertical position of the table
-relative to the baseline of the surrounding text.  Use one of the
-letters \mfr{t}, \mfr{b} and \mfr{c} to specify table
-alignment at the top, bottom or centre.
-
-Within a \texttt{tabular} environment, \texttt{\&} jumps to the next
-column, \ci{\bs} starts a new line and \ci{hline} inserts a horizontal
-line.  Add partial lines by using \ci{cline}\texttt{\{}$i$\texttt{-}$j$\texttt{\}},
-where $i$ and $j$ are the column numbers the line should extend over.
-
-\index{"|@ \verb."|.}
-
-\begin{example}
-\begin{tabular}{|r|l|}
-\hline
-7C0 & hexadecimal \\
-3700 & octal \\ \cline{2-2}
-11111000000 & binary \\
-\hline \hline
-1984 & decimal \\
-\hline
+merge the cells. The \carg{ncols} argument indicates how many columns should
+the \carg{text} span, while the \carg{colspec} is the column specification for
+the new content---the same as when starting a \ei{tabular} environment.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Person      & Face & Table       \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & \multicolumn{2}{c}{
+                  Not available}   \\
+  \bottomrule
 \end{tabular}
 \end{example}
 
-\begin{example}
-\begin{tabular}{|p{4.7cm}|}
-\hline
-Welcome to Boxy's paragraph.
-We sincerely hope you'll
-all enjoy the show.\\
-\hline
+To get a horizontal line to span multiple columns, use the command
+\begin{lscommand}
+  \ci*{cmidrule}[dim:o ! trim:p ! a--b:m]
+\end{lscommand}
+While the command uses nonstandard syntax for \carg{trim}, this is just an
+optional argument with different pair of delimiters.\footnote{This syntax
+allows to specify the second optional argument without specifying the first,
+which would be impossible if square brackets were used for both.} The
+\carg{dim} allows us to specify the thickness of the line. The \carg{trim}
+argument accepts any combination of \cargv{r}, \cargv{r\{\carg{dim}\}},
+\cargv{l} or \cargv{l\{\carg{dim}\}}. This allows you trim the rule from right
+or left, either by the package default or the specified \carg{dim}. It is
+usually recommended to trim the rules from the side where they touch other
+columns. Finally the only required argument \carg{a--b} is the span of columns
+to draw the line over.
+\begin{example}[examplewidth=0.43\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+              & \multicolumn{2}{c}{
+                  Reaction}        \\
+  \cmidrule(l){2-3}
+  Person      & Face & Exclamation \\
+  \midrule
+  Me          & :)   & Nice        \\
+  You         & :]   & Sleek       \\
+  Your reader & \multicolumn{2}{c}{
+                  Not available}   \\
+  \bottomrule
 \end{tabular}
 \end{example}
 
-The column separator can be specified with the \mfr{@\{...\}}
-construct. This command kills the inter-column space and replaces it
-with whatever is between the curly braces. 
-Common application is to suppress leading space in a table with
-\mfr{@\{\}}.
-
-\begin{example}
-\begin{tabular}{@{} l @{}}
-\hline
-no leading space\\
-\hline
+If you need a cell to span multiple rows instead of columns, then you have to
+use package \pai{multirow}. Its main command is a little more complicated
+\begin{lscommand}
+  \ci*{multirow}[vpos:o ! nrows:m ! width:m ! vmove:o ! text:m]
+\end{lscommand}
+The arguments are
+\begin{description}
+  \item[\carg{vpos}] is the vertical position of the text within the cell.
+    Can be either \cargv{c} for centre (the default), \cargv{t} for top or
+    \cargv{b} for bottom.
+  \item[\carg{nrows}] is the number of rows for the new cell to span.
+  \item[\carg{width}] is the width of the cell. Apart from a regular length,
+    you can also pass two special arguments here: \cargv{*} for the natural
+    length of the text and \cargv{=} for the same width as the column (this
+    only makes sense if the column width was specified, for example via
+    \cargv{p\{3cm\}}).
+  \item[\carg{vmove}] allows adjusting the position of the text if it sits too
+    low or too high.
+  \item[\carg{text}] is the text to be put in the cell.
+\end{description}
+Unlike with \ci{multicolumn} you still have to write all the cells in remaining
+rows, but they should be empty.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{@{}lll@{}}
+  \toprule
+                & \multicolumn{2}{c}{
+                    Reaction}        \\
+  \cmidrule(l){2-3}
+  Person        & Face & Exclamation \\
+  \midrule
+  \multirow[t]{
+    2}{*}{VIPs} & :)   & Nice        \\
+                & :]   & Sleek       \\
+  Others        & \multicolumn{2}{c}{
+                    Not available}   \\
+  \bottomrule
 \end{tabular}
 \end{example}
-
-\begin{example}
-\begin{tabular}{l}
-\hline
-leading space left and right\\
-\hline
-\end{tabular}
-\end{example}
-
-%
-% This part by Mike Ressler
-%
+In general it is not a good idea to use the \ci{multirow} command for showing
+values common to multiple rows. Usually repeating the values in question makes
+the table more readable.
 
 When typesetting numerical data in the table, you may want to align it by
-decimal point. A way to do this will be described in section~\ref{sec:sitables}.
+decimal point. A way to do this (and more) is described in
+section~\ref{sec:sitables}. The section also contains some guidelines about
+typesetting numerical data in tables.
 
-\begin{example}
-\begin{tabular}{|c|c|}
-\hline
-\multicolumn{2}{|c|}{Ene} \\
-\hline
-Mene & Muh! \\
-\hline
-\end{tabular}
-\end{example}
+\subsubsection{Long tables}
 
 Material typeset with the tabular environment always stays together on one
-page. If you want to typeset long tables, you might want to use the
-\pai{longtable} environments.
-
-Sometimes the default \LaTeX{} tables do feel a bit cramped. So you may want
-to give them a bit more breathing space by setting a higher
-\ci{arraystretch} and \ci{tabcolsep} value.
-
-\begin{example}[examplewidth=0.3\linewidth]
-\begin{tabular}{|l|}
-\hline
-These lines\\\hline
-are tight\\\hline
+page. This poses a problem for especially long tables. If your table is not
+very wide you may get away with it by typesetting its rows side by side. You
+should then put a bigger space between those to indicate that these are
+separate either by using \cargv{@\{...\}} or by putting an empty column between
+those.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{@{}cllcl@{}}
+  \toprule
+  Digit & Word  && Digit & Word  \\
+  \midrule
+  0     & Zero  && 5     & Five  \\
+  1     & One   && 6     & Six   \\
+  2     & Two   && 7     & Seven \\
+  3     & Three && 8     & Eight \\
+  4     & Four  && 9     & Nine  \\
+  \bottomrule
 \end{tabular}
-
-{\RenewDocumentCommand{\arraystretch}{}{1.5}
-\RenewDocumentCommand{\tabcolsep}{}{0.2cm}
-\begin{tabular}{|l|}
-\hline
-less cramped\\\hline
-table layout\\\hline
-\end{tabular}}
-
 \end{example}
 
-If you just want to grow the height of a single row in your table add an invisible vertical bar\footnote{In professional typesetting,
-this is called a \wi{strut}.}. Use a zero width \ci{rule} to implement this trick.
+This approach will obviously not work for \emph{really} long tables. This is
+where the \pai{longtable} package shines. It defines a \ei{longtable}
+environment that works similarly to \ei{tabular} environment, but allows
+pagebreaks inside.
 
+\begin{lscommand}
+  \ei*{longtable}[align:o ! colspec:m]
+\end{lscommand}
+In contrast to \ei{tabular}, the \ei{longtable} always starts a new paragraph
+and is centred by default. Thus the optional argument \carg{align} specifies
+whether the table should be centred, on the left or on the right. Use
+\cargv{c}, \cargv{l} and \cargv{r} to specify this. The \carg{colspec} argument
+is the same as in the \ei{tabular} environment.
+
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \toprule
+  Number & Word   \\
+  \midrule
+  0      & Zero   \\
+  1      & One    \\
+  2      & Two    \\
+  % ...
+%!hidebegin
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten       \\
+  11     & Eleven    \\
+  12     & Twelve    \\
+  13     & Thirteen  \\
+  14     & Fourteen  \\
+  15     & Fifteen   \\
+  16     & Sixteen   \\
+  17     & Seventeen \\
+  18     & Eighteen  \\
+  19     & Nineteen  \\
+%!hideend
+  20     & Twenty \\
+  \bottomrule
+\end{longtable}
+\end{document} %!hide
+\end{example}
+
+Note that the pagebreaks are always placed between rows. If you have some tall
+row thanks to \cargv{p\{...\}} specification, it will not broken. 
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{
+  cp{1cm}
+}
+  \toprule
+  Number & Words  \\
+  \midrule
+  0      & Zero   \\
+  1      & Multi
+           paragraph
+           text.
+
+           It makes
+           the table
+           cell very
+           tall.  \\
+  2      & Two    \\
+  \bottomrule
+\end{longtable}
+\end{document} %!hide
+\end{example}
+
+The \ei{longtable} environment defines also some additional commands that end
+table rows. One of them is \ci{\textbackslash*} which, similarly to its
+paragraph use, prohibits pagebreak after the row. Another useful commands are
+\ci{endhead}, \ci{endfirsthead}, \ci{endfoot} and \ci{endlastfoot}. If you end
+the row with them they will set the preceding rows as headers and footers of
+the table. The \ci{endhead} and \ci{endfoot} put the headers and footers on
+every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
+and last page. An example of using these commands is presented in
+figure~\ref{ex:longtable}.
+\begin{figure}[htp]
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \toprule
+  \multicolumn{2}{c}{
+    V.~Important Table} \\
+  Number & Word         \\
+  \midrule \endfirsthead
+
+  \toprule
+  \multicolumn{2}{c}{
+    VIT (continued)} \\
+  Number & Word      \\
+  \midrule \endhead
+
+  \midrule
+  \multicolumn{2}{c}{
+    Not the end} \\
+  \bottomrule \endfoot
+
+  \midrule
+  \multicolumn{2}{c}{
+    The end of VIT} \\
+  \bottomrule \endlastfoot
+
+  0      & Zero   \\
+  1      & One    \\
+  % ...
+%!hidebegin
+  2      & Two     \\
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten    \\
+  11     & Eleven \\
+  %!hideend
+  12     & Twelve \\
+\end{longtable}
+\end{document} %!hide 
+\end{example}
+\caption{An example of \ei{longtable} with running headers and footers.} \label{ex:longtable}
+\end{figure}
+
+Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
+the \ei{longtable} environment, the table may get very complicated and \LaTeX{}
+will then need several passes to properly calculate the column widths.
+
+\subsubsection{Advanced tables and non-tables}
+
+In regular text you can specify the amount of space between two lines as an
+optional argument to the \ci{\textbackslash} command. Can the same be done
+within the table? It turns out that it can, but there is one caveat. If you use
+it together with a \cargv{p\{...\}} column, the space specified will be different
+depending on column order.
+\begin{example}[standalone, paperheight=2.6cm]
+\noindent %!hide
+\begin{tabular}{lp{1cm}}
+  1 & 2\newline x \\[1cm]
+  3 & 4           \\
+\end{tabular}
+\begin{tabular}{p{1cm}l}
+  2\newline x & 1 \\[1cm]
+  4           & 3 \\
+\end{tabular}
+\end{example}
+This counterintuitive behaviour is caused by the fact that the space to add is
+calculated based on the last column. In order to prevent that simply add
+\verb|\usepackage{array}| to your preamble. Since there are no downsides to
+this, it is recommended to always use this package when starting a new document
+to avoid breaking tables that rely on the original behaviour later. The
+\pai{array} package also defines some additional column specifiers.
+
+The \cargv{p\{...\}} specifier allows to insert text with linebreaks into the
+table. The text always starts from the top though, so the \pai{array} package
+defines two additional specifiers \cargv{m\{...\}} for vertically centred text
+and \cargv{b\{...\}} for text put vertically at the bottom.
 \begin{example}
-\begin{tabular}{|c|}
-\hline
-\rule{1pt}{4ex}Pitprop \ldots\\
-\hline
-\rule{0pt}{4ex}Strut\\
-\hline
+\begin{tabular}{
+  lp{1.4cm}m{1.4cm}b{1.4cm}
+}
+  Cell                 &
+  Top matches cell.    &
+  Centre matches cell. &
+  Bottom matches cell. \\
 \end{tabular}
 \end{example}
 
-The \texttt{pt} and \texttt{ex} in the example above are \TeX{} units. Read more
-on units in table \ref{units} on page \pageref{units}.
+When a column must be formatted a certain way it is inconvenient to put
+the same commands in every cell. Moreover if you decide that something needs to
+be changed about the formatting, then you would have to edit every cell
+individually. To avoid that, the \pai{array} package defines
+\cargv{>\{\carg{cmds}\}} and \cargv{<\{\carg{cmds}\}} column specifiers which
+can be used to put some code before and after a column.
+\begin{example}
+\begin{tabular}{
+  l
+  >{\begin{em}}l<{\end{em}}
+}
+  normal text & emphasised text \\
+  normal text & emphasised text \\
+  normal text & emphasised text \\
+\end{tabular}
+\end{example}
 
-A number of extra commands, enhancing the tabular environment are available
-in the \pai{booktabs} package. It makes the creation of professional looking
-tables with proper spacing quite a bit simpler.
+Some environments change the meaning of the \ci{\textbackslash} command thus
+making it unavailable to go to the next row. In such occasions you may use the
+\ci{tabularnewline} command.
+\begin{example}
+\begin{tabular}{
+  >{\begin{flushleft}}
+    p{2cm}
+  <{\end{flushleft}}
+  >{\begin{flushright}}
+    p{2cm}
+  <{\end{flushright}}
+}
+  This cell will
+    be flushed left. &
+  This cell will
+    be flushed right.
+  \tabularnewline
 
+  This \\ is newline &
+  Here \\ too
+  \tabularnewline
+\end{tabular}
+\end{example}
 
+While using \cargv{>\{...\}} and \cargv{<\{...\}} comes handy if we only have
+one such column, it quickly becomes inconvenient when many column of the same
+type appear in any tables. In that case it may be desirable to use the command
+\begin{lscommand}
+  \ci*{newcolumntype}[newcolspec:m ! definition:m]
+\end{lscommand}
+where \carg{newcolspec} is a single letter used for specification of columns
+and the \carg{definition} is what should be inserted in the table when using
+it.
+\begin{example}
+\newcolumntype{e}{
+  >{\begin{em}\begin{flushleft}}
+  p{2.5cm}
+  <{\end{flushleft}\end{em}}
+}
+\begin{tabular}{ee}
+  This cell will
+    be flushed left
+    and emphasised. &
+  This cell will
+    be flushed left
+    and emphasised.
+  \tabularnewline
+
+  This cell will
+    be flushed left
+    and emphasised. &
+  This cell will
+    be flushed left
+    and emphasised.
+  \tabularnewline
+\end{tabular}
+\end{example}
+
+In order to create a tic-tac-toe grid you need to put some vertical and
+horizontal lines of the same width. In order to do so you may use the
+\cargv{|}~(vertical bar) column specifier for vertical rules and \ci{hline} for
+horizontal rules.
+\begin{example}
+\begin{tabular}{c|c|c}
+  O & X & O \\
+  \hline
+  X & X & O \\
+  \hline
+  X & O & X \\
+\end{tabular}
+\end{example} 
+In case your grid gets more complicated you may also need the \ci{cline}[a--b]
+command which draws horizontal line that spans only over the specified rows.
+\begin{example}[examplewidth=0.4\linewidth]
+\begin{tabular}{|cccc|}
+  \cline{4-4}
+  a & a & \multicolumn{1}{c|}{a} & b \\
+  \cline{2-3}
+  a & \multicolumn{1}{|c}{b} & b & b \\
+  \cline{2-2}
+  a & a & \multicolumn{1}{|c}{b} & b \\
+  \cline{1-2}
+\end{tabular}
+\end{example} 
 
 \section{Including Graphics and Images}\label{eps}
 
@@ -1273,7 +1713,7 @@ include a picture into your document:
 \item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
 \item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
 prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
-Note that it may be sensible to export EPS eventhough your software can export PDF too, as PDFs often are full page and will
+Note that it may be sensible to export EPS even though your software can export PDF too, as PDFs often are full page and will
 thus get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
 \item Load the \textsf{graphicx} package in the preamble of the input
   file with
@@ -1297,10 +1737,12 @@ most important keys.
 \label{keyvals}
 \begin{tabular}{@{}ll@{}}
   \toprule
-\texttt{width}& scale graphic to the specified width\\
-\texttt{height}& scale graphic to the specified height\\
-\texttt{angle}& rotate graphic counterclockwise\\
-\texttt{scale}& scale graphic \\
+  Key & Effect \\
+  \midrule
+  \cargv{width}& scale graphic to the specified width\\
+  \cargv{height}& scale graphic to the specified height\\
+  \cargv{angle}& rotate graphic counterclockwise\\
+  \cargv{scale}& scale graphic \\
 \bottomrule
 \end{tabular}
 
@@ -1483,6 +1925,62 @@ Under certain circumstances it might be necessary to use the
 \noindent command. It orders \LaTeX{} to immediately place all
 floats remaining in the queues and then start a new
 page. \ci{cleardoublepage} even goes to a new right-hand page.
+
+\subsection{The \ei{longtable} environment}
+
+Floating bodies occupy only a single page, thus putting \ei{longtable} into
+them does not make sense. Still you may want to have the \ei{longtable} listed
+in the list of tables with some caption. The \pai{longtable} package defines
+its own \ci{caption} command that you may use inside the environment. Its use
+is similar to the standard \ci{caption} command except that they are treated as
+rows. If you pass empty optional argument to the \ci{caption} command it will
+typeset normally but it won't be put in the list of tables, which is useful if
+you want to have a running caption.
+
+\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.1cm] 
+%!hidebegin
+\documentclass{article}
+
+\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+\begin{document}
+%!hideend
+\begin{longtable}{cl}
+  \caption{Numbers} \\
+  \toprule
+  Number & Word         \\
+  \midrule \endfirsthead
+
+  \caption[]{(continued)} \\
+  \toprule
+  Number & Word      \\
+  \midrule \endhead
+
+  \bottomrule \endfoot
+  \bottomrule \endlastfoot
+
+  0      & Zero   \\
+  1      & One    \\
+  % ...
+%!hidebegin
+  2      & Two     \\
+  3      & Three \\
+  4      & Four  \\
+  5      & Five  \\
+  6      & Six   \\
+  7      & Seven \\
+  8      & Eight \\
+  9      & Nine  \\
+  10     & Ten    \\
+  11     & Eleven \\
+  %!hideend
+  12     & Twelve \\
+\end{longtable}
+\end{document} %!hide 
+\end{example}
+
 
 % Local Variables:
 % TeX-master: "lshort2e"
