@@ -8,8 +8,8 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 
 # Define some variables
 LATEX=latex
-PDFLATEX=xelatex --enable-write18
-PDFLATEX_DEBUG_ARGS=-synctex=1 -interaction=nonstopmode -file-line-error
+PDFLATEX=xelatex --enable-write18 -interaction=nonstopmode
+PDFLATEX_DEBUG_ARGS=-synctex=1 -file-line-error
 MAKEINDEX=makeindex
 DVIPS=dvips
 
@@ -29,7 +29,7 @@ lulu: lshort-body.pdf lshort-title.pdf
 	mv $@ .. )
 
 src/title.tex: Makefile fixdate.pl src/title.template.tex
-	perl fixdate.pl $(VERS) < src/title.template.tex > src/title.tex
+	perl fixdate.pl $(VERS) $(GITHUB_SHA) < src/title.template.tex > src/title.tex
 
 quick: $(FILES)
 	-mkdir pdfbuild
