@@ -101,64 +101,430 @@ and \'ecole examples above.
 \section{Fancy Headers}
 \label{sec:fancy}
 
-The \pai{fancyhdr} package,\footnote{Available from
-  \CTAN|macros/latex/contrib/supported/fancyhdr|.} written by
-Piet van Oostrum, provides a few simple commands that allow you to
-customize the header and footer lines of your document.  Look
-at the top of this page, for an application of this
-package.
+\subsection{Basic commands}
 
-\begin{figure}[!htbp]
-\begin{lined}{\textwidth}
-\begin{verbatim}
-\documentclass{book}
+The \pai*{fancyhdr} package provides a few simple commands that allow you to
+customise the header and footer lines of your document. It defines an
+additional page style \cargv{fancy} that can be customised to our liking. By
+default it only adds a line separating header from the page body.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide 
+%!showbegin %!hide
+\documentclass{article}
+
+%!showend %!hide
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-% with this we ensure that the chapter and section
-% headings are in lowercase.
-\RenewDocumentCommand{\chaptermark}{m}{%
-        \markboth{#1}{}}
+
+\begin{document}
+\noindent %!hide
+This statement is false.
+\end{document}
+\end{example}
+
+The basic command of the package is
+\begin{lscommand}
+  \ci{fancyhf}[places][field]
+\end{lscommand}
+The \carg{places} is a comma separated list of places to put the \carg{field}
+argument. There are total of 12 different places and each is identified by a
+combination of three letters:
+\begin{itemize}
+  \item The first letter tells whether it is in a header (\cargv{H}) or in a
+  footer (\cargv{F}).
+  \item The second letter tells which part of the header\slash footer should be
+  occupied. The possible positions are left (\cargv{L}), centre (\cargv{C}) and
+  right (\cargv{R}).
+  \item The third letter tells whether the field should be printed on even
+  (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
+  all pages are treated as odd.
+\end{itemize}
+So for example the combination \cargv{FCE} identifies the centre part of the
+footer on even pages. If any of the letters is omitted then the identifier
+points toward all positions specifiable by the omitted letter, so for example
+\cargv{HR} means right part of the header on both odd and even pages.
+\begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
+\documentclass[twoside]{article}
+
+%!hidebegin
+\usepackage[paperheight=\height,
+    paperwidth=\width,
+    margin=0.3cm,
+    includefoot,
+    includehead,
+    headsep=.5em,
+    footskip=1em
+]{geometry}
+%!hideend
+\usepackage{fancyhdr} 
+\pagestyle{fancy}
+
+\fancyhf[HCE]{A}
+\fancyhf[L]{\emph{B}}
+\fancyhf[FR]{\textbf{C}}
+\fancyhf[HCO, HRE]{\textsl{D}}
+
+\begin{document}
+\noindent %!hide
+The next statement is false.
+The previous statement is true.
+\end{document}
+\end{example}
+
+There are two additional commands \ci{fancyhead} and \ci{fancyfoot} that work
+the same way except that they imply respectively \cargv{H} and \cargv{F} in
+their \carg{places} argument if it's missing.
+\begin{example}[standalone, paperheight=3.5cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{csquotes} %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{A}
+\fancyfoot[R]{B}
+
+\begin{document}%!hide
+\noindent %!hide
+\enquote{Yields a falsehood when
+appended to its own quotation}
+yields a falsehood when appended
+to its own quotation.
+\end{document}%!hide
+\end{example}
+
+The lines drawn by the \pai{fancyhdr} package may also be customised. To change
+their thickness redefine the
+\begin{lscommand}
+  \ci{headrulewidth} \\
+  \ci{footrulewidth}
+\end{lscommand}
+macros to the desired length.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr} %!hide
+\pagestyle{fancy} %!hide
+\RenewDocumentCommand{\headrulewidth}{}{.2cm}
+\RenewDocumentCommand{\footrulewidth}{}{.5cm}
+
+\begin{document}%!hide
+\noindent %!hide
+Do not read this sentence.
+\end{document}%!hide
+\end{example}
+
+By default headers and footers are as long as the text on the page. If you want
+to extend\slash shorten them use the
+\begin{lscommand}
+  \ci{fancyhfoffset}[places][offset]
+\end{lscommand}
+command. The \carg{places} argument is the same as in \ci{fancyhf} except that
+it cannot contain \cargv{C}.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhfoffset[L]{-1cm}
+\fancyhfoffset[R]{.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+If this sentence is true,
+then \(2 + 2 = 5\).
+\end{document}%!hide
+\end{example}
+Similarly to \ci{fancyf}, \ci{fancyheadoffset} and \ci{fancyfootoffset} are
+used the same way except they only modify header\slash footer.
+
+\subsection{Contents of the headers}
+
+The default footer of the article class contains the current page number. To
+use it inside the fancy header simply use the command \ci{thepage}.
+\begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhf{Page~\thepage}
+
+\begin{document}%!hide
+\noindent %!hide
+This statement is dedicated to
+all statements that are not
+dedicated to themselves. 
+\end{document}%!hide
+\end{example}
+
+It is often useful to have the header and footer contain information based on
+the contents of the page. These are called \enquote{marks} in \LaTeX{}
+terminology. Before we talk about the default ones let's consider how you can
+define your own using the \pai{extramarks}:\footnote{\pai{extramarks} is part
+of \pai*{fancyhdr}.}
+\begin{lscommand}
+  \ci*{extramarks}[left:m ! right:m] \\
+  \ci{firstleftxmark} \\
+  \ci{firstrightxmark} \\
+  \ci{lastleftxmark} \\
+  \ci{lastrightxmark}
+\end{lscommand}
+The \ci{extramarks} is used to set the contents of \carg{left} and \carg{right}
+marks. Then you can access those inside the headers by using the appropriate
+command. The \texttt{first}- command refer to the first mark occurring on the
+page, while the \texttt{last}- refer to the last one.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{\firstleftxmark}
+\fancyhead[R]{\lastleftxmark}
+\fancyfoot[L]{\firstrightxmark}
+\fancyfoot[R]{\lastrightxmark}
+
+\begin{document} %!hide
+\noindent %!hide
+The second statement is false.
+\extramarks{One}{2 is false}
+The third statement is false.
+\extramarks{Two}{1 is false}
+The first statement is false.
+\extramarks{Three}{3 is false}
+\end{document} %!hide
+\end{example}
+
+Let us now look at the default marks defined by \LaTeX{}. After loading
+\pai{extramarks} these may be set and accessed similarly:
+\begin{lscommand}
+  \ci*{markboth}[left:m ! right:m] \\
+  \ci{firstleftmark} \\
+  \ci{firstrightmark} \\
+  \ci{lastleftmark} \\
+  \ci{lastrightmark}
+\end{lscommand}
+The only difference between these and the extra marks is that \LaTeX{} classes
+automatically fill them, so if you are not careful you may lose your content.
+For example in the article class, \carg{left} is set by the \ci{section}
+command, while \carg{right} is set by the \ci{subsection} command.
+\begin{example}[standalone, paperheight=5cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\firstleftmark}
+\fancyhead[R]{\lastleftmark}
+\fancyfoot[L]{\firstrightmark}
+\fancyfoot[R]{\lastrightmark}
+
+\begin{document}%!hide
+\section{First}
+\subsection{Sub}
+\section{Second}
+\subsection{Sub}
+\end{document}%!hide
+\end{example}
+Note that \ci{firstrightmark} is empty in the above example. This is caused by
+the fact that \ci{section} commands sets both marks, leaving the right one
+empty.
+
+You may have noticed that section titles are typeset in uppercase when given by
+marks. To disable this use the \ci{nouppercase} command inside the \ci{fancyhf}
+command.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{\nouppercase{\firstleftmark}}
+
+\begin{document}%!hide
+\section{Today}
+is opposite day.
+\end{document}%!hide
+\end{example}
+
+\subsection{Advanced commands}
+
+If you want even more control over the section titles you may redefine the
+\ci{sectionmark}.\footnote{Or \ci{chaptermark}, \ci{subsectionmark} \ldots} The
+command receives the section title as its first argument, while the section
+number is available as \ci{thesection}.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{\firstleftmark}
 \RenewDocumentCommand{\sectionmark}{m}{%
-        \markright{\thesection\ #1}}
-\fancyhf{}  % delete current header and footer
-\fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\rightmark}
-\fancyhead[RE]{\bfseries\leftmark}
-\RenewDocumentCommand{\headrulewidth}{}{0.5pt}
-\RenewDocumentCommand{\footrulewidth}{}{0pt}
-\addtolength{\headheight}{0.5pt} % space for the rule
-\fancypagestyle{plain}{%
-   \fancyhead{} % get rid of headers on plain pages
-   \RenewDocumentCommand{\headrulewidth}{}{0pt} % and the line
+  \markboth{Section no.\,\thesection: #1}{}%
 }
-\end{verbatim}
-\end{lined}
-\caption{Example \pai{fancyhdr} Setup.} \label{fancyhdr}
+
+\begin{document}%!hide
+\section{Person}
+There exists a person such that
+if they are reading this then
+everybody is reading this.
+\end{document}%!hide
+\end{example}
+In case you want to change only the right mark, the \ci{markright} command is
+available.
+
+By default the field in the centre of header\slash footer will expand equally
+to the left and to the right. This is usually the desired behaviour but in some
+cases it may overlap with either left or right text, while still having some
+space on the other side.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\thepage}
+\fancyhead[C]{\firstleftmark}
+\fancyhead[R]{Jane Doe}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+In this situation you may want to use the
+\begin{lscommand}
+  \ci*{fancycenter}[distance:o ! stretch:o ! left:m ! centre:m ! right:m]
+\end{lscommand}
+command that automatically shifts the centre toward the shorter text. The
+\carg{distance} is the minimal distance that the elements are always surrounded
+with (\cargv{1em} by default), while the \carg{stretch} controls the preference
+for shifting the \carg{centre}: \cargv{1} means shift only when- and as much
+as necessary, higher numbers will start shifting sooner and more aggressively,
+default is \cargv{3}. This command writes over the whole header\slash footer
+space so it should only be put in one place (typically \cargv{C}) and other
+places (\cargv{L,R}) should be empty.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L,R]{}
+\fancyhead[C]{%
+  \fancycenter%
+    {\thepage}%
+    {\firstleftmark}%
+    {Jane Doe}%
+}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+
+You may want to present different headers\slash footers when the corresponding
+page starts with a float or ends with a footnote. The \pai{fancyhdr} package
+defines four commands that let you achieve this.
+\begin{lscommand}
+  \ci*{iftopfloat}[true branch:m ! false branch:m] \\
+  \ci*{ifbotfloat}[true branch:m ! false branch:m] \\
+  \ci*{iffloatpage}[true branch:m ! false branch:m] \\
+  \ci*{iffootnote}[true branch:m ! false branch:m]
+\end{lscommand}
+\ci{iftopfloat}/\ci{ifbotfloat} execute \carg{true branch} if a float sits at
+the top\slash bottom of the page. Similarly \ci{iffloatpage} checks whether
+the page is special float-only page and \ci{iffootnote} checks if footnote is
+at the bottom of the page.
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[C]{%
+  \iftopfloat{%
+    A float is below me%
+  } {}
+}
+\fancyfoot[C]{%
+  \iffootnote{%
+    A footnote is above me%
+  } {%
+    \thepage%
+  }%
+}
+
+\begin{document}%!hide
+\noindent %!hide
+Ignore this footnote.%
+\footnote{Read this.}
+\begin{figure}[t]
+  \centering
+  A floating float.
+  \caption{Hmm}
 \end{figure}
+\end{document}%!hide
+\end{example}
 
-The tricky problem when customising headers and footers is to get
-things like running section and chapter names in there. \LaTeX{}
-accomplishes this with a two-stage approach. In the header and footer
-definition, you use the commands \ci{rightmark} and \ci{leftmark} to
-represent the current section and chapter heading, respectively.
-The values of these two commands are overwritten whenever a chapter or
-section command is processed.
+The lines in headers and footers are created by invoking \ci{headrule} and
+\ci{footrule} commands. If you want finer control over the lines consider
+redefining these macros. Use \ci{headruleskip} and \ci{footruleskip} to raise
+or lower them if necessary.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\RenewDocumentCommand{\headrule}{}{
+  \rule{0.05\headwidth}{0.2cm}%
+  \rule[0.1cm]{0.9\headwidth}{\headrulewidth}%
+  \rule{0.05\headwidth}{0.2cm}%
+}
 
-For ultimate flexibility, the \verb|\chapter| command and its friends
-do not redefine \ci{rightmark} and \ci{leftmark} themselves. They call
-yet another command (\ci{chaptermark}, \ci{sectionmark}, or
-\ci{subsectionmark}) that is responsible for redefining \ci{rightmark}
-and \ci{leftmark}.
+\RenewDocumentCommand{\headruleskip}{}{-0.2cm}
 
-If you want to change the look of the chapter
-name in the header line, you need only ``renew'' the \ci{chaptermark}
-command. \cih{sectionmark}\cih{subsectionmark}
+\begin{document}%!hide
+\noindent %!hide
+My age is the first number not
+nameable in under twenty words.
+\end{document} %!hide
+\end{example}
 
+While working on a longer document you may want to have several page styles for
+different occasions. You may also notice that some commands (for example
+\ci{chapter}, \ci{maketitle}) change the page style to \cargv{plain} whether
+you want it or not. The solution to both of these problems is the
+\begin{lscommand}
+  \ci*{fancypagestyle}[name:m ! code:m]
+\end{lscommand}
+command. The \carg{name} is the name of page style to (re)define, while the
+\carg{code} is the code to set up the page style. All page styles declared this
+way use the \cargv{fancy} page style as its basis, so if empty \carg{code} is
+given they will match \cargv{fancy} exactly.
+ \begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\fancypagestyle{mine}{
+  \fancyhead[L]{My style}
+}
+\pagestyle{mine}
 
-Figure~\ref{fancyhdr} shows a possible setup for the \pai{fancyhdr}
-package that makes the headers look about the same as they look in
-this booklet. In any case, I suggest you fetch the documentation for
-the package at the address mentioned in the footnote.
+\begin{document}%!hide
+%!showbegin %!hide
+Were you expecting a paradox here?
+%!showend !hidebegin
+\noindent
+You may be disappointed.
+\end{document}
+\end{example}
 
 \section{The Verbatim Package}
 
