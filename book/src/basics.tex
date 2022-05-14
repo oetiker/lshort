@@ -674,11 +674,35 @@ with the command
 \begin{lscommand}
 \ci{thispagestyle}\verb|{|\emph{style}\verb|}|
 \end{lscommand}
-A description how to create your own
-headers and footers can be found in \companion{} and in section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
-%
-% Pointer to the Fancy headings Package description !
-%
+
+You may also control the style of the displayed page numbers. To change it use
+the
+\begin{lscommand}
+  \ci{pagenumbering}[style]
+\end{lscommand}
+command, where \carg{style} is one of the styles presented in
+table~\ref{tb:numberings}.
+
+\begin{table}[htp]
+  \centering
+  \caption{Possible argument of the \ci{pagenumbering} command.}
+  \label{tb:numberings}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Style          & Description                                   \\
+    \midrule
+    \cargv{arabic} & Arabic numerals (1, 2, 3, \ldots)             \\
+    \cargv{roman}  & Lowercase Roman numerals (i, ii, iii, \ldots) \\
+    \cargv{Roman}  & Uppercase Roman numerals (I, II, III, \ldots) \\
+    \cargv{alph}   & Lowercase Latin letters (a, b, c, \ldots)     \\
+    \cargv{Alph}   & Uppercase Latin letters (A, B, C, \ldots)     \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A description how to create your own headers and footers can be found in
+section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
+
 
 \section{Files You Might Encounter}
 
@@ -737,12 +761,6 @@ file:
 % Package Info pointer
 %
 %
-
-
-
-%
-% Add Info on page-numbering, ...
-% \pagenumbering
 
 \section{Big Projects}
 When working on big documents, you might want to split the input file
