@@ -69,6 +69,9 @@
 
   to_page .int_set:N  = \__lshortexample_to_page,
   to_page .initial:n  = 1,
+
+  vertical_pages .bool_set:N = \__lshortexample_vertical_pages_bool,
+  vertical_pages .initial:n = false,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -176,10 +179,15 @@
 \cs_new:Nn \lshortexample_typeset_standalone_example:nn {
   \group_begin:
   \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
-  \begin{minipage}{\dim_eval:n {
-    \linewidth - (\__lshortexample_paperwidth + 0.2pt) * (
-    \__lshortexample_to_page - \__lshortexample_from_page + 1)
-  }}
+  \dim_set:Nn \l_tmpa_dim {
+    \bool_if:NTF \__lshortexample_vertical_pages_bool {
+      \__lshortexample_paperwidth + 0.2pt
+    } {
+      (\__lshortexample_paperwidth + 0.2pt) * (
+      \__lshortexample_to_page - \__lshortexample_from_page + 1)
+    }
+  }
+  \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
     \small\verbatiminput{#2}
   \end{minipage}
   \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
@@ -196,17 +204,21 @@
       \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
     }
   }
-  \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-    \fancyframebox{0.1pt}{0pt}{
-      \begin{minipage}{\__lshortexample_paperwidth}
+  \begin{minipage}{\l_tmpa_dim}
+    \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
+      \fancyframebox{0.1pt}{0pt}{
         \includegraphics[
           width=\__lshortexample_paperwidth,
           page=##1]{
           \__lshortexample_cache_dir_tl\l_tmpb_tl
         }
-      \end{minipage}
+      }
+      \bool_if:nT {
+        \__lshortexample_vertical_pages_bool &&
+        !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
+      } {\\[-1pt]}
     }
-  }
+  \end{minipage}
   \group_end:
 }
 

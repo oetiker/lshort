@@ -1411,11 +1411,8 @@ whether the table should be centred, on the left or on the right. Use
 \cargv{c}, \cargv{l} and \cargv{r} to specify this. The \carg{colspec} argument
 is the same as in the \ei{tabular} environment.
 
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+\begin{example}[standalone, to_page=2, paperwidth=4.5cm] 
 %!hidebegin
-\documentclass{article}
-
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
 \usepackage{longtable}
 \usepackage{booktabs}
 \begin{document}
@@ -1455,11 +1452,8 @@ is the same as in the \ei{tabular} environment.
 
 Note that the pagebreaks are always placed between rows. If you have some tall
 row thanks to \cargv{p\{...\}} specification, it will not broken. 
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.5cm] 
+\begin{example}[standalone, to_page=2, paperwidth=4.5cm] 
 %!hidebegin
-\documentclass{article}
-
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
 \usepackage{longtable}
 \usepackage{booktabs}
 \begin{document}
@@ -1495,11 +1489,8 @@ every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
 and last page. An example of using these commands is presented in
 figure~\ref{ex:longtable}.
 \begin{figure}[htp]
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.3cm] 
+\begin{example}[standalone, to_page=2, paperwidth=4.3cm] 
 %!hidebegin
-\documentclass{article}
-
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
 \usepackage{longtable}
 \usepackage{booktabs}
 \begin{document}
@@ -1561,6 +1552,7 @@ within the table? It turns out that it can, but there is one caveat. If you use
 it together with a \cargv{p\{...\}} column, the space specified will be different
 depending on column order.
 \begin{example}[standalone, paperheight=2.6cm]
+\begin{document} %!hide
 \noindent %!hide
 \begin{tabular}{lp{1cm}}
   1 & 2\newline x \\[1cm]
@@ -1569,7 +1561,8 @@ depending on column order.
 \begin{tabular}{p{1cm}l}
   2\newline x & 1 \\[1cm]
   4           & 3 \\
-\end{tabular}
+\end{tabular} 
+\end{document} %!hide
 \end{example}
 This counterintuitive behaviour is caused by the fact that the space to add is
 calculated based on the last column. In order to prevent that simply add
@@ -1937,11 +1930,8 @@ rows. If you pass empty optional argument to the \ci{caption} command it will
 typeset normally but it won't be put in the list of tables, which is useful if
 you want to have a running caption.
 
-\begin{example}[standalone, template=empty, to_page=2, paperwidth=4.1cm] 
+\begin{example}[standalone, to_page=2, paperwidth=4.1cm] 
 %!hidebegin
-\documentclass{article}
-
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm,includefoot]{geometry}
 \usepackage{longtable}
 \usepackage{booktabs}
 

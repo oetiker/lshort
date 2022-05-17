@@ -36,6 +36,7 @@ command defines how much space to reserve for the number of labels. In the examp
 \cargv{\{99\}} tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
 than the number 99.
 \begin{example}[standalone, paperwidth=7cm, paperheight=4cm]
+\begin{document} %!hide
 Partl~\cite{pa} has
 proposed that \ldots
 \begin{thebibliography}{99}
@@ -43,6 +44,7 @@ proposed that \ldots
 \emph{German \TeX},
 TUGboat Volume~9, Issue~1 (1988)
 \end{thebibliography}
+\end{document} %!hide
 \end{example}
 
 In order to get the citations typeset properly, two passes of \LaTeX{} compiler
@@ -212,20 +214,17 @@ entries in chronological order simply pass the \cargv{ynt} option. Other options
 allow sorting by citation order (\cargv{none}) and by the number of citations
 (\cargv{count}).
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=6.5cm,
   paperheight=5.5cm,
 ]
-\documentclass{article} %!hide
 % In preamble
 \usepackage[sorting=ynt]{biblatex}
 
 % ...
 %!hidebegin
 \sloppy
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 
 \begin{document}
@@ -240,13 +239,11 @@ setting the preferred style via the \carg{style} option. Choose from
 \cargv{authoryear}, \cargv{authortitle} or \cargv{verbose}. Some styles come in
 several variations.
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=6.5cm,
   paperheight=7.2cm,
 ]
-\documentclass{article} %!hide
 % In preamble
 \usepackage[
   style=alphabetic
@@ -255,7 +252,6 @@ several variations.
 % ...
 
 %!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 
@@ -281,16 +277,13 @@ instructing \pai{biblatex} to put them in the bibliography. The special value
 \cargv{*} can be passed as a \carg{marker} if you want to print all entries in
 the database.
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=7cm,
 ]
 %!hidebegin
-\documentclass{article} %!hide
 \usepackage{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \begin{document}
 \setlength{\parindent}{0pt}
@@ -310,16 +303,13 @@ several parts. This can be done by passing filter options to the
 different categories using \cargv{title} option.
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=6cm,
 ]
 %!hidebegin
-\documentclass{article} %!hide
 \usepackage{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \begin{document}
 \setlength{\parindent}{0pt}
@@ -358,16 +348,13 @@ options include
 \end{description}
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=7.6cm,
   paperheight=7.5cm,
 ]
 %!hidebegin
-\documentclass{article} %!hide
 \usepackage{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \begin{document}
 \setlength{\parindent}{0pt}
@@ -398,16 +385,13 @@ may be controlled via \cargv{maxnames} (default $3$) and \cargv{minnames}
 then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=3cm,
 ]
-\documentclass{article} %!hide
 \usepackage[maxnames=4]{biblatex}
 %!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -418,16 +402,13 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 \end{example}
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=3cm,
 ]
-\documentclass{article} %!hide
 \usepackage[minnames=2]{biblatex}
 %!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -453,16 +434,13 @@ parentheses), \ci{footcite} (in footnotes), \ci{textcite} (citation intended to
 be subject in a sentence), \ci{smartcite} (context dependent).
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=5cm,
 ]
 %!hidebegin
-\documentclass{article}
 \usepackage[style=alphabetic]{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -484,16 +462,13 @@ the bibliographic entry, and use the information directly in the text. This is i
 \ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=4cm,
 ]
 %!hidebegin
-\documentclass{article}
 \usepackage{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -512,15 +487,11 @@ If you want to be less tied to a specific style, the \ci{autocite}
 command follows the citation style specified in the package options.
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=4cm,
 ]
-%!hidebegin
-\documentclass{article}
-%!hideend
 \usepackage[
   style=verbose,
   autocite=footnote,
@@ -529,7 +500,6 @@ command follows the citation style specified in the package options.
 % ...
 
 %!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -542,15 +512,11 @@ This is auto citation \autocite{curie}.
 
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=2cm,
 ]
-%!hidebegin
-\documentclass{article}
-%!hideend
 \usepackage[
   style=authoryear,
   autocite=inline,
@@ -558,7 +524,6 @@ This is auto citation \autocite{curie}.
 
 % ...
 %!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -586,13 +551,11 @@ like this
 
 
 \begin{example}[standalone,
-  template=empty,
   biber,
   paperwidth=6cm,
   paperheight=7cm,
 ]
 %!hidebegin
-\documentclass{article}
 \begin{filecontents}{example2.bib} 
 %!hideend
 @xdata{krugers,
@@ -614,7 +577,6 @@ like this
 }
 \end{filecontents} %!hidebegin
 \usepackage{biblatex}
-\usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry}
 \addbibresource{example2.bib}
 \sloppy
 \begin{document}
