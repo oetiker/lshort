@@ -105,8 +105,8 @@ and \'ecole examples above.
 
 The \pai*{fancyhdr} package provides a few simple commands that allow you to
 customise the header and footer lines of your document. It defines an
-additional page style \cargv{fancy} that can be customised to our liking. By
-default it only adds a line separating header from the page body.
+additional page style \cargv{fancy} and a set of commands to customise it to our liking. By
+default it only adds a line separating the header from the page body.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide 
 %!showbegin %!hide
@@ -122,27 +122,25 @@ This statement is false.
 \end{document}
 \end{example}
 
-The basic command of the package is
+The primary command of the package is
 \begin{lscommand}
   \ci{fancyhf}[places][field]
 \end{lscommand}
-The \carg{places} is a comma separated list of places to put the \carg{field}
-argument. There are total of 12 different places and each is identified by a
+The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
 combination of three letters:
 \begin{itemize}
-  \item The first letter tells whether it is in a header (\cargv{H}) or in a
+  \item The first specifies whether the location is in the header (\cargv{H}) or in the
   footer (\cargv{F}).
-  \item The second letter tells which part of the header\slash footer should be
-  occupied. The possible positions are left (\cargv{L}), centre (\cargv{C}) and
-  right (\cargv{R}).
-  \item The third letter tells whether the field should be printed on even
+  \item The second letter specifies the location within the header\slash footer: \cargv{L} for left, \cargv{C} for center and
+  \cargv{R} for right.
+  \item The third letter defines whether the field should be printed on even
   (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
   all pages are treated as odd.
 \end{itemize}
 So for example the combination \cargv{FCE} identifies the centre part of the
 footer on even pages. If any of the letters is omitted then the identifier
 points toward all positions specifiable by the omitted letter, so for example
-\cargv{HR} means right part of the header on both odd and even pages.
+\cargv{HR} is right side of the header on both odd and even pages.
 \begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
 \documentclass[twoside]{article}
 
@@ -172,8 +170,8 @@ The previous statement is true.
 \end{example}
 
 There are two additional commands \ci{fancyhead} and \ci{fancyfoot} that work
-the same way except that they imply respectively \cargv{H} and \cargv{F} in
-their \carg{places} argument if it's missing.
+the same way except that they assume \cargv{H} and \cargv{F} respectively
+in their \carg{places} argument unless specified differently.
 \begin{example}[standalone, paperheight=3.5cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -199,7 +197,7 @@ their thickness redefine the
   \ci{headrulewidth} \\
   \ci{footrulewidth}
 \end{lscommand}
-macros to the desired length.
+macros to the desired size.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -260,8 +258,8 @@ dedicated to themselves.
 It is often useful to have the header and footer contain information based on
 the contents of the page. These are called \enquote{marks} in \LaTeX{}
 terminology. Before we talk about the default ones let's consider how you can
-define your own using the \pai{extramarks}:\footnote{\pai{extramarks} is part
-of \pai*{fancyhdr}.}
+define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
+of \pai*{fancyhdr}.} package.
 \begin{lscommand}
   \ci*{extramarks}[left:m ! right:m] \\
   \ci{firstleftxmark} \\
@@ -269,9 +267,9 @@ of \pai*{fancyhdr}.}
   \ci{lastleftxmark} \\
   \ci{lastrightxmark}
 \end{lscommand}
-The \ci{extramarks} is used to set the contents of \carg{left} and \carg{right}
-marks. Then you can access those inside the headers by using the appropriate
-command. The \texttt{first}- command refer to the first mark occurring on the
+The \ci{extramarks} command is used to set the contents of \carg{left} and \carg{right}
+marks. Then you can access these marks inside the headers by using the appropriate
+command. The \texttt{first}- commands refer to the first mark occurring on the
 page, while the \texttt{last}- refer to the last one.
 \begin{example}[standalone, paperheight=4cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -290,9 +288,9 @@ page, while the \texttt{last}- refer to the last one.
 The second statement is false.
 \extramarks{One}{2 is false}
 The third statement is false.
-\extramarks{Two}{1 is false}
+\extramarks{Two}{3 is false}
 The first statement is false.
-\extramarks{Three}{3 is false}
+\extramarks{Three}{1 is false}
 \end{document} %!hide
 \end{example}
 
@@ -307,6 +305,8 @@ Let us now look at the default marks defined by \LaTeX{}. After loading
 \end{lscommand}
 The only difference between these and the extra marks is that \LaTeX{} classes
 automatically fill them, so if you are not careful you may lose your content.
+\footnote{You may prevent this by setting the pagestyle to \cargv{myheadings} 
+and then redefining it to use it with \pai{fancyhdr} as describied later.}
 For example in the article class, \carg{left} is set by the \ci{section}
 command, while \carg{right} is set by the \ci{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
@@ -331,8 +331,8 @@ Note that \ci{firstrightmark} is empty in the above example. This is caused by
 the fact that \ci{section} commands sets both marks, leaving the right one
 empty.
 
-You may have noticed that section titles are typeset in uppercase when given by
-marks. To disable this use the \ci{nouppercase} command inside the \ci{fancyhf}
+You may have noticed that section titles are typeset in uppercase when provided by
+marks commands. To disable this use the \ci{nouppercase} command inside the \ci{fancyhf}
 command.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -372,10 +372,9 @@ if they are reading this then
 everybody is reading this.
 \end{document}%!hide
 \end{example}
-In case you want to change only the right mark, the \ci{markright} command is
-available.
+If you only want to change the right mark, use the \ci{markright} command.
 
-By default the field in the centre of header\slash footer will expand equally
+By default the field in the centre of the header\slash footer will expand equally
 to the left and to the right. This is usually the desired behaviour but in some
 cases it may overlap with either left or right text, while still having some
 space on the other side.
