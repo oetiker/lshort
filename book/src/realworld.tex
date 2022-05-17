@@ -111,7 +111,7 @@ by optimizing the contents of a whole paragraph. If necessary, it
 also hyphenates words that would not fit comfortably on a line.
 How the paragraphs are typeset depends on the document class.
 Normally the first line of a paragraph is indented, and there is no
-additional space between two paragraphs. Refer to section~\ref{parsp}
+additional space between two paragraphs. Refer to Section~\ref{parsp}
 for more information.
 
 In special cases it might be necessary to order \LaTeX{} to break a
@@ -178,7 +178,7 @@ optimal.  In this case a warning (``\wi{underfull hbox}'') is given to
 the user.  In most such cases the result doesn't look very good. The
 command \ci{fussy} brings \LaTeX{} back to its default behaviour.
 
-\subsection{Hyphenation} \label{hyph}
+\subsection{Hyphenation}\label{hyph}
 
 \LaTeX{} hyphenates words whenever necessary. If the hyphenation
 algorithm does not find the correct hyphenation points,
@@ -252,12 +252,12 @@ text strings:
 \begin{center}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Command     & Example & Description\\
+    Command     & Example  & Description\\
     \midrule
-    \ci{today}  & \today  & Current date\\
-    \ci{TeX}    & \TeX    & Your favorite typesetter\\
-    \ci{LaTeX}  & \LaTeX  & The Name of the Game\\
-    \ci{LaTeXe} & \LaTeXe & The current incarnation\\
+    \ci{today}  & \today   & Current date\\
+    \ci{TeX}    & \TeX{}   & Your favorite typesetter\\
+    \ci{LaTeX}  & \LaTeX{} & The Name of the Game\\
+    \ci{LaTeXe} & \LaTeXe{}& The current incarnation\\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -266,7 +266,7 @@ text strings:
 
 \subsection{Quotation Marks}
 
-You should \emph{not} use the \verb|"| for \wi{quotation marks}
+You should \emph{not} use the \verb|"| for \wi{quotation marks}%
 \index{""@\texttt{""}} as you would when using a WYSIWYG program.  In publishing
 there are special opening and closing quotation marks.  In \LaTeX{},
 use two~\textasciigrave~(grave accent) for opening quotation marks and
@@ -286,8 +286,8 @@ special characters such as these in Section 2.4.9.
 
 \LaTeX{} knows four kinds of \wi{dash}es. Access three of
 them with different number of consecutive dashes. The fourth sign
-is actually not a dash at all---it is the mathematical minus sign: \index{-}
-\index{--} \index{---} \index{-@$-$} \index{mathematical!minus}
+is actually not a dash at all---it is the mathematical minus sign:\index{-}%
+\index{--}\index{---}\index{-@$-$}\index{mathematical!minus}
 
 \begin{example}
 daughter-in-law, X-rated\\
@@ -299,7 +299,7 @@ The names for these dashes are:
 `-' \wi{hyphen}, `--' \wi{en-dash}, `---' \wi{em-dash} and
 `$-$' \wi{minus sign}.
 
-\subsection{Tilde (\(\sim\))}
+\subsection{Tilde (\(\sim\))}%
 \index{URL link}\index{tilde}
 A character often seen in web addresses is the tilde. To generate
 this in \LaTeX{} use \verb|\~{}| but the result (\~{}) is not really
@@ -310,7 +310,7 @@ http://www.rich.edu/\~{}bush \\
 http://www.clever.edu/$\sim$demo
 \end{example}
 
-\subsection{Slash (/)}
+\subsection{Slash (/)}%
 \index{Slash}
 In order to typeset a slash between two words, one can simply type e.g.\
 \texttt{read/write}, but this makes \LaTeX{} treat the two words as one.
@@ -319,7 +319,7 @@ errors.  To overcome this, use \ci{slash}.  For example type
 `\verb|read\slash write|' which allows hyphenation.  Normal `\texttt{/}'
 character may be still used for inline fractions. Typesetting units,
 such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be described in
-section~\ref{sec:units}.
+Section~\ref{sec:units}.
 
 \subsection{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
 
@@ -359,18 +359,18 @@ If you prefer a Euro symbol that matches your font, use the option
 \begin{table}[!htbp]
   \centering
 \caption[Available Euro symbols]{The appearance of available Euro symbols based
-on the loaded package and the used font.} \label{eurosymb}
+on the loaded package and the used font.}\label{eurosymb}
 \begin{tabular}{@{}llccc@{}}
 \toprule
 && \multicolumn{3}{c}{Symbol used} \\
 \cmidrule(l){3-5}
 Package & Command & Roman & Sans serif & Monospace \\
 \midrule
-LM+textcomp  &\ci{texteuro} & \huge\texteuro &\huge\sffamily\texteuro
+LM+textcomp  &\ci{texteuro} & \huge\texteuro{} &\huge\sffamily\texteuro{}
                                                 &\huge\ttfamily\texteuro\\
-eurosym      &\ci{euro} & \huge\officialeuro &\huge\sffamily\officialeuro
+eurosym      &\ci{euro} & \huge\officialeuro{} &\huge\sffamily\officialeuro{}
                                                 &\huge\ttfamily\officialeuro\\
-$[$gen$]$eurosym &\ci{euro} & \huge\geneuro  &\huge\sffamily\geneuro
+$[$gen$]$eurosym &\ci{euro} & \huge\geneuro{}  &\huge\sffamily\geneuro{}
                                                 &\huge\ttfamily\geneuro\\
 %europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
 %                                                &\huge\EURcr\\
@@ -394,14 +394,15 @@ command for these dots. It is called
 
 \begin{lscommand}
 \ci{ldots} (low dots)
-\end{lscommand}
+\end{lscommand}%
 \index{...@\ldots}
 
-
+\begin{chktexignore}
 \begin{example}
 Not like this ... but like this:\\
 New York, Tokyo, Budapest, \ldots
 \end{example}
+\end{chktexignore}
 
 \subsection{Ligatures}
 
@@ -429,15 +430,17 @@ being applied to the letter o. Naturally other letters work too.
 
 To place an accent on top of an i or a j, its dots have to be
 removed. This is accomplished by typing \verb|\i| and \verb|\j|.
+\begin{chktexignore}  
 \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\~norita!,\\
 Sch\"onbrunner Schlo\ss{}
 Stra\ss e
 \end{example}
+\end{chktexignore}
 \begin{table}[!hbp]
   \centering
-\caption{Accents and Special Characters.} \label{accents}
+\caption{Accents and Special Characters.}\label{accents}
 \begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
   \toprule
   Code & Effect & Code & Effect & Code& Effect & Code & Effect \\
@@ -449,11 +452,11 @@ Stra\ss e
   \mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
   \mstA{\aa} &  \mstA{\AA} &&&& \\[6pt]
   \mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
-  \mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\
+  \mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\ %chktex 26
   \bottomrule
-\end{tabular}
-\index{dotless \i{} and \j}\index{Scandinavian letters}
-\index{ae@\ae}\index{umlaut}\index{grave}\index{acute}
+\end{tabular}%
+\index{dotless \i{} and \j}\index{Scandinavian letters}%
+\index{ae@\ae}\index{umlaut}\index{grave}\index{acute}%
 \index{oe@\oe}\index{aa@\aa}
 
 \bigskip
@@ -504,7 +507,7 @@ where \carg{language} is either the name of the language to use such as
 additional \carg{options} to decide between its variants for example
 \cargv{variant=british} or \cargv{script=Arabic}. Note that when loading a
 language, either via tag or with options, all variants are loaded and the
-tag\slash options specified are just the defaults. For a full list of supported
+tag\slash{}options specified are just the defaults. For a full list of supported
 languages and variants see the \pai{polyglossia} package documentation.
 
 To write a paragraph in German, you can use the \ei{german} environment:
@@ -581,7 +584,7 @@ To set the fonts use the command
 from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
 by \pai{polyglossia} so you do not need to add it to a the preamble of your
 document.} which is described in much more detail in
-section~\ref{sec:fontspec}.
+Section~\ref{sec:fontspec}.
 
 When changing the text language, \pai{polyglossia} checks whether a font family named
 \cargv{\textit{language}font} exists and changes to it if it's available.
@@ -620,7 +623,9 @@ With the appropriate fonts loaded, you can now write:
 % ...
 %!showend !hide
 
+\begin{chktexignore} %!hide
 \textrussian{Правда} is
+\end{chktexignore} %!hide
 a Russian newspaper.
 \textlang{greek}{ἀλήθεια} is truth
 or disclosure in philosophy.
@@ -667,7 +672,7 @@ same way but without the \carg{familyname} argument.
 \end{verbatim}
 
 If you want to learn even more about fonts, have a look at
-section~\ref{sec:fontspec}.
+Section~\ref{sec:fontspec}.
 
 \subsubsection{Right to Left (RTL) languages}
 
@@ -728,7 +733,7 @@ suitable font with real Unicode Hebrew. SBL Hebrew~\cite{font:sblhebrew} is a
 non-free font available for non-commercial use. Another font, available under
 the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
 
-\subsubsection{Chinese, Japanese and Korean (CJK)}
+\subsubsection{Chinese, Japanese and Korean (CJK)}%
 \index{Chinese}\index{Japanese}\index{Korean}
 
 The package \pai*{xeCJK}\footnote{Works only with
@@ -751,7 +756,7 @@ not be enlarged. A tilde~`\verb|~|' character generates a space that cannot be
 enlarged and additionally prohibits a line break. The command
 \verb|\@| in front of a period specifies that this period terminates a
 sentence even when it follows an uppercase letter.
-\cih{"@} \index{~@ \verb.~.} \index{tilde@tilde ( \verb.~.)}
+\cih{"@}\index{~@ \verb.~.}\index{tilde@tilde ( \verb.~.)}% chktex 18
 \index{., space after}
 
 \begin{example}
@@ -820,7 +825,7 @@ and page numbers from the last compile cycle of the document. The command
 \end{lscommand}
 \noindent expands to a table of contents at the place it
 is issued. A new
-document has to be compiled (``\LaTeX ed'') twice to get a
+document has to be compiled (``\LaTeX{}ed'') twice to get a
 correct \wi{table of contents}. Sometimes it might be
 necessary to compile the document a third time. \LaTeX{} will tell you
 when this is necessary.
@@ -899,9 +904,9 @@ the numbers from the previous compile cycle are used.
 
 
 \begin{example}
-A reference to this subsection
+A reference to this subsection%
 \label{sec:this} looks like:
-``see section~\ref{sec:this} on
+``see Section~\ref{sec:this} on
 page~\pageref{sec:this}.''
 \end{example}
 
@@ -919,7 +924,7 @@ the comma or period.\footnote{Note that footnotes
   everybody reads the footnotes---we are a curious species, so why not
   just integrate everything you want to say into the body of the
   document?\footnotemark}
-\footnotetext{A guidepost doesn't necessarily go where it's pointing to :-).}
+\footnotetext{A guidepost doesn't necessarily go where it's pointing to \smiley.}
 
 \begin{example}
 Footnotes\footnote{This is
@@ -953,10 +958,10 @@ its argument depends on the context:
   emphasizing.}
 \end{example}
 
-If you want control over font and font size, section \ref{sec:fontsize} on
-page \pageref{sec:fontsize} might provide some inspiration.
+If you want control over font and font size, Section~\ref{sec:fontsize} on
+page~\pageref{sec:fontsize} might provide some inspiration.
 
-\section{Environments} \label{env}
+\section{Environments}\label{env}
 
 % To typeset special purpose text, \LaTeX{} defines many different
 % \wi{environment}s for all sorts of formatting:
@@ -1005,7 +1010,7 @@ in a list.
 \subsection{Flushleft, Flushright, and Center}
 
 The environments \ei{flushleft} and \ei{flushright} generate
-paragraphs that are either left- or \wi{right-aligned}. \index{left
+paragraphs that are either left- or \wi{right-aligned}.\index{left
   aligned} The \ei{center} environment generates cenetred text. If you
 do not issue \ci{\bs} to specify line breaks, \LaTeX{} will
 automatically determine line breaks.
@@ -1145,11 +1150,11 @@ They are so useful, that you probably want to put them all into the preamble of
 your document right away.
 
 In addition to the description description of the commands, the \pai{booktabs}
-package documentation \cite{pack:booktabs} contains guidelines on typesetting
+package documentation~\cite{pack:booktabs} contains guidelines on typesetting
 professional-looking tables. We have taken these guidelines to heart when
 writing this booklet. You will find some of them in this section.
 
-\subsubsection{Basic tables} \label{foo}
+\subsubsection{Basic tables}\label{foo}
 
 The environment \ei{tabular} has the following form
 \begin{lscommand}
@@ -1227,6 +1232,7 @@ of producing professional-looking tables is that you \emph{must not} use
 vertical lines.
 
 The second rule is to never use double lines such as these:
+\begin{chktexignore}
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{lll}
   \toprule[0.1cm]
@@ -1241,6 +1247,7 @@ The second rule is to never use double lines such as these:
   \bottomrule[0.1cm]
 \end{tabular}
 \end{example}
+\end{chktexignore}
 As you can see the lines are already of different weight in order to signify
 their meaning. Using more lines than is necessary means cluttering the space
 without adding information. If you stick to these two rules your tables will
@@ -1263,6 +1270,7 @@ the relevant column.
 \end{example}
 If you leave the \carg{sep} empty it will suppress the padding between the
 columns.
+\begin{chktexignore}
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
@@ -1274,6 +1282,7 @@ columns.
   \bottomrule
 \end{tabular}
 \end{example}
+\end{chktexignore}
 
 Sometimes it may make sense to group columns under one heading. To achieve this
 we need two things: a way to group multiple heading columns and have a line
@@ -1284,6 +1293,7 @@ covering the same columns, to sit underneath the merged heading cell. Use the
 merge the cells. The \carg{ncols} argument indicates how many columns should
 the \carg{text} span, while the \carg{colspec} is the column specification for
 the new content---the same as when starting a \ei{tabular} environment.
+\begin{chktexignore}
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
@@ -1296,6 +1306,7 @@ the new content---the same as when starting a \ei{tabular} environment.
   \bottomrule
 \end{tabular}
 \end{example}
+\end{chktexignore}
 
 To get a horizontal line to span multiple columns, use the command
 \begin{lscommand}
@@ -1312,6 +1323,7 @@ or left, either by the package default or the specified \carg{dim}. It is
 usually recommended to trim the rules from the side where they touch other
 columns. Finally the only required argument \carg{a--b} is the span of columns
 to draw the line over.
+\begin{chktexignore}
 \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
@@ -1327,6 +1339,7 @@ to draw the line over.
   \bottomrule
 \end{tabular}
 \end{example}
+\end{chktexignore}
 
 If you need a cell to span multiple rows instead of columns, then you have to
 use package \pai{multirow}. Its main command is a little more complicated
@@ -1350,6 +1363,7 @@ The arguments are
 \end{description}
 Unlike with \ci{multicolumn} you still have to write all the cells in remaining
 rows, but they should be empty.
+\begin{chktexignore}
 \begin{example}[examplewidth=0.4\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
@@ -1366,13 +1380,15 @@ rows, but they should be empty.
   \bottomrule
 \end{tabular}
 \end{example}
+\end{chktexignore}
+
 In general it is not a good idea to use the \ci{multirow} command for showing
 values common to multiple rows. Usually repeating the values in question makes
 the table more readable.
 
 When typesetting numerical data in the table, you may want to align it by
 decimal point. A way to do this (and more) is described in
-section~\ref{sec:sitables}. The section also contains some guidelines about
+Section~\ref{sec:sitables}. The section also contains some guidelines about
 typesetting numerical data in tables.
 
 \subsubsection{Long tables}
@@ -1451,7 +1467,7 @@ is the same as in the \ei{tabular} environment.
 \end{example}
 
 Note that the pagebreaks are always placed between rows. If you have some tall
-row thanks to \cargv{p\{...\}} specification, it will not broken. 
+row thanks to \cargv{p\{...\}} specification, it will not broken.
 \begin{example}[standalone, to_page=2, paperwidth=4.5cm] 
 %!hidebegin
 \usepackage{longtable}
@@ -1537,7 +1553,7 @@ figure~\ref{ex:longtable}.
 \end{longtable}
 \end{document} %!hide 
 \end{example}
-\caption{An example of \ei{longtable} with running headers and footers.} \label{ex:longtable}
+\caption{An example of \ei{longtable} with running headers and footers.}\label{ex:longtable}
 \end{figure}
 
 Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
@@ -1665,6 +1681,7 @@ In order to create a tic-tac-toe grid you need to put some vertical and
 horizontal lines of the same width. In order to do so you may use the
 \cargv{|}~(vertical bar) column specifier for vertical rules and \ci{hline} for
 horizontal rules.
+\begin{chktexignore}
 \begin{example}
 \begin{tabular}{c|c|c}
   O & X & O \\
@@ -1674,8 +1691,10 @@ horizontal rules.
   X & O & X \\
 \end{tabular}
 \end{example} 
-In case your grid gets more complicated you may also need the \ci{cline}[a--b]
+\end{chktexignore}
+In case your grid gets more complicated you may also need the \ci{cline}[a--b] %chktex 8
 command which draws horizontal line that spans only over the specified rows.
+\begin{chktexignore}
 \begin{example}[examplewidth=0.4\linewidth]
 \begin{tabular}{|cccc|}
   \cline{4-4}
@@ -1687,6 +1706,7 @@ command which draws horizontal line that spans only over the specified rows.
   \cline{1-2}
 \end{tabular}
 \end{example} 
+\end{chktexignore}
 
 \section{Including Graphics and Images}\label{eps}
 
@@ -1726,7 +1746,7 @@ most important keys.
 
 \begin{table}[tb]
 \centering
-\caption{Key Names for \textsf{graphicx} Package.}
+\caption{Key Names for \textsf{graphicx} Package.}%
 \label{keyvals}
 \begin{tabular}{@{}ll@{}}
   \toprule
@@ -1758,7 +1778,7 @@ standard paragraph.  The aspect ratio is $1.0$, because no special
 height is specified.  The width and height parameters can also be
 specified in absolute dimensions. Refer to Table~\ref{units} on
 page~\pageref{units} for more information. If you want to know more
-about this topic, make sure to read \cite{graphics}.
+about this topic, make sure to read~\cite{graphics}.
 
 \section{Floating Bodies}
 Today most publications contain a lot of figures and tables. These

@@ -17,8 +17,8 @@ of this book.
 \section{A Bit of History}
 \subsection{\TeX}
 
-\TeX{} is a computer program created by \index{Knuth, Donald E.}Donald
-E. Knuth \cite{texbook}. It is aimed at typesetting text and
+\TeX{} is a computer program created by\index{Knuth, Donald E.}Donald
+E. Knuth~\cite{texbook}. It is aimed at typesetting text and
 mathematical formulae. Knuth started writing the \TeX{} typesetting
 engine in 1977 to explore the potential of the digital printing
 equipment that was beginning to infiltrate the publishing industry at
@@ -50,9 +50,9 @@ becomes \texttt{TeX}.
 
 \LaTeX{} enables authors to typeset and print their work at the highest
 typographical quality, using a predefined, professional layout. \LaTeX{} was
-originally written by \index{Lamport, Leslie}Leslie Lamport~\cite{manual}.
+originally written by\index{Lamport, Leslie}Leslie Lamport~\cite{manual}.
 It uses the \TeX{} formatter as its typesetting engine. These days \LaTeX{}
-is maintained by \index{The \LaTeX{} Project}the \LaTeX{} Project.
+is maintained by\index{The \LaTeX{} Project}the \LaTeX{} Project.
 
 %In 1994 the \LaTeX{} package was updated by the \index{LaTeX3@\LaTeX
 %  3}\LaTeX 3 team, led by \index{Mittelbach, Frank}Frank Mittelbach,
@@ -181,7 +181,7 @@ of \LaTeX{} over normal word processors are the following:
 
 \noindent\LaTeX{} also has some disadvantages, and I guess it's a bit
 difficult for me to find any sensible ones, though I am sure other people
-can tell you hundreds \texttt{;-)}
+can tell you hundreds \smiley.
 
 \begin{itemize}
 \item \LaTeX{} does not work well for people who have sold their
@@ -189,7 +189,7 @@ can tell you hundreds \texttt{;-)}
 \item Although some parameters can be adjusted within a predefined
   document layout, the design of a whole new layout is difficult and
   takes a lot of time.\footnote{Rumour says that this is one of the
-    key elements that will be addressed in the upcoming \LaTeX 3
+    key elements that will be addressed in the upcoming \LaTeX3
     system.}\index{LaTeX3@\LaTeX 3}
 \item It is very hard to write unstructured and disorganized documents.
 \item Your hamster might, despite some encouraging first steps, never be
@@ -210,8 +210,7 @@ contains the text of the document, as well as the commands that tell
 treated uniformly as ``\wi{space}'' by \LaTeX{}. \emph{Several
   consecutive} \wi{whitespace} characters are treated as \emph{one}
 ``space''.  Whitespace at the start of a line is generally ignored, and
-a single line break is treated as ``whitespace''.
-\index{whitespace!at the start of a line}
+a single line break is treated as ``whitespace''.\index{whitespace!at the start of a line}
 
 An empty line between two lines of text defines the end of a
 paragraph. \emph{Several} empty lines are treated the same as
@@ -243,7 +242,7 @@ the same by using a prefix backslash:
 
 \begin{example}
 \# \$ \% \^{} \& \_ \{ \} \~{}
-\textbackslash
+\textbackslash{}
 \end{example}
 
 The other symbols and many more can be printed with special commands
@@ -273,14 +272,13 @@ to the command name.
 %
 % Can \3 be a valid command ? (jacoboni)
 %
-\label{whitespace}
 \hyphenation{white-spaces white-space}
-\LaTeX{} ignores whitespace after commands. If you want to get a
-\index{whitespace!after commands}space after a command, you have to
+\LaTeX{} ignores whitespace after commands. If you want to get a\index{whitespace!after commands}space after a command, you have to
 put either an empty parameter \verb|{}| and a blank or a special spacing command after the
 command name. The empty parameter \verb|{}| stops \LaTeX{} from eating up all the white space after
 the command name.
 
+\begin{chktexignore}
 \begin{example}
 New \TeX users may miss whitespaces
 after a command. % renders wrong
@@ -288,6 +286,7 @@ Experienced \TeX{} users are
 \TeX perts, and know how to use
 whitespaces. % renders correct
 \end{example}
+\end{chktexignore}
 
 Some commands require a \wi{parameter}, which has to be given between
 \wi{curly braces} \verb|{ }| after the command name. Some commands take
@@ -308,10 +307,9 @@ right here!\newline
 Thank you!
 \end{example}
 
-\subsection{Comments}
-\index{comments}
+\subsection{Comments}\index{comments}
 
-When \LaTeX{} encounters a \verb|%| character while processing an input file,
+When \LaTeX{} encounters a \ai{\%} character while processing an input file,
 it ignores the rest of the present line, the line break, and all
 whitespace at the beginning of the next line.
 
@@ -346,8 +344,7 @@ comments in your document.
 
 Note that this won't work inside complex environments, like math for example.
 
-\section{Input File Structure}
-\label{sec:structure}
+\section{Input File Structure}\label{sec:structure}
 When \LaTeXe{} processes an input file, it expects it to follow a
 certain \wi{structure}. Thus every input file must start with the
 command
@@ -363,8 +360,8 @@ command
 \verb|\usepackage{...}|
 \end{code}
 
-When all the setup work is done,\footnote{The area between \texttt{\bs
-    documentclass} and \texttt{\bs
+When all the setup work is done,\footnote{The area between \texttt{\bs{}
+    documentclass} and \texttt{\bs{}
     begin$\mathtt{\{}$document$\mathtt{\}}$} is called the
   \emph{\wi{preamble}}.} you start the body of the text with the
 command
@@ -395,7 +392,7 @@ Small is beautiful.
 \end{document}
 \end{example}
 \end{lined}
-\caption{A Minimal \LaTeX{} File.} \label{mini}
+\caption{A Minimal \LaTeX{} File.}\label{mini}
 \end{figure}
 
 \begin{figure}[!bp]
@@ -420,14 +417,14 @@ Well, and here begins my lovely article.
 \end{lined}
 \caption[Example of a Realistic Journal Article.]{Example of a Realistic
 Journal Article. Note that all the commands you see in this example will be
-explained later in the introduction.} \label{document}
+explained later in the introduction.}\label{document}
 
 \end{figure}
 
 \section{A Typical Command Line Session}
 
 I bet you must be dying to try out the neat small \LaTeX{} input file
-shown on page \pageref{mini}. Here is some help:
+shown on page~\pageref{mini}. Here is some help:
 \LaTeX{} itself comes without a GUI or
 fancy buttons to press. It is just a program that crunches away at your
 input file. Some \LaTeX{} installations feature a graphical front-end where
@@ -436,7 +433,7 @@ there might be some typing involved, so here is how to coax \LaTeX{} into
 compiling your input file on a text based system. Please note: this
 description assumes that a working \LaTeX{} installation already sits on
 your computer.\footnote{This is the case with most well groomed Unix
-Systems, and \ldots{} Real Men use Unix, so \ldots{} \texttt{;-)}} If this is 
+Systems, and \ldots{} Real Men use Unix, so \ldots{} \smiley} If this is 
 not the case you may want to look at Appendix~\ref{installinglatex} 
 on page~\pageref{installinglatex} first.
 
@@ -465,7 +462,7 @@ input file. Type \texttt{ctrl-D} to get back to the command line.
 
 \section{The Layout of the Document}
 
-\subsection {Document Classes}\label{sec:documentclass}
+\subsection{Document Classes}\label{sec:documentclass}
 
 The first information \LaTeX{} needs to know when processing an
 input file is the type of document the author wants to create. This
@@ -484,43 +481,39 @@ Table~\ref{options}.
 
 
 \begin{table}[!bp]
-\caption{Document Classes.} \label{documentclasses}
+\caption{Document Classes.}\label{documentclasses}
 \begin{lined}{\textwidth}
 \begin{description}
 
-\item [\normalfont\texttt{article}] for articles in scientific journals, presentations,
+\item [\normalfont\texttt{article}]\index{article class} for articles in scientific journals, presentations,
   short reports, program documentation, invitations, \ldots
-  \index{article class}
-\item [\normalfont\texttt{proc}] a class for proceedings based on the article class.
-  \index{proc class}
-\item [\normalfont\texttt{minimal}] is as small as it can get.
+\item [\normalfont\texttt{proc}]\index{proc class} a class for proceedings based on the article class.
+\item [\normalfont\texttt{minimal}]\index{minimal class} is as small as it can get.
 It only sets a page size and a base font. It is mainly used for debugging
 purposes.
-  \index{minimal class}
-\item [\normalfont\texttt{report}] for longer reports containing several chapters, small
-  books, PhD theses, \ldots \index{report class}
-\item [\normalfont\texttt{book}] for real books \index{book class}
-\item [\normalfont\texttt{slides}] for slides. The class uses big sans serif
+\item [\normalfont\texttt{report}]\index{report class} for longer reports containing several chapters, small
+  books, PhD theses, \ldots 
+\item [\normalfont\texttt{book}]\index{book class} for real books 
+\item [\normalfont\texttt{slides}]\index{slides class} for slides. The class uses big sans serif
   letters. You might want to consider using the Beamer class instead.
-        \index{slides class}
 \end{description}
 \end{lined}
 \end{table}
 
 \begin{table}[!bp]
-\caption{Document Class Options.} \label{options}
+\caption{Document Class Options.}\label{options}
 \begin{lined}{\textwidth}
 \begin{flushleft}
 \begin{description}
 \item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
   of the main font in the document. If no option is specified,
-  \texttt{10pt} is assumed.  \index{document font size}\index{base
+  \texttt{10pt} is assumed.\index{document font size}\index{base
     font size}
 \item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
   the paper size. The default size is \texttt{letterpaper}. Besides
   that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
-  and \texttt{legalpaper} can be specified.  \index{legal paper}
-  \index{paper size}\index{A4 paper}\index{letter paper} \index{A5
+  and \texttt{legalpaper} can be specified.\index{legal paper}\index{paper
+    size}\index{A4 paper}\index{letter paper}\index{A5
     paper}\index{B5 paper}\index{executive paper}
 
 \item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
@@ -532,7 +525,7 @@ purposes.
 \item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
   whether a new page should be started after the \wi{document title}
   or not. The \texttt{article} class does not start a new page by
-  default, while \texttt{report} and \texttt{book} do.  \index{title}
+  default, while \texttt{report} and \texttt{book} do.\index{title}
 
 \item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
   document in \wi{one column} or \wi{two column}s.
@@ -567,8 +560,8 @@ with a base font size of \emph{eleven points}, and to produce a
 layout suitable for \emph{double sided} printing on \emph{A4 paper}.
 \pagebreak[2]
 
-\subsection{Packages}
-\index{package} While writing your document, you will probably find
+\subsection{Packages}\index{package}
+While writing your document, you will probably find
 that there are some areas where basic \LaTeX{} cannot solve your
 problem. If you want to include \wi{graphics}, \wi{coloured text} or
 source code from a file into your document, you need to enhance the
@@ -580,7 +573,7 @@ Packages are activated with the
 \noindent command, where \emph{package} is the name of the package and
 \emph{options} is a list of keywords that trigger special features in
 the package. The \ci{usepackage} command goes into the preamble of the
-document. See section \ref{sec:structure} for details.
+document. See Section~\ref{sec:structure} for details.
 
 Some packages come with the \LaTeXe{} base distribution
 (See Table~\ref{packages}). Others are provided separately. You may
@@ -595,7 +588,7 @@ preinstalled. If you are working on a Unix system, use the command
 
 
 \begin{table}[btp]
-\caption{Some of the Packages Distributed with \LaTeX.} \label{packages}
+\caption{Some of the Packages Distributed with \LaTeX.}\label{packages}
 \begin{lined}{\textwidth}
 \begin{description}
 \item[\normalfont\pai{doc}] Allows the documentation of \LaTeX{} programs.\\
@@ -622,7 +615,7 @@ preinstalled. If you are working on a Unix system, use the command
   \texttt{latexsym.dtx} and in \companion.
 
 \item[\normalfont\pai{makeidx}] Provides commands for producing
-  indexes.  Described in section~\ref{sec:indexing} and in \companion.
+  indexes.  Described in Section~\ref{sec:indexing} and in \companion.
 
 \item[\normalfont\pai{syntonly}] Processes a document without
   typesetting it.
@@ -640,9 +633,9 @@ preinstalled. If you are working on a Unix system, use the command
 
 \LaTeX{} supports three predefined \wi{header}/\wi{footer}
 combinations---so-called \wi{page style}s. The \emph{style} parameter
-of the \index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}
-\index{page style!headings@\texttt{headings}}\index{headings@texttt{headings}}
-\index{page style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
+style!headings@\texttt{headings}}\index{headings@texttt{headings}}\index{page
+style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
 \begin{lscommand}
 \ci{pagestyle}\verb|{|\emph{style}\verb|}|
 \end{lscommand}
@@ -651,7 +644,7 @@ Table~\ref{pagestyle}
 lists the predefined page styles.
 
 \begin{table}[!hbp]
-\caption{The Predefined Page Styles of \LaTeX.} \label{pagestyle}
+\caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
 \begin{lined}{\textwidth}
 \begin{description}
 
@@ -685,8 +678,7 @@ table~\ref{tb:numberings}.
 
 \begin{table}[htp]
   \centering
-  \caption{Possible argument of the \ci{pagenumbering} command.}
-  \label{tb:numberings}
+  \caption{Possible argument of the \ci{pagenumbering} command.}\label{tb:numberings}
   \begin{tabular}{@{}ll@{}}
     \toprule
     Style          & Description                                   \\
@@ -701,7 +693,7 @@ table~\ref{tb:numberings}.
 \end{table}
 
 A description how to create your own headers and footers can be found in
-section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
+Section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
 
 
 \section{Files You Might Encounter}
@@ -720,13 +712,13 @@ think is important, please drop me a line.
 \item[\eei{.sty}] \LaTeX{} Macro package. Load this
   into your \LaTeX{} document using the \ci{usepackage} command.
 \item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
-  format for \LaTeX{} style files. If you process a .dtx file you get
-  documented macro code of the \LaTeX{} package contained in the .dtx
+  format for \LaTeX{} style files. If you process a \eei{.dtx} file you get
+  documented macro code of the \LaTeX{} package contained in the \eei{.dtx}
   file.
 \item[\eei{.ins}] The installer for the files contained in the
-  matching .dtx file. If you download a \LaTeX{} package from the net,
-  you will normally get a .dtx and a .ins file. Run \LaTeX{} on the
-  .ins file to unpack the .dtx file.
+  matching \eei{.dtx} file. If you download a \LaTeX{} package from the net,
+  you will normally get a \eei{.dtx} and a \eei{.ins} file. Run \LaTeX{} on the
+  \eei{.ins} file to unpack the \eei{.dtx} file.
 \item[\eei{.cls}] Class files define what your document looks
   like. They are selected with the \ci{documentclass} command.
 \item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
@@ -743,16 +735,16 @@ file:
   last compiler run.
 \item[\eei{.toc}] Stores all your section headers. It gets read in for the
   next compiler run and is used to produce the table of contents.
-\item[\eei{.lof}] This is like .toc but for the list of figures.
+\item[\eei{.lof}] This is like \eei{.toc} but for the list of figures.
 \item[\eei{.lot}] And again the same for the list of tables.
 \item[\eei{.aux}] Another file that transports information from one
-  compiler run to the next. Among other things, the .aux file is used
+  compiler run to the next. Among other things, the \eei{.aux} file is used
   to store information associated with cross-references.
 \item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
   the words that go into the index in this file. Process this file with
-  \texttt{makeindex}. Refer to section \ref{sec:indexing} on
-  page \pageref{sec:indexing} for more information on indexing.
-\item[\eei{.ind}] The processed .idx file, ready for inclusion into your
+  \texttt{makeindex}. Refer to Section~\ref{sec:indexing} on
+  page~\pageref{sec:indexing} for more information on indexing.
+\item[\eei{.ind}] The processed \eei{.idx} file, ready for inclusion into your
   document on the next compile cycle.
 \item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.
 \end{description}

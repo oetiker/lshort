@@ -95,14 +95,14 @@ He didn't say
  \begin{equation}
   1 + 1 = 3 \tag{dumb}
  \end{equation}
-This is a reference to 
-\eqref{clever}. 
+This is a reference to%
+~\eqref{clever}. 
 \end{example}
 
 If you don't want \LaTeX{} to number the equations, use the starred
 version of \ei{equation} using an asterisk, \ei{equation*}, or even easier, enclose the
-equation in \ci{[} and \ci{]}:\footnote{\index{equation!amsmath@\textsf{amsmath}}
-  \index{equation!LaTeX@\LaTeX{}}This is again from \pai{amsmath}.
+equation in \ci{[} and \ci{]}:\footnote{\index{equation!amsmath@\textsf{amsmath}}\index{equation!LaTeX@\LaTeX{}}
+This is again from \pai{amsmath}.
   Standard \LaTeX{}'s has only the \ei{equation} environment without the star.}
 \begin{example}
 Add $a$ squared and $b$ squared
@@ -154,17 +154,17 @@ example, in \emph{math mode}:
 
 \begin{enumerate}
 
-\item \index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
+\item\index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
 are either derived logically from the mathematical expressions, or
 have to be specified with special commands such as \ci{,}, \ci{quad} or
-\ci{qquad} (we'll get back to that later, see section~\ref{sec:math-spacing}).
+\ci{qquad} (we'll get back to that later, see Section~\ref{sec:math-spacing}).
  
 \item Empty lines are not allowed. Only one paragraph per formula.
 
 \item Each letter is considered to be the name of a variable and will be
 typeset as such. If you want to typeset normal text within a formula
 (normal upright font and normal spacing) then you have to enter the
-text using the \ci{text} command (see also section \ref{sec:fontsz}~on
+text using the \ci{text} command (see also Section~\ref{sec:fontsz}~on
 page~\pageref{sec:fontsz}).
 
 \end{enumerate}
@@ -178,7 +178,7 @@ $x^{2} \geq 0\qquad
 \end{example}
  
 Mathematicians can be very fussy about which symbols are used:
-it would be conventional here to use the `\wi{blackboard bold}' font,
+it would be conventional here to use the `\wi{blackboard bold}' font,%
 \index{bold symbols} which is obtained using \ci{mathbb} from the
 package \pai*{amssymb}.\footnote{\pai{amssymb} is not a part
   of the \hologo{AmSLaTeX} bundle, but it is perhaps still a part of your \LaTeX{}
@@ -206,7 +206,7 @@ typesetting. Most of the commands in this section will not require
 \emph{Lowercase \wi{Greek letters}} are entered as \ci{alpha},
  \ci{beta}, \ci{gamma}, \ldots, uppercase letters
 are entered as \ci{Gamma}, \ci{Delta}, \ldots\footnote{There is no
-  uppercase Alpha, Beta etc. defined in \LaTeXe{} because it looks the same as a
+  uppercase Alpha, Beta etc.\ defined in \LaTeXe{} because it looks the same as a
   normal roman A, B\ldots{}} 
 
 Take a look at Table~\ref{greekletters} on page~\pageref{greekletters} for a
@@ -217,7 +217,7 @@ $\lambda,\xi,\pi,\theta,
 \end{example}
 
 
-\emph{Exponents, Superscripts and Subscripts} can be specified using
+\emph{Exponents, Superscripts and Subscripts} can be specified using%
 \index{exponent}\index{subscript}\index{superscript}
 the \ai{\^} and the \ai{\_} characters.
 Most math mode commands act only on the next character, so if you
@@ -237,7 +237,7 @@ $p^3_{ij} \qquad
 
 
 The \emph{\wi{square root}} is entered as \ci{sqrt}; the
-\carg{n}-th root is generated with \ci*{sqrt}[n : o]. The size of
+\carg{n}-th root is generated with \ci*{sqrt}[n:o]. The size of
 the root sign is determined automatically by \LaTeX. If just the sign
 is needed, use \ci{surd}.
 
@@ -251,17 +251,15 @@ $\sqrt{x} = x^{1/2}
 \end{example}
 
 
-\index{dots!three}
-\index{vertical!dots}
-\index{horizontal!dots}
-While the \emph{\wi{dot}} sign to indicate
+While the \emph{\wi{dot}} sign to indicate%
+\index{dots!three}\index{vertical!dots}\index{horizontal!dots}
 the multiplication operation is normally left out, it is sometimes written
 to help the eye in grouping a formula.
 Use \ci{cdot} to typeset a single centered dot. \ci{cdots} is
 three centered \emph{\wi{dots}} while \ci{ldots} sets the dots low (on the
 baseline). Besides that, there are \ci{vdots} for 
 vertical and \ci{ddots} for \wi{diagonal dots}. There are more examples in 
-section~\ref{sec:arraymat}.
+Section~\ref{sec:arraymat}.
 \begin{example}
 $\Psi = v_1 \cdot v_2
  \cdot \ldots \qquad 
@@ -270,23 +268,23 @@ $\Psi = v_1 \cdot v_2
 \end{example}
 
 The commands \ci{overline} and \ci{underline} create
-\emph{horizontal lines} directly over or under an expression:
-\index{horizontal!line} \index{line!horizontal}
+\emph{horizontal lines} directly over or under an expression:%
+\index{horizontal!line}\index{line!horizontal}
 \begin{example}
 $0.\overline{3} = 
  \underline{\underline{1/3}}$
 \end{example}
 
 The commands \ci{overbrace} and \ci{underbrace} create
-long \emph{horizontal braces} over or under an expression:
-\index{horizontal!brace} \index{brace!horizontal} 
+long \emph{horizontal braces} over or under an expression:%
+\index{horizontal!brace}\index{brace!horizontal} 
 \begin{example}
 $\underbrace{\overbrace{a+b+c}^6 
  \cdot \overbrace{d+e+f}^7}
  _\text{meaning of life} = 42$
 \end{example}
 
-\index{mathematical!accents} To add mathematical accents such as \emph{small
+To add mathematical accents\index{mathematical!accents} such as \emph{small
 arrows} or \emph{\wi{tilde}} signs to variables, the commands
 given in Table~\ref{mathacc} on page~\pageref{mathacc} might be useful.  Wide hats and
 tildes covering several characters are generated with \ci{widetilde}
@@ -315,7 +313,7 @@ $\vec{a} \qquad
 
 Names of functions are often typeset in an upright
 font, and not in italics as variables are, so \LaTeX{} supplies the
-following commands to typeset the most common function names:
+following commands to typeset the most common function names:%
 \index{mathematical!functions}
 
 \begin{center}
@@ -359,7 +357,7 @@ $a\bmod b \\
 \end{example}
 
 A built-up \emph{\wi{fraction}} is typeset with the
-\ci*{frac}[numerator:m ! denominator:m]
+\ci*{frac}[numerator:m ! denominator:m]%chktex 26
 command.
 \begin{example}
 \ldots{} And since
@@ -412,7 +410,7 @@ Pascal's rule is
 \end{example}
 
 For \wi{binary relations} it may be useful to stack symbols over each other.
-\ci*{stackrel}[above:m ! below:m] puts the symbol given
+\ci*{stackrel}[above:m ! below:m] puts the symbol given%chktex 26
 in \carg{above} in superscript-like size over \carg{below} which
 is set in its usual position.
 \begin{example}
@@ -423,7 +421,7 @@ is set in its usual position.
 
 The \emph{\wi{integral operator}} is generated with \ci{int}, the
 \emph{\wi{sum operator}} with \ci{sum}, and the \emph{\wi{product operator}}
-with \ci{prod}. The upper and lower limits are specified with~\ai{\^}
+with \ci{prod}. The upper and lower limits are specified with~\ai{\^{}}
 and~\ai{\_} like superscripts and subscripts:
 \begin{example}
 \begin{equation*}
@@ -446,7 +444,7 @@ expressions, \pai{amsmath} provides the \ci{substack} command:
 
 
 \LaTeX{} provides all sorts of symbols for \emph{\wi{bracketing}} and other
-\emph{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$).
+\emph{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$). %chktex 9
 Round and square brackets can be entered with the corresponding keys and
 curly braces with \ci{\{}, but all other delimiters are generated with
 special commands (e.g.~\ci{updownarrow}).
@@ -473,6 +471,7 @@ In some cases it is necessary to specify the correct size of a
 mathematical delimiter\index{mathematical!delimiter} by hand,
 which can be done using the commands \ci{big}, \ci{Big}, \ci{bigg} and
 \ci{Bigg} as prefixes to most delimiter commands:
+\begin{chktexignore}  
 \begin{example}
 $\Big((x+1)(x-1)\Big)^{2}$\\
 $\big( \Big( \bigg( \Bigg( \quad
@@ -481,15 +480,15 @@ $\big( \Big( \bigg( \Bigg( \quad
 \big\Downarrow \Big\Downarrow 
 \bigg\Downarrow \Bigg\Downarrow$
 \end{example}
- For a list of all delimiters available, see Table~\ref{tab:delimiters} on page
-\pageref{tab:delimiters}. 
+\end{chktexignore}
+
+ For a list of all delimiters available, see Table~\ref{tab:delimiters} on page\pageref{tab:delimiters}. 
 
 You can find large list of symbols supported in math mode in
-Appendix \ref{symbols}.
+Appendix\ref{symbols}.
 
-\section{Single Equations that are Too Long: multline}
-\index{long equations}
-\label{sec:multline}
+\section{Single Equations that are Too Long: multline}%
+\index{long equations}\label{sec:multline}
 
 If an equation is too long, we have to wrap it somehow. Unfortunately,
 wrapped equations are usually less easy to read than not wrapped
@@ -523,7 +522,7 @@ to be wrapped. Similarly to \ei{equation*} there also exists a
 \ei{multline*} version for preventing an equation number.
 
 Often the
-\ei{IEEEeqnarray} environment (see section~\ref{sec:IEEEeqnarray})
+\ei{IEEEeqnarray} environment (see Section~\ref{sec:IEEEeqnarray})
 will yield better results.  Consider the following
 situation:
 \begin{example}
@@ -545,16 +544,15 @@ Here it is actually the RHS that is too long to fit on one line. The
 \end{multline}
 \end{example}
 
-This is better than \eqref{eq:equation_too_long}, but
+This is better than~\eqref{eq:equation_too_long}, but
 it has the disadvantage that the equality sign loses its natural
 greater importance with respect to the plus operator in front of
 $k$. The better solution is provided by the
 \ei{IEEEeqnarray} environment that will be discussed in detail in
 Section~\ref{sec:IEEEeqnarray}.
 
-\section{Multiple Equations}
-\index{equation!multiple}
-\label{sec:IEEEeqnarray}
+\section{Multiple Equations}%
+\index{equation!multiple}\label{sec:IEEEeqnarray}
 
 In the most general situation we have a sequence of several
 equalities that do not fit onto one line. Here we need to work with
@@ -565,7 +563,7 @@ Before we offer our suggestions on how to do this, we start with a few
 bad examples that show the biggest drawbacks of some common solutions.
 
 
-\subsection{Problems with Traditional Commands}
+\subsection{Problems with Traditional Commands}%
 \label{sec:problems_traditional}
 
 To group multiple equations the
@@ -653,13 +651,13 @@ not properly centered:
 
 \noindent Having badmouthed the competition sufficiently, I can now steer you gently towards the glorious \ldots
 
-\subsection{IEEEeqnarray Environment}
+\subsection{IEEEeqnarray Environment}%
 \label{sec:IEEEeqnarray_intro}
 
 The \ei{IEEEeqnarray} environment is a very powerful command with
 many options. Here, we will only introduce its basic
 functionalities. For more information please refer to the
-manual.\footnote{For the official manual see \cite{IEEEtran_HOWTO}.
+manual.\footnote{For the official manual see~\cite{IEEEtran_HOWTO}.
   The part about \texttt{IEEEeqnarray}
   can be found in Appendix~F.}
 
@@ -685,7 +683,7 @@ lower-case \cargv{c}) and the third column left-justified:
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && \negmedspace {} + l 
+  && \negmedspace{} + l 
   + m + n + o 
   \\
   & = & p + q + r + s
@@ -703,14 +701,14 @@ Additional space can be added with \cargv{.} and
 Note the spaces around the equality signs in contrast to the space produced
 by the \ei{eqnarray} environment.
 
-\subsection{Common Usage}
+\subsection{Common Usage}%
 \label{sec:common-usage}
 
 In the following we will describe how we use \ei{IEEEeqnarray} to
 solve the most common problems.
 
-If a line overlaps with the equation number as in
-  \eqref{eq:faultyeqnarray}, the command 
+If a line overlaps with the equation number as in%
+~\eqref{eq:faultyeqnarray}, the command 
 \small
 \begin{verbatim}
 \IEEEeqnarraynumspace
@@ -797,7 +795,7 @@ If an equation is split into two or more lines, \LaTeX{}
   \\
   & = & d + e + f + g + h 
   + i + j + k \nonumber\\
-  && \negmedspace {} + l 
+  && \negmedspace{} + l 
   + m + n + o 
   \\
   & = & p + q + r + s
@@ -843,12 +841,12 @@ Sub-numbers are also easily possible using
 \end{IEEEeqnarray}
 \end{example}
 
-\section{Units} \label{sec:units} \index{units (SI)}\index{SI}
+\section{Units}\label{sec:units}\index{units (SI)}\index{SI}
 
 When dealing with real world data you will often find yourself writing units
 such as \qty{10}{\kg} or \qty{25}{\coulomb\per\mole}. In technical writing it
 is crucial to accurately convey values to avoid errors and ambiguity.
-The \emph{International System of Units} (\emph{SI}) \cite{si}, comes with a detailed set
+The \emph{International System of Units} (\emph{SI})~\cite{si}, comes with a detailed set
 of typesetting rules. For example you may have noticed that in the
 first sentence the space between \num{10} and \unit{\kg} is smaller than
 between the words.
@@ -913,7 +911,7 @@ In literal mode units are entered as string of letters
 \qty{10}{m/s} is a quantity
 \end{example}
 Spaces in literal mode are ignored. If you want to insert a product of units,
-use either dot \ai{.} or tilde \ai{\~}.
+use either dot \ai{.} or tilde \ai{\~{}}.
 \begin{example}
 \unit{N} is 
 not \unit{kg m / s^2},
@@ -1081,7 +1079,7 @@ preamble: \qty{9.81}{\m\per\s\squared}.
       \bottomrule
     \end{tabular}
   \end{center}
-  \caption{Measurement results}
+  \caption{Measurement results}%
   \label{table}
 \end{table}
 
@@ -1091,7 +1089,7 @@ are back to normal:
 \qty{3.637e-4}{\m\squared\per\s}.
 \end{document}
 \end{example}
-\caption{An example of using \pai{siunitx} in a document.}
+\caption{An example of using \pai{siunitx} in a document.}%
 \label{sistandaloneexa}
 \end{figure}
 
@@ -1207,7 +1205,7 @@ It's over
 \qty{9000}{\quartic\decakilo\pt\polymer}!
 \end{example}
 
-\subsection{Table columns with numbers} \label{sec:sitables} \index{decimal
+\subsection{Table columns with numbers}\label{sec:sitables}\index{decimal
 alignment}
 
 When typesetting tables which contain numeric data it is often useful to align
@@ -1237,7 +1235,7 @@ following two rules
 All the numbers in \cargv{S} columns are automatically parsed by \pai{siunitx},
 which means that if we use it, the first rule will be enforced for us.
 
-In order to influence parsing\slash displaying options of a
+In order to influence parsing\slash{}displaying options of a
 single column, pass them in square brackets to the column specification.
 \begin{example}[examplewidth=0.38\linewidth]
 \DeclareSIUnit{\eur}{\euro}
@@ -1375,7 +1373,7 @@ numbers in columns formatted by \pai{siunitx}, change the
 \end{tabular}
 \end{example}
 
-\section{Arrays and Matrices}
+\section{Arrays and Matrices}%
 \label{sec:arraymat}
 
 To typeset \emph{arrays}, use the \ei{array} environment. It works
@@ -1446,9 +1444,9 @@ very often you need 10 columns!):
 
 
 
-\section{Spacing in Math Mode} \label{sec:math-spacing}
-
-\index{math spacing} If the spacing within formulae chosen by \LaTeX{}
+\section{Spacing in Math Mode}\label{sec:math-spacing}%
+\index{math spacing}
+If the spacing within formulae chosen by \LaTeX{}
 is not satisfactory, it can be adjusted by inserting special spacing
 commands: \ci{,} for $\frac{3}{18}\:\textrm{quad}$
 (\demowidth{0.166em}), \ci{:} for $\frac{4}{18}\: \textrm{quad}$
@@ -1474,7 +1472,7 @@ In the next example, we define a new command \ci{ud} (upright d) which produces
 ``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
 $\text{d}$), so we don't have to write it every time. The \ci{NewDocumentCommand} is
 placed in the preamble.  More on
-\ci{NewDocumentCommand} in section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
+\ci{NewDocumentCommand} in Section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
 \begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
@@ -1501,7 +1499,7 @@ commands.
 \end{IEEEeqnarray*}
 \end{example}
 
-For further details see \cite{amstestmath} or Chapter~8 of \companion{}.
+For further details see~\cite{amstestmath} or Chapter~8 of \companion{}.
 
 \subsection{Phantoms}
 
@@ -1521,8 +1519,7 @@ package is very useful for typesetting isotopes and chemical formulae too.
 
 
 \section{Fiddling with the Math Fonts}\label{sec:fontsz}
-Different math fonts are listed on Table~\ref{mathalpha} on page
-\pageref{mathalpha}.
+Different math fonts are listed on Table~\ref{mathalpha} on page~\pageref{mathalpha}.
 \begin{example}
  $\Re \qquad
   \mathcal{R} \qquad
@@ -1559,7 +1556,7 @@ Changing styles generally affects the way big operators and limits are displayed
 % mathop gets the spacing right.
 
 
-\subsection{Bold Symbols}
+\subsection{Bold Symbols}%
 \index{bold symbols}
 
 It is quite difficult to get bold symbols in \LaTeX{}; this is
@@ -1634,7 +1631,7 @@ First define the theorems:
 \end{verbatim}
 
 \begin{example}
-\begin{law} \label{law:box}
+\begin{law}\label{law:box}
 Don't hide in the witness box
 \end{law}
 \begin{jury}[The Twelve]
@@ -1671,8 +1668,7 @@ If you want to customize your theorems down to the last dot, the
 \pai{ntheorem} package offers a plethora of options.
 
 
-\subsection{Proofs and End-of-Proof Symbol}
-\label{sec:putting-qed-right}
+\subsection{Proofs and End-of-Proof Symbol}\label{sec:putting-qed-right}
 
 The \pai{amsthm} package also provides the \ei{proof} environment.
 

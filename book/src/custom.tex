@@ -53,7 +53,7 @@ places where I have used some generic \LaTeX{} commands to draw a
 box around some word.
 
 
-\subsection{New Commands} \label{sec:new_commands}
+\subsection{New Commands}\label{sec:new_commands}
 
 To add your own commands, use the
 \begin{lscommand}
@@ -145,7 +145,7 @@ be used if you only need output for one of the branches. The example with
 \end{itemize}
 \end{example}
 The commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
-work exactly the same, but the value\slash no-value branches are swapped.
+work exactly the same, but the value\slash{}no-value branches are swapped.
 
 Often you will want to use optional arguments when present but use some default
 values when the user does not provide them. This could be achieved by
@@ -171,6 +171,7 @@ starred or non-starred version of command was issued by the user. It uses
 \ci{IfBooleanTF} command (and its variations\cih{IfBooleanT}\cih{IfBooleanF})
 that works analogously to the \ci{IfValueTF} command. 
 
+\begin{chktexignore}
 \begin{example}[examplewidth=0.4\linewidth]
 \NewDocumentCommand{\txsit}{sO{not so}m}
 {This is the \emph{#2}
@@ -186,11 +187,12 @@ that works analogously to the \ci{IfValueTF} command.
 \item \txsit*{long}
 \end{itemize}
 \end{example}
+\end{chktexignore}
 
 These are just the most common argument specifications. For a full description,
 take a look at the \pai*{xparse} package documentation.\footnote{This
 package is loaded automatically in new \LaTeX{} releases, so you probably do not
-need to put \texttt{\textbackslash usepackage\{xparse\}} in your preamble. }
+need to put \texttt{\textbackslash{}usepackage\{xparse\}} in your preamble. }
 
 \LaTeX{} will not allow you to create a new command that would
 overwrite an existing one. But there is a special command in case you
@@ -416,7 +418,7 @@ command to make the package available in your document.
 }
 \end{verbatim}
 \end{lined}
-\caption{Example Package.} \label{package}
+\caption{Example Package.}\label{package}
 \end{figure}
 
 Writing a package basically consists of copying the contents of your document
@@ -446,11 +448,10 @@ in the \eei{.log} file.
 to include a package twice. Figure~\ref{package} shows a small example package
 that contains the commands defined in the examples above.
 
-\section{Fonts and Sizes}
-\label{sec:fontsize}
+\section{Fonts and Sizes}\label{sec:fontsize}
 
-\subsection{Font Changing Commands}
-\index{font}\index{font size} \LaTeX{} chooses the appropriate font
+\subsection{Font Changing Commands}\index{font}\index{font size}
+\LaTeX{} chooses the appropriate font
 and font size based on the logical structure of the document
 (sections, footnotes, \ldots).  In some cases, one might like to change
 fonts and sizes by hand. To do this, use the commands listed in
@@ -478,7 +479,7 @@ special set of commands; refer to Table~\ref{mathfonts}.
 
 \begin{table}[!bp]
   \centering
-  \caption{Fonts.} \label{fonts}
+  \caption{Fonts.}\label{fonts}
 %
 % Alan suggested not to tell about the other form of the command
 % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
@@ -506,8 +507,7 @@ special set of commands; refer to Table~\ref{mathfonts}.
 
 \begin{table}[!bp]
   \centering
-\index{font size}
-\caption{Font Sizes.} \label{sizes}
+\caption{Font Sizes.}\label{sizes}\index{font size}
 \begin{tabular}{@{}ll@{\qquad}ll@{}}
   \toprule
   Command & Size &  Command & Size \\
@@ -531,9 +531,7 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \centering
   \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
   Standard Classes depending on the class option. The default class option is
-  \cargv{10pt}.}
-  \label{tab:pointsizes}
-\label{tab:sizes}
+  \cargv{10pt}.}\label{tab:pointsizes}\label{tab:sizes}
 \sisetup{table-format=2.0}
 \begin{tabular}{@{}lSSS@{}}
   \toprule
@@ -560,7 +558,7 @@ special set of commands; refer to Table~\ref{mathfonts}.
 
 \begin{table}[!bp]
   \centering
-  \caption{Math Fonts.} \label{mathfonts}
+  \caption{Math Fonts.}\label{mathfonts}
 \begin{tabular}{@{}ll@{}}
   \toprule
   Command & Font \\
@@ -603,7 +601,7 @@ He likes {\LARGE large and
 The font size commands also change the line spacing, but only if the
 paragraph ends within the scope of the font size command. The closing curly
 brace \verb|}| should therefore not come too early.  Note the position of
-the \ci{par} command in the next two examples. \footnote{\texttt{\bs{}par}
+the \ci{par} command in the next two examples.\footnote{\texttt{\bs{}par}
 is equivalent to a blank line}
 
 
@@ -687,9 +685,9 @@ here is a little word of advice:\nopagebreak
 
 \section{Spacing}
 
-\subsection{Line Spacing}
+\subsection{Line Spacing}\index{line spacing}
 
-\index{line spacing} If you want to use larger inter-line spacing in a
+If you want to use larger inter-line spacing in a
 document, change its value by putting the
 \begin{lscommand}
 \ci{linespread}\verb|{|\emph{factor}\verb|}|
@@ -765,19 +763,17 @@ To create a non-indented paragraph, use
 \noindent as the first command of the paragraph. This might come in handy when
 you start a document with body text and not with a sectioning command.
 
-\subsection{Horizontal Space}
+\subsection{Horizontal Space}\label{sec:hspace}
 
-\label{sec:hspace}
 \LaTeX{} determines the spaces between words and sentences
-automatically. To add horizontal space, use: \index{horizontal!space}
+automatically. To add horizontal space, use:\index{horizontal!space}
 \begin{lscommand}
 \ci{hspace}\verb|{|\emph{length}\verb|}|
 \end{lscommand}
 If such a space should be kept even if it falls at the end or the
 start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
 \emph{length} in the simplest case is just a number plus a unit.  The
-most important units are listed in Table~\ref{units}.
-\index{units (\TeX)}\index{dimensions}
+most important units are listed in Table~\ref{units}.\index{units (\TeX)}\index{dimensions}
 
 \begin{example}
 This\hspace{1.5cm}is a space
@@ -791,7 +787,7 @@ of \qty{1.5}{\cm}.
     parse-numbers = false
   }
 
-\caption{\TeX{} Units.} \label{units}\index{units}
+\caption{\TeX{} Units.}\label{units}\index{units}
 \begin{tabular}{@{}ll@{}}
 \toprule
 Unit & Meaning \\
@@ -808,7 +804,6 @@ Unit & Meaning \\
 \bigskip
 \end{table}
 
-\label{cmd:stretch}
 The command
 \begin{lscommand}
 \ci{stretch}\verb|{|\emph{n}\verb|}|
@@ -845,8 +840,7 @@ space \emph{between two paragraphs} can be added with the command:
 
 This command should normally be used between two empty lines.  If the
 space should be preserved at the top or at the bottom of a page, use
-the starred version of the command, \verb|\vspace*|, instead of \verb|\vspace|.
-\index{vertical space}
+the starred version of the command, \verb|\vspace*|, instead of \verb|\vspace|.\index{vertical space}
 
 The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
 be used to typeset text on the last line of a page, or to centre text
@@ -878,8 +872,7 @@ vertical space without having to worry about exact numbers.
 \makeatletter\@mylayout\makeatother
 \end{center}
 \vspace*{1.8cm}
-\caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}
-\label{fig:layout}
+\caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}\label{fig:layout}
 \cih{footskip}
 \cih{headheight}
 \cih{headsep}
@@ -892,8 +885,8 @@ vertical space without having to worry about exact numbers.
 \cih{textheight}
 \cih{textwidth}
 \cih{topmargin}
-\end{figure}
-\index{page layout}
+\end{figure}\index{page layout}
+
 \LaTeXe{} allows you to specify the \wi{paper size} in the
 \verb|\documentclass| command. It then automatically picks the right
 text \wi{margins}, but sometimes you may not be happy with
@@ -979,13 +972,13 @@ a^2+b^2=c^2
 \end{displaymath}
 
 \begin{vardesc}{Where}$a$,
-$b$ -- are adjacent to the right
+$b$ --- are adjacent to the right
 angle of a right-angled triangle.
 
-$c$ -- is the hypotenuse of
+$c$ --- is the hypotenuse of
 the triangle and feels lonely.
 
-$d$ -- finally does not show up
+$d$ --- finally does not show up
 here at all. Isn't that puzzling?
 \end{vardesc}
 \end{example}
@@ -1102,8 +1095,7 @@ one in line noticed that something
 terrible had happened to her.
 \end{example}
 
-\section{Rules}
-\label{sec:rule}
+\section{Rules}\label{sec:rule}
 
 A few pages back you may have noticed the command
 

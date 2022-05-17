@@ -7,8 +7,7 @@
 \newcommand{\hoenig}{\emph{\TeX{} Unbound}~\cite{unbound}}
 \newcommand{\graphicsinlatex}{\emph{Graphics in \LaTeXe{}}~\cite{ursoswald}}
 
-\chapter{Producing Mathematical Graphics}
-\label{chap:graphics}
+\chapter{Producing Mathematical Graphics}\label{chap:graphics}
 
 \begin{intro}
 Most people use \LaTeX\ for typesetting their text. And since the structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
@@ -46,11 +45,11 @@ Building on these basics, numerous packages have been written for specific
 purposes. A wide variety of these packages is described in detail in
 \graphicscompanion{}.
 
-Perhaps the most advanced graphical tool related with \LaTeX\ is \MP. It is a stand-alone application
-based on Donald E. Knuth's \MF. \MP{} has the very powerful and
+Perhaps the most advanced graphical tool related with \LaTeX\ is \MP{}. It is a stand-alone application
+based on Donald E. Knuth's \MF{}. \MP{} has the very powerful and
 mathematically sophisticated programming language of \MF{} but contrary to \MF,
 it generates encapsulated \PSi{} files,
-which can be imported in \LaTeX{} and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on \cite{ursoswald}.
+which can be imported in \LaTeX{} and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on~\cite{ursoswald}.
 
 A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can
 be found in \hoenig.
@@ -60,7 +59,7 @@ be found in \hoenig.
 
 As mentioned above the picture environment is part of standard \LaTeX{} and it is great for simple tasks and also if you want
 to control the exact positioning of individual elements on a page. But if you are about to do any serious graphics work, you should
-look at TikZ as presented in section \ref{sec:tikz} on page \pageref{sec:tikz}.
+look at TikZ as presented in Section~\ref{sec:tikz} on page~\pageref{sec:tikz}.
 
 \subsection{Basic Commands}
 
@@ -503,14 +502,13 @@ The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2
 Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
 is assigned the mathematical coordinates $(-3,-2)$ (black disk).
 
-\section{The PGF and TikZ Graphics Packages}
-\label{sec:tikz}
+\section{The PGF and TikZ Graphics Packages}\label{sec:tikz}
 
 Today every \LaTeX{} output generation system can create nice vector graphics,
 it's just the interfaces that are rather diverse. The \pai{pgf} package provides an
 abstraction layer over these interface. The
-\pai{pgf} package comes with a large manual/tutorial of its own
-\cite{pgfplot}. So we are only going to scratch the surface of the package with this little
+\pai{pgf} package comes with a large manual/tutorial of its own~\cite{pgfplot}.
+So we are only going to scratch the surface of the package with this little
 section.
 
 The \pai{pgf} package comes with a high level access language provided by the  \pai{tikz} package.
@@ -696,7 +694,7 @@ call the external \texttt{gnuplot} command to evaluate actual
 functions you wrote into the graph.
 
 For more inspiration make sure to visit Kjell Magne Fauske's excellent
-\url{http://www.texample.net/tikz/}. it contains an ever expanding store of
+\url{http://www.texample.net/tikz/}. It contains an ever expanding store of
 beautiful graphs and other \LaTeX{} code. On \TeX{}ample.net you will also
 find a
  \href{http://www.texample.net/tikz/resources/#tools-that-generate-pgftikz-code}{list

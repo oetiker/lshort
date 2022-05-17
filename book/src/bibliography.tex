@@ -8,7 +8,7 @@
   option to manage the bibliographic data of our document.
 \end{intro}
 
-This chapter will describe two approaches to bibliography management in \LaTeX:
+This chapter will describe two approaches to bibliography management in \LaTeX{}:
 \begin{description}
   \item[\ei{thebibliography} environment] which is suitable for rather small
   bibliographies.
@@ -81,7 +81,7 @@ bibliography management. \hologo{biber} is a successor of a popular
 \hologo{BibTeX} program. Its main advantage is UTF-8 support, which was lacking
 in the original \hologo{BibTeX}. The database format is largely backward
 compatible, so on many sites you can find ``BibTeX entry'' or ``Export Bibtex
-Citation'' , which will be useful when compiling your own citation database.
+Citation'', which will be useful when compiling your own citation database.
 
 \subsection{Database files}
 The bibliographic database is stored in special \eei{.bib} files with their own
@@ -124,7 +124,7 @@ figure~\ref{fig:bibfile} for an example.
     \verbatiminput{examples/example.bib}
   \end{lined}
   \caption[An example of bibliography database]{An example bibliography
-  database for \hologo{biber} (\eei{.bib} file)} \label{fig:bibfile}
+  database for \hologo{biber} (\eei{.bib} file)}\label{fig:bibfile}
 \end{figure}
 
 \subsection{Using \pai{biblatex}}
@@ -207,7 +207,7 @@ traveller~\cite{dream}.
 
 \subsection{Controlling the bibliography}
 
-The default sorting order is \emph{N}ame (author\slash editor), \emph{T}itle,
+The default sorting order is \emph{N}ame (author\slash{}editor), \emph{T}itle,
 \emph{Y}ear or \cargv{nty} in short. This order can be changed by passing
 \cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
 entries in chronological order simply pass the \cargv{ynt} option. Other options
