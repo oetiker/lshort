@@ -8,14 +8,14 @@
   option to manage the bibliographic data of our document.
 \end{intro}
 
-This chapter will describe two approaches to bibliography management in \LaTeX:
+This chapter will describe two approaches to bibliography management in \LaTeX{}:
 \begin{description}
   \item[\ei{thebibliography} environment] which is suitable for rather small
-  bibliographies.
+    bibliographies.
   \item[\pai{biblatex} with \hologo{biber}] which is an advanced bibliography
-  management system that is suitable for books and publications with extensive
-  bibliographies. These systems also make it easy to format all bibliography
-  entries in exactly the style required by the publisher.
+    management system that is suitable for books and publications with extensive
+    bibliographies. These systems also make it easy to format all bibliography
+    entries in exactly the style required by the publisher.
 \end{description}
 
 \section{\ei{thebibliography} environment}
@@ -23,12 +23,12 @@ This chapter will describe two approaches to bibliography management in \LaTeX:
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
-\ci{bibitem}[label][marker]
+  \ci{bibitem}[label][marker]
 \end{lscommand}
 The \carg{marker} is then used to cite the book, article or paper
 within the document.
 \begin{lscommand}
-\ci{cite}[marker]
+  \ci{cite}[marker]
 \end{lscommand}
 If you do not use the \carg{label} option, the entries will get enumerated
 automatically.  The parameter after the \verb|\begin{thebibliography}|
@@ -55,14 +55,14 @@ contained---no outer packages and programs are needed since it is supported out
 of the box by \LaTeX{}. There are however many problems:
 \begin{itemize}
   \item Each entry has to be formatted manually, which may lead to inconsistent
-  styling. Moreover simple changes in format will require editing each entry by
-  hand.
+        styling. Moreover simple changes in format will require editing each entry by
+        hand.
   \item There is no logical/structural markup to imply which part of
-  bibliographic entry is author, title, journal, etc.
+        bibliographic entry is author, title, journal, etc.
   \item No sorting is performed. If you want the entries to be processed in
-  citation order, you have to ensure this manually.
+        citation order, you have to ensure this manually.
   \item If you want to use different citation style than numeric, you have to
-  manually set all the labels.
+        manually set all the labels.
 \end{itemize}
 Thus for all projects that contain more than few citations \pai{biblatex} is
 strongly recommended.
@@ -81,39 +81,39 @@ bibliography management. \hologo{biber} is a successor of a popular
 \hologo{BibTeX} program. Its main advantage is UTF-8 support, which was lacking
 in the original \hologo{BibTeX}. The database format is largely backward
 compatible, so on many sites you can find ``BibTeX entry'' or ``Export Bibtex
-Citation'' , which will be useful when compiling your own citation database.
+Citation'', which will be useful when compiling your own citation database.
 
 \subsection{Database files}
 The bibliographic database is stored in special \eei{.bib} files with their own
 syntax. A single bibliographic entry is of the form
 \begin{lscommand}
-\texttt{@}\carg{entry type}\texttt{\{}\carg{marker},\\
-\hspace*{1em}\carg{field1}\texttt{ = \{}\carg{value1}\texttt{\}},\\
-\hspace*{1em}\carg{field2}\texttt{ = \{}\carg{value2}\texttt{\}},\\
-\hspace*{1em}\carg{field3}\texttt{ = \{}\carg{value3}\texttt{\}},\\
-\hspace*{3em}\vdots\\
-\texttt{\}}
+  \texttt{@}\carg{entry type}\texttt{\{}\carg{marker},\\
+  \hspace*{1em}\carg{field1}\texttt{ = \{}\carg{value1}\texttt{\}},\\
+  \hspace*{1em}\carg{field2}\texttt{ = \{}\carg{value2}\texttt{\}},\\
+  \hspace*{1em}\carg{field3}\texttt{ = \{}\carg{value3}\texttt{\}},\\
+  \hspace*{3em}\vdots\\
+  \texttt{\}}
 \end{lscommand}
 The fields required depend on the bibliography style you choose,
 the default style of \pai{biblatex} will accept
 the following \carg{entry type}s:
 \begin{description}
   \item[\cargv{article}] for articles from journals or other periodicals. Important fields are
-   are \cargv{author}, \cargv{title}, \cargv{journaltitle},
-  \cargv{date}, \cargv{url}, \cargv{doi}.
+    are \cargv{author}, \cargv{title}, \cargv{journaltitle},
+    \cargv{date}, \cargv{url}, \cargv{doi}.
   \item[\cargv{book}] for single-volume book. With the fields
-  \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
-  \cargv{volume}.
+    \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
+    \cargv{volume}.
   \item[\cargv{online}] for accessed online resources. With
-   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{urldate}.
+    \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{urldate}.
   \item[\cargv{manual}] for technical documentation. With
-   \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{version}.
+    \cargv{author}, \cargv{title}, \cargv{date}, \cargv{url}, \cargv{version}.
   \item[\cargv{misc}] for entries that do not fit any of the predefined
-   categories. With \cargv{author}, \cargv{title},
-   \cargv{date}, \cargv{howpublished}, \cargv{note}.
+    categories. With \cargv{author}, \cargv{title},
+    \cargv{date}, \cargv{howpublished}, \cargv{note}.
 \end{description}
 Note that the above list is far from exhaustive both in terms of \carg{entry
-type}s and the field names mentioned. For a full list check the \pai{biblatex}
+  type}s and the field names mentioned. For a full list check the \pai{biblatex}
 manual or the style you are using.
 
 Each \eei{.bib} file will typically contain multiple entries. See
@@ -124,7 +124,7 @@ figure~\ref{fig:bibfile} for an example.
     \verbatiminput{examples/example.bib}
   \end{lined}
   \caption[An example of bibliography database]{An example bibliography
-  database for \hologo{biber} (\eei{.bib} file)} \label{fig:bibfile}
+    database for \hologo{biber} (\eei{.bib} file)}\label{fig:bibfile}
 \end{figure}
 
 \subsection{Using \pai{biblatex}}
@@ -207,7 +207,7 @@ traveller~\cite{dream}.
 
 \subsection{Controlling the bibliography}
 
-The default sorting order is \emph{N}ame (author\slash editor), \emph{T}itle,
+The default sorting order is \emph{N}ame (author\slash{}editor), \emph{T}itle,
 \emph{Y}ear or \cargv{nty} in short. This order can be changed by passing
 \cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
 entries in chronological order simply pass the \cargv{ynt} option. Other options
@@ -337,13 +337,13 @@ options include
   \item[\cargv{bibliography}] the default, starred version of heading
   \item[\cargv{bibintoc}] starred version of heading, will appear in table of contents
   \item[\cargv{subbibliography}] will drop the bibliography one level in
-  hierarchy (\ci{section*} instead of \ci{chapter*} and so on)
+    hierarchy (\ci{section*} instead of \ci{chapter*} and so on)
   \item[\cargv{bibnumbered}] will use non starred version for heading, thus
-  numbering it and appearing in table of contents
+    numbering it and appearing in table of contents
   \item[\cargv{subbibintoc}] will drop the bibliography one level and put it in
-  table of contents
+    table of contents
   \item[\cargv{subbibnumbered}] will drop the bibliography one level and use
-  non starred version of heading
+    non starred version of heading
   \item[\cargv{none}] will not print the heading
 \end{description}
 

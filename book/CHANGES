@@ -14,6 +14,7 @@ UNRELEASED
 * update polyglossia tutorial / marcin-serwin
 * rewrite tables intro / marcin-serwin
 * rewrite fancyhdr intro / marcin-serwin
+* lint files using chktex and latexindent / marcin-serwin
 
 6.4 2021.03.09
 --------------

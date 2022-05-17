@@ -285,6 +285,10 @@
     \edef\){}  
   }
 \fi
+% This does nothing, but disables ChkTeX inside
+\NewDocumentEnvironment{chktexignore}{}{}{}
+
+\NewDocumentCommand{\smiley}{}{\texttt{;-)}}
 \ExplSyntaxOff
 
 %\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}

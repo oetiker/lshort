@@ -1,0 +1,24 @@
+CmdLine {
+    -eall -n22 -n30 -e16 -n46 -n21 -n29 -n3 -n17
+}
+
+VerbEnvir {
+    lscommand code chktexignore
+}
+
+Silent {
+    \printbibliography \IfValueTF \suppressfloats
+    \flushright \mainmatter \IEEEyessubnumber
+    \endhead \endfoot \endlastfoot \endfirsthead
+    \tabularnewline \ifpdf
+}
+
+MathEnvir {
+    IEEEeqnarray
+}
+
+WipeArg {
+    \ai:{} \ci:*{} \carg:{} \cargv:{} \mstX:{}
+    \complexnum:{}
+    \url:{}
+}
