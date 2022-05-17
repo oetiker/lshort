@@ -13,6 +13,7 @@ UNRELEASED
 * change document font back to Latin Modern / marcin-serwin
 * update polyglossia tutorial / marcin-serwin
 * rewrite tables intro / marcin-serwin
+* rewrite fancyhdr intro / marcin-serwin
 
 6.4 2021.03.09
 --------------
