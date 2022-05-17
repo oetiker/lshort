@@ -1,0 +1,45 @@
+defaultIndent: "  "
+
+verbatimEnvironments:
+  example: 1
+  code: 1
+
+modifyLineBreaks:
+  textWrapOptions:
+    columns: 70
+    blocksFollow:
+      other: |-
+        (?x)
+        \\\] |
+        \\item(?:\h*\[?) |
+        \\begin\{lscommand|intro\} |
+        \\end\{(?:lscommand|intro|example|code)\}
+    blocksBeginWith:
+      other: |-
+        (?x)
+          \\LaTeX |
+          \\TeX |
+          \\hologo |
+
+          \\normalfont |
+          \\textbf |
+          \\texttt |
+
+          \\index |
+
+          \\wi |
+          \\ei |
+          \\eei |
+          \\pai |
+          \\ci |
+          \\demowidth |
+
+          \\\( |
+          \\noindent |
+          \\hyphenation |
+          \\bigskip |
+          \\caption |
+          \\centerline |
+          \\verb |
+          \\quad |
+          \\emph
