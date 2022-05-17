@@ -10,11 +10,11 @@
 \chapter{Producing Mathematical Graphics}\label{chap:graphics}
 
 \begin{intro}
-Most people use \LaTeX\ for typesetting their text. And since the structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
-if somewhat restricted, means for producing graphical output from textual
-descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created
-in order to overcome these restrictions. In this section, you will learn about a
-few of them.
+  Most people use \LaTeX\ for typesetting their text. And since the structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
+  if somewhat restricted, means for producing graphical output from textual
+  descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created
+  in order to overcome these restrictions. In this section, you will learn about a
+  few of them.
 \end{intro}
 
 \section{Overview}
@@ -64,18 +64,18 @@ look at TikZ as presented in Section~\ref{sec:tikz} on page~\pageref{sec:tikz}.
 \subsection{Basic Commands}
 
 A \ei{picture} environment\footnote{Believe it or not, the picture environment works out of the
-box, with standard \LaTeXe{} no package loading necessary.} is created with one of the two commands
+  box, with standard \LaTeXe{} no package loading necessary.} is created with one of the two commands
 \begin{lscommand}
-\ci{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\ci{end}\verb|{picture}|
+  \ci{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\ci{end}\verb|{picture}|
 \end{lscommand}
 \noindent or
 \begin{lscommand}
-\ci{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\ci{end}\verb|{picture}|
+  \ci{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\ci{end}\verb|{picture}|
 \end{lscommand}
 The numbers $x,\,y,\,x_0,\,y_0$ refer to \ci{unitlength}, which can be reset any time
 (but not within a \ei{picture} environment) with a command such as
 \begin{lscommand}
-\ci{setlength}\verb|{|\ci{unitlength}\verb|}{1.2cm}|
+  \ci{setlength}\verb|{|\ci{unitlength}\verb|}{1.2cm}|
 \end{lscommand}
 The default value of \ci{unitlength} is \texttt{1pt}. The first pair, $(x,y)$, effects
 the reservation, within the document, of rectangular space for the picture. The optional
@@ -84,14 +84,14 @@ reserved rectangle.
 
 Most drawing commands have one of the two forms
 \begin{lscommand}
-\ci{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
+  \ci{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
 \end{lscommand}
 \noindent or
 \begin{lscommand}
-\ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
+  \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
 B\'ezier curves are an exception. They are drawn with the command
 \begin{lscommand}
-\ci{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
+  \ci{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
 \end{lscommand}
 
 \subsection{Line Segments}
@@ -127,7 +127,7 @@ B\'ezier curves are an exception. They are drawn with the command
 \end{example}
 Line segments are drawn with the command
 \begin{lscommand}
-\ci{put}\verb|(|$x,y$\verb|){|\ci{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+  \ci{put}\verb|(|$x,y$\verb|){|\ci{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
 \end{lscommand}
 The \ci{line} command has two arguments:
 \begin{enumerate}
@@ -163,7 +163,7 @@ horizontal coordinate in all other cases.
 \end{example}
 Arrows are drawn with the command
 \begin{lscommand}
-\ci{put}\verb|(|$x,y$\verb|){|\ci{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+  \ci{put}\verb|(|$x,y$\verb|){|\ci{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
 \end{lscommand}
 For arrows, the components of the direction vector are even more narrowly restricted than
 for line segments, namely to the integers
@@ -417,10 +417,10 @@ respective slopes, of a quadratic B\'ezier curve. The intermediate control point
 $S=(x,\,y)$ is then given by the equations
 \begin{equation} \label{zwischenpunkt}
   \left\{
-    \begin{aligned}{rcl}
-      x & = & \displaystyle \frac{m_2 x_2-m_1x_1-(y_2-y_1)}{m_2-m_1}, \\
-      y & = & y_i+m_i(x-x_i)\qquad (i=1,\,2).
-    \end{aligned}
+  \begin{aligned}{rcl}
+    x & = & \displaystyle \frac{m_2 x_2-m_1x_1-(y_2-y_1)}{m_2-m_1}, \\
+    y & = & y_i+m_i(x-x_i)\qquad (i=1,\,2).
+  \end{aligned}
   \right.
 \end{equation}
 \noindent See \graphicsinlatex\ for a Java program which generates
@@ -622,69 +622,69 @@ so I will just show you the result. If you have a look at the \pai{pgf} document
 you will find a detailed tutorial on drawing this exact diagram.
 
 \begin{center}
-\begin{tikzpicture}[point/.style={coordinate},thick,draw=black!50,>=stealth',
-                    tip/.style={->,shorten >=1pt},every join/.style={rounded corners},
-                    skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}},
-                    hv path/.style={to path={-| (\tikztotarget)}},
-                    vh path/.style={to path={|- (\tikztotarget)}},
-                 terminal/.style={
-            rounded rectangle,
-            minimum size=6mm,
-            thick,draw=black!50,
-            top color=white,bottom color=black!20,
-            font=\ttfamily\tiny},
-                nonterminal/.style={
-                       rectangle,
-                       minimum size=6mm,
-                       thick,
-                       draw=red!50!black!50,         % 50% red and 50% black,
-                       top color=white,              % a shading that is white at the top...
-                       bottom color=red!50!black!20, % and something else at the bottom
-                       font=\itshape\tiny}]
-\matrix[column sep=4mm] {
-  % First row:
-  & & & & & & & & & & & \node (plus) [terminal] {+};\\
-  % Second row:
-  \node (p1) [point] {}; &     \node (ui1)    [nonterminal] {unsigned integer}; &
-  \node (p2) [point] {}; &     \node (dot)    [terminal]    {.};                &
-  \node (p3) [point] {}; &     \node (digit) [terminal]     {digit};            &
-  \node (p4) [point] {}; &     \node (p5)     [point] {};                       &
-  \node (p6) [point] {}; &     \node (e)      [terminal]    {E};                &
-  \node (p7) [point] {}; &                                                      &
-  \node (p8) [point] {}; &     \node (ui2)    [nonterminal] {unsigned integer}; &
-  \node (p9) [point] {}; &     \node (p10)    [point]       {};\\
-  % Third row:
-  & & & & & & & & & & & \node (minus)[terminal] {-};\\
-};
-{ [start chain]
-  \chainin (p1);
-  \chainin (ui1)   [join=by tip];
-  \chainin (p2)    [join];
-  \chainin (dot)   [join=by tip];
-  \chainin (p3)    [join];
-  \chainin (digit) [join=by tip];
-  \chainin (p4)    [join];
-  { [start branch=digit loop]
+  \begin{tikzpicture}[point/.style={coordinate},thick,draw=black!50,>=stealth',
+      tip/.style={->,shorten >=1pt},every join/.style={rounded corners},
+      skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}},
+      hv path/.style={to path={-| (\tikztotarget)}},
+      vh path/.style={to path={|- (\tikztotarget)}},
+      terminal/.style={
+          rounded rectangle,
+          minimum size=6mm,
+          thick,draw=black!50,
+          top color=white,bottom color=black!20,
+          font=\ttfamily\tiny},
+      nonterminal/.style={
+          rectangle,
+          minimum size=6mm,
+          thick,
+          draw=red!50!black!50,         % 50% red and 50% black,
+          top color=white,              % a shading that is white at the top...
+          bottom color=red!50!black!20, % and something else at the bottom
+          font=\itshape\tiny}]
+    \matrix[column sep=4mm] {
+      % First row:
+                             &                                                  &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
+      % Second row:
+      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned integer}; &
+      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                &
+      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};            &
+      \node (p4) [point] {}; & \node (p5)     [point] {};                       &
+      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                &
+      \node (p7) [point] {}; &                                                  &
+      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned integer}; &
+      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                            \\
+      % Third row:
+                             &                                                  &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
+    };
+    { [start chain]
+    \chainin (p1);
+    \chainin (ui1)   [join=by tip];
+    \chainin (p2)    [join];
+    \chainin (dot)   [join=by tip];
+    \chainin (p3)    [join];
+    \chainin (digit) [join=by tip];
+    \chainin (p4)    [join];
+    { [start branch=digit loop]
     \chainin (p3) [join=by {skip loop=-6mm,tip}];
-  }
-  \chainin (p5)    [join,join=with p2 by {skip loop=6mm,tip}];
-  \chainin (p6)    [join];
-  \chainin (e)     [join=by tip];
-  \chainin (p7)    [join];
-  { [start branch=plus]
+    }
+    \chainin (p5)    [join,join=with p2 by {skip loop=6mm,tip}];
+    \chainin (p6)    [join];
+    \chainin (e)     [join=by tip];
+    \chainin (p7)    [join];
+    { [start branch=plus]
     \chainin (plus) [join=by {vh path,tip}];
     \chainin (p8)    [join=by {hv path,tip}];
-  }
-  { [start branch=minus]
+    }
+    { [start branch=minus]
     \chainin (minus) [join=by {vh path,tip}];
     \chainin (p8)    [join=by {hv path,tip}];
-  }
-  \chainin (p8)    [join];
-  \chainin (ui2)   [join=by tip];
-  \chainin (p9)    [join,join=with p6 by {skip loop=-11mm,tip}];
-  \chainin (p10)   [join=by tip];
-}
-\end{tikzpicture}
+    }
+    \chainin (p8)    [join];
+    \chainin (ui2)   [join=by tip];
+    \chainin (p9)    [join,join=with p6 by {skip loop=-11mm,tip}];
+    \chainin (p10)   [join=by tip];
+    }
+  \end{tikzpicture}
 \end{center}
 
 And there is more, if you have to draw plots of numerical data or
@@ -697,9 +697,9 @@ For more inspiration make sure to visit Kjell Magne Fauske's excellent
 \url{http://www.texample.net/tikz/}. It contains an ever expanding store of
 beautiful graphs and other \LaTeX{} code. On \TeX{}ample.net you will also
 find a
- \href{http://www.texample.net/tikz/resources/#tools-that-generate-pgftikz-code}{list
- of tools to work with PGF/TikZ} so that you do not have to write all that
- code by hand.
+\href{http://www.texample.net/tikz/resources/#tools-that-generate-pgftikz-code}{list
+  of tools to work with PGF/TikZ} so that you do not have to write all that
+code by hand.
 
 %%% Local Variables:
 %%% TeX-master: "lshort.tex"

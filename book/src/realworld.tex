@@ -7,7 +7,7 @@
 
 \begin{intro}
   After reading the previous chapter, you should have some general idea
-about \LaTeX{}. This chapter
+  about \LaTeX{}. This chapter
   will fill in the remaining structure you will need to know in order
   to produce real world documents.
 \end{intro}
@@ -117,26 +117,26 @@ for more information.
 In special cases it might be necessary to order \LaTeX{} to break a
 line:
 \begin{lscommand}
-\ci*{\bs}[length:o] or \ci{newline}
+  \ci*{\bs}[length:o] or \ci{newline}
 \end{lscommand}
 starts a new line without starting a new paragraph. The optional \carg{length}
-argument adds additional space after the line. 
+argument adds additional space after the line.
 
 \begin{lscommand}
-\ci*{\bs*}[length:o]
+  \ci*{\bs*}[length:o]
 \end{lscommand}
 additionally prohibits a page break after the forced line break.
 
 \begin{lscommand}
-\ci{newpage}
+  \ci{newpage}
 \end{lscommand}
 starts a new page.
 
 \begin{lscommand}
-\ci{linebreak}\verb|[|\emph{n}\verb|]|,
-\ci{nolinebreak}\verb|[|\emph{n}\verb|]|,
-\ci{pagebreak}\verb|[|\emph{n}\verb|]|,
-\ci{nopagebreak}\verb|[|\emph{n}\verb|]|
+  \ci{linebreak}\verb|[|\emph{n}\verb|]|,
+  \ci{nolinebreak}\verb|[|\emph{n}\verb|]|,
+  \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
+  \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
 \end{lscommand}
 suggest places where a break may (or may not) happen.
 They enable the author to influence their
@@ -187,7 +187,7 @@ about the exception.
 
 The command
 \begin{lscommand}
-\ci{hyphenation}\verb|{|\emph{word list}\verb|}|
+  \ci{hyphenation}\verb|{|\emph{word list}\verb|}|
 \end{lscommand}
 \noindent causes the words listed in the argument to be hyphenated only at
 the points marked by ``\verb|-|''.  The argument of the command should only
@@ -226,7 +226,7 @@ al\-i\-do\-cious
 
 Several words can be kept together on one line with the command
 \begin{lscommand}
-\ci{mbox}\verb|{|\emph{text}\verb|}|
+  \ci{mbox}\verb|{|\emph{text}\verb|}|
 \end{lscommand}
 \noindent It causes its argument to be kept together under all circumstances.
 
@@ -252,12 +252,12 @@ text strings:
 \begin{center}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Command     & Example  & Description\\
+    Command     & Example   & Description              \\
     \midrule
-    \ci{today}  & \today   & Current date\\
-    \ci{TeX}    & \TeX{}   & Your favorite typesetter\\
-    \ci{LaTeX}  & \LaTeX{} & The Name of the Game\\
-    \ci{LaTeXe} & \LaTeXe{}& The current incarnation\\
+    \ci{today}  & \today    & Current date             \\
+    \ci{TeX}    & \TeX{}    & Your favorite typesetter \\
+    \ci{LaTeX}  & \LaTeX{}  & The Name of the Game     \\
+    \ci{LaTeXe} & \LaTeXe{} & The current incarnation  \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -326,11 +326,11 @@ Section~\ref{sec:units}.
 When writing about money these days, you need the Euro symbol. Many current
 fonts contain a Euro symbol. After loading the \pai{textcomp} package in the preamble of your document
 \begin{lscommand}
-\ci{usepackage}\verb|{textcomp}|
+  \ci{usepackage}\verb|{textcomp}|
 \end{lscommand}
 use the command
 \begin{lscommand}
-\ci{texteuro}
+  \ci{texteuro}
 \end{lscommand}
 to access it.
 
@@ -339,7 +339,7 @@ font's Euro symbol, you have two more choices:
 
 First the \pai{eurosym} package. It provides the official Euro symbol:
 \begin{lscommand}
-\ci{usepackage}\verb|[|\emph{official}\verb|]{eurosym}|
+  \ci{usepackage}\verb|[|\emph{official}\verb|]{eurosym}|
 \end{lscommand}
 If you prefer a Euro symbol that matches your font, use the option
 \texttt{gen} in place of the \texttt{official} option.
@@ -358,29 +358,29 @@ If you prefer a Euro symbol that matches your font, use the option
 
 \begin{table}[!htbp]
   \centering
-\caption[Available Euro symbols]{The appearance of available Euro symbols based
-on the loaded package and the used font.}\label{eurosymb}
-\begin{tabular}{@{}llccc@{}}
-\toprule
-&& \multicolumn{3}{c}{Symbol used} \\
-\cmidrule(l){3-5}
-Package & Command & Roman & Sans serif & Monospace \\
-\midrule
-LM+textcomp  &\ci{texteuro} & \huge\texteuro{} &\huge\sffamily\texteuro{}
-                                                &\huge\ttfamily\texteuro\\
-eurosym      &\ci{euro} & \huge\officialeuro{} &\huge\sffamily\officialeuro{}
-                                                &\huge\ttfamily\officialeuro\\
-$[$gen$]$eurosym &\ci{euro} & \huge\geneuro{}  &\huge\sffamily\geneuro{}
-                                                &\huge\ttfamily\geneuro\\
-%europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
-%                                                &\huge\EURcr\\
-%eurosans     &\verb+\euro+ & \huge\EUROSANS  &\huge\sffamily\EUROSANS
-%                                             & \huge\ttfamily\EUROSANS \\
-%marvosym     &\verb+\EURtm+  & \huge\mvchr101  &\huge\mvchr101
-%                                               &\huge\mvchr101
-\bottomrule
-\end{tabular}
-\medskip
+  \caption[Available Euro symbols]{The appearance of available Euro symbols based
+    on the loaded package and the used font.}\label{eurosymb}
+  \begin{tabular}{@{}llccc@{}}
+    \toprule
+                     &                               & \multicolumn{3}{c}{Symbol used}                                             \\
+    \cmidrule(l){3-5}
+    Package          & Command                       & Roman                           & Sans serif                    & Monospace \\
+    \midrule
+    LM+textcomp      & \ci{texteuro}                 & \huge\texteuro{}                & \huge\sffamily\texteuro{}
+                     & \huge\ttfamily\texteuro{}                                                                                   \\
+    eurosym          & \ci{euro}                     & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
+                     & \huge\ttfamily\officialeuro{}                                                                               \\
+    $[$gen$]$eurosym & \ci{euro}                     & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
+                     & \huge\ttfamily\geneuro{}                                                                                    \\
+    %europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
+    %                                                &\huge\EURcr\\
+    %eurosans     &\verb+\euro+ & \huge\EUROSANS  &\huge\sffamily\EUROSANS
+    %                                             & \huge\ttfamily\EUROSANS \\
+    %marvosym     &\verb+\EURtm+  & \huge\mvchr101  &\huge\mvchr101
+    %                                               &\huge\mvchr101
+    \bottomrule
+  \end{tabular}
+  \medskip
 \end{table}
 
 \subsection{Ellipsis (\ldots)}
@@ -393,12 +393,12 @@ dots would produce the wrong result. Instead, there is a special
 command for these dots. It is called
 
 \begin{lscommand}
-\ci{ldots} (low dots)
+  \ci{ldots} (low dots)
 \end{lscommand}%
 \index{...@\ldots}
 
 \begin{chktexignore}
-\begin{example}
+  \begin{example}
 Not like this ... but like this:\\
 New York, Tokyo, Budapest, \ldots
 \end{example}
@@ -430,8 +430,8 @@ being applied to the letter o. Naturally other letters work too.
 
 To place an accent on top of an i or a j, its dots have to be
 removed. This is accomplished by typing \verb|\i| and \verb|\j|.
-\begin{chktexignore}  
-\begin{example}
+\begin{chktexignore}
+  \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
 sm\o rrebr\o d, !`Se\~norita!,\\
 Sch\"onbrunner Schlo\ss{}
@@ -440,26 +440,26 @@ Stra\ss e
 \end{chktexignore}
 \begin{table}[!hbp]
   \centering
-\caption{Accents and Special Characters.}\label{accents}
-\begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
-  \toprule
-  Code & Effect & Code & Effect & Code& Effect & Code & Effect \\
-  \midrule
-  \mstA{\`o} & \mstA{\'o} & \mstA{\^o} & \mstA{\~o} \\
-  \mstA{\=o} & \mstA{\.o} & \mstA{\"o} & \mstB{\c}{c}\\[6pt]
-  \mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o} & \mstB{\c}{o} \\
-  \mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} && \\[6pt]
-  \mstA{\oe}  &  \mstA{\OE} & \mstA{\ae} & \mstA{\AE} \\
-  \mstA{\aa} &  \mstA{\AA} &&&& \\[6pt]
-  \mstA{\o}  & \mstA{\O} & \mstA{\l} & \mstA{\L} \\
-  \mstA{\i}  & \mstA{\j} & !` & \verb|!`| & ?` & \verb|?`| \\ %chktex 26
-  \bottomrule
-\end{tabular}%
-\index{dotless \i{} and \j}\index{Scandinavian letters}%
-\index{ae@\ae}\index{umlaut}\index{grave}\index{acute}%
-\index{oe@\oe}\index{aa@\aa}
+  \caption{Accents and Special Characters.}\label{accents}
+  \begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
+    \toprule
+    Code         & Effect       & Code          & Effect       & Code & Effect    & Code & Effect \\
+    \midrule
+    \mstA{\`o}   & \mstA{\'o}   & \mstA{\^o}    & \mstA{\~o}                                      \\
+    \mstA{\=o}   & \mstA{\.o}   & \mstA{\"o}    & \mstB{\c}{c}                                    \\[6pt]
+    \mstB{\u}{o} & \mstB{\v}{o} & \mstB{\H}{o}  & \mstB{\c}{o}                                    \\
+    \mstB{\d}{o} & \mstB{\b}{o} & \mstB{\t}{oo} &              &                                  \\[6pt]
+    \mstA{\oe}   & \mstA{\OE}   & \mstA{\ae}    & \mstA{\AE}                                      \\
+    \mstA{\aa}   & \mstA{\AA}   &               &              &      &                           \\[6pt]
+    \mstA{\o}    & \mstA{\O}    & \mstA{\l}     & \mstA{\L}                                       \\
+    \mstA{\i}    & \mstA{\j}    & !`            & \verb|!`|    & ?`   & \verb|?`|                 \\ %chktex 26
+    \bottomrule
+  \end{tabular}%
+  \index{dotless \i{} and \j}\index{Scandinavian letters}%
+  \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}%
+  \index{oe@\oe}\index{aa@\aa}
 
-\bigskip
+  \bigskip
 \end{table}
 
 \section{International Language Support}
@@ -469,11 +469,11 @@ other than English, there are three areas where \LaTeX{} has to be
 configured appropriately:
 
 \begin{enumerate}
-\item All automatically generated text strings (\enquote{Table of Contents},
-    \enquote{List of Figures}, \ldots) have to be adapted to the new language.
-\item \LaTeX{} needs to know the hyphenation rules for the current language.
-\item Language specific typographic rules. In French for example, there is a
-  mandatory space before each colon character (:).
+  \item All automatically generated text strings (\enquote{Table of Contents},
+        \enquote{List of Figures}, \ldots) have to be adapted to the new language.
+  \item \LaTeX{} needs to know the hyphenation rules for the current language.
+  \item Language specific typographic rules. In French for example, there is a
+        mandatory space before each colon character (:).
 \end{enumerate}
 
 Also entering text in your language of choice might be a bit cumbersome using
@@ -575,15 +575,15 @@ English, the more useful will this commands become.
 Sometimes the font used in the main document does not contain glyphs that are
 required in the second language. The default Latin Modern font for example does not
 contain Cyrillic letters. The solution is to define a custom font that will be used
-for that language. 
+for that language.
 
 To set the fonts use the command
 \begin{lscommand}
   \ci*{newfontfamily}[familyname:M ! options:o ! font:m]
 \end{lscommand}
 from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
-by \pai{polyglossia} so you do not need to add it to a the preamble of your
-document.} which is described in much more detail in
+  by \pai{polyglossia} so you do not need to add it to a the preamble of your
+  document.} which is described in much more detail in
 Section~\ref{sec:fontspec}.
 
 When changing the text language, \pai{polyglossia} checks whether a font family named
@@ -592,10 +592,10 @@ When changing the text language, \pai{polyglossia} checks whether a font family 
 If you are happy with the default Latin Modern font, you may want to try the \enquote{CMU} font
 which contains some additional Cyrillic or Greek glyphs
 while looking nearly identical to Latin Modern.\footnote{Both fonts are
-actually based on the Computer Modern font, designed by Donald Knuth for
-the first \TeX{} versions.}
+  actually based on the Computer Modern font, designed by Donald Knuth for
+  the first \TeX{} versions.}
 
-If you have the CMU font installed in your system (unlikely) or you are using 
+If you have the CMU font installed in your system (unlikely) or you are using
 \hologo{LuaLaTeX} then you can simply write
 \begin{verbatim}
 \newfontfamily\greekfont{CMU Serif}
@@ -612,8 +612,8 @@ need to specify the font by its file name.
 
 With the appropriate fonts loaded, you can now write:
 {
-  \setmonofont{cmuntt.otf}
-  \begin{example}[examplewidth=0.4\linewidth]
+\setmonofont{cmuntt.otf}
+\begin{example}[examplewidth=0.4\linewidth]
 %!showbegin !hide
 % In the preamble (LuaLaTeX)
 \setotherlanguage{greek}
@@ -678,9 +678,9 @@ Section~\ref{sec:fontspec}.
 
 Some languages are written left to right, others are written right to left
 (RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
-supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
-\pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
-much more limited than \pai{bidi}.} in order to support RTL languages. The
+  supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
+  \pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
+  much more limited than \pai{bidi}.} in order to support RTL languages. The
 \pai{bidi} package should be the last package you load, even after
 \pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
 loads \pai{bidi} this means that \pai{polyglossia} should be the last package
@@ -699,7 +699,7 @@ This text will be typeset right to left.
 \end{example}
 
 The package \pai*{xepersian}\footnote{Works only with
-\hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
+  \hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
 supplies Persian \LaTeX-commands that allows you to enter commands like
 \ci{section} in Persian, which makes this really attractive to native speakers.
 \pai{xepersian} is the only package that supports kashida\index{kashida} with
@@ -712,16 +712,16 @@ developed by the SCICT and updated by Mohammad Saleh Souzanchi.
 The \pai*{arabxetex} package supports several languages with
 an Arabic script:
 \begin{itemize}
-\item arab (Arabic)\index{Arabic}
-\item persian\index{Persian}
-\item urdu\index{Urdu}
-\item sindhi\index{Sindhi}
-\item pashto\index{Pashto}
-\item ottoman (turk)\index{Ottoman}\index{Turkish}
-\item kurdish\index{Kurdish}
-\item kashmiri\index{Kashmiri}
-\item malay (jawi)\index{Malay}\index{Jawi}
-\item uighur\index{Uighur}
+  \item arab (Arabic)\index{Arabic}
+  \item persian\index{Persian}
+  \item urdu\index{Urdu}
+  \item sindhi\index{Sindhi}
+  \item pashto\index{Pashto}
+  \item ottoman (turk)\index{Ottoman}\index{Turkish}
+  \item kurdish\index{Kurdish}
+  \item kashmiri\index{Kashmiri}
+  \item malay (jawi)\index{Malay}\index{Jawi}
+  \item uighur\index{Uighur}
 \end{itemize}
 
 It offers a font mapping that enables \hologo{XeLaTeX} to process input
@@ -737,7 +737,7 @@ the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
 \index{Chinese}\index{Japanese}\index{Korean}
 
 The package \pai*{xeCJK}\footnote{Works only with
-\hologo{XeLaTeX}.} takes care of font selection and
+  \hologo{XeLaTeX}.} takes care of font selection and
 punctuation for these languages.
 
 \section{The Space Between Words}
@@ -767,7 +767,7 @@ I like BASIC\@. What about you?
 
 The additional space after periods can be disabled with the command
 \begin{lscommand}
-\ci{frenchspacing}
+  \ci{frenchspacing}
 \end{lscommand}
 \noindent which tells \LaTeX{} \emph{not} to insert more space after a
 period than after an ordinary character. This is very common in
@@ -785,23 +785,23 @@ The following sectioning commands are available for the
 \texttt{article} class: \nopagebreak
 
 \begin{lscommand}
-\ci{section}\verb|{...}|\\
-\ci{subsection}\verb|{...}|\\
-\ci{subsubsection}\verb|{...}|\\
-\ci{paragraph}\verb|{...}|\\
-\ci{subparagraph}\verb|{...}|
+  \ci{section}\verb|{...}|\\
+  \ci{subsection}\verb|{...}|\\
+  \ci{subsubsection}\verb|{...}|\\
+  \ci{paragraph}\verb|{...}|\\
+  \ci{subparagraph}\verb|{...}|
 \end{lscommand}
 
 If you want to split your document into parts without influencing the
 section or chapter numbering use
 \begin{lscommand}
-\ci{part}\verb|{...}|
+  \ci{part}\verb|{...}|
 \end{lscommand}
 
 When you work with the \texttt{report} or \texttt{book} class,
 an additional top-level sectioning command becomes available
 \begin{lscommand}
-\ci{chapter}\verb|{...}|
+  \ci{chapter}\verb|{...}|
 \end{lscommand}
 
 As the \texttt{article} class does not know about chapters, it is quite easy
@@ -811,17 +811,17 @@ titles will be set automatically by \LaTeX.
 
 Two of the sectioning commands are a bit special:
 \begin{itemize}
-\item The \ci{part} command does
-  not influence the numbering sequence of chapters.
-\item The \ci{appendix} command does not take an argument. It just
-  changes the chapter numbering to letters.\footnote{For the article
-    style it changes the section numbering.}
+  \item The \ci{part} command does
+        not influence the numbering sequence of chapters.
+  \item The \ci{appendix} command does not take an argument. It just
+        changes the chapter numbering to letters.\footnote{For the article
+          style it changes the section numbering.}
 \end{itemize}
 
 \LaTeX{} creates a table of contents by taking the section headings
 and page numbers from the last compile cycle of the document. The command
 \begin{lscommand}
-\ci{tableofcontents}
+  \ci{tableofcontents}
 \end{lscommand}
 \noindent expands to a table of contents at the place it
 is issued. A new
@@ -850,12 +850,12 @@ optional argument in front of the actual heading.
 
 The \wi{title} of the whole document is generated by issuing a
 \begin{lscommand}
-\ci{maketitle}
+  \ci{maketitle}
 \end{lscommand}
 \noindent command. The contents of the title have to be defined by the commands
 \begin{lscommand}
-\ci{title}\verb|{...}|, \ci{author}\verb|{...}|
-and optionally \ci{date}\verb|{...}|
+  \ci{title}\verb|{...}|, \ci{author}\verb|{...}|
+  and optionally \ci{date}\verb|{...}|
 \end{lscommand}
 \noindent before calling \verb|\maketitle|. In the argument to \ci{author}, you can supply several names separated by \ci{and} commands.
 
@@ -868,19 +868,19 @@ They are useful for dividing your publication. The commands alter
 chapter headings and page numbering to work as you would expect in
 a book:
 \begin{description}
-\item[\ci{frontmatter}] should be the very first command after
-  the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
+  \item[\ci{frontmatter}] should be the very first command after
+    the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
     numerals and sections will be non-enumerated as if you were using
     the starred sectioning commands (e.g.\ \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
-\item[\ci{mainmatter}] comes right before the first chapter of
-  the book. It turns on Arabic page numbering and restarts the page
-  counter.
-\item[\ci{appendix}] marks the start of additional material in your
-  book. After this command chapters will be numbered with letters.
-\item[\ci{backmatter}] should be inserted before the very last items
-  in your book, such as the bibliography and the index. In the standard
-  document classes, this has no visual effect.
+  \item[\ci{mainmatter}] comes right before the first chapter of
+    the book. It turns on Arabic page numbering and restarts the page
+    counter.
+  \item[\ci{appendix}] marks the start of additional material in your
+    book. After this command chapters will be numbered with letters.
+  \item[\ci{backmatter}] should be inserted before the very last items
+    in your book, such as the bibliography and the index. In the standard
+    document classes, this has no visual effect.
 \end{description}
 
 
@@ -890,8 +890,8 @@ In books, reports and articles, there are often
 \wi{cross-references} to figures, tables and special segments of text.
 \LaTeX{} provides the following commands for cross referencing
 \begin{lscommand}
-\ci{label}\verb|{|\emph{marker}\verb|}|, \ci{ref}\verb|{|\emph{marker}\verb|}|
-and \ci{pageref}\verb|{|\emph{marker}\verb|}|
+  \ci{label}\verb|{|\emph{marker}\verb|}|, \ci{ref}\verb|{|\emph{marker}\verb|}|
+  and \ci{pageref}\verb|{|\emph{marker}\verb|}|
 \end{lscommand}
 \noindent where \emph{marker} is an identifier chosen by the user. \LaTeX{}
 replaces \verb|\ref| by the number of the section, subsection, figure,
@@ -913,7 +913,7 @@ page~\pageref{sec:this}.''
 \section{Footnotes}
 With the command
 \begin{lscommand}
-\ci{footnote}\verb|{|\emph{footnote text}\verb|}|
+  \ci{footnote}\verb|{|\emph{footnote text}\verb|}|
 \end{lscommand}
 \noindent a footnote is printed at the foot of the current page.  Footnotes
 should always be put\footnote{``put'' is one of the most common
@@ -935,16 +935,16 @@ by people using \LaTeX.
 \section{Emphasized Words}
 
 If a text is typed using a typewriter, important words are
-  \texttt{emphasized by \underline{underlining} them.}
+\texttt{emphasized by \underline{underlining} them.}
 \begin{lscommand}
-\ci{underline}\verb|{|\emph{text}\verb|}|
+  \ci{underline}\verb|{|\emph{text}\verb|}|
 \end{lscommand}
 In printed books,
 however, words are emphasized by typesetting them in an \emph{italic}
 font.  As an author you shouldn't care either way. The important bit is, to tell \LaTeX{} that a
 particular bit of text is important and should be emphasized. Hence the command
 \begin{lscommand}
-\ci{emph}\verb|{|\emph{text}\verb|}|
+  \ci{emph}\verb|{|\emph{text}\verb|}|
 \end{lscommand}
 \noindent to emphasize text. What the command actually does with
 its argument depends on the context:
@@ -966,9 +966,9 @@ page~\pageref{sec:fontsize} might provide some inspiration.
 % To typeset special purpose text, \LaTeX{} defines many different
 % \wi{environment}s for all sorts of formatting:
 \begin{lscommand}
-\ci{begin}\verb|{|\emph{environment}\verb|}|\quad
-   \emph{text}\quad
-\ci{end}\verb|{|\emph{environment}\verb|}|
+  \ci{begin}\verb|{|\emph{environment}\verb|}|\quad
+  \emph{text}\quad
+  \ci{end}\verb|{|\emph{environment}\verb|}|
 \end{lscommand}
 \noindent Where \emph{environment} is the name of the environment. Environments can be
 nested within each other as long as the correct nesting order is
@@ -1087,7 +1087,7 @@ gives the reader a quick overview of what to expect. \LaTeX{} provides the
 in documents typeset with the article document class.
 
 \newenvironment{abstract}%
-        {\begin{center}\begin{small}\begin{minipage}{0.8\textwidth}}%
+{\begin{center}\begin{small}\begin{minipage}{0.8\textwidth}}%
         {\end{minipage}\end{small}\end{center}}
 \begin{example}
 \begin{abstract}
@@ -1104,7 +1104,7 @@ command being executed.
 
 Within a paragraph, similar behavior can be accessed with
 \begin{lscommand}
-\ci{verb}\verb|+|\emph{text}\verb|+|
+  \ci{verb}\verb|+|\emph{text}\verb|+|
 \end{lscommand}
 \noindent The \verb|+| is just an example of a delimiter character. Use any
 character except letters, \verb|*| or space. Many \LaTeX{} examples in this
@@ -1233,7 +1233,7 @@ vertical lines.
 
 The second rule is to never use double lines such as these:
 \begin{chktexignore}
-\begin{example}[examplewidth=0.43\linewidth]
+  \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{lll}
   \toprule[0.1cm]
   \toprule
@@ -1271,7 +1271,7 @@ the relevant column.
 If you leave the \carg{sep} empty it will suppress the padding between the
 columns.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.43\linewidth]
+  \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
   Person      & Face & Table       \\
@@ -1286,7 +1286,7 @@ columns.
 
 Sometimes it may make sense to group columns under one heading. To achieve this
 we need two things: a way to group multiple heading columns and have a line
-covering the same columns, to sit underneath the merged heading cell. Use the 
+covering the same columns, to sit underneath the merged heading cell. Use the
 \begin{lscommand}
   \ci*{multicolumn}[ncols:m ! colspec:m ! text:m]
 \end{lscommand}
@@ -1294,7 +1294,7 @@ merge the cells. The \carg{ncols} argument indicates how many columns should
 the \carg{text} span, while the \carg{colspec} is the column specification for
 the new content---the same as when starting a \ei{tabular} environment.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.43\linewidth]
+  \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
   Person      & Face & Table       \\
@@ -1314,8 +1314,8 @@ To get a horizontal line to span multiple columns, use the command
 \end{lscommand}
 While the command uses nonstandard syntax for \carg{trim}, this is just an
 optional argument with different pair of delimiters.\footnote{This syntax
-allows to specify the second optional argument without specifying the first,
-which would be impossible if square brackets were used for both.} The
+  allows to specify the second optional argument without specifying the first,
+  which would be impossible if square brackets were used for both.} The
 \carg{dim} allows us to specify the thickness of the line. The \carg{trim}
 argument accepts any combination of \cargv{r}, \cargv{r\{\carg{dim}\}},
 \cargv{l} or \cargv{l\{\carg{dim}\}}. This allows you trim the rule from right
@@ -1324,7 +1324,7 @@ usually recommended to trim the rules from the side where they touch other
 columns. Finally the only required argument \carg{a--b} is the span of columns
 to draw the line over.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.43\linewidth]
+  \begin{example}[examplewidth=0.43\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
               & \multicolumn{2}{c}{
@@ -1364,7 +1364,7 @@ The arguments are
 Unlike with \ci{multicolumn} you still have to write all the cells in remaining
 rows, but they should be empty.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.4\linewidth]
+  \begin{example}[examplewidth=0.4\linewidth]
 \begin{tabular}{@{}lll@{}}
   \toprule
                 & \multicolumn{2}{c}{
@@ -1505,7 +1505,7 @@ every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
 and last page. An example of using these commands is presented in
 figure~\ref{ex:longtable}.
 \begin{figure}[htp]
-\begin{example}[standalone, to_page=2, paperwidth=4.3cm] 
+  \begin{example}[standalone, to_page=2, paperwidth=4.3cm] 
 %!hidebegin
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -1553,7 +1553,7 @@ figure~\ref{ex:longtable}.
 \end{longtable}
 \end{document} %!hide 
 \end{example}
-\caption{An example of \ei{longtable} with running headers and footers.}\label{ex:longtable}
+  \caption{An example of \ei{longtable} with running headers and footers.}\label{ex:longtable}
 \end{figure}
 
 Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
@@ -1682,7 +1682,7 @@ horizontal lines of the same width. In order to do so you may use the
 \cargv{|}~(vertical bar) column specifier for vertical rules and \ci{hline} for
 horizontal rules.
 \begin{chktexignore}
-\begin{example}
+  \begin{example}
 \begin{tabular}{c|c|c}
   O & X & O \\
   \hline
@@ -1690,12 +1690,12 @@ horizontal rules.
   \hline
   X & O & X \\
 \end{tabular}
-\end{example} 
+\end{example}
 \end{chktexignore}
 In case your grid gets more complicated you may also need the \ci{cline}[a--b] %chktex 8
 command which draws horizontal line that spans only over the specified rows.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.4\linewidth]
+  \begin{example}[examplewidth=0.4\linewidth]
 \begin{tabular}{|cccc|}
   \cline{4-4}
   a & a & \multicolumn{1}{c|}{a} & b \\
@@ -1705,7 +1705,7 @@ command which draws horizontal line that spans only over the specified rows.
   a & a & \multicolumn{1}{|c}{b} & b \\
   \cline{1-2}
 \end{tabular}
-\end{example} 
+\end{example}
 \end{chktexignore}
 
 \section{Including Graphics and Images}\label{eps}
@@ -1723,53 +1723,53 @@ Use the following step by step guide to
 include a picture into your document:
 
 \begin{enumerate}
-\item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
-\item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
-prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
-Note that it may be sensible to export EPS even though your software can export PDF too, as PDFs often are full page and will
-thus get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
-\item Load the \textsf{graphicx} package in the preamble of the input
-  file with
-\begin{lscommand}
-\verb|\usepackage{graphicx}|
-\end{lscommand}
-\item Use the command
-\begin{lscommand}
-\ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
-\end{lscommand}
-\noindent to include \emph{file} into your document. The optional parameter
-accepts a comma separated list of \emph{keys} and associated
-\emph{values}. The \emph{keys} can be used to alter the width, height
-and rotation of the included graphic. Table~\ref{keyvals} lists the
-most important keys.
+  \item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
+  \item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
+        prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
+        Note that it may be sensible to export EPS even though your software can export PDF too, as PDFs often are full page and will
+        thus get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
+  \item Load the \textsf{graphicx} package in the preamble of the input
+        file with
+        \begin{lscommand}
+          \verb|\usepackage{graphicx}|
+        \end{lscommand}
+  \item Use the command
+        \begin{lscommand}
+          \ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
+        \end{lscommand}
+        \noindent to include \emph{file} into your document. The optional parameter
+        accepts a comma separated list of \emph{keys} and associated
+        \emph{values}. The \emph{keys} can be used to alter the width, height
+        and rotation of the included graphic. Table~\ref{keyvals} lists the
+        most important keys.
 \end{enumerate}
 
 \begin{table}[tb]
-\centering
-\caption{Key Names for \textsf{graphicx} Package.}%
-\label{keyvals}
-\begin{tabular}{@{}ll@{}}
-  \toprule
-  Key & Effect \\
-  \midrule
-  \cargv{width}& scale graphic to the specified width\\
-  \cargv{height}& scale graphic to the specified height\\
-  \cargv{angle}& rotate graphic counterclockwise\\
-  \cargv{scale}& scale graphic \\
-\bottomrule
-\end{tabular}
+  \centering
+  \caption{Key Names for \textsf{graphicx} Package.}%
+  \label{keyvals}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Key            & Effect                                \\
+    \midrule
+    \cargv{width}  & scale graphic to the specified width  \\
+    \cargv{height} & scale graphic to the specified height \\
+    \cargv{angle}  & rotate graphic counterclockwise       \\
+    \cargv{scale}  & scale graphic                         \\
+    \bottomrule
+  \end{tabular}
 
-\bigskip
+  \bigskip
 \end{table}
 
 The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
 \begin{figure}
-\begin{lined}{11cm}
-\begin{verbatim}
+  \begin{lined}{11cm}
+    \begin{verbatim}
 \includegraphics[angle=90,width=\textwidth]{test.png}
 \end{verbatim}
-\end{lined}
-\caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
+  \end{lined}
+  \caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
 \end{figure}
 It includes the graphic stored in the file \texttt{test.png}. The
 graphic is \emph{first} rotated by an angle of 90 degrees and
@@ -1804,8 +1804,8 @@ Any material enclosed in a \ei{figure} or \ei{table} environment will
 be treated as floating matter. Both float environments support an optional
 parameter
 \begin{lscommand}
-\verb|\begin{figure}[|\emph{placement specifier}\verb|]| or
-\verb|\begin{table}[|\ldots\verb|]|
+  \verb|\begin{figure}[|\emph{placement specifier}\verb|]| or
+  \verb|\begin{table}[|\ldots\verb|]|
 \end{lscommand}
 \noindent called the \emph{placement specifier}. This parameter
 is used to tell \LaTeX{} about the locations to which the float
@@ -1813,24 +1813,24 @@ is allowed to be moved.  A \emph{placement specifier} is constructed by building
 of \emph{float-placing permissions}. See Table~\ref{tab:permiss}.
 
 \begin{table}[!bp]
-\begin{minipage}{\textwidth}
-\centering
-\caption{Float Placing Permissions.}\label{tab:permiss}
-\begin{tabular}{@{}cp{8cm}@{}}
-  \toprule
-Spec&Permission to place the float \ldots\\
-\midrule
-\texttt{h} & \emph{here} at the very place in the text
-  where it occurred.  This is useful mainly for small floats.\\[0.3ex]
-\texttt{t} & at the \emph{top} of a page\\[0.3ex]
-\texttt{b} & at the \emph{bottom} of a page\\[0.3ex]
-\texttt{p} & on a special \emph{page} containing only floats.\\[0.3ex]
-\texttt{!} & without considering most of the  internal parameters\footnote{Such as the
-    maximum number of floats allowed  on one page.}, which could otherwise stop this
-  float from being placed. \\
-  \bottomrule
-\end{tabular}
-\end{minipage}
+  \begin{minipage}{\textwidth}
+    \centering
+    \caption{Float Placing Permissions.}\label{tab:permiss}
+    \begin{tabular}{@{}cp{8cm}@{}}
+      \toprule
+      Spec       & Permission to place the float \ldots                                      \\
+      \midrule
+      \texttt{h} & \emph{here} at the very place in the text
+      where it occurred.  This is useful mainly for small floats.                            \\[0.3ex]
+      \texttt{t} & at the \emph{top} of a page                                               \\[0.3ex]
+      \texttt{b} & at the \emph{bottom} of a page                                            \\[0.3ex]
+      \texttt{p} & on a special \emph{page} containing only floats.                          \\[0.3ex]
+      \texttt{!} & without considering most of the  internal parameters\footnote{Such as the
+        maximum number of floats allowed  on one page.}, which could otherwise stop this
+      float from being placed.                                                               \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
 \end{table}
 
 For example, a table could be started with the following line
@@ -1860,8 +1860,8 @@ be placed pushes all further figures to the end of the document.
 Therefore:
 
 \begin{quote}
-If \LaTeX{} is not placing the floats as you expected,
-it is often only one float jamming one of the two float queues.
+  If \LaTeX{} is not placing the floats as you expected,
+  it is often only one float jamming one of the two float queues.
 \end{quote}
 
 While it is possible to give \LaTeX{}  single-location placement
@@ -1869,7 +1869,7 @@ specifiers, this causes problems.  If the float does not fit in the
 location specified it becomes stuck, blocking subsequent floats.
 In particular, you should never, ever use the [h] option---it is so bad
 that in more recent versions of \LaTeX, it is automatically replaced by
-[ht].
+  [ht].
 
 \bigskip
 \noindent Having explained the difficult bit, there are some more things to
@@ -1877,7 +1877,7 @@ mention about the \ei{table} and \ei{figure} environments.
 Use the
 
 \begin{lscommand}
-\ci{caption}\verb|{|\emph{caption text}\verb|}|
+  \ci{caption}\verb|{|\emph{caption text}\verb|}|
 \end{lscommand}
 
 \noindent command to define a caption for the float. A running number and
@@ -1886,7 +1886,7 @@ the string ``Figure'' or ``Table'' will be added by \LaTeX.
 The two commands
 
 \begin{lscommand}
-\ci{listoffigures} and \ci{listoftables}
+  \ci{listoffigures} and \ci{listoftables}
 \end{lscommand}
 
 \noindent operate analogously to the \verb|\tableofcontents| command,
@@ -1932,7 +1932,7 @@ had just occurred in the text.
 Under certain circumstances it might be necessary to use the
 
 \begin{lscommand}
-\ci{clearpage} or even the \ci{cleardoublepage}
+  \ci{clearpage} or even the \ci{cleardoublepage}
 \end{lscommand}
 
 \noindent command. It orders \LaTeX{} to immediately place all

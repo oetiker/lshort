@@ -10,7 +10,7 @@
   features like index generation, automatic linking to relevant pages and other
   things. A much more complete description of specialities and enhancements
   possible with \LaTeX{} can be found in the {\normalfont\manual{}} and
-  {\normalfont\companion}.
+    {\normalfont\companion}.
 \end{intro}
 
 \section{Indexing}\label{sec:indexing}
@@ -26,7 +26,7 @@ For a more in-depth view, please refer to \companion.\index{makeindex
 To enable their indexing feature of \LaTeX{}, the \pai{makeidx} package
 must be loaded in the preamble with
 \begin{lscommand}
-\verb|\usepackage{makeidx}|
+  \verb|\usepackage{makeidx}|
 \end{lscommand}
 \noindent and the special indexing commands must be enabled by putting
 the
@@ -47,20 +47,20 @@ point to.  Table~\ref{index} explains the syntax with several examples.
 
 \begin{table}[!tp]
   \centering
-\caption{Index Key Syntax Examples.}\label{index}
-\begin{tabular}{@{}lll@{}}
-  \toprule
-  Code &Index Entry &Comment\\
-  \midrule
-  \rule{0pt}{1.05em}\verb|\index{hello}| &hello, 1 &Plain entry\\
-  \verb|\index{hello!Peter}|   &\hspace*{2ex}Peter, 3 &Subentry under `hello'\\
-  \verb|\index{Sam@\emph{Sam}}|     &\emph{Sam}, 2& Formatted entry\\
-  \verb|\index{Kaese@\emph{K\"ase}}|     &\emph{K\"ase}, 33& Formatted entry\\
-  \verb.\index{ecole@\'ecole}.     &\'ecole, 4& Formatted entry\\
-  \verb.\index{Jenny|emph}.     &Jenny, \emph{3}& Formatted page number\\
-  \verb.\index{Joe@\emph{Joe}|emph}.     &\emph{Joe}, \emph{5}& Formatted page number\\
-\bottomrule
-\end{tabular}
+  \caption{Index Key Syntax Examples.}\label{index}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Code                                   & Index Entry           & Comment                \\
+    \midrule
+    \rule{0pt}{1.05em}\verb|\index{hello}| & hello, 1              & Plain entry            \\
+    \verb|\index{hello!Peter}|             & \hspace*{2ex}Peter, 3 & Subentry under `hello' \\
+    \verb|\index{Sam@\emph{Sam}}|          & \emph{Sam}, 2         & Formatted entry        \\
+    \verb|\index{Kaese@\emph{K\"ase}}|     & \emph{K\"ase}, 33     & Formatted entry        \\
+    \verb.\index{ecole@\'ecole}.           & \'ecole, 4            & Formatted entry        \\
+    \verb.\index{Jenny|emph}.              & Jenny, \emph{3}       & Formatted page number  \\
+    \verb.\index{Joe@\emph{Joe}|emph}.     & \emph{Joe}, \emph{5}  & Formatted page number  \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
 When the input file is processed with \LaTeX{}, each \verb|\index|
@@ -87,8 +87,8 @@ proofreading a document and verifying the index.
 
 Note that the \ci{index} command can affect your layout if not used carefully.
 
-\begin{chktexignore}  
-\begin{example}
+\begin{chktexignore}
+  \begin{example}
 My Word \index{Word}. As opposed
 to Word\index{Word}. Note the
 position of the full stop.
@@ -130,12 +130,12 @@ The \carg{places} is a comma separated list of places where the \carg{field} sho
 combination of three letters:
 \begin{itemize}
   \item The first specifies whether the location is in the header (\cargv{H}) or in the
-  footer (\cargv{F}).
+        footer (\cargv{F}).
   \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for center and
-  \cargv{R} for right.
+        \cargv{R} for right.
   \item The third letter defines whether the field should be printed on even
-  (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
-  all pages are treated as odd.
+        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
+        all pages are treated as odd.
 \end{itemize}
 So for example the combination \cargv{FCE} identifies the centre part of the
 footer on even pages. If any of the letters is omitted then the identifier
@@ -259,7 +259,7 @@ It is often useful to have the header and footer contain information based on
 the contents of the page. These are called \enquote{marks} in \LaTeX{}
 terminology. Before we talk about the default ones let's consider how you can
 define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
-of \pai*{fancyhdr}.} package.
+  of \pai*{fancyhdr}.} package.
 \begin{lscommand}
   \ci*{extramarks}[left:m ! right:m] \\
   \ci{firstleftxmark} \\
@@ -305,8 +305,8 @@ Let us now look at the default marks defined by \LaTeX{}. After loading
 \end{lscommand}
 The only difference between these and the extra marks is that \LaTeX{} classes
 automatically fill them, so if you are not careful you may lose your content.
-\footnote{You may prevent this by setting the pagestyle to \cargv{myheadings} 
-and then redefining it to use it with \pai{fancyhdr} as describied later.}
+\footnote{You may prevent this by setting the pagestyle to \cargv{myheadings}
+  and then redefining it to use it with \pai{fancyhdr} as describied later.}
 For example in the article class, \carg{left} is set by the \ci{section}
 command, while \carg{right} is set by the \ci{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
@@ -506,7 +506,7 @@ command. The \carg{name} is the name of page style to (re)define, while the %chk
 \carg{code} is the code to set up the page style. All page styles declared this
 way use the \cargv{fancy} page style as its basis, so if empty \carg{code} is
 given they will match \cargv{fancy} exactly.
- \begin{example}[standalone, paperheight=3cm]
+\begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr}%!hide
@@ -538,7 +538,7 @@ why I am mentioning the package here. The \pai{verbatim}
 package provides the
 
 \begin{lscommand}
-\ci{verbatiminput}\verb|{|\emph{filename}\verb|}|
+  \ci{verbatiminput}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
 
 \noindent command, which allows you to include raw ASCII text into your
@@ -567,37 +567,37 @@ machine, you still have to process them in a way that (a) tells your
 the documentation.  Here's how you do the first part:
 
 \begin{enumerate}
-\item Run \LaTeX{} on the \texttt{.ins} file. This will
-  extract a \eei{.sty} file.
-\item Move the \eei{.sty} file to a place where your distribution
-  can find it. Usually this is in your \texttt{\ldots/\emph{localtexmf}/tex/latex}
-  subdirectory (Windows or OS/2 users should feel free to change the
-  direction of the slashes).
-\item Refresh your distribution's file-name database. The command
-  depends on the \LaTeX{} distribution you use:
-  \TeX{}live --- \texttt{texhash}; web2c --- \texttt{maktexlsr};
-  MiK\TeX{} --- \texttt{initexmf -{}-update-fndb} or use the GUI\@.
+  \item Run \LaTeX{} on the \texttt{.ins} file. This will
+        extract a \eei{.sty} file.
+  \item Move the \eei{.sty} file to a place where your distribution
+        can find it. Usually this is in your \texttt{\ldots/\emph{localtexmf}/tex/latex}
+        subdirectory (Windows or OS/2 users should feel free to change the
+        direction of the slashes).
+  \item Refresh your distribution's file-name database. The command
+        depends on the \LaTeX{} distribution you use:
+        \TeX{}live --- \texttt{texhash}; web2c --- \texttt{maktexlsr};
+        MiK\TeX{} --- \texttt{initexmf -{}-update-fndb} or use the GUI\@.
 \end{enumerate}
 
 \noindent Now extract the documentation from the
 \texttt{.dtx} file:
 
 \begin{enumerate}
-\item Run \hologo{XeLaTeX} on the \texttt{.dtx} file.  This will generate a
-  \texttt{.pdf} file. Note that you may have to run \hologo{XeLaTeX}
-  several times before it gets the cross-references right.
-\item Check to see if \LaTeX\ has produced a \texttt{.idx} file
-  among the various files you now have.
-  If you do not see this file, then the documentation has no index. Continue
-  with step~\ref{step:final}.
-\item In order to generate the index, type the following:\\
+  \item Run \hologo{XeLaTeX} on the \texttt{.dtx} file.  This will generate a
+        \texttt{.pdf} file. Note that you may have to run \hologo{XeLaTeX}
+        several times before it gets the cross-references right.
+  \item Check to see if \LaTeX\ has produced a \texttt{.idx} file
+        among the various files you now have.
+        If you do not see this file, then the documentation has no index. Continue
+        with step~\ref{step:final}.
+  \item In order to generate the index, type the following:\\
         \fbox{\texttt{makeindex -s gind.ist \textit{name}}}\\
         (where \textit{name} stands for the main-file name without any
-    extension).
- \item Run \LaTeX\ on the \texttt{.dtx} file once again.\label{step:next}
+        extension).
+  \item Run \LaTeX\ on the \texttt{.dtx} file once again.\label{step:next}
 
-\item Last but not least, make a \texttt{.ps} or \texttt{.pdf}
-  file to increase your reading pleasure.\label{step:final}
+  \item Last but not least, make a \texttt{.ps} or \texttt{.pdf}
+        file to increase your reading pleasure.\label{step:final}
 
 \end{enumerate}
 
@@ -632,12 +632,12 @@ Most web pages you find today are written in HTML \emph{(HyperText
   Markup Language)}. This format has two significant disadvantages
 when writing scientific documents:
 \begin{enumerate}
-\item Including mathematical formulae into HTML documents is not
-  generally supported. While there is a standard for it, most browsers
-  used today do not support it, or lack the required fonts.
-\item Printing HTML documents is possible, but the results vary widely
-  between platforms and browsers. The results are miles removed from
-  the quality we have come to expect in the \LaTeX{} world.
+  \item Including mathematical formulae into HTML documents is not
+        generally supported. While there is a standard for it, most browsers
+        used today do not support it, or lack the required fonts.
+  \item Printing HTML documents is possible, but the results vary widely
+        between platforms and browsers. The results are miles removed from
+        the quality we have come to expect in the \LaTeX{} world.
 \end{enumerate}
 
 There have been many attempts to create translators from \LaTeX{} to
@@ -659,8 +659,8 @@ All modern \TeX{} engines can generate PDF files out of the box. If you worked t
 The \pai{hyperref} adds two cool features to your \LaTeX{} PDF files:
 
 \begin{enumerate}
-\item The paper size is set according to your specification in the document class call.
-\item All references in your document turn into hyperlinks.
+  \item The paper size is set according to your specification in the document class call.
+  \item All references in your document turn into hyperlinks.
 \end{enumerate}
 
 Just add \verb+\usepackage{hyperref}+ as the \emph{last} command into
@@ -669,48 +669,48 @@ the preamble of your document.
 Many options are available to customize the behaviour of the
 \pai{hyperref} package:
 \begin{itemize}
-\item either as a comma separated list after the pdftex option\\
-  \verb+\usepackage{hyperref}+
-\item or on individual lines with the command
-  \verb+\hypersetup{+\emph{options}\verb+}+.
+  \item either as a comma separated list after the pdftex option\\
+        \verb+\usepackage{hyperref}+
+  \item or on individual lines with the command
+        \verb+\hypersetup{+\emph{options}\verb+}+.
 \end{itemize}
 
 In the following
 list the default values are written in an upright font.
 
 \begin{flushleft}
-\begin{description}
-  \item [\texttt{bookmarks (=true,\textsl{false})}] show or hide the
-    bookmarks bar when displaying the document
-  \item [\texttt{unicode (=false,\textsl{true})}] allows the use of
-    characters of non-Latin based languages in Acrobat's bookmarks
-  \item [\texttt{pdftoolbar (=true,\textsl{false})}] show or hide
-    Acrobat's toolbar
-  \item [\texttt{pdfmenubar (=true,\textsl{false})}] show or hide
-    Acrobat's menu
-  \item [\texttt{pdffitwindow (=false,\textsl{true})}] adjust the
-    initial magnification of the PDF when displayed
-  \item [\texttt{pdftitle (=\{text\})}] define the title that gets
-    displayed in the \texttt{Document Info} window of Acrobat
-  \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
-  \item [\texttt{pdfnewwindow (=false,\textsl{true})}] define whether a new
-    window should be opened when a link leads out of the current
-    document
-  \item [\texttt{colorlinks (=false,\textsl{true})}] surround the
-    links by colour frames (\texttt{false}) or colour the text of the links
-    (\texttt{true}). The colour of these links can be configured
-    using the following options (default colours are shown):
-    \begin{description}
-    \item [\texttt{linkcolor (=red)}] colour of internal
-      links (sections, pages, etc.)
-    \item [\texttt{citecolor (=green)}] colour of
-      citation links (bibliography)
-    \item [\texttt{filecolor (=magenta)}] colour of file
-      links
-    \item [\texttt{urlcolor (=cyan)}] colour of URL
-      links (mail, web)
-    \end{description}
-\end{description}
+  \begin{description}
+    \item [\texttt{bookmarks (=true,\textsl{false})}] show or hide the
+          bookmarks bar when displaying the document
+    \item [\texttt{unicode (=false,\textsl{true})}] allows the use of
+          characters of non-Latin based languages in Acrobat's bookmarks
+    \item [\texttt{pdftoolbar (=true,\textsl{false})}] show or hide
+          Acrobat's toolbar
+    \item [\texttt{pdfmenubar (=true,\textsl{false})}] show or hide
+          Acrobat's menu
+    \item [\texttt{pdffitwindow (=false,\textsl{true})}] adjust the
+          initial magnification of the PDF when displayed
+    \item [\texttt{pdftitle (=\{text\})}] define the title that gets
+          displayed in the \texttt{Document Info} window of Acrobat
+    \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
+    \item [\texttt{pdfnewwindow (=false,\textsl{true})}] define whether a new
+          window should be opened when a link leads out of the current
+          document
+    \item [\texttt{colorlinks (=false,\textsl{true})}] surround the
+          links by colour frames (\texttt{false}) or colour the text of the links
+          (\texttt{true}). The colour of these links can be configured
+          using the following options (default colours are shown):
+          \begin{description}
+            \item [\texttt{linkcolor (=red)}] colour of internal
+                  links (sections, pages, etc.)
+            \item [\texttt{citecolor (=green)}] colour of
+                  citation links (bibliography)
+            \item [\texttt{filecolor (=magenta)}] colour of file
+                  links
+            \item [\texttt{urlcolor (=cyan)}] colour of URL
+                  links (mail, web)
+          \end{description}
+  \end{description}
 \end{flushleft}
 
 If you are happy with the defaults, use
@@ -729,8 +729,8 @@ To have the bookmark list open and links in colour
 \end{code}
 
 When creating PDFs destined for printing, coloured links are not a
-  good thing as they end up in gray in the final output, making it
-  difficult to read. Use colour frames, which are not printed:
+good thing as they end up in gray in the final output, making it
+difficult to read. Use colour frames, which are not printed:
 \begin{code}
 \begin{verbatim}
 \usepackage{hyperref}
@@ -751,7 +751,7 @@ When creating PDFs destined for printing, coloured links are not a
 \end{code}
 
 When you just want to provide information for the
-  \texttt{Document Info} section of the PDF file:
+\texttt{Document Info} section of the PDF file:
 \begin{code}
 \begin{verbatim}
 \usepackage[pdfauthor={Pierre Desproges},%
@@ -765,7 +765,7 @@ When you just want to provide information for the
 In addition to the automatic hyperlinks for cross references, it is
 possible to embed explicit links using
 \begin{lscommand}
-\ci{href}\verb|{|\emph{url}\verb|}{|\emph{text}\verb|}|
+  \ci{href}\verb|{|\emph{url}\verb|}{|\emph{text}\verb|}|
 \end{lscommand}
 
 The code
@@ -779,7 +779,7 @@ a click on the word ``\textcolor{magenta}{CTAN}''
 will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
-  use the \ci{href} command without the \enquote*{\texttt{http://}} bit:
+use the \ci{href} command without the \enquote*{\texttt{http://}} bit:
 \begin{verbatim}
   The complete document is \href{manual.pdf}{here}
 \end{verbatim}
@@ -790,8 +790,8 @@ will open the file \texttt{manual.pdf}. (The filename is relative to
 the location of the current document).
 
 The author of an article might want her readers to easily send
-  email messages by using the \ci{href} command inside the \ci{author}
-  command on the title page of the document:
+email messages by using the \ci{href} command inside the \ci{author}
+command on the title page of the document:
 \begin{code}
 \begin{verbatim}
 \author{Mary Oetiker $<$\href{mailto:mary@oetiker.ch}%
@@ -844,7 +844,7 @@ Token not allowed in a PDFDocEncoded string:
 Work around this problem by providing a text string for
 the bookmarks, which replaces the offending text:
 \begin{lscommand}
-\ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
+  \ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
 \end{lscommand}
 
 
@@ -875,7 +875,7 @@ information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}.
 
 In addition to the normal \texttt{tfm} based fonts, \hologo{XeLaTeX} is able
 to use any font known to the operating system. If you have the \texttt{Linux
-Libertine} fonts installed, you can simply say
+  Libertine} fonts installed, you can simply say
 
 \begin{code}
 \begin{verbatim}
@@ -937,7 +937,7 @@ to enable the Polish ligatures.
 Some fonts (like the commercial Adobe Garamond Premier Pro) contain
 alternative glyphs that are activated by default in \hologo{XeLaTeX}
 distributed with \TeX{}Live~2010\footnote{The behavior has changed with this
-version, it was off by default in earlier releases.}. The result is a stylish
+  version, it was off by default in earlier releases.}. The result is a stylish
 ``Q'' with a descender reaching below the following ``u''. To disable this
 feature you have to define the font with disabled contextuals:
 
@@ -963,7 +963,7 @@ You can use every font installed on your computer, but remember that other
 users may not have these fonts. The Zapfino font used in the \pai{fontspec}
 manual is included in Mac OSX, but is not available on Windows
 computers.\footnote{A commercial version of the font called Zapfino Extra is
-available.}
+  available.}
 
 \subsubsection{Entering Unicode Characters}
 
@@ -987,12 +987,12 @@ enter these characters. Read the manual for the tools you are using.
 There are a few things that are different between \hologo{XeLaTeX} and \hologo{pdfLaTeX}.
 
 \begin{itemize}
-	\item A \hologo{XeLaTeX} document has to be written in
-	Unicode (UTF-8) while \hologo{pdfLaTeX} may use different input encodings.
-\item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
-	support for character protrusion is already under development.
-\item Everything font related has to be reviewed. (Unless you want to stick
-	to Latin Modern.)
+  \item A \hologo{XeLaTeX} document has to be written in
+        Unicode (UTF-8) while \hologo{pdfLaTeX} may use different input encodings.
+  \item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
+        support for character protrusion is already under development.
+  \item Everything font related has to be reviewed. (Unless you want to stick
+        to Latin Modern.)
 \end{itemize}
 
 \section{Creating Presentations}%
@@ -1018,7 +1018,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 % et convertie en jpg toujours par ImageMagick.
 
 \begin{figure}[htbp]
-\begin{verbatim}
+  \begin{verbatim}
 \documentclass[10pt]{beamer}
 \mode<beamer>{%
   \usetheme[hideothersubsections,
@@ -1071,10 +1071,10 @@ document from the same input file. The input file may contain special
 instructions for the different modes in angular brackets. The
 following modes are available:
 \begin{description}
-\item[beamer] for the presentation PDF
-  discussed above.
-\item[trans] for transparencies.
-\item[handout] for the printed version.
+  \item[beamer] for the presentation PDF
+    discussed above.
+  \item[trans] for transparencies.
+  \item[handout] for the printed version.
 \end{description}
 The default mode is \texttt{beamer}, change it by setting a
 different mode as a global option, like

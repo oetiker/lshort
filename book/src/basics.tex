@@ -6,12 +6,12 @@
 
 \chapter{\LaTeX{} Basics}
 \begin{intro}
-The first part of this chapter presents a short
-overview of the philosophy and history of \LaTeXe. The second part
-focuses on the basic structures of a \LaTeX{} document.
-After reading this chapter, you should have a rough knowledge
-of how \LaTeX{} works, which you will need to understand the rest
-of this book.
+  The first part of this chapter presents a short
+  overview of the philosophy and history of \LaTeXe. The second part
+  focuses on the basic structures of a \LaTeX{} document.
+  After reading this chapter, you should have a rough knowledge
+  of how \LaTeX{} works, which you will need to understand the rest
+  of this book.
 \end{intro}
 
 \section{A Bit of History}
@@ -34,13 +34,13 @@ converging to $\pi$ and is now at $3.14159265$.
 
 \TeX{} is pronounced ``Tech,'' with a ``ch'' as in the German word
 ``Ach''\footnote{In German there are actually two pronunciations for ``ch''
-and one might assume that the soft ``ch'' sound from ``Pech'' would be a
-more appropriate. Asked about this, Knuth wrote in the German Wikipedia:
-\emph{I do not get angry when people pronounce \TeX{} in their favorite way
-\ldots{} and in Germany many use a soft ch because the X follows the vowel
-e, not the harder ch that follows the vowel a. In Russia, `tex' is a very
-common word, pronounced `tyekh'. But I believe the most proper pronunciation
-is heard in Greece, where you have the harsher ch of ach and Loch.}}
+  and one might assume that the soft ``ch'' sound from ``Pech'' would be a
+  more appropriate. Asked about this, Knuth wrote in the German Wikipedia:
+  \emph{I do not get angry when people pronounce \TeX{} in their favorite way
+    \ldots{} and in Germany many use a soft ch because the X follows the vowel
+    e, not the harder ch that follows the vowel a. In Russia, `tex' is a very
+    common word, pronounced `tyekh'. But I believe the most proper pronunciation
+    is heard in Greece, where you have the harsher ch of ach and Loch.}}
 or in the Scottish ``Loch.'' The ``ch'' originates from the Greek
 alphabet where X is the letter ``ch'' or ``chi''. \TeX{} is also the first syllable
 of the Greek word technique. In an ASCII environment, \TeX{}
@@ -126,11 +126,11 @@ up in a picture gallery, the readability and understandability is
 much more important than the beautiful look of it.
 Examples:
 \begin{itemize}
-\item The font size and the numbering of headings have to be chosen to make
-  the structure of chapters and sections clear to the reader.
-\item The line length has to be short enough not to strain
-  the eyes of the reader, while long enough to fill the page
-  beautifully.
+  \item The font size and the numbering of headings have to be chosen to make
+        the structure of chapters and sections clear to the reader.
+  \item The line length has to be short enough not to strain
+        the eyes of the reader, while long enough to fill the page
+        beautifully.
 \end{itemize}
 
 With \wi{WYSIWYG} systems, authors often generate aesthetically
@@ -152,29 +152,29 @@ of \LaTeX{} over normal word processors are the following:
 
 \begin{itemize}
 
-\item Professionally crafted layouts are available, which make a
-  document really look as if ``printed.''
-\item The typesetting of mathematical formulae is supported in a
-  convenient way.
-\item Users only need to learn a few easy-to-understand commands
-  that specify the logical structure of a document. They almost never
-  need to tinker with the actual layout of the document.
-\item Even complex structures such as footnotes, references, table of
-  contents, and bibliographies can be generated easily.
-\item Free add-on packages exist for many typographical tasks not directly supported by basic
-  \LaTeX. For example, packages are
-  available to include \PSi{} graphics or to typeset
-  bibliographies conforming to exact standards. Many of these add-on
-  packages are described in \companion.
-\item \LaTeX{} encourages authors to write well-structured texts,
-  because this is how \LaTeX{} works---by specifying structure.
-\item \TeX, the formatting engine of \LaTeXe, is highly portable and free.
-  Therefore the system runs on almost any hardware platform
-  available.
+  \item Professionally crafted layouts are available, which make a
+        document really look as if ``printed.''
+  \item The typesetting of mathematical formulae is supported in a
+        convenient way.
+  \item Users only need to learn a few easy-to-understand commands
+        that specify the logical structure of a document. They almost never
+        need to tinker with the actual layout of the document.
+  \item Even complex structures such as footnotes, references, table of
+        contents, and bibliographies can be generated easily.
+  \item Free add-on packages exist for many typographical tasks not directly supported by basic
+        \LaTeX. For example, packages are
+        available to include \PSi{} graphics or to typeset
+        bibliographies conforming to exact standards. Many of these add-on
+        packages are described in \companion.
+  \item \LaTeX{} encourages authors to write well-structured texts,
+        because this is how \LaTeX{} works---by specifying structure.
+  \item \TeX, the formatting engine of \LaTeXe, is highly portable and free.
+        Therefore the system runs on almost any hardware platform
+        available.
 
-%
-% Add examples ...
-%
+        %
+        % Add examples ...
+        %
 \end{itemize}
 
 \medskip
@@ -184,16 +184,16 @@ difficult for me to find any sensible ones, though I am sure other people
 can tell you hundreds \smiley.
 
 \begin{itemize}
-\item \LaTeX{} does not work well for people who have sold their
-  souls \ldots
-\item Although some parameters can be adjusted within a predefined
-  document layout, the design of a whole new layout is difficult and
-  takes a lot of time.\footnote{Rumour says that this is one of the
-    key elements that will be addressed in the upcoming \LaTeX3
-    system.}\index{LaTeX3@\LaTeX 3}
-\item It is very hard to write unstructured and disorganized documents.
-\item Your hamster might, despite some encouraging first steps, never be
-able to fully grasp the concept of Logical Markup.
+  \item \LaTeX{} does not work well for people who have sold their
+        souls \ldots
+  \item Although some parameters can be adjusted within a predefined
+        document layout, the design of a whole new layout is difficult and
+        takes a lot of time.\footnote{Rumour says that this is one of the
+          key elements that will be addressed in the upcoming \LaTeX3
+          system.}\index{LaTeX3@\LaTeX 3}
+  \item It is very hard to write unstructured and disorganized documents.
+  \item Your hamster might, despite some encouraging first steps, never be
+        able to fully grasp the concept of Logical Markup.
 \end{itemize}
 
 \section{\LaTeX{} Input Files}
@@ -257,12 +257,12 @@ line breaking. Use the \ci{textbackslash} command instead.
 two formats:
 
 \begin{itemize}
-\item They start with a \wi{backslash} \verb|\| and then have a name
- consisting of letters only. Command names are terminated by a
- space, a number or any other `non-letter.'
-\item They consist of a backslash and exactly one non-letter.
-\item Many commands exist in a `starred variant' where a star is appended
-to the command name.
+  \item They start with a \wi{backslash} \verb|\| and then have a name
+        consisting of letters only. Command names are terminated by a
+        space, a number or any other `non-letter.'
+  \item They consist of a backslash and exactly one non-letter.
+  \item Many commands exist in a `starred variant' where a star is appended
+        to the command name.
 \end{itemize}
 
 %
@@ -279,7 +279,7 @@ command name. The empty parameter \verb|{}| stops \LaTeX{} from eating up all th
 the command name.
 
 \begin{chktexignore}
-\begin{example}
+  \begin{example}
 New \TeX users may miss whitespaces
 after a command. % renders wrong
 Experienced \TeX{} users are
@@ -383,21 +383,21 @@ slightly more complicated \wi{input file} is given in
 Figure~\ref{document}.
 
 \begin{figure}[!bp]
-\begin{lined}{10cm}
-\begin{example}[standalone, template=empty, noextend]
+  \begin{lined}{10cm}
+    \begin{example}[standalone, template=empty, noextend]
 \documentclass{article}
 \usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry} %!hide
 \begin{document}
 Small is beautiful.
 \end{document}
 \end{example}
-\end{lined}
-\caption{A Minimal \LaTeX{} File.}\label{mini}
+  \end{lined}
+  \caption{A Minimal \LaTeX{} File.}\label{mini}
 \end{figure}
 
 \begin{figure}[!bp]
-\begin{lined}{\textwidth}
-\begin{example}[standalone, template=empty, noextend]
+  \begin{lined}{\textwidth}
+    \begin{example}[standalone, template=empty, noextend]
 \documentclass[a4paper,11pt]{article}
 \usepackage[paperheight=2\height,paperwidth=2\width,margin=0.8cm,includefoot]{geometry} %!hide
 % define the title
@@ -414,10 +414,10 @@ Well, and here begins my lovely article.
 \ldots{} and here it ends.
 \end{document}
 \end{example}
-\end{lined}
-\caption[Example of a Realistic Journal Article.]{Example of a Realistic
-Journal Article. Note that all the commands you see in this example will be
-explained later in the introduction.}\label{document}
+  \end{lined}
+  \caption[Example of a Realistic Journal Article.]{Example of a Realistic
+    Journal Article. Note that all the commands you see in this example will be
+    explained later in the introduction.}\label{document}
 
 \end{figure}
 
@@ -433,29 +433,29 @@ there might be some typing involved, so here is how to coax \LaTeX{} into
 compiling your input file on a text based system. Please note: this
 description assumes that a working \LaTeX{} installation already sits on
 your computer.\footnote{This is the case with most well groomed Unix
-Systems, and \ldots{} Real Men use Unix, so \ldots{} \smiley} If this is 
-not the case you may want to look at Appendix~\ref{installinglatex} 
+  Systems, and \ldots{} Real Men use Unix, so \ldots{} \smiley} If this is
+not the case you may want to look at Appendix~\ref{installinglatex}
 on page~\pageref{installinglatex} first.
 
 \begin{enumerate}
-\item
+  \item
 
-  Edit/Create your \LaTeX{} input file. This file must be plain ASCII
-  text.  On Unix all the editors will create just that. On Windows you
-  might want to make sure that you save the file in ASCII or
-  \emph{Plain Text} format.  When picking a name for your file, make
-  sure it bears the extension \eei{.tex}.
+        Edit/Create your \LaTeX{} input file. This file must be plain ASCII
+        text.  On Unix all the editors will create just that. On Windows you
+        might want to make sure that you save the file in ASCII or
+        \emph{Plain Text} format.  When picking a name for your file, make
+        sure it bears the extension \eei{.tex}.
 
-\item
+  \item
 
-Open a shell or cmd window, \texttt{cd} to the directory where your input file is located and run \LaTeX{} on your input file. If successful you will end up with a
-\texttt{.pdf} file. It may be necessary to run \LaTeX{} several times to get
-the table of contents and all internal references right. When your input
-file has a bug \LaTeX{} will tell you about it and stop processing your
-input file. Type \texttt{ctrl-D} to get back to the command line.
-\begin{lscommand}
-\verb+xelatex foo.tex+
-\end{lscommand}
+        Open a shell or cmd window, \texttt{cd} to the directory where your input file is located and run \LaTeX{} on your input file. If successful you will end up with a
+        \texttt{.pdf} file. It may be necessary to run \LaTeX{} several times to get
+        the table of contents and all internal references right. When your input
+        file has a bug \LaTeX{} will tell you about it and stop processing your
+        input file. Type \texttt{ctrl-D} to get back to the command line.
+        \begin{lscommand}
+          \verb+xelatex foo.tex+
+        \end{lscommand}
 
 \end{enumerate}
 
@@ -468,7 +468,7 @@ The first information \LaTeX{} needs to know when processing an
 input file is the type of document the author wants to create. This
 is specified with the \ci{documentclass} command.
 \begin{lscommand}
-\ci{documentclass}\verb|[|\emph{options}\verb|]{|\emph{class}\verb|}|
+  \ci{documentclass}\verb|[|\emph{options}\verb|]{|\emph{class}\verb|}|
 \end{lscommand}
 \noindent Here \emph{class} specifies the type of document to be created.
 Table~\ref{documentclasses} lists the document classes explained in
@@ -481,73 +481,73 @@ Table~\ref{options}.
 
 
 \begin{table}[!bp]
-\caption{Document Classes.}\label{documentclasses}
-\begin{lined}{\textwidth}
-\begin{description}
+  \caption{Document Classes.}\label{documentclasses}
+  \begin{lined}{\textwidth}
+    \begin{description}
 
-\item [\normalfont\texttt{article}]\index{article class} for articles in scientific journals, presentations,
-  short reports, program documentation, invitations, \ldots
-\item [\normalfont\texttt{proc}]\index{proc class} a class for proceedings based on the article class.
-\item [\normalfont\texttt{minimal}]\index{minimal class} is as small as it can get.
-It only sets a page size and a base font. It is mainly used for debugging
-purposes.
-\item [\normalfont\texttt{report}]\index{report class} for longer reports containing several chapters, small
-  books, PhD theses, \ldots 
-\item [\normalfont\texttt{book}]\index{book class} for real books 
-\item [\normalfont\texttt{slides}]\index{slides class} for slides. The class uses big sans serif
-  letters. You might want to consider using the Beamer class instead.
-\end{description}
-\end{lined}
+      \item [\normalfont\texttt{article}]\index{article class} for articles in scientific journals, presentations,
+            short reports, program documentation, invitations, \ldots
+      \item [\normalfont\texttt{proc}]\index{proc class} a class for proceedings based on the article class.
+      \item [\normalfont\texttt{minimal}]\index{minimal class} is as small as it can get.
+            It only sets a page size and a base font. It is mainly used for debugging
+            purposes.
+      \item [\normalfont\texttt{report}]\index{report class} for longer reports containing several chapters, small
+            books, PhD theses, \ldots
+      \item [\normalfont\texttt{book}]\index{book class} for real books
+      \item [\normalfont\texttt{slides}]\index{slides class} for slides. The class uses big sans serif
+            letters. You might want to consider using the Beamer class instead.
+    \end{description}
+  \end{lined}
 \end{table}
 
 \begin{table}[!bp]
-\caption{Document Class Options.}\label{options}
-\begin{lined}{\textwidth}
-\begin{flushleft}
-\begin{description}
-\item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
-  of the main font in the document. If no option is specified,
-  \texttt{10pt} is assumed.\index{document font size}\index{base
-    font size}
-\item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
-  the paper size. The default size is \texttt{letterpaper}. Besides
-  that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
-  and \texttt{legalpaper} can be specified.\index{legal paper}\index{paper
-    size}\index{A4 paper}\index{letter paper}\index{A5
-    paper}\index{B5 paper}\index{executive paper}
+  \caption{Document Class Options.}\label{options}
+  \begin{lined}{\textwidth}
+    \begin{flushleft}
+      \begin{description}
+        \item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
+          of the main font in the document. If no option is specified,
+          \texttt{10pt} is assumed.\index{document font size}\index{base
+            font size}
+        \item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
+          the paper size. The default size is \texttt{letterpaper}. Besides
+          that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
+          and \texttt{legalpaper} can be specified.\index{legal paper}\index{paper
+            size}\index{A4 paper}\index{letter paper}\index{A5
+            paper}\index{B5 paper}\index{executive paper}
 
-\item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
-  instead of centred.
+        \item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
+          instead of centred.
 
-\item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
-  left hand side instead of the right.
+        \item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
+          left hand side instead of the right.
 
-\item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
-  whether a new page should be started after the \wi{document title}
-  or not. The \texttt{article} class does not start a new page by
-  default, while \texttt{report} and \texttt{book} do.\index{title}
+        \item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
+          whether a new page should be started after the \wi{document title}
+          or not. The \texttt{article} class does not start a new page by
+          default, while \texttt{report} and \texttt{book} do.\index{title}
 
-\item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
-  document in \wi{one column} or \wi{two column}s.
+        \item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
+          document in \wi{one column} or \wi{two column}s.
 
-\item[\normalfont\texttt{twoside, oneside}] \quad Specifies whether double or
-  single sided output should be generated. The classes
-  \texttt{article} and \texttt{report} are \wi{single sided} and the
-  \texttt{book} class is \wi{double sided} by default. Note that this
-  option concerns the style of the document only. The option
-  \texttt{twoside} does \emph{not} tell the printer you use that it
-  should actually make a two-sided printout.
-\item[\normalfont\texttt{landscape}] \quad Changes the layout of the document to print in landscape mode.
-\item[\normalfont\texttt{openright, openany}] \quad Makes chapters begin either
-  only on right hand pages or on the next page available. This does
-  not work with the \texttt{article} class, as it does not know about
-  chapters. The \texttt{report} class by default starts chapters on
-  the next page available and the \texttt{book} class starts them on
-  right hand pages.
+        \item[\normalfont\texttt{twoside, oneside}] \quad Specifies whether double or
+          single sided output should be generated. The classes
+          \texttt{article} and \texttt{report} are \wi{single sided} and the
+          \texttt{book} class is \wi{double sided} by default. Note that this
+          option concerns the style of the document only. The option
+          \texttt{twoside} does \emph{not} tell the printer you use that it
+          should actually make a two-sided printout.
+        \item[\normalfont\texttt{landscape}] \quad Changes the layout of the document to print in landscape mode.
+        \item[\normalfont\texttt{openright, openany}] \quad Makes chapters begin either
+          only on right hand pages or on the next page available. This does
+          not work with the \texttt{article} class, as it does not know about
+          chapters. The \texttt{report} class by default starts chapters on
+          the next page available and the \texttt{book} class starts them on
+          right hand pages.
 
-\end{description}
-\end{flushleft}
-\end{lined}
+      \end{description}
+    \end{flushleft}
+  \end{lined}
 \end{table}
 
 Example: An input file for a \LaTeX{} document could start with the
@@ -568,7 +568,7 @@ source code from a file into your document, you need to enhance the
 capabilities of \LaTeX.  Such enhancements are called packages.
 Packages are activated with the
 \begin{lscommand}
-\ci{usepackage}\verb|[|\emph{options}\verb|]{|\emph{package}\verb|}|
+  \ci{usepackage}\verb|[|\emph{options}\verb|]{|\emph{package}\verb|}|
 \end{lscommand}
 \noindent command, where \emph{package} is the name of the package and
 \emph{options} is a list of keywords that trigger special features in
@@ -588,44 +588,44 @@ preinstalled. If you are working on a Unix system, use the command
 
 
 \begin{table}[btp]
-\caption{Some of the Packages Distributed with \LaTeX.}\label{packages}
-\begin{lined}{\textwidth}
-\begin{description}
-\item[\normalfont\pai{doc}] Allows the documentation of \LaTeX{} programs.\\
- Described in \texttt{doc.dtx}\footnote{This file should be installed
-   on your system, and you should be able to get a \texttt{dvi} file
-   by typing \texttt{latex doc.dtx} in any directory where you have
-   write permission. The same is true for all the
-   other files mentioned in this table.}  and in \companion.
+  \caption{Some of the Packages Distributed with \LaTeX.}\label{packages}
+  \begin{lined}{\textwidth}
+    \begin{description}
+      \item[\normalfont\pai{doc}] Allows the documentation of \LaTeX{} programs.\\
+        Described in \texttt{doc.dtx}\footnote{This file should be installed
+          on your system, and you should be able to get a \texttt{dvi} file
+          by typing \texttt{latex doc.dtx} in any directory where you have
+          write permission. The same is true for all the
+          other files mentioned in this table.}  and in \companion.
 
-\item[\normalfont\pai{exscale}] Provides scaled versions of the
-  math extension  font.\\
-  Described in \texttt{ltexscale.dtx}.
+      \item[\normalfont\pai{exscale}] Provides scaled versions of the
+        math extension  font.\\
+        Described in \texttt{ltexscale.dtx}.
 
-\item[\normalfont\pai{fontenc}] Specifies which \wi{font encoding}
-  \LaTeX{} should use.\\
-  Described in \texttt{ltoutenc.dtx}.
+      \item[\normalfont\pai{fontenc}] Specifies which \wi{font encoding}
+        \LaTeX{} should use.\\
+        Described in \texttt{ltoutenc.dtx}.
 
-\item[\normalfont\pai{ifthen}] Provides commands of the form\\
-  `if\ldots then do\ldots otherwise do\ldots.'\\ Described in
-  \texttt{ifthen.dtx} and \companion.
+      \item[\normalfont\pai{ifthen}] Provides commands of the form\\
+        `if\ldots then do\ldots otherwise do\ldots.'\\ Described in
+        \texttt{ifthen.dtx} and \companion.
 
-\item[\normalfont\pai{latexsym}] To access the \LaTeX{} symbol
-  font, you should use the \texttt{latexsym} package. Described in
-  \texttt{latexsym.dtx} and in \companion.
+      \item[\normalfont\pai{latexsym}] To access the \LaTeX{} symbol
+        font, you should use the \texttt{latexsym} package. Described in
+        \texttt{latexsym.dtx} and in \companion.
 
-\item[\normalfont\pai{makeidx}] Provides commands for producing
-  indexes.  Described in Section~\ref{sec:indexing} and in \companion.
+      \item[\normalfont\pai{makeidx}] Provides commands for producing
+        indexes.  Described in Section~\ref{sec:indexing} and in \companion.
 
-\item[\normalfont\pai{syntonly}] Processes a document without
-  typesetting it.
+      \item[\normalfont\pai{syntonly}] Processes a document without
+        typesetting it.
 
-\item[\normalfont\pai{inputenc}] Allows the specification of an
-  input encoding such as ASCII, ISO Latin-1, ISO Latin-2, 437/850 IBM
-  code pages,  Apple Macintosh, Next, ANSI-Windows or user-defined one.
-  Described in \texttt{inputenc.dtx}.
-\end{description}
-\end{lined}
+      \item[\normalfont\pai{inputenc}] Allows the specification of an
+        input encoding such as ASCII, ISO Latin-1, ISO Latin-2, 437/850 IBM
+        code pages,  Apple Macintosh, Next, ANSI-Windows or user-defined one.
+        Described in \texttt{inputenc.dtx}.
+    \end{description}
+  \end{lined}
 \end{table}
 
 
@@ -634,38 +634,38 @@ preinstalled. If you are working on a Unix system, use the command
 \LaTeX{} supports three predefined \wi{header}/\wi{footer}
 combinations---so-called \wi{page style}s. The \emph{style} parameter
 of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
-style!headings@\texttt{headings}}\index{headings@texttt{headings}}\index{page
-style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+  style!headings@\texttt{headings}}\index{headings@texttt{headings}}\index{page
+  style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
 \begin{lscommand}
-\ci{pagestyle}\verb|{|\emph{style}\verb|}|
+  \ci{pagestyle}\verb|{|\emph{style}\verb|}|
 \end{lscommand}
 \noindent command defines which one to use.
 Table~\ref{pagestyle}
 lists the predefined page styles.
 
 \begin{table}[!hbp]
-\caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
-\begin{lined}{\textwidth}
-\begin{description}
+  \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
+  \begin{lined}{\textwidth}
+    \begin{description}
 
-\item[\normalfont\texttt{plain}] prints the page numbers on the bottom
-  of the page, in the middle of the footer. This is the default page
-  style.
+      \item[\normalfont\texttt{plain}] prints the page numbers on the bottom
+        of the page, in the middle of the footer. This is the default page
+        style.
 
-\item[\normalfont\texttt{headings}] prints the current chapter heading
-  and the page number in the header on each page, while the footer
-  remains empty.  (This is the style used in this document)
-\item[\normalfont\texttt{empty}] sets both the header and the footer
-  to be empty.
+      \item[\normalfont\texttt{headings}] prints the current chapter heading
+        and the page number in the header on each page, while the footer
+        remains empty.  (This is the style used in this document)
+      \item[\normalfont\texttt{empty}] sets both the header and the footer
+        to be empty.
 
-\end{description}
-\end{lined}
+    \end{description}
+  \end{lined}
 \end{table}
 
 It is possible to change the page style of the current page
 with the command
 \begin{lscommand}
-\ci{thispagestyle}\verb|{|\emph{style}\verb|}|
+  \ci{thispagestyle}\verb|{|\emph{style}\verb|}|
 \end{lscommand}
 
 You may also control the style of the displayed page numbers. To change it use
@@ -707,46 +707,46 @@ think is important, please drop me a line.
 
 \begin{description}
 
-\item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
-  \texttt{latex}.
-\item[\eei{.sty}] \LaTeX{} Macro package. Load this
-  into your \LaTeX{} document using the \ci{usepackage} command.
-\item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
-  format for \LaTeX{} style files. If you process a \eei{.dtx} file you get
-  documented macro code of the \LaTeX{} package contained in the \eei{.dtx}
-  file.
-\item[\eei{.ins}] The installer for the files contained in the
-  matching \eei{.dtx} file. If you download a \LaTeX{} package from the net,
-  you will normally get a \eei{.dtx} and a \eei{.ins} file. Run \LaTeX{} on the
-  \eei{.ins} file to unpack the \eei{.dtx} file.
-\item[\eei{.cls}] Class files define what your document looks
-  like. They are selected with the \ci{documentclass} command.
-\item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
+  \item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
+    \texttt{latex}.
+  \item[\eei{.sty}] \LaTeX{} Macro package. Load this
+    into your \LaTeX{} document using the \ci{usepackage} command.
+  \item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
+    format for \LaTeX{} style files. If you process a \eei{.dtx} file you get
+    documented macro code of the \LaTeX{} package contained in the \eei{.dtx}
+    file.
+  \item[\eei{.ins}] The installer for the files contained in the
+    matching \eei{.dtx} file. If you download a \LaTeX{} package from the net,
+    you will normally get a \eei{.dtx} and a \eei{.ins} file. Run \LaTeX{} on the
+    \eei{.ins} file to unpack the \eei{.dtx} file.
+  \item[\eei{.cls}] Class files define what your document looks
+    like. They are selected with the \ci{documentclass} command.
+  \item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
 \end{description}
 The following files are generated when you run \LaTeX{} on your input
 file:
 
 \begin{description}
-\item[\eei{.dvi}] Device Independent File. This is the main result of a classical \LaTeX{}
-  compile run. Look at its content with a DVI previewer
-  program or send it to a printer with \texttt{dvips} or a
-  similar application. If you are using \hologo{pdfLaTeX} then you should not see any of these files.
-\item[\eei{.log}] Gives a detailed account of what happened during the
-  last compiler run.
-\item[\eei{.toc}] Stores all your section headers. It gets read in for the
-  next compiler run and is used to produce the table of contents.
-\item[\eei{.lof}] This is like \eei{.toc} but for the list of figures.
-\item[\eei{.lot}] And again the same for the list of tables.
-\item[\eei{.aux}] Another file that transports information from one
-  compiler run to the next. Among other things, the \eei{.aux} file is used
-  to store information associated with cross-references.
-\item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
-  the words that go into the index in this file. Process this file with
-  \texttt{makeindex}. Refer to Section~\ref{sec:indexing} on
-  page~\pageref{sec:indexing} for more information on indexing.
-\item[\eei{.ind}] The processed \eei{.idx} file, ready for inclusion into your
-  document on the next compile cycle.
-\item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.
+  \item[\eei{.dvi}] Device Independent File. This is the main result of a classical \LaTeX{}
+    compile run. Look at its content with a DVI previewer
+    program or send it to a printer with \texttt{dvips} or a
+    similar application. If you are using \hologo{pdfLaTeX} then you should not see any of these files.
+  \item[\eei{.log}] Gives a detailed account of what happened during the
+    last compiler run.
+  \item[\eei{.toc}] Stores all your section headers. It gets read in for the
+    next compiler run and is used to produce the table of contents.
+  \item[\eei{.lof}] This is like \eei{.toc} but for the list of figures.
+  \item[\eei{.lot}] And again the same for the list of tables.
+  \item[\eei{.aux}] Another file that transports information from one
+    compiler run to the next. Among other things, the \eei{.aux} file is used
+    to store information associated with cross-references.
+  \item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
+    the words that go into the index in this file. Process this file with
+    \texttt{makeindex}. Refer to Section~\ref{sec:indexing} on
+    page~\pageref{sec:indexing} for more information on indexing.
+  \item[\eei{.ind}] The processed \eei{.idx} file, ready for inclusion into your
+    document on the next compile cycle.
+  \item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.
 \end{description}
 
 
@@ -760,7 +760,7 @@ into several parts. \LaTeX{} has two commands that help you to do
 that.
 
 \begin{lscommand}
-\ci{include}\verb|{|\emph{filename}\verb|}|
+  \ci{include}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
 \noindent Use this command in the document body to insert the
 contents of another file named \emph{filename.tex}. Note that \LaTeX{}
@@ -770,8 +770,8 @@ before processing the material input from \emph{filename.tex}.
 The second command can be used in the preamble. It allows you to
 instruct \LaTeX{} to only input some of the \verb|\include|d files.
 \begin{lscommand}
-\ci{includeonly}\verb|{|\emph{filename}\verb|,|\emph{filename}%
-\verb|,|\ldots\verb|}|
+  \ci{includeonly}\verb|{|\emph{filename}\verb|,|\emph{filename}%
+  \verb|,|\ldots\verb|}|
 \end{lscommand}
 After this command is executed in the preamble of the document, only
 \ci{include} commands for the filenames that are listed in the
@@ -782,7 +782,7 @@ page. This is helpful when you use \ci{includeonly}, because the
 page breaks will not move, even when some include files are omitted.
 Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
-\ci{input}\verb|{|\emph{filename}\verb|}|
+  \ci{input}\verb|{|\emph{filename}\verb|}|
 \end{lscommand}
 \noindent command. It simply includes the file specified.
 No flashy suits, no strings attached.
