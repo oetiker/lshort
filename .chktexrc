@@ -10,7 +10,8 @@ Silent {
     \printbibliography \IfValueTF \suppressfloats
     \flushright \mainmatter \IEEEyessubnumber
     \endhead \endfoot \endlastfoot \endfirsthead
-    \tabularnewline \ifpdf
+    \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
+    \bgroup \egroup
 }
 
 MathEnvir {
