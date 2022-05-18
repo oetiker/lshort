@@ -1007,34 +1007,39 @@ in a list.
 \end{enumerate}
 \end{example}
 
-\subsection{Flushleft, Flushright, and Center}
+\subsection{Non-Justified Text}
 
-The environments \ei{flushleft} and \ei{flushright} generate
-paragraphs that are either left- or \wi{right-aligned}.\index{left
-  aligned} The \ei{center} environment generates cenetred text. If you
-do not issue \ci{\bs} to specify line breaks, \LaTeX{} will
-automatically determine line breaks.
+By default \LaTeX{} justifies text inside a document. While this is desirable
+for the main text there may be occasions where you want the text to be left- or
+\wi{right-aligned}\index{left-aligned}. This is where the \pai*{ragged2e}
+package is useful. It defines environments
+\begin{lscommand}
+  \ei{FlushLeft}
+  \ei{FlushRight}
+  \ei{Center}
+\end{lscommand}
+which allow you to achieve left-aligned, right-aligned and centered text.
 
 \begin{example}
-\begin{flushleft}
-This text is\\ left-aligned.
-\LaTeX{} is not trying to make
-each line the same length.
-\end{flushleft}
+\begin{FlushLeft}
+  This text is\\ left-aligned.
+  \LaTeX{} is not trying to make
+  each line the same length.
+\end{FlushLeft}
 \end{example}
 
 \begin{example}
-\begin{flushright}
-This text is right-\\aligned.
-\LaTeX{} is not trying to make
-each line the same length.
-\end{flushright}
+\begin{FlushRight}
+  This text is right-\\aligned.
+  \LaTeX{} is not trying to make
+  each line the same length.
+\end{FlushRight}
 \end{example}
 
 \begin{example}
-\begin{center}
-At the centre\\of the earth
-\end{center}
+\begin{Center}
+  At the centre\\of the earth
+\end{Center}
 \end{example}
 
 \subsection{Quote, Quotation, and Verse}
@@ -1067,7 +1072,7 @@ verse.
 \begin{example}
 I know only one English poem by
 heart. It is about Humpty Dumpty.
-\begin{flushleft}
+\begin{FlushLeft}
 \begin{verse}
 Humpty Dumpty sat on a wall:\\
 Humpty Dumpty had a great fall.\\
@@ -1076,7 +1081,7 @@ the King's men\\
 Couldn't put Humpty together
 again.
 \end{verse}
-\end{flushleft}
+\end{FlushLeft}
 \end{example}
 
 \subsection{Abstract}
@@ -1624,12 +1629,12 @@ making it unavailable to go to the next row. In such occasions you may use the
 \ci{tabularnewline} command.
 \begin{example}
 \begin{tabular}{
-  >{\begin{flushleft}}
+  >{\begin{FlushLeft}}
     p{2cm}
-  <{\end{flushleft}}
-  >{\begin{flushright}}
+  <{\end{FlushLeft}}
+  >{\begin{FlushRight}}
     p{2cm}
-  <{\end{flushright}}
+  <{\end{FlushRight}}
 }
   This cell will
     be flushed left. &
@@ -1654,9 +1659,9 @@ and the \carg{definition} is what should be inserted in the table when using
 it.
 \begin{example}
 \newcolumntype{e}{
-  >{\begin{em}\begin{flushleft}}
+  >{\begin{em}\begin{FlushLeft}}
   p{2.5cm}
-  <{\end{flushleft}\end{em}}
+  <{\end{FlushLeft}\end{em}}
 }
 \begin{tabular}{ee}
   This cell will
