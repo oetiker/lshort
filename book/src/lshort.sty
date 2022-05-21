@@ -182,16 +182,19 @@
   }
 }
 
-\NewDocumentCommand{\ci}{smoo}{
-  \texttt{\bs #2}\cih{#2}
+\NewDocumentCommand{\ci}{smsoo}{
+  \texttt{\bs #2}
+  \IfBooleanF {#3} {
+    \cih{#2}
+  }
   \IfBooleanTF {#1} {
-    \lshort@arglist{#3}
+    \lshort@arglist{#4}
   }{
-    \IfValueT {#3} {
-      \IfValueTF {#4} {
-        \texttt{[}\emph{#3}\texttt{]\{}\emph{#4}\texttt{\}}
+    \IfValueT {#4} {
+      \IfValueTF {#5} {
+        \texttt{[}\emph{#4}\texttt{]\{}\emph{#5}\texttt{\}}
       } {
-        \texttt{\{}\emph{#3}\texttt{\}}
+        \texttt{\{}\emph{#4}\texttt{\}}
       }
     }
   }
@@ -290,6 +293,7 @@
 \NewDocumentEnvironment{chktexignore}{}{}{}
 
 \NewDocumentCommand{\smiley}{}{\texttt{;-)}}
+\NewDocumentCommand{\Unix}{}{Unix-like}
 \ExplSyntaxOff
 
 %\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}

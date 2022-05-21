@@ -101,6 +101,172 @@ e.g.\ \verb|\section{The| \texttt{Structure of Text and Language}\verb|}| is
 so obvious that it is almost self-evident how these high-level
 structures should be used.
 
+\section{The Layout of the Document}
+
+\subsection{Document Classes}\label{sec:documentclass}
+
+The first information \LaTeX{} needs to know when processing an
+input file is the type of document the author wants to create. This
+is specified with the \ci{documentclass} command.
+\begin{lscommand}
+  \ci{documentclass}[options][class]
+\end{lscommand}
+Here \carg{class} specifies the type of document to be created.
+Table~\ref{documentclasses} lists the document classes explained in
+this introduction. The \LaTeXe{} distribution provides additional
+classes for other documents, including letters and slides.  The
+\carg{\wi{option}s} parameter customises the behaviour of the document
+class. The options have to be separated by commas. The most common options for the standard document
+classes are listed in
+Table~\ref{options}.
+
+
+\begin{table}[!bp]
+  \caption{Document Classes.}\label{documentclasses}
+  \begin{lined}{\textwidth}
+    \begin{description}
+
+      \item [\normalfont\texttt{article}]\index{article class} for articles in scientific journals, presentations,
+            short reports, program documentation, invitations, \ldots
+      \item [\normalfont\texttt{proc}]\index{proc class} a class for proceedings based on the article class.
+      \item [\normalfont\texttt{minimal}]\index{minimal class} is as small as it can get.
+            It only sets a page size and a base font. It is mainly used for debugging
+            purposes.
+      \item [\normalfont\texttt{report}]\index{report class} for longer reports containing several chapters, small
+            books, PhD theses, \ldots
+      \item [\normalfont\texttt{book}]\index{book class} for real books
+      \item [\normalfont\texttt{slides}]\index{slides class} for slides. The class uses big sans serif
+            letters. You might want to consider using the Beamer class instead.
+    \end{description}
+  \end{lined}
+\end{table}
+
+\begin{table}[!bp]
+  \caption{Document Class Options.}\label{options}
+  \begin{lined}{\textwidth}
+    \begin{FlushLeft}
+      \begin{description}
+        \item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
+          of the main font in the document. If no option is specified,
+          \texttt{10pt} is assumed.\index{document font size}\index{base
+            font size}
+        \item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
+          the paper size. The default size is \texttt{letterpaper}. Besides
+          that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
+          and \texttt{legalpaper} can be specified.\index{legal paper}\index{paper
+            size}\index{A4 paper}\index{letter paper}\index{A5
+            paper}\index{B5 paper}\index{executive paper}
+
+        \item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
+          instead of centred.
+
+        \item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
+          left hand side instead of the right.
+
+        \item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
+          whether a new page should be started after the \wi{document title}
+          or not. The \texttt{article} class does not start a new page by
+          default, while \texttt{report} and \texttt{book} do.\index{title}
+
+        \item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
+          document in \wi{one column} or \wi{two column}s.
+
+        \item[\normalfont\texttt{twoside, oneside}] \quad Specifies whether double or
+          single sided output should be generated. The classes
+          \texttt{article} and \texttt{report} are \wi{single sided} and the
+          \texttt{book} class is \wi{double sided} by default. Note that this
+          option concerns the style of the document only. The option
+          \texttt{twoside} does \emph{not} tell the printer you use that it
+          should actually make a two-sided printout.
+        \item[\normalfont\texttt{landscape}] \quad Changes the layout of the document to print in landscape mode.
+        \item[\normalfont\texttt{openright, openany}] \quad Makes chapters begin either
+          only on right hand pages or on the next page available. This does
+          not work with the \texttt{article} class, as it does not know about
+          chapters. The \texttt{report} class by default starts chapters on
+          the next page available and the \texttt{book} class starts them on
+          right hand pages.
+
+      \end{description}
+    \end{FlushLeft}
+  \end{lined}
+\end{table}
+
+Example: An input file for a \LaTeX{} document could start with the
+line
+\begin{code}
+\ci{documentclass}\verb|[11pt,twoside,a4paper]{article}|
+\end{code}
+which instructs \LaTeX{} to typeset the document as an \emph{article}
+with a base font size of \emph{eleven points}, and to produce a
+layout suitable for \emph{double sided} printing on \emph{A4 paper}.
+
+\subsection{Page Styles}
+
+\LaTeX{} supports three predefined \wi{header}/\wi{footer}
+combinations---so-called \wi{page style}s. The \emph{style} parameter
+of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
+  style!headings@\texttt{headings}}\index{headings@texttt{headings}}\index{page
+  style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+\begin{lscommand}
+  \ci{pagestyle}\verb|{|\emph{style}\verb|}|
+\end{lscommand}
+\noindent command defines which one to use.
+Table~\ref{pagestyle}
+lists the predefined page styles.
+
+\begin{table}[!hbp]
+  \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
+  \begin{lined}{\textwidth}
+    \begin{description}
+
+      \item[\normalfont\texttt{plain}] prints the page numbers on the bottom
+        of the page, in the middle of the footer. This is the default page
+        style.
+
+      \item[\normalfont\texttt{headings}] prints the current chapter heading
+        and the page number in the header on each page, while the footer
+        remains empty.  (This is the style used in this document)
+      \item[\normalfont\texttt{empty}] sets both the header and the footer
+        to be empty.
+
+    \end{description}
+  \end{lined}
+\end{table}
+
+It is possible to change the page style of the current page
+with the command
+\begin{lscommand}
+  \ci{thispagestyle}\verb|{|\emph{style}\verb|}|
+\end{lscommand}
+
+You may also control the style of the displayed page numbers. To change it use
+the
+\begin{lscommand}
+  \ci{pagenumbering}[style]
+\end{lscommand}
+command, where \carg{style} is one of the styles presented in
+table~\ref{tb:numberings}.
+
+\begin{table}[htp]
+  \centering
+  \caption{Possible argument of the \ci{pagenumbering} command.}\label{tb:numberings}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Style          & Description                                   \\
+    \midrule
+    \cargv{arabic} & Arabic numerals (1, 2, 3, \ldots)             \\
+    \cargv{roman}  & Lowercase Roman numerals (i, ii, iii, \ldots) \\
+    \cargv{Roman}  & Uppercase Roman numerals (I, II, III, \ldots) \\
+    \cargv{alph}   & Lowercase Latin letters (a, b, c, \ldots)     \\
+    \cargv{Alph}   & Uppercase Latin letters (A, B, C, \ldots)     \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A description how to create your own headers and footers can be found in
+Section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
+
+
 \section{Line Breaking and Page Breaking}
 
 \subsection{Justified Paragraphs}
@@ -462,7 +628,7 @@ Stra\ss e
   \bigskip
 \end{table}
 
-\section{International Language Support}
+\section{International Language Support}\label{sec:polyglossia}
 \secby{Axel Kielhorn}{A.Kielhorn@web.de}%
 \index{international} When you write documents in \wi{language}s
 other than English, there are three areas where \LaTeX{} has to be
@@ -1143,7 +1309,7 @@ The \texttt{verbatim} environment and the \verb|\verb| command may not be used
 within parameters of other commands.
 
 
-\subsection{Tabular}
+\subsection{Tables}\label{sec:tables}
 
 In \LaTeX{} the environment to typeset tables (and more) is called
 \ei{tabular}. While it can be used on its own, the resulting table layouts look
@@ -1996,6 +2162,54 @@ you want to have a running caption.
 \end{document} %!hide 
 \end{example}
 
+
+
+
+\section{Big Projects}
+When working on big documents, you might want to split the input file
+into several parts. \LaTeX{} has two commands that help you to do
+that.
+
+\begin{lscommand}
+  \ci{include}\verb|{|\emph{filename}\verb|}|
+\end{lscommand}
+\noindent Use this command in the document body to insert the
+contents of another file named \emph{filename.tex}. Note that \LaTeX{}
+will start a new page
+before processing the material input from \emph{filename.tex}.
+
+The second command can be used in the preamble. It allows you to
+instruct \LaTeX{} to only input some of the \verb|\include|d files.
+\begin{lscommand}
+  \ci{includeonly}\verb|{|\emph{filename}\verb|,|\emph{filename}%
+  \verb|,|\ldots\verb|}|
+\end{lscommand}
+After this command is executed in the preamble of the document, only
+\ci{include} commands for the filenames that are listed in the
+argument of the \ci{includeonly} command will be executed.
+
+The \ci{include} command starts typesetting the included text on a new
+page. This is helpful when you use \ci{includeonly}, because the
+page breaks will not move, even when some include files are omitted.
+Sometimes this might not be desirable. In this case, use the
+\begin{lscommand}
+  \ci{input}\verb|{|\emph{filename}\verb|}|
+\end{lscommand}
+\noindent command. It simply includes the file specified.
+No flashy suits, no strings attached.
+
+To make \LaTeX{} quickly check your document use the \pai{syntonly}
+package. This makes \LaTeX{} skim through your document only checking for
+proper syntax and usage of the commands, but doesn't produce any (pdf) output.
+As \LaTeX{} runs faster in this mode you may save yourself valuable time.
+Usage is very simple:
+
+\begin{verbatim}
+\usepackage{syntonly}
+\syntaxonly
+\end{verbatim}
+When you want to produce pages, just comment out the second line
+(by adding a percent sign).
 
 % Local Variables:
 % TeX-master: "lshort2e"
