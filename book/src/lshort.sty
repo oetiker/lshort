@@ -294,6 +294,11 @@
 
 \NewDocumentCommand{\smiley}{}{\texttt{;-)}}
 \NewDocumentCommand{\Unix}{}{Unix-like}
+
+% Change default float settings
+\g@addto@macro\@floatboxreset\centering
+
+\RenewExpandableDocumentCommand{\fps@figure}{}{htpb}
 \ExplSyntaxOff
 
 %\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}
