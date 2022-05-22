@@ -219,4 +219,26 @@ should be.
   text
 \end{Center}|
 \end{chktexignore}
+
+\section{Typesetting Quotations}
+\instead{
+  \texttt{``} \\
+  \texttt{,,} \\
+  \texttt{<<} \\
+  \texttt{>>} \\
+  \texttt{''}
+}{
+  \ci{enquote} \\
+  \ci{enquote*}
+}
+
+The \TeX{} version of entering quotes was to rely on ligatures for the given
+quotation mark. This method is not context aware and cannot be customized.
+Using \pai{csquotes} package as described in Section~\ref{sec:csquotes} allows
+greater control over the typesetting of the quotations.
+
+\chto|``quote''||\usepackage{csquotes}
+% ...
+\enquote{quote}|
+
 \egroup

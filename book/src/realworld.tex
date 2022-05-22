@@ -12,95 +12,6 @@
   to produce real world documents.
 \end{intro}
 
-\section{The Structure of Text and Language}
-\secby{Hanspeter Schmid}{hanspi@schmid-werren.ch}
-The main point of writing a text, is to convey ideas, information, or
-knowledge to the reader.  The reader will understand the text better
-if these ideas are well-structured, and will see and feel this
-structure much better if the typographical form reflects the logical
-and semantic structure of the content.
-
-\LaTeX{} is different from other typesetting systems in that you just
-have to tell it the logical and semantic structure of a text.  It
-then derives the typographical form of the text according to the
-``rules'' given in the document class file and in various style files.
-
-The most important text unit in \LaTeX{} (and in typography) is the
-\wi{paragraph}.  We call it ``text unit'' because a paragraph is the
-typographical form that should reflect one coherent thought, or one idea.
-You will learn in the following sections how to force line breaks with
-e.g.\ \texttt{\bs\bs}, and paragraph breaks with e.g.\ leaving an empty line
-in the source code.  Therefore, if a new thought begins, a new paragraph
-should begin, and if not, only line breaks should be used.  If in doubt
-about paragraph breaks, think about your text as a conveyor of ideas and
-thoughts.  If you have a paragraph break, but the old thought continues, it
-should be removed.  If some totally new line of thought occurs in the same
-paragraph, then it should be broken.
-
-Most people completely underestimate the importance of well-placed
-paragraph breaks.  Many people do not even know what the meaning of
-a paragraph break is, or, especially in \LaTeX, introduce paragraph
-breaks without knowing it.  The latter mistake is especially easy to
-make if equations are used in the text.  Look at the following
-examples, and figure out why sometimes empty lines (paragraph breaks)
-are used before and after the equation, and sometimes not.  (If you
-don't yet understand all commands well enough to understand these
-examples, please read this and the following chapter, and then read
-this section again.)
-
-\begin{code}
-\begin{verbatim}
-% Example 1
-\ldots when Einstein introduced his formula
-\begin{equation}
-  e = m \cdot c^2 \; ,
-\end{equation}
-which is at the same time the most widely known
-and the least well understood physical formula.
-
-
-% Example 2
-\ldots from which follows Kirchhoff's current law:
-\begin{equation}
-  \sum_{k=1}^{n} I_k = 0 \; .
-\end{equation}
-
-Kirchhoff's voltage law can be derived \ldots
-
-
-% Example 3
-\ldots which has several advantages.
-
-\begin{equation}
-  I_D = I_F - I_R
-\end{equation}
-is the core of a very different transistor model. \ldots
-\end{verbatim}
-\end{code}
-
-The next smaller text unit is a sentence.  In English texts, there is
-a larger space after a period that ends a sentence than after one
-that ends an abbreviation.  \LaTeX{} tries to figure out which one
-you wanted to have.  If \LaTeX{} gets it wrong, you must tell it what
-you want.  This is explained later in this chapter.
-
-The structuring of text even extends to parts of sentences.  Most
-languages have very complicated punctuation rules, but in many
-languages (including German and English), you will get almost every
-comma right if you remember what it represents: a short stop in the
-flow of language.  If you are not sure about where to put a comma,
-read the sentence aloud and take a short breath at every comma.  If
-this feels awkward at some place, delete that comma; if you feel the
-urge to breathe (or make a short stop) at some other place, insert a
-comma.
-
-Finally, the paragraphs of a text should also be structured logically
-at a higher level, by putting them into chapters, sections,
-subsections, and so on.  However, the typographical effect of writing
-e.g.\ \verb|\section{The| \texttt{Structure of Text and Language}\verb|}| is
-so obvious that it is almost self-evident how these high-level
-structures should be used.
-
 \section{The Layout of the Document}
 
 \subsection{Document Classes}\label{sec:documentclass}
@@ -112,131 +23,123 @@ is specified with the \ci{documentclass} command.
   \ci{documentclass}[options][class]
 \end{lscommand}
 Here \carg{class} specifies the type of document to be created.
-Table~\ref{documentclasses} lists the document classes explained in
-this introduction. The \LaTeXe{} distribution provides additional
-classes for other documents, including letters and slides.  The
-\carg{\wi{option}s} parameter customises the behaviour of the document
-class. The options have to be separated by commas. The most common options for the standard document
-classes are listed in
-Table~\ref{options}.
+Table~\ref{documentclasses} lists some of the available document classes. The
+\carg{\wi{option}s} parameter customises the behaviour of the document class.
+The options have to be separated by commas. The most common options for the
+standard document classes are listed in Table~\ref{options}.
 
-
-\begin{table}[!bp]
+\begin{table}
   \caption{Document Classes.}\label{documentclasses}
-  \begin{lined}{\textwidth}
-    \begin{description}
-
-      \item [\normalfont\texttt{article}]\index{article class} for articles in scientific journals, presentations,
-            short reports, program documentation, invitations, \ldots
-      \item [\normalfont\texttt{proc}]\index{proc class} a class for proceedings based on the article class.
-      \item [\normalfont\texttt{minimal}]\index{minimal class} is as small as it can get.
-            It only sets a page size and a base font. It is mainly used for debugging
-            purposes.
-      \item [\normalfont\texttt{report}]\index{report class} for longer reports containing several chapters, small
-            books, PhD theses, \ldots
-      \item [\normalfont\texttt{book}]\index{book class} for real books
-      \item [\normalfont\texttt{slides}]\index{slides class} for slides. The class uses big sans serif
-            letters. You might want to consider using the Beamer class instead.
-    \end{description}
-  \end{lined}
+  \begin{tabular}{@{}lp{8cm}@{}}
+    \toprule
+    Class                                 & Description               \\
+    \midrule
+    \texttt{article}\index{article class} & for articles in
+    scientific journals, short reports, and any other short document. \\
+    \texttt{proc}\index{proc class}       & a class for
+    proceedings based on the article class.                           \\
+    \texttt{report}\index{report class}   & for longer reports.
+    containing several chapters, small books, PhD theses, \ldots      \\
+    \texttt{book}\index{book class}       & for real books.           \\
+    \texttt{beamer}\index{beamer class}   & for presentations.        \\
+    \texttt{letter}\index{letter class}   & for letters.              \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-\begin{table}[!bp]
+\begin{table}
+  \RenewDocumentCommand{\arraystretch}{}{1.2}
   \caption{Document Class Options.}\label{options}
-  \begin{lined}{\textwidth}
-    \begin{FlushLeft}
-      \begin{description}
-        \item[\normalfont\texttt{10pt}, \texttt{11pt}, \texttt{12pt}] \quad Sets the size
-          of the main font in the document. If no option is specified,
-          \texttt{10pt} is assumed.\index{document font size}\index{base
-            font size}
-        \item[\normalfont\texttt{a4paper}, \texttt{letterpaper}, \ldots] \quad Defines
-          the paper size. The default size is \texttt{letterpaper}. Besides
-          that, \texttt{a5paper}, \texttt{b5paper}, \texttt{executivepaper},
-          and \texttt{legalpaper} can be specified.\index{legal paper}\index{paper
-            size}\index{A4 paper}\index{letter paper}\index{A5
-            paper}\index{B5 paper}\index{executive paper}
-
-        \item[\normalfont\texttt{fleqn}] \quad Typesets displayed formulae left-aligned
-          instead of centred.
-
-        \item[\normalfont\texttt{leqno}] \quad Places the numbering of formulae on the
-          left hand side instead of the right.
-
-        \item[\normalfont\texttt{titlepage}, \texttt{notitlepage}] \quad Specifies
-          whether a new page should be started after the \wi{document title}
-          or not. The \texttt{article} class does not start a new page by
-          default, while \texttt{report} and \texttt{book} do.\index{title}
-
-        \item[\normalfont\texttt{onecolumn}, \texttt{twocolumn}] \quad Instructs \LaTeX{} to typeset the
-          document in \wi{one column} or \wi{two column}s.
-
-        \item[\normalfont\texttt{twoside, oneside}] \quad Specifies whether double or
-          single sided output should be generated. The classes
-          \texttt{article} and \texttt{report} are \wi{single sided} and the
-          \texttt{book} class is \wi{double sided} by default. Note that this
-          option concerns the style of the document only. The option
-          \texttt{twoside} does \emph{not} tell the printer you use that it
-          should actually make a two-sided printout.
-        \item[\normalfont\texttt{landscape}] \quad Changes the layout of the document to print in landscape mode.
-        \item[\normalfont\texttt{openright, openany}] \quad Makes chapters begin either
-          only on right hand pages or on the next page available. This does
-          not work with the \texttt{article} class, as it does not know about
-          chapters. The \texttt{report} class by default starts chapters on
-          the next page available and the \texttt{book} class starts them on
-          right hand pages.
-
-      \end{description}
-    \end{FlushLeft}
-  \end{lined}
+  \begin{tabular}{@{}>{\RaggedRight}p{3cm}p{9cm}@{}}
+    \toprule
+    Options                                  & Description                   \\
+    \midrule
+    \cargv{10pt}, \cargv{11pt}, \cargv{12pt} & Sets the size
+    of the main font in the document. If no option is specified,
+    \cargv{10pt} is assumed.\index{document font size}\index{base
+    font size}                                                               \\
+    \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
+    The default size can be configured when installing \LaTeX. Besides that,
+    \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
+    \cargv{legalpaper} can be specified.\index{legal paper}\index{paper
+      size}\index{A4 paper}\index{letter paper}\index{A5 paper}\index{B5
+    paper}\index{executive paper}                                            \\
+    \cargv{fleqn}                            & Typesets
+    displayed formulae left-aligned instead of centred.                      \\
+    \cargv{leqno}                            & Places
+    the numbering of formulae on the left hand side instead of the right.    \\
+    \cargv{titlepage}, \cargv{notitlepage}   & Specifies
+    whether a new page should be started after the \wi{document title}
+    or not. The \cargv{article} class does not start a new page by
+    default, while \cargv{report} and \cargv{book} do.\index{title}          \\
+    \cargv{onecolumn}, \cargv{twocolumn}     & Instructs
+    \LaTeX{} to typeset the document in \wi{one column} or \wi{two column}s. \\
+    \cargv{twoside, oneside}                 & Specifies whether
+    double or single sided output should be generated. The classes
+    \cargv{article} and \cargv{report} are \wi{single sided} and the
+    \cargv{book} class is \wi{double sided} by default. Note that this
+    option concerns the style of the document only. The option
+    \cargv{twoside} does \emph{not} tell the printer you use that it
+    should actually make a two-sided printout.                               \\
+    \cargv{landscape}                        & Changes the
+    layout of the document to print in landscape mode.                       \\
+    \cargv{openright, openany}               & Makes chapters begin
+    either only on right hand pages or on the next page available. This does
+    not work with the \cargv{article} class, as it does not know about
+    chapters. The \cargv{report} class by default starts chapters on
+    the next page available and the \cargv{book} class starts them on
+    right hand pages.                                                        \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-Example: An input file for a \LaTeX{} document could start with the
+For example if an input file for a \LaTeX{} document starts with the
 line
 \begin{code}
-\ci{documentclass}\verb|[11pt,twoside,a4paper]{article}|
+\ci*{documentclass}[11pt, twoside, a4paper:vo ! article: vm]
 \end{code}
-which instructs \LaTeX{} to typeset the document as an \emph{article}
-with a base font size of \emph{eleven points}, and to produce a
-layout suitable for \emph{double sided} printing on \emph{A4 paper}.
+then it instructs \LaTeX{} to typeset the document as an article
+with a base font size of eleven points, and to produce a
+layout suitable for double sided printing on A4 paper.
 
 \subsection{Page Styles}
 
 \LaTeX{} supports three predefined \wi{header}/\wi{footer}
 combinations---so-called \wi{page style}s. The \emph{style} parameter
 of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
-  style!headings@\texttt{headings}}\index{headings@texttt{headings}}\index{page
+  style!headings@\texttt{headings}}\index{headings@\texttt{headings}}\index{page
   style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
 \begin{lscommand}
-  \ci{pagestyle}\verb|{|\emph{style}\verb|}|
+  \ci{pagestyle}[style]
 \end{lscommand}
-\noindent command defines which one to use.
-Table~\ref{pagestyle}
-lists the predefined page styles.
+command defines which one to use. Table~\ref{pagestyle} lists the predefined
+page styles.
 
-\begin{table}[!hbp]
+\begin{table}
   \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
-  \begin{lined}{\textwidth}
-    \begin{description}
-
-      \item[\normalfont\texttt{plain}] prints the page numbers on the bottom
-        of the page, in the middle of the footer. This is the default page
-        style.
-
-      \item[\normalfont\texttt{headings}] prints the current chapter heading
-        and the page number in the header on each page, while the footer
-        remains empty.  (This is the style used in this document)
-      \item[\normalfont\texttt{empty}] sets both the header and the footer
-        to be empty.
-
-    \end{description}
-  \end{lined}
+  \begin{tabular}{lp{8cm}}
+    \toprule
+    Style              & Description                                      \\
+    \midrule
+    \cargv{plain}      & prints the page numbers on the bottom
+    of the page, in the middle of the footer. This is the default page
+    style.                                                                \\
+    \cargv{headings}   & prints the current chapter heading
+    and the page number in the header on each page, while the footer
+    remains empty.  (This is the style used in this document)             \\
+    \cargv{empty}      & sets both the header and the footer
+    to be empty.                                                          \\
+    \cargv{myheadings} & similar to the \cargv{headings} style but leaves
+    the headers and footers empty allowing for them to be defined by
+    the author. A description of how to do this is in
+    Section~\ref{sec:fancy}.                                              \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-It is possible to change the page style of the current page
-with the command
+It is possible to change the page style of the current page with the command
 \begin{lscommand}
-  \ci{thispagestyle}\verb|{|\emph{style}\verb|}|
+  \ci{thispagestyle}[style]
 \end{lscommand}
 
 You may also control the style of the displayed page numbers. To change it use
@@ -247,8 +150,7 @@ the
 command, where \carg{style} is one of the styles presented in
 table~\ref{tb:numberings}.
 
-\begin{table}[htp]
-  \centering
+\begin{table}
   \caption{Possible argument of the \ci{pagenumbering} command.}\label{tb:numberings}
   \begin{tabular}{@{}ll@{}}
     \toprule
@@ -265,7 +167,6 @@ table~\ref{tb:numberings}.
 
 A description how to create your own headers and footers can be found in
 Section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
-
 
 \section{Line Breaking and Page Breaking}
 
@@ -299,10 +200,10 @@ additionally prohibits a page break after the forced line break.
 starts a new page.
 
 \begin{lscommand}
-  \ci{linebreak}\verb|[|\emph{n}\verb|]|,
-  \ci{nolinebreak}\verb|[|\emph{n}\verb|]|,
-  \ci{pagebreak}\verb|[|\emph{n}\verb|]|,
-  \ci{nopagebreak}\verb|[|\emph{n}\verb|]|
+  \ci*{linebreak}[n:o],
+  \ci*{nolinebreak}[n:o],
+  \ci*{pagebreak}[n:o],
+  \ci*{nopagebreak}[n:o]
 \end{lscommand}
 suggest places where a break may (or may not) happen.
 They enable the author to influence their
@@ -355,35 +256,29 @@ The command
 \begin{lscommand}
   \ci{hyphenation}\verb|{|\emph{word list}\verb|}|
 \end{lscommand}
-\noindent causes the words listed in the argument to be hyphenated only at
-the points marked by ``\verb|-|''.  The argument of the command should only
-contain words built from normal letters, or rather signs that are considered
-to be normal letters by \LaTeX{}. The hyphenation hints are
-stored for the language that is active when the hyphenation command
-occurs. This means that if you place a hyphenation command into the preamble
-of your document it will influence the English language hyphenation. If you
-place the command after the \verb|\begin{document}| and you are using some
-package for national language support like \pai{polyglossia}, then the hyphenation
-hints will be active in the language activated through \pai{polyglossia}.
+causes the words listed in the argument to be hyphenated only at the points
+marked by \enquote*{\texttt{-}}.  The argument of the command should only contain
+words built from normal letters, or rather signs that are considered to be
+normal letters by \LaTeX{}. The hyphenation hints are stored for the language
+that is active when the hyphenation command occurs. This means that if you
+place a hyphenation command into the preamble of your document it will
+influence the English language hyphenation. If you place the command after the
+\verb|\begin{document}| and you are using some package for national language
+support like \pai{polyglossia}, then the hyphenation hints will be active in
+the language activated through \pai{polyglossia}.
 
-The example below will allow ``hyphenation'' to be hyphenated as well as
-``Hyphenation'', and it prevents ``FORTRAN'', ``Fortran'' and ``fortran''
-from being hyphenated at all.  No special characters or symbols are allowed
-in the argument.
-
-Example:
+The example below will allow the word \enquote{locomotion} to be hyphenated as
+well as \enquote{Locomotion}, and it prevents \enquote{FORTRAN},
+\enquote{Fortran} and \enquote{fortran} from being hyphenated at all.  No
+special characters or symbols are allowed in the argument.
 \begin{code}
-\verb|\hyphenation{FORTRAN Hy-phen-a-tion}|
+\ci*{hyphenation}[FORTRAN Lo-co-mo-tion:vm]
 \end{code}
 
-The command \ci{-} inserts a discretionary hyphen into a word. This
-also becomes the only point hyphenation is allowed in this word. This
-command is especially useful for words containing special characters
-(e.g.\ accented characters), because \LaTeX{} does not automatically
-hyphenate words containing special characters.
-%\footnote{Unless you are using the new
-%\wi{DC fonts}.}.
-
+The command \ci{-} inserts a discretionary hyphen into a word. This also
+becomes the only point hyphenation is allowed in this word. This command is
+especially useful for words containing special characters, because \LaTeX{}
+does not automatically hyphenate words containing special characters.
 \begin{example}
 I think this is: su\-per\-cal\-%
 i\-frag\-i\-lis\-tic\-ex\-pi\-%
@@ -401,20 +296,15 @@ My phone number will change soon.
 It will be \mbox{0116 291 2319}.
 
 The parameter
-\mbox{\emph{filename}} should
+\mbox{[filename]} should
 contain the name of the file.
 \end{example}
-
-\ci{fbox} is similar to \ci{mbox}, but in addition there will
-be a visible box drawn around the content.
-
 
 \section{Ready-Made Strings}
 
 In some of the examples on the previous pages, you have seen
 some very simple \LaTeX{} commands for typesetting special
 text strings:
-
 \begin{center}
   \begin{tabular}{@{}lll@{}}
     \toprule
@@ -428,140 +318,106 @@ text strings:
   \end{tabular}
 \end{center}
 
-\section{Special Characters and Symbols}
+\section{Dashes and Hyphens}
 
-\subsection{Quotation Marks}
-
-You should \emph{not} use the \verb|"| for \wi{quotation marks}%
-\index{""@\texttt{""}} as you would when using a WYSIWYG program.  In publishing
-there are special opening and closing quotation marks.  In \LaTeX{},
-use two~\textasciigrave~(grave accent) for opening quotation marks and
-two~\textquotesingle~(vertical quote) for closing quotation marks. For single
-quotes you use just one of each.
-\begin{example}
-``Please press the `x' key.''
-\end{example}
-Yes I know the rendering is not ideal, it's really a back-tick or grave accent
-(\textasciigrave) for
-opening quotes and vertical quote (\textquotesingle) for closing, despite what the font chosen might suggest.
-
-This is not to indicate that we never type \verb|"|. One reason to use this is
-when you need to display a letter with an umlaut. We cover displaying
-special characters such as these in Section 2.4.9.
-\subsection{Dashes and Hyphens}
-
-\LaTeX{} knows four kinds of \wi{dash}es. Access three of
-them with different number of consecutive dashes. The fourth sign
-is actually not a dash at all---it is the mathematical minus sign:\index{-}%
-\index{--}\index{---}\index{-@$-$}\index{mathematical!minus}
-
+\LaTeX{} knows four kinds of \wi{dash}es. Access three of them with different
+number of consecutive dashes. The fourth sign is actually not a dash at
+all---it is the mathematical minus sign. It is typed automatically when inside
+math mode which is described later in Chatper~\ref{chap:math}.
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
-yes---or no? \\
-$0$, $1$ and $-1$
-\end{example}
-The names for these dashes are:
-`-' \wi{hyphen}, `--' \wi{en-dash}, `---' \wi{em-dash} and
-`$-$' \wi{minus sign}.
-
-\subsection{Tilde (\(\sim\))}%
-\index{URL link}\index{tilde}
-A character often seen in web addresses is the tilde. To generate
-this in \LaTeX{} use \verb|\~{}| but the result (\~{}) is not really
-what you want. Try this instead:
-
-\begin{example}
-http://www.rich.edu/\~{}bush \\
-http://www.clever.edu/$\sim$demo
+yes---or no?
 \end{example}
 
-\subsection{Slash (/)}%
-\index{Slash}
-In order to typeset a slash between two words, one can simply type e.g.\
+The names for these dashes are: `-' \wi{hyphen}\index{-}, `--'
+\wi{en-dash}\index{--} and `---' \wi{em-dash}\index{---}. Hyphens are used when
+writing compound words (and inserted automatically by \LaTeX{} when splitting a
+single words), en-dashes are used for writing a range of numbers and em-dashes
+are used to mark an interruption in speech or an abrupt change of thought.
+
+\section{Abstract}
+
+In scientific publications it is customary to start with an abstract which
+gives the reader a quick overview of what to expect. \LaTeX{} provides the
+\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
+in documents typeset with the article document class.
+
+\begin{example}[standalone, paperheight=3.5cm]
+\begin{document}%!hide
+\begin{abstract}
+  This paper will talk about abstracts.
+\end{abstract}
+
+Abstracts are very important \ldots
+\end{document}%!hide
+\end{example}
+
+\section{Slash (/)}\index{Slash}
+
+In order to typeset a slash between two words, one can simply type for example
 \texttt{read/write}, but this makes \LaTeX{} treat the two words as one.
-Hyphenation is disabled for these two words, so there may be `overfull'
-errors.  To overcome this, use \ci{slash}.  For example type
-`\verb|read\slash write|' which allows hyphenation.  Normal `\texttt{/}'
-character may be still used for inline fractions. Typesetting units,
-such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be described in
-Section~\ref{sec:units}.
+Hyphenation is disabled for these two words, so there may be
+\enquote*{overfull} errors.  To overcome this, use \ci{slash}.  For example
+type
+\begin{code}
+  \verb|read\slash write|
+\end{code}
+which allows hyphenation.  Normal
+\enquote*{\texttt{/}} character may be still used for inline fractions.
+Typesetting units, such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be
+described in Section~\ref{sec:units}.
 
-\subsection{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
+\section{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
 
 When writing about money these days, you need the Euro symbol. Many current
-fonts contain a Euro symbol. After loading the \pai{textcomp} package in the preamble of your document
-\begin{lscommand}
-  \ci{usepackage}\verb|{textcomp}|
-\end{lscommand}
-use the command
+fonts contain a Euro symbol. To typeset it use the command
 \begin{lscommand}
   \ci{texteuro}
 \end{lscommand}
-to access it.
 
 If your font does not provide its own Euro symbol or if you do not like the
 font's Euro symbol, you have two more choices:
 
 First the \pai{eurosym} package. It provides the official Euro symbol:
 \begin{lscommand}
-  \ci{usepackage}\verb|[|\emph{official}\verb|]{eurosym}|
+  \ci{usepackage}[official][eurosym]
 \end{lscommand}
 If you prefer a Euro symbol that matches your font, use the option
-\texttt{gen} in place of the \texttt{official} option.
+\texttt{gen} in place of the \texttt{official} option. Comparison of the
+available Euro symbols can be fount in Table~\ref{eurosymb}.
 
-%If the Adobe Eurofonts are installed on your system (they are available for
-%free from \url{ftp://ftp.adobe.com/pub/adobe/type/win/all}) you can use
-%either the package \pai{europs} and the command \ci{EUR} (for a Euro symbol
-%that matches the current font).
-% does not work
-% or the package
-% \pai{eurosans} and the command \ci{euro} (for the ``official Euro'').
-
-%The \pai{marvosym} package also provides many different symbols, including a
-%Euro, under the name \ci{EURtm}. Its disadvantage is that it does not provide
-%slanted and bold variants of the Euro symbol.
-
-\begin{table}[!htbp]
-  \centering
+\begin{table}
   \caption[Available Euro symbols]{The appearance of available Euro symbols based
     on the loaded package and the used font.}\label{eurosymb}
   \begin{tabular}{@{}llccc@{}}
     \toprule
-                     &                               & \multicolumn{3}{c}{Symbol used}                                             \\
+                   &                               & \multicolumn{3}{c}{Symbol used}                                             \\
     \cmidrule(l){3-5}
-    Package          & Command                       & Roman                           & Sans serif                    & Monospace \\
+    Package        & Command                       & Roman                           & Sans serif                    & Monospace \\
     \midrule
-    LM+textcomp      & \ci{texteuro}                 & \huge\texteuro{}                & \huge\sffamily\texteuro{}
-                     & \huge\ttfamily\texteuro{}                                                                                   \\
-    eurosym          & \ci{euro}                     & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
-                     & \huge\ttfamily\officialeuro{}                                                                               \\
-    $[$gen$]$eurosym & \ci{euro}                     & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
-                     & \huge\ttfamily\geneuro{}                                                                                    \\
-    %europs       &\verb+\EUR + & \huge\EURtm        &\huge\EURhv
-    %                                                &\huge\EURcr\\
-    %eurosans     &\verb+\euro+ & \huge\EUROSANS  &\huge\sffamily\EUROSANS
-    %                                             & \huge\ttfamily\EUROSANS \\
-    %marvosym     &\verb+\EURtm+  & \huge\mvchr101  &\huge\mvchr101
-    %                                               &\huge\mvchr101
+    \emph{none}    & \ci{texteuro}                 & \huge\texteuro{}                & \huge\sffamily\texteuro{}
+                   & \huge\ttfamily\texteuro{}                                                                                   \\
+    eurosym        & \ci{euro}                     & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
+                   & \huge\ttfamily\officialeuro{}                                                                               \\
+    {[gen]eurosym} & \ci{euro}                     & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
+                   & \huge\ttfamily\geneuro{}                                                                                    \\
     \bottomrule
   \end{tabular}
   \medskip
 \end{table}
 
-\subsection{Ellipsis (\ldots)}
+\section{Ellipsis (\ldots)}
 
 On a typewriter, a \wi{comma} or a \wi{period} takes the same amount of
 space as any other letter. In book printing, these characters occupy
 only a little space and are set very close to the preceding letter.
-Therefore, entering `\wi{ellipsis}' by just typing three
+Therefore, entering \enquote*{\wi{ellipsis}} by just typing three
 dots would produce the wrong result. Instead, there is a special
 command for these dots. It is called
-
 \begin{lscommand}
-  \ci{ldots} (low dots)
-\end{lscommand}%
-\index{...@\ldots}
+  \ci{ldots} (low dots)\index{...@\ldots}
+\end{lscommand}
 
 \begin{chktexignore}
   \begin{example}
@@ -570,13 +426,13 @@ New York, Tokyo, Budapest, \ldots
 \end{example}
 \end{chktexignore}
 
-\subsection{Ligatures}
+\section{Ligatures}
 
 Some letter combinations are typeset not just by setting the
 different letters one after the other, but by actually using special
 symbols.
 \begin{code}
-{\large ff fi fl ffi\ldots}\quad
+{\large ff fi fl ffi \ldots}\quad
 instead of\quad {\large f\mbox{}f f\mbox{}i f\mbox{}l f\mbox{}f\mbox{}i \ldots}
 \end{code}
 These so-called \wi{ligature}s can be prohibited by inserting an \ci{mbox}\verb|{}|
@@ -584,7 +440,8 @@ between the two letters in question. This might be necessary with
 words built from two words.
 
 \begin{example}
-\Large Not shelfful\\
+\Large %!hide
+Not shelfful\\
 but shelf\mbox{}ful
 \end{example}
 
@@ -609,7 +466,7 @@ Stra\ss e
   \caption{Accents and Special Characters.}\label{accents}
   \begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
     \toprule
-    Code         & Effect       & Code          & Effect       & Code & Effect    & Code & Effect \\
+    Code         & Result       & Code          & Result       & Code & Result    & Code & Result \\
     \midrule
     \mstA{\`o}   & \mstA{\'o}   & \mstA{\^o}    & \mstA{\~o}                                      \\
     \mstA{\=o}   & \mstA{\.o}   & \mstA{\"o}    & \mstB{\c}{c}                                    \\[6pt]
@@ -916,13 +773,12 @@ marks. If a period follows an uppercase letter, this is not taken as a
 sentence ending, since periods after uppercase letters normally occur in
 abbreviations.
 
-Any exception from these assumptions has to be specified by the
-author. A backslash in front of a space generates a space that will
-not be enlarged. A tilde~`\verb|~|' character generates a space that cannot be
-enlarged and additionally prohibits a line break. The command
-\verb|\@| in front of a period specifies that this period terminates a
-sentence even when it follows an uppercase letter.
-\cih{"@}\index{~@ \verb.~.}\index{tilde@tilde ( \verb.~.)}% chktex 18
+Any exception from these assumptions has to be specified by the author. A
+backslash in front of a space generates a space that will not be enlarged. A
+tilde~\enquote*{\ai{~}} character generates a non-breaking space (prohibits a
+line break). The command \ci{@} in front of a period specifies that this
+period terminates a sentence even when it follows an uppercase letter.
+\cih{"@}\index{~@ \verb.~.}\index{tilde@tilde (\verb.~.)}% chktex 18
 \index{., space after}
 
 \begin{example}
@@ -935,10 +791,9 @@ The additional space after periods can be disabled with the command
 \begin{lscommand}
   \ci{frenchspacing}
 \end{lscommand}
-\noindent which tells \LaTeX{} \emph{not} to insert more space after a
-period than after an ordinary character. This is very common in
-non-English languages, except bibliographies. If you use
-\ci{frenchspacing}, the command \verb|\@| is not necessary.
+which tells \LaTeX{} \emph{not} to insert more space after a period than after
+an ordinary character. This is very common in non-English languages
+(\pai{polyglossia} sets it automatically based on the main language).
 
 \section{Titles, Chapters, and Sections}
 
@@ -951,23 +806,23 @@ The following sectioning commands are available for the
 \texttt{article} class: \nopagebreak
 
 \begin{lscommand}
-  \ci{section}\verb|{...}|\\
-  \ci{subsection}\verb|{...}|\\
-  \ci{subsubsection}\verb|{...}|\\
-  \ci{paragraph}\verb|{...}|\\
-  \ci{subparagraph}\verb|{...}|
+  \ci{section}[title]\\
+  \ci{subsection}[title]\\
+  \ci{subsubsection}[title]\\
+  \ci{paragraph}[title]\\
+  \ci{subparagraph}[title]
 \end{lscommand}
 
 If you want to split your document into parts without influencing the
 section or chapter numbering use
 \begin{lscommand}
-  \ci{part}\verb|{...}|
+  \ci{part}[title]
 \end{lscommand}
 
 When you work with the \texttt{report} or \texttt{book} class,
 an additional top-level sectioning command becomes available
 \begin{lscommand}
-  \ci{chapter}\verb|{...}|
+  \ci{chapter}[title]
 \end{lscommand}
 
 As the \texttt{article} class does not know about chapters, it is quite easy
@@ -975,32 +830,19 @@ to add articles as chapters to a book.
 The spacing between sections, the numbering and the font size of the
 titles will be set automatically by \LaTeX.
 
-Two of the sectioning commands are a bit special:
-\begin{itemize}
-  \item The \ci{part} command does
-        not influence the numbering sequence of chapters.
-  \item The \ci{appendix} command does not take an argument. It just
-        changes the chapter numbering to letters.\footnote{For the article
-          style it changes the section numbering.}
-\end{itemize}
-
 \LaTeX{} creates a table of contents by taking the section headings
 and page numbers from the last compile cycle of the document. The command
 \begin{lscommand}
   \ci{tableofcontents}
 \end{lscommand}
-\noindent expands to a table of contents at the place it
-is issued. A new
-document has to be compiled (``\LaTeX{}ed'') twice to get a
-correct \wi{table of contents}. Sometimes it might be
-necessary to compile the document a third time. \LaTeX{} will tell you
-when this is necessary.
+\noindent expands to a table of contents at the place it is issued. A new
+document has to be compiled twice to get a correct \wi{table of contents}.
+Sometimes it might be necessary to compile the document a third time. \LaTeX{}
+will tell you when this is necessary.
 
-All sectioning commands listed above also exist as ``starred''
-versions.  A ``starred'' version of a command is built by adding a
-star \verb|*| after the command name.  This generates section headings
-that do not show up in the table of contents and are not
-numbered. The command \verb|\section{Help}|, for example, would become
+All sectioning commands listed above also exist as starred versions. This
+generates section headings that do not show up in the table of contents and are
+not numbered. The command \verb|\section{Help}|, for example, would become
 \verb|\section*{Help}|.
 
 Normally the section headings show up in the table of contents exactly
@@ -1009,10 +851,16 @@ because the heading is too long to fit into the table of contents. The
 entry for the table of contents can then be specified as an
 optional argument in front of the actual heading.
 
-\begin{code}
-\verb|\chapter[Title for the table of contents]{A long|\\
-\verb|    and especially boring title, shown in the text}|
-\end{code}
+\begin{example}[standalone, paperwidth=7cm,paperheight=5cm]
+\begin{document}%!hide
+\tableofcontents
+
+\section[Title for the
+  table of contents]{A long 
+  and especially boring title,
+  shown in the text}
+\end{document}%!hide
+\end{example}
 
 The \wi{title} of the whole document is generated by issuing a
 \begin{lscommand}
@@ -1020,35 +868,35 @@ The \wi{title} of the whole document is generated by issuing a
 \end{lscommand}
 \noindent command. The contents of the title have to be defined by the commands
 \begin{lscommand}
-  \ci{title}\verb|{...}|, \ci{author}\verb|{...}|
-  and optionally \ci{date}\verb|{...}|
+  \ci{title}[title], \ci{author}[author]
+  and optionally \ci{date}[date]
 \end{lscommand}
 \noindent before calling \verb|\maketitle|. In the argument to \ci{author}, you can supply several names separated by \ci{and} commands.
 
 An example of some of the commands mentioned above can be found in
 Figure~\ref{document} on page~\pageref{document}.
 
-Apart from the sectioning commands explained above, \LaTeXe{}
-introduced three additional commands for use with the \verb|book| class.
-They are useful for dividing your publication. The commands alter
-chapter headings and page numbering to work as you would expect in
-a book:
+Apart from the sectioning commands explained above, \LaTeX{} defines four
+additional commands for use with the \texttt{book} class. They are useful for
+dividing your publication. The commands alter chapter headings and page
+numbering to work as you would expect in a book:
 \begin{description}
   \item[\ci{frontmatter}] should be the very first command after
     the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
     numerals and sections will be non-enumerated as if you were using
-    the starred sectioning commands (e.g.\ \verb|\chapter*{Preface}|)
+    the starred sectioning commands (for example \verb|\chapter*{Preface}|)
     but the sections will still show up in the table of contents.
   \item[\ci{mainmatter}] comes right before the first chapter of
     the book. It turns on Arabic page numbering and restarts the page
     counter.
-  \item[\ci{appendix}] marks the start of additional material in your
-    book. After this command chapters will be numbered with letters.
+  \item[\ci{appendix}] marks the start of additional material in your book.
+    After this command chapters will be numbered with letters. Unlike others
+    this method can also be used inside articles. In this case it changes the
+    numbering of sections.
   \item[\ci{backmatter}] should be inserted before the very last items
     in your book, such as the bibliography and the index. In the standard
     document classes, this has no visual effect.
 \end{description}
-
 
 \section{Cross References}
 
@@ -1056,41 +904,33 @@ In books, reports and articles, there are often
 \wi{cross-references} to figures, tables and special segments of text.
 \LaTeX{} provides the following commands for cross referencing
 \begin{lscommand}
-  \ci{label}\verb|{|\emph{marker}\verb|}|, \ci{ref}\verb|{|\emph{marker}\verb|}|
-  and \ci{pageref}\verb|{|\emph{marker}\verb|}|
+  \ci{label}[marker], \ci{ref}[marker]
+  and \ci{pageref}[marker]
 \end{lscommand}
-\noindent where \emph{marker} is an identifier chosen by the user. \LaTeX{}
-replaces \verb|\ref| by the number of the section, subsection, figure,
-table, or theorem after which the corresponding \verb|\label| command
-was issued. \verb|\pageref| prints the page number of the
-page where the \verb|\label| command occurred.\footnote{Note that these commands
-  are not aware of what they refer to. \ci{label} just saves the last
-  automatically generated number.} As with section titles and page numbers for the table of contents,
-the numbers from the previous compile cycle are used.
+where \carg{marker} is an identifier chosen by the user. \LaTeX{} replaces
+\ci{ref} by the number of the section, subsection, figure, table, or theorem
+after which the corresponding \ci{label} command was issued. \ci{pageref}
+prints the page number of the page where the \ci{label} command
+occurred.\footnote{Note that these commands are not aware of what they refer
+  to. \ci{label} just saves the last automatically generated number.} As with
+section titles and page numbers for the table of contents, the numbers from the
+previous compile cycle are used.
 
-
-\begin{example}
+\begin{example}[examplewidth=0.4\textwidth]
 A reference to this subsection%
 \label{sec:this} looks like:
-``see Section~\ref{sec:this} on
-page~\pageref{sec:this}.''
+\enquote{see Section~\ref{sec:this}
+on page~\pageref{sec:this}.}
 \end{example}
 
 \section{Footnotes}
 With the command
 \begin{lscommand}
-  \ci{footnote}\verb|{|\emph{footnote text}\verb|}|
+  \ci{footnote}[footnote text]
 \end{lscommand}
-\noindent a footnote is printed at the foot of the current page.  Footnotes
-should always be put\footnote{``put'' is one of the most common
-  English words.} after the word or sentence they refer to. Footnotes
-referring to a sentence or part of it should therefore be put after
-the comma or period.\footnote{Note that footnotes
-  distract the reader from the main body of your document. After all,
-  everybody reads the footnotes---we are a curious species, so why not
-  just integrate everything you want to say into the body of the
-  document?\footnotemark}
-\footnotetext{A guidepost doesn't necessarily go where it's pointing to \smiley.}
+a footnote is printed at the foot of the current page.  Footnotes should always
+be put after the word or sentence they refer to. Footnotes referring to a
+sentence or part of it should therefore be put after the comma or period.
 
 \begin{example}
 Footnotes\footnote{This is
@@ -1098,54 +938,7 @@ Footnotes\footnote{This is
 by people using \LaTeX.
 \end{example}
 
-\section{Emphasized Words}
-
-If a text is typed using a typewriter, important words are
-\texttt{emphasized by \underline{underlining} them.}
-\begin{lscommand}
-  \ci{underline}\verb|{|\emph{text}\verb|}|
-\end{lscommand}
-In printed books,
-however, words are emphasized by typesetting them in an \emph{italic}
-font.  As an author you shouldn't care either way. The important bit is, to tell \LaTeX{} that a
-particular bit of text is important and should be emphasized. Hence the command
-\begin{lscommand}
-  \ci{emph}\verb|{|\emph{text}\verb|}|
-\end{lscommand}
-\noindent to emphasize text. What the command actually does with
-its argument depends on the context:
-
-\begin{example}
-\emph{If you use
-  emphasizing inside a piece
-  of emphasized text, then
-  \LaTeX{} uses the
-  \emph{normal} font for
-  emphasizing.}
-\end{example}
-
-If you want control over font and font size, Section~\ref{sec:fontsize} on
-page~\pageref{sec:fontsize} might provide some inspiration.
-
-\section{Environments}\label{env}
-
-% To typeset special purpose text, \LaTeX{} defines many different
-% \wi{environment}s for all sorts of formatting:
-\begin{lscommand}
-  \ci{begin}\verb|{|\emph{environment}\verb|}|\quad
-  \emph{text}\quad
-  \ci{end}\verb|{|\emph{environment}\verb|}|
-\end{lscommand}
-\noindent Where \emph{environment} is the name of the environment. Environments can be
-nested within each other as long as the correct nesting order is
-maintained.
-\begin{code}
-\verb|\begin{aaa}...\begin{bbb}...\end{bbb}...\end{aaa}|
-\end{code}
-
-\noindent In the following sections all important environments are explained.
-
-\subsection{Itemize, Enumerate, and Description}
+\section{Lists}
 
 The \ei{itemize} environment is suitable for simple lists, the
 \ei{enumerate} environment for enumerated lists, and the
@@ -1173,15 +966,15 @@ in a list.
 \end{enumerate}
 \end{example}
 
-\subsection{Non-Justified Text}\label{sec:ragged}
+\section{Non-Justified Text}\label{sec:ragged}
 
 By default \LaTeX{} justifies text inside a document. While this is desirable
 for the main text there may be occasions where you want the text to be left- or
 \wi{right-aligned}\index{left-aligned}. This is where the \pai*{ragged2e}
 package is useful. It defines environments
 \begin{lscommand}
-  \ei{FlushLeft}
-  \ei{FlushRight}
+  \ei{FlushLeft} \\
+  \ei{FlushRight} \\
   \ei{Center}
 \end{lscommand}
 which allow you to achieve left-aligned, right-aligned and centered text.
@@ -1208,37 +1001,176 @@ which allow you to achieve left-aligned, right-aligned and centered text.
 \end{Center}
 \end{example}
 
-\subsection{Quote, Quotation, and Verse}
+\section{Quotations}\label{sec:csquotes}
 
-The \ei{quote} environment is useful for quotes, important phrases and
-examples.
-
+You should \emph{not} use the \enquote*{\texttt{"}} for %chktex 18
+\wi{quotation marks}\index{""@\texttt{""}} for quotation as you would when
+using a WYSIWYG program.  In publishing there are special opening and closing
+quotation marks. In \LaTeX{}, the \pai*{csquotes} package provides the
+\begin{lscommand}
+  \ci{enquote}[text]
+\end{lscommand}
+command that will automatically enclose the \carg{text} within the right
+quotes.
 \begin{example}
-A typographical rule of thumb
-for the line length is:
-\begin{quote}
-On average, no line should
-be longer than 66 characters.
-\end{quote}
-This is why \LaTeX{} pages have
-such large borders by default
-and also why multicolumn print
-is used in newspapers.
+\enquote{Please press
+  the \enquote{x} key.}
 \end{example}
 
-There are two similar environments: the \ei{quotation} and the
-\ei{verse} environments. The \texttt{quotation} environment is useful
-for longer quotes going over several paragraphs, because it indents the
-first line of each paragraph. The \texttt{verse} environment is useful for poems
-where the line breaks are important. The lines are separated by
-issuing a \ci{\bs} at the end of a line and an empty line after each
-verse.
+If you want to skip directly to inner form of quotation use starred version of
+the command
+\begin{example}
+The \enquote*{x} key is here.
+\end{example}
 
+\subsection{Formal Quotes}
+
+The above commands are useful when you want to use for example scare quotes. If
+you are actually quoting someone else it is better to use the \ci{textquote}
+command. It accepts an optional argument with the source of the quote.
+\begin{example}
+\textquote[A.~Einstein]{Why
+  is it nobody understands
+  me and everybody likes me?}
+\end{example}
+
+For longer quotations you may want to use the \ei{displayquote} environment.
+\begin{example}
+As Einstein once said
+\begin{displayquote}[A.~Einstein]
+  Whoever undertakes to
+  set himself up as a judge
+  of Truth and Knowledge is
+  shipwrecked by the laughter
+  of the gods.
+\end{displayquote}
+\end{example}
+
+In academic writing there may be strict rules present when quotes should be
+typeset inline and when they should be typeset in display style based on their
+length. This can be achieved automatically using the \ci{blockquote} command.
+It will scan the text inside and typeset the quote accordingly.
+\begin{example}[examplewidth=0.4\textwidth]
+\csdisplaytrue%!hide
+\blockquote[Me]{A short quote}
+
+\blockquote[Also Me]{A very long
+  quote that spans over multiple
+  lines and should be typeset in
+  display quote style
+  according to my publisher.}
+\end{example}
+By default the \ci{blockquote} will switch to display quote style if the quote
+spans more than three lines or contains more than one paragraph. The number of
+lines may be changes using the \cargv{threshold} package options. If you prefer
+to count words instead of lines you may change the \cargv{thresholdtype} from
+lines to words and set \cargv{threshold} accordingly. If you want to ignore
+paragarphs and rely only on automatic lines\slash{}words counting, set the
+\cargv{parthreshold} to false.
+
+The quote attribution shown in the previous examples is especially useful when
+combined with bibliography commands described later in
+Chapter~\ref{chap:bibliography}.
+
+\subsection{Foreign Quotes}
+
+The \pai{csquotes} has excellent integration with \pai{polyglossia}, thus
+simply changing the main language document automatically adapts the quotation
+marks used.
+\begin{example}
+%!showbegin !hide
+% In preamble
+\setmainlanguage{french}
+% ...
+%!showend !hide
+\setquotestyle{french} %!hide
+
+\textquote[Antoine de
+Saint Exupéry]{Toute
+nation est égoïste.
+Toute nation considère
+son égoïsme comme sacré.}
+\end{example}
+
+If you load the package with \cargv{autostyle} option it will also adapt the
+quotation marks used based on the language of the surrounding text.
+\begin{example}
+%!showbegin !hide
+% In preamble
+\usepackage[autostyle]{csquotes}
+% ...
+%!showend !hide
+
+\enquote{English quote}
+
+\begin{german}
+  \enquote{Deutsches zitat}
+\end{german}
+\end{example}
+
+If you are often quoting in foreign language you may get tired of first
+switching to a given language using a polyglossia command and then using
+\ci{textquote}. In order to avoid it, \pai{csquotes} defines additional
+\ci{foreignquote} command that take the language as its first language.
+\begingroup
+\setmonofont{cmuntt.otf}
+\begin{example}
+As Dostoyevsky once wrote
+\foreignquote{russian}{%
+  Мир спасёт красота.}
+%!hidebegin
+% For some reason \foreignquote doesn't like my example environment
+% and this is needed
+\textrussian{}
+\end{example}
+\endgroup
+The commands \ci{foreigntextquote}, \ci{foreignblockquote} and environment
+\ei{foreigndisplayquote} are also available and work analogously to the ones
+described in previous section.
+
+Some languages have multiple variants of quotes used. To change the variant
+used by the given language add option \cargv{\carg{language}=\carg{variant}}
+when loading the \pai{csquotes} package.
+\begin{example}
+%!showbegin !hide
+% In preamble
+\usepackage[
+  autostyle,
+  german=guillemets,
+]{csquotes}
+% ...
+%!showend !hide
+
+\setquotestyle[guillemets]{german} %!hide
+\foreignquote{german}{%
+  Deutsches zitat}
+\end{example}
+
+\subsection{Long Quotations and Poetry}
+\LaTeX{} provides two additional environments: the \ei{quotation} and the
+\ei{verse} environments. The \texttt{quotation} environment is useful for
+longer quotes going over several paragraphs, because it indents the first line
+of each paragraph. The \texttt{verse} environment is useful for poems where the
+line breaks are important. The lines are separated by issuing a \ci{\bs} at the
+end of a line and an empty line after each verse. Note that this environments
+are not defined by \pai{csquotes} so they do not accept optional argument with
+attribution and are not context sensitive.
+
+\begin{example}
+I wanted to quote my
+favorite speech:
+\begin{quotation}
+  This is a very
+  long speech.
+
+  It spans over multiple
+  paragarphs.
+\end{quotation}
+\end{example}
 
 \begin{example}
 I know only one English poem by
 heart. It is about Humpty Dumpty.
-\begin{FlushLeft}
 \begin{verse}
 Humpty Dumpty sat on a wall:\\
 Humpty Dumpty had a great fall.\\
@@ -1247,69 +1179,78 @@ the King's men\\
 Couldn't put Humpty together
 again.
 \end{verse}
-\end{FlushLeft}
 \end{example}
 
-\subsection{Abstract}
+\section{Printing Verbatim}
 
-In scientific publications it is customary to start with an abstract which
-gives the reader a quick overview of what to expect. \LaTeX{} provides the
-\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
-in documents typeset with the article document class.
+When writing a book about \LaTeX{}, you often need to insert short code
+snippets like this \verb|\LaTeX{}|. While you could escape all the characters,
+this would quickly become rather tiresome, especially for longer pieces of
+code. This can be done much more easily by using the \ci{verb} command.
 
-\newenvironment{abstract}%
-{\begin{center}\begin{small}\begin{minipage}{0.8\textwidth}}%
-        {\end{minipage}\end{small}\end{center}}
-\begin{example}
-\begin{abstract}
-The abstract abstract.
-\end{abstract}
-\end{example}
-
-\subsection{Printing Verbatim}
+The \ci{verb} command is unusual in that it does not use group for gettings its
+first argument. Instead you pass it between a chosen delimiters that can be
+any character except for letters, \verb|*| or space.
 
 Text that is enclosed between \verb|\begin{|\ei{verbatim}\verb|}| and
-\verb|\end{verbatim}| will be directly printed, as if typed on a
-typewriter, with all line breaks and spaces, without any \LaTeX{}
-command being executed.
-
-Within a paragraph, similar behavior can be accessed with
+\verb|\end{verbatim}| will be directly printed, as if typed on a typewriter,
+with all line breaks and spaces, without any \LaTeX{} command being executed.
+For example to use \cargv{|} (which is typically used) as a delimiter you type
 \begin{lscommand}
-  \ci{verb}\verb|+|\emph{text}\verb|+|
+  \ci{verb}\verb+|+\carg{text}\verb+|+
 \end{lscommand}
-\noindent The \verb|+| is just an example of a delimiter character. Use any
-character except letters, \verb|*| or space. Many \LaTeX{} examples in this
-booklet are typeset with this command.
 
 \begin{example}
-The \verb|\ldots| command \ldots
+Use \verb|\LaTeX{}| to 
+print \LaTeX.
 
+We normally use \verb+|+ but
+when it's not available we
+use \verb|+| to delimit the
+argument of the \verb|\verb|
+command.
+\end{example}
+
+The starred version of the \ci{verb} command replace spaces with the
+\enquote*{\textvisiblespace{}} symbol.
+
+\begin{chktexignore}
+\begin{example}
+\verb*|\TeX user| will
+produce \TeX user.
+
+To get proper spacing use
+\verb*|\TeX{} user|.
+
+Several spaces are treated
+by \LaTeX{} as one space, 
+so \verb*|a     b| will
+produce a     b.
+\end{example}
+\end{chktexignore}
+
+For longer text you may want to use the \ei{verbatim} environment from the
+\pai*{verbatim} package.
+\begin{example}
 \begin{verbatim}
-10 PRINT "HELLO WORLD ";
-20 GOTO 10
+\documentclass{article}
+
+\begin{document}
+Small is beautiful.
+\end{document}
 \end{verbatim}
 \end{example}
+Its starred version will analogously draw the \enquote*{\textvisiblespace}
+symbol instead of spaces.
 
-\begin{example}
-\begin{verbatim*}
-the starred version of
-the      verbatim
-environment emphasizes
-the spaces   in the text
-\end{verbatim*}
-\end{example}
+The \texttt{verbatim} environment and the \ci{verb} command may not be used
+within parameters of other commands, so the below code will result in an error
+\begin{verbatim}
+  Footnote\footnote{\verb|abc| cannot be used here.}
+\end{verbatim}
+If this is a problem for you look at the \pai*{fancyvrb} package.
 
-The \ci{verb} command can be used in a similar fashion with a star:
-
-\begin{example}
-\verb*|like   this :-) |
-\end{example}
-
-The \texttt{verbatim} environment and the \verb|\verb| command may not be used
-within parameters of other commands.
-
-
-\subsection{Tables}\label{sec:tables}
+\section{Tables}\label{sec:tables}
 
 In \LaTeX{} the environment to typeset tables (and more) is called
 \ei{tabular}. While it can be used on its own, the resulting table layouts look
@@ -1325,7 +1266,7 @@ package documentation~\cite{pack:booktabs} contains guidelines on typesetting
 professional-looking tables. We have taken these guidelines to heart when
 writing this booklet. You will find some of them in this section.
 
-\subsubsection{Basic tables}\label{foo}
+\subsection{Basic Tables}
 
 The environment \ei{tabular} has the following form
 \begin{lscommand}
@@ -1378,7 +1319,6 @@ text
 text
 \end{example}
 
-
 What we have shown so far allows aligning some items in rows and columns,
 but real tables need visible headings. To insert them use the commands
 \ci{toprule}, \ci{midrule} and \ci{bottomrule} from the \pai{booktabs} package.
@@ -1390,7 +1330,7 @@ usually the default settings are just fine.
   Alignment & Letter & Niceness  \\
   \midrule
   Left      & l      & Very nice \\
-  Centre     & c      & Very nice \\
+  Centre    & c      & Very nice \\
   Right     & r      & Very nice \\
   \bottomrule
 \end{tabular}
@@ -1562,7 +1502,7 @@ decimal point. A way to do this (and more) is described in
 Section~\ref{sec:sitables}. The section also contains some guidelines about
 typesetting numerical data in tables.
 
-\subsubsection{Long tables}
+\subsection{Long Tables}
 
 Material typeset with the tabular environment always stays together on one
 page. This poses a problem for especially long tables. If your table is not
@@ -1731,7 +1671,7 @@ Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
 the \ei{longtable} environment, the table may get very complicated and \LaTeX{}
 will then need several passes to properly calculate the column widths.
 
-\subsubsection{Advanced tables and non-tables}
+\subsection{Advanced Tables and Non-Tables}
 
 In regular text you can specify the amount of space between two lines as an
 optional argument to the \ci{\textbackslash} command. Can the same be done
@@ -1879,84 +1819,169 @@ command which draws horizontal line that spans only over the specified rows.
 \end{example}
 \end{chktexignore}
 
-\section{Including Graphics and Images}\label{eps}
+\section{Including Graphics and Images}\label{sec:images}
 
-As explained in the previous section \LaTeX{} provides the facilities to work with floating bodies,
-such as images or graphics, with the \texttt{figure} and
-\texttt{table} environments.
+\LaTeX{} itself does not provide facilities to include images. In order to so
+it is necessary to use the \pai*{graphicx} package. It provides the
+\begin{lscommand}
+  \ci{includegraphics}[options][file]
+\end{lscommand}
+command that can be used to include the \carg{file} in the
+document.\footnote{In the examples below we are using images from the
+  \pai*{mwe} package that should be installed with your \LaTeX{} distribution.}
+\begin{example}
+Here is an image:
+%!showbegin !hide
+\includegraphics{example-image}
+%!showend !hide
+\includegraphics[width=3cm]{example-image}%!hide
+\end{example}
+The file may be either PDF, PNG or JPEG\@. If you omit the extension then
+\LaTeX{} will try the following in order: \eei{.pdf}, \eei{.png}, \eei{.jpg},
+\eei{.mps}, \eei{.jpeg}, \eei{.jbig2}, \eei{.jb2}. Note that if your filename
+contains dots (other than the extension dot) then its basename has to be put in
+curly braces like so:
+\begin{code}
+  \verb|\includegraphics{{image.with.dots}.jpg}|
+\end{code}
 
-A good set of commands for inclusion of graphics into these floating bodies is provided in the
-\pai{graphicx} package by D.~P.~Carlisle. It is part of a whole family
-of packages called the ``graphics''
-bundle.\footnote{\CTAN|pkg/graphics|}
+The \carg{optoins} parameter is a comma delimited list of keys and values. The
+most basic keys are \cargv{width} and \cargv{height}. If only one is supplied
+then \LaTeX{} will calculate the other one to keep the aspect ratio of the
+original image.
+\begin{example}[examplewidth=2.7cm]
+\includegraphics[width=2cm]{example-image}
 
-Use the following step by step guide to
-include a picture into your document:
+\includegraphics[height=1cm]{example-image}
 
-\begin{enumerate}
-  \item Export the picture from your graphics program in EPS, PDF, PNG or JPEG format.
-  \item If you exported your graphics as an EPS vector graphics, you have to convert it to PDF format
-        prior to using it. There is a \texttt{epstopdf} command line tool that helps with this task.
-        Note that it may be sensible to export EPS even though your software can export PDF too, as PDFs often are full page and will
-        thus get very small when imported into a document. EPS on the other hand come with a bounding box showing the extent of the actual graphics.
-  \item Load the \textsf{graphicx} package in the preamble of the input
-        file with
-        \begin{lscommand}
-          \verb|\usepackage{graphicx}|
-        \end{lscommand}
-  \item Use the command
-        \begin{lscommand}
-          \ci{includegraphics}\verb|[|\emph{key}=\emph{value}, \ldots\verb|]{|\emph{file-name}\verb|}|
-        \end{lscommand}
-        \noindent to include \emph{file} into your document. The optional parameter
-        accepts a comma separated list of \emph{keys} and associated
-        \emph{values}. The \emph{keys} can be used to alter the width, height
-        and rotation of the included graphic. Table~\ref{keyvals} lists the
-        most important keys.
-\end{enumerate}
+\includegraphics[width=2cm, height=1cm]{example-image}
+\end{example}
 
-\begin{table}[tb]
-  \centering
-  \caption{Key Names for \textsf{graphicx} Package.}%
-  \label{keyvals}
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    Key            & Effect                                \\
-    \midrule
-    \cargv{width}  & scale graphic to the specified width  \\
-    \cargv{height} & scale graphic to the specified height \\
-    \cargv{angle}  & rotate graphic counterclockwise       \\
-    \cargv{scale}  & scale graphic                         \\
-    \bottomrule
-  \end{tabular}
+You may also pass the \cargv{keepaspectratio} key. This will change the meaning
+of \cargv{width} and \cargv{height} keys to the \emph{maximum} possible width
+and height.
+\begin{example}
+\includegraphics[
+  width=2cm,
+  height=2cm,
+]{example-image}
+\includegraphics[
+  width=2cm,
+  height=2cm,
+  keepaspectratio,
+]{example-image}
+\end{example}
 
-  \bigskip
-\end{table}
+Instead of specifying width or height you may also pass the \cargv{scale}
+argument to scale it by a specific amount. Passsing negative values will
+reflect the image.
+\begin{example}
+\includegraphics[
+  scale=0.1,
+]{example-image}
+\includegraphics[
+  scale=0.3,
+]{example-image}
+\includegraphics[
+  scale=-0.15,
+]{example-image}
+%!hidebegin
+\vspace{1.1cm}
+\end{example}
 
-The example code in figure~\ref{figureex} on page~\pageref{figureex} may help to clarify things.
-\begin{figure}
-  \begin{lined}{11cm}
-    \begin{verbatim}
-\includegraphics[angle=90,width=\textwidth]{test.png}
-\end{verbatim}
-  \end{lined}
-  \caption{Example code for including \texttt{test.png} into a document.\label{figureex}}
-\end{figure}
-It includes the graphic stored in the file \texttt{test.png}. The
-graphic is \emph{first} rotated by an angle of 90 degrees and
-\emph{then} scaled to the final width of 0.5 times the width of a
-standard paragraph.  The aspect ratio is $1.0$, because no special
-height is specified.  The width and height parameters can also be
-specified in absolute dimensions. Refer to Table~\ref{units} on
-page~\pageref{units} for more information. If you want to know more
-about this topic, make sure to read~\cite{graphics}.
+If you want to rotate the picture you may pass the \cargv{angle} key. By
+default the image is rotated around bottom left corner. You may change the
+anchor point by specifying the \cargv{origin} key. Its value may contain one or
+two of the following specifications: \cargv{l} for left, \cargv{r} for right,
+\cargv{c} for center, \cargv{t} for top, \cargv{b} for bottom and \cargv{B} for
+baseline (useful with \TikZ{} pictures as described in
+Chapter~\ref{chap:graphics}). So for example \cargv{lc} will rotate the image
+about the center of its left edge, while \cargv{c} will rotate it around its
+center.
+\begin{example}
+Text \includegraphics[
+  scale=0.1, %!hide
+  angle=45,
+]{example-image}
+Text \includegraphics[
+  scale=0.1, %!hide
+  angle=180,
+]{example-image}  \\
+Text \includegraphics[
+  scale=0.1, %!hide
+  angle=180,
+  origin=c,
+]{example-image}
+Text \includegraphics[
+  scale=0.1, %!hide
+  angle=180,
+  origin=lt,
+]{example-image}
+\end{example}
+
+If you want to show only a part of the picture you may specify the
+\cargv{clip} key and set the \cargv{viewport} key to required part of the
+image. The \cargv{viewport} takes as its value four numbers: first two specify
+the left bottom point of rectangle, and the latter two specify the top right
+point of rectangle.
+\begin{example}
+\includegraphics[
+  clip,
+  viewport=3cm 3cm 8.5cm 5.5cm,
+]{example-image}
+\end{example}
+
+If you are including a PDF file, the \ci{includegraphics} will only include its
+first page. If you want to specify a different page pass it to the \cargv{page}
+key.
+\begin{example}
+\includegraphics[
+  scale=0.1,
+]{example-image-a4-numbered}
+\includegraphics[
+  scale=0.1,
+  page=2,
+]{example-image-a4-numbered}
+\includegraphics[
+  scale=0.1,
+  page=11,
+]{example-image-a4-numbered}
+\end{example}
+
+If you pass the \cargv{draft} option then instead of images their name will be
+printed to save on file size and processing time. This key will be inherited
+from the \ci{documentclass} options if specified there.
+\begin{example}
+\includegraphics[
+  scale=0.3,
+  draft,
+]{example-image}
+\end{example}
 
 \section{Floating Bodies}
-Today most publications contain a lot of figures and tables. These
-elements need special treatment, because they cannot be broken across
-pages.  One method would be to start a new page every time a figure or
-a table is too large to fit on the present page. This approach would
-leave pages partially empty, which looks very bad.
+If you try writing a longer text with tables and images you will soon notice a
+problem: they cannot be broken across multiple pages (except for the
+\pai{longtable}). If you simply include them in normal text flow this will lead
+to a lot of empty space if the image is large and the text preceeding it would
+be to close to the bottom of the page. In the example below the first page is
+half empty.
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\usepackage{graphicx} %!hide
+\usepackage{ragged2e} %!hide
+\geometry{includefoot} %!hide
+\begin{document}%!hide
+Here is some text
+to take up some space.
+
+Below this text is an image.
+
+\begin{Center}
+  \includegraphics[scale=0.2]{example-image}
+\end{Center}
+
+Here is more text.
+\end{document}%!hide
+\end{example}
 
 The solution to this problem is to `float' any figure or table that
 does not fit on the current page to a later page, while filling the
@@ -1967,105 +1992,118 @@ understand approximately how \LaTeX{} handles floats internally.
 Otherwise floats may become a major source of frustration, because
 \LaTeX{} never puts them where you want them to be.
 
-\bigskip
 Let's first have a look at the commands \LaTeX{} supplies
 for floats:
 
 Any material enclosed in a \ei{figure} or \ei{table} environment will
-be treated as floating matter. Both float environments support an optional
+be treated as floating matter.
 parameter
 \begin{lscommand}
-  \verb|\begin{figure}[|\emph{placement specifier}\verb|]| or
-  \verb|\begin{table}[|\ldots\verb|]|
+  \ei*{figure}[placement specifier:o] \\
+  \ei*{table}[placement specifier:o]
 \end{lscommand}
-\noindent called the \emph{placement specifier}. This parameter
-is used to tell \LaTeX{} about the locations to which the float
-is allowed to be moved.  A \emph{placement specifier} is constructed by building a string
-of \emph{float-placing permissions}. See Table~\ref{tab:permiss}.
+The optional \carg{placement specifier} parameter is used to tell \LaTeX{}
+about the locations to which the float is allowed to be moved.  A
+\carg{placement specifier} is constructed by building a string of
+\emph{float-placing permissions}. See Table~\ref{tab:permiss} for a description
+of available specifiers. Note that the order of specifiers does not matter.
 
-\begin{table}[!bp]
+\begin{table}
   \begin{minipage}{\textwidth}
     \centering
     \caption{Float Placing Permissions.}\label{tab:permiss}
     \begin{tabular}{@{}cp{8cm}@{}}
       \toprule
-      Spec       & Permission to place the float \ldots                                      \\
+      Spec       & Permission to place the float \ldots             \\
       \midrule
       \texttt{h} & \emph{here} at the very place in the text
-      where it occurred.  This is useful mainly for small floats.                            \\[0.3ex]
-      \texttt{t} & at the \emph{top} of a page                                               \\[0.3ex]
-      \texttt{b} & at the \emph{bottom} of a page                                            \\[0.3ex]
-      \texttt{p} & on a special \emph{page} containing only floats.                          \\[0.3ex]
-      \texttt{!} & without considering most of the  internal parameters\footnote{Such as the
-        maximum number of floats allowed  on one page.}, which could otherwise stop this
-      float from being placed.                                                               \\
+      where it occurred.  This is useful mainly for small floats.   \\
+      \texttt{t} & at the \emph{top} of a page                      \\
+      \texttt{b} & at the \emph{bottom} of a page                   \\
+      \texttt{p} & on a special \emph{page} containing only floats. \\
+      \texttt{!} & without considering most of the
+      internal parameters\footnote{Such as the
+        maximum number of floats allowed  on one page.},
+      which could otherwise stop this
+      float from being placed.                                      \\
       \bottomrule
     \end{tabular}
   \end{minipage}
 \end{table}
 
-For example, a table could be started with the following line
+For example, a table float could be started with the following line
 \begin{code}
 \verb|\begin{table}[!hbp]|
 \end{code}
-\noindent The \wi{placement specifier} \verb|[!hbp]| allows \LaTeX{} to
-place the table right here (\texttt{h}) or at the bottom (\texttt{b})
+The \wi{placement specifier} \cargv{[!hbp]} allows \LaTeX{} to
+place the table right here (\cargv{h}) or at the bottom (\cargv{b})
 of some page
-or on a special floats page (\texttt{p}), and all this even if it does not
-look that good (\texttt{!}). If no placement specifier is given, the standard
-classes assume \verb|[tbp]|.
+or on a special floats page (\cargv{p}), and all this even if it does not
+look that good (\cargv{!}). If no placement specifier is given, the standard
+classes assume \cargv{[tbp]}.
 
-\LaTeX{} will place every float it encounters according to the
-placement specifier supplied by the author. If a float cannot be
-placed on the current page it is deferred either to the
-\emph{figures} queue or the \emph{tables} queue.\footnote{These are FIFO---`first in first out'---queues!}  When a new page is started,
-\LaTeX{} first checks if it is possible to fill a special `float'
-page with floats from the queues. If this is not possible, the first
-float on each queue is treated as if it had just occurred in the
-text: \LaTeX{} tries again to place it according to its
-respective placement specifiers (except `h,' which is no longer
-possible).  Any new floats occurring in the text get placed into the
-appropriate queues. \LaTeX{} strictly maintains the original order of
-appearance for each type of float. That's why a figure that cannot
-be placed pushes all further figures to the end of the document.
-Therefore:
-
+\LaTeX{} will place every float it encounters according to the placement
+specifier supplied by the author. If a float cannot be placed on the current
+page it is deferred either to the figures queue or the tables
+queue.\footnote{These are FIFO---`first in first out'---queues!}  When a new
+page is started, \LaTeX{} first checks if it is possible to fill a special
+\enquote*{float page} with floats from the queues. If this is not possible, the
+first float on each queue is treated as if it had just occurred in the text:
+\LaTeX{} tries again to place it according to its respective placement
+specifiers (except \cargv{h}, which is no longer possible).  Any new floats
+occurring in the text get placed into the appropriate queues. \LaTeX{} strictly
+maintains the original order of appearance for each type of float. That's why a
+figure that cannot be placed pushes all further figures to the end of the
+document. Therefore:
 \begin{quote}
   If \LaTeX{} is not placing the floats as you expected,
   it is often only one float jamming one of the two float queues.
 \end{quote}
 
-While it is possible to give \LaTeX{}  single-location placement
-specifiers, this causes problems.  If the float does not fit in the
-location specified it becomes stuck, blocking subsequent floats.
-In particular, you should never, ever use the [h] option---it is so bad
-that in more recent versions of \LaTeX, it is automatically replaced by
-  [ht].
+While it is possible to give \LaTeX{}  single-location placement specifiers,
+this causes problems.  If the float does not fit in the location specified it
+becomes stuck, blocking subsequent floats. In particular, you should never,
+ever use the [h] option---it is so bad that in more recent versions of \LaTeX,
+it is automatically replaced by [ht].
 
-\bigskip
-\noindent Having explained the difficult bit, there are some more things to
-mention about the \ei{table} and \ei{figure} environments.
-Use the
+Using floats, the previous example would look like this:
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\usepackage{graphicx} %!hide
+\geometry{includefoot} %!hide
+\begin{document}%!hide
+Here is some text
+to take up some space.
 
+Below this text is an image.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.2]{example-image}
+\end{figure}
+
+Here is more text.
+\end{document}%!hide
+\end{example}
+As you can see, \LaTeX{} now typeset the remaining text and delayed inserting
+the image until the next page.
+
+Having explained the difficult bit, there are some more things to mention about
+the \ei{table} and \ei{figure} environments. Use the
 \begin{lscommand}
-  \ci{caption}\verb|{|\emph{caption text}\verb|}|
+  \ci{caption}[short caption][full caption]
 \end{lscommand}
-
-\noindent command to define a caption for the float. A running number and
-the string ``Figure'' or ``Table'' will be added by \LaTeX.
+command to define a caption for the float. A running number and
+the string \enquote{Figure} or \enquote{Table} will be added by \LaTeX.
 
 The two commands
-
 \begin{lscommand}
   \ci{listoffigures} and \ci{listoftables}
 \end{lscommand}
-
-\noindent operate analogously to the \verb|\tableofcontents| command,
-printing a list of figures or tables, respectively.  These lists will
-display the whole caption, so if you tend to use long captions
-you must have a shorter version of the caption for the lists.
-This is accomplished by entering the short version in brackets after
-the \verb|\caption| command.
+operate analogously to the \ci{tableofcontents} command, printing a list of
+figures or tables, respectively.  These lists will display the whole caption,
+so if you tend to use long captions you must have a shorter version of the
+caption for the lists. This is accomplished by entering the short version in
+brackets after the \ci{caption} command.
 \begin{code}
 \verb|\caption[Short]{LLLLLoooooonnnnnggggg}|
 \end{code}
@@ -2079,45 +2117,58 @@ The following example draws a square and inserts it into the
 document. You could use this if you wanted to reserve space for images
 you are going to paste into the finished document.
 
-\begin{code}
-\begin{verbatim}
-Figure~\ref{white} is an example of Pop-Art.
-\begin{figure}[!hbtp]
-\includegraphics[angle=90,width=\textwidth]{wbox.pdf}
-\caption{White Box by Peter Markus Paulian.\label{white}}
-\end{figure}
-\end{verbatim}
-\end{code}
+\begin{example}[standalone, paperheight=4.5cm, to_page=2, vertical_pages]
+\usepackage{graphicx} %!hide
+\geometry{includefoot} %!hide
+\begin{document}%!hide
+\listoffigures
+\vspace{.3cm}%!hide
 
-\noindent In the example above,
-\LaTeX{} will try \emph{really hard}~(\texttt{!})\ to place the figure
-right \emph{here}~(\texttt{h}).\footnote{assuming the figure queue is
-  empty.} If this is not possible, it tries to place the figure at the
-\emph{bottom}~(\texttt{b}) of the page.  Failing to place the figure
-on the current page, it determines whether it is possible to create a float
-page containing this figure and maybe some tables from the tables
-queue. If there is not enough material for a special float page,
-\LaTeX{} starts a new page, and once more treats the figure as if it
-had just occurred in the text.
+Here is some text describing
+the Figure~\ref{figure}.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.2]{%
+    example-image}
+  \caption{An interesting figure}%
+  \label{figure}
+\end{figure}
+
+Here is more text.
+\end{document}%!hide
+\end{example}
 
 Under certain circumstances it might be necessary to use the
-
 \begin{lscommand}
   \ci{clearpage} or even the \ci{cleardoublepage}
 \end{lscommand}
+command. It orders \LaTeX{} to immediately place all floats remaining in the
+queues and then start a new page. \ci{cleardoublepage} even goes to a new
+right-hand page.
 
-\noindent command. It orders \LaTeX{} to immediately place all
-floats remaining in the queues and then start a new
-page. \ci{cleardoublepage} even goes to a new right-hand page.
+\subsection{Other Floats}
 
-\subsection{The \ei{longtable} environment}
+If you want to have other float lists than \enquote{Table} and \enquote{Figure}
+use the \pai*{newfloat} package. It provides the
+\begin{lscommand}
+  \ci{DeclareFloatingEnvironment}[options][name]
+\end{lscommand}
+For exampmle the \verb|\DeclareFloatingEnvironment{cat}| will define a new
+environment \verb|cat| that can be used similarly to \ei{figure} and \ei{table}
+environment and \verb|\listofcats| that works analogously to \ci{listoftables}.
+You can customize the float using the \carg{options} to change the printed
+captions (\cargv{name}), list title (\cargv{listname}) or default placement
+(\cargv{placement}).
+
+\subsection{The \ei{longtable} Environment}
 
 Floating bodies occupy only a single page, thus putting \ei{longtable} into
 them does not make sense. Still you may want to have the \ei{longtable} listed
 in the list of tables with some caption. The \pai{longtable} package defines
 its own \ci{caption} command that you may use inside the environment. Its use
-is similar to the standard \ci{caption} command except that they are treated as
-rows. If you pass empty optional argument to the \ci{caption} command it will
+is similar to the standard \ci{caption} command except that it is treated as a
+row. If you pass empty optional argument to the \ci{caption} command it will
 typeset normally but it won't be put in the list of tables, which is useful if
 you want to have a running caption.
 
@@ -2128,7 +2179,7 @@ you want to have a running caption.
 
 \begin{document}
 %!hideend
-\begin{longtable}{cl}
+\begin{longtable}{@{}cl@{}}
   \caption{Numbers} \\
   \toprule
   Number & Word         \\
@@ -2143,9 +2194,9 @@ you want to have a running caption.
   \bottomrule \endlastfoot
 
   0      & Zero   \\
-  1      & One    \\
   % ...
 %!hidebegin
+  1      & One    \\
   2      & Two     \\
   3      & Three \\
   4      & Four  \\
@@ -2156,33 +2207,29 @@ you want to have a running caption.
   9      & Nine  \\
   10     & Ten    \\
   11     & Eleven \\
-  %!hideend
   12     & Twelve \\
+  %!hideend
 \end{longtable}
 \end{document} %!hide 
 \end{example}
-
-
-
 
 \section{Big Projects}
 When working on big documents, you might want to split the input file
 into several parts. \LaTeX{} has two commands that help you to do
 that.
 
+Use the
 \begin{lscommand}
-  \ci{include}\verb|{|\emph{filename}\verb|}|
+  \ci{include}[filename]
 \end{lscommand}
-\noindent Use this command in the document body to insert the
-contents of another file named \emph{filename.tex}. Note that \LaTeX{}
-will start a new page
-before processing the material input from \emph{filename.tex}.
+command in the document body to insert the contents of another file named
+\emph{filename.tex}. Note that \LaTeX{} will start a new page before processing
+the material input from \emph{filename.tex}.
 
 The second command can be used in the preamble. It allows you to
 instruct \LaTeX{} to only input some of the \verb|\include|d files.
 \begin{lscommand}
-  \ci{includeonly}\verb|{|\emph{filename}\verb|,|\emph{filename}%
-  \verb|,|\ldots\verb|}|
+  \ci{includeonly}[filename\texttt{, }filename\texttt{, }\ldots]
 \end{lscommand}
 After this command is executed in the preamble of the document, only
 \ci{include} commands for the filenames that are listed in the
@@ -2193,9 +2240,9 @@ page. This is helpful when you use \ci{includeonly}, because the
 page breaks will not move, even when some include files are omitted.
 Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
-  \ci{input}\verb|{|\emph{filename}\verb|}|
+  \ci{input}[filename]
 \end{lscommand}
-\noindent command. It simply includes the file specified.
+command. It simply includes the file specified.
 No flashy suits, no strings attached.
 
 To make \LaTeX{} quickly check your document use the \pai{syntonly}
@@ -2210,9 +2257,3 @@ Usage is very simple:
 \end{verbatim}
 When you want to produce pages, just comment out the second line
 (by adding a percent sign).
-
-% Local Variables:
-% TeX-master: "lshort2e"
-% mode: latex
-% mode: flyspell
-% End:

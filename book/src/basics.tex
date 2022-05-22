@@ -25,7 +25,6 @@ for being extremely stable, for running on many different kinds of computers,
 and for being virtually bug free. The version number of \TeX{} is converging
 to the \(\pi\) constant and is now at \(3.141592653\).
 
-
 \TeX{} is pronounced ``Tech,'' with a ``ch'' as in the German word
 ``Ach''\footnote{In German there are actually two pronunciations for ``ch''
   and one might assume that the soft ``ch'' sound from ``Pech'' would be a
@@ -215,7 +214,7 @@ how to typeset the text. For beginners it is recommended to use a \LaTeX{}
 IDE.\footnote{Some examples of them are listed in
   Appendix~\ref{installinglatex}.}
 
-\subsection{Spaces}
+\subsection{Spaces}\label{sec:spaces}
 
 \enquote{Whitespace} characters, such as blank or tab, are treated uniformly as
 \enquote{\wi{space}} by \LaTeX{}. Several consecutive \wi{whitespace}
@@ -351,7 +350,6 @@ command
   \ci{documentclass}[class]
 \end{code}
 The \carg{class} argument specifies what sort of document you intend to write.
-
 
 Now begins an area of the input file that is called the \emph{\wi{preamble}}.
 Inside it you add commands to influence the style of the whole document, or
@@ -663,6 +661,97 @@ be present under the \enquote*{Documentation} field.
     \bottomrule
   \end{tabular}
 \end{table}
+
+\section{The Structure of Text and Language}
+\secby{Hanspeter Schmid}{hanspi@schmid-werren.ch}
+The main point of writing a text, is to convey ideas, information, or
+knowledge to the reader.  The reader will understand the text better
+if these ideas are well-structured, and will see and feel this
+structure much better if the typographical form reflects the logical
+and semantic structure of the content.
+
+As we have seen \LaTeX{} is different from other typesetting systems in that
+you just have to tell it the logical and semantic structure of a text.  It then
+derives the typographical form of the text according to the \enquote{rules}
+given in the document class file and in various style files.
+
+The most important text unit in \LaTeX{} (and in typography) is the
+\wi{paragraph}.  We call it \enquote{text unit} because a paragraph is the
+typographical form that should reflect one coherent thought, or one idea.
+Therefore, if a new thought begins, a new paragraph should begin, and if not,
+only line breaks should be used.  If in doubt about paragraph breaks, think
+about your text as a conveyor of ideas and thoughts.  If you have a paragraph
+break, but the old thought continues, it should be removed.  If some totally
+new line of thought occurs in the same paragraph, then it should be broken.
+
+Most people completely underestimate the importance of well-placed paragraph
+breaks. Many people do not even know what the meaning of a paragraph break is,
+or, especially in \LaTeX, introduce paragraph breaks without knowing it.  The
+latter mistake is especially easy to make if equations are used in the text.
+You have already learned in Section~\ref{sec:spaces} that paragraph breaks are
+introduced by leaving an empty line in the source code. Look at the following
+examples, and figure out why sometimes empty lines (paragraph breaks) are used
+before and after the equation, and sometimes not. (Ignore the contents of the
+equations themselves as they are not important.)
+
+\begin{example}[standalone, paperwidth=5cm, paperheight=4cm]
+\begin{document}%!hide
+% Example 1
+\ldots when Einstein introduced
+his formula
+\begin{equation}
+  e = m \cdot c^2 \; ,
+\end{equation}
+which is at the same time the
+most widely known and the least
+well understood physical formula.
+\end{document}%!hide
+\end{example}
+\begin{example}[standalone, paperwidth=5cm, paperheight=4cm]
+\begin{document}%!hide
+% Example 2
+\ldots from which follows
+Kirchhoff's current law:
+\begin{equation}
+  \sum_{k=1}^{n} I_k = 0 \; .
+\end{equation}
+
+Kirchhoff's voltage law can
+be derived \ldots
+\end{document}%!hide
+\end{example}
+\begin{example}[standalone, paperwidth=5cm, paperheight=4cm]
+\begin{document}%!hide
+% Example 3
+\ldots which has several
+advantages.
+
+\begin{equation}
+  I_D = I_F - I_R
+\end{equation}
+is the core of a very different
+transistor model. \ldots
+\end{document}%!hide
+\end{example}
+
+The next smaller text unit is a sentence.  In English texts, there is
+a larger space after a period that ends a sentence than after one
+that ends an abbreviation.  \LaTeX{} tries to figure out which one
+you wanted to have.  If \LaTeX{} gets it wrong, you must tell it what
+you want.  This is explained later in the next chapter.
+
+The structuring of text even extends to parts of sentences.  Most
+languages have very complicated punctuation rules, but in many
+languages (including German and English), you will get almost every
+comma right if you remember what it represents: a short stop in the
+flow of language.  If you are not sure about where to put a comma,
+read the sentence aloud and take a short breath at every comma.  If
+this feels awkward at some place, delete that comma; if you feel the
+urge to breathe (or make a short stop) at some other place, insert a
+comma.
+
+Finally, the paragraphs of a text should also be structured logically at a
+higher level, by putting them into chapters, sections, subsections, and so on.
 
 \section{Files You Might Encounter}
 
