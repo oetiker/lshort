@@ -4,7 +4,7 @@
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Specialities}
+\chapter{Specialities}\label{chap:spec}
 \begin{intro}
   When putting together a large document, \LaTeX{} will help with some special
   features like index generation, automatic linking to relevant pages and other
@@ -610,7 +610,6 @@ step~\ref{step:next} and~\ref{step:final}:
 \noindent Be sure to run \LaTeX\ on the \texttt{.dtx} one last
 time before moving on to step~\ref{step:final}.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Contents: Chapter on pdfLaTeX
 % French original by Daniel Flipo 14/07/2004
@@ -805,7 +804,6 @@ would
 work well within Acrobat, but once the page is printed the email address
 would not be visible anymore.
 
-
 \subsection{Problems with Links}
 
 Messages like the following:
@@ -845,7 +843,6 @@ the bookmarks, which replaces the offending text:
 \begin{lscommand}
   \ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
 \end{lscommand}
-
 
 Math expressions are a prime candidate for this kind of problem:
 \begin{code}
@@ -1132,8 +1129,6 @@ In any case make sure to read through the beamer class documentation
 \texttt{beameruserguide.pdf} to get a complete picture of what is in
 store for you. This package is being actively developed, check out their website
 to get the latest information. (\href{http://latex-beamer.sourceforge.net/}{http://latex-beamer.sourceforge.net/})
-
-
 
 % Local Variables:
 % TeX-master: "lshort2e"
