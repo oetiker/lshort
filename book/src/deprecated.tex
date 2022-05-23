@@ -1,5 +1,13 @@
 % !TEX root = ./lshort.tex
 \chapter{Things You Shouldn't Use}
+
+\begin{intro}
+  \LaTeX{} has been around for well over 30 years now. And it has remained largly backward compatible. This means
+  you can scrib use text and tricks from a friends document written ten years ago and use them in your document today.
+  In many intances this is totally fine, in others, while \LaTeX{} works fine with the old code, you still should not do it. 
+  Have a look!
+\end{intro}
+
 \bgroup
 \ExplSyntaxOn
 \NewDocumentCommand{\instead}{mm}{
@@ -151,7 +159,7 @@ described in Section~\ref{sec:copyingcommands}.
 
 \ei{eqnarray} and \ei{eqnarray*} are \hologo{LaTeX} environments that allow
 aligning equations. However spacing around the binary operators in these is far
-from ideal. Therefore it is recommended to always use \ei{align} environments
+from ideal. Therefore it is recommended to always use the \ei{align} environments
 from \pai{amsmath} or \ei{IEEEeqnarray} as described in
 Section~\ref{sec:IEEEeqnarray}.
 \begin{chktexignore}
