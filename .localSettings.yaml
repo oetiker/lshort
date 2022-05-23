@@ -7,7 +7,7 @@ verbatimEnvironments:
 
 modifyLineBreaks:
   textWrapOptions:
-    columns: 70
+    columns: 0
     blocksFollow:
       other: |-
         (?x)

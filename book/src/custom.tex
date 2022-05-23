@@ -20,7 +20,6 @@
   that looks different from what is provided by default.
 \end{intro}
 
-
 \section{New Commands, Environments and Packages}
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
@@ -51,7 +50,6 @@ a box any more, I can simply change the definition of the
 easier than going through the whole document to hunt down all the
 places where I have used some generic \LaTeX{} commands to draw a
 box around some word.
-
 
 \subsection{New Commands}\label{sec:new_commands}
 
@@ -504,7 +502,6 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \bigskip
 \end{table}
 
-
 \begin{table}[!bp]
   \centering
   \caption{Font Sizes.}\label{sizes}\index{font size}
@@ -555,7 +552,6 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \bigskip
 \end{table}
 
-
 \begin{table}[!bp]
   \centering
   \caption{Math Fonts.}\label{mathfonts}
@@ -603,7 +599,6 @@ paragraph ends within the scope of the font size command. The closing curly
 brace \verb|}| should therefore not come too early.  Note the position of
 the \ci{par} command in the next two examples.\footnote{\texttt{\bs{}par}
   is equivalent to a blank line}
-
 
 \begin{example}
 {\Large Don't read this!
@@ -746,7 +741,6 @@ place below the command \verb|\tableofcontents| or to not use them at all,
 because you'll find that most professional books use indenting and not
 spacing to separate paragraphs.
 
-
 If you want to indent a paragraph that is not indented, use
 \begin{lscommand}
   \ci{indent}
@@ -814,7 +808,6 @@ remaining space on a line is filled up. If multiple
 line, they occupy all available space in proportion of their respective
 stretch factors.
 
-
 \begin{example}
 x\hspace{\stretch{1}}
 x\hspace{\stretch{3}}x
@@ -863,7 +856,6 @@ within a table is specified with the
 
 With \ci{bigskip} and \ci{smallskip} you can skip a predefined amount of
 vertical space without having to worry about exact numbers.
-
 
 \section{Page Layout}
 
@@ -1072,7 +1064,6 @@ the vertical.\footnote{Total control is only to be obtained by
   controlling both the horizontal and the vertical \ldots}
 No problem for \LaTeX{}. The
 
-
 \begin{lscommand}
   \ci{raisebox}\verb|{|\emph{lift}\verb|}[|\emph{extend-above-baseline}\verb|][|\emph{extend-below-baseline}\verb|]{|\emph{text}\verb|}|
 \end{lscommand}
@@ -1081,7 +1072,6 @@ No problem for \LaTeX{}. The
 box. You can use \ci{width}, \ci{height}, \ci{depth}, and
 \ci{totalheight} in the first three parameters, in order to act
 upon the size of the box inside the \emph{text} argument.
-
 
 \begin{example}
 \raisebox{0pt}[0pt][0pt]{\Large%

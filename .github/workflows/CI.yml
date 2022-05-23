@@ -27,7 +27,7 @@ jobs:
 
       - name: Run latexindent
         run: |
-          latexindent -kv -l .localSettings.yaml book/src/*.tex > /dev/null
+          latexindent -kv -m -l .localSettings.yaml book/src/*.tex > /dev/null
           cat book/src/indent.log
 
   build_latex:
