@@ -76,8 +76,8 @@ and over again.
 \NewDocumentCommand{\tnss}{}{%
   The not so Short Introduction to
     \LaTeXe}
-This is ``\tnss'' \ldots{}
-``\tnss''
+This is \enquote{\tnss} \ldots{}
+\enquote{\tnss}
 \end{example}
 
 The next example illustrates how to define a new
@@ -306,7 +306,7 @@ When redefining commands you may want to use the original version of the
 command. Your initial code may look like this
 \begin{verbatim}
 \RenewDocumentCommand{\emph}{m}{%
-  \emph{#1}~(``#1'' is emphasised)%
+  \emph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{verbatim}
 but when you try to compile the document you will receive the error
@@ -317,10 +317,12 @@ but when you try to compile the document you will receive the error
 To understand why this happens it is instructive to consider how \TeX{} expands
 the defined commands. The above \ci{RenewDocumentCommand} tells the \TeX{}
 engine that whenever \ci*{emph}[foo:vm] is seen it must replace it with
-\verb|\emph{foo}~(``foo'' is emphasised)|. You may already see the problem here.
-In the next stage it will again replace the \ci*{emph}[foo:vm] yielding
+\verb|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
+problem here. In the next stage it will again replace the \ci*{emph}[foo:vm]
+yielding
 \begin{verbatim}
-\emph{foo}~(``foo'' is emphasised)~(``foo'' is emphasised)
+\emph{foo}~(\enquote{foo} is emphasised)~
+  (\enquote{foo} is emphasised)
 \end{verbatim}
 This process will never end and at some point \TeX{}
 simply gives up.
@@ -329,7 +331,7 @@ Note that
 \begin{verbatim}
 \NewDocumentCommand{\oldemph}{m}{\emph{#1}}
 \RenewDocumentCommand{\emph}{m}{%
-  \oldemph{#1}~(``#1'' is emphasised)%
+  \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{verbatim}
 will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
@@ -353,10 +355,10 @@ It makes the \carg{name} the exact copy of the \carg{command}. The following exa
 
 This is precisely the behaviour we need in order to redefine the \ci{emph}
 command as we have tried to do earlier.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.35\linewidth]
 \NewCommandCopy{\oldemph}{\emph}
 \RenewDocumentCommand{\emph}{m}{%
-  \oldemph{#1}~(``#1'' is emphasised)%
+  \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 
 And here it \emph{comes}.

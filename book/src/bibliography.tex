@@ -441,6 +441,7 @@ be subject in a sentence), \ci{smartcite} (context dependent).
 ]
 %!hidebegin
 \usepackage[style=alphabetic]{biblatex}
+\usepackage{csquotes}
 \addbibresource{example.bib}
 \sloppy
 \begin{document}
@@ -452,7 +453,9 @@ Footnote cite~\footcite{dream}.
 Smart \smartcite[See][78]{lshort}.
 Again\footnote{Smart
 \smartcite[12--56]{dream}.}.
-``\Textcite{curie} was an important paper.''
+\enquote{\Textcite{curie}
+  was an important paper.
+}
 %!hidebegin
 \end{document}
 \end{example}
