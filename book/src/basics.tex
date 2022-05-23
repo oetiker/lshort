@@ -18,9 +18,10 @@ mathematical formulae. Knuth started writing the \TeX{} typesetting engine in
 1977 to explore the potential of the digital printing equipment that was
 beginning to infiltrate the publishing industry at that time, especially in
 the hope that he could reverse the trend of deteriorating typographical
-quality that he saw affecting his own books and articles. The first stable version of
-\TeX{} was released in 1982. Version 3.0 was relased in 1989 to
-better support 8-bit characters and multiple languages. Knuth considered the \TeX-design to be complete with the release of Version 3. \TeX{} is renowned
+quality that he saw affecting his own books and articles. The first stable
+version of \TeX{} was released in 1982. Version 3.0 was released in 1989 to
+better support 8-bit characters and multiple languages. Knuth considered the
+\TeX-design to be complete with the release of Version 3. \TeX{} is renowned
 for being extremely stable, for running on many different kinds of computers,
 and for being virtually bug free. The version number of \TeX{} is converging
 to the \(\pi\) constant and is now at \(3.141592653\).
@@ -45,8 +46,10 @@ syllable of the Greek word technique. In an ASCII environment, \TeX{} becomes
 
 While the original \TeX{} engine is still fully functional and can be used to
 typeset documents, some of the technical solutions it uses are now dated. Over
-the years the \TeX{} engine has been extended, introducing many new features. Due to the way \TeX{} is licensed, anyone is free to produce enhanced versions of \TeX{} but they must not call the program \TeX{} anymore.
-The first widely popular enhnced version of \TeX{} was \hologo{eTeX}~\cite{etex}.
+the years the \TeX{} engine has been extended, introducing many new features.
+Due to the way \TeX{} is licensed, anyone is free to produce enhanced versions
+of \TeX{} but they must not call the program \TeX{} anymore. The first widely
+popular enhanced version of \TeX{} was \hologo{eTeX}~\cite{etex}.
 
 The original program produced \eei{.dvi} files which were meant only to be sent
 to printer. With the proliferation of high resolution displays it became more
@@ -59,31 +62,36 @@ which was not compatible with modern font formats. This was in turn solved in
 Today four \TeX{} engines are actively maintained: the original \TeX{},
 \hologo{pdfTeX}, \hologo{XeTeX} and \hologo{LuaTeX}. This book recommends using
 either \hologo{XeTeX} or \hologo{LuaTeX}. The examples presented should produce
-the same results on both engines (except where otherwise noted). The basic examples will work with \TeX{} and \hologo{pdfTeX} too, but we suggest to switch to \hologo{XeTeX} or \hologo{LuaTeX} from the start, to avoid problems down the road as you explore more advanced concepts.
+the same results on both engines (except where otherwise noted). The basic
+examples will work with \TeX{} and \hologo{pdfTeX} too, but we suggest to
+switch to \hologo{XeTeX} or \hologo{LuaTeX} from the start, to avoid problems
+down the road as you explore more advanced concepts.
 
 \subsection{\LaTeX{}}
 
 \LaTeX{} is a set of macros\footnote{Macros are short names for long list of
   instructions, that are created to avoid retyping the instructions each time
-  they are needed.} for the \TeX{} engine, \LaTeX{} was originally developed by Leslie
-Lamport\index{Lamport, Leslie} for his own use. After some consideration he
-decided to make them more general so others could use them for their project.
-Thus in 1985 the first version of \LaTeX{} --- named \LaTeX{} 2.09 --- was
-released~\cite{manual}.
+  they are needed.} for the \TeX{} engine, \LaTeX{} was originally developed by
+Leslie Lamport\index{Lamport, Leslie} for his own use. After some
+consideration he decided to make them more general so others could use them
+for their project. Thus in 1985 the first version of \LaTeX{} --- named
+\LaTeX{} 2.09 --- was released~\cite{manual}.
 
-The original \LaTeX{} became quite popular and promted the creation of many extension packages. Unfortunately some of the more popular extensions were not compatible with each
-other. \LaTeXe{} managed to unify many of
-the extensions, and also provided an extension packaging system, dealing with third party extensions on a standardised way.
+The original \LaTeX{} became quite popular and promoted the creation of many
+extension packages. Unfortunately some of the more popular extensions were not
+compatible with each other. \LaTeXe{} managed to unify many of the extensions,
+and also provided an extension packaging system, dealing with third party
+extensions on a standardised way.
 
 The same year when \LaTeXe{} was released, the \LaTeX3 project started. Its aim
 was to create improved standard for writing \LaTeX{} documents, fixing some of
 the mistakes that were made when defining the initial \LaTeX{} macros. While at
-the beginning it was planned to release \LaTeX3 as a standalone system that
-was not backward compatible with \LaTeXe{}, in the end it was decided that
-abandoning the huge collection of third party packages written for \LaTeXe{} over the years, would
-be a mistake. Thus the development team decided that \LaTeX3 would be slowly backported into
-\LaTeXe{} format, while avoiding breaking changes as much as reasonably
-possible~\cite{quovadis}.
+the beginning it was planned to release \LaTeX3 as a standalone system that was
+not backward compatible with \LaTeXe{}, in the end it was decided that
+abandoning the huge collection of third party packages written for \LaTeXe{}
+over the years, would be a mistake. Thus the development team decided that
+\LaTeX3 would be slowly backported into \LaTeXe{} format, while avoiding
+breaking changes as much as reasonably possible~\cite{quovadis}.
 
 \LaTeX{} is pronounced ``Lay-tech'' or ``Lah-tech.'' If you refer to
 \LaTeX{} in an ASCII environment, you type \texttt{LaTeX}.
@@ -170,11 +178,11 @@ of \LaTeX{} over normal word processors are the following:
         need to tinker with the actual layout of the document.
   \item Even complex structures such as footnotes, references, table of
         contents, and bibliographies can be generated easily.
-  \item Free add-on packages exist for many typographical tasks not directly supported by basic
-        \LaTeX. For example, packages are
-        available to include \PSi{} graphics or to typeset
-        bibliographies conforming to exact standards. Many of these add-on
-        packages are described in \companion.
+  \item Free add-on packages exist for many typographical tasks not directly
+        supported by basic \LaTeX. For example, packages are available to
+        include \PSi{} graphics or to typeset bibliographies conforming to
+        exact standards. Many of these add-on packages are described in
+        \companion.
   \item \LaTeX{} encourages authors to write well-structured texts,
         because this is how \LaTeX{} works---by specifying structure.
   \item \TeX, the formatting engine of \LaTeXe, is highly portable and free.
@@ -615,11 +623,12 @@ useful and should be installed along with your \LaTeX{} distribution. See
 Table~\ref{packages} for some examples. Their versions may be different than
 the ones described in this book, which in turn may lead to differences in the
 produced output. Along with the package introduction we will usually also point
-to its entry in our bibliography. In the bibliograph entry you will also find information about the package
-version that was used when writing this booklet. You can check the versions of
-all the packages used in a document, by looking at the \eei{.log} file that is produced when compiling the document.
-If the package versions aren't very different (usually the first number
-is the most important) then you should be fine.
+to its entry in our bibliography. In the bibliography entry you will also find
+information about the package version that was used when writing this booklet.
+You can check the versions of all the packages used in a document, by looking
+at the \eei{.log} file that is produced when compiling the document. If the
+package versions aren't very different (usually the first number is the most
+important) then you should be fine.
 
 Modern \LaTeX{} distributions come with a large number of packages
 preinstalled. If you are working on a \Unix{} system, try using the command
@@ -632,31 +641,33 @@ be present under the \enquote*{Documentation} field.
   \caption{Examples of \LaTeX{} packages.}\label{packages}
   \begin{tabular}{@{}lp{9.5cm}@{}}
     \toprule
-    Package            & Description                                        \\
+    Package            & Description                                          \\
     \midrule
     \pai*{amsmath}     & Provides additional commands for typesetting
     mathematical symbols and environments for aligning equations. Described
-    in Chapter~\ref{chap:math}.                                             \\
+    in Chapter~\ref{chap:math}.                                               \\
 
     \pai*{polyglossia} & Makes it easy to write \LaTeX{} documents in
     languages different than English or even multiple languages.
-    Described in Section~\ref{sec:polyglossia}.                             \\
+    Described in Section~\ref{sec:polyglossia}.                               \\
 
     \pai*{booktabs}    & Provides commands for producing beautifully
     formatted tables for your document. Described in
-    Section~\ref{sec:tables}.                                               \\
+    Section~\ref{sec:tables}.                                                 \\
 
     \pai*{biblatex}    & Provides commands for automatically specifying and
     producing a bibliography for your document. Described in
-    Chapter~\ref{chap:bibliography}.                                        \\
+    Chapter~\ref{chap:bibliography}.                                          \\
 
     \pai*{makeidx}     & Provides commands for producing indices. Described
-    in Section~\ref{sec:indexing}.                                          \\
+    in Section~\ref{sec:indexing}.                                            \\
 
-\pai*{fancyhdr}     & Let's you easily customize page headers and footers. Described in Section~\ref{sec:fancy}.\\
+    \pai*{fancyhdr}    & Let's you easily customise page headers and footers.
+    Described in Section~\ref{sec:fancy}.                                     \\
+
     \pai*{beamer}      & Provides a document class that changes output to
     produce presentations and provides command to typeset slides.
-    Described in Section~\ref{sec:beamer}.                                  \\
+    Described in Section~\ref{sec:beamer}.                                    \\
     \bottomrule
   \end{tabular}
 \end{table}
