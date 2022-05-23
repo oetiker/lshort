@@ -22,7 +22,7 @@ lulu: lshort-body.pdf lshort-title.pdf
 
 %.pdf: $(FILES)
 	-mkdir pdfbuild
-	(TEXINPUTS=.:`pwd`/src:${TEXINPUTS:-:}&&export TEXINPUTS&& cp src/biblio.bib pdfbuild/ && cd pdfbuild &&\
+	(TEXINPUTS=.:`pwd`/src:`pwd`/src/examples:${TEXINPUTS:-:}&&export TEXINPUTS&& cp src/biblio.bib pdfbuild/ && cd pdfbuild &&\
 	$(PDFLATEX) $(basename $@)&& $(PDFLATEX) $(basename $@)&& \
 	$(MAKEINDEX) -s ../src/lshort.ist $(basename $@) && biber $(basename $@) &&$(PDFLATEX) $(basename $@)&& \
 	(thumbpdf --resolution 10 $@ && $(PDFLATEX) $(basename $@))&& \
@@ -33,7 +33,7 @@ src/title.tex: Makefile fixdate.pl src/title.template.tex
 
 quick: $(FILES)
 	-mkdir pdfbuild
-	(TEXINPUTS=.:`pwd`/src:${TEXINPUTS:-:}&&export TEXINPUTS && cd pdfbuild &&\
+	(TEXINPUTS=.:`pwd`/src:`pwd`/src/examples:${TEXINPUTS:-:}&&export TEXINPUTS && cd pdfbuild &&\
 	$(PDFLATEX) $(PDFLATEX_DEBUG_ARGS) lshort)
 
 

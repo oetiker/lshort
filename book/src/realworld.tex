@@ -1183,25 +1183,28 @@ again.
 \end{verse}
 \end{example}
 
-\section{Printing Verbatim}
+\section{Code Listings}
 
-When writing a book about \LaTeX{}, you often need to insert short code
-snippets like this \verb|\LaTeX{}|. While you could escape all the characters,
-this would quickly become rather tiresome, especially for longer pieces of
-code. This can be done much more easily by using the \ci{verb} command.
+When writing about \LaTeX{} or other programming languages, you often need to
+insert short code snippets like this \verb|\LaTeX{}|. While you could escape
+all the characters, this would quickly become rather tiresome, especially for
+longer pieces of code where correct spacing (collapsed by \LaTeX{} to single
+spaces) is crucial for readability. We will present three solutions to this
+problem.
 
-The \ci{verb} command is unusual in that it does not use group for getting its
-first argument. Instead you pass it between a chosen delimiters that can be
-any character except for letters, \verb|*| or space.
+\subsection{Verbatim}
 
-Text that is enclosed between \verb|\begin{|\ei{verbatim}\verb|}| and
-\verb|\end{verbatim}| will be directly printed, as if typed on a typewriter,
-with all line breaks and spaces, without any \LaTeX{} command being executed.
-For example to use \cargv{|} (which is typically used) as a delimiter you type
+\LaTeX{} itself comes with the \ci{verb} command. It is unusual in that it does
+not use groups for getting its first argument. Instead you pass it between a
+chosen delimiters that can be any character except for letters, \verb|*| or
+space. For example to use \cargv{|} (which is typically used) as a delimiter
+you type
 \begin{lscommand}
   \ci{verb}\verb+|+\carg{text}\verb+|+
 \end{lscommand}
-
+Text that is enclosed between these delimiters will be directly printed, as if
+typed on a typewriter, with all spaces, without any \LaTeX{} command being
+executed.
 \begin{example}
 Use \verb|\LaTeX{}| to 
 print \LaTeX.
@@ -1213,7 +1216,7 @@ argument of the \verb|\verb|
 command.
 \end{example}
 
-The starred version of the \ci{verb} command replace spaces with the
+The starred version of the \ci{verb} command replaces spaces with the
 \enquote*{\textvisiblespace{}} symbol.
 
 \begin{chktexignore}
@@ -1245,12 +1248,383 @@ Small is beautiful.
 Its starred version will analogously draw the \enquote*{\textvisiblespace}
 symbol instead of spaces.
 
-The \texttt{verbatim} environment and the \ci{verb} command may not be used
-within parameters of other commands, so the below code will result in an error
+For code snippets it may be useful to store them in their dedicated files,
+outside the \LaTeX{} document. This allows to edit them in your editor of
+choice and makes the document code less cluttered. To accomplish this use the
+\ci{verbatiminput}[file] command from the \pai{verbatim} package.\footnote{This
+  and following examples uses code snippets that can be found at \url{https://github.com/oetiker/lshort/tree/master/book/src/examples}.}
+\begin{example}
+\verbatiminput{hello.c}
+\end{example}
+\ci{verbatiminput*} also exists and works exactly as you would predict.
+
+The \texttt{verbatim} environment and the \ci{verb}, \ci{verbatiminput}
+commands may not be used within parameters of other commands, so the below code
+will result in an error
 \begin{verbatim}
   Footnote\footnote{\verb|abc| cannot be used here.}
 \end{verbatim}
 If this is a problem for you look at the \pai*{fancyvrb} package.
+
+\subsection{The \ei{listings} Package}
+
+While the \ei{verbatim} environment is fine for small snippets, they are very
+crude and look basic. In order to make them a bit more fancy you may use the
+\ei*{listings} package. It defines
+\begin{lscommand}
+  \ci{lstinline} command that works like \ci{verb} \\
+  \ei{lstlisting} environment that works like \ei{verbatim} \\
+  \ci{lstinputlisting} command that works like \ci{verbatiminput}
+\end{lscommand}
+\begin{example}
+\lstinline|\LaTeX{}|
+
+\begin{lstlisting}
+Here is some \LaTeX{} code.
+\end{lstlisting}
+
+\lstinputlisting{hello.c}
+\end{example}
+
+As you can see by default it isn't much different from the \ei{verbatim
+  environment}. The big difference is that every command accepts optional
+argument that allows to customize the output. The argument accepts comma
+delimited key value list. For example to automatically highlight the code we
+may pass the \cargv{language} key.
+\begin{example}
+\lstinputlisting[
+  language=C,
+]{hello.c}
+\end{example}
+If a language has several dialects you may specify it inside square brackets
+before the language name. You must enclose this value in the curly brackets.
+\begin{example}
+\lstinputlisting[
+  language={[LaTeX]TeX},
+]{hello.tex}
+\end{example}
+When presenting code it is often that we want to point to a specific line. To
+save the reader from counting which line we mean, it is possible to print line
+numbers using \cargv{numbers} key. Its possible values are \cargv{none},
+\cargv{left} and \cargv{right}.
+\begin{example}
+\lstinputlisting[
+  language=C,
+  xleftmargin=1em,%!hide
+  numbers=left,
+]{hello.c}
+\end{example}
+The appearance of numbers may be further customized with the following keys:
+\begin{description}
+  \item[\cargv{firstnumber}] allows you to specify the first number. Besides
+    numbers this key can also contain two special values: \cargv{last} and
+    \cargv{auto} (the default). \cargv{last} continues numbering from the last
+    listing, while \cargv{auto} continues it from the last listing with the
+    same \cargv{name} argument or starts over if no \cargv{name} is present.
+  \item[\cargv{stepnumber}] allows to print only every \(n\)-th number. For
+    example if you pass \cargv{stepnumber=7}, then only line numbers \(1, 8,
+    15, 22, \ldots\) will be printed.
+  \item[\cargv{numberblanklines}] controls whether line numbers are printed on
+    empty lines. Either \cargv{true} or \cargv{false}.
+  \item[\cargv{numberstyle}] allows to customize the font for printing
+    numbers. It accepts switch commands described in Section~\ref{sec:fontsize}.
+\end{description}
+\begin{example}
+\lstinputlisting[
+  language=C,
+  numbers=left,
+  stepnumber=2,
+  numberblanklines=false,
+  firstnumber=4,
+  xleftmargin=1em, %!hide
+  numberstyle=\tiny,
+]{hello.c}
+\end{example}
+
+If you have a long file and want to show it piecewise you can use the
+\cargv{firstline} and \cargv{lastline} keys.
+\begin{example}
+The \lstinline|main| function
+body consists of:
+\lstinputlisting[
+  language=C,
+  firstline=5,
+  lastline=6,
+]{hello.c}
+\end{example}
+
+If you are trying to typeset long lines you may order the \pai{listings} to
+automatically break them using the key \cargv{breaklines}.
+\begin{example}
+\lstinputlisting[
+  language=python,
+  numbers=left,
+  xleftmargin=1em, %!hide
+  breaklines,
+]{factorial.py}
+\end{example}
+You may customize the indentation width with the \cargv{breakindent} key. It
+may be useful to indicate that a linebreak occured using \cargv{prebreak}
+and/or \cargv{postbreak} keys that include their contents before and after an
+artificial linebreak.
+\begin{example}
+\lstinputlisting[
+  language=python,
+  numbers=left,
+  xleftmargin=1em, %!hide
+  breaklines,
+  breakindent=1cm,
+  prebreak=\textrightarrow,
+  postbreak=\textleftarrow,
+]{factorial.py}
+\end{example}
+
+One of the neat features of the \pai{listings} package is that you can evaluate
+\LaTeX{} code inside the code itself. The easiest way is to pass the
+\cargv{texcl} key. It enables \LaTeX{} syntax inside the comments.
+\begin{example}
+\begin{lstlisting}[
+  texcl,
+  language=haskell,
+]
+-- I can use \LaTeX{} here.
+-- The cost is in \texteuro{}
+cost x = show (
+    foldr (+) 0 x
+  ) ++ " eur"
+\end{lstlisting}
+\end{example}
+
+This feature is especially useful with \ci{label} command. We can use it to
+point to a specific line of code without hardcoding it into the document.
+\begin{example}
+\begin{lstlisting}[
+  texcl,
+  numbers=left,
+  xleftmargin=1em, %!hide
+  language=haskell,
+]
+cost x = show (
+    foldr (+) 0 x 
+  ) ++ " eur" -- \label{concat}
+\end{lstlisting}
+The \lstinline|++| in Haskell as
+seen in line~\ref{concat} means
+string concatenation.
+\end{example}
+This has the downside that it introduces empty comments that are just there to
+include label. To fix this we may use the \cargv{escapeinside} key that accepts
+sets the two delimiters between which \LaTeX{} code can be typed. The
+delimiters themselves will not be printed.
+\begin{example}
+  \begin{lstlisting}[
+  escapeinside={(*}{*)},
+  numbers=left,
+  xleftmargin=1em, %!hide
+  language=haskell,
+]
+cost x = show ( (*\label{show}*)
+    foldr (+) 0 x 
+  ) ++ " eur" (*(\texteuro)*)
+\end{lstlisting}
+The \lstinline|show| in Haskell as
+seen in line~\ref{show} converts
+its argument to a string.
+\end{example}
+
+If you do not like the default style of listings, you may customize them using
+the \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
+\cargv{commentstyle}. Note that you will need some font changing commands which
+you will learn about in Section~\ref{sec:fontsize}.
+\begin{example}
+\lstinputlisting[
+  language=SQL,
+  numbers=left,
+  xleftmargin=1em, %!hide
+  basicstyle=\ttfamily,
+  commentstyle=\color{gray},
+  keywordstyle=\itshape,
+]{employee.sql}
+\end{example}
+
+If you intend to use similar options for many listings in the document you may
+use the \ci{lstset} command to set them beforehand. This way you will avoid
+repeating them with every time you want to typeset some code.
+
+\begin{example}[examplewidth=0.4\linewidth]
+\lstset{
+  language=C,
+  numbers=left,
+  xleftmargin=1em, %!hide
+  breaklines,
+  basicstyle=\ttfamily,
+  prebreak=\textrightarrow,
+}
+
+\lstinputlisting{hello.c}
+
+The statement \lstinline|int x = 1;|
+assigns 1 to variable \lstinline|x|.
+\end{example}
+
+\subsection{The \pai{minted} Package}
+
+While the \pai{listings} package allows to typeset pretty decent looking code
+snippets, you may find it still lacking in some respects. The most obvious
+problem is the syntax highlighting: you may find that your language of choice
+is not supported. You can write a custom style for the language but it relies
+on a simple keyword search, so this is an option only for simple languages.
+
+If this is a problem for you it may be worth to consider the \pai*{minted}
+package. It relies on the Pygments~\cite{pygments} program to highlight code.
+In contrast to the \pai{listings} package, this program uses pushdown automata
+to color the code which may produce much better results. Moreover the
+predefined styles and language support are much richer than those offered by
+the \pai{listings} package. This is the package that is used to color examples
+throughout this booklet.
+
+Due to the fact that the \pai{minted} package relies on third party program
+there are two things that you need to do before using it
+\begin{enumerate}
+  \item Ensure that the Pygments program is installed. If you are using a
+        \Unix{} system it is probably enough to execute\\
+        \verb|pip install Pygments|\\
+        You can find more information at their official website:
+        \citeurl{pygments} and in the \pai*{minted} package documentation.
+
+  \item
+        Add \verb|--shell-escape| flag when compiling \LaTeX{} document, for
+        example:\\
+        \verb|xelatex --shell-escape document.tex|
+\end{enumerate}
+It is important to understand what the cryptic flag mentioned in the second
+point actually means. It allows the \LaTeX{} document to call any program via
+shell. Let me repeat this to make the point clear: \emph{Enabling this flag
+  allows the \LaTeX{} document to call any program via shell}. This means that
+maliciously crafted document could for example delete all files from your
+computer. Only enable this flag if the document comes from a trusted source.
+
+Once you meet this requirements you can use the package in a manner similar to
+the previous approaches. It provides
+\begin{lscommand}
+  \ci*{mintinline}[options:o ! language:m ! code:m] \\
+  \ci*{inputminted}[options:o ! language:m ! code:m] \\
+  \ei*{minted}[options:o ! language:m]
+\end{lscommand}
+In contrast to the \pai{listings} the \carg{language} is a required parameter.
+The command \ci{mintinline} works with both normal groups and custom
+delimiters.
+\begin{example}
+\mintinline{latex}|\LaTeX{}|
+
+\begin{minted}{python}
+x = 0
+for i in range(10):
+  x += 2**i
+print(f"Result: {x}")
+\end{minted}
+
+\inputminted{rust}{age.rs}
+\end{example}
+
+Its capabilities are comparable to that of the \pai{listings} package. Some of
+the options have synonyms that makes their usage identical to the
+\pai{listings} package. For example to enable line numbers you may use the
+\cargv{linenos} key (which is a boolean value) or the \cargv{numbers} key
+(which accepts \cargv{left}, \cargv{right}, \cargv{none} or \cargv{both}).
+\begin{example}
+\inputminted[
+  linenos,
+  xleftmargin=1em, %!hide
+]{css}{review.css}
+\end{example}
+You can change the line numbering using \cargv{firstnumber} and
+\cargv{stepnumber}. Additionaly you may highlight some lines using the
+\cargv{highlightlines} key to draw attention to them. Note that
+\cargv{highlightlines} uses the transformed line numbers.
+\begin{chktexignore}
+\begin{example}
+\inputminted[
+  linenos,
+  xleftmargin=1em, %!hide
+  firstnumber=5,
+  stepnumber=3,
+  highlightlines={6, 10-12}
+]{coq}{em.v}
+\end{example}
+\end{chktexignore}
+
+Similarly to the \pai{listings} package, \cargv{breaklines} enables automatic
+breaking of long lines, however it will only break the lines at whitespace
+characters. If you want the breaks to occur anywhere use the
+\cargv{breakanywhere} key. The breaking behaviour may be even more
+fine-tuned using the keys \cargv{breakbytoken}, \cargv{breakbytokenanywhere},
+\cargv{breakbefore} and \cargv{breakafter}.
+\begin{example}
+\inputminted[
+  linenos,
+  xleftmargin=1em, %!hide
+  breaklines,
+]{haskell}{quicksort.hs}
+\end{example}
+As you can see by default it inserts \enquote{\(\hookrightarrow\)} to indicate
+that automatic linebreak occured. You can customise the printed symbols using
+the \cargv{breaksymbolleft} and \cargv{breaksymbolright} keys.
+
+In order to use \LaTeX{} inside the comments you can use either the
+\cargv{texcl} or its synonym \cargv{texcomments}. You can also add custom
+\LaTeX{} escape delimiters using \cargv{escapeinside}, but unlike in
+\pai{listings}, these must be single tokens.
+\begin{example}
+\begin{minted}[
+  linenos,
+  xleftmargin=1em, %!hide
+  texcomments,
+  escapeinside=||,
+]{html}
+<!DOCTYPE html>
+<html>
+  <head> |\label{head}|
+    <title>On |\LaTeX{}|</title>
+  </head>
+  <body>
+    <div class="review">
+      <!-- \LaTeX{} review -->
+      <p>It is awesome!</p>
+    </div>
+  </body>
+</html>
+\end{minted}
+The \mintinline{html}{<head>} 
+element in line~\ref{head}
+contains page metadata.
+\end{example}
+
+The Pygments program comes with a lot of predefined styles for typesetting your
+code. In order to choose between them use the \cargv{style} key.
+\begin{example}
+\inputminted[
+  style=bw,
+]{bash}{echo.sh}
+\inputminted[
+  style=sas,
+]{bash}{echo.sh}
+\inputminted[
+  style=xcode,
+]{bash}{echo.sh}
+\end{example}
+
+To avoid setting the options with every listing with every code snippet you
+include you can use \ci{setminted} to define the default values.
+\begin{example}
+\setminted{
+  linenos,
+  xleftmargin=1em, %!hide
+  breaklines,
+  style=xcode,
+}
+\inputminted{c++}{goodbye.cpp}
+\end{example}
 
 \section{Tables}\label{sec:tables}
 
