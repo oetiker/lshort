@@ -174,7 +174,7 @@ Section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
 
 Books are often typeset with each line having the same length.
 \LaTeX{} inserts the necessary \wi{line break}s and spaces between words
-by optimizing the contents of a whole paragraph. If necessary, it
+by optimising the contents of a whole paragraph. If necessary, it
 also hyphenates words that would not fit comfortably on a line.
 How the paragraphs are typeset depends on the document class.
 Normally the first line of a paragraph is indented, and there is no
@@ -323,7 +323,7 @@ text strings:
 \LaTeX{} knows four kinds of \wi{dash}es. Access three of them with different
 number of consecutive dashes. The fourth sign is actually not a dash at
 all---it is the mathematical minus sign. It is typed automatically when inside
-math mode which is described later in Chatper~\ref{chap:math}.
+math mode which is described later in Chapter~\ref{chap:math}.
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
@@ -977,7 +977,7 @@ package is useful. It defines environments
   \ei{FlushRight} \\
   \ei{Center}
 \end{lscommand}
-which allow you to achieve left-aligned, right-aligned and centered text.
+which allow you to achieve left-aligned, right-aligned and centred text.
 
 \begin{example}
 \begin{FlushLeft}
@@ -1065,7 +1065,7 @@ spans more than three lines or contains more than one paragraph. The number of
 lines may be changes using the \cargv{threshold} package options. If you prefer
 to count words instead of lines you may change the \cargv{thresholdtype} from
 lines to words and set \cargv{threshold} accordingly. If you want to ignore
-paragarphs and rely only on automatic lines\slash{}words counting, set the
+paragraphs and rely only on automatic lines\slash{}words counting, set the
 \cargv{parthreshold} to false.
 
 The quote attribution shown in the previous examples is especially useful when
@@ -1115,7 +1115,7 @@ switching to a given language using a polyglossia command and then using
 \begingroup
 \setmonofont{cmuntt.otf}
 \begin{example}
-As Dostoyevsky once wrote
+As Dostoevsky once wrote
 \foreignquote{russian}{%
   Мир спасёт красота.}
 %!hidebegin
@@ -1158,13 +1158,13 @@ attribution and are not context sensitive.
 
 \begin{example}
 I wanted to quote my
-favorite speech:
+favourite speech:
 \begin{quotation}
   This is a very
   long speech.
 
   It spans over multiple
-  paragarphs.
+  paragraphs.
 \end{quotation}
 \end{example}
 
@@ -1188,7 +1188,7 @@ snippets like this \verb|\LaTeX{}|. While you could escape all the characters,
 this would quickly become rather tiresome, especially for longer pieces of
 code. This can be done much more easily by using the \ci{verb} command.
 
-The \ci{verb} command is unusual in that it does not use group for gettings its
+The \ci{verb} command is unusual in that it does not use group for getting its
 first argument. Instead you pass it between a chosen delimiters that can be
 any character except for letters, \verb|*| or space.
 
@@ -1873,7 +1873,7 @@ and height.
 \end{example}
 
 Instead of specifying width or height you may also pass the \cargv{scale}
-argument to scale it by a specific amount. Passsing negative values will
+argument to scale it by a specific amount. Passing negative values will
 reflect the image.
 \begin{example}
 \includegraphics[
@@ -1893,11 +1893,11 @@ If you want to rotate the picture you may pass the \cargv{angle} key. By
 default the image is rotated around bottom left corner. You may change the
 anchor point by specifying the \cargv{origin} key. Its value may contain one or
 two of the following specifications: \cargv{l} for left, \cargv{r} for right,
-\cargv{c} for center, \cargv{t} for top, \cargv{b} for bottom and \cargv{B} for
+\cargv{c} for centre, \cargv{t} for top, \cargv{b} for bottom and \cargv{B} for
 baseline (useful with \TikZ{} pictures as described in
 Chapter~\ref{chap:graphics}). So for example \cargv{lc} will rotate the image
-about the center of its left edge, while \cargv{c} will rotate it around its
-center.
+about the centre of its left edge, while \cargv{c} will rotate it around its
+centre.
 \begin{example}
 Text \includegraphics[
   scale=0.1, %!hide
@@ -1962,7 +1962,7 @@ from the \ci{documentclass} options if specified there.
 If you try writing a longer text with tables and images you will soon notice a
 problem: they cannot be broken across multiple pages (except for the
 \pai{longtable}). If you simply include them in normal text flow this will lead
-to a lot of empty space if the image is large and the text preceeding it would
+to a lot of empty space if the image is large and the text preceding it would
 be to close to the bottom of the page. In the example below the first page is
 half empty.
 \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
@@ -2154,10 +2154,10 @@ use the \pai*{newfloat} package. It provides the
 \begin{lscommand}
   \ci{DeclareFloatingEnvironment}[options][name]
 \end{lscommand}
-For exampmle the \verb|\DeclareFloatingEnvironment{cat}| will define a new
+For example the \verb|\DeclareFloatingEnvironment{cat}| will define a new
 environment \verb|cat| that can be used similarly to \ei{figure} and \ei{table}
 environment and \verb|\listofcats| that works analogously to \ci{listoftables}.
-You can customize the float using the \carg{options} to change the printed
+You can customise the float using the \carg{options} to change the printed
 captions (\cargv{name}), list title (\cargv{listname}) or default placement
 (\cargv{placement}).
 
