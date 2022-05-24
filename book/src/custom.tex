@@ -3,7 +3,7 @@
 % Contents: Customising LaTeX output
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Customising \LaTeX}
+\chapter{Customising \LaTeX}\label{chap:custom}
 
 \begin{intro}
   Documents produced with the commands you have learned up to this
@@ -19,7 +19,6 @@
   how to teach \LaTeX{} new tricks and how to make it produce output
   that looks different from what is provided by default.
 \end{intro}
-
 
 \section{New Commands, Environments and Packages}
 
@@ -52,7 +51,6 @@ easier than going through the whole document to hunt down all the
 places where I have used some generic \LaTeX{} commands to draw a
 box around some word.
 
-
 \subsection{New Commands}\label{sec:new_commands}
 
 To add your own commands, use the
@@ -78,8 +76,8 @@ and over again.
 \NewDocumentCommand{\tnss}{}{%
   The not so Short Introduction to
     \LaTeXe}
-This is ``\tnss'' \ldots{}
-``\tnss''
+This is \enquote{\tnss} \ldots{}
+\enquote{\tnss}
 \end{example}
 
 The next example illustrates how to define a new
@@ -263,10 +261,10 @@ My humble subjects \ldots
 
 If you want to create a starred version of an environment (similarly to some
 \hologo{AmSLaTeX} environments) you have to define it separately.
-\begin{verbatim}
+\begin{minted}{latex}
 \NewDocumentEnvironment{king}{moo} { ... } { ... }
 \NewDocumentEnvironment{king*}{moo} { ... } { ... }
-\end{verbatim}
+\end{minted}
 Obviously you can use the same internal commands to define them, for example
 renaming the previous implementation to \cargv{kinginternal} making the
 \cargv{king} and \cargv{king*} a thin wrapper around it.
@@ -302,38 +300,40 @@ define an environment that already exists. If you ever want to change an
 existing environment, use the \ci{RenewDocumentEnvironment} command. Its
 arguments are exactly the same as the \ci{NewDocumentEnvironment} command.
 
-\subsection{Copying commands}
+\subsection{Copying commands}\label{sec:copyingcommands}
 
 When redefining commands you may want to use the original version of the
 command. Your initial code may look like this
-\begin{verbatim}
+\begin{minted}{latex}
 \RenewDocumentCommand{\emph}{m}{%
-  \emph{#1}~(``#1'' is emphasised)%
+  \emph{#1}~(\enquote{#1} is emphasised)%
 }
-\end{verbatim}
+\end{minted}
 but when you try to compile the document you will receive the error
-\begin{verbatim}
+\begin{minted}{console}
 ! TeX capacity exceeded, sorry [input stack size=5000].
-\end{verbatim}
+\end{minted}
 
 To understand why this happens it is instructive to consider how \TeX{} expands
 the defined commands. The above \ci{RenewDocumentCommand} tells the \TeX{}
 engine that whenever \ci*{emph}[foo:vm] is seen it must replace it with
-\verb|\emph{foo}~(``foo'' is emphasised)|. You may already see the problem here.
-In the next stage it will again replace the \ci*{emph}[foo:vm] yielding
-\begin{verbatim}
-\emph{foo}~(``foo'' is emphasised)~(``foo'' is emphasised)
-\end{verbatim}
+\mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
+problem here. In the next stage it will again replace the \ci*{emph}[foo:vm]
+yielding
+\begin{minted}{latex}
+\emph{foo}~(\enquote{foo} is emphasised)~
+  (\enquote{foo} is emphasised)
+\end{minted}
 This process will never end and at some point \TeX{}
 simply gives up.
 
 Note that
-\begin{verbatim}
+\begin{minted}{latex}
 \NewDocumentCommand{\oldemph}{m}{\emph{#1}}
 \RenewDocumentCommand{\emph}{m}{%
-  \oldemph{#1}~(``#1'' is emphasised)%
+  \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
-\end{verbatim}
+\end{minted}
 will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
 with \verb|\emph{...}| and the cycle repeats.
 
@@ -355,10 +355,10 @@ It makes the \carg{name} the exact copy of the \carg{command}. The following exa
 
 This is precisely the behaviour we need in order to redefine the \ci{emph}
 command as we have tried to do earlier.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.35\linewidth]
 \NewCommandCopy{\oldemph}{\emph}
 \RenewDocumentCommand{\emph}{m}{%
-  \oldemph{#1}~(``#1'' is emphasised)%
+  \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 
 And here it \emph{comes}.
@@ -371,18 +371,18 @@ If you work on a Unix-like OS, you might be using Makefiles to build your
 different versions of the same document by calling \LaTeX{} with command-line
 parameters. If you add the following structure to your document:
 
-\begin{verbatim}
+\begin{minted}{latex}
 \IfBooleanTF{\blackandwhite} {
   % "black and white" mode; do something...
 } {
   % "color" mode; do something different...
 }
-\end{verbatim}
+\end{minted}
 
 Now compile document like this:
 \begin{verbatim}
 xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
-  \input{test.tex}'
+    \input{test.tex}'
 \end{verbatim}
 First the command \verb|\blackandwhite| is defined as the \ci{BooleanTrue} macro which
 holds a special value used in \ci{IfBooleanTF} checks. Then the actual file is
@@ -399,7 +399,7 @@ command to make the package available in your document.
 
 \begin{figure}[!htbp]
   \begin{lined}{\textwidth}
-    \begin{verbatim}
+    \begin{minted}{latex}
 \ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
   Package by Tobias Oetiker
 }
@@ -416,7 +416,7 @@ command to make the package available in your document.
 } {
   \end{quote}
 }
-\end{verbatim}
+\end{minted}
   \end{lined}
   \caption{Example Package.}\label{package}
 \end{figure}
@@ -504,7 +504,6 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \bigskip
 \end{table}
 
-
 \begin{table}[!bp]
   \centering
   \caption{Font Sizes.}\label{sizes}\index{font size}
@@ -555,7 +554,6 @@ special set of commands; refer to Table~\ref{mathfonts}.
   \bigskip
 \end{table}
 
-
 \begin{table}[!bp]
   \centering
   \caption{Math Fonts.}\label{mathfonts}
@@ -603,7 +601,6 @@ paragraph ends within the scope of the font size command. The closing curly
 brace \verb|}| should therefore not come too early.  Note the position of
 the \ci{par} command in the next two examples.\footnote{\texttt{\bs{}par}
   is equivalent to a blank line}
-
 
 \begin{example}
 {\Large Don't read this!
@@ -746,7 +743,6 @@ place below the command \verb|\tableofcontents| or to not use them at all,
 because you'll find that most professional books use indenting and not
 spacing to separate paragraphs.
 
-
 If you want to indent a paragraph that is not indented, use
 \begin{lscommand}
   \ci{indent}
@@ -814,7 +810,6 @@ remaining space on a line is filled up. If multiple
 line, they occupy all available space in proportion of their respective
 stretch factors.
 
-
 \begin{example}
 x\hspace{\stretch{1}}
 x\hspace{\stretch{3}}x
@@ -846,12 +841,12 @@ The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
 be used to typeset text on the last line of a page, or to centre text
 vertically on a page.
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 Some text \ldots
 
 \vspace{\stretch{1}}
 This goes onto the last line of the page.\pagebreak
-\end{verbatim}
+\end{minted}
 \end{code}
 
 Additional space between two lines of \emph{the same} paragraph or
@@ -863,7 +858,6 @@ within a table is specified with the
 
 With \ci{bigskip} and \ci{smallskip} you can skip a predefined amount of
 vertical space without having to worry about exact numbers.
-
 
 \section{Page Layout}
 
@@ -1072,7 +1066,6 @@ the vertical.\footnote{Total control is only to be obtained by
   controlling both the horizontal and the vertical \ldots}
 No problem for \LaTeX{}. The
 
-
 \begin{lscommand}
   \ci{raisebox}\verb|{|\emph{lift}\verb|}[|\emph{extend-above-baseline}\verb|][|\emph{extend-below-baseline}\verb|]{|\emph{text}\verb|}|
 \end{lscommand}
@@ -1081,7 +1074,6 @@ No problem for \LaTeX{}. The
 box. You can use \ci{width}, \ci{height}, \ci{depth}, and
 \ci{totalheight} in the first three parameters, in order to act
 upon the size of the box inside the \emph{text} argument.
-
 
 \begin{example}
 \raisebox{0pt}[0pt][0pt]{\Large%
@@ -1118,7 +1110,9 @@ lines. The line on the title page, for example, has been created with a
 \ci{rule} command.
 
 \bigskip
-{\flushright The End.\par}
+\begin{FlushRight}
+  The End.
+\end{FlushRight}
 
 %
 

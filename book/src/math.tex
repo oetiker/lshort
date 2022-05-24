@@ -24,7 +24,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Typesetting Mathematical Formulae}
+\chapter{Typesetting Mathematical Formulae}\label{chap:math}
 
 \begin{intro}
   Now you are ready! In this chapter, we will attack the main strength
@@ -34,8 +34,6 @@
   solution to your mathematical typesetting needs here. It is highly likely
   that your problem is addressed in \hologo{AmSLaTeX}.
 \end{intro}
-
-
 
 \section{The \hologo{AmSLaTeX} bundle}
 
@@ -194,14 +192,11 @@ $x^{2} \geq 0\qquad
 See Table~\ref{mathalpha} on page~\pageref{mathalpha} and
 Table~\ref{mathfonts} on page~\pageref{mathfonts} for more math fonts.
 
-
-
 \section{Building Blocks of a Mathematical Formula}
 
 In this section, we describe the most important commands used in mathematical
 typesetting. Most of the commands in this section will not require
 \textsf{amsmath} (if they do, it will be stated clearly), but load it anyway.
-
 
 \emph{Lowercase \wi{Greek letters}} are entered as \ci{alpha},
 \ci{beta}, \ci{gamma}, \ldots, uppercase letters
@@ -215,7 +210,6 @@ list of Greek letters.
 $\lambda,\xi,\pi,\theta,
  \mu,\Phi,\Omega,\Delta$
 \end{example}
-
 
 \emph{Exponents, Superscripts and Subscripts} can be specified using%
 \index{exponent}\index{subscript}\index{superscript}
@@ -235,7 +229,6 @@ $p^3_{ij} \qquad
  e^{x^2} \neq {e^x}^2$
 \end{example}
 
-
 The \emph{\wi{square root}} is entered as \ci{sqrt}; the
 \carg{n}-th root is generated with \ci*{sqrt}[n:o]. The size of
 the root sign is determined automatically by \LaTeX. If just the sign
@@ -249,7 +242,6 @@ $\sqrt{x} = x^{1/2}
  \quad \sqrt{x^{2} + \sqrt{y}}
  \quad \surd[x^2 + y^2]$
 \end{example}
-
 
 While the \emph{\wi{dot}} sign to indicate%
 \index{dots!three}\index{vertical!dots}\index{horizontal!dots}
@@ -299,7 +291,6 @@ $f(x) = x^2 \qquad f'(x)
  \quad \bar{x_0} \quad \bar{x}_0$
 \end{example}
 
-
 \emph{Vectors}\index{vectors} are often specified by adding small
 \wi{arrow symbols} on the tops of variables. This is done with the
 \ci{vec} command. The two commands \ci{overrightarrow} and
@@ -309,7 +300,6 @@ $\vec{a} \qquad
  \vec{AB} \qquad
  \overrightarrow{AB}$
 \end{example}
-
 
 Names of functions are often typeset in an upright
 font, and not in italics as variables are, so \LaTeX{} supplies the
@@ -441,8 +431,6 @@ expressions, \pai{amsmath} provides the \ci{substack} command:
 \end{equation*}
 \end{example}
 
-
-
 \LaTeX{} provides all sorts of symbols for \emph{\wi{bracketing}} and other
 \emph{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$). %chktex 9
 Round and square brackets can be entered with the corresponding keys and
@@ -562,7 +550,6 @@ and readable structure.
 Before we offer our suggestions on how to do this, we start with a few
 bad examples that show the biggest drawbacks of some common solutions.
 
-
 \subsection{Problems with Traditional Commands}%
 \label{sec:problems_traditional}
 
@@ -666,9 +653,9 @@ First of all, in order to be able to use the
 package\footnote{The \pai{IEEEtrantools} package may not be included in your setup, it can be found on CTAN.}
 \pai*{IEEEtrantools}. Include the following line in the header of
 your document: \small
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{IEEEtrantools}
-\end{verbatim}
+\end{minted}
 \normalsize
 
 The strength of \ei{IEEEeqnarray} is the ability to specify
@@ -710,9 +697,9 @@ solve the most common problems.
 If a line overlaps with the equation number as in%
 ~\eqref{eq:faultyeqnarray}, the command
 \small
-\begin{verbatim}
+\begin{minted}{latex}
 \IEEEeqnarraynumspace
-\end{verbatim}
+\end{minted}
 \normalsize
 can be used: it has to be added in the corresponding line and makes
 sure that the whole equation array is shifted by the size of the
@@ -1415,7 +1402,6 @@ the syntax, so it is worth a look:
 \end{equation*}
 \end{example}
 
-
 Matrices\index{matrix} can be typeset by \ei{array}, but
 \pai{amsmath} provides a better solution using the different \ei{matrix}
 environments. There are six versions with different delimiters: \ei{matrix}
@@ -1441,8 +1427,6 @@ very often you need 10 columns!):
   \end{bmatrix}
 \end{equation*}
 \end{example}
-
-
 
 \section{Spacing in Math Mode}\label{sec:math-spacing}%
 \index{math spacing}
@@ -1517,7 +1501,6 @@ The easiest way to understand this is to look at an example:
 If you want to typeset a lot of isotopes as in the example, the \pai{mhchem}
 package is very useful for typesetting isotopes and chemical formulae too.
 
-
 \section{Fiddling with the Math Fonts}\label{sec:fontsz}
 Different math fonts are listed on Table~\ref{mathalpha} on page~\pageref{mathalpha}.
 \begin{example}
@@ -1530,12 +1513,12 @@ The last two require \pai{amssymb} or \pai{amsfonts}.
 
 Sometimes you need to tell \LaTeX{} the correct font
 size. In math mode, this is set with the following four commands:
-\begin{flushleft}
-  \ci{displaystyle}~($\displaystyle 123$),
-  \ci{textstyle}~($\textstyle 123$),
-  \ci{scriptstyle}~($\scriptstyle 123$) and
-  \ci{scriptscriptstyle}~($\scriptscriptstyle 123$).
-\end{flushleft}
+\begin{lscommand}
+  \ci{displaystyle}~($\displaystyle 123$)\\
+  \ci{textstyle}~($\textstyle 123$)\\
+  \ci{scriptstyle}~($\scriptstyle 123$)\\
+  \ci{scriptscriptstyle}~($\scriptscriptstyle 123$)
+\end{lscommand}
 
 If $\sum$ is placed in a fraction, it'll be typeset in text style unless you tell
 \LaTeX{} otherwise:
@@ -1554,7 +1537,6 @@ Changing styles generally affects the way big operators and limits are displayed
 
 % This is not a math accent, and no maths book would be set this way.
 % mathop gets the spacing right.
-
 
 \subsection{Bold Symbols}%
 \index{bold symbols}
@@ -1580,7 +1562,6 @@ a \ci{boldsymbol} command:
 $\mu, M \qquad
 \boldsymbol{\mu}, \boldsymbol{M}$
 \end{example}
-
 
 \section{Theorems, Lemmas, \ldots}
 
@@ -1624,11 +1605,11 @@ remove any remaining doubt, and make it clear that the
 
 First define the theorems:
 
-\begin{verbatim}
+\begin{minted}{latex}
 \theoremstyle{definition} \newtheorem{law}{Law}
 \theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
 \theoremstyle{remark}     \newtheorem*{marg}{Margaret}
-\end{verbatim}
+\end{minted}
 
 \begin{example}
 \begin{law}\label{law:box}
@@ -1666,7 +1647,6 @@ subsection.
 
 If you want to customize your theorems down to the last dot, the
 \pai{ntheorem} package offers a plethora of options.
-
 
 \subsection{Proofs and End-of-Proof Symbol}\label{sec:putting-qed-right}
 
@@ -1785,7 +1765,6 @@ which contrasts with
   \end{IEEEeqnarray}  
 \end{proof}
 \end{example}
-
 
 %
 

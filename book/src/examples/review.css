@@ -1,0 +1,7 @@
+.review {
+    font-size: large;
+    background-color: darkred;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+}

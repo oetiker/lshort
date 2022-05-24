@@ -8,7 +8,7 @@ if (defined $sha) {
 }
 
 while (<STDIN>) {
-  s/^Version.+/Version~$v, $d/ if not (defined $sha);
-  s/^Version.+/Nightly version~$v\@$sha, $d/ if (defined $sha);
+  s/!versionplaceholder!/Version~$v, $d/ if not (defined $sha);
+  s/!versionplaceholder!/Nightly version~$v\@$sha, $d/ if (defined $sha);
   print;
 }

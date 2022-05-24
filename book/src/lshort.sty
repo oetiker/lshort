@@ -25,6 +25,8 @@
 \RequirePackage{mflogo}
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
+\RequirePackage{listings}
+\RequirePackage[kpsewhich]{minted}
 \RequirePackage{fancyhdr}
 \RequirePackage{booktabs}
 \RequirePackage{caption}
@@ -182,16 +184,19 @@
   }
 }
 
-\NewDocumentCommand{\ci}{smoo}{
-  \cih{#2}\texttt{\bs #2}
+\NewDocumentCommand{\ci}{smsoo}{
+  \texttt{\bs #2}
+  \IfBooleanF {#3} {
+    \cih{#2}
+  }
   \IfBooleanTF {#1} {
-    \lshort@arglist{#3}
+    \lshort@arglist{#4}
   }{
-    \IfValueT {#3} {
-      \IfValueTF {#4} {
-        \texttt{[}\emph{#3}\texttt{]\{}\emph{#4}\texttt{\}}
+    \IfValueT {#4} {
+      \IfValueTF {#5} {
+        \texttt{[}\emph{#4}\texttt{]\{}\emph{#5}\texttt{\}}
       } {
-        \texttt{\{}\emph{#3}\texttt{\}}
+        \texttt{\{}\emph{#4}\texttt{\}}
       }
     }
   }
@@ -211,7 +216,7 @@
   \paih{#2}\textsf{#2}\IfBooleanT{#1}{\,\cite{pack:#2}}%
 }
 % Active characters
-\NewDocumentCommand{\ai}{m}{\index{#1@\texttt{#1{}}}\texttt{#1{}}}
+\NewDocumentCommand{\ai}{m}{\texttt{#1{}}\index{#1@\texttt{#1{}}}}
 % Index entry for an environment
 \ExplSyntaxOn
 \NewDocumentCommand{\eih}{m} {
@@ -219,21 +224,17 @@
   \index{#1@\texttt{#1}}
 }
 \NewDocumentCommand{\ei}{smo} {
-  \eih{#2}
-  \IfValueTF {#3} {
-    \textbackslash{}begin\{\texttt{#2}\}
+  \IfBooleanTF {#1} {
+    \texttt{\textbackslash{}begin\{#2\}}
     \IfValueT {#3} {
       \lshort@arglist{#3}
     }
-    \\
-    \scriptsize
-    \textbackslash{}end\{\texttt{#2}\}
   } {
     \texttt{#2}
     \IfValueT {#3} {
       \lshort@arglist{#3}
     }
-  }
+  }\eih{#2}
 }
 \ExplSyntaxOff
 % Indexentry for a word (Word inserted into the text)
@@ -289,6 +290,13 @@
 \NewDocumentEnvironment{chktexignore}{}{}{}
 
 \NewDocumentCommand{\smiley}{}{\texttt{;-)}}
+\NewDocumentCommand{\Unix}{}{Unix-like}
+\NewDocumentCommand{\TikZ}{}{Ti\textit{k}Z}
+
+% Change default float settings
+\g@addto@macro\@floatboxreset\centering
+
+\RenewExpandableDocumentCommand{\fps@figure}{}{htpb}
 \ExplSyntaxOff
 
 %\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}

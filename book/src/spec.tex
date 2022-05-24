@@ -4,7 +4,7 @@
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Specialities}
+\chapter{Specialities}\label{chap:spec}
 \begin{intro}
   When putting together a large document, \LaTeX{} will help with some special
   features like index generation, automatic linking to relevant pages and other
@@ -546,8 +546,7 @@ document as if it were inside a \ei{verbatim} environment.
 
 As the \pai{verbatim} package is part of the `tools' bundle, you
 should find it pre-installed on most systems. If you want to know more
-about this package, make sure to read~\cite{verbatim}.
-
+about this package, make sure to read~\cite{pack:verbatim}.
 
 \section{Installing Extra Packages}\label{sec:Packages}
 
@@ -610,7 +609,6 @@ step~\ref{step:next} and~\ref{step:final}:
 
 \noindent Be sure to run \LaTeX\ on the \texttt{.dtx} one last
 time before moving on to step~\ref{step:final}.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Contents: Chapter on pdfLaTeX
@@ -678,7 +676,7 @@ Many options are available to customize the behaviour of the
 In the following
 list the default values are written in an upright font.
 
-\begin{flushleft}
+\begin{FlushLeft}
   \begin{description}
     \item [\texttt{bookmarks (=true,\textsl{false})}] show or hide the
           bookmarks bar when displaying the document
@@ -711,35 +709,35 @@ list the default values are written in an upright font.
                   links (mail, web)
           \end{description}
   \end{description}
-\end{flushleft}
+\end{FlushLeft}
 
 If you are happy with the defaults, use
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{hyperref}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 To have the bookmark list open and links in colour
 (the \texttt{=true} values are optional):
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage[bookmarks,colorlinks]{hyperref}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 When creating PDFs destined for printing, coloured links are not a
 good thing as they end up in gray in the final output, making it
 difficult to read. Use colour frames, which are not printed:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{hyperref}
 \hypersetup{colorlinks=false}
-\end{verbatim}
+\end{minted}
 \end{code}
 \noindent or make links black:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{hyperref}
 \hypersetup{colorlinks,%
             citecolor=black,%
@@ -747,17 +745,17 @@ difficult to read. Use colour frames, which are not printed:
             linkcolor=black,%
             urlcolor=black,%
             pdftex}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 When you just want to provide information for the
 \texttt{Document Info} section of the PDF file:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage[pdfauthor={Pierre Desproges},%
             pdftitle={Des femmes qui tombent},%
             pdftex]{hyperref}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 \vspace{\baselineskip}
@@ -770,9 +768,9 @@ possible to embed explicit links using
 
 The code
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 The \href{http://www.ctan.org}{CTAN} website.
-\end{verbatim}
+\end{minted}
 \end{code}
 produces the output ``\href{http://www.ctan.org}{CTAN}'';
 a click on the word ``\textcolor{magenta}{CTAN}''
@@ -780,9 +778,9 @@ will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
 use the \ci{href} command without the \enquote*{\texttt{http://}} bit:
-\begin{verbatim}
-  The complete document is \href{manual.pdf}{here}
-\end{verbatim}
+\begin{minted}{latex}
+The complete document is \href{manual.pdf}{here}
+\end{minted}
 which produces the text ``The complete document is \textcolor{cyan}{here}''.
 A click on the word
 ``\textcolor{cyan}{here}''
@@ -793,10 +791,10 @@ The author of an article might want her readers to easily send
 email messages by using the \ci{href} command inside the \ci{author}
 command on the title page of the document:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \author{Mary Oetiker $<$\href{mailto:mary@oetiker.ch}%
        {mary@oetiker.ch}$>$
-\end{verbatim}
+\end{minted}
 \end{code}
 Note that I have put the link so that my email address appears not only
 in the link but also on the page itself. I did this because the
@@ -805,7 +803,6 @@ link\\
 would
 work well within Acrobat, but once the page is printed the email address
 would not be visible anymore.
-
 
 \subsection{Problems with Links}
 
@@ -847,13 +844,12 @@ the bookmarks, which replaces the offending text:
   \ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
 \end{lscommand}
 
-
 Math expressions are a prime candidate for this kind of problem:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \section{\texorpdfstring{$E=mc^2$}%
         {E = mc ** 2}}
-\end{verbatim}
+\end{minted}
 \end{code}
 which turns \verb+\section{$E=mc^2$}+ to ``E = mc ** 2'' in the bookmark area.
 
@@ -878,10 +874,10 @@ to use any font known to the operating system. If you have the \texttt{Linux
   Libertine} fonts installed, you can simply say
 
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{fontspec}
 \setmainfont[Ligatures=TeX]{Linux Libertine}
-\end{verbatim}
+\end{minted}
 \end{code}
 %
 in the preamble. This will normally detect the italic and bold versions as
@@ -898,7 +894,7 @@ takes less space than the ``0'') or monospaced numerals which are suitable
 for tables.
 
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \newfontfamily\LLln[Numbers=Lining]{(font)}
 \newfontfamily\LLos[Numbers=OldStyle]{(font)}
 \newfontfamily\LLlnm[
@@ -907,7 +903,7 @@ for tables.
 \newfontfamily\LLosm[
   Numbers=OldStyle,Numbers=Monospaced
 ]{(font)}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 Almost all OpenType fonts contain the standard ligatures (fl fi ffi) but
@@ -916,11 +912,11 @@ not want to use them in a technical report but they are fine for a novel. To
 enable these ligatures use either of the following lines:
 
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \setmainfont[Ligatures=Rare]{(font)}
 \setmainfont[Ligatures=Historic]{(font)}
 \setmainfont[Ligatures=Historic,Ligatures=Rare]{(font)}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 Not every font contains both sets of ligature, consult the font
@@ -928,9 +924,9 @@ documentation or just try it out. Sometimes these ligatures are language
 dependent; for example a ligature used in Polish (fk) is not used in English. You have
 to add
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \setmainfont[Language=Polish]{(font)}
-\end{verbatim}
+\end{minted}
 \end{code}
 to enable the Polish ligatures.
 
@@ -942,9 +938,9 @@ distributed with \TeX{}Live~2010\footnote{The behavior has changed with this
 feature you have to define the font with disabled contextuals:
 
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 \setmainfont[Contextuals=NoAlternate]{(font)}
-\end{verbatim}
+\end{minted}
 \end{code}
 
 To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
@@ -1018,7 +1014,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 % et convertie en jpg toujours par ImageMagick.
 
 \begin{figure}[htbp]
-  \begin{verbatim}
+  \begin{minted}{latex}
 \documentclass[10pt]{beamer}
 \mode<beamer>{%
   \usetheme[hideothersubsections,
@@ -1051,7 +1047,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
   and many other things
 \end{frame}
 \end{document}
-\end{verbatim}
+\end{minted}
   \caption{Sample code for the \pai{beamer} class}%
   \label{fig:code-beamer}
 \end{figure}
@@ -1133,8 +1129,6 @@ In any case make sure to read through the beamer class documentation
 \texttt{beameruserguide.pdf} to get a complete picture of what is in
 store for you. This package is being actively developed, check out their website
 to get the latest information. (\href{http://latex-beamer.sourceforge.net/}{http://latex-beamer.sourceforge.net/})
-
-
 
 % Local Variables:
 % TeX-master: "lshort2e"

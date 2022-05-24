@@ -3,10 +3,11 @@ defaultIndent: "  "
 verbatimEnvironments:
   example: 1
   code: 1
+  chktexignore: 1
 
 modifyLineBreaks:
   textWrapOptions:
-    columns: 70
+    columns: 0
     blocksFollow:
       other: |-
         (?x)
