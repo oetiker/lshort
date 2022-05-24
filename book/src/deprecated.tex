@@ -199,21 +199,22 @@ Section~\ref{sec:IEEEeqnarray}.
 These are \hologo{plainTeX} commands. Each of them resets the font to normal
 before changing it, so for example bold italics cannot be achieved using them.
 Use newer commands as described in Section~\ref{sec:fontsize}.
+\chto|{\bf foo}||\textbf{foo}|
 \chto|{\bf foo}||{\bfseries foo}|
 
 \section{Changing Text Alignment}
 \instead{
-  \ci{flushleft}  \\
-  \ci{flushright} \\
-  \ci{center}
+  \ei*{flushleft}  \\
+  \ei*{flushright} \\
+  \ei*{center}
 }{
-  \ci{FlushLeft} \\
-  \ci{FlushRight} \\
-  \ci{Center} \\
+  \ei*{FlushLeft} \\
+  \ei*{FlushRight} \\
+  \ei*{Center} \\
   (\pai{ragged2e})
 }
 
-The default \hologo{LaTeX2e} commands for changing text alignment make it
+The default \hologo{LaTeX2e} environments for changing text alignment make it
 nearly impossible to hyphenate words inside them. Therefore it is recommended
 to use the \pai{ragged2e} equivalents, as described in
 Section~\ref{sec:ragged}, that make the text less \enquote*{ragged} than it
@@ -259,7 +260,9 @@ greater control over the typesetting of the quotations.
 
 \LaTeX{} defines its own \ei{verbatim} environment, however there are problems
 with it. Firstly due to the way delimiting is handled you cannot put spaces
-between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|. % chktex 9
+\begin{chktexignore}
+  between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|.
+\end{chktexignore}
 Second and more important problem is that it reads the whole input at once
 which risks overflowing \TeX{}'s memory. The \pai{verbatim} package described
 in Section~\ref{sec:verbatim} solves both of these problems.
