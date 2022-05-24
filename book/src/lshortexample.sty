@@ -38,13 +38,13 @@
 
   biber .bool_set:N = \__lshortexample_biber_run,
   biber_dir .tl_set:N = \__lshortexample_biber_dir,
-  biber_dir .initial:n  = .,
+  biber_dir .initial:n  = src/examples/,
 
   cache_dir .tl_set:N  = \__lshortexample_cache_dir_tl,
-  cache_dir .initial:n  = example_cache/,
+  cache_dir .initial:n  = pdfbuild/example_cache/,
 
   template_dir .tl_set:N  = \__lshortexample_template_dir_tl,
-  template_dir .initial:n  = ../src/templates/,
+  template_dir .initial:n  = src/templates/,
 
   template .tl_set:N  = \__lshortexample_template_tl,
   template .initial:n  = default,
@@ -209,17 +209,17 @@
   }
   \begin{minipage}{\l_tmpa_dim}
     \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-      \fancyframebox{0.1pt}{0pt}{
-        \includegraphics[
-          width=\__lshortexample_paperwidth,
-          page=##1]{
-          \__lshortexample_cache_dir_tl\l_tmpb_tl
-        }
+    \fancyframebox{0.1pt}{0pt}{
+      \includegraphics[
+        width=\__lshortexample_paperwidth,
+        page=##1]{
+        \__lshortexample_cache_dir_tl\l_tmpb_tl
       }
-      \bool_if:nT {
-        \__lshortexample_vertical_pages_bool &&
-        !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
-      } {\\[-1pt]}
+    }
+    \bool_if:nT {
+    \__lshortexample_vertical_pages_bool &&
+    !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
+    } {\\[-1pt]}
     }
   \end{minipage}
   \group_end:
