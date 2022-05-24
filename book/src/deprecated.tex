@@ -3,9 +3,9 @@
 
 \begin{intro}
   \LaTeX{} has been around for well over 30 years now. And it has remained
-  largly backward compatible. This means you can scrib use text and tricks from
+  largely backward compatible. This means you can use text and tricks from
   a friends document written ten years ago and use them in your document today.
-  In many intances this is totally fine, in others, while \LaTeX{} works fine
+  In many instances this is totally fine, in others, while \LaTeX{} works fine
   with the old code, you still should not do it. Have a look!
 \end{intro}
 
@@ -242,12 +242,50 @@ should be.
 }
 
 The \TeX{} version of entering quotes was to rely on ligatures for the given
-quotation mark. This method is not context aware and cannot be customized.
+quotation mark. This method is not context aware and cannot be customised.
 Using \pai{csquotes} package as described in Section~\ref{sec:csquotes} allows
 greater control over the typesetting of the quotations.
 
 \chto|``quote''||\usepackage{csquotes}
 % ...
 \enquote{quote}|
+
+\section{Printing Verbatim}
+\instead{
+\ei{verbatim}
+}{
+\ei{verbatim} (from \pai(verbatim) package)
+}
+
+\LaTeX{} defines its own \ei{verbatim} environment, however there are problems
+with it. Firstly due to the way delimiting is handled you cannot put spaces
+between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|. % chktex 9
+Second and more important problem is that it reads the whole input at once
+which risks overflowing \TeX{}'s memory. The \pai{verbatim} package described
+in Section~\ref{sec:verbatim} solves both of these problems.
+\begin{chktexignore}
+\chto|\begin{verbatim}
+  code
+\end{verbatim}||\usepackage{verbatim}
+% ...
+\begin{verbatim}
+  code
+\end{verbatim}|
+\end{chktexignore}
+
+\section{Adding Bibliography}
+\instead{
+  \ei{natbib} and \texttt{bibtex}
+}{
+  \ei{biblatex} and \texttt{biber}
+}
+
+As was already mentioned in the Chapter~\ref{chap:bibliography} before
+\texttt{biber} there was \texttt{bibtex}. It used \ei{natbib} package for
+typesetting the bibliography itself. Both of these are no longer maintained and
+don't handle UTF-8 input. However the \ei{natbib} styles (\eei{.bst} files)
+don't work with \ei{biblatex} so if you are forced to use one you don't have a
+choice.
+\chto|\usepackage{natbib}||\usepackage{biblatex}|
 
 \endgroup
