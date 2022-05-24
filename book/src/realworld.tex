@@ -1195,8 +1195,8 @@ problem.
 \subsection{Verbatim}\label{sec:verbatim}
 
 \LaTeX{} itself comes with the \ci{verb} command. It is unusual in that it does
-not use groups for getting its first argument. Instead you pass it between a
-chosen delimiters that can be any character except for letters, \verb|*| or
+not use groups for getting its first argument. Instead you pass the argument between a
+chosen delimiters that can be any character except a letter, \verb|*| or
 space. For example to use \cargv{|} (which is typically used) as a delimiter
 you type
 \begin{lscommand}
@@ -1483,7 +1483,7 @@ predefined styles and language support are much richer than those offered by
 the \pai{listings} package. This is the package that is used to color examples
 throughout this booklet.
 
-Due to the fact that the \pai{minted} package relies on third party program
+Due to the fact that the \pai{minted} package relies on an external program
 there are two things that you need to do before using it
 \begin{enumerate}
   \item Ensure that the Pygments program is installed. If you are using a
@@ -1498,9 +1498,9 @@ there are two things that you need to do before using it
         \verb|xelatex --shell-escape document.tex|
 \end{enumerate}
 It is important to understand what the cryptic flag mentioned in the second
-point actually means. It allows the \LaTeX{} document to call any program via
-shell. Let me repeat this to make the point clear: \emph{Enabling this flag
-  allows the \LaTeX{} document to call any program via shell}. This means that
+point actually means. It allows the \LaTeX{} document to call any external program via
+the shell. Let me repeat this to make the point clear: \emph{Enabling this flag
+  allows the \LaTeX{} document to call any program via the shell}. This means that
 maliciously crafted document could for example delete all files from your
 computer. Only enable this flag if the document comes from a trusted source.
 
@@ -1615,7 +1615,7 @@ code. In order to choose between them use the \cargv{style} key.
 \end{example}
 
 To avoid setting the options with every listing with every code snippet you
-include you can use \ci{setminted} to define the default values.
+include, you can use \ci{setminted} to define the default values.
 \begin{example}
 \setminted{
   linenos,

@@ -3,9 +3,9 @@
 
 \begin{intro}
   \LaTeX{} has been around for well over 30 years now. And it has remained
-  largely backward compatible. This means you can use text and tricks from
+  largely backward compatible. This means you can easily steal snipptes from
   a friends document written ten years ago and use them in your document today.
-  In many instances this is totally fine, in others, while \LaTeX{} works fine
+  In many instances this work without any problem. But eventhough \LaTeX{} seems happy
   with the old code, you still should not do it. Have a look!
 \end{intro}
 
@@ -255,10 +255,10 @@ greater control over the typesetting of the quotations.
 \instead{
 \ei{verbatim}
 }{
-\ei{verbatim} (from \pai(verbatim) package)
+\ei{verbatim} (from the \pai(verbatim) package)
 }
 
-\LaTeX{} defines its own \ei{verbatim} environment, however there are problems
+\LaTeX{} comes with a \ei{verbatim} environment built into the core, however there are problems
 with it. Firstly due to the way delimiting is handled you cannot put spaces
 \begin{chktexignore}
   between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|.
@@ -276,7 +276,7 @@ in Section~\ref{sec:verbatim} solves both of these problems.
 \end{verbatim}|
 \end{chktexignore}
 
-\section{Adding Bibliography}
+\section{Adding a Bibliography}
 \instead{
   \ei{natbib} and \texttt{bibtex}
 }{
