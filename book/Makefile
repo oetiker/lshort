@@ -8,8 +8,8 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 
 # Define some variables
 LATEX=latex
-PDFLATEX=xelatex --enable-write18 -interaction=nonstopmode
-PDFLATEX_DEBUG_ARGS=-synctex=1 -file-line-error
+PDFLATEX=lualatex --shell-escape --interaction=nonstopmode
+PDFLATEX_DEBUG_ARGS=--synctex=1 --file-line-error
 MAKEINDEX=makeindex
 DVIPS=dvips
 
