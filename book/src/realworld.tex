@@ -620,18 +620,18 @@ while looking nearly identical to Latin Modern.\footnote{Both fonts are
 
 If you have the CMU font installed in your system (unlikely) or you are using
 \hologo{LuaLaTeX} then you can simply write
-\begin{verbatim}
+\begin{minted}{latex}
 \newfontfamily\greekfont{CMU Serif}
-\end{verbatim}
+\end{minted}
 
 If you are using \hologo{XeLaTeX} and don't have the font installed then you
 need to specify the font by its file name.
-\begin{verbatim}
+\begin{minted}{latex}
 \newfontfamily\greekfont[
   Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
   BoldFont=*bx, BoldItalicFont=*bi,
 ]{cmun}
-\end{verbatim}
+\end{minted}
 
 With the appropriate fonts loaded, you can now write:
 {
@@ -662,14 +662,14 @@ other fonts are \textsf{sans serif} (used in presentations slides) and
 a particular language, define \cargv{\textit{language}fontsf} family for sans serif and
 \cargv{\textit{language}fonttt} for monospace. For example, to define CMU as a
 font for Greek in all three fonts when using \hologo{LuaLaTeX} you would write
-\begin{verbatim}
+\begin{minted}{latex}
 \newfontfamily\greekfont{CMU Serif}
 \newfontfamily\greekfontsf{CMU Sans Serif}
 \newfontfamily\greekfonttt{CMU Typewriter Text}
-\end{verbatim}
+\end{minted}
 \pagebreak[3]
 or in \hologo{XeLaTeX}
-\begin{verbatim}
+\begin{minted}{latex}
 \newfontfamily\greekfont[
   Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
   BoldFont=*bx, BoldItalicFont=*bi,
@@ -682,17 +682,17 @@ or in \hologo{XeLaTeX}
   Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
   BoldFont=*tb, BoldItalicFont=*tx, 
 ]{cmun}
-\end{verbatim}
+\end{minted}
 
 The commands above redefine the fonts for languages used as \enquote*{other} in
 polyglossia. If you want to influence the font of the main document language
 use the \ci{setmainfont}, \ci{setsansfont} and \ci{setmonofont} that work the
 same way but without the \carg{familyname} argument.
-\begin{verbatim}
+\begin{minted}{latex}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
-\end{verbatim}
+\end{minted}
 
 If you want to learn even more about fonts, have a look at
 Section~\ref{sec:fontspec}.
@@ -1261,16 +1261,16 @@ choice and makes the document code less cluttered. To accomplish this use the
 The \texttt{verbatim} environment and the \ci{verb}, \ci{verbatiminput}
 commands may not be used within parameters of other commands, so the below code
 will result in an error
-\begin{verbatim}
-  Footnote\footnote{\verb|abc| cannot be used here.}
-\end{verbatim}
+\begin{minted}{latex}
+Text\footnote{\verb|abc| cannot be used here.}
+\end{minted}
 If this is a problem for you look at the \pai*{fancyvrb} package.
 
 \subsection{The \ei{listings} Package}
 
 While the \ei{verbatim} environment is fine for small snippets, they are very
 crude and look basic. In order to make them a bit more fancy you may use the
-\ei*{listings} package. It defines
+\pai*{listings} package. It defines
 \begin{lscommand}
   \ci{lstinline} command that works like \ci{verb} \\
   \ei{lstlisting} environment that works like \ei{verbatim} \\
@@ -2627,9 +2627,9 @@ proper syntax and usage of the commands, but doesn't produce any (pdf) output.
 As \LaTeX{} runs faster in this mode you may save yourself valuable time.
 Usage is very simple:
 
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{syntonly}
 \syntaxonly
-\end{verbatim}
+\end{minted}
 When you want to produce pages, just comment out the second line
 (by adding a percent sign).

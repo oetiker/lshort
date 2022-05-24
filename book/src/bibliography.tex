@@ -121,7 +121,7 @@ figure~\ref{fig:bibfile} for an example.
 
 \begin{figure}[htp]
   \begin{lined}{\textwidth}
-    \verbatiminput{examples/example.bib}
+    \inputminted{bibtex}{../src/examples/example.bib}
   \end{lined}
   \caption[An example of bibliography database]{An example bibliography
     database for \hologo{biber} (\eei{.bib} file)}\label{fig:bibfile}
@@ -157,12 +157,12 @@ title or filter the entries included.
 Processing files requires three \LaTeX{} passes in addition to the biber
 command. A typical command line run may look like this:
 \begin{code}
-\begin{verbatim}
+\begin{minted}{console}
 $ xelatex document.tex
 $ biber document
 $ xelatex document.tex
 $ xelatex document.tex
-\end{verbatim}
+\end{minted}
 \end{code}
 The first \LaTeX{} pass extracts the citation data from the document which are
 then read by \hologo{biber}. In the second pass, the bibliography is placed in the
@@ -538,11 +538,11 @@ This is auto citation \autocite{curie}.
 
 \hologo{biber} uses ``and'' as a separator in author entries. To prevent
 this behaviour, enclose ``and'' in curly brackets
-\begin{verbatim}
-@book{
+\begin{minted}{bibtex}
+@book{kru,
   author = {Kruger {and} sons}
 }
-\end{verbatim}
+\end{minted}
 The same trick may be useful when \hologo{biber} changes capitalisation, even
 though it shouldn't.
 
@@ -555,6 +555,7 @@ like this
   biber,
   paperwidth=6cm,
   paperheight=7cm,
+  minted_language=bibtex
 ]
 %!hidebegin
 \begin{filecontents}{example2.bib} 

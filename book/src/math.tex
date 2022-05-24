@@ -653,9 +653,9 @@ First of all, in order to be able to use the
 package\footnote{The \pai{IEEEtrantools} package may not be included in your setup, it can be found on CTAN.}
 \pai*{IEEEtrantools}. Include the following line in the header of
 your document: \small
-\begin{verbatim}
+\begin{minted}{latex}
 \usepackage{IEEEtrantools}
-\end{verbatim}
+\end{minted}
 \normalsize
 
 The strength of \ei{IEEEeqnarray} is the ability to specify
@@ -697,9 +697,9 @@ solve the most common problems.
 If a line overlaps with the equation number as in%
 ~\eqref{eq:faultyeqnarray}, the command
 \small
-\begin{verbatim}
+\begin{minted}{latex}
 \IEEEeqnarraynumspace
-\end{verbatim}
+\end{minted}
 \normalsize
 can be used: it has to be added in the corresponding line and makes
 sure that the whole equation array is shifted by the size of the
@@ -1605,11 +1605,11 @@ remove any remaining doubt, and make it clear that the
 
 First define the theorems:
 
-\begin{verbatim}
+\begin{minted}{latex}
 \theoremstyle{definition} \newtheorem{law}{Law}
 \theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
 \theoremstyle{remark}     \newtheorem*{marg}{Margaret}
-\end{verbatim}
+\end{minted}
 
 \begin{example}
 \begin{law}\label{law:box}

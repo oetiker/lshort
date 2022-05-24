@@ -72,6 +72,9 @@
 
   vertical_pages .bool_set:N = \__lshortexample_vertical_pages_bool,
   vertical_pages .initial:n = false,
+
+  minted_language .tl_set:N = \__lshortexample_minted_language,
+  minted_language .initial:n = latex,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -188,7 +191,7 @@
     }
   }
   \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
-    \small\verbatiminput{#2}
+    \small\inputminted{\__lshortexample_minted_language}{#2}
   \end{minipage}
   \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
     \bool_set:Nn \l_tmpa_bool {\c_false_bool}
@@ -224,7 +227,7 @@
 
 \cs_new:Nn \lshortexample_typeset_example:nn {
   \begin{minipage}{\linewidth-\__lshortexample_examplewidth-0.2pt-6mm}
-    \small\verbatiminput{#2}
+    \small\inputminted{\__lshortexample_minted_language}{#2}
   \end{minipage}
   \fancyframebox{0.1pt}{3mm}{
     \begin{minipage}{\__lshortexample_examplewidth}

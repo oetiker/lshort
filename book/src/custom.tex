@@ -261,10 +261,10 @@ My humble subjects \ldots
 
 If you want to create a starred version of an environment (similarly to some
 \hologo{AmSLaTeX} environments) you have to define it separately.
-\begin{verbatim}
+\begin{minted}{latex}
 \NewDocumentEnvironment{king}{moo} { ... } { ... }
 \NewDocumentEnvironment{king*}{moo} { ... } { ... }
-\end{verbatim}
+\end{minted}
 Obviously you can use the same internal commands to define them, for example
 renaming the previous implementation to \cargv{kinginternal} making the
 \cargv{king} and \cargv{king*} a thin wrapper around it.
@@ -304,36 +304,36 @@ arguments are exactly the same as the \ci{NewDocumentEnvironment} command.
 
 When redefining commands you may want to use the original version of the
 command. Your initial code may look like this
-\begin{verbatim}
+\begin{minted}{latex}
 \RenewDocumentCommand{\emph}{m}{%
   \emph{#1}~(\enquote{#1} is emphasised)%
 }
-\end{verbatim}
+\end{minted}
 but when you try to compile the document you will receive the error
-\begin{verbatim}
+\begin{minted}{console}
 ! TeX capacity exceeded, sorry [input stack size=5000].
-\end{verbatim}
+\end{minted}
 
 To understand why this happens it is instructive to consider how \TeX{} expands
 the defined commands. The above \ci{RenewDocumentCommand} tells the \TeX{}
 engine that whenever \ci*{emph}[foo:vm] is seen it must replace it with
-\verb|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
+\mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
 problem here. In the next stage it will again replace the \ci*{emph}[foo:vm]
 yielding
-\begin{verbatim}
+\begin{minted}{latex}
 \emph{foo}~(\enquote{foo} is emphasised)~
   (\enquote{foo} is emphasised)
-\end{verbatim}
+\end{minted}
 This process will never end and at some point \TeX{}
 simply gives up.
 
 Note that
-\begin{verbatim}
+\begin{minted}{latex}
 \NewDocumentCommand{\oldemph}{m}{\emph{#1}}
 \RenewDocumentCommand{\emph}{m}{%
   \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
-\end{verbatim}
+\end{minted}
 will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
 with \verb|\emph{...}| and the cycle repeats.
 
@@ -371,18 +371,18 @@ If you work on a Unix-like OS, you might be using Makefiles to build your
 different versions of the same document by calling \LaTeX{} with command-line
 parameters. If you add the following structure to your document:
 
-\begin{verbatim}
+\begin{minted}{latex}
 \IfBooleanTF{\blackandwhite} {
   % "black and white" mode; do something...
 } {
   % "color" mode; do something different...
 }
-\end{verbatim}
+\end{minted}
 
 Now compile document like this:
 \begin{verbatim}
 xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
-  \input{test.tex}'
+    \input{test.tex}'
 \end{verbatim}
 First the command \verb|\blackandwhite| is defined as the \ci{BooleanTrue} macro which
 holds a special value used in \ci{IfBooleanTF} checks. Then the actual file is
@@ -399,7 +399,7 @@ command to make the package available in your document.
 
 \begin{figure}[!htbp]
   \begin{lined}{\textwidth}
-    \begin{verbatim}
+    \begin{minted}{latex}
 \ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
   Package by Tobias Oetiker
 }
@@ -416,7 +416,7 @@ command to make the package available in your document.
 } {
   \end{quote}
 }
-\end{verbatim}
+\end{minted}
   \end{lined}
   \caption{Example Package.}\label{package}
 \end{figure}
@@ -841,12 +841,12 @@ The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
 be used to typeset text on the last line of a page, or to centre text
 vertically on a page.
 \begin{code}
-\begin{verbatim}
+\begin{minted}{latex}
 Some text \ldots
 
 \vspace{\stretch{1}}
 This goes onto the last line of the page.\pagebreak
-\end{verbatim}
+\end{minted}
 \end{code}
 
 Additional space between two lines of \emph{the same} paragraph or

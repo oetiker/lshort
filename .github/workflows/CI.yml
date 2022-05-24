@@ -42,6 +42,7 @@ jobs:
       - name: Build all
         run: |
           apk add make
+          apk add py3-pygments
           cd book
           make all
 
