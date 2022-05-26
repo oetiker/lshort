@@ -15,6 +15,10 @@ UNRELEASED
 * rewrite tables intro / marcin-serwin
 * rewrite fancyhdr intro / marcin-serwin
 * lint files using chktex and latexindent / marcin-serwin
+* add listings and minted tutorial / marcin-serwin
+* add logical markup introduction / marcin-serwin
+* update TeX and LaTeX history / marcin-serwin
+* restructure the first two chapters / marcin-serwin
 
 6.4 2021.03.09
 --------------
