@@ -8,7 +8,6 @@
 \usepackage{iftex}
 \RequireLuaTeX
 
-\let\lsspageref\pageref
 \ProvidesPackage{lshort}
 \RequirePackage{ragged2e}
 
@@ -22,7 +21,6 @@
 \newfontfamily\russianfont{cmunrm.otf}
 
 \RequirePackage[autostyle]{csquotes}
-\RequirePackage{mflogo}
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
 \RequirePackage{listings}
@@ -30,46 +28,15 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{booktabs}
 \RequirePackage{caption}
-\RequirePackage{multirow}
 \captionsetup{tableposition=top}
-\RequirePackage{calc}
+
+\RequirePackage{multirow}
 \RequirePackage{siunitx}
 \RequirePackage{lastpage}
-\RequirePackage{amsmath,latexsym,amsthm}
+\RequirePackage{amsmath, amssymb, amsthm, amsfonts}
+\RequirePackage{mathrsfs}
 \RequirePackage{IEEEtrantools}
-\RequirePackage{amssymb}
-\RequirePackage[all]{xy}
-%\RequirePackage[babel=true,kerning=true]{microtype}
-%\RequirePackage{textcomp}
-%\RequirePackage{type1cm}% remove size restrictions
-%\RequirePackage{aeguill}
-% some packages which draw a euro
-\RequirePackage{textcomp}
-% need some magic here to keep the original definition of rightarrow
-\newcommand{\org@Rightarrow}{}
-\let\org@Rightarrow\Rightarrow
-\usepackage{marvosym}
-\let\MVRightarrow\Rightarrow
-\let\Rightarrow\org@Rightarrow
-%%%%
 \RequirePackage[gen]{eurosym} % redefines \EUR
-% \RequirePackage{eurosans}
-% \let\EUROSANS\euro
-% marvosym defines \EUR, \EURtm, \EURhv and \EURcr (with \def), while europs
-% uses \providecommand to define them :-( so let's first undefine them:
-\let\EURtm\undefined
-\let\EURhv\undefined
-\let\EURcr\undefined
-% \RequirePackage{europs}
-%\RequirePackage[mathcal]{euscript}
-%\IfFileExists{eucal.sty}
-%  {\RequirePackage[psamsfonts]{eucal}}
-%  {\IfFileExists{euscript.sty}
-%  {\RequirePackage[mathcal]{euscript}}{}}
-
-\RequirePackage{url}
-% Lets have some nice headings
-%
 \pagestyle{fancyplain}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}}
@@ -124,7 +91,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Adapted from TeX FAQ
-\renewcommand{\Email}{\begingroup \def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}\Url}     % email address
+\newcommand{\Email}{\begingroup \def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}\Url}     % email address
 \def\mailto|#1|{\href{mailto:#1}{\Email|#1|}}        % url to mail somewhere
 %\newcommand{\CTANref}{\begingroup \urlstyle{tt}\Url}     %
 \newcommand{\CTANref}{\begingroup \urlstyle{tt}\Url}     %
@@ -212,13 +179,13 @@
 \newcommand{\paih}[1]{%
 \index{packages!#1@\textsf{#1}}%
 \index{#1@\textsf{#1}}}
-\NewDocumentCommand{\pai}{sm}{%
-  \paih{#2}\textsf{#2}\IfBooleanT{#1}{\,\cite{pack:#2}}%
+\ExplSyntaxOn
+\NewDocumentCommand{\pai}{sm}{
+  \paih{#2}\textsf{#2}\IfBooleanT{#1}{\,\cite{pack:#2}}
 }
 % Active characters
 \NewDocumentCommand{\ai}{m}{\texttt{#1{}}\index{#1@\texttt{#1{}}}}
 % Index entry for an environment
-\ExplSyntaxOn
 \NewDocumentCommand{\eih}{m} {
   \index{environments!#1@\texttt{#1}}
   \index{#1@\texttt{#1}}
@@ -323,31 +290,9 @@
 \hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
 {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
 %
-% Special Prep for AMS Symbols Printout
-% Should work if AMS is not available
-%
-
-%% we have no PS versions of the rsfs fonts ... so this is a nogo for pdf
-%\ifx\HyPsd@pageref\undefined
-\RequirePackage{mathrsfs}
-%\fi
-\RequirePackage{latexsym}
-\RequirePackage[mathcal]{euscript}
-%
 % Print |--| to show a distance
 %
 \newcommand{\demowidth}[1]{\rule{0.3pt}{1.3ex}\rule{#1}{0.3pt}\rule{0.3pt}{1.3ex}}
-%
-%
-% --- example ----
-% This is an environment to set LaTeX examples.
-% On the left side the source text and on the
-% right side the typeset text.
-%
-% \begin{example}
-% \Large This is Large
-% \end{example}
-% This Part is stolen from the verbaim.sty by FMi
 %
 \RequirePackage{lshortexample}
 \addtolength{\headwidth}{1cm}
