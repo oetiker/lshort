@@ -8,7 +8,9 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 
 # Define some variables
 OUTPUT_DIR=pdfbuild
-PDFLATEX=lualatex --shell-escape --interaction=nonstopmode --output-directory=$(OUTPUT_DIR) --halt-on-error
+PDFLATEX=lualatex --shell-escape --interaction=nonstopmode \
+	--output-directory=$(OUTPUT_DIR) --halt-on-error
+BIBER=biber --input-directory=src --output-directory=$(OUTPUT_DIR)
 PDFLATEX_DEBUG_ARGS=--synctex=1 --file-line-error
 MAKEINDEX=makeindex
 
@@ -25,14 +27,14 @@ export TEXINPUTS::=src:src/examples:$(OUTPUT_DIR):$(TEXINPUTS)
 	$(PDFLATEX) $(basename $@)
 	$(PDFLATEX) $(basename $@)
 	$(MAKEINDEX) -s src/lshort.ist $(OUTPUT_DIR)/$(basename $@)
-	biber $(OUTPUT_DIR)/$(basename $@)
+	$(BIBER) $(basename $@)
 	$(PDFLATEX) $(basename $@)
 	$(PDFLATEX) $(basename $@)
 	mv $(OUTPUT_DIR)/$@ .
 
-$(OUTPUT_DIR): src/biblio.bib
+$(OUTPUT_DIR): src/lshort.bib
 	mkdir -p $(OUTPUT_DIR)
-	cp src/biblio.bib $(OUTPUT_DIR)/
+	cp src/lshort.bib $(OUTPUT_DIR)/
 
 src/title.tex: Makefile fixdate.pl src/title.template.tex
 	perl fixdate.pl $(VERS) $(GITHUB_SHA) < src/title.template.tex > src/title.tex
