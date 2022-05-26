@@ -6,6 +6,8 @@
 \RequirePackage{frame}
 \RequirePackage{graphicx}
 \RequirePackage{verbatim}
+\RequirePackage{hyperref}
+
 % L3 interface for verbatim
 \cs_new_eq:NN \verbatim_start: \verbatim@start
 
@@ -19,6 +21,15 @@
   \cs_set_protected:Nn \__lshortexample_func_temp:n {#1}
   \verbatim_set_processline:N \__lshortexample_func_temp:n
 }
+%%%
+
+% Messages
+\msg_new:nnn {lshortexample} {examplecompilationfailed} {\\
+  Current~ example~ compilation~ failed.~
+  Input~ file:~'#1'.~Template~ file:~'#2'.~
+  See~ the~ '#3'~ file~ for~ more~ info.
+}
+%%%
 
 \tl_new:N \__lshortexample_example_label
 \int_new:N \__lshortexample_example_counter
@@ -137,45 +148,67 @@
   \end{trivlist}
 }
 
-\cs_new:Nn \lshortexample_compile_command:nnn {
-  lualatex~
-  --output-directory=\__lshortexample_cache_dir_tl\c_space_tl
-  -interaction=nonstopmode\c_space_tl
-  --jobname=#1~'
-  \c_backslash_str def\c_backslash_str file{#2}
-  \c_backslash_str newlength{\c_backslash_str width}
-  \c_backslash_str setlength{\c_backslash_str width}{\dim_use:N \__lshortexample_paperwidth}
-  \c_backslash_str newlength{\c_backslash_str height}
-  \c_backslash_str setlength{\c_backslash_str height}{\dim_use:N \__lshortexample_paperheight}
-  \c_backslash_str input{#3}
-  '
+\cs_new:Nn \lshortexample_compile:nnn {
+  \exp_args:Nx \sys_get_shell:nnN {
+    lualatex~
+    --output-directory=\__lshortexample_cache_dir_tl\c_space_tl
+    \tl_to_str:n {
+      --interaction=nonstopmode~
+      --jobname=#1~'
+      \def\file{#2}
+      \newlength{\width}
+      \setlength{\width}
+    }
+    {\dim_use:N \__lshortexample_paperwidth}
+    \tl_to_str:n {
+      \newlength{\height}
+      \setlength{\height}
+    }
+    {\dim_use:N \__lshortexample_paperheight}
+    \tl_to_str:n {
+      \input{#3}' >&2; echo~$?
+    }
+  }
+  {} \l_tmpa_tl
+
+  \int_compare:nNnF \l_tmpa_tl = 0 {
+      \msg_error:nnnnn {lshortexample} {
+        examplecompilationfailed} {#2} {#3} {#1.log}
+    }
+}
+
+\cs_generate_variant:Nn \lshortexample_compile:nnn {
+  eee
 }
 
 \cs_new:Nn \lshortexample_compile_example:nn {
   \sys_shell_now:x {
     mkdir~-p~\__lshortexample_cache_dir_tl;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    }
   }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+
 }
 
 \cs_new:Nn \lshortexample_compile_biber_example:nn {
   \sys_shell_now:x {
     mkdir~-p~\__lshortexample_cache_dir_tl;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \sys_shell_now:x {
     biber~--input-directory~\__lshortexample_biber_dir~\c_space_tl~\__lshortexample_cache_dir_tl #2;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    }
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
   }
 }
 
