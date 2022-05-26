@@ -714,11 +714,22 @@ loaded.)
 
 \usepackage{polyglossia}
 \setdefaultlanguage{arabic}
-\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}%!hide
-\newfontfamily\arabicfont{CMU Serif}
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}
+\defaultfontfeatures[Iran Nastaliq] {
+  Path=font-IranNastaliq/WebFonts/,
+  Extension=.ttf,
+  UprightFont=IranNastaliq-Web,
+  Script=Arabic,
+}
+%!hideend
+\newfontfamily\arabicfont{Iran Nastaliq}
 
 \begin{document}
-This text will be typeset right to left.
+%!showbegin !hide
+«\textarabic{هذا نص عربي}»
+%!showend !hide
+هذا نص عربي
 \end{document}
 \end{example}
 
@@ -730,7 +741,7 @@ supplies Persian \LaTeX-commands that allows you to enter commands like
 \hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
 development.
 
-To typeset Arabic you may use the IranNastaliq font~\cite{font:IranNastaliq}
+To typeset Arabic you may use the Iran Nastaliq font~\cite{font:IranNastaliq}
 developed by the SCICT and updated by Mohammad Saleh Souzanchi.
 
 The \pai*{arabxetex} package supports several languages with

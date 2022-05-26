@@ -16,9 +16,17 @@
 \setdefaultlanguage{english}
 \setotherlanguage{german}
 \setotherlanguage{greek}
-\newfontfamily\greekfont{cmunrm.otf}
+\newfontfamily\greekfont{CMU Serif}
 \setotherlanguage{russian}
-\newfontfamily\russianfont{cmunrm.otf}
+\newfontfamily\russianfont{CMU Serif}
+\setotherlanguage{arabic}
+\defaultfontfeatures[Iran Nastaliq] {
+  Path=font-IranNastaliq/WebFonts/,
+  Extension=.ttf,
+  UprightFont=IranNastaliq-Web,
+  Script=Arabic,
+}
+\newfontfamily\arabicfonttt{Iran Nastaliq}
 
 \RequirePackage[autostyle]{csquotes}
 \RequirePackage{hologo} % for \XeTeX logo *ak*
