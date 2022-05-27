@@ -634,9 +634,7 @@ need to specify the font by its file name.
 \end{minted}
 
 With the appropriate fonts loaded, you can now write:
-{
-\setmonofont{cmuntt.otf}
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.4\linewidth, vertical_mode,noextend]
 %!showbegin !hide
 % In the preamble (LuaLaTeX)
 \setotherlanguage{greek}
@@ -647,13 +645,15 @@ With the appropriate fonts loaded, you can now write:
 %!showend !hide
 
 \begin{chktexignore} %!hide
-\textrussian{Правда} is
+\textrussian{Правда} is a Russian newspaper. %!hide
+\textlang{greek}{ἀλήθεια} is truth or disclosure in %!hide
+%!showbegin %!hide
+\textrussian{«\fontspec{cmuntt.otf}Правда»} is a Russian newspaper.
+\textlang{greek}{«\fontspec{cmuntt.otf}ἀλήθεια»} is truth or disclosure in
+%!showend %!hide
+philosophy.
 \end{chktexignore} %!hide
-a Russian newspaper.
-\textlang{greek}{ἀλήθεια} is truth
-or disclosure in philosophy.
-  \end{example}
-}
+\end{example}
 
 \LaTeX{} actually uses three different fonts for typesetting documents. The
 above commands only set the default serif font used for the body text. The

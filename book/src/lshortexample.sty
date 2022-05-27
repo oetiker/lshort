@@ -67,7 +67,7 @@
   paperheight .initial:n = {\fp_to_dim:n {sqrt(2) * \__lshortexample_paperwidth}},
 
   examplewidth .tl_set:N = \__lshortexample_examplewidth,
-  examplewidth .initial:n = 0.48\linewidth,
+  examplewidth .initial:n = 0.52\linewidth,
 
   verbatim_input_file_name .tl_set:N = \__lshortexample_verbatim_input_file,
   verbatim_input_file_name .initial:n = {\c_sys_jobname_str _input.exa},
@@ -86,6 +86,9 @@
 
   minted_language .tl_set:N = \__lshortexample_minted_language,
   minted_language .initial:n = latex,
+
+  vertical_mode .bool_set:N = \__lshortexample_vertical_mode_bool,
+  vertical_mode .initial:n = false,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -108,7 +111,6 @@
   \begin{trivlist}
     \item\relax
     \group_begin:
-    \setminted{escapeinside=«»}
     \IfValueT {#1} {
       \keys_set:nn { lshortexample } { #1 }
     }
@@ -129,18 +131,10 @@
     }
 
     \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
-      \bool_if:NTF \__lshortexample_standalone_bool {
-        \lshortexample_typeset_standalone_example:nn {
-          \__lshortexample_verbatim_input_file
-        } {
-          \__lshortexample_verbatim_output_file
-        }
+      \lshortexample_typeset_example:nn {
+        \__lshortexample_verbatim_input_file
       } {
-        \lshortexample_typeset_example:nn {
-          \__lshortexample_verbatim_input_file
-        } {
-          \__lshortexample_verbatim_output_file
-        }
+        \__lshortexample_verbatim_output_file
       }
       \label{\__lshortexample_example_label}
     \end{adjustwidth}
@@ -192,7 +186,6 @@
   \lshortexample_compile:eee {#2} {#1} {
     \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
   }
-
 }
 
 \cs_new:Nn \lshortexample_compile_biber_example:nn {
@@ -213,21 +206,8 @@
   }
 }
 
-\cs_new:Nn \lshortexample_typeset_standalone_example:nn {
-  \group_begin:
-  \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
-  \dim_set:Nn \l_tmpa_dim {
-    \bool_if:NTF \__lshortexample_vertical_pages_bool {
-      \__lshortexample_paperwidth + 0.2pt
-    } {
-      (\__lshortexample_paperwidth + 0.2pt) * (
-      \__lshortexample_to_page - \__lshortexample_from_page + 1)
-    }
-  }
-  \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
-    \small\inputminted{\__lshortexample_minted_language}{#2}
-  \end{minipage}
-  \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
+\cs_new:Nn \lshortexample_ensure_output_exists:nn {
+  \file_if_exist:nTF {\__lshortexample_cache_dir_tl #2.pdf} {
     \bool_set:Nn \l_tmpa_bool {\c_false_bool}
   }{
     \bool_set:Nn \l_tmpa_bool {\c_true_bool}
@@ -236,37 +216,90 @@
     !\__lshortexample_cache_bool || \l_tmpa_bool
   } {
     \bool_if:NTF \__lshortexample_biber_run {
-      \lshortexample_compile_biber_example:nn {#1} {\l_tmpb_tl}
+      \lshortexample_compile_biber_example:nn {#1} {#2}
     } {
-      \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+      \lshortexample_compile_example:nn {#1} {#2}
     }
   }
-  \begin{minipage}{\l_tmpa_dim}
-    \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-    \fancyframebox{0.1pt}{0pt}{
-      \includegraphics[
-        width=\__lshortexample_paperwidth,
-        page=##1]{
-        \__lshortexample_cache_dir_tl\l_tmpb_tl
-      }
-    }
-    \bool_if:nT {
-    \__lshortexample_vertical_pages_bool &&
-    !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
-    } {\\[-1pt]}
-    }
-  \end{minipage}
-  \group_end:
 }
 
 \cs_new:Nn \lshortexample_typeset_example:nn {
-  \begin{minipage}{\linewidth-\__lshortexample_examplewidth-0.2pt-6mm}
-    \small\inputminted{\__lshortexample_minted_language}{#2}
-  \end{minipage}
-  \fancyframebox{0.1pt}{3mm}{
-    \begin{minipage}{\__lshortexample_examplewidth}
-      \input{#1}
+  \group_begin:
+  \bool_if:NTF \__lshortexample_standalone_bool {
+    \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
+    \dim_set:Nn \l_tmpa_dim {
+      \bool_if:NTF \__lshortexample_vertical_pages_bool {
+        \__lshortexample_paperwidth + 0.2pt
+      } {
+        (\__lshortexample_paperwidth + 0.2pt) * (
+        \__lshortexample_to_page - \__lshortexample_from_page + 1)
+      }
+    }
+    \lshortexample_ensure_output_exists:nn {#1} {\l_tmpb_tl}
+  } {
+    \dim_set:Nn \l_tmpa_dim {\__lshortexample_examplewidth}
+  }
+  \bool_if:NTF \__lshortexample_vertical_mode_bool {
+    \show_input_file:n {#2}
+    \show_output:n {#1}
+  } {
+    \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
+      \show_input_file:n {#2}
     \end{minipage}
+    \begin{minipage}{\l_tmpa_dim}
+      \show_output:n {#1}
+    \end{minipage}
+  }
+  \group_end:
+}
+
+\cs_new:Nn \show_input_file:n {
+  \bool_if:NTF \__lshortexample_vertical_mode_bool {
+    \begin{adjustwidth}{1cm}{1cm}
+      \inputminted{\__lshortexample_minted_language}{#1}
+    \end{adjustwidth}
+  } {
+    \inputminted{\__lshortexample_minted_language}{#1}
+  }
+}
+
+\cs_new:Nn \show_output:n {
+  \bool_if:NTF \__lshortexample_standalone_bool {
+    \bool_if:NT \__lshortexample_vertical_mode_bool {
+      \begin{adjustwidth}{1cm}{1cm}
+        \centering
+        }
+
+        \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
+        \fancyframebox{0.1pt}{0pt}{
+          \includegraphics[
+            width=\__lshortexample_paperwidth,
+            page=##1,
+          ]{
+            \__lshortexample_cache_dir_tl\l_tmpb_tl
+          }
+        }
+        \bool_if:nT {
+        \__lshortexample_vertical_pages_bool &&
+        !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
+        } {\\[-1pt]}
+        }
+
+        \bool_if:NT \__lshortexample_vertical_mode_bool {
+      \end{adjustwidth}
+    }
+  } {
+    \bool_if:NT \__lshortexample_vertical_mode_bool {
+      \begin{adjustwidth}{1cm}{1cm}
+        }
+        \fancyframebox{0.1pt}{3mm}{
+          \begin{minipage}{\l_tmpa_dim-6mm}
+            \input{#1}
+          \end{minipage}
+        }
+        \bool_if:NT \__lshortexample_vertical_mode_bool {
+      \end{adjustwidth}
+    }
   }
 }
 
