@@ -58,7 +58,7 @@ be found in \hoenig.
 
 As mentioned above the picture environment is part of standard \LaTeX{} and it is great for simple tasks and also if you want
 to control the exact positioning of individual elements on a page. But if you are about to do any serious graphics work, you should
-look at TikZ as presented in Section~\ref{sec:tikz} on page~\pageref{sec:tikz}.
+look at TikZ as presented in \autoref{sec:tikz} on \autopageref{sec:tikz}.
 
 \subsection{Basic Commands}
 
@@ -461,7 +461,7 @@ the necessary \ci{qbezier} command line.
 
 In this figure, each symmetric half of the catenary $y=\cosh x -1$ is approximated by a quadratic
 B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value
-\(m=3.6269\). Using again equation (\ref{zwischenpunkt}), we can
+\(m=3.6269\). Using again \autoref{zwischenpunkt}, we can
 calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$.
 The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less
 than one percent.
@@ -495,7 +495,7 @@ The picture is defined in convenient ``mathematical'' coordinates, whereas by th
   \put(-3,-2){\circle*{0.2}}
 \end{picture}
 \end{example}
-The control points of the two B\'ezier curves were calculated with formulas (\ref{zwischenpunkt}).
+The control points of the two B\'ezier curves were calculated with \autoref{zwischenpunkt}.
 The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2),\,m_2=1/\cosh^2 2$.
 Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
 is assigned the mathematical coordinates $(-3,-2)$ (black disk).

@@ -219,7 +219,7 @@ pretty common. On Windows, one would use Notepad to create a text file. It
 contains the text of the document, as well as the commands that tell \LaTeX{}
 how to typeset the text. For beginners it is recommended to use a \LaTeX{}
 IDE.\footnote{Some examples of them are listed in
-  Appendix~\ref{installinglatex}.}
+  \autoref{installinglatex}.}
 
 \subsection{Spaces}\label{sec:spaces}
 
@@ -380,11 +380,11 @@ Mark the end of the document with
 command, which tells \LaTeX{} to call it a day. Anything that
 follows this command will be ignored by \LaTeX.
 
-Figure~\ref{mini} shows the contents of a minimal \LaTeXe{} file. A
+\autoref{mini} shows the contents of a minimal \LaTeXe{} file. A
 slightly more complicated \wi{input file} is given in
-Figure~\ref{document}.
+\autoref{document}.
 
-\begin{figure}[htp]
+\begin{listing}
   \begin{lined}{10cm}
     \begin{example}[standalone, template=empty, noextend]
 \documentclass{article}
@@ -396,9 +396,9 @@ Small is beautiful.
 \end{example}
   \end{lined}
   \caption{A Minimal \LaTeX{} File.}\label{mini}
-\end{figure}
+\end{listing}
 
-\begin{figure}[htp]
+\begin{listing}
   \begin{lined}{\textwidth}
     \begin{example}[standalone, template=empty, noextend]
 \documentclass[a4paper,11pt]{article}
@@ -424,20 +424,20 @@ article.
   \caption[Example of a realistic journal article.]{Example of a realistic
     journal article. Note that all the commands you see in this example will be
     explained later.}\label{document}
-\end{figure}
+\end{listing}
 
 \section{A Typical Command Line Session}
 
 I bet you must be dying to try out the neat small \LaTeX{} input file shown on
-page~\pageref{mini}. Here is some help: \LaTeX{} itself comes without a GUI or
+\autopageref{mini}. Here is some help: \LaTeX{} itself comes without a GUI or
 fancy buttons to press. It is just a program that crunches away at your input
 file. Some \LaTeX{} installations feature a graphical front-end where there is
 a \LaTeX{} button to start compiling your input file. On other systems there
 might be some typing involved, so here is how to coax \LaTeX{} into compiling
 your input file on a text based system. Please note: this description assumes
 that a working \LaTeX{} installation already sits on your computer. If this is
-not the case you may want to look at Appendix~\ref{installinglatex} on
-page~\pageref{installinglatex} first.
+not the case you may want to look at \autoref{installinglatex} on
+\autopageref{installinglatex} first.
 
 \begin{enumerate}
   \item Edit/Create your \LaTeX{} input file. This file must be plain text.  On
@@ -465,7 +465,7 @@ command line.
 
 \section{Logical Structure of Your Document}
 
-In the Section~\ref{sec:layout_design} we have mentioned that one of the
+In the \autoref{sec:layout_design} we have mentioned that one of the
 differences between \LaTeX{} and WYSIWYG editors is that in \LaTeX{} you write
 the document by specifying its logical structure. This section will explore
 this idea in more detail by presenting a problem and demonstrating how it can be
@@ -537,7 +537,7 @@ It stands for \enquote{emphasise} and does just that: it emphasises the
 Are you gonna eat \emph{that}?
 \end{example}
 If you write the code on the left in the body of your document (you can use
-Figure~\ref{mini} as a template) you will get the output on the right in the
+\autoref{mini} as a template) you will get the output on the right in the
 PDF file you produce.
 
 As you can see by default \LaTeX{} typesets the emphasised text in cursive
@@ -618,11 +618,11 @@ code from a file into your document, you need to enhance the capabilities of
 command, where \carg{package} is the name of the package and
 \carg{options} is a list of keywords that trigger special features in
 the package. The \ci{usepackage} command goes into the preamble of the
-document. See Section~\ref{sec:structure} for details.
+document. See \autoref{sec:structure} for details.
 
 This book will describe some packages that the authors thought were especially
 useful and should be installed along with your \LaTeX{} distribution. See
-Table~\ref{packages} for some examples. Their versions may be different than
+\autoref{packages} for some examples. Their versions may be different than
 the ones described in this book, which in turn may lead to differences in the
 produced output. Along with the package introduction we will usually also point
 to its entry in our bibliography. In the bibliography entry you will also find
@@ -647,29 +647,29 @@ be present under the \enquote*{Documentation} field.
     \midrule
     \pai*{amsmath}     & Provides additional commands for typesetting
     mathematical symbols and environments for aligning equations. Described
-    in Chapter~\ref{chap:math}.                                               \\
+    in \autoref{chap:math}.                                                   \\
 
     \pai*{polyglossia} & Makes it easy to write \LaTeX{} documents in
     languages different than English or even multiple languages.
-    Described in Section~\ref{sec:polyglossia}.                               \\
+    Described in \autoref{sec:polyglossia}.                                   \\
 
     \pai*{booktabs}    & Provides commands for producing beautifully
     formatted tables for your document. Described in
-    Section~\ref{sec:tables}.                                                 \\
+    \autoref{sec:tables}.                                                     \\
 
     \pai*{biblatex}    & Provides commands for automatically specifying and
     producing a bibliography for your document. Described in
-    Chapter~\ref{chap:bibliography}.                                          \\
+    \autoref{chap:bibliography}.                                              \\
 
     \pai*{makeidx}     & Provides commands for producing indices. Described
-    in Section~\ref{sec:indexing}.                                            \\
+    in \autoref{sec:indexing}.                                                \\
 
     \pai*{fancyhdr}    & Let's you easily customise page headers and footers.
-    Described in Section~\ref{sec:fancy}.                                     \\
+    Described in \autoref{sec:fancy}.                                         \\
 
     \pai*{beamer}      & Provides a document class that changes output to
     produce presentations and provides command to typeset slides.
-    Described in Section~\ref{sec:beamer}.                                    \\
+    Described in \autoref{sec:beamer}.                                        \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -700,7 +700,7 @@ Most people completely underestimate the importance of well-placed paragraph
 breaks. Many people do not even know what the meaning of a paragraph break is,
 or, especially in \LaTeX, introduce paragraph breaks without knowing it.  The
 latter mistake is especially easy to make if equations are used in the text.
-You have already learned in Section~\ref{sec:spaces} that paragraph breaks are
+You have already learned in \autoref{sec:spaces} that paragraph breaks are
 introduced by leaving an empty line in the source code. Look at the following
 examples, and figure out why sometimes empty lines (paragraph breaks) are used
 before and after the equation, and sometimes not. (Ignore the contents of the
@@ -807,8 +807,8 @@ file:
     to store information associated with cross-references.
   \item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
     the words that go into the index in this file. Process this file with
-    \texttt{makeindex}. Refer to Section~\ref{sec:indexing} on
-    page~\pageref{sec:indexing} for more information on indexing.
+    \texttt{makeindex}. Refer to \autoref{sec:indexing} on
+    \autopageref{sec:indexing} for more information on indexing.
   \item[\eei{.ind}] The processed \eei{.idx} file, ready for inclusion into your
     document on the next compile cycle.
   \item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.

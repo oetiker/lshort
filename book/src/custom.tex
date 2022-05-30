@@ -393,7 +393,7 @@ idea to create a \LaTeX{} package containing all your command and
 environment definitions. Use the \ci{usepackage}
 command to make the package available in your document.
 
-\begin{figure}[!htbp]
+\begin{listing}
   \begin{lined}{\textwidth}
     \begin{minted}{latex}
 \ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
@@ -415,7 +415,7 @@ command to make the package available in your document.
 \end{minted}
   \end{lined}
   \caption{Example Package.}\label{package}
-\end{figure}
+\end{listing}
 
 Writing a package basically consists of copying the contents of your document
 preamble (with minor adjustments) into a separate file with a name ending in
@@ -441,7 +441,7 @@ Package: demopack 2022-05-05 v0.1 Package by Tobias Oetiker
 in the \eei{.log} file.
 
 \ci{ProvidesExplPackage} will also issue a sensible error message when you try
-to include a package twice. Figure~\ref{package} shows a small example package
+to include a package twice. \autoref{package} shows a small example package
 that contains the commands defined in the examples above.
 
 \section{Fonts and Sizes}\label{sec:fontsize}
@@ -451,9 +451,9 @@ that contains the commands defined in the examples above.
 and font size based on the logical structure of the document
 (sections, footnotes, \ldots).  In some cases, one might like to change
 fonts and sizes by hand. To do this, use the commands listed in
-Tables~\ref{fonts} and~\ref{sizes}. The actual size of each font
+\autoref{fonts} and \autoref{sizes}. The actual size of each font
 is a design issue and depends on the document class and its options.
-Table~\ref{tab:pointsizes} shows the absolute point size for these
+\autoref{tab:pointsizes} shows the absolute point size for these
 commands as implemented in the standard document classes.
 
 \begin{example}
@@ -471,7 +471,7 @@ earlier.
 In \emph{math mode} use the font changing \emph{commands} to
 temporarily exit \emph{math mode} and enter some normal text. If you want to
 switch to another font for math typesetting you need another
-special set of commands; refer to Table~\ref{mathfonts}.
+special set of commands; refer to \autoref{mathfonts}.
 
 \begin{table}[!bp]
   \centering
@@ -765,7 +765,7 @@ automatically. To add horizontal space, use:\index{horizontal!space}
 If such a space should be kept even if it falls at the end or the
 start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
 \emph{length} in the simplest case is just a number plus a unit.  The
-most important units are listed in Table~\ref{units}.\index{units (\TeX)}\index{dimensions}
+most important units are listed in \autoref{units}.\index{units (\TeX)}\index{dimensions}
 
 \begin{example}
 This\hspace{1.5cm}is a space
@@ -883,7 +883,7 @@ text \wi{margins}, but sometimes you may not be happy with
 the predefined values. Naturally, you can change them.
 %no idea why this is needed here ...
 \thispagestyle{fancyplain}
-Figure~\ref{fig:layout} shows all the parameters that can be changed.
+\autoref{fig:layout} shows all the parameters that can be changed.
 The figure was produced with the \pai{layout} package from the tools bundle.%
 \footnote{\CTANref|pkg/tools|}
 

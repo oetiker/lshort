@@ -156,15 +156,15 @@ example, in \emph{math mode}:
   \item\index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
   are either derived logically from the mathematical expressions, or
   have to be specified with special commands such as \ci{,}, \ci{quad} or
-  \ci{qquad} (we'll get back to that later, see Section~\ref{sec:math-spacing}).
+  \ci{qquad} (we'll get back to that later, see \autoref{sec:math-spacing}).
 
   \item Empty lines are not allowed. Only one paragraph per formula.
 
   \item Each letter is considered to be the name of a variable and will be
         typeset as such. If you want to typeset normal text within a formula
         (normal upright font and normal spacing) then you have to enter the
-        text using the \ci{text} command (see also Section~\ref{sec:fontsz}~on
-        page~\pageref{sec:fontsz}).
+        text using the \ci{text} command (see also \autoref{sec:fontsz}~on
+        \autopageref{sec:fontsz}).
 
 \end{enumerate}
 \begin{example}
@@ -188,8 +188,8 @@ $x^{2} \geq 0
  \text{ for all } x 
  \in \mathbb{R}$
 \end{example}
-See Table~\ref{mathalpha} on page~\pageref{mathalpha} and
-Table~\ref{mathfonts} on page~\pageref{mathfonts} for more math fonts.
+See \autoref{mathalpha} on \autopageref{mathalpha} and
+\autoref{mathfonts} on \autopageref{mathfonts} for more math fonts.
 
 \section{Building Blocks of a Mathematical Formula}
 
@@ -203,7 +203,7 @@ are entered as \ci{Gamma}, \ci{Delta}, \ldots\footnote{There is no
   uppercase Alpha, Beta etc.\ defined in \LaTeXe{} because it looks the same as a
   normal roman A, B\ldots{}}
 
-Take a look at Table~\ref{greekletters} on page~\pageref{greekletters} for a
+Take a look at \autoref{greekletters} on \autopageref{greekletters} for a
 list of Greek letters.
 \begin{example}
 $\lambda,\xi,\pi,\theta,
@@ -217,7 +217,7 @@ Most math mode commands act only on the next character, so if you
 want a command to affect several characters, you have to group them
 together using curly braces: \verb|{...}|.
 
-Table~\ref{binaryrel} on page~\pageref{binaryrel} lists a lot of binary
+\autoref{binaryrel} on \autopageref{binaryrel} lists a lot of binary
 relations like $\subseteq$ and $\perp$.
 
 \begin{example}
@@ -233,8 +233,6 @@ The \emph{\wi{square root}} is entered as \ci{sqrt}; the
 the root sign is determined automatically by \LaTeX. If just the sign
 is needed, use \ci{surd}.
 
-% See various kinds of arrows like $\hookrightarrow$ and $\rightleftharpoons$ on
-% Table~\ref{tab:arrows} on page \pageref{tab:arrows}. 
 \begin{example}
 $\sqrt{x} = x^{1/2}
  \quad \sqrt[3]{2}
@@ -250,7 +248,7 @@ Use \ci{cdot} to typeset a single centered dot. \ci{cdots} is
 three centered \emph{\wi{dots}} while \ci{ldots} sets the dots low (on the
 baseline). Besides that, there are \ci{vdots} for
 vertical and \ci{ddots} for \wi{diagonal dots}. There are more examples in
-Section~\ref{sec:arraymat}.
+\autoref{sec:arraymat}.
 \begin{example}
 $\Psi = v_1 \cdot v_2
  \cdot \ldots \qquad 
@@ -277,7 +275,7 @@ $\underbrace{\overbrace{(a+b+c)}^6
 
 To add mathematical accents\index{mathematical!accents} such as \emph{small
   arrows} or \emph{\wi{tilde}} signs to variables, the commands
-given in Table~\ref{mathacc} on page~\pageref{mathacc} might be useful.  Wide hats and
+given in \autoref{mathacc} on \autopageref{mathacc} might be useful.  Wide hats and
 tildes covering several characters are generated with \ci{widetilde}
 and \ci{widehat}. Notice the difference between \ci{hat} and \ci{widehat} and the placement of
 \ci{bar} for a variable with subscript. The \wi{apostrophe} mark
@@ -476,10 +474,10 @@ $\big\Downarrow \Big\Downarrow
 \end{example}
 \end{chktexignore}
 
-For a list of all delimiters available, see Table~\ref{tab:delimiters} on page~\pageref{tab:delimiters}.
+For a list of all delimiters available, see \autoref{tab:delimiters} on \autopageref{tab:delimiters}.
 
 You can find large list of symbols supported in math mode in
-Appendix~\ref{symbols}.
+\autoref{symbols}.
 
 \section{Single Equations that are Too Long: multline}%
 \index{long equations}\label{sec:multline}
@@ -516,7 +514,7 @@ to be wrapped. Similarly to \ei{equation*} there also exists a
 \ei{multline*} version for preventing an equation number.
 
 Often the
-\ei{IEEEeqnarray} environment (see Section~\ref{sec:IEEEeqnarray})
+\ei{IEEEeqnarray} environment (see \autoref{sec:IEEEeqnarray})
 will yield better results.  Consider the following
 situation:
 \begin{example}
@@ -543,7 +541,7 @@ it has the disadvantage that the equality sign loses its natural
 greater importance with respect to the plus operator in front of
 $k$. The better solution is provided by the
 \ei{IEEEeqnarray} environment that will be discussed in detail in
-Section~\ref{sec:IEEEeqnarray}.
+\autoref{sec:IEEEeqnarray}.
 
 \section{Multiple Equations}%
 \index{equation!multiple}\label{sec:IEEEeqnarray}
@@ -690,7 +688,7 @@ for comments. Moreover, beside \cargv{l}, \cargv{c}, \cargv{r}, \cargv{L},
 \cargv{t}, \cargv{u} for left, centered, and right text mode entries.
 Additional space can be added with \cargv{.} and
 \cargv{/} and \cargv{?} in increasing order.\footnote{For more spacing
-  types refer to Section~\ref{sec:putting-qed-right}.}
+  types refer to \autoref{sec:putting-qed-right}.}
 Note the spaces around the equality signs in contrast to the space produced
 by the \ei{eqnarray} environment.
 
@@ -1039,10 +1037,10 @@ To avoid repeating the options with every use of commands, use the
 command. It can be used in the preamble to ensure consistent style throughout
 the document, or inside the document when the style needs to be changed just
 in a given element, such as a table. These options may be also passed as package
-options. Figure~\ref{sistandaloneexa} shows an example usage of the package in
+options. \autoref{sistandaloneexa} shows an example usage of the package in
 a full document.
 \begin{listing}
-  \begin{example}[standalone, template=empty, examplewidth=\linewidth,paperwidth=6cm, vertical_mode]
+  \begin{example}[standalone, template=empty, examplewidth=\linewidth,paperwidth=12cm, paperheight=5.5cm, vertical_mode]
 \documentclass{article}
 
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
@@ -1057,30 +1055,23 @@ a full document.
 \begin{document}
 All the units in the document are typeset according to setup
 in the preamble: \qty{9.81}{\m\per\s\squared}.
-
 \begin{table}[h]
-  \centering %!hide
-  \sisetup{
-    exponent-mode = fixed,
-    fixed-exponent = 1,
-  }
-  \begin{center}  
-    \begin{tabular}{@{}lr@{}}
-      \toprule
-      No. & Result (\unit{\kg}) \\
-      \midrule
-      1   & \num{12.3}          \\ 
-      2   & \num{0.3}           \\ 
-      3   & \num{1e2}           \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \caption{Measurement results}%
-  \label{table}
+  \centering
+  \sisetup{exponent-mode = fixed, fixed-exponent = 1}
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    No. & Result (\unit{\kg}) \\
+    \midrule
+    1   & \num{12.3}          \\ 
+    2   & \num{0.3}           \\ 
+    3   & \num{1e2}           \\
+    \bottomrule
+  \end{tabular}
+  \caption{Measurement results.
+    Here custom options are used.}\label{table}
 \end{table}
 
-In table~\ref{table} custom options are used, but now we
-are back to normal: \qty{3.637e-4}{\m\squared\per\s}.
+Now we are back to normal: \qty{3.637e-4}{\m\squared\per\s}.
 \end{document}
 \end{example}
   \caption{An example of using \pai{siunitx} in a document.}%
@@ -1239,7 +1230,7 @@ which means that if we use it, the first rule will be enforced for us.
 
 In order to influence parsing\slash{}displaying options of a
 single column, pass them in square brackets to the column specification. See
-Listing~\ref{lst:siunitxS} for an example.
+\autoref{lst:siunitxS} for an example.
 \begin{listing}
   \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \DeclareSIUnit{\eur}{\euro}
@@ -1267,7 +1258,7 @@ passed to the columns. An important one is \cargv{table-format}. By default the
 \cargv{S} specifier centres the decimal point leaving equal space to the left
 and to the right of it. This leads to a lot of empty space if lengths of
 integer and fraction parts are widely different as can be seen in
-Listing~\ref{lst:toowide}.
+\autoref{lst:toowide}.
 \begin{listing}
   \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
@@ -1290,7 +1281,7 @@ We can then use
 before and after dot. For example \cargv{6.2} means that it should reserve
 space for 6 digits before the decimal point, and for two after. The format may
 also contain information about signs, exponents or text around numbers. See
-Listing~\ref{lst:tableformat} for an example.
+\autoref{lst:tableformat} for an example.
 \begin{listing}
   \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
@@ -1318,7 +1309,7 @@ Listing~\ref{lst:tableformat} for an example.
 
 By default numbers and text within the \cargv{S} columns and centered. If you
 want to change the alignment use the \cargv{table-number-alignment} and
-\cargv{table-text-alignment} options. See Listing~\ref{lst:salignment} for an example.
+\cargv{table-text-alignment} options. See \autoref{lst:salignment} for an example.
 \begin{listing}
   \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular} {
@@ -1348,7 +1339,7 @@ want to change the alignment use the \cargv{table-number-alignment} and
   \caption{An example of aligning text and numbers inside the \pai{siunitx}'s \cargv{S} column.}\label{lst:salignment}
 \end{listing}
 The numbers may also be aligned inside a \ci{multicol} or \ci{multirow},
-using the \ci{tablenum} command as seen in Listing~\ref{lst:tablenum}.
+using the \ci{tablenum} command as seen in \autoref{lst:tablenum}.
 \begin{listing}
   \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{table-format = 4.4e1}
@@ -1483,7 +1474,7 @@ In the next example, we define a new command \ci{ud} (upright d) which produces
 ``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
 $\text{d}$), so we don't have to write it every time. The \ci{NewDocumentCommand} is
 placed in the preamble.  More on
-\ci{NewDocumentCommand} in Section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
+\ci{NewDocumentCommand} in \autoref{sec:new_commands} on \autopageref{sec:new_commands}.
 \begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
@@ -1529,7 +1520,7 @@ If you want to typeset a lot of isotopes as in the example, the \pai{mhchem}
 package is very useful for typesetting isotopes and chemical formulae too.
 
 \section{Fiddling with the Math Fonts}\label{sec:fontsz}
-Different math fonts are listed on Table~\ref{mathalpha} on page~\pageref{mathalpha}.
+Different math fonts are listed on \autoref{mathalpha} on \autopageref{mathalpha}.
 \begin{example}
  $\Re \qquad
   \mathcal{R} \qquad

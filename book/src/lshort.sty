@@ -256,6 +256,9 @@
 % propper bookmark entries in pdftex
 
 \ExplSyntaxOn
+\RenewDocumentCommand{\sectionautorefname}{}{Section}
+\RenewDocumentCommand{\chapterautorefname}{}{Chapter}
+\NewDocumentCommand{\listingautorefname}{}{Listing}
 \ifx\hypersetup\undefined\else  
   \pdfstringdefDisableCommands {
     \edef\ci{\textbackslash}
