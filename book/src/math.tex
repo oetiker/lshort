@@ -131,11 +131,12 @@ And this is display style:
  \end{equation}
 \end{example}
 
-In text style, enclose tall or deep math expressions or sub
+In text style, you may enclose tall or deep math expressions or sub
 expressions in \ci{smash}. This makes \LaTeX{} ignore the height of
-these expressions. This keeps the line spacing even.
+these expressions. This keeps the line spacing even, but risks overlapping the
+text around them.
 
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 A $d_{e_{e_p}}$ mathematical
 expression  followed by a
 $h^{i^{g^h}}$ expression. As
@@ -167,12 +168,12 @@ example, in \emph{math mode}:
 
 \end{enumerate}
 \begin{example}
-$\forall x \in \mathbf{R}\colon
- \qquad x^{2} \geq 0$
+$\forall x \in \mathbf{R}
+  \colon x^{2} \geq 0$
 \end{example}
 \begin{example}
-$x^{2} \geq 0\qquad
- \text{for all }x\in\mathbf{R}$
+$x^{2} \geq 0 \text{ for all }
+  x\in\mathbf{R}$
 \end{example}
 
 Mathematicians can be very fussy about which symbols are used:
@@ -181,14 +182,12 @@ it would be conventional here to use the `\wi{blackboard bold}' font,%
 package \pai*{amssymb}.\footnote{\pai{amssymb} is not a part
   of the \hologo{AmSLaTeX} bundle, but it is perhaps still a part of your \LaTeX{}
   distribution.}
-\ifx\mathbb\undefined\else
-  The last example becomes
-  \begin{example}
-$x^{2} \geq 0\qquad
- \text{for all } x 
+The last example becomes
+\begin{example}
+$x^{2} \geq 0
+ \text{ for all } x 
  \in \mathbb{R}$
 \end{example}
-\fi
 See Table~\ref{mathalpha} on page~\pageref{mathalpha} and
 Table~\ref{mathfonts} on page~\pageref{mathfonts} for more math fonts.
 
@@ -270,9 +269,9 @@ $0.\overline{3} =
 The commands \ci{overbrace} and \ci{underbrace} create
 long \emph{horizontal braces} over or under an expression:%
 \index{horizontal!brace}\index{brace!horizontal}
-\begin{example}
-$\underbrace{\overbrace{a+b+c}^6 
- \cdot \overbrace{d+e+f}^7}
+\begin{example}[examplewidth=0.45\linewidth]
+$\underbrace{\overbrace{(a+b+c)}^6 
+ \cdot \overbrace{(d+e+f)}^7}
  _\text{meaning of life} = 42$
 \end{example}
 
@@ -285,10 +284,11 @@ and \ci{widehat}. Notice the difference between \ci{hat} and \ci{widehat} and th
 \ai{'} gives a \wi{prime}:
 % a dash is --
 \begin{example}
-$f(x) = x^2 \qquad f'(x) 
- = 2x \qquad f''(x) = 2\\[5pt]
- \hat{XY} \quad \widehat{XY}
- \quad \bar{x_0} \quad \bar{x}_0$
+$f(x) = x^2$ \\
+$f'(x) = 2x$ \\
+$f''(x) = 2$ \\
+$\hat{XY} \neq \widehat{XY}$ \\
+$\bar{x_0} \neq \bar{x}_0$
 \end{example}
 
 \emph{Vectors}\index{vectors} are often specified by adding small
@@ -296,9 +296,8 @@ $f(x) = x^2 \qquad f'(x)
 \ci{vec} command. The two commands \ci{overrightarrow} and
 \ci{overleftarrow} are useful to denote the vector from $A$ to $B$:
 \begin{example}
-$\vec{a} \qquad
- \vec{AB} \qquad
- \overrightarrow{AB}$
+$\vec{a}$ $\vec{AB}$
+$\overrightarrow{AB}$
 \end{example}
 
 Names of functions are often typeset in an upright
@@ -329,9 +328,13 @@ command. There is even a starred version for functions with limits.
 This command works only in the preamble so the commented lines in the
 example below must be put into the preamble.
 
-\begin{example}
-%\DeclareMathOperator{\argh}{argh}
-%\DeclareMathOperator*{\nut}{Nut}
+\begin{example}[examplewidth=0.4\linewidth]
+%!showbegin !hide
+% In preamble
+\DeclareMathOperator{\argh}{argh}
+\DeclareMathOperator*{\nut}{Nut}
+% ...
+%!showend !hide
 \begin{equation*}
   3\argh = 2\nut_{x=1}    
 \end{equation*}
@@ -347,7 +350,9 @@ $a\bmod b \\
 \end{example}
 
 A built-up \emph{\wi{fraction}} is typeset with the
-\ci*{frac}[numerator:m ! denominator:m]%chktex 26
+\begin{lscommand}
+  \ci*{frac}[numerator:m ! denominator:m]%chktex 26
+\end{lscommand}
 command.
 \begin{example}
 \ldots{} And since
@@ -451,7 +456,8 @@ don't want anything on the right, use the invisible ``\ci{right.}'':
 \begin{equation*}
 1 + \left(\frac{1}{1-x^{2}}
     \right)^3 \qquad 
-\left. \ddagger \frac{~}{~}\right)
+\left. \ddagger
+  \frac{~}{~}\right)
 \end{equation*}
 \end{example}
 
@@ -462,18 +468,18 @@ which can be done using the commands \ci{big}, \ci{Big}, \ci{bigg} and
 \begin{chktexignore}
   \begin{example}
 $\Big((x+1)(x-1)\Big)^{2}$\\
-$\big( \Big( \bigg( \Bigg( \quad
-\big\} \Big\} \bigg\} \Bigg\} \quad
-\big\| \Big\| \bigg\| \Bigg\| \quad
-\big\Downarrow \Big\Downarrow 
+$\big( \Big( \bigg( \Bigg($ 
+$\big\} \Big\} \bigg\} \Bigg\}$ 
+$\big\| \Big\| \bigg\| \Bigg\|$ 
+$\big\Downarrow \Big\Downarrow 
 \bigg\Downarrow \Bigg\Downarrow$
 \end{example}
 \end{chktexignore}
 
-For a list of all delimiters available, see Table~\ref{tab:delimiters} on page\pageref{tab:delimiters}.
+For a list of all delimiters available, see Table~\ref{tab:delimiters} on page~\pageref{tab:delimiters}.
 
 You can find large list of symbols supported in math mode in
-Appendix\ref{symbols}.
+Appendix~\ref{symbols}.
 
 \section{Single Equations that are Too Long: multline}%
 \index{long equations}\label{sec:multline}
@@ -709,10 +715,9 @@ instead of
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c 
   \\
-  & = & d + e + f + g + h 
-  + i + j + k 
+  & = & d + e + f + g + h + i
   \\
-  & = & l + m + n
+  & = & j + k + l + m + n.
 \end{IEEEeqnarray}
 \end{example}
 we get
@@ -720,10 +725,9 @@ we get
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c 
   \\
-  & = & d + e + f + g + h 
-  + i + j + k 
+  & = & d + e + f + g + h + i
   \IEEEeqnarraynumspace\\
-  & = & l + m + n.
+  & = & j + k + l + m + n.
 \end{IEEEeqnarray}
 \end{example}
 
@@ -865,12 +869,12 @@ The speed of light is
 \end{example}
 \noindent Yet another problem arises when trying to write the units inside math
 mode
-\begin{example}[examplewidth=6cm]
+\begin{example}[examplewidth=5cm]
 $10~\frac{m}{s} \cdot 12~s = 120~m$
 \end{example}
 \noindent Here we need to make sure that the units are written in roman font.
 The above example should be then written as
-\begin{example}[examplewidth=6cm]
+\begin{example}[examplewidth=5cm]
 $10~\frac{\mathrm{m}}{\mathrm{s}} 
   \cdot 12~\mathrm{s} 
   = 120~\mathrm{m}$
@@ -916,26 +920,26 @@ is a quantity
 At first glance this may seem less convenient, but this enables the package to
 recognise the logical structure of the units, which means that the formatting
 can be changed on the fly.
-\begin{example}[examplewidth=0.32\linewidth]
-Which one do you prefer? \\
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+Which one do you prefer:
 $\unit{\newton} = \unit{
-  \kilo\gram\metre\per\square\second}$ \\
+  \kilo\gram\metre\per\square\second}$,
 $\unit{\newton} = \unit[per-mode = fraction]{
-  \kilo\gram\metre\per\second\squared}$ \\
+  \kilo\gram\metre\per\second\squared}$ or
 $\unit{\N} = \unit[per-mode = symbol]{
-  \kg\m\per\s\tothe{2}}$
+  \kg\m\per\s\tothe{2}}$?
 \end{example}
 The commands \ci{gram}, \ci{kilo}, \ci{per} are rather self explanatory. As you
 can see we have also used the \cargv{per-mode} option to influence the unit
 style. While the command \ci{tothe} typesets arbitrary superscripts, the
 command \ci{of} typesets arbitrary subscripts, known as qualifiers.
-\begin{example}[examplewidth=0.32\linewidth]
+\begin{example}[examplewidth=0.35\linewidth]
 \unit{\kg\of{mol}}, \unit{\bel\of{i}}
 \end{example}
 
 Note that the \ci{per} command only works on the next unit. If we want it to
 apply to all following units we may use \cargv{sticky-per} option.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.35\linewidth]
 The unit of thermal conductivity is
 \unit{\watt\per\metre\per\kelvin}
 or equivalently
@@ -946,31 +950,33 @@ Sometimes you may want to make the units use a different colour so they figure m
 \cargv{number-color} and \cargv{color} may be used to colour only the numeric
 values or whole quantities. If you want to highlight a single unit in a
 compound unit, you may use the \ci{highlight} command.
-\begin{example}[examplewidth=0.2\linewidth]
-\qty[unit-color = red]{9.81}{\m\per\s\squared} \\
-\qty[number-color = blue]{9.81}{\m\per\s\squared} \\
-\qty[color = green]{9.81}{\m\per\s\squared}
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\qty[unit-color = red   ]{9.81}{\m\per\s\squared},
+\qty[number-color = blue]{9.81}{\m\per\s\squared},
+\qty[color = green      ]{9.81}{\m\per\s\squared},
 \qty{9.81}{\m\per\highlight{orange}\s\squared}
 \end{example}
 
 Now let's turn our attention to numbers. The numeric values will always use dot
 as a decimal separator, regardless of entered symbol. If you want to use comma
 as a decimal separator, change the \cargv{output-decimal-marker} option.
-\begin{example}[examplewidth=0.2\linewidth]
+\begin{example}[examplewidth=0.3\linewidth]
 $\pi \approx \num{3.14159}$ \\
 $\pi \approx \num{3,14159}$ \\
-$\pi \approx \num[output-decimal-marker={,}]{3.14159}$
+$\pi \approx \num[
+  output-decimal-marker={,}
+]{3.14159}$
 \end{example}
 
 The numbers may also be entered using exponent notation. The symbol before
 exponent and base may be controlled using \cargv{exponent-product} and
 \cargv{exponent-base} options
-\begin{example}[examplewidth=0.25\linewidth]
+\begin{example}[examplewidth=0.3\linewidth]
 $\qty{1}{\tonne} = \qty{1e6}{\g}$ \\
 $\qty{1}{\gibi\byte} =
   \qty[exponent-base = 2]{1e30}{\byte}$ \\
-$\qty{1}{\L} =
-  \qty[exponent-product = \cdot]{1e-3}{\cubic\m}$
+$\qty{1}{\L} = \qty[
+  exponent-product = \cdot]{1e-3}{\cubic\m}$
 \end{example}
 
 If we want all numbers to be formatted using exponent notation, regardless of
@@ -985,22 +991,26 @@ $2^{16} = \num[
   exponent-mode = fixed]{65.536e3}$ \\
 $2^{16} = \num[
   exponent-mode = fixed,
-  fixed-exponent = 7]{65.536e3}$
+  fixed-exponent = 5]{65.536e3}$
 \end{example}
 
 In some fields it may be common to write uncertainty next to numbers. This may
 also be done in several ways. In order to customise the appearance of
 uncertainty use the \cargv{uncertainty-mode} option.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 $M_\oplus = \qty{
-  5.9722(6) e24}{\kg}$ \\
+  5.9722(6) e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty{
-  5.9722 +- 0.0006 e24}{\kg}$ \\
+  5.9722 +- 0.0006 e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty{
-  5.9722 \pm 0.0006 e24}{\kg}$ \\
+  5.9722 \pm 0.0006 e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty[
     uncertainty-mode = separate
-  ]{5.9722(6) e24}{\kg}$ \\
+  ]{5.9722(6) e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty[
   uncertainty-mode = full
 ]{5.9722(6) e24}{\kg}$
@@ -1010,8 +1020,8 @@ By default \pai{siunitx} typesets the quantities in math mode. This may be
 especially jarring if you use different font for the document text. One simple
 solution is to set the \cargv{mode} option to \cargv{text}.
 % TODO: Add pointer to changing math fonts section when written.
-\begin{example}[examplewidth=0.4\linewidth]
-\setmainfont{SourceSansPro-Regular.otf} %!hide
+\begin{example}[examplewidth=0.35\linewidth]
+\setmainfont{Source Sans Pro} %!hide
 \qty{1}{\degreeCelsius} is
 equal to \qty{1}{\kelvin}, but
 \qty[mode = text]{0}{\degreeCelsius}
@@ -1031,8 +1041,8 @@ the document, or inside the document when the style needs to be changed just
 in a given element, such as a table. These options may be also passed as package
 options. Figure~\ref{sistandaloneexa} shows an example usage of the package in
 a full document.
-\begin{figure}[htp]
-  \begin{example}[standalone, template=empty, paperwidth=6cm]
+\begin{listing}
+  \begin{example}[standalone, template=empty, examplewidth=\linewidth,paperwidth=6cm, vertical_mode]
 \documentclass{article}
 
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
@@ -1045,9 +1055,8 @@ a full document.
 ]{siunitx}
 
 \begin{document}
-All the units in the document are
-typeset according to setup in the
-preamble: \qty{9.81}{\m\per\s\squared}.
+All the units in the document are typeset according to setup
+in the preamble: \qty{9.81}{\m\per\s\squared}.
 
 \begin{table}[h]
   \centering %!hide
@@ -1060,9 +1069,9 @@ preamble: \qty{9.81}{\m\per\s\squared}.
       \toprule
       No. & Result (\unit{\kg}) \\
       \midrule
-      1 & \num{12.3} \\ 
-      2 & \num{0.3} \\ 
-      3 & \num{1e2} \\
+      1   & \num{12.3}          \\ 
+      2   & \num{0.3}           \\ 
+      3   & \num{1e2}           \\
       \bottomrule
     \end{tabular}
   \end{center}
@@ -1070,15 +1079,13 @@ preamble: \qty{9.81}{\m\per\s\squared}.
   \label{table}
 \end{table}
 
-In table~\ref{table} custom
-options are used, but now we
-are back to normal:
-\qty{3.637e-4}{\m\squared\per\s}.
+In table~\ref{table} custom options are used, but now we
+are back to normal: \qty{3.637e-4}{\m\squared\per\s}.
 \end{document}
 \end{example}
   \caption{An example of using \pai{siunitx} in a document.}%
   \label{sistandaloneexa}
-\end{figure}
+\end{listing}
 
 \subsection{Other \pai{siunitx} commands}
 
@@ -1141,12 +1148,15 @@ If we are dealing with quantum mechanics then complex numbers may be useful.
 To typeset them use \ci{complexnum} and \ci{complexqty}. They can be entered in
 both Cartesian form and polar coordinates.
 
-\begin{example}[examplewidth=0.4\linewidth]
-The conjugate of \complexnum{2+3i} is
-\complexnum{2-3i} which is approximately
+\begin{example}[examplewidth=0.5\linewidth]
+The conjugate of
+\complexnum{2+3i} is
+\complexnum{2-3i}
+which is approximately
 \complexnum{3.6056:-56.310}. \\
 Why is my scale showing my
-weight is \complexqty{65+i21}{\kg}?
+weight is
+\complexqty{65+i21}{\kg}?
 \end{example}
 
 Sometimes the required unit that we want to use is missing. For example
@@ -1169,10 +1179,12 @@ This command may also be used when we want to adjust the appearance of
 predefined unit. For example, the default litre is typeset using uppercase
 \enquote*{L} and you may want to change it to use lowercase \enquote*{l}
 instead.
-\begin{example}[examplewidth=0.4\linewidth]
-Litre before redefining: \unit{\L}. \\
+\begin{example}
+Litre before redefining:
+\unit{\L}. \\
 \DeclareSIUnit{\litre}{l}
-Litre after redefining: \unit{\L}.
+Litre after redefining:
+\unit{\L}.
 \end{example}
 
 Similarly the commands
@@ -1182,14 +1194,13 @@ Similarly the commands
   \ci{DeclareSIQualifier}
 \end{lscommand}
 allow definition of unit-related macros in case additional are needed.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \DeclareSIUnit{\pt}{pt}
 \DeclareSIPower\quartic\tothefourth{4}
 \DeclareSIPrefix\decakilo{dk}{4}
 \DeclareSIQualifier\polymer{pol}
 
-It's over
-\qty{9000}{\quartic\decakilo\pt\polymer}!
+It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
 \end{example}
 
 \subsection{Table columns with numbers}\label{sec:sitables}\index{decimal
@@ -1200,18 +1211,22 @@ them along the decimal point, so they can be compared easily. The \pai{siunitx}
 package adds the special column specifier \cargv{S} for this purpose to the
 \ei{tabular} environment. Non numeric data must be surrounded by curly brackets
 in such columns.
-\begin{example}[examplewidth=0.45\linewidth]
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular}{@{}lS@{}}
   \toprule
-  Day & {Candy eaten (\unit{\g})} \\
+  Day       & {Candy eaten (\unit{\g})} \\
   \midrule
-  Monday & .3011 \\
-  Tuesday & 54.86 \\
-  Wednesday & 1000.9722 \\
-  Thursday & -1000.9722 \\
+  Monday    & .3011                     \\
+  Tuesday   & 54.86                     \\
+  Wednesday & 1000.9722                 \\
+  Thursday  & -1000.9722                \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{A simple example of using \pai{siunitx}'s \cargv{S} column
+    specification.}
+\end{listing}
 
 When presenting numeric data, such as above, it is good to remember the
 following two rules
@@ -1223,40 +1238,41 @@ All the numbers in \cargv{S} columns are automatically parsed by \pai{siunitx},
 which means that if we use it, the first rule will be enforced for us.
 
 In order to influence parsing\slash{}displaying options of a
-single column, pass them in square brackets to the column specification.
-\begin{example}[examplewidth=0.38\linewidth]
+single column, pass them in square brackets to the column specification. See
+Listing~\ref{lst:siunitxS} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \DeclareSIUnit{\eur}{\euro}
 \begin{tabular} {
-    @{}
-    l
-    S[
-      output-decimal-marker={,},
-      per-mode=symbol,
-    ]
-    @{}
+    @{}l
+    S[output-decimal-marker={,},
+      per-mode=symbol]@{}
   }
   \toprule
-  Candy & {Price (\unit{\eur\per\kg})} \\
+  Candy        & {Price (\unit{\eur\per\kg})} \\
   \midrule
-  Chocolate & 11.30 \\
-  Lollipops & 15.86 \\
-  Marshmallows & 5.97 \\
-  Golden taffy & 1125.12 \\
+  Chocolate    & 11.30                        \\
+  Lollipops    & 15.86                        \\
+  Marshmallows & 5.97                         \\
+  Golden taffy & 1125.12                      \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using optional parameters in a single \cargv{S}
+    column specification.}\label{lst:siunitxS}
+\end{listing}
 
 Besides standard options there are also table specific options that can be
 passed to the columns. An important one is \cargv{table-format}. By default the
 \cargv{S} specifier centres the decimal point leaving equal space to the left
 and to the right of it. This leads to a lot of empty space if lengths of
-integer and fraction parts are widely different.
-\begin{example}[examplewidth=0.5\linewidth]
+integer and fraction parts are widely different as can be seen in
+Listing~\ref{lst:toowide}.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
 \begin{tabular} {@{}SS@{}}
   \toprule
-  \multicolumn{2}{c}{Weight} \\
-  \midrule
   {\unit{\ug}} & {\unit{\kg}} \\
   \midrule
   1 & 1e-9 \\
@@ -1266,12 +1282,17 @@ integer and fraction parts are widely different.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An anti-example of using \pai{siunitx}'s \cargv{S} column
+    specification without setting the \cargv{table-format}.}\label{lst:toowide}
+\end{listing}
 We can then use
 \cargv{table-format} to instruct \LaTeX{} how much space should be reserved
 before and after dot. For example \cargv{6.2} means that it should reserve
 space for 6 digits before the decimal point, and for two after. The format may
-also contain information about signs, exponents or text around numbers.
-\begin{example}[examplewidth=0.5\linewidth]
+also contain information about signs, exponents or text around numbers. See
+Listing~\ref{lst:tableformat} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
 \begin{tabular} {
     @{}
@@ -1291,11 +1312,15 @@ also contain information about signs, exponents or text around numbers.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using \pai{siunitx}'s \cargv{S} column
+    specification with the \cargv{table-format} key.}\label{lst:tableformat}
+\end{listing}
 
 By default numbers and text within the \cargv{S} columns and centered. If you
 want to change the alignment use the \cargv{table-number-alignment} and
-\cargv{table-text-alignment} options.
-\begin{example}[examplewidth=0.45\linewidth]
+\cargv{table-text-alignment} options. See Listing~\ref{lst:salignment} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular} {
     @{}
     S[
@@ -1320,25 +1345,27 @@ want to change the alignment use the \cargv{table-number-alignment} and
   \bottomrule
 \end{tabular}
 \end{example}
-
+  \caption{An example of aligning text and numbers inside the \pai{siunitx}'s \cargv{S} column.}\label{lst:salignment}
+\end{listing}
 The numbers may also be aligned inside a \ci{multicol} or \ci{multirow},
-using the \ci{tablenum} command.
-\begin{example}[examplewidth=0.30\linewidth]
-\sisetup{
-  table-format = 4.4e1
-}
+using the \ci{tablenum} command as seen in Listing~\ref{lst:tablenum}.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
+\sisetup{table-format = 4.4e1}
 \begin{tabular}{@{}lr@{}}
   \toprule
-  Candy & Friend \\
+  Candy     & Friend                         \\
   \midrule
-  Chocolate & Peter \\
-  Lollipop & Jane \\
-  \multicolumn{2}{c}{\tablenum{12,34 e0}} \\
+  Chocolate & Peter                          \\
+  Lollipop  & Jane                           \\
+  \multicolumn{2}{c}{\tablenum{12,34 e0}}    \\
   \multicolumn{2}{c}{\tablenum{333.5567 e1}} \\
-  \multicolumn{2}{c}{\tablenum{4563.21 e2}} \\
+  \multicolumn{2}{c}{\tablenum{4563.21 e2}}  \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using the \ci{tablenum} command.}\label{lst:tablenum}
+\end{listing}
 
 If you don't want the decimal alignment but still would like to have
 numbers in columns formatted by \pai{siunitx}, change the
@@ -1559,8 +1586,9 @@ package \pai{bm} from the \pai{tools} bundle make this much easier as they inclu
 a \ci{boldsymbol} command:
 
 \begin{example}
-$\mu, M \qquad
-\boldsymbol{\mu}, \boldsymbol{M}$
+$\mu, M$
+$\boldsymbol{\mu}
+  \boldsymbol{M}$
 \end{example}
 
 \section{Theorems, Lemmas, \ldots}
@@ -1629,7 +1657,7 @@ The ``Jury'' theorem uses the same counter as the ``Law''
 theorem, so it gets a number that is in sequence with
 the other ``Laws''. The argument in square brackets is used to specify
 a title or something similar for the theorem.
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 %!showbegin !hide
 \newtheorem{mur}{Murphy}[section]
 %!showend !hide

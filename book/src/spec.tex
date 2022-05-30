@@ -50,7 +50,7 @@ point to.  Table~\ref{index} explains the syntax with several examples.
   \caption{Index Key Syntax Examples.}\label{index}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Code                                   & Index Entry           & Comment                \\
+    Code                                   & Entry                 & Explanation            \\
     \midrule
     \rule{0pt}{1.05em}\verb|\index{hello}| & hello, 1              & Plain entry            \\
     \verb|\index{hello!Peter}|             & \hspace*{2ex}Peter, 3 & Subentry under `hello' \\
@@ -198,7 +198,7 @@ their thickness redefine the
   \ci{footrulewidth}
 \end{lscommand}
 macros to the desired size.
-\begin{example}[standalone, paperheight=3cm]
+\begin{example}[standalone, paperheight=3cm, paperwidth=3cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr} %!hide
@@ -340,7 +340,9 @@ command.
 \usepackage{fancyhdr}%!hide
 \usepackage{extramarks}%!hide
 \pagestyle{fancy}%!hide
-\fancyhead[R]{\nouppercase{\firstleftmark}}
+\fancyhead[R]{%
+  \nouppercase{\firstleftmark}%
+}
 
 \begin{document}%!hide
 \section{Today}
@@ -354,7 +356,7 @@ If you want even more control over the section titles you may redefine the
 \ci{sectionmark}.\footnote{Or \ci{chaptermark}, \ci{subsectionmark} \ldots} The
 command receives the section title as its first argument, while the section
 number is available as \ci{thesection}.
-\begin{example}[standalone, paperheight=4cm]
+\begin{example}[standalone, paperheight=4.5cm, paperwidth=4cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr}%!hide
@@ -362,7 +364,8 @@ number is available as \ci{thesection}.
 \pagestyle{fancy}%!hide
 \fancyhead[R]{\firstleftmark}
 \RenewDocumentCommand{\sectionmark}{m}{%
-  \markboth{Section no.\,\thesection: #1}{}%
+  \markboth{%
+    Section no.\,\thesection: #1}{}%
 }
 
 \begin{document}%!hide
@@ -474,7 +477,7 @@ The lines in headers and footers are created by invoking \ci{headrule} and
 \ci{footrule} commands. If you want finer control over the lines consider
 redefining these macros. Use \ci{headruleskip} and \ci{footruleskip} to raise
 or lower them if necessary.
-\begin{example}[standalone, paperheight=4cm]
+\begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr}%!hide
@@ -1013,7 +1016,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 % cran captur par ImageMagick (man ImageMagick) fonction  import
 % et convertie en jpg toujours par ImageMagick.
 
-\begin{figure}[htbp]
+\begin{listing}
   \begin{minted}{latex}
 \documentclass[10pt]{beamer}
 \mode<beamer>{%
@@ -1050,7 +1053,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 \end{minted}
   \caption{Sample code for the \pai{beamer} class}%
   \label{fig:code-beamer}
-\end{figure}
+\end{listing}
 
 When you compile the code presented in figure~\ref{fig:code-beamer}
 with \wi{pdf\LaTeX} you get a PDF file with a title page and a second page

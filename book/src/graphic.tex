@@ -341,7 +341,7 @@ apply to oblique line segments as well as to circles and ovals.
 }
 \newsavebox{\folderb}
 \savebox{\folderb}
-  (40,32)[l]{%         definition
+  (40,32)[l]{% definition
   \put(0,14){\line(1,0){8}}
   \put(8,0){\usebox{\foldera}}
 }
@@ -379,7 +379,7 @@ about 3\,mm.
 
 \subsection{Quadratic B\'ezier Curves}
 
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \setlength{\unitlength}{0.8cm}
 \begin{picture}(6,4)
   \linethickness{0.075mm}
@@ -426,7 +426,7 @@ the necessary \ci{qbezier} command line.
 
 \subsection{Catenary}
 
-\begin{example}
+\begin{example}[examplewidth=0.47\linewidth]
 \setlength{\unitlength}{1cm}
 \begin{picture}(4.3,3.6)(-2.5,-0.25)
 \put(-2,0){\vector(1,0){4.4}}
@@ -519,10 +519,10 @@ instead of actually explaining how it works, I will just show you a few examples
 so that you can get a first impression of how this tool works.
 
 First a simple nonsense diagram.
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2)
-     rectangle (1.8,1.2);
+     rectangle (1.2,1.2);
   \draw[step=.25cm,gray,very thin]
        (-1.4,-1.4) grid (3.4,3.4);
   \draw (-1.5,0) -- (2.5,0);
@@ -536,28 +536,24 @@ First a simple nonsense diagram.
 \end{example}
 Note the semicolon (\texttt{;}) character. It separates the individual commands.
 
-A simple Venn diagram.
-\begin{example}
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.7\linewidth]
 \begin{tikzpicture}
-  \node[circle,draw,
-        minimum size=3cm,
-        label=120:{economics}]
-         at (0,0) {};
-  \node[circle,draw,
-        minimum size=3cm,
-        label=60:{psychology}]
-         at (1,0) {};
+  \node[circle,draw, minimum size=3cm,
+        label=120:{economics}] at (0,0) {};
+  \node[circle,draw, minimum size=3cm,
+        label=60:{psychology}] at (1,0) {};
   \node (i) at (0.5,-1) {};
-  \node at (0.6,-2.5)
-    {behavioral economics}
-    edge[->,thick,
-         out=60,in=-60] (i);
+  \node at (0.6,-2.5) {behavioral economics}
+    edge[->,thick, out=60,in=-60] (i);
 \end{tikzpicture}
 \end{example}
+  \caption{A simple Venn Diagram using \TikZ{}}\label{lst:venn}
+\end{listing}
 
 Note the foreach loops in the next example.
 \begin{example}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[scale=0.75]
   \tikzstyle{v}=[circle, minimum size=2mm,inner sep=0pt,draw]
   \foreach \i in {1,...,8}
     \foreach \j in {1,...,3}
@@ -595,7 +591,7 @@ features for drawing special shapes, like this box which is slightly bent.
 \end{tikzpicture}
 \end{example}
 
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \usetikzlibrary{positioning}
 \begin{tikzpicture}[xscale=6,
      yscale=8,>=stealth]
@@ -632,6 +628,7 @@ you will find a detailed tutorial on drawing this exact diagram.
           top color=white,bottom color=black!20,
           font=\ttfamily\tiny},
       nonterminal/.style={
+          align=center,
           rectangle,
           minimum size=6mm,
           thick,
@@ -641,18 +638,18 @@ you will find a detailed tutorial on drawing this exact diagram.
           font=\itshape\tiny}]
     \matrix[column sep=4mm] {
       % First row:
-                             &                                                  &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
+                             &                                                   &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
       % Second row:
-      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned integer}; &
-      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                &
-      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};            &
-      \node (p4) [point] {}; & \node (p5)     [point] {};                       &
-      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                &
-      \node (p7) [point] {}; &                                                  &
-      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned integer}; &
-      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                            \\
+      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned\\integer}; &
+      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                 &
+      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};             &
+      \node (p4) [point] {}; & \node (p5)     [point] {};                        &
+      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                 &
+      \node (p7) [point] {}; &                                                   &
+      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned\\integer}; &
+      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                             \\
       % Third row:
-                             &                                                  &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
+                             &                                                   &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
     };
     { [start chain]
     \chainin (p1);

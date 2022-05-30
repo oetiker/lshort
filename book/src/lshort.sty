@@ -32,7 +32,8 @@
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
 \RequirePackage{listings}
-\RequirePackage[kpsewhich, cachedir=pdfbuild/minted_cache]{minted}
+\RequirePackage[kpsewhich, cachedir=pdfbuild/minted_cache, chapter]{minted}
+\RequirePackage{flafter}
 \setminted{
   fontsize=\small,
   escapeinside=«»,
@@ -310,9 +311,21 @@
 %
 \RequirePackage{lshortexample}
 
-\newenvironment{lined}[1]%
- {\begin{center}\begin{tabular}{@{}p{#1}@{}}\toprule\begin{minipage}{#1}}
- {\end{minipage}\\\bottomrule\end{tabular}\end{center}}
+\ExplSyntaxOn
+\NewDocumentEnvironment{lined}{sm} {
+  \dim_set:Nn \l_tmpa_dim {#2}
+  \begin{center}
+    \begin{tabular}{@{}p{\l_tmpa_dim}@{}}
+      \IfBooleanF {#1} {\toprule}
+      \begin{minipage}{\l_tmpa_dim}
+        } {
+      \end{minipage} \\
+      \IfBooleanF {#1} {\bottomrule}
+    \end{tabular}
+  \end{center}
+}
+
+\ExplSyntaxOff
 % I want no headers on pages created by clearpage
 
 \renewcommand{\cleardoublepage}

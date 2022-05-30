@@ -240,8 +240,17 @@
     \dim_set:Nn \l_tmpa_dim {\__lshortexample_examplewidth}
   }
   \bool_if:NTF \__lshortexample_vertical_mode_bool {
-    \show_input_file:n {#2}
-    \show_output:n {#1}
+    \begin{lined}*{
+        \bool_if:NTF \__lshortexample_standalone_bool {
+          \__lshortexample_examplewidth
+        } {
+          \l_tmpa_dim
+        }
+      }
+      \show_input_file:n {#2}
+      \centering
+      \show_output:n {#1}
+    \end{lined}
   } {
     \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
       \show_input_file:n {#2}
@@ -254,53 +263,32 @@
 }
 
 \cs_new:Nn \show_input_file:n {
-  \bool_if:NTF \__lshortexample_vertical_mode_bool {
-    \begin{adjustwidth}{1cm}{1cm}
-      \inputminted{\__lshortexample_minted_language}{#1}
-    \end{adjustwidth}
-  } {
-    \inputminted{\__lshortexample_minted_language}{#1}
-  }
+  \inputminted{\__lshortexample_minted_language}{#1}
 }
 
 \cs_new:Nn \show_output:n {
-  \bool_if:NTF \__lshortexample_standalone_bool {
-    \bool_if:NT \__lshortexample_vertical_mode_bool {
-      \begin{adjustwidth}{1cm}{1cm}
-        \centering
-        }
-
-        \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-        \fancyframebox{0.1pt}{0pt}{
-          \includegraphics[
-            width=\__lshortexample_paperwidth,
-            page=##1,
-          ]{
-            \__lshortexample_cache_dir_tl\l_tmpb_tl
-          }
-        }
-        \bool_if:nT {
-        \__lshortexample_vertical_pages_bool &&
-        !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
-        } {\\[-1pt]}
-        }
-
-        \bool_if:NT \__lshortexample_vertical_mode_bool {
-      \end{adjustwidth}
-    }
-  } {
-    \bool_if:NT \__lshortexample_vertical_mode_bool {
-      \begin{adjustwidth}{1cm}{1cm}
-        }
-        \fancyframebox{0.1pt}{3mm}{
-          \begin{minipage}{\l_tmpa_dim-6mm}
-            \input{#1}
-          \end{minipage}
-        }
-        \bool_if:NT \__lshortexample_vertical_mode_bool {
-      \end{adjustwidth}
-    }
+\bool_if:NTF \__lshortexample_standalone_bool {
+\int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
+\fancyframebox{0.1pt}{0pt}{
+  \includegraphics[
+    width=\__lshortexample_paperwidth,
+    page=##1,
+  ]{
+    \__lshortexample_cache_dir_tl\l_tmpb_tl
   }
+}
+\bool_if:nT {
+\__lshortexample_vertical_pages_bool &&
+!\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
+} {\\[-1pt]}
+}
+} {
+\fancyframebox{0.1pt}{2mm}{
+  \begin{minipage}{\l_tmpa_dim-4mm-0.2pt}
+    \input{#1}
+  \end{minipage}
+}
+}
 }
 
 \cs_new:Nn \lshortexample_verbatim_processline:n {

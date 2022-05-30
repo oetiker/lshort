@@ -74,8 +74,8 @@ and over again.
 
 \begin{example}
 \NewDocumentCommand{\tnss}{}{%
-  The not so Short Introduction to
-    \LaTeXe}
+  The not so Short Introduction
+    to \LaTeXe}
 This is \enquote{\tnss} \ldots{}
 \enquote{\tnss}
 \end{example}
@@ -90,10 +90,9 @@ you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
   #2 Introduction to \LaTeXe}
 
 % in the document body:
-\begin{itemize}
-\item \txsit{not so}{short}
-\item \txsit{very}{long}
-\end{itemize}
+\txsit{not so}{short}
+
+\txsit{very}{long}
 \end{example}
 
 If your command accepts an optional argument but the user does not supply one,
@@ -104,10 +103,9 @@ a special marker \cargv{-NoValue-} will be inserted instead.
   #2 Introduction to \LaTeXe}
 
 % in the document body:
-\begin{itemize}
-\item \txsit{definitive}
-\item \txsit[very]{long}
-\end{itemize}
+\txsit{definitive}
+
+\txsit[very]{long}
 \end{example}
 In order to test whether the user supplied a value, use
 \begin{lscommand}
@@ -137,10 +135,9 @@ be used if you only need output for one of the branches. The example with
   #2 Introduction to \LaTeXe}
 
 % in the document body:
-\begin{itemize}
-\item \txsit{definitive}
-\item \txsit[very]{long}
-\end{itemize}
+\txsit{definitive}
+
+\txsit[very]{long}
 \end{example}
 The commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
 work exactly the same, but the value\slash{}no-value branches are swapped.
@@ -157,10 +154,9 @@ if no value is supplied. Write
   #2 Introduction to \LaTeXe}
 
 % in the document body:
-\begin{itemize}
-\item \txsit{definitive}
-\item \txsit[very]{long}
-\end{itemize}
+\txsit{definitive}
+
+\txsit[very]{long}
 \end{example}
 
 Another useful argument specification is \cargv{s}, short for star. This
@@ -180,10 +176,9 @@ that works analogously to the \ci{IfValueTF} command.
 }
 
 % in the document body:
-\begin{itemize}
-\item \txsit{long}
-\item \txsit*{long}
-\end{itemize}
+\txsit{long}
+
+\txsit*{long}
 \end{example}
 \end{chktexignore}
 
@@ -342,7 +337,7 @@ In order to avoid this problem a special command exists
   \ci*{NewCommandCopy}[\texttt{\bs}name:m ! \texttt{\bs}command:m]
 \end{lscommand}
 It makes the \carg{name} the exact copy of the \carg{command}. The following example shows how this works
-\begin{example}[examplewidth=0.40\linewidth]
+\begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\foo}{}{Batman!}
 
 \NewDocumentCommand{\newfoo}{}{\foo}
@@ -358,7 +353,8 @@ command as we have tried to do earlier.
 \begin{example}[examplewidth=0.35\linewidth]
 \NewCommandCopy{\oldemph}{\emph}
 \RenewDocumentCommand{\emph}{m}{%
-  \oldemph{#1}~(\enquote{#1} is emphasised)%
+  \oldemph{#1}~(\enquote{#1}
+  is emphasised)%
 }
 
 And here it \emph{comes}.
@@ -707,8 +703,8 @@ changing the line spacing you might want to use the command:
            {1.5\baselineskip}
 This paragraph is typeset with
 the baseline skip set to 1.5 of
-what it was before. Note the par
-command at the end of the
+what it was before. Note the
+par command at the end of the
 paragraph.\par}
 
 This paragraph has a clear
@@ -956,7 +952,7 @@ depth of a text string.
 
 \noindent The example below shows a possible application of these commands.
 
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \newenvironment{vardesc}[1]{%
   \settowidth{\parindent}{#1:\ }
   \makebox[0pt][r]{#1:\ }}{}
@@ -1054,6 +1050,7 @@ the \ci{makebox} and \ci{framebox} commands.
     s p r e a d}\par
 \framebox[1.1\width]{Guess I'm
     framed now!} \par
+\hspace{1cm} %!hide
 \framebox[0.8\width][r]{Bummer,
     I am too wide} \par
 \framebox[1cm][l]{never
@@ -1075,7 +1072,7 @@ box. You can use \ci{width}, \ci{height}, \ci{depth}, and
 \ci{totalheight} in the first three parameters, in order to act
 upon the size of the box inside the \emph{text} argument.
 
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \raisebox{0pt}[0pt][0pt]{\Large%
 \textbf{Aaaa\raisebox{-0.3ex}{a}%
 \raisebox{-0.7ex}{aa}%
