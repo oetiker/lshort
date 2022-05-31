@@ -193,21 +193,22 @@ explicitly want this: \csi{RenewDocumentCommand}.
 It uses the same syntax as the \csi{NewDocumentCommand}
 command.
 
-In certain cases you might want to use the \csi{ProvideDocumentCommand}
+In some cases you might want to use the \csi{ProvideDocumentCommand}
 command. It works like \csi{NewDocumentCommand}, but if the command is
-already defined, \LaTeXe{} will silently ignore it.
+already defined, \LaTeX{} will silently ignore it.
 
 \subsection{New Environments}
 The \csi{NewDocumentEnvironment} command lets you create your own environments. It has the
 following syntax:
 
 \begin{lscommand}
+  \small
   \csi{NewDocumentEnvironment}[name:m, argspec:m, at begin:m, at end:m]
 \end{lscommand}
 The \carg{argspec} argument is the same as in the
 \csi{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
   end} arguments will be inserted respectively when the commands
-\csi{begin}[name] and \csi{end}[name] is encountered.
+\csi{begin}[name: m] and \csi{end}[name: m] is encountered.
 
 The example below illustrates the usage of this command.
 \begin{example}
@@ -227,7 +228,7 @@ My humble subjects \ldots
 \end{example}
 
 Note that when environment argument are read, they are read \emph{after} the
-\csi{begin}[name] command. This may be especially counter intuitive when we
+\csi{begin}[name: m] command. This may be especially counter intuitive when we
 consider the \cargv{s} specification. Below is an example that illustrates
 this.
 
@@ -293,7 +294,7 @@ typesetting.
 Similarly to the \csi{NewDocumentCommand} \LaTeX{} makes sure that you do not
 define an environment that already exists. If you ever want to change an
 existing environment, use the \csi{RenewDocumentEnvironment} command. Its
-arguments are exactly the same as the \csi{NewDocumentEnvironment} command.
+arguments are the same as the \csi{NewDocumentEnvironment} command.
 
 \subsection{Copying commands}\label{sec:copyingcommands}
 

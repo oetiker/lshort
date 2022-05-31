@@ -569,20 +569,18 @@ To group multiple equations the
   & = d + e
 \end{align}
 \end{example}
-
 this approach fails once a single line is too long:
 \begin{example}
 \begin{align}
   a & = b + c \\
-  & = d + e + f + g + h + i 
-  + j + k + l \nonumber \\
-  & + m + n + o \\
-  & = p + q + r + s
+  & = d + e + f
+  + g + h + i \nonumber \\
+  & + j + k + l \\
+  & = m + n + o + p
 \end{align}
 \end{example}
-\noindent
 Here $+\:m$ should be below $d$ and not below the equality sign. A
-\TeX{}pert will point out that \verb+\mathrel{\phantom{=}} \negmedspace {}+,
+\TeX{}pert will point out that \mintinline{latex}|\mathrel{\phantom{=}} \negmedspace{}|,
 would add the necessary space in front of \verb|+m+n+o|, but since most users
 lack that kind of imagination, a simpler solution would be nice.
 
@@ -590,10 +588,10 @@ This is the moment where the \ei{eqnarray} environment bursts onto the scene:
 \begin{example}
 \begin{eqnarray}
   a & = & b + c \\
-  & = & d + e + f + g + h + i 
-  + j + k + l \nonumber \\
-  && +\: m + n + o \\
-  & = & p + q + r + s
+  & = & d + e + f
+  + g + h + i \nonumber \\
+  && +\: j + k + l \\
+  & = & m + n + o + p
 \end{eqnarray}
 \end{example}
 
@@ -799,7 +797,7 @@ than just a sign, and the unwanted ensuing space between
 If a particular line should not have an equation number, the
 number can be suppressed using \csi{nonumber} (or
 \csi{IEEEnonumber}). If on such a line a label
-\csi{label}[\ldots] is defined, then this label is passed on
+\csi{label}[\ldots: m] is defined, then this label is passed on
 to the next equation number that is not suppressed. Place the labels right before the line-break
 \csi{\bs} or the next to the equation it belongs to. Apart from
 improving the readability of the source code this prevents a

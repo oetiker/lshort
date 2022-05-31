@@ -313,8 +313,10 @@ The command
 \emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to
 ``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates.
 
-Line thickness can be controlled by two kinds of commands: \\
-\csi{linethickness}\verb|{|\emph{length}\verb|}|
+Line thickness can be controlled by two kinds of commands:
+\begin{lscommand}
+  \csi{linethickness}[length: m]
+\end{lscommand}
 on the one hand, \csi{thinlines} and \csi{thicklines} on the other. While \csi{linethickness}\verb|{|\emph{length}\verb|}|
 applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \csi{thinlines} and \csi{thicklines}
 apply to oblique line segments as well as to circles and ovals.

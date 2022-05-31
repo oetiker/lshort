@@ -28,7 +28,6 @@
 }
 \newfontfamily\arabicfonttt{Iran Nastaliq}
 
-\RequirePackage[autostyle]{csquotes}
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
 \RequirePackage{listings}
@@ -43,6 +42,7 @@
 \RequirePackage{caption}
 \captionsetup{tableposition=top}
 
+\RequirePackage[autostyle]{csquotes}
 \RequirePackage{multirow}
 \RequirePackage{siunitx}
 \RequirePackage{lastpage}
@@ -292,16 +292,16 @@
 \RenewDocumentCommand{\sectionautorefname}{}{Section}
 \RenewDocumentCommand{\chapterautorefname}{}{Chapter}
 \NewDocumentCommand{\listingautorefname}{}{Listing}
-\ifx\hypersetup\undefined\else  
+\ifx\hypersetup\undefined\else
   \pdfstringdefDisableCommands {
-    \edef\ci{\textbackslash}
     \edef\sim{\textasciitilde}
     \edef\circ{\textdegree}
     \edef\ldots{...}
     \edef\ei{}
     \edef\pai{}
     \edef\({}
-    \edef\){}  
+    \edef\){}
+    \RenewExpandableDocumentCommand{\csi}{m}{\textbackslash#1}
   }
 \fi
 % This does nothing, but disables ChkTeX inside

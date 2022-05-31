@@ -689,8 +689,8 @@ list the default values are written in an upright font.
           Acrobat's menu
     \item [\texttt{pdffitwindow (=false,\textsl{true})}] adjust the
           initial magnification of the PDF when displayed
-    \item [\texttt{pdftitle (=\{text\})}] define the title that gets
-          displayed in the \texttt{Document Info} window of Acrobat
+    \item [\texttt{pdftitle (=\{text\})}] defines the title that gets
+          displayed in the \enquote{Document Info} window of Acrobat
     \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
     \item [\texttt{pdfnewwindow (=false,\textsl{true})}] define whether a new
           window should be opened when a link leads out of the current
@@ -951,7 +951,10 @@ To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
 \subsubsection{Where do I get OpenType fonts?}
 
 If you have \texttt{TeXLive} installed, you already have some at
-\url{.../texmf-dist/fonts/opentype}, just install them in your operating
+\begin{code}
+  \url{.../texmf-dist/fonts/opentype},
+\end{code}
+just install them in your operating
 system. This collection does not include \texttt{DejaVu}, which is available
 at \url{http://dejavu-fonts.org/}.
 
@@ -1102,7 +1105,7 @@ let you specify a special version of the title and the author
 name to be displayed on the panel of the \cargv{Goettingen} theme.
 
 The titles and subtitles in the panel are created with normal
-\mintinline{latex}|\section{}| and \mintinline{latex}|\subsection{}| commands that you place
+\cs{section} and \cs{subsection} commands that you place
 \emph{outside} the \ei{frame} environment.
 
 The tiny navigation icons at the bottom of the screen also allow to

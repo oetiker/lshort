@@ -295,10 +295,14 @@ two formats:
   \item They start with a \wi{backslash} \verb|\| and then have a name
         consisting of letters only. Command names are terminated by a space, a
         number or any other \enquote*{non-letter}, for example:
-        \mintinline{latex}|\emph|, \mintinline{latex}|\begin|,
-        \mintinline{latex}|\LaTeX|.
+        \begin{chktexignore}
+          \mintinline{latex}|\emph|, \mintinline{latex}|\begin|,
+          \mintinline{latex}|\LaTeX|.
+        \end{chktexignore}
   \item They consist of a backslash and exactly one non-letter, for example:
-        \mintinline{latex}|\\|, \mintinline{latex}|\{|, \mintinline{latex}|\"|.
+        \begin{chktexignore}
+          \mintinline{latex}|\\|, \mintinline{latex}|\{|, \mintinline{latex}|\"|.
+        \end{chktexignore}
 \end{itemize}
 Many commands also exist in a `starred variant' where a star is appended to the
 command name.
@@ -335,7 +339,7 @@ group.
 New \TeX users may miss whitespaces
 after a command. % renders wrong
 Experienced \TeX{} users are
-\TeX perts, and know how to use
+\TeX nicians, and know how to use
 whitespaces. % renders correct
 \end{example}
 \end{chktexignore}
@@ -593,7 +597,7 @@ understand: the \ei{em} environment, short for
 \subsection{Summary}
 
 Using logical markup we can embed the logical structure of our document inside
-the document itself. Instead of saying \enquote{write this and green and write
+the document itself. Instead of saying \enquote{write this in green and write
   this word in cursive}, we say \enquote{this text happens in dimension A and
   this word is emphasised} and the style of all texts in \enquote*{dimension A}
 or emphasised words can be decided later and easily changed.
@@ -642,7 +646,7 @@ be present under the \enquote*{Documentation} field.
 \begin{table}[htp]
   \centering
   \caption{Examples of \LaTeX{} packages.}\label{packages}
-  \begin{tabular}{@{}lp{9.5cm}@{}}
+  \begin{tabular}{@{}lp{9cm}@{}}
     \toprule
     Package            & Description                                          \\
     \midrule
