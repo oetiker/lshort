@@ -29,35 +29,25 @@
   \end{trivlist}
 }
 
-\cs_set:Nn \__lshort_fix_verb_arg:n {
-  \tl_set:Nn \l_tmpa_tl {#1}
-  \exp_args:NNx\tl_replace_all:Nnn \l_tmpa_tl {\char_generate:nn{13}{12}} {\\}
-  \tl_replace_all:Nnn \l_tmpa_tl {~} {\mbox{~}}
-  \tl_use:N \l_tmpa_tl
-}
-
 \NewDocumentCommand{\chto}{+v+v}{
   \begin{trivlist}
     \item
     \begin{minipage}{0.4\textwidth}
-      \ttfamily
-      \__lshort_fix_verb_arg:n {#1}
+      \mintinline{latex}:#1:
     \end{minipage}
     \hspace{\stretch{1}}
     \(\longrightarrow\)
     \hspace{\stretch{1}}
     \begin{minipage}{0.4\textwidth}
-      \ttfamily
-      \__lshort_fix_verb_arg:n {#2}
+      \mintinline{latex}:#2:
     \end{minipage}
   \end{trivlist}
 }
 \NewDocumentCommand{\vchto}{+v+v}{
   \begin{center}
-    \ttfamily
-    \__lshort_fix_verb_arg:n {#1}\\[.2cm]
+    \mintinline{latex}:#1:\\[.2cm]
     \(\big\downarrow\)\\[.2cm]
-    \__lshort_fix_verb_arg:n {#2}
+    \mintinline{latex}:#2:
   \end{center}
 }
 
