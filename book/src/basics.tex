@@ -283,8 +283,8 @@ the same by using a prefix backslash:
 The other symbols and many more can be printed with special commands
 in mathematical formulae or as accents. The backslash character
 \textbackslash{} can \emph{not} be entered by adding another backslash
-in front of it (\ci{\bs}); this sequence is used for
-line breaking. Use the \ci{textbackslash} command instead.
+in front of it (\csi{\bs}); this sequence is used for
+line breaking. Use the \csi{textbackslash} command instead.
 
 \subsection{\LaTeX{} Commands}
 
@@ -293,11 +293,12 @@ two formats:
 
 \begin{itemize}
   \item They start with a \wi{backslash} \verb|\| and then have a name
-        consisting of letters only. Command names are terminated by a
-        space, a number or any other \enquote*{non-letter}, for example:
-        \verb|\emph|, \verb|\begin|, \verb|\LaTeX|.
+        consisting of letters only. Command names are terminated by a space, a
+        number or any other \enquote*{non-letter}, for example:
+        \mintinline{latex}|\emph|, \mintinline{latex}|\begin|,
+        \mintinline{latex}|\LaTeX|.
   \item They consist of a backslash and exactly one non-letter, for example:
-        \verb|\\|, \verb|\{|, \verb|\"|.
+        \mintinline{latex}|\\|, \mintinline{latex}|\{|, \mintinline{latex}|\"|.
 \end{itemize}
 Many commands also exist in a `starred variant' where a star is appended to the
 command name.
@@ -309,7 +310,7 @@ encounters after its end in the source file. If the command name consists of
 letters then it ignores following spaces. For example if command \enquote*{foo}
 accepts two arguments then
 \begin{code}
-  \verb+\foo bar+
+  \mintinline{latex}+\foo bar+
 \end{code}
 Will be read as command \enquote*{foo} with first argument \enquote*{b} and
 second argument \enquote*{a} followed by the letter \enquote*{r}. In order to pass
@@ -318,7 +319,7 @@ more than one letter to the commands, groups are used.
 Groups are delimited by \ai{\{} and \ai{\}}. They tell \LaTeX{} to treat the
 content between them as a single unit. For example
 \begin{code}
-  \verb+\foo{bar}{baz}qux+
+  \mintinline{latex}+\foo{bar}{baz}qux+
 \end{code}
 will be interpreted as command \enquote*{foo} with first argument
 \enquote*{bar} and second argument \enquote*{baz} followed by text
@@ -346,7 +347,7 @@ within square brackets \verb|[ ]| and usually come right after the command
 name. The following notation will be often used within this book to denote a
 command with one optional parameter and one required parameter:
 \begin{lscommand}
-  \ci{command}*[optional parameter][parameter]
+  \cs{command}[optional parameter: o, parameter: m]
 \end{lscommand}
 
 \section{Input File Structure}\label{sec:structure}
@@ -354,7 +355,7 @@ When \LaTeX{} processes an input file, it expects it to follow a
 certain \wi{structure}. Input files must start with the
 command
 \begin{code}
-  \ci{documentclass}[class]
+  \csi{documentclass}[class: m]
 \end{code}
 The \carg{class} argument specifies what sort of document you intend to write.
 
@@ -363,19 +364,19 @@ Inside it you add commands to influence the style of the whole document, or
 load \wi{package}s that add new features to the \LaTeX{} system. To load such a
 package you use the command
 \begin{code}
-  \ci{usepackage}[package]
+  \csi{usepackage}[package: m]
 \end{code}
 
 When the preamble is finished you start the \emph{body} of the text with the
 command
 \begin{code}
-\verb|\begin{document}|
+\mintinline{latex}|\begin{document}|
 \end{code}
 
 Inside the body you enter the text mixed with some useful \LaTeX{} commands.
 Mark the end of the document with
 \begin{code}
-\verb|\end{document}|
+\mintinline{latex}|\end{document}|
 \end{code}
 command, which tells \LaTeX{} to call it a day. Anything that
 follows this command will be ignored by \LaTeX.
@@ -529,7 +530,7 @@ what logical markup does.
 To see how this example would play out different in \LaTeX{} let's introduce
 our first text command
 \begin{lscommand}
-  \ci{emph}[text]
+  \csi{emph}[text: m]
 \end{lscommand}
 It stands for \enquote{emphasise} and does just that: it emphasises the
 \carg{text} it received as a parameter.
@@ -541,7 +542,7 @@ If you write the code on the left in the body of your document (you can use
 PDF file you produce.
 
 As you can see by default \LaTeX{} typesets the emphasised text in cursive
-font. It is important to understand that the \ci{emph} command \emph{does not}
+font. It is important to understand that the \csi{emph} command \emph{does not}
 mean \enquote{write this text in cursive}. It is much smarter than that. To
 illustrate that let's see how it behaves when the text of it is inside of is
 already in cursive
@@ -551,11 +552,11 @@ Are you gonna eat \emph{that}?
 \end{example}
 As you can see in this case it changed the font back to upright.
 
-Remember that you should only use the \ci{emph} command to emphasise text and
+Remember that you should only use the \csi{emph} command to emphasise text and
 nothing else, even if the resulting output would be the same (for example
 cursive font). If you stick to this rule, then if you later decide to use a
 different form of emphasis you can simply change the definition of the
-\ci{emph} command and other things that just \emph{happened} to be in cursive
+\csi{emph} command and other things that just \emph{happened} to be in cursive
 will be unaffected.
 \begin{example}
   \RenewCommandCopy{\emph}{\strong}%!hide
@@ -564,15 +565,15 @@ Are you gonna eat \emph{that}?
 
 \subsection{Your First Environment}
 
-If you have played with the \ci{emph} command a bit you may have noticed that
+If you have played with the \csi{emph} command a bit you may have noticed that
 trying to write several paragraphs inside it results in an error. This is the
 case for most of the \LaTeX{} commands. The reason is that putting a lot of
 text inside the parameters could result in poor performance and excessive
 memory consumption. In order to overcome that \LaTeX{} uses a concept of
 \emph{environments}.
 
-Environments are started using the \ci{begin} command and ended using the
-\ci{end} command. You have already seen one environment --- the
+Environments are started using the \csi{begin} command and ended using the
+\csi{end} command. You have already seen one environment --- the
 \cargv{document} environment that holds the body of the document. This one is
 present exactly once in every \LaTeX{} document. To explore the concept a bit
 let's introduce another one that is not very useful in practice, but easy to
@@ -599,7 +600,7 @@ or emphasised words can be decided later and easily changed.
 
 If you started writing your hypothetical novel using \LaTeX{} instead of
 WYSIWYG editor and used custom environments for typesetting events in different
-dimensions and \ci{emph} for emphasis, then changing it to black and white
+dimensions and \csi{emph} for emphasis, then changing it to black and white
 version would come down to simply changing the definition of the custom
 environments.
 
@@ -613,11 +614,11 @@ problem. If you want to include \wi{graphics}, \wi{coloured text} or source
 code from a file into your document, you need to enhance the capabilities of
 \LaTeX. Such enhancements are called packages. Packages are activated with the
 \begin{lscommand}
-  \ci{usepackage}[options][package]
+  \csi{usepackage}[options: o, package: m]
 \end{lscommand}
 command, where \carg{package} is the name of the package and
 \carg{options} is a list of keywords that trigger special features in
-the package. The \ci{usepackage} command goes into the preamble of the
+the package. The \csi{usepackage} command goes into the preamble of the
 document. See \autoref{sec:structure} for details.
 
 This book will describe some packages that the authors thought were especially
@@ -779,7 +780,7 @@ think is important, please drop me a line.
   \item[\eei{.tex}] \LaTeX{} or \TeX{} input file. Can be compiled with
     \texttt{latex}.
   \item[\eei{.sty}] \LaTeX{} Macro package. Load this
-    into your \LaTeX{} document using the \ci{usepackage} command.
+    into your \LaTeX{} document using the \csi{usepackage} command.
   \item[\eei{.dtx}] Documented \TeX{}. This is the main distribution
     format for \LaTeX{} style files. If you process a \eei{.dtx} file you get
     documented macro code of the \LaTeX{} package contained in the \eei{.dtx}
@@ -789,7 +790,7 @@ think is important, please drop me a line.
     you will normally get a \eei{.dtx} and a \eei{.ins} file. Run \LaTeX{} on the
     \eei{.ins} file to unpack the \eei{.dtx} file.
   \item[\eei{.cls}] Class files define what your document looks
-    like. They are selected with the \ci{documentclass} command.
+    like. They are selected with the \csi{documentclass} command.
   \item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
 \end{description}
 

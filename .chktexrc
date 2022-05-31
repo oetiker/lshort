@@ -19,7 +19,7 @@ MathEnvir {
 }
 
 WipeArg {
-    \ai:{} \ci:*{} \carg:{} \cargv:{} \mstX:{}
+    \ai:{} \csi:*{} \carg:{} \cargv:{} \mstX:{}
     \complexnum:{}
     \url:{}
 }

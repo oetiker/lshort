@@ -23,7 +23,7 @@
 \section{New Commands, Environments and Packages}
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
-write documents using logical markup, with commands like \ci{emph} or \ci{section}. There
+write documents using logical markup, with commands like \csi{emph} or \csi{section}. There
 may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.
 You may have noticed that all the
 commands I introduce in this book are typeset in a box, and that they show up
@@ -32,17 +32,17 @@ can write:
 
 \begin{example}
 \begin{lscommand}
-\ci{dum}
+\csi{dum}
 \end{lscommand}
 \end{example}
 
 In this example, I am using both a new environment called
 \ei{lscommand}, which is responsible for drawing the box around the
-command, and a new command named \ci{ci}, which typesets the command
+command, and a new command named \csi{ci}, which typesets the command
 name and makes a corresponding entry in the index. Check
-this out by looking up the \ci{dum} command in the index at the back
-of this book, where you'll find an entry for \ci{dum}, pointing to
-every page where I mentioned the \ci{dum} command.
+this out by looking up the \csi{dum} command in the index at the back
+of this book, where you'll find an entry for \csi{dum}, pointing to
+every page where I mentioned the \csi{dum} command.
 
 If I ever decide that I do not like having the commands typeset in
 a box any more, I can simply change the definition of the
@@ -55,7 +55,7 @@ box around some word.
 
 To add your own commands, use the
 \begin{lscommand}
-  \ci*{NewDocumentCommand}[\texttt{\bs}name:m ! argspec:m ! definition:m]
+  \csi{NewDocumentCommand}[name:M, argspec:m, definition:m]
 \end{lscommand}
 \noindent command. It requires three arguments: the \carg{name} of the command
 you want to create, the \carg{arg}ument \carg{spec}ification and the
@@ -67,7 +67,7 @@ command that takes two optional arguments, then two mandatory, then again one
 optional and finally three mandatory you would write \cargv{oommommm}. If the
 \carg{argspec} argument is empty then the command will take no arguments.
 
-This example defines a new command called \ci{tnss}. This is
+This example defines a new command called \csi{tnss}. This is
 short for ``The Not So Short Introduction to \LaTeXe.'' Such a command
 could come in handy if you had to write the title of this book over
 and over again.
@@ -109,7 +109,7 @@ a special marker \cargv{-NoValue-} will be inserted instead.
 \end{example}
 In order to test whether the user supplied a value, use
 \begin{lscommand}
-  \ci*{IfValueTF}[argument:m ! value version:m ! no value version:m]
+  \csi{IfValueTF}[argument:m, value version:m, no value version:m]
 \end{lscommand}
 macro.
 \begin{example}[examplewidth=0.4\linewidth]
@@ -125,7 +125,7 @@ macro.
 \MyCommand[hello]
 \end{example}
 
-There are two variations of it: \ci{IfValueT} and \ci{IfValueF} which may
+There are two variations of it: \csi{IfValueT} and \csi{IfValueF} which may
 be used if you only need output for one of the branches. The example with
 \cargv{-NoValue-} in the output could be fixed by writing
 \begin{example}
@@ -139,12 +139,12 @@ be used if you only need output for one of the branches. The example with
 
 \txsit[very]{long}
 \end{example}
-The commands \ci{IfNoValueTF}, \ci{IfNoValueT} and \ci{IfNoValueF}
+The commands \csi{IfNoValueTF}, \csi{IfNoValueT} and \csi{IfNoValueF}
 work exactly the same, but the value\slash{}no-value branches are swapped.
 
 Often you will want to use optional arguments when present but use some default
 values when the user does not provide them. This could be achieved by
-\ci{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
+\csi{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
 It works like \cargv{o} but allows to set a default
 if no value is supplied. Write
 
@@ -162,8 +162,8 @@ if no value is supplied. Write
 Another useful argument specification is \cargv{s}, short for star. This
 argument allows to provide different definitions based on whether the
 starred or non-starred version of command was issued by the user. It uses
-\ci{IfBooleanTF} command (and its variations\cih{IfBooleanT}\cih{IfBooleanF})
-that works analogously to the \ci{IfValueTF} command.
+\csi{IfBooleanTF} command (and its variations\csih{IfBooleanT}\csih{IfBooleanF})
+that works analogously to the \csi{IfValueTF} command.
 
 \begin{chktexignore}
   \begin{example}[examplewidth=0.4\linewidth]
@@ -185,29 +185,29 @@ that works analogously to the \ci{IfValueTF} command.
 These are just the most common argument specifications. For a full description,
 take a look at the \pai*{xparse} package documentation.\footnote{This
   package is loaded automatically in new \LaTeX{} releases, so you probably do not
-  need to put \texttt{\textbackslash{}usepackage\{xparse\}} in your preamble. }
+  need to put \cs{usepackage}[xparse: vm] in your preamble.}
 
 \LaTeX{} will not allow you to create a new command that would
 overwrite an existing one. But there is a special command in case you
-explicitly want this: \ci{RenewDocumentCommand}.
-It uses the same syntax as the \ci{NewDocumentCommand}
+explicitly want this: \csi{RenewDocumentCommand}.
+It uses the same syntax as the \csi{NewDocumentCommand}
 command.
 
-In certain cases you might want to use the \ci{ProvideDocumentCommand}
-command. It works like \ci{NewDocumentCommand}, but if the command is
+In certain cases you might want to use the \csi{ProvideDocumentCommand}
+command. It works like \csi{NewDocumentCommand}, but if the command is
 already defined, \LaTeXe{} will silently ignore it.
 
 \subsection{New Environments}
-The \ci{NewDocumentEnvironment} command lets you create your own environments. It has the
+The \csi{NewDocumentEnvironment} command lets you create your own environments. It has the
 following syntax:
 
 \begin{lscommand}
-  \ci*{NewDocumentEnvironment}[name:m ! argspec:m ! at begin:m ! at end:m]
+  \csi{NewDocumentEnvironment}[name:m, argspec:m, at begin:m, at end:m]
 \end{lscommand}
 The \carg{argspec} argument is the same as in the
-\ci{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
+\csi{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
   end} arguments will be inserted respectively when the commands
-\ci{begin}[name] and \ci{end}[name] is encountered.
+\csi{begin}[name] and \csi{end}[name] is encountered.
 
 The example below illustrates the usage of this command.
 \begin{example}
@@ -227,7 +227,7 @@ My humble subjects \ldots
 \end{example}
 
 Note that when environment argument are read, they are read \emph{after} the
-\ci{begin}[name] command. This may be especially counter intuitive when we
+\csi{begin}[name] command. This may be especially counter intuitive when we
 consider the \cargv{s} specification. Below is an example that illustrates
 this.
 
@@ -264,7 +264,7 @@ Obviously you can use the same internal commands to define them, for example
 renaming the previous implementation to \cargv{kinginternal} making the
 \cargv{king} and \cargv{king*} a thin wrapper around it.
 
-The \ci{NewDocumentEnvironment} also introduces a special argument
+The \csi{NewDocumentEnvironment} also introduces a special argument
 specification: \cargv{+b}, short for body.\footnote{The \cargv{+} indicates
   that it may contain multiple paragraphs.} It is only allowed as the last
 argument in the \carg{argspec}. It allows you to receive the body of the
@@ -287,13 +287,13 @@ they are still required. (In the example above we provided an empty \carg{at
   end}.)
 
 Do not overuse \cargv{+b} as this will both make the environments subject to
-some limitations (e.g.\ \ci{verb} will not be allowed inside) and slow down the
+some limitations (e.g.\ \csi{verb} will not be allowed inside) and slow down the
 typesetting.
 
-Similarly to the \ci{NewDocumentCommand} \LaTeX{} makes sure that you do not
+Similarly to the \csi{NewDocumentCommand} \LaTeX{} makes sure that you do not
 define an environment that already exists. If you ever want to change an
-existing environment, use the \ci{RenewDocumentEnvironment} command. Its
-arguments are exactly the same as the \ci{NewDocumentEnvironment} command.
+existing environment, use the \csi{RenewDocumentEnvironment} command. Its
+arguments are exactly the same as the \csi{NewDocumentEnvironment} command.
 
 \subsection{Copying commands}\label{sec:copyingcommands}
 
@@ -310,10 +310,10 @@ but when you try to compile the document you will receive the error
 \end{minted}
 
 To understand why this happens it is instructive to consider how \TeX{} expands
-the defined commands. The above \ci{RenewDocumentCommand} tells the \TeX{}
-engine that whenever \ci*{emph}[foo:vm] is seen it must replace it with
+the defined commands. The above \csi{RenewDocumentCommand} tells the \TeX{}
+engine that whenever \csi{emph}[foo:vm] is seen it must replace it with
 \mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
-problem here. In the next stage it will again replace the \ci*{emph}[foo:vm]
+problem here. In the next stage it will again replace the \csi{emph}[foo:vm]
 yielding
 \begin{minted}{latex}
 \emph{foo}~(\enquote{foo} is emphasised)~
@@ -334,7 +334,7 @@ with \verb|\emph{...}| and the cycle repeats.
 
 In order to avoid this problem a special command exists
 \begin{lscommand}
-  \ci*{NewCommandCopy}[\texttt{\bs}name:m ! \texttt{\bs}command:m]
+  \csi{NewCommandCopy}[name:M, command:M]
 \end{lscommand}
 It makes the \carg{name} the exact copy of the \carg{command}. The following example shows how this works
 \begin{example}[examplewidth=0.35\linewidth]
@@ -348,7 +348,7 @@ It makes the \carg{name} the exact copy of the \carg{command}. The following exa
 \foo{} \newfoo{} \copiedfoo{}
 \end{example}
 
-This is precisely the behaviour we need in order to redefine the \ci{emph}
+This is precisely the behaviour we need in order to redefine the \csi{emph}
 command as we have tried to do earlier.
 \begin{example}[examplewidth=0.35\linewidth]
 \NewCommandCopy{\oldemph}{\emph}
@@ -380,9 +380,9 @@ Now compile document like this:
 xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
     \input{test.tex}'
 \end{verbatim}
-First the command \verb|\blackandwhite| is defined as the \ci{BooleanTrue} macro which
-holds a special value used in \ci{IfBooleanTF} checks. Then the actual file is
-read with input. By setting \verb|\blackandwhite| to \ci{BooleanFalse} the
+First the command \verb|\blackandwhite| is defined as the \csi{BooleanTrue} macro which
+holds a special value used in \csi{IfBooleanTF} checks. Then the actual file is
+read with input. By setting \verb|\blackandwhite| to \csi{BooleanFalse} the
 colour version of the document would be produced.
 
 \subsection{Your Own Package}
@@ -390,7 +390,7 @@ colour version of the document would be produced.
 If you define a lot of new environments and commands, the preamble of
 your document will get quite long. In this situation, it is a good
 idea to create a \LaTeX{} package containing all your command and
-environment definitions. Use the \ci{usepackage}
+environment definitions. Use the \csi{usepackage}
 command to make the package available in your document.
 
 \begin{listing}
@@ -421,7 +421,7 @@ Writing a package basically consists of copying the contents of your document
 preamble (with minor adjustments) into a separate file with a name ending in
 \texttt{.sty}. There is one special command,
 \begin{lscommand}
-  \ci*{ProvidesExplPackage}[package name:m ! date:m ! version:m ! description:m]
+  \csi{ProvidesExplPackage}[package name:m, date:m, version:m, description:m]
 \end{lscommand}
 \noindent for use at the very beginning of your package file. This command
 tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
@@ -431,7 +431,7 @@ spacing in the output. In \emph{expl mode}, spaces have to be added explicitly i
 quite rare when writing a package. To insert spaces, use
 the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
   you want to insert non-breaking space in \emph{expl mode}, use
-  \ci{nobreakspace}.} Paragraphs can be started with the \ci{par} command.
+  \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
 
 The arguments are used to provide information about package in the log file. If
 you use this package and look at the log file you will find
@@ -440,7 +440,7 @@ Package: demopack 2022-05-05 v0.1 Package by Tobias Oetiker
 \end{verbatim}
 in the \eei{.log} file.
 
-\ci{ProvidesExplPackage} will also issue a sensible error message when you try
+\csi{ProvidesExplPackage} will also issue a sensible error message when you try
 to include a package twice. \autoref{package} shows a small example package
 that contains the commands defined in the examples above.
 
@@ -530,20 +530,20 @@ special set of commands; refer to \autoref{mathfonts}.
   \sisetup{table-format=2.0}
   \begin{tabular}{@{}lSSS@{}}
     \toprule
-                      & \multicolumn{3}{c}{Size (\unit{pt})}                                   \\
+                       & \multicolumn{3}{c}{Size (\unit{pt})}                                   \\
     \cmidrule(l){2-4}
-    Command           & {\cargv{10pt}}                       & {\cargv{11pt}} & {\cargv{12pt}} \\
+    Command            & {\cargv{10pt}}                       & {\cargv{11pt}} & {\cargv{12pt}} \\
     \midrule
-    \ci{tiny}         & 5                                    & 6              & 6              \\
-    \ci{scriptsize}   & 7                                    & 8              & 8              \\
-    \ci{footnotesize} & 8                                    & 9              & 10             \\
-    \ci{small}        & 9                                    & 10             & 11             \\
-    \ci{normalsize}   & 10                                   & 11             & 12             \\
-    \ci{large}        & 12                                   & 12             & 14             \\
-    \ci{Large}        & 14                                   & 14             & 17             \\
-    \ci{LARGE}        & 17                                   & 17             & 20             \\
-    \ci{huge}         & 20                                   & 20             & 25             \\
-    \ci{Huge}         & 25                                   & 25             & 25             \\
+    \csi{tiny}         & 5                                    & 6              & 6              \\
+    \csi{scriptsize}   & 7                                    & 8              & 8              \\
+    \csi{footnotesize} & 8                                    & 9              & 10             \\
+    \csi{small}        & 9                                    & 10             & 11             \\
+    \csi{normalsize}   & 10                                   & 11             & 12             \\
+    \csi{large}        & 12                                   & 12             & 14             \\
+    \csi{Large}        & 14                                   & 14             & 17             \\
+    \csi{LARGE}        & 17                                   & 17             & 20             \\
+    \csi{huge}         & 20                                   & 20             & 25             \\
+    \csi{Huge}         & 25                                   & 25             & 25             \\
     \bottomrule
   \end{tabular}
 
@@ -595,7 +595,7 @@ He likes {\LARGE large and
 The font size commands also change the line spacing, but only if the
 paragraph ends within the scope of the font size command. The closing curly
 brace \verb|}| should therefore not come too early.  Note the position of
-the \ci{par} command in the next two examples.\footnote{\texttt{\bs{}par}
+the \csi{par} command in the next two examples.\footnote{\texttt{\bs{}par}
   is equivalent to a blank line}
 
 \begin{example}
@@ -631,7 +631,7 @@ opposition to the basic idea of \LaTeX{}, which is to separate the
 logical and visual markup of your document.  This means that if you
 use the same font changing command in several places in order to
 typeset a special kind of information, you should use
-\ci{NewDocumentCommand} to define a ``logical wrapper command'' for the font
+\csi{NewDocumentCommand} to define a ``logical wrapper command'' for the font
 changing command.
 
 \begin{example}
@@ -651,7 +651,7 @@ reason.
 
 Please note the difference between telling \LaTeX{} to
 \emph{emphasize} something and telling it to use a different
-\emph{font}. The \ci{emph} command is context aware, while the font commands are absolute.
+\emph{font}. The \csi{emph} command is context aware, while the font commands are absolute.
 
 \begin{example}
 \textit{You can also
@@ -683,7 +683,7 @@ here is a little word of advice:\nopagebreak
 If you want to use larger inter-line spacing in a
 document, change its value by putting the
 \begin{lscommand}
-  \ci{linespread}\verb|{|\emph{factor}\verb|}|
+  \csi{linespread}\verb|{|\emph{factor}\verb|}|
 \end{lscommand}
 \noindent command into the preamble of your document.
 Use \verb|\linespread{1.3}| for ``one and a half'' line
@@ -691,7 +691,7 @@ spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
 the lines are not spread, so the default line spread factor
 is~1.\index{double line spacing}
 
-Note that the effect of the \ci{linespread} command is rather drastic and
+Note that the effect of the \csi{linespread} command is rather drastic and
 not appropriate for published work. So if you have a good reason for
 changing the line spacing you might want to use the command:
 \begin{lscommand}
@@ -718,8 +718,8 @@ everything is back to normal.
 In \LaTeX{}, there are two parameters influencing paragraph layout.
 By placing a definition like
 \begin{code}
-\ci{setlength}\verb|{|\ci{parindent}\verb|}{0pt}| \\
-\verb|\setlength{|\ci{parskip}\verb|}{1ex plus 0.5ex minus 0.2ex}|
+\csi{setlength}\verb|{|\csi{parindent}\verb|}{0pt}| \\
+\verb|\setlength{|\csi{parskip}\verb|}{1ex plus 0.5ex minus 0.2ex}|
 \end{code}
 in the preamble of the input file, you can change the layout of
 paragraphs. These two commands increase the space between two paragraphs
@@ -741,7 +741,7 @@ spacing to separate paragraphs.
 
 If you want to indent a paragraph that is not indented, use
 \begin{lscommand}
-  \ci{indent}
+  \csi{indent}
 \end{lscommand}
 \noindent at the beginning of the paragraph.\footnote{To indent the first paragraph after each section head, use
   the \pai{indentfirst} package in the `tools' bundle.} Obviously,
@@ -750,7 +750,7 @@ zero.
 
 To create a non-indented paragraph, use
 \begin{lscommand}
-  \ci{noindent}
+  \csi{noindent}
 \end{lscommand}
 \noindent as the first command of the paragraph. This might come in handy when
 you start a document with body text and not with a sectioning command.
@@ -760,7 +760,7 @@ you start a document with body text and not with a sectioning command.
 \LaTeX{} determines the spaces between words and sentences
 automatically. To add horizontal space, use:\index{horizontal!space}
 \begin{lscommand}
-  \ci{hspace}\verb|{|\emph{length}\verb|}|
+  \csi{hspace}\verb|{|\emph{length}\verb|}|
 \end{lscommand}
 If such a space should be kept even if it falls at the end or the
 start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
@@ -798,7 +798,7 @@ of \qty{1.5}{\cm}.
 
 The command
 \begin{lscommand}
-  \ci{stretch}\verb|{|\emph{n}\verb|}|
+  \csi{stretch}\verb|{|\emph{n}\verb|}|
 \end{lscommand}
 \noindent generates a special rubber space. It stretches until all the
 remaining space on a line is filled up. If multiple
@@ -826,7 +826,7 @@ The space between paragraphs, sections, subsections, \ldots\ is
 determined automatically by \LaTeX. If necessary, additional vertical
 space \emph{between two paragraphs} can be added with the command:
 \begin{lscommand}
-  \ci{vspace}\verb|{|\emph{length}\verb|}|
+  \csi{vspace}\verb|{|\emph{length}\verb|}|
 \end{lscommand}
 
 This command should normally be used between two empty lines.  If the
@@ -848,11 +848,11 @@ This goes onto the last line of the page.\pagebreak
 Additional space between two lines of \emph{the same} paragraph or
 within a table is specified with the
 \begin{lscommand}
-  \ci{\bs}\verb|[|\emph{length}\verb|]|
+  \csi{\bs}\verb|[|\emph{length}\verb|]|
 \end{lscommand}
 \noindent command.
 
-With \ci{bigskip} and \ci{smallskip} you can skip a predefined amount of
+With \csi{bigskip} and \csi{smallskip} you can skip a predefined amount of
 vertical space without having to worry about exact numbers.
 
 \section{Page Layout}
@@ -863,18 +863,18 @@ vertical space without having to worry about exact numbers.
   \end{center}
   \vspace*{1.8cm}
   \caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}\label{fig:layout}
-  \cih{footskip}
-  \cih{headheight}
-  \cih{headsep}
-  \cih{marginparpush}
-  \cih{marginparsep}
-  \cih{marginparwidth}
-  \cih{oddsidemargin}
-  \cih{paperheight}
-  \cih{paperwidth}
-  \cih{textheight}
-  \cih{textwidth}
-  \cih{topmargin}
+  \csih{footskip}
+  \csih{headheight}
+  \csih{headsep}
+  \csih{marginparpush}
+  \csih{marginparsep}
+  \csih{marginparwidth}
+  \csih{oddsidemargin}
+  \csih{paperheight}
+  \csih{paperwidth}
+  \csih{textheight}
+  \csih{textwidth}
+  \csih{topmargin}
 \end{figure}\index{page layout}
 
 \LaTeXe{} allows you to specify the \wi{paper size} in the
@@ -912,15 +912,15 @@ usually used in the document preamble.
 
 The first command assigns a fixed value to any of the parameters:
 \begin{lscommand}
-  \ci{setlength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
+  \csi{setlength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
 \end{lscommand}
 
 The second command adds a length to any of the parameters:
 \begin{lscommand}
-  \ci{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
+  \csi{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
 \end{lscommand}
 
-This second command is actually more useful than the \ci{setlength}
+This second command is actually more useful than the \csi{setlength}
 command, because it works relative to the existing settings.
 To add one centimetre to the overall text width, I put the
 following commands into the document preamble:
@@ -930,7 +930,7 @@ following commands into the document preamble:
 \end{code}
 
 In this context, you might want to look at the \pai{calc} package.
-It allows you to use arithmetic operations in the argument of \ci{setlength}
+It allows you to use arithmetic operations in the argument of \csi{setlength}
 and other places where numeric values are entered into function
 arguments.
 
@@ -945,9 +945,9 @@ The following 3 commands allow you to determine the width, height and
 depth of a text string.
 
 \begin{lscommand}
-  \ci{settoheight}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \ci{settodepth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \ci{settowidth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|
+  \csi{settoheight}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
+  \csi{settodepth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
+  \csi{settowidth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|
 \end{lscommand}
 
 \noindent The example below shows a possible application of these commands.
@@ -987,7 +987,7 @@ including other boxes. Each box will then be handled by \LaTeX{} as if it
 were a single letter.
 
 In earlier chapters you encountered some boxes, although I did
-not tell you. The \ei{tabular} environment and the \ci{includegraphics}, for
+not tell you. The \ei{tabular} environment and the \csi{includegraphics}, for
 example, both produce a box. This means that you can easily arrange two
 tables or images side by side. You just have to make sure that their
 combined width is not larger than the textwidth.
@@ -996,7 +996,7 @@ You can also pack a paragraph of your choice into a box with either
 the
 
 \begin{lscommand}
-  \ci{parbox}\verb|[|\emph{pos}\verb|]{|\emph{width}\verb|}{|\emph{text}\verb|}|
+  \csi{parbox}\verb|[|\emph{pos}\verb|]{|\emph{width}\verb|}{|\emph{text}\verb|}|
 \end{lscommand}
 
 \noindent command or the
@@ -1010,20 +1010,20 @@ the
 \texttt{c, t} or \texttt{b} to control the vertical alignment of the box,
 relative to the baseline of the surrounding text. \texttt{width} takes
 a length argument specifying the width of the box. The main difference
-between a \ei{minipage} and a \ci{parbox} is that you cannot use all commands
+between a \ei{minipage} and a \csi{parbox} is that you cannot use all commands
 and environments inside a \ei{parbox}, while almost anything is possible in
 a \ei{minipage}.
 
-While \ci{parbox} packs up a whole paragraph doing line breaking and
+While \csi{parbox} packs up a whole paragraph doing line breaking and
 everything, there is also a class of boxing commands that operates
 only on horizontally aligned material. We already know one of them;
-it's called \ci{mbox}. It simply packs up a series of boxes into
+it's called \csi{mbox}. It simply packs up a series of boxes into
 another one, and can be used to prevent \LaTeX{} from breaking two
 words. As boxes can be put inside boxes, these horizontal box packers
 give you ultimate flexibility.
 
 \begin{lscommand}
-  \ci{makebox}\verb|[|\emph{width}\verb|][|\emph{pos}\verb|]{|\emph{text}\verb|}|
+  \csi{makebox}\verb|[|\emph{width}\verb|][|\emph{pos}\verb|]{|\emph{text}\verb|}|
 \end{lscommand}
 
 \noindent \texttt{width} defines the width of the resulting box as
@@ -1031,17 +1031,17 @@ seen from the outside.\footnote{This means it can be smaller than the
   material inside the box. You can even set the
   width to 0pt so that the text inside the box will be typeset without
   influencing the surrounding boxes.}  Besides the length
-expressions, you can also use \ci{width}, \ci{height}, \ci{depth}, and
-\ci{totalheight} in the width parameter. They are set from values
+expressions, you can also use \csi{width}, \csi{height}, \csi{depth}, and
+\csi{totalheight} in the width parameter. They are set from values
 obtained by measuring the typeset \emph{text}. The \emph{pos} parameter takes
 a one letter value: \textbf{c}enter, flush\textbf{l}eft,
 flush\textbf{r}ight, or \textbf{s}pread the text to fill the box.
 
-The command \ci{framebox} works exactly the same as \ci{makebox}, but
+The command \csi{framebox} works exactly the same as \csi{makebox}, but
 it draws a box around the text.
 
 The following example shows you some things you could do with
-the \ci{makebox} and \ci{framebox} commands.
+the \csi{makebox} and \csi{framebox} commands.
 
 \begin{example}
 \makebox[\textwidth]{%
@@ -1064,12 +1064,12 @@ the vertical.\footnote{Total control is only to be obtained by
 No problem for \LaTeX{}. The
 
 \begin{lscommand}
-  \ci{raisebox}\verb|{|\emph{lift}\verb|}[|\emph{extend-above-baseline}\verb|][|\emph{extend-below-baseline}\verb|]{|\emph{text}\verb|}|
+  \csi{raisebox}\verb|{|\emph{lift}\verb|}[|\emph{extend-above-baseline}\verb|][|\emph{extend-below-baseline}\verb|]{|\emph{text}\verb|}|
 \end{lscommand}
 
 \noindent command lets you define the vertical properties of a
-box. You can use \ci{width}, \ci{height}, \ci{depth}, and
-\ci{totalheight} in the first three parameters, in order to act
+box. You can use \csi{width}, \csi{height}, \csi{depth}, and
+\csi{totalheight} in the first three parameters, in order to act
 upon the size of the box inside the \emph{text} argument.
 
 \begin{example}[examplewidth=0.45\linewidth]
@@ -1089,7 +1089,7 @@ terrible had happened to her.
 A few pages back you may have noticed the command
 
 \begin{lscommand}
-  \ci{rule}\verb|[|\emph{lift}\verb|]{|\emph{width}\verb|}{|\emph{height}\verb|}|
+  \csi{rule}\verb|[|\emph{lift}\verb|]{|\emph{width}\verb|}{|\emph{height}\verb|}|
 \end{lscommand}
 
 \noindent In normal use it produces a simple black box.
@@ -1104,7 +1104,7 @@ A few pages back you may have noticed the command
 
 \noindent This is useful for drawing vertical and horizontal
 lines. The line on the title page, for example, has been created with a
-\ci{rule} command.
+\csi{rule} command.
 
 \bigskip
 \begin{FlushRight}

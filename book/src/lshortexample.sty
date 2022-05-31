@@ -263,7 +263,9 @@
 }
 
 \cs_new:Nn \show_input_file:n {
-  \inputminted{\__lshortexample_minted_language}{#1}
+  \inputminted[
+    fontsize=\small,
+  ]{\__lshortexample_minted_language}{#1}
 }
 
 \cs_new:Nn \show_output:n {

@@ -23,12 +23,12 @@ This chapter will describe two approaches to bibliography management in \LaTeX{}
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
-  \ci{bibitem}[label][marker]
+  \csi{bibitem}[label: o, marker: m]
 \end{lscommand}
 The \carg{marker} is then used to cite the book, article or paper
 within the document.
 \begin{lscommand}
-  \ci{cite}[marker]
+  \csi{cite}[marker: m]
 \end{lscommand}
 If you do not use the \carg{label} option, the entries will get enumerated
 automatically.  The parameter after the \verb|\begin{thebibliography}|
@@ -133,7 +133,7 @@ In order to use biblatex, the following three commands are necessary.
 
 The \pai{biblatex} package must be loaded with the
 \begin{lscommand}
-  \ci*{usepackage}[options:o ! biblatex:vm]
+  \csi{usepackage}[options:o, biblatex:vm]
 \end{lscommand}
 command. The \carg{options} are comma delimited key value pairs that allow to
 customise the behaviour of biblatex package. Some of them will be explained
@@ -141,7 +141,7 @@ later.
 
 The command
 \begin{lscommand}
-  \ci*{addbibresource}[options:o ! file:m]
+  \csi{addbibresource}[options:o, file:m]
 \end{lscommand}
 must be put in the preamble. The \carg{file} is the name of the \eei{.bib} file
 containing bibliographic entries. You may also specify a remote location here,
@@ -149,7 +149,7 @@ but then you must also put \cargv{location=remote} in the \carg{options}.
 
 Finally the
 \begin{lscommand}
-  \ci*{printbibliography}[options:o]
+  \csi{printbibliography}[options:o]
 \end{lscommand}
 typesets the loaded bibliography. The \carg{options} may be used to alter the
 title or filter the entries included.
@@ -270,9 +270,9 @@ described in~\cite{curie}.
 \end{example}
 
 In contrast the \ei{thebibliography} environment, \pai{biblatex}'s
-\ci{printbibliography} command only prints entries that were referenced in the
+\csi{printbibliography} command only prints entries that were referenced in the
 document. If you want to print entries not mentioned in the document, you may
-use the \ci{nocite}[marker] command. It will insert invisible citations, thus
+use the \csi{nocite}[marker: m] command. It will insert invisible citations, thus
 instructing \pai{biblatex} to put them in the bibliography. The special value
 \cargv{*} can be passed as a \carg{marker} if you want to print all entries in
 the database.
@@ -298,7 +298,7 @@ cited~\cite{lshort}.
 
 If your bibliography gets really large it may make sense to split it into
 several parts. This can be done by passing filter options to the
-\ci{printbibliography} command. Available filters include \cargv{type},
+\csi{printbibliography} command. Available filters include \cargv{type},
 \cargv{category}, \cargv{keyword}. It may be useful to also change the titles of
 different categories using \cargv{title} option.
 
@@ -328,15 +328,15 @@ different categories using \cargv{title} option.
 \end{example}
 
 By default the bibliography does not appear in the table of contents. This is
-because it is using starred version of \ci{chapter}\slash\ci{section}
+because it is using starred version of \csi{chapter}\slash\csi{section}
 (depending on the class) to generate its heading. In order to change the default we
-may pass the option \cargv{heading} to \ci{printbibliography}. Available
+may pass the option \cargv{heading} to \csi{printbibliography}. Available
 options include
 \begin{description}
   \item[\cargv{bibliography}] the default, starred version of heading
   \item[\cargv{bibintoc}] starred version of heading, will appear in table of contents
   \item[\cargv{subbibliography}] will drop the bibliography one level in
-    hierarchy (\ci{section*} instead of \ci{chapter*} and so on)
+    hierarchy (\csi{section*} instead of \csi{chapter*} and so on)
   \item[\cargv{bibnumbered}] will use non starred version for heading, thus
     numbering it and appearing in table of contents
   \item[\cargv{subbibintoc}] will drop the bibliography one level and put it in
@@ -421,18 +421,18 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 
 \subsection{Citing commands}
 
-Until now we have only used the basic \ci{cite} command. \pai{biblatex} extends
+Until now we have only used the basic \csi{cite} command. \pai{biblatex} extends
 the command set to allow extra control with
 citations.
 
-Most of the citing commands (\ci{cite} included) allows to insert notes
+Most of the citing commands (\csi{cite} included) allows to insert notes
 around the citations:
 \begin{lscommand}
-  \ci*{cite}[pre:o ! post:o ! marker:m]
+  \csi{cite}[pre:o, post:o, marker:m]
 \end{lscommand}
-Other standard citation commands include \ci{parencite} (citation in
-parentheses), \ci{footcite} (in footnotes), \ci{textcite} (citation intended to
-be subject in a sentence), \ci{smartcite} (context dependent).
+Other standard citation commands include \csi{parencite} (citation in
+parentheses), \csi{footcite} (in footnotes), \csi{textcite} (citation intended to
+be subject in a sentence), \csi{smartcite} (context dependent).
 
 \begin{example}[standalone,
   biber,
@@ -462,8 +462,8 @@ Again\footnote{Smart
 \end{example}
 
 Another set of commands allows us to extract specific information from
-the bibliographic entry, and use the information directly in the text. This is includes commands such as \ci{citeauthor},
-\ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
+the bibliographic entry, and use the information directly in the text. This is includes commands such as \csi{citeauthor},
+\csi{citetitle}, \csi{citeyear}, \csi{citedate}, \csi{citeurl}.
 
 \begin{example}[standalone,
   biber,
@@ -487,7 +487,7 @@ at \citeurl{lshort}.
 \end{document}
 \end{example}
 
-If you want to be less tied to a specific style, the \ci{autocite}
+If you want to be less tied to a specific style, the \csi{autocite}
 command follows the citation style specified in the package options.
 
 \begin{example}[standalone,
