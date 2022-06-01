@@ -58,7 +58,7 @@ To add your own commands, use the
   \csi{NewDocumentCommand}[name:M, argspec:m, definition:m]
 \end{lscommand}
 \noindent command. It requires three arguments: the \carg{name} of the command
-you want to create, the \carg{arg}ument \carg{spec}ification and the
+you want to create, the \carg{argspec} (argument specification) and the
 \emph{definition} of the command.
 
 The \carg{argspec} argument specifies the number and types of arguments the
@@ -112,12 +112,12 @@ In order to test whether the user supplied a value, use
   \csi{IfValueTF}[argument:m, value version:m, no value version:m]
 \end{lscommand}
 macro.
-\begin{example}[examplewidth=0.4\linewidth]
-\NewDocumentCommand{\MyCommand}{o}{%
-  \IfValueTF {#1} {%
-    Optional argument: #1.%
+\begin{example}
+\NewDocumentCommand{\MyCommand}{o}{
+  \IfValueTF {#1} {
+    Optional argument: #1.
   } {
-    No optional argument given.%
+    No optional argument given.
   }%
 }
 
@@ -148,7 +148,7 @@ values when the user does not provide them. This could be achieved by
 It works like \cargv{o} but allows to set a default
 if no value is supplied. Write
 
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 \NewDocumentCommand{\txsit}{O{not so}m}
 {This is the \emph{#1}
   #2 Introduction to \LaTeXe}
@@ -166,7 +166,7 @@ starred or non-starred version of command was issued by the user. It uses
 that works analogously to the \csi{IfValueTF} command.
 
 \begin{chktexignore}
-  \begin{example}[examplewidth=0.4\linewidth]
+  \begin{example}
 \NewDocumentCommand{\txsit}{sO{not so}m}
 {This is the \emph{#2}
   #3 Introduction to \LaTeXe%
@@ -176,8 +176,7 @@ that works analogously to the \csi{IfValueTF} command.
 }
 
 % in the document body:
-\txsit{long}
-
+\txsit{long}\\
 \txsit*{long}
 \end{example}
 \end{chktexignore}
@@ -208,10 +207,10 @@ following syntax:
 The \carg{argspec} argument is the same as in the
 \csi{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
   end} arguments will be inserted respectively when the commands
-\csi{begin}[name: m] and \csi{end}[name: m] is encountered.
-
-The example below illustrates the usage of this command.
-\begin{example}
+\csi{begin}[name: m] and \csi{end}[name: m] is encountered. The example
+presented in \autoref{lst:kingenv} illustrates the usage of this command.
+\begin{listing}
+  \begin{example}
 \NewDocumentEnvironment{king}{}{%
   \emph{Listen! For the
     king made a statement:}%
@@ -226,13 +225,15 @@ The example below illustrates the usage of this command.
 My humble subjects \ldots
 \end{king}
 \end{example}
+  \caption{An example of using \csi{NewDocumentEnvironment}
+    command.}\label{lst:kingenv}
+\end{listing}
 
 Note that when environment argument are read, they are read \emph{after} the
 \csi{begin}[name: m] command. This may be especially counter intuitive when we
-consider the \cargv{s} specification. Below is an example that illustrates
-this.
-
-\begin{example}
+consider the \cargv{s} specification. \autoref{lst:kingsenv} illustrates this.
+\begin{listing}
+  \begin{example}
 \NewDocumentEnvironment{king}{s}{%
   \IfBooleanTF{#1}{
     \begin{center}
@@ -254,7 +255,9 @@ this.
 My humble subjects \ldots
 \end{king}
 \end{example}
-
+  \caption{An example of using \cargv{s} specifier when defining a new
+    environment.}\label{lst:kingsenv}
+\end{listing}
 If you want to create a starred version of an environment (similarly to some
 \hologo{AmSLaTeX} environments) you have to define it separately.
 \begin{minted}{latex}
@@ -270,13 +273,11 @@ specification: \cargv{+b}, short for body.\footnote{The \cargv{+} indicates
   that it may contain multiple paragraphs.} It is only allowed as the last
 argument in the \carg{argspec}. It allows you to receive the body of the
 environment as an argument.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 \NewDocumentEnvironment{twice}{+b} {%
-  First time:\\
-  #1
+  First time:\\ #1
 
-  Second time:\\
-  #1
+  Second time:\\ #1
 } {}
 
 \begin{twice}
@@ -651,12 +652,12 @@ for each one whether it was used for pointing out danger or for some other
 reason.
 
 Please note the difference between telling \LaTeX{} to
-\emph{emphasize} something and telling it to use a different
+\emph{emphasise} something and telling it to use a different
 \emph{font}. The \csi{emph} command is context aware, while the font commands are absolute.
 
 \begin{example}
 \textit{You can also
-  \emph{emphasize} text if
+  \emph{emphasise} text if
   it is set in italics,}
 \textsf{in a
   \emph{sans-serif} font,}

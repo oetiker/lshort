@@ -131,7 +131,7 @@ combination of three letters:
 \begin{itemize}
   \item The first specifies whether the location is in the header (\cargv{H}) or in the
         footer (\cargv{F}).
-  \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for center and
+  \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for centre and
         \cargv{R} for right.
   \item The third letter defines whether the field should be printed on even
         (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
@@ -306,7 +306,7 @@ Let us now look at the default marks defined by \LaTeX{}. After loading
 The only difference between these and the extra marks is that \LaTeX{} classes
 automatically fill them, so if you are not careful you may lose your content.
 \footnote{You may prevent this by setting the pagestyle to \cargv{myheadings}
-  and then redefining it to use it with \pai{fancyhdr} as describied later.}
+  and then redefining it to use it with \pai{fancyhdr} as described later.}
 For example in the article class, \carg{left} is set by the \csi{section}
 command, while \carg{right} is set by the \csi{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
@@ -665,7 +665,7 @@ The \pai{hyperref} adds two cool features to your \LaTeX{} PDF files:
 Just add \mintinline{latex}|\usepackage{hyperref}| as the \emph{last} command into
 the preamble of your document.
 
-Many options are available to customize the behaviour of the
+Many options are available to customise the behaviour of the
 \pai{hyperref} package:
 \begin{itemize}
   \item either as a comma separated list after the pdftex option\\
@@ -815,7 +815,7 @@ Messages like the following:
   identifier (name{page.1}) has been already used,
   duplicate ignored
 \end{verbatim}
-appear when a counter gets reinitialized, for example by using
+appear when a counter gets reinitialised, for example by using
 the command \csi{mainmatter} provided by the \texttt{book} document class. It
 resets the page number counter to~1 prior to the first chapter of the
 book. But as the preface of the book also has a page number~1 all
@@ -935,7 +935,7 @@ to enable the Polish ligatures.
 
 Some fonts (like the commercial Adobe Garamond Premier Pro) contain
 alternative glyphs that are activated by default in \hologo{XeLaTeX}
-distributed with \TeX{}Live~2010\footnote{The behavior has changed with this
+distributed with \TeX{}Live~2010\footnote{The behaviour has changed with this
   version, it was off by default in earlier releases.}. The result is a stylish
 ``Q'' with a descender reaching below the following ``u''. To disable this
 feature you have to define the font with disabled contextuals:
@@ -974,7 +974,7 @@ regular keyboard has not. So, how do I enter non-ASCII characters?
 
 If you write a large amount of text in a foreign language, you can install a
 keyboard for that language and print out the character positions. (Most
-operatings system have some sort of virtual keyboard, just make a
+operating system have some sort of virtual keyboard, just make a
 screenshot.)
 
 If you rarely need an exotic character, you can simply pick it in the
@@ -1129,7 +1129,7 @@ The command \mintinline{latex}|\pause| in the itemize environment lets you revea
 the items one by one. For other presentation effects check out the
 commands \mintinline{latex}|\only|, \mintinline{latex}|\uncover|, \mintinline{latex}|\alt| and
 \mintinline{latex}|\temporal|. In many place it is possible to use angular brackets to
-further customize the presentation.
+further customise the presentation.
 
 In any case make sure to read through the beamer class documentation
 \texttt{beameruserguide.pdf} to get a complete picture of what is in

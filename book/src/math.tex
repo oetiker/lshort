@@ -136,14 +136,16 @@ expressions in \csi{smash}. This makes \LaTeX{} ignore the height of
 these expressions. This keeps the line spacing even, but risks overlapping the
 text around them.
 
-\begin{example}[examplewidth=0.45\linewidth]
+\begin{example}
 A $d_{e_{e_p}}$ mathematical
 expression  followed by a
 $h^{i^{g^h}}$ expression. As
 opposed to a smashed 
-\smash{$d_{e_{e_p}}$} expression 
+\smash{$d_{e_{e_p}}$}
+expression 
 followed by a
-\smash{$h^{i^{g^h}}$} expression.
+\smash{$h^{i^{g^h}}$}
+expression.
 \end{example}
 
 \subsection{Math Mode}
@@ -221,11 +223,15 @@ together using curly braces: \verb|{...}|.
 relations like $\subseteq$ and $\perp$.
 
 \begin{example}
-$p^3_{ij} \qquad 
- m_\text{Knuth}\qquad
-\sum_{k=1}^3 k \\[5pt]
- a^x+y \neq a^{x+y}\qquad 
- e^{x^2} \neq {e^x}^2$
+$p^3_{ij}$ 
+\qquad%!hide
+$m_\text{Knuth}$
+\qquad%!hide
+$\sum_{k=1}^3 k$ \\[5pt]
+\qquad%!hide
+$a^x+y \neq a^{x+y}$
+\qquad%!hide
+$e^{x^2} \neq {(e^x)}^2$
 \end{example}
 
 The \emph{\wi{square root}} is entered as \csi{sqrt}; the
@@ -234,25 +240,27 @@ the root sign is determined automatically by \LaTeX. If just the sign
 is needed, use \csi{surd}.
 
 \begin{example}
-$\sqrt{x} = x^{1/2}
- \quad \sqrt[3]{2}
- \quad \sqrt{x^{2} + \sqrt{y}}
- \quad \surd[x^2 + y^2]$
+$\sqrt{x} = x^{1/2}$
+\qquad%!hide
+$\sqrt[3]{2}$ \\
+$\sqrt{x^{2} + \sqrt{y}}$
+\qquad%!hide
+$\surd[x^2 + y^2]$
 \end{example}
 
 While the \emph{\wi{dot}} sign to indicate%
 \index{dots!three}\index{vertical!dots}\index{horizontal!dots}
 the multiplication operation is normally left out, it is sometimes written
 to help the eye in grouping a formula.
-Use \csi{cdot} to typeset a single centered dot. \csi{cdots} is
-three centered \emph{\wi{dots}} while \csi{ldots} sets the dots low (on the
+Use \csi{cdot} to typeset a single centred dot. \csi{cdots} is
+three centred \emph{\wi{dots}} while \csi{ldots} sets the dots low (on the
 baseline). Besides that, there are \csi{vdots} for
 vertical and \csi{ddots} for \wi{diagonal dots}. There are more examples in
 \autoref{sec:arraymat}.
 \begin{example}
 $\Psi = v_1 \cdot v_2
- \cdot \ldots \qquad 
- n! = 1 \cdot 2 
+ \cdot \ldots$ \\
+$n! = 1 \cdot 2 
  \cdots (n-1) \cdot n$
 \end{example}
 
@@ -267,8 +275,9 @@ $0.\overline{3} =
 The commands \csi{overbrace} and \csi{underbrace} create
 long \emph{horizontal braces} over or under an expression:%
 \index{horizontal!brace}\index{brace!horizontal}
-\begin{example}[examplewidth=0.45\linewidth]
-$\underbrace{\overbrace{(a+b+c)}^6 
+\begin{example}
+$\underbrace{
+  \overbrace{(a+b+c)}^6 
  \cdot \overbrace{(d+e+f)}^7}
  _\text{meaning of life} = 42$
 \end{example}
@@ -294,7 +303,10 @@ $\bar{x_0} \neq \bar{x}_0$
 \csi{vec} command. The two commands \csi{overrightarrow} and
 \csi{overleftarrow} are useful to denote the vector from $A$ to $B$:
 \begin{example}
-$\vec{a}$ $\vec{AB}$
+$\vec{a}$
+\quad%!hide
+$\vec{AB}$
+\quad%!hide
 $\overrightarrow{AB}$
 \end{example}
 
@@ -323,10 +335,9 @@ following commands to typeset the most common function names:%
 
 For functions missing from the list, use the \csi{DeclareMathOperator}
 command. There is even a starred version for functions with limits.
-This command works only in the preamble so the commented lines in the
-example below must be put into the preamble.
+This command works only in the preamble.
 
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 %!showbegin !hide
 % In preamble
 \DeclareMathOperator{\argh}{argh}
@@ -371,22 +382,28 @@ for small amounts of `fraction material:'
 \begin{example}
 In display style:
 \begin{equation*}
-  3/8 \qquad \frac{3}{8} 
-  \qquad \tfrac{3}{8}
+  3/8
+  \qquad%!hide
+  \frac{3}{8} 
+  \qquad%!hide
+  \tfrac{3}{8}
 \end{equation*}
 \end{example}
 
 \begin{example}
-In text style:
-$1\frac{1}{2}$~hours \qquad
+In text style: \\
+$1\frac{1}{2}$~hours
+\qquad%!hide
 $1\dfrac{1}{2}$~hours
 \end{example}
 
 Here the \csi{partial} command for \wi{partial derivative}s is used:
 \begin{example}
 \begin{equation*} 
-  \sqrt{\frac{x^2}{k+1}}\qquad
-  x^\frac{2}{k+1}\qquad
+  \sqrt{\frac{x^2}{k+1}}
+  \qquad%!hide
+  x^\frac{2}{k+1}
+  \qquad%!hide
   \frac{\partial^2f}
   {\partial x^2} 
 \end{equation*}
@@ -418,9 +435,11 @@ with \csi{prod}. The upper and lower limits are specified with~\ai{\^{}}
 and~\ai{\_} like superscripts and subscripts:
 \begin{example}
 \begin{equation*}
-\sum_{i=1}^n \qquad
-\int_0^{\frac{\pi}{2}} \qquad
-\prod_\epsilon
+\sum_{i=1}^n
+  \qquad%!hide
+  \int_0^{\frac{\pi}{2}}
+  \qquad%!hide
+  \prod_\epsilon
 \end{equation*}
 \end{example}
 
@@ -449,7 +468,7 @@ If you put \csi{left} in front of an opening delimiter and
 \csi{right} in front of a closing delimiter, \LaTeX{} will automatically
 determine the correct size of the delimiter. Note that you must close
 every \csi{left} with a corresponding \csi{right}. If you
-don't want anything on the right, use the invisible ``\csi{right.}'':
+don't want anything on the right, use the invisible \csi{right.} (with a dot):
 \begin{example}
 \begin{equation*}
 1 + \left(\frac{1}{1-x^{2}}
@@ -628,7 +647,7 @@ be used when the LHS is too long:
 \end{eqnarray}
 \end{example}
 \noindent This is not optimal either as the RHS is too short and the array is
-not properly centered:
+not properly centred:
 \begin{example}
 \begin{eqnarray}
   \lefteqn{a + b + c + d 
@@ -663,7 +682,7 @@ your document: \small
 The strength of \ei{IEEEeqnarray} is the ability to specify
 the number of \emph{columns} in the equation array. Usually, this
 specification will be \cargv{\{rCl\}}, i.e., three columns, the
-first column right-justified, the middle one centered with a little
+first column right-justified, the middle one centred with a little
 more space around it (therefore we specify capital \cargv{C} instead of
 lower-case \cargv{c}) and the third column left-justified:
 \begin{example}
@@ -679,11 +698,11 @@ lower-case \cargv{c}) and the third column left-justified:
 \end{IEEEeqnarray}
 \end{example}
 Any number of columns can be specified:
-\verb+{c}+ will give only one column with all entries centered, or
+\verb+{c}+ will give only one column with all entries centred, or
 \verb+{rCll}+ would add a fourth, left-justified column to use
 for comments. Moreover, beside \cargv{l}, \cargv{c}, \cargv{r}, \cargv{L},
 \cargv{C}, \cargv{R} for math mode entries there are also \cargv{s},
-\cargv{t}, \cargv{u} for left, centered, and right text mode entries.
+\cargv{t}, \cargv{u} for left, centred, and right text mode entries.
 Additional space can be added with \cargv{.} and
 \cargv{/} and \cargv{?} in increasing order.\footnote{For more spacing
   types refer to \autoref{sec:putting-qed-right}.}
@@ -845,33 +864,35 @@ typeset correctly.
 \subsection{Pitfalls of naïvely entered units}
 
 Naïvely, one might write units like this:
-\begin{example}[examplewidth=6cm]
+\begin{example}
 The speed of light
 is 299792458 m/s.
 \end{example}
-\noindent This may look fine initially but if your document gets longer you will probably
+This may look fine initially but if your document gets longer you will probably
 get into a situation where an unfortunate linebreak occurs.
-\begin{example}[examplewidth=6cm]
+\begin{example}
 \ldots{} The speed of light
 is 299792458 m/s. Thus we
 can calculate \ldots
 \end{example}
-\noindent A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
+A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
 long numbers should be grouped to make them easier to read. The above example
 should then written like this:
-\begin{example}[examplewidth=6cm]
+\begin{example}
 The speed of light is
 299\,792\,458~m/s.
 \end{example}
-\noindent Yet another problem arises when trying to write the units inside math
+Yet another problem arises when trying to write the units inside math
 mode
-\begin{example}[examplewidth=5cm]
-$10~\frac{m}{s} \cdot 12~s = 120~m$
+\begin{example}
+$10~\frac{m}{s}
+  \cdot 12~s = 120~m$
 \end{example}
-\noindent Here we need to make sure that the units are written in roman font.
+Here we need to make sure that the units are written in roman font.
 The above example should be then written as
-\begin{example}[examplewidth=5cm]
-$10~\frac{\mathrm{m}}{\mathrm{s}} 
+\begin{example}
+$10~\frac{\mathrm{m}}
+  {\mathrm{s}} 
   \cdot 12~\mathrm{s} 
   = 120~\mathrm{m}$
 \end{example}
@@ -929,13 +950,14 @@ The commands \csi{gram}, \csi{kilo}, \csi{per} are rather self explanatory. As y
 can see we have also used the \cargv{per-mode} option to influence the unit
 style. While the command \csi{tothe} typesets arbitrary superscripts, the
 command \csi{of} typesets arbitrary subscripts, known as qualifiers.
-\begin{example}[examplewidth=0.35\linewidth]
-\unit{\kg\of{mol}}, \unit{\bel\of{i}}
+\begin{example}
+\unit{\kg\of{mol}},
+\unit{\bel\of{i}}
 \end{example}
 
 Note that the \csi{per} command only works on the next unit. If we want it to
 apply to all following units we may use \cargv{sticky-per} option.
-\begin{example}[examplewidth=0.35\linewidth]
+\begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 The unit of thermal conductivity is
 \unit{\watt\per\metre\per\kelvin}
 or equivalently
@@ -956,7 +978,7 @@ compound unit, you may use the \csi{highlight} command.
 Now let's turn our attention to numbers. The numeric values will always use dot
 as a decimal separator, regardless of entered symbol. If you want to use comma
 as a decimal separator, change the \cargv{output-decimal-marker} option.
-\begin{example}[examplewidth=0.3\linewidth]
+\begin{example}
 $\pi \approx \num{3.14159}$ \\
 $\pi \approx \num{3,14159}$ \\
 $\pi \approx \num[
@@ -967,27 +989,33 @@ $\pi \approx \num[
 The numbers may also be entered using exponent notation. The symbol before
 exponent and base may be controlled using \cargv{exponent-product} and
 \cargv{exponent-base} options
-\begin{example}[examplewidth=0.3\linewidth]
+\begin{example}
 $\qty{1}{\tonne} = \qty{1e6}{\g}$ \\
-$\qty{1}{\gibi\byte} =
-  \qty[exponent-base = 2]{1e30}{\byte}$ \\
+$\qty{1}{\gibi\byte} = \qty[
+  exponent-base = 2,
+]{1e30}{\byte}$ \\
 $\qty{1}{\L} = \qty[
-  exponent-product = \cdot]{1e-3}{\cubic\m}$
+  exponent-product = \cdot,
+]{1e-3}{\cubic\m}$
 \end{example}
 
 If we want all numbers to be formatted using exponent notation, regardless of
 their entered form, we may use \cargv{exponent-mode} option.
-\begin{example}[examplewidth=0.3\linewidth]
+\begin{example}
 $2^{16} = \num{65536}$ \\
 $2^{16} = \num[
-  exponent-mode = scientific]{65536}$ \\
+  exponent-mode = scientific,
+]{65536}$ \\
 $2^{16} = \num[
-  exponent-mode = engineering]{65536}$ \\
-$2^{16} = \num[
-  exponent-mode = fixed]{65.536e3}$ \\
+  exponent-mode = engineering,
+]{65536}$ \\
 $2^{16} = \num[
   exponent-mode = fixed,
-  fixed-exponent = 5]{65.536e3}$
+]{65.536e3}$ \\
+$2^{16} = \num[
+  exponent-mode = fixed,
+  fixed-exponent = 5,
+]{65.536e3}$
 \end{example}
 
 In some fields it may be common to write uncertainty next to numbers. This may
@@ -1016,12 +1044,15 @@ By default \pai{siunitx} typesets the quantities in math mode. This may be
 especially jarring if you use different font for the document text. One simple
 solution is to set the \cargv{mode} option to \cargv{text}.
 % TODO: Add pointer to changing math fonts section when written.
-\begin{example}[examplewidth=0.35\linewidth]
+\begin{example}
 \setmainfont{Source Sans Pro} %!hide
 \qty{1}{\degreeCelsius} is
-equal to \qty{1}{\kelvin}, but
-\qty[mode = text]{0}{\degreeCelsius}
-is \qty[mode = text]{-273.15}{\kelvin}.
+equal to \qty{1}{\kelvin},
+but \qty[
+  mode = text,
+]{0}{\degreeCelsius} is \qty[
+  mode = text,
+]{-273.15}{\kelvin}.
 Bizarre, isn't it?
 \end{example}
 
@@ -1030,7 +1061,7 @@ of options check out the \pai{siunitx} package documentation.
 
 To avoid repeating the options with every use of commands, use the
 \begin{lscommand}
-  \csi{sisetup}[options: o]
+  \csi{sisetup}[options: m]
 \end{lscommand}
 command. It can be used in the preamble to ensure consistent style throughout
 the document, or inside the document when the style needs to be changed just
@@ -1044,15 +1075,10 @@ a full document.
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
 \sloppy %!hide
 \usepackage{booktabs}
-\usepackage[
-  output-decimal-marker={,},
-  per-mode = fraction,
-  unit-color = red,
-]{siunitx}
+\usepackage[per-mode = fraction, unit-color = red]{siunitx}
 
 \begin{document}
-All the units in the document are typeset according to setup
-in the preamble: \qty{9.81}{\m\per\s\squared}.
+Units are typeset like this: \qty{9.81}{\m\per\s\squared}.
 \begin{table}[h]
   \centering
   \sisetup{exponent-mode = fixed, fixed-exponent = 1}
@@ -1090,10 +1116,13 @@ exists in order to simplify entering them. If they are entered using semicolon
 as a separator, then the following numbers are treated as minutes and seconds.
 If they are given as a decimal number, they will be displayed as such.
 \begin{example}
-\ang{10} \\
-\ang{1;2;3} \\
+\ang{10}
+\qquad %!hide
+\ang{1;2;3}
+\qquad %!hide
 \ang{;;20} \\
-\ang{32.5} \\
+\ang{32.5}
+\qquad %!hide
 \qty{60}{\degree}
 \end{example}
 
@@ -1305,7 +1334,7 @@ also contain information about signs, exponents or text around numbers. See
     specification with the \cargv{table-format} key.}\label{lst:tableformat}
 \end{listing}
 
-By default numbers and text within the \cargv{S} columns and centered. If you
+By default numbers and text within the \cargv{S} columns and centred. If you
 want to change the alignment use the \cargv{table-number-alignment} and
 \cargv{table-text-alignment} options. See \autoref{lst:salignment} for an example.
 \begin{listing}
@@ -1538,7 +1567,7 @@ size. In math mode, this is set with the following four commands:
 
 If $\sum$ is placed in a fraction, it'll be typeset in text style unless you tell
 \LaTeX{} otherwise:
-\begin{example}
+\begin{example}[examplewidth=0.55\linewidth]
 \begin{equation*}
  P = \frac{\displaystyle{ 
    \sum_{i=1}^n (x_i- x)
@@ -1662,7 +1691,7 @@ The ``Murphy'' theorem gets a number that is linked to the number of
 the current section. You could also use another unit, for example chapter or
 subsection.
 
-If you want to customize your theorems down to the last dot, the
+If you want to customise your theorems down to the last dot, the
 \pai{ntheorem} package offers a plethora of options.
 
 \subsection{Proofs and End-of-Proof Symbol}\label{sec:putting-qed-right}
@@ -1705,7 +1734,7 @@ Unfortunately, this correction does not work for \ei{IEEEeqnarray}:
 The reason for this is the internal structure of \ei{IEEEeqnarray}:
 it always puts two invisible columns at both sides of the array that
 only contain a stretchable space. By this \ei{IEEEeqnarray} ensures
-that the equation array is horizontally centered. The
+that the equation array is horizontally centred. The
 \csi{qedhere} command should actually be put \emph{outside} this
 stretchable space, but this does not happen as these columns are
 invisible to the user.

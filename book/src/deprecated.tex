@@ -3,9 +3,9 @@
 
 \begin{intro}
   \LaTeX{} has been around for well over 30 years now. And it has remained
-  largely backward compatible. This means you can easily steal snipptes from
+  largely backward compatible. This means you can easily steal snippets from
   a friends document written ten years ago and use them in your document today.
-  In many instances this work without any problem. But eventhough \LaTeX{} seems happy
+  In many instances this work without any problem. But even though \LaTeX{} seems happy
   with the old code, you still should not do it. Have a look!
 \end{intro}
 
@@ -57,7 +57,7 @@
 
 \section{Display Math}
 \instead{
-\ai{\&\&}
+\ai{\$\$}
 } {
 \csi{[}, \csi{]} \\
 \ei*{equation*}\\
@@ -65,8 +65,8 @@
 (All with the \pai{amsmath} package.)
 }
 
-\ai{\&\&} is \hologo{plainTeX} syntax and it cannot be modified. The
-\csi{displaymath} and \csi{[} are \hologo{LaTeX} commands that are a bit better
+\ai{\$\$} is \hologo{plainTeX} syntax and it cannot be modified. The
+\ei{displaymath} and \csi{[} are \hologo{LaTeX} commands that are a bit better
 in terms of spacing and features and can be redefined. With \pai{amsmath} both
 of them are redefined to be synonyms for the \ei{equation*} which produces
 optimal and consistent spacing.
@@ -132,7 +132,7 @@ if it's needed you can use \csi{DeclareDocumentCommand}.
   \csi{DeclareCommandCopy}
 }
 
-Similarly to \autoref{sec:def}, \csi{let} is a \hologo{plainTeX} primitive that does
+Similarly to \autoref{sec:def}, \csi{let} is a \hologo{plainTeX} primitive that
 does not guard against accidental redefinition. Moreover it does not work
 correctly with some \hologo{LaTeX} commands. Use \csi{NewCommandCopy} as
 described in \autoref{sec:copyingcommands}.

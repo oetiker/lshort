@@ -96,7 +96,7 @@ standard document classes are listed in \autoref{options}.
 For example if an input file for a \LaTeX{} document starts with the
 line
 \begin{code}
-\csi{documentclass}[11pt: vm, twoside: vm, a4paper: vo, article: vm]
+\csi{documentclass}[{11pt, twoside, a4paper}: vo, article: vm]
 \end{code}
 then it instructs \LaTeX{} to typeset the document as an article
 with a base font size of eleven points, and to produce a
@@ -311,12 +311,12 @@ text strings:
 \begin{center}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Command      & Example   & Description              \\
+    Command      & Example   & Description               \\
     \midrule
-    \csi{today}  & \today    & Current date             \\
-    \csi{TeX}    & \TeX{}    & Your favorite typesetter \\
-    \csi{LaTeX}  & \LaTeX{}  & The Name of the Game     \\
-    \csi{LaTeXe} & \LaTeXe{} & The current incarnation  \\
+    \csi{today}  & \today    & Current date              \\
+    \csi{TeX}    & \TeX{}    & Your favourite typesetter \\
+    \csi{LaTeX}  & \LaTeX{}  & The Name of the Game      \\
+    \csi{LaTeXe} & \LaTeXe{} & The current incarnation   \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -338,24 +338,6 @@ The names for these dashes are: `-' \wi{hyphen}\index{-}, `--'
 writing compound words (and inserted automatically by \LaTeX{} when splitting a
 single words), en-dashes are used for writing a range of numbers and em-dashes
 are used to mark an interruption in speech or an abrupt change of thought.
-
-\section{Abstract}
-
-In scientific publications it is customary to start with an abstract which
-gives the reader a quick overview of what to expect. \LaTeX{} provides the
-\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
-in documents typeset with the article document class.
-
-\begin{example}[standalone, paperheight=3.5cm]
-\begin{document}%!hide
-\begin{abstract}
-  This paper will talk about
-  abstracts.
-\end{abstract}
-
-Abstracts are very important \ldots
-\end{document}%!hide
-\end{example}
 
 \section{Slash (/)}\index{Slash}
 
@@ -449,6 +431,24 @@ words built from two words.
 \Large %!hide
 Not shelfful\\
 but shelf\mbox{}ful
+\end{example}
+
+\section{Abstract}
+
+In scientific publications it is customary to start with an abstract which
+gives the reader a quick overview of what to expect. \LaTeX{} provides the
+\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
+in documents typeset with the article document class.
+
+\begin{example}[standalone, paperheight=3.5cm]
+\begin{document}%!hide
+\begin{abstract}
+  This paper will talk about
+  abstracts.
+\end{abstract}
+
+Abstracts are very important \ldots
+\end{document}%!hide
 \end{example}
 
 \subsection{Accents and Special Characters}
@@ -635,7 +635,7 @@ need to specify the font by its file name.
   \newfontfamily\greekfont[
     Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
     BoldFont=*bx, BoldItalicFont=*bi,
-  ]{cmun}
+  ]{Cm}
 \end{minted}
 
 With the appropriate fonts loaded, you can now write:
@@ -839,7 +839,7 @@ section or chapter numbering use
 When you work with the \texttt{report} or \texttt{book} class,
 an additional top-level sectioning command becomes available
 \begin{lscommand}
-  \csi{chapter}[title: M]
+  \csi{chapter}[title: m]
 \end{lscommand}
 
 As the \texttt{article} class does not know about chapters, it is quite easy
@@ -1117,7 +1117,7 @@ son égoïsme comme sacré.}
 
 If you load the package with \cargv{autostyle} option it will also adapt the
 quotation marks used based on the language of the surrounding text.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 %!showbegin !hide
 % In preamble
 \usepackage[autostyle]{csquotes}
@@ -1195,7 +1195,7 @@ favourite speech:
 \end{quotation}
 \end{example}
 
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}
 I know only one English
 poem by heart. It is
 about Humpty Dumpty.
@@ -1281,7 +1281,7 @@ outside the \LaTeX{} document. This allows to edit them in your editor of
 choice and makes the document code less cluttered. To accomplish this use the
 \csi{verbatiminput}[file: m] command from the \pai{verbatim} package.\footnote{This
   and following examples uses code snippets that can be found at \url{https://github.com/oetiker/lshort/tree/master/book/src/examples}.}
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}[examplewidth=0.55\linewidth, vertical_mode]
 \verbatiminput{hello.c}
 \end{example}
 \csi{verbatiminput*} also exists and works exactly as you would predict.
@@ -1304,12 +1304,11 @@ crude and look basic. In order to make them a bit more fancy you may use the
   \ei{lstlisting} environment that works like \ei{verbatim} \\
   \csi{lstinputlisting} command that works like \csi{verbatiminput}
 \end{lscommand}
-\begin{example}[examplewidth=0.6\linewidth]
+\begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \lstinline|\LaTeX{}|
 
 \begin{lstlisting}
-Here is some \LaTeX{}
-code.
+Here is some \LaTeX{} code.
 \end{lstlisting}
 
 \lstinputlisting{hello.c}
@@ -1317,33 +1316,26 @@ code.
 
 As you can see by default it isn't much different from the \ei{verbatim
   environment}. The big difference is that every command accepts optional
-argument that allows to customize the output. The argument accepts comma
+argument that allows to customise the output. The argument accepts comma
 delimited key value list. For example to automatically highlight the code we
 may pass the \cargv{language} key.
-\begin{example}[examplewidth=0.6\linewidth]
-\lstinputlisting[
-  language=C,
-]{hello.c}
+\begin{example}[examplewidth=0.6\linewidth, vertical_mode]
+\lstinputlisting[language=C]{hello.c}
 \end{example}
 If a language has several dialects you may specify it inside square brackets
 before the language name. You must enclose this value in the curly brackets.
-\begin{example}[examplewidth=0.6\linewidth]
-\lstinputlisting[
-  language={[LaTeX]TeX},
-]{hello.tex}
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\lstinputlisting[language={[LaTeX]TeX}]{hello.tex}
 \end{example}
 When presenting code it is often that we want to point to a specific line. To
 save the reader from counting which line we mean, it is possible to print line
 numbers using \cargv{numbers} key. Its possible values are \cargv{none},
 \cargv{left} and \cargv{right}.
-\begin{example}[examplewidth=0.65\linewidth]
-\lstinputlisting[
-  language=C,
-  xleftmargin=1.2em,%!hide
-  numbers=left,
-]{hello.c}
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\lstset{xleftmargin=1.2em}%!hide
+\lstinputlisting[language=C, numbers=left]{hello.c}
 \end{example}
-The appearance of numbers may be further customized with the following keys:
+The appearance of numbers may be further customised with the following keys:
 \begin{description}
   \item[\cargv{firstnumber}] allows you to specify the first number. Besides
     numbers this key can also contain two special values: \cargv{last} and
@@ -1355,7 +1347,7 @@ The appearance of numbers may be further customized with the following keys:
     15, 22, \ldots\) will be printed.
   \item[\cargv{numberblanklines}] controls whether line numbers are printed on
     empty lines. Either \cargv{true} or \cargv{false}.
-  \item[\cargv{numberstyle}] allows to customize the font for printing
+  \item[\cargv{numberstyle}] allows to customise the font for printing
     numbers. It accepts switch commands described in \autoref{sec:fontsize}.
 \end{description}
 \begin{example}[examplewidth=0.61\linewidth]
@@ -1393,11 +1385,12 @@ automatically break them using the key \cargv{breaklines}.
   breaklines,
 ]{factorial.py}
 \end{example}
-You may customize the indentation width with the \cargv{breakindent} key. It
-may be useful to indicate that a linebreak occured using \cargv{prebreak}
+You may customise the indentation width with the \cargv{breakindent} key. It
+may be useful to indicate that a linebreak occurred using \cargv{prebreak}
 and/or \cargv{postbreak} keys that include their contents before and after an
-artificial linebreak.
-\begin{example}[examplewidth=0.55\linewidth]
+artificial linebreak. \autoref{lst:prepostbreak} shows an example of doing it.
+\begin{listing}
+  \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \lstinputlisting[
   language=python,
   numbers=left,
@@ -1408,6 +1401,9 @@ artificial linebreak.
   postbreak=\textleftarrow,
 ]{factorial.py}
 \end{example}
+  \caption{An example of marking the artificial linebreaks in \ei{listing}
+    package.}\label{lst:prepostbreak}
+\end{listing}
 
 One of the neat features of the \pai{listings} package is that you can evaluate
 \LaTeX{} code inside the code itself. The easiest way is to pass the
@@ -1438,9 +1434,9 @@ cost x = show (
     foldr (+) 0 x 
   ) ++ " eur" -- \label{concat}
 \end{lstlisting}
-The \lstinline|++| in Haskell as
-seen in line~\ref{concat} means
-string concatenation.
+The \lstinline|++| in Haskell
+as seen in line~\ref{concat}
+means string concatenation.
 \end{example}
 This has the downside that it introduces empty comments that are just there to
 include label. To fix this we may use the \cargv{escapeinside} key that accepts
@@ -1462,7 +1458,7 @@ as seen in line~\ref{show}
 converts its argument to a string.
 \end{example}
 
-If you do not like the default style of listings, you may customize them using
+If you do not like the default style of listings, you may customise them using
 the
 \begin{lscommand}
   \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
@@ -1483,7 +1479,7 @@ If you intend to use similar options for many listings in the document you may
 use the \csi{lstset} command to set them beforehand. This way you will avoid
 repeating them with every time you want to typeset some code.
 
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.55\linewidth]
 \lstset{
   language=C,
   numbers=left,
@@ -1495,8 +1491,10 @@ repeating them with every time you want to typeset some code.
 
 \lstinputlisting{hello.c}
 
-The statement \lstinline|int x = 1;|
-assigns 1 to variable \lstinline|x|.
+The statement
+\lstinline|int x = 1;|
+assigns 1 to variable
+\lstinline|x|.
 \end{example}
 
 \subsection{The \pai{minted} Package}
@@ -1510,9 +1508,9 @@ on a simple keyword search, so this is an option only for simple languages.
 If this is a problem for you it may be worth to consider the \pai*{minted}
 package. It relies on the Pygments~\cite{pygments} program to highlight code.
 In contrast to the \pai{listings} package, this program uses pushdown automata
-to color the code which may produce much better results. Moreover the
+to colour the code which may produce much better results. Moreover the
 predefined styles and language support are much richer than those offered by
-the \pai{listings} package. This is the package that is used to color examples
+the \pai{listings} package. This is the package that is used to colour examples
 throughout this booklet.
 
 Due to the fact that the \pai{minted} package relies on an external program
@@ -1546,7 +1544,7 @@ the previous approaches. It provides
 In contrast to the \pai{listings} the \carg{language} is a required parameter.
 The command \csi{mintinline} works with both normal groups and custom
 delimiters.
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}[examplewidth=0.56\linewidth]
 \mintinline{latex}|\LaTeX{}|
 
 \begin{minted}{python}
@@ -1564,18 +1562,18 @@ the options have synonyms that makes their usage identical to the
 \pai{listings} package. For example to enable line numbers you may use the
 \cargv{linenos} key (which is a boolean value) or the \cargv{numbers} key
 (which accepts \cargv{left}, \cargv{right}, \cargv{none} or \cargv{both}).
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}[examplewidth=0.56\linewidth]
 \inputminted[
   linenos,
   xleftmargin=1.2em, %!hide
 ]{css}{review.css}
 \end{example}
 You can change the line numbering using \cargv{firstnumber} and
-\cargv{stepnumber}. Additionaly you may highlight some lines using the
+\cargv{stepnumber}. Additionally you may highlight some lines using the
 \cargv{highlightlines} key to draw attention to them. Note that
 \cargv{highlightlines} uses the transformed line numbers.
 \begin{chktexignore}
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}[examplewidth=0.56\linewidth]
 \inputminted[
   linenos,
   xleftmargin=1.2em, %!hide
@@ -1600,7 +1598,7 @@ fine-tuned using the keys \cargv{breakbytoken}, \cargv{breakbytokenanywhere},
 ]{haskell}{quicksort.hs}
 \end{example}
 As you can see by default it inserts \enquote{\(\hookrightarrow\)} to indicate
-that automatic linebreak occured. You can customise the printed symbols using
+that automatic linebreak occurred. You can customise the printed symbols using
 the \cargv{breaksymbolleft} and \cargv{breaksymbolright} keys.
 
 In order to use \LaTeX{} inside the comments you can use either the
@@ -1622,7 +1620,7 @@ In order to use \LaTeX{} inside the comments you can use either the
   <body>
     <div class="review">
       <!-- \LaTeX{} review -->
-      <p>It is awesome!</p>
+      <p>It's awesome!</p>
     </div>
   </body>
 </html>
@@ -1694,7 +1692,7 @@ environment use \ai{\&} to go to next cell within the row and
 Note that the text inside the cells will not be wrapped. If you want the column
 to contain justified text with linebreaks use the \cargv{p\{\carg{width}\}}
 column specifier, where \carg{width} is the width of the column.
-\begin{example}[examplewidth=0.45\linewidth]
+\begin{example}
 \begin{tabular}{lp{3cm}}
   left & Very long paragraph
          that gets broken into
@@ -1708,22 +1706,14 @@ The optional \carg{pos} argument specifies the vertical position of the table
 with respect to baseline of the text. There are three possible alignments:
 \cargv{c} centres the table (the default), \cargv{t} matches the baseline of
 the top row and \cargv{b} matches the baseline of the bottom row.
-\begin{example}[examplewidth=0.6\linewidth]
+\begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 text
-\begin{tabular}{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
 text
-\begin{tabular}[t]{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}[t]{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
 text
-\begin{tabular}[b]{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}[b]{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
+text
 \end{example}
 
 What we have shown so far allows aligning some items in rows and columns,
@@ -2029,12 +2019,12 @@ row thanks to \cargv{p\{...\}} specification, it will not broken as seen in
 \end{example}
   \end{lined}
 
-  \caption{An anti-exaple of using \ei{longtable} assuming it will break
+  \caption{An anti-example of using \ei{longtable} assuming it will break
     the paragraphs inside the cells.}\label{lst:longtablepars}
 \end{listing}
 
 The \ei{longtable} environment defines also some additional commands that end
-table rows. One of them is \csi{\textbackslash*} which, similarly to its
+table rows. One of them is \csi{textbackslash*} which, similarly to its
 paragraph use, prohibits pagebreak after the row. Another useful commands are
 \csi{endhead}, \csi{endfirsthead}, \csi{endfoot} and \csi{endlastfoot}. If you end
 the row with them they will set the preceding rows as headers and footers of
@@ -2107,7 +2097,7 @@ optional argument to the \csi{\textbackslash} command. Can the same be done
 within the table? It turns out that it can, but there is one caveat. If you use
 it together with a \cargv{p\{...\}} column, the space specified will be different
 depending on column order.
-\begin{example}[standalone, paperheight=3cm]
+\begin{example}[standalone, paperheight=3cm, paperwidth=0.57\linewidth]
 \begin{document} %!hide
 \noindent %!hide
 \begin{tabular}{lp{1cm}}
@@ -2281,7 +2271,7 @@ The \carg{optoins} parameter is a comma delimited list of keys and values. The
 most basic keys are \cargv{width} and \cargv{height}. If only one is supplied
 then \LaTeX{} will calculate the other one to keep the aspect ratio of the
 original image.
-\begin{example}[examplewidth=0.9\linewidth, vertical_mode]
+\begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 \includegraphics[width=2cm]{example-image}
 \includegraphics[height=1cm]{example-image}
 \includegraphics[width=2cm, height=1cm]{example-image}
@@ -2290,7 +2280,7 @@ original image.
 You may also pass the \cargv{keepaspectratio} key. This will change the meaning
 of \cargv{width} and \cargv{height} keys to the \emph{maximum} possible width
 and height.
-\begin{example}
+\begin{example}[examplewidth=0.6\linewidth]
 \includegraphics[
   width=2cm,
   height=2cm,
@@ -2393,9 +2383,11 @@ If you try writing a longer text with tables and images you will soon notice a
 problem: they cannot be broken across multiple pages (except for the
 \pai{longtable}). If you simply include them in normal text flow this will lead
 to a lot of empty space if the image is large and the text preceding it would
-be to close to the bottom of the page. In the example below the first page is
-half empty.
-\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+be to close to the bottom of the page. In the \autoref{lst:floatrationale} the
+first page is half empty.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \usepackage{ragged2e} %!hide
 \geometry{includefoot} %!hide
@@ -2414,6 +2406,10 @@ Below this text is an image.
 Here is more text.
 \end{document}%!hide
 \end{example}
+  \end{lined}
+  \caption{An anti-example of half-empty page due to a large, non-floated
+    image.}\label{lst:floatrationale}
+\end{listing}
 
 The solution to this problem is to `float' any figure or table that
 does not fit on the current page to a later page, while filling the
@@ -2498,8 +2494,13 @@ becomes stuck, blocking subsequent floats. In particular, you should never,
 ever use the [h] option---it is so bad that in more recent versions of \LaTeX,
 it is automatically replaced by [ht].
 
-Using floats, the previous example would look like this:
-\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+Using floats, the \autoref{lst:floatrationale} could be made better by
+rewriting it like in the \autoref{lst:floatexample}. As you can see there,
+\LaTeX{} now typeset the remaining text and delayed inserting the image until
+the next page.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \geometry{includefoot} %!hide
 \begin{document}%!hide
@@ -2518,8 +2519,10 @@ Below this text is an image.
 Here is more text.
 \end{document}%!hide
 \end{example}
-As you can see, \LaTeX{} now typeset the remaining text and delayed inserting
-the image until the next page.
+  \end{lined}
+  \caption{An example of using \ei{figure} float to achieve dynamic image
+    placement inside a document.}\label{lst:floatexample}
+\end{listing}
 
 Having explained the difficult bit, there are some more things to mention about
 the \ei{table} and \ei{figure} environments. Use the
@@ -2545,13 +2548,11 @@ brackets after the \csi{caption} command.
 Use \csi{label} and \csi{ref} to create a reference to a float within
 your text. Note that the \csi{label} command must come \emph{after} the
 \csi{caption} command since you want it to reference the number of the
-caption.
-
-The following example draws a square and inserts it into the
-document. You could use this if you wanted to reserve space for images
-you are going to paste into the finished document.
-
-\begin{example}[standalone, paperheight=4.5cm, to_page=2, vertical_pages]
+caption. The \autoref{lst:floatrefs} presents an example usage of the described
+commands.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4.5cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \geometry{includefoot} %!hide
 \begin{document}%!hide
@@ -2566,13 +2567,18 @@ the Figure~\ref{figure}.
   \includegraphics[
     scale=0.2
   ]{example-image}
-  \caption{An interesting figure}%
+  \caption[A figure]{An
+    interesting figure}%
   \label{figure}
 \end{figure}
 
 Here is more text.
 \end{document}%!hide
 \end{example}
+  \end{lined}
+  \caption{An example of using \ei{figure} float together with references and
+    list of figures.}\label{lst:floatrefs}
+\end{listing}
 
 Under certain circumstances it might be necessary to use the
 \begin{lscommand}
