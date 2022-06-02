@@ -130,7 +130,9 @@
       \dim_set:Nn \l_tmpb_dim {0pt}
     }
 
-    \medskip
+    \int_compare:nNnF \@floatpenalty < 0 {
+        \medskip
+      }
     \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
       \lshortexample_typeset_example:nn {
         \__lshortexample_verbatim_input_file
@@ -141,7 +143,9 @@
     \end{adjustwidth}
     \int_gincr:N \__lshortexample_example_counter
     \group_end:
-    \medskip
+    \int_compare:nNnF \@floatpenalty < 0 {
+        \medskip
+      }
   \end{trivlist}
 }
 
