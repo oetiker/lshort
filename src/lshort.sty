@@ -298,15 +298,25 @@
 %
 % Intro Environment
 \newenvironment{intro}{\sffamily}{\vspace*{2ex minus 1.5ex}}
-%
-\newcommand{\secby}[2]{\nopagebreak\par\addvspace{-1.5ex}%
-     \vskip -\parskip\noindent{\tiny By #1 \mailto|#2|}\par\nopagebreak%
-     \addvspace{1ex plus 0.8ex minus 0.2ex}%
-     \vskip -\parskip\noindent\ignorespaces}
-%
-% propper bookmark entries in pdftex
 
 \ExplSyntaxOn
+\cs_new:Nn \lshort_gobblepars: {
+  \peek_meaning_remove:NT \par {\lshort_gobblepars:}
+}
+
+\NewDocumentCommand{\secby}{mm}{
+  \nopagebreak\par
+  \addvspace{-1.5ex}
+  \vskip -\parskip\noindent
+  {\tiny By~#1~\mailto|#2|}
+  \par\nopagebreak
+  \addvspace{1ex plus 0.8ex minus 0.2ex}
+  \vskip -\parskip\noindent
+  \peek_remove_spaces:n {
+    \lshort_gobblepars:
+  }
+}
+
 \RenewDocumentCommand{\sectionautorefname}{}{Section}
 \RenewDocumentCommand{\chapterautorefname}{}{Chapter}
 \NewDocumentCommand{\listingautorefname}{}{Listing}
