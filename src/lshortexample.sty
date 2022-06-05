@@ -107,6 +107,13 @@
 
   vertical_mode .bool_set:N = \__lshortexample_vertical_mode_bool,
   vertical_mode .initial:n = false,
+
+  hide_hyperref .bool_set:N = \l__lshortexample_hide_hyperref_bool,
+  hide_hyperref .initial:n = true,
+}
+
+\DeclareDocumentCommand\LshortExampleSetup { m } {
+  \keys_set:nn { lshortexample } { #1 }
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -312,6 +319,17 @@
 \begin{adjustbox}{frame = 0.4pt~2mm, Clip=0}
   \begin{minipage}{\l_tmpa_dim-4mm-0.8pt}
     \sloppy
+    \RenewExpandableDocumentCommand{\thempfootnote}{}{
+      \@arabic\c@mpfootnote
+    }
+
+    \bool_if:NT \l__lshortexample_hide_hyperref_bool {
+      \NewCommandCopy{\old@ref}{\ref}
+      \RenewDocumentCommand{\ref}{}{\old@ref*}
+      \NewCommandCopy{\old@pageref}{\pageref}
+      \RenewDocumentCommand{\pageref}{}{\old@pageref*}
+      \RenewCommandCopy\@footnotemark\H@@footnotemark
+    }
     \input{#1}
   \end{minipage}
 \end{adjustbox}
