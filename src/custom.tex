@@ -467,87 +467,156 @@ that contains the commands defined in the examples above.
 \section{Fonts and Sizes}\label{sec:fontsize}
 
 \subsection{Font Changing Commands}\index{font}\index{font size}
-\LaTeX{} chooses the appropriate font
-and font size based on the logical structure of the document
-(sections, footnotes, \ldots).  In some cases, one might like to change
-fonts and sizes by hand. To do this, use the commands listed in
-\autoref{fonts} and \autoref{sizes}. The actual size of each font
-is a design issue and depends on the document class and its options.
-\autoref{tab:pointsizes} shows the absolute point size for these
-commands as implemented in the standard document classes.
 
+\LaTeX{} fonts are influenced by four parameters
+\begin{description}
+  \item[family] The collection of fonts. For example, \enquote*{Latin Modern
+      Roman} or \enquote*{Source Code Pro}.
+  \item[series] The heaviness of the font. For example, \enquote*{bold} or
+    \enquote*{medium}.
+  \item[shape] The shape of glyphs within a font family. For example,
+    \enquote*{small caps} or \enquote*{italics}.
+  \item[size] The size of the glyphs. For example, \enquote*{\qty{10}{pt}} or
+    \enquote*{\qty{12}{pt}}.
+\end{description}
+Normally \LaTeX{} chooses the appropriate font and font size based on the
+logical structure of the document (sections, footnotes, emphasis, \ldots). It
+is possible however to instruct \LaTeX{} manually which font to use. It is
+important to note that, while they can be mixed, not every combination of
+family\slash{}series\slash{}shape is supported.
+
+\LaTeX{} predefines three font families to use throughout the document: the
+upright or roman family accessible via \csi{textrm}, the \textsf{sans serif
+  family} accessible via \csi{textsf} and monospace or typewriter family
+accessible via \csi{texttt}.
 \begin{example}
-{\small The small and
-\textbf{bold} Romans ruled}
-{\Large all of great big
-\textit{Italy}.}
+\textrm{Roman is the default
+  in articles.} \\
+\textsf{Sans serif is used in
+  presentations.} \\
+\texttt{Monospace is used in
+  verbatim code blocks.}
 \end{example}
 
-One important feature of \LaTeX{} is that the font attributes are
-independent. This means that issuing size or even font
-changing commands, and still keep bold or slant attributes set
-earlier.
+There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold (\csi{textbf}).
+\begin{example}
+\textmd{The default.} \\
+\textbf{Bold font.}
+\end{example}
 
-In \emph{math mode} use the font changing \emph{commands} to
-temporarily exit \emph{math mode} and enter some normal text. If you want to
-switch to another font for math typesetting you need another
-special set of commands; refer to \autoref{mathfonts}.
+Shapes are a bit more complicated. The three basic shapes are: italics
+(\csi{textit}), oblique or slanted\footnote{The difference between oblique and
+  italic shapes is that italic shape uses different glyphs while oblique shape
+  uses the same glyphs but slanted. The difference is really obvious
+  \fontshape{ui}\selectfont when you look at the unslanted italic font.}
+(\csi{textsl}) and small capitals (\csi{textsc}).
+\begin{example}
+\textit{Italic shape.} \\
+\textsl{Slanted shape.} \\
+\textsc{Small Capitals.}
+\end{example}
+However there are two additional shapes that are not provided by default
+\LaTeX{} fonts: swash (\csi{textsw}), for decorative fonts and spaced caps and
+small caps (\csi{textssc}). These are rarely used but may come in handy when
+using custom fonts as described in \autoref{sec:fontspec}.
+\begin{example}
+\setmainfont{EB Garamond} %!hide
+Question vs. \textsw{Question}
+\end{example}
+In addition two virtual shapes are provided: upright (\csi{textup}) and
+upper-lowercase (\csi{textulc}). These are not actually shapes but they change
+the current shape to, respectively switch back to upright font and to disable
+small capitals. The command \csi{textnormal} is just the combination of the
+two.
+\begin{example}
+\textsl{\textsc{Back to
+  \textup{upright.}}} \\
+\textsl{\textsc{Back to
+  \textulc{lowercase.}}} \\
+\textsl{\textsc{Back to
+  \textnormal{normal.}}}
+\end{example}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Fonts.}\label{fonts}
-  %
-  % Alan suggested not to tell about the other form of the command
-  % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
-  %
-  \begin{tabular}{@{}ll@{\qquad}ll@{}}
+All of the commands described above also exist in their switch version. Instead
+of receiving the text via argument they change the font permanently until it is
+changed again. For example, the switch version of \csi{textit} and \csi{textrm}
+are \csi{itshape} and \csi{rmfamily} respectively. While the argument versions
+are useful for defining commands, switch versions are especially useful when
+defining your own environments.
+\begin{example}
+Only \textit{argument} is
+affected. After \itshape
+everything is in italics
+until \upshape is encountered.
+\end{example}
+Both argument and switch versions of the described commands are presented in
+\autoref{tbl:fonts}.
+\begin{table}
+  \caption{Default Font Changing Commands of \LaTeX.}\label{tbl:fonts}
+  \begin{tabular}{@{}lll@{}}
     \toprule
-    Command                      & Font                       & Command & Font \\
+    Argument Command         & Switch           & Example                      \\
     \midrule
-    \fni{textrm}\verb|{...}|     & \textrm{\wi{roman}}        &
-    \fni{textsf}\verb|{...}|     & \textsf{\wi{sans serif}}                    \\
-    \fni{texttt}\verb|{...}|     & \texttt{typewriter}                         \\[6pt]
-    \fni{textmd}\verb|{...}|     & \textmd{medium}            &
-    \fni{textbf}\verb|{...}|     & \textbf{\wi{bold face}}                     \\[6pt]
-    \fni{textup}\verb|{...}|     & \textup{\wi{upright}}      &
-    \fni{textit}\verb|{...}|     & \textit{\wi{italic}}                        \\
-    \fni{textsl}\verb|{...}|     & \textsl{\wi{slanted}}      &
-    \fni{textsc}\verb|{...}|     & \textsc{\wi{Small Caps}}                    \\[6pt]
-    \fni{textnormal}\verb|{...}| & \textnormal{document} font &         &      \\
+    \csi{textrm}[text:m]     & \csi{rmfamily}   & \textrm{\wi{roman}}          \\
+    \csi{textsf}[text:m]     & \csi{sffamily}   & \textsf{\wi{sans serif}}     \\
+    \csi{texttt}[text:m]     & \csi{ttfamily}   & \texttt{typewriter}          \\[6pt]
+    \csi{textmd}[text:m]     & \csi{mdseries}   & \textmd{medium}              \\
+    \csi{textbf}[text:m]     & \csi{bfseries}   & \textbf{\wi{bold face}}      \\[6pt]
+    \csi{textup}[text:m]     & \csi{upshape}    & \textup{\wi{upright}}        \\
+    \csi{textit}[text:m]     & \csi{itshape}    & \textit{\wi{italic}}         \\
+    \csi{textsl}[text:m]     & \csi{slshape}    & \textsl{\wi{slanted}}        \\
+    \csi{textsc}[text:m]     & \csi{scshape}    & \textsc{\wi{Small Caps}}     \\
+    \csi{textsw}[text:m]     & \csi{swshape}    & \textsw{\wi{Queen of Swash}} \\[6pt]
+    \csi{textnormal}[text:m] & \csi{normalfont} & \textnormal{document} font   \\
     \bottomrule
   \end{tabular}
-
-  \bigskip
 \end{table}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Font Sizes.}\label{sizes}\index{font size}
+When working with switch versions of fonts that are slanted right it is
+important to remember about \wi{italic correction}. This is a small space after
+the end of right slanting text that is sometimes necessary to avoid overlapping
+letters. It is inserted using \csi{/} command.
+\begin{chktexignore}  
+\begin{example}
+Without: {\itshape oof}bar \\
+With: {\itshape oof\/}bar
+\end{example}
+\end{chktexignore}
+The italic correction is handled automatically by the argument versions of the
+commands.
+
+In contrast to the previous font changing commands, the size of font can only
+be controlled via switch versions. \LaTeX{} predefines some switches for
+changing font size, see \autoref{sizes} and \autoref{tab:pointsizes} for their
+description.
+\begin{table}
+  \caption{Commands Changing Font Size.}\label{sizes}\index{font size}
   \begin{tabular}{@{}ll@{\qquad}ll@{}}
     \toprule
-    Command                     & Size                                    & Command & Size \\
+    Command                     & Size                             &
+    Command                     & Size                               \\
     \midrule
-    \fni{tiny}                  & \tiny        tiny                       &
-    \fni{Large}                 & \Large       larger                                      \\
-    \fni{scriptsize}            & \scriptsize  very small                 &
-    \fni{LARGE}                 & \LARGE       very large                                  \\
-    \fni{footnotesize}          & \footnotesize  quite small              &
-    \multirow{2}{*}{\fni{huge}} & \multirow{2}{*}{\huge        huge}                       \\
-    \fni{small}                 & \small            small                 &         &      \\
-    \fni{normalsize}            & \normalsize  normal                     &
-    \multirow{2}{*}{\fni{Huge}} & \multirow{2.2}{*}{\Huge        largest}                  \\
-    \fni{large}                 & \large       large                      &         &      \\
+    \csi{tiny}                  & \tiny tiny                       &
+    \csi{Large}                 & \Large larger                      \\
+    \csi{scriptsize}            & \scriptsize very small           &
+    \csi{LARGE}                 & \LARGE very large                  \\
+    \csi{footnotesize}          & \footnotesize  quite small       &
+    \multirow{2}{*}{\csi{huge}} & \multirow{2}{*}{\huge huge}        \\
+    \csi{small}                 & \small small                     &
+                                &                                    \\
+    \csi{normalsize}            & \normalsize  normal              &
+    \multirow{2}{*}{\csi{Huge}} & \multirow{2.2}{*}{\Huge largest}   \\
+    \csi{large}                 & \large large                     &
+                                &                                    \\
     \bottomrule
-  \end{tabular}%
-  \bigskip
+  \end{tabular}
 \end{table}
 
-\begin{table}[!tb]
-  \centering
+\begin{table}
   \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
     Standard Classes depending on the class option. The default class option is
     \cargv{10pt}.}\label{tab:pointsizes}\label{tab:sizes}
-  \sisetup{table-format=2.0}
+  \sisetup{table-format=2.2}
   \begin{tabular}{@{}lSSS@{}}
     \toprule
                        & \multicolumn{3}{c}{Size (\unit{pt})}                                   \\
@@ -557,102 +626,95 @@ special set of commands; refer to \autoref{mathfonts}.
     \csi{tiny}         & 5                                    & 6              & 6              \\
     \csi{scriptsize}   & 7                                    & 8              & 8              \\
     \csi{footnotesize} & 8                                    & 9              & 10             \\
-    \csi{small}        & 9                                    & 10             & 11             \\
-    \csi{normalsize}   & 10                                   & 11             & 12             \\
-    \csi{large}        & 12                                   & 12             & 14             \\
-    \csi{Large}        & 14                                   & 14             & 17             \\
-    \csi{LARGE}        & 17                                   & 17             & 20             \\
-    \csi{huge}         & 20                                   & 20             & 25             \\
-    \csi{Huge}         & 25                                   & 25             & 25             \\
+    \csi{small}        & 9                                    & 10             & 10.95          \\
+    \csi{normalsize}   & 10                                   & 10.95          & 12             \\
+    \csi{large}        & 12                                   & 12             & 14.4           \\
+    \csi{Large}        & 14.4                                 & 14.4           & 17.28          \\
+    \csi{LARGE}        & 17.28                                & 17.28          & 20.74          \\
+    \csi{huge}         & 20.74                                & 20.74          & 24.88          \\
+    \csi{Huge}         & 24.88                                & 24.88          & 24.88          \\
     \bottomrule
   \end{tabular}
-
-  \bigskip
 \end{table}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Math Fonts.}\label{mathfonts}
-  \begin{tabular}{@{}ll@{}}
+When using these commands it is important to remember that the
+line spacing is only updated after the paragraph ends. To avoid putting empty
+lines before the closing curly brace you may use the \csi{par} command.
+\begin{example}
+{\Large Here the line spacing
+  is not updated. A bit tight!}
+
+{\Large Much better! I can
+  breathe freely again!\par}
+\end{example}
+
+An arbitrary font size can be specified using the
+\begin{lscommand}
+  \csi{fontsize}[size: m, line skip: m]\csi{selectfont}
+\end{lscommand}
+command combo. The \carg{line skip} determines the height of the text line and
+should be usually around \(1.2\) times larger than the \carg{size}.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\fontsize{2cm}{2.4cm}\selectfont A big one!
+\end{example}
+
+Fun fact: \LaTeX{} default font is a bit unusual in that it looks slightly
+different depending on its size. The difference is presented in the table below
+where the text written using different sizes was rescaled to the same height.
+\begin{center}
+  \begin{tabular}{@{}lll@{}}
     \toprule
-    Command                      & Font                           \\
+    \csi{tiny}                           &
+    \csi{normalsize}                     &
+    \csi{Huge}                             \\
     \midrule
-    \fni{mathrm}\verb|{...}|     & $\mathrm{Roman\ Font}$         \\
-    \fni{mathbf}\verb|{...}|     & $\mathbf{Boldface\ Font}$      \\
-    \fni{mathsf}\verb|{...}|     & $\mathsf{Sans\ Serif\ Font}$   \\
-    \fni{mathtt}\verb|{...}|     & $\mathtt{Typewriter\ Font}$    \\
-    \fni{mathit}\verb|{...}|     & $\mathit{Italic\ Font}$        \\
-    \fni{mathcal}\verb|{...}|    & $\mathcal{CALLIGRAPHIC\ FONT}$ \\
-    \fni{mathnormal}\verb|{...}| & $\mathnormal{Normal\ Font}$    \\
+    \resizebox{!}{2em}{\tiny Text}       &
+    \resizebox{!}{2em}{\normalsize Text} &
+    \resizebox{!}{2em}{\Huge Text}         \\
     \bottomrule
   \end{tabular}
+\end{center}
 
-  %\begin{tabular}{@{}lll@{}}
-  %\textit{Command}&\textit{Example}&    \textit{Output}\\[6pt]
-  %\fni{mathcal}\verb|{...}|&    \verb|$\mathcal{B}=c$|&     $\mathcal{B}=c$\\
-  %\fni{mathscr}\verb|{...}|&    \verb|$\mathscr{B}=c$|&     $\mathscr{B}=c$\\
-  %\fni{mathrm}\verb|{...}|&     \verb|$\mathrm{K}_2$|&      $\mathrm{K}_2$\\
-  %\fni{mathbf}\verb|{...}|&     \verb|$\sum x=\mathbf{v}$|& $\sum x=\mathbf{v}$\\
-  %\fni{mathsf}\verb|{...}|&     \verb|$\mathsf{G\times R}$|&        $\mathsf{G\times R}$\\
-  %\fni{mathtt}\verb|{...}|&     \verb|$\mathtt{L}(b,c)$|&   $\mathtt{L}(b,c)$\\
-  %\fni{mathnormal}\verb|{...}|& \verb|$\mathnormal{R_{19}}\neq R_{19}$|&
-  %$\mathnormal{R_{19}}\neq R_{19}$\\
-  %\fni{mathit}\verb|{...}|&     \verb|$\mathit{ffi}\neq ffi$|& $\mathit{ffi}\neq ffi$
-  %\end{tabular}
+In math mode the font changing commands typeset normal text. If you want to
+switch to another font for math typesetting you need another special set of
+commands presented in \autoref{mathfonts}.
+\begin{example}
+\(
+  \textnormal{Normal text }
+  \mathbf{math mode \frac{1}{2}}
+\)
+\end{example}
 
-  \bigskip
+\begin{table}
+  \caption{Math Fonts.}\label{mathfonts}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Command                   & Example                  & Comment                \\
+    \midrule
+    \csi{mathrm}[text: m]     & $\mathrm{ABCabc123}$     &                        \\
+    \csi{mathbf}[text: m]     & $\mathbf{ABCabc123}$     &                        \\
+    \csi{mathsf}[text: m]     & $\mathsf{ABCabc123}$     &                        \\
+    \csi{mathtt}[text: m]     & $\mathtt{ABCabc123}$     &                        \\
+    \csi{mathit}[text: m]     & $\mathit{ABCabc123}$     &                        \\
+    \csi{mathcal}[text: m]    & $\mathcal{ABC}$          & Only uppercase letters \\
+    \csi{mathnormal}[text: m] & $\mathnormal{ABCabc123}$ & Old style numerals     \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-In connection with the font size commands, \wi{curly braces} play a
-significant role. They are used to build \emph{groups}.  Groups
-limit the scope of most \LaTeX{} commands.\index{grouping}
-
-\begin{example}
-He likes {\LARGE large and
-{\small small} letters}.
-\end{example}
-
-The font size commands also change the line spacing, but only if the
-paragraph ends within the scope of the font size command. The closing curly
-brace \verb|}| should therefore not come too early.  Note the position of
-the \csi{par} command in the next two examples.\footnote{\texttt{\bs{}par}
-  is equivalent to a blank line}
-
-\begin{example}
-{\Large Don't read this!
- It is not true.
- You can believe me!\par}
-\end{example}
-
-\begin{example}
-{\Large This is not true either.
-But remember I am a liar.}\par
-\end{example}
-
-If you want to activate a size changing command for a whole paragraph
-of text or even more, you might want to use the environment syntax for
-font changing commands.
-
-\begin{example}
-\begin{Large}
-This is not true.
-But then again, what is these
-days \ldots
-\end{Large}
-\end{example}
-
-\noindent This will save you from counting lots of curly braces.
+If you need to access even more font variants and shapes\footnote{For example
+  the aforementioned \fontshape{ui}\selectfont upright italic shape.} check out
+\citetitle{fntguide}~\cite{fntguide}.
 
 \subsection{Danger, Will Robinson, Danger}
 
-As noted at the beginning of this chapter, it is dangerous to clutter
-your document with explicit commands like this, because they work in
-opposition to the basic idea of \LaTeX{}, which is to separate the
-logical and visual markup of your document.  This means that if you
-use the same font changing command in several places in order to
-typeset a special kind of information, you should use
-\csi{NewDocumentCommand} to define a ``logical wrapper command'' for the font
-changing command.
+As noted at the beginning of this chapter, it is dangerous to clutter your
+document with explicit commands like this, because they work in opposition to
+the basic idea of \LaTeX{} described in \autoref{sec:logical_structure}, which
+is to separate the logical and visual markup of your document. This means that
+if you use the same font changing command in several places in order to typeset
+a special kind of information, you should use \csi{NewDocumentCommand} to
+define a \enquote{logical wrapper command} for the font changing command.
 
 \begin{example}
 \NewDocumentCommand{\oops}{m}{%
@@ -664,24 +726,10 @@ of unknown origin and purpose.
 
 This approach has the advantage that you can decide at some later
 stage that you want to use a visual representation of danger other
-than \verb|\textbf|, without having to wade through your document,
-identifying all the occurrences of \verb|\textbf| and then figuring out
+than \csi{textbf}, without having to wade through your document,
+identifying all the occurrences of \csi{textbf} and then figuring out
 for each one whether it was used for pointing out danger or for some other
 reason.
-
-Please note the difference between telling \LaTeX{} to
-\emph{emphasise} something and telling it to use a different
-\emph{font}. The \csi{emph} command is context aware, while the font commands are absolute.
-
-\begin{example}
-\textit{You can also
-  \emph{emphasise} text if
-  it is set in italics,}
-\textsf{in a
-  \emph{sans-serif} font,}
-\texttt{or in
-  \emph{typewriter} style.}
-\end{example}
 
 \subsection{Advice}
 
@@ -689,8 +737,8 @@ To conclude this journey into the land of fonts and font sizes,
 here is a little word of advice:\nopagebreak
 
 \begin{quote}
-  \underline{\textbf{Remember\Huge!}} \textit{The}
-  \textsf{M\textbf{\LARGE O} \texttt{R}\textsl{E}} fonts \Huge you
+  \underline{\textbf{Reme\(\mathfrak{mber}\)\Huge!}} \textit{The}
+  \textsf{M\textbf{\LARGE O} \(\mathcal{R}\)\textsl{E}} fonts \Huge you
   \tiny use \footnotesize \textbf{in} a \small \texttt{document},
   \large \textit{the} \normalsize more \textsc{readable} and
   \textsl{\textsf{beautiful} it bec\large o\Large m\LARGE e\huge s}.
@@ -732,7 +780,7 @@ Normal text.
 \textsf{Sans serif text.
   \emph{Emphasized}.} \\
 \texttt{Monospace text.
-  \emph{Emphasized}.}
+  \emph{Emphasized}.} \\
 
 \setmainfont{Source Serif Pro}
 \setsansfont{Source Sans Pro}
@@ -888,9 +936,9 @@ redefine existing font families.
 If you want to use larger inter-line spacing in a
 document, change its value by putting the
 \begin{lscommand}
-  \csi{linespread}\verb|{|\emph{factor}\verb|}|
+  \csi{linespread}[factor: m]
 \end{lscommand}
-\noindent command into the preamble of your document.
+command into the preamble of your document.
 Use \verb|\linespread{1.3}| for ``one and a half'' line
 spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
 the lines are not spread, so the default line spread factor
@@ -900,7 +948,7 @@ Note that the effect of the \csi{linespread} command is rather drastic and
 not appropriate for published work. So if you have a good reason for
 changing the line spacing you might want to use the command:
 \begin{lscommand}
-  \verb|\setlength{\baselineskip}{1.5\baselineskip}|
+  \mintinline{latex}|\setlength{\baselineskip}{1.5\baselineskip}|
 \end{lscommand}
 
 \begin{example}

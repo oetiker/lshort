@@ -45,6 +45,10 @@
   Script=Arabic,
 }
 \newfontfamily\arabicfonttt{Iran Nastaliq}
+\newfontface\@swash[
+  Style=Swash,
+]{EB Garamond}
+\DeclareTextFontCommand{\textsw}{\@swash}
 
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
@@ -73,9 +77,9 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection{} #1}}
 \lhead[\fancyplain{}{\bfseries\thepage}]
-    {\fancyplain{}{\bfseries\rightmark}}
+{\fancyplain{}{\bfseries\rightmark}}
 \rhead[\fancyplain{}{\bfseries\leftmark}]
-    {\fancyplain{}{\bfseries\thepage}}
+{\fancyplain{}{\bfseries\thepage}}
 \cfoot[]{}
 % \RequirePackage{pgfbaseplot}
 \RequirePackage{tikz}
@@ -133,8 +137,8 @@
 
 \newcommand{\PSi}{\textsc{PostScript}\index{PostScript@\textsc{PostScript}}}
 \newcommand{\EPSi}{Encapsulated \textsc{PostScript}%
-\index{Encapsulated PostScript@Encapsulated \textsc{PostScript}}%
-\index{PostScript@\textsc{PostScript}!Encapsulated}%
+  \index{Encapsulated PostScript@Encapsulated \textsc{PostScript}}%
+  \index{PostScript@\textsc{PostScript}!Encapsulated}%
 }
 
 % Earlier paragraphs were separated by some space
@@ -153,7 +157,7 @@
 %\newcommand{\bs}{\ensuremath{\mathtt{\backslash}}}%Print backslash
 % Index entry for a command (\cih for hidden command index
 \newcommand{\eei}[1]{%
-\index{extension!\texttt{#1}}\texttt{#1}}
+  \index{extension!\texttt{#1}}\texttt{#1}}
 % probably add handling of period like handling of \ in \ci
 \newcommand{\fni}[1]{%
   \index{font!#1@\texttt{\textbackslash #1}}%
@@ -226,8 +230,8 @@
 \ExplSyntaxOff
 %Package
 \newcommand{\paih}[1]{%
-\index{packages!#1@\textsf{#1}}%
-\index{#1@\textsf{#1}}}
+  \index{packages!#1@\textsf{#1}}%
+  \index{#1@\textsf{#1}}}
 \ExplSyntaxOn
 \NewDocumentCommand{\pai}{sm}{
   \paih{#2}\textsf{#2}\IfBooleanT{#1}{\,\cite{pack:#2}}
@@ -284,7 +288,7 @@
     \item\relax
     \begin{tabular}{|l|}
       \hline\rule{0pt}{1em}\ignorespaces
-} {
+      } {
       \\\hline
     \end{tabular}
   \end{trivlist}
@@ -364,10 +368,10 @@
 \newsavebox{\symbbox}
 \newenvironment{symbols}[1]%
 {\par\vspace*{2ex}
-\renewcommand{\arraystretch}{1.1}
-\begin{lrbox}{\symbbox}
-\hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
-{\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{lrbox}{\symbbox}
+    \hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
+      {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
 %
 % Print |--| to show a distance
 %
@@ -393,23 +397,22 @@
 % I want no headers on pages created by clearpage
 
 \renewcommand{\cleardoublepage}
-    {\clearpage\if@twoside \ifodd\c@page\else
-    \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
-
+{\clearpage\if@twoside \ifodd\c@page\else
+      \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 % section titles should be raggright ... since
 % this is not a trivial change I have to repeat the definitions here ...
 % taken from book.cls
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
-                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
-                                   {2.3ex \@plus.2ex}%
-                                   {\raggedright\normalfont\Large\bfseries}}
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\raggedright\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\raggedright\normalfont\large\bfseries}}
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\raggedright\normalfont\large\bfseries}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\raggedright\normalfont\normalsize\bfseries}}
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\raggedright\normalfont\normalsize\bfseries}}
