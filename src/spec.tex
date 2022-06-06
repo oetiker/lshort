@@ -881,141 +881,190 @@ command would be
 }
 \end{minted}
 
-\section{Working with \hologo{XeLaTeX} and PDF}%
-\label{sec:xetex}\index{PDF}\index{XeTeX@\hologo{XeTeX}}\index{XeLaTeX@\hologo{XeLaTeX}}
+\section{Custom Fonts with \pai{fontspec}}\label{sec:fontspec}
 
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
-Most of the things said in the previous section are valid for \hologo{XeLaTeX} as well.
-
-There is a Wiki at \url{http://wiki.xelatex.org/doku.php} that collects
-information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}.
-
-\subsection{The Fonts}\label{sec:fontspec}
-
-In addition to the normal \texttt{tfm} based fonts, \hologo{XeLaTeX} is able
-to use any font known to the operating system. If you have the \texttt{Linux
-  Libertine} fonts installed, you can simply say
-
+In the following examples we use Adobe Source fonts~\cites{sourceserif,
+  sourcesans, sourcecodepro}. These fonts are included with \TeX{}Live \LaTeX{}
+distributions and should be available in
 \begin{code}
-\begin{minted}{latex}
-\usepackage{fontspec}
-\setmainfont[Ligatures=TeX]{Linux Libertine}
-\end{minted}
+  \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
 \end{code}
-%
-in the preamble. This will normally detect the italic and bold versions as
-well, so \mintinline{latex}|\textit| and \mintinline{latex}|\textbf| will work as usual. When the
-font is using OpenType technology you have access to many features which
-required switching to a separate font or using virtual fonts in the past.
-The main feature is the extended character set; a font may contain Latin,
-Greek and Cyrillic characters and the corresponding ligatures.
+directory, where the \cargv{...} denotes tha path \TeX{}Live was installed to.
+\hologo{LuaTeX} checks this directory automatically, so it should work fine,
+but if you are usign \hologo{XeTeX} you must first install these fonts in your
+system. You can also download and install them manually from the links provided
+in bibliography. Alternatively swap out their respective names with some other
+fonts installed in your system.
 
-Many fonts contain at least two kinds of numerals, the normal lining
-numerals and so called old style (or lower case) numerals, which partly
-extend below the baseline. They may contain proportional numerals (the ``1''
-takes less space than the ``0'') or monospaced numerals which are suitable
-for tables.
+Many free OpenType fonts are available at \url{https://fontlibrary.org/}.
 
-\begin{code}
-\begin{minted}{latex}
-\newfontfamily\LLln[Numbers=Lining]{(font)}
-\newfontfamily\LLos[Numbers=OldStyle]{(font)}
-\newfontfamily\LLlnm[
-  Numbers=Lining,Numbers=Monospaced
-]{(font)}
-\newfontfamily\LLosm[
-  Numbers=OldStyle,Numbers=Monospaced
-]{(font)}
-\end{minted}
-\end{code}
+\subsection{Main Document Fonts}
 
-Almost all OpenType fonts contain the standard ligatures (fl fi ffi) but
-there are also some rare or historical ligatures like st, ct and tz. You may
-not want to use them in a technical report but they are fine for a novel. To
-enable these ligatures use either of the following lines:
+If you are not pleased with the default Latin Modern font, you can change it to
+any font installed in your system using the \pai*{fontspec} package. It provides
+three main commands for changing document fonts:
+\begin{lscommand}
+  \csi{setmainfont}[options: o, font: m] \\
+  \csi{setsansfont}[options: o, font: m] \\
+  \csi{setmonofont}[options: o, font: m]
+\end{lscommand}
+This commands change, respectively, the main font of the document, \textsf{the
+  sans serif font used in the document} and \texttt{the monospace font in the
+  document}.
+\begin{example}
+Normal text.
+  \emph{Emphasized.} \\
+\textsf{Sans serif text.
+  \emph{Emphasized}.} \\
+\texttt{Monospace text.
+  \emph{Emphasized}.}
 
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Ligatures=Rare]{(font)}
-\setmainfont[Ligatures=Historic]{(font)}
-\setmainfont[Ligatures=Historic,Ligatures=Rare]{(font)}
-\end{minted}
-\end{code}
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+\setmonofont{Source Code Pro}
+Normal text.
+  \emph{Emphasized.} \\
+\textsf{Sans serif text.
+  \emph{Emphasized}.} \\
+\texttt{Monospace text.
+  \emph{Emphasized}.}
+\end{example}
+Note that it is best to put these commands in the preamble of your document,
+because some fonts are frozen when the body starts.
 
-Not every font contains both sets of ligature, consult the font
-documentation or just try it out. Sometimes these ligatures are language
-dependent; for example a ligature used in Polish (fk) is not used in English. You have
-to add
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Language=Polish]{(font)}
-\end{minted}
-\end{code}
-to enable the Polish ligatures.
+The optional \carg{options} argument accepts key value lists that allow to
+customize the font features. For example, many fonts contain the, so called,
+old style numerals that are not used by default. You can pass
+\cargv{Number=OldStyle} if you want to use them in your document.
+\begin{example}
+\setmainfont{Source Serif Pro}
+0123456789
 
-Some fonts (like the commercial Adobe Garamond Premier Pro) contain
-alternative glyphs that are activated by default in \hologo{XeLaTeX}
-distributed with \TeX{}Live~2010\footnote{The behaviour has changed with this
-  version, it was off by default in earlier releases.}. The result is a stylish
-``Q'' with a descender reaching below the following ``u''. To disable this
-feature you have to define the font with disabled contextuals:
+\setmainfont[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+0123456789
+\end{example}
 
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Contextuals=NoAlternate]{(font)}
-\end{minted}
-\end{code}
+Some fonts also provide special glyphs for a given language. For example the
+Latin Modern Font provides a special \enquote{fk} ligature for Polish language.
+You can pass \cargv{Language} key set to a given language to enable these
+features.
+\begin{example}
+agrafka
 
-To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
+\setmainfont[
+  Language=Polish,
+]{Latin Modern Roman}
+agrafka
+\end{example}
+The \pai{polyglossia} package activates these features automatically so you
+don't have to worry about them if you use it.
 
-\subsubsection{Where do I get OpenType fonts?}
+If your font supports it you may wish to enable automatic fractions insertion
+with \cargv{Fractions=On} key.
+\begin{example}
+1/2 3/4 123/456
 
-If you have \texttt{TeXLive} installed, you already have some at
-\begin{code}
-  \url{.../texmf-dist/fonts/opentype},
-\end{code}
-just install them in your operating
-system. This collection does not include \texttt{DejaVu}, which is available
-at \url{http://dejavu-fonts.org/}.
+\setmainfont[
+  Fractions=On,
+]{Latin Modern Roman}
+1/2 3/4 123/456
 
-Make sure that each font is only installed \emph{once}, otherwise
-interesting results may happen.
+\setmainfont[
+  Fractions=On,
+]{Source Serif Pro}
+1/2 3/4 123/456
+\end{example}
 
-You can use every font installed on your computer, but remember that other
-users may not have these fonts. The Zapfino font used in the \pai{fontspec}
-manual is included in Mac OSX, but is not available on Windows
-computers.\footnote{A commercial version of the font called Zapfino Extra is
-  available.}
+OpenType font format defines a lot of more font features, that may or may not
+be supported by your font of choice. Consult with the \pai*{fontspec} package
+documentation for a comprehensive description and examples.
 
-\subsubsection{Entering Unicode Characters}
+\subsection{Specifying Fonts via Filenames}
 
-The number of characters in a font has grown but the number of keys on a
-regular keyboard has not. So, how do I enter non-ASCII characters?
+If you do not want to install fonts in your system or you are working on a
+collaborative project where not everybody has specific fonts installed, you can
+specify the fonts directly via their filenames. In this case you must specify
+font variations manually. Because the filenames are usually very similar, it is
+possible to enter them using \cargv{*} patterns, where \cargv{*} is replaced by
+the main name defined. Extension may also be passed via the \cargv{Extension}
+key to avoid repetition. See \autoref{lst:fontloading} for a comparison of font
+loadings. If the font files are not present in the same directory as the
+document you may have to specify it directly using the \cargv{Path} key.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\setmainfont{Source Serif Pro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
 
-If you write a large amount of text in a foreign language, you can install a
-keyboard for that language and print out the character positions. (Most
-operating system have some sort of virtual keyboard, just make a
-screenshot.)
+\setmainfont{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+ 
+\setmainfont[
+  ItalicFont=SourceSerifPro-RegularIt.otf,
+  BoldFont=SourceSerifPro-Bold.otf,
+  BoldItalicFont=SourceSerifPro-BoldIt.otf,
+]{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
 
-If you rarely need an exotic character, you can simply pick it in the
-character palette.
+\setmainfont[
+  Extension=.otf,
+  UprightFont=*-Regular,
+  ItalicFont=*-RegularIt,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldIt,
+]{SourceSerifPro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}}
+\end{example}
+  \caption{Comparison of font loading with the \pai{fontspec}
+    package.}\label{lst:fontloading}
+\end{listing}
 
-Some environments (e.\,g.\ the X Window System) offer many methods to enter
-non-ASCII characters. Some editors (e.\,g. Vim and Emacs) offer ways to
-enter these characters. Read the manual for the tools you are using.
+The default \LaTeX{} fonts are rather atypical in that they distinguish between
+\textit{italics} and \textsl{slanted} font. Most fonts do not do this, so
+\pai{fontspec} defines slanted font to be the same as italics. This may be
+fixed by setting the \cargv{SlantedFont} key explicitly.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\setmainfont{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
 
-\subsection{Compatibility Between \hologo{XeLaTeX} and \hologo{pdfLaTeX}}
+\setmainfont[
+  SlantedFont=Latin Modern Roman Slanted,
+]{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
+\end{example}
 
-There are a few things that are different between \hologo{XeLaTeX} and \hologo{pdfLaTeX}.
+\subsection{Defining New Fonts}
 
-\begin{itemize}
-  \item A \hologo{XeLaTeX} document has to be written in
-        Unicode (UTF-8) while \hologo{pdfLaTeX} may use different input encodings.
-  \item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
-        support for character protrusion is already under development.
-  \item Everything font related has to be reviewed. (Unless you want to stick
-        to Latin Modern.)
-\end{itemize}
+So far we have only talked about changing the fonts for the whole document. It
+is possible however to define new fonts that are used only sporadically
+throughout the document, for emphasis or decorative purposes. It is possible to
+do so using the
+\begin{lscommand}
+  \csi{newfontfamily}[command: M, options: o, font: m]
+\end{lscommand}
+It defines new \carg{command} that works analogously to the \csi{rmfamily} or
+\csi{sffamily} commands.
+\begin{example}
+\newfontfamily{\sourcefamily}[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+
+Normal text when suddenly
+\ldots{} \sourcefamily
+a different font! 0123456789
+\end{example}
+This is especially useful when working with multiple languages as you have
+already seen in \autoref{sec:polyglossia}.
+
+The \csi{newfontfamily} checks whether the font family is already defined and
+raises an error if it is. Similarly to \autoref{sec:new_commands} the
+\csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
+redefine existing font families.
 
 \section{Creating Presentations}%
 \label{sec:beamer}
