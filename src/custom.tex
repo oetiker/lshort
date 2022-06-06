@@ -696,6 +696,191 @@ here is a little word of advice:\nopagebreak
   \textsl{\textsf{beautiful} it bec\large o\Large m\LARGE e\huge s}.
 \end{quote}
 
+\section{Custom Fonts with \pai{fontspec}}\label{sec:fontspec}
+
+In the following examples we use Adobe Source fonts~\cites{sourceserif,
+  sourcesans, sourcecodepro}. These fonts are included with \TeX{}Live \LaTeX{}
+distributions and should be available in
+\begin{code}
+  \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
+\end{code}
+directory, where the \cargv{...} denotes tha path \TeX{}Live was installed to.
+\hologo{LuaTeX} checks this directory automatically, so it should work fine,
+but if you are usign \hologo{XeTeX} you must first install these fonts in your
+system. You can also download and install them manually from the links provided
+in bibliography. Alternatively swap out their respective names with some other
+fonts installed in your system.
+
+Many free OpenType fonts are available at \url{https://fontlibrary.org/}.
+
+\subsection{Main Document Fonts}
+
+If you are not pleased with the default Latin Modern font, you can change it to
+any font installed in your system using the \pai*{fontspec} package. It provides
+three main commands for changing document fonts:
+\begin{lscommand}
+  \csi{setmainfont}[options: o, font: m] \\
+  \csi{setsansfont}[options: o, font: m] \\
+  \csi{setmonofont}[options: o, font: m]
+\end{lscommand}
+This commands change, respectively, the main font of the document, \textsf{the
+  sans serif font used in the document} and \texttt{the monospace font in the
+  document}.
+\begin{example}
+Normal text.
+  \emph{Emphasized.} \\
+\textsf{Sans serif text.
+  \emph{Emphasized}.} \\
+\texttt{Monospace text.
+  \emph{Emphasized}.}
+
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+\setmonofont{Source Code Pro}
+Normal text.
+  \emph{Emphasized.} \\
+\textsf{Sans serif text.
+  \emph{Emphasized}.} \\
+\texttt{Monospace text.
+  \emph{Emphasized}.}
+\end{example}
+Note that it is best to put these commands in the preamble of your document,
+because some fonts are frozen when the body starts.
+
+The optional \carg{options} argument accepts key value lists that allow to
+customize the font features. For example, many fonts contain the, so called,
+old style numerals that are not used by default. You can pass
+\cargv{Number=OldStyle} if you want to use them in your document.
+\begin{example}
+\setmainfont{Source Serif Pro}
+0123456789
+
+\setmainfont[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+0123456789
+\end{example}
+
+Some fonts also provide special glyphs for a given language. For example the
+Latin Modern Font provides a special \enquote{fk} ligature for Polish language.
+You can pass \cargv{Language} key set to a given language to enable these
+features.
+\begin{example}
+agrafka
+
+\setmainfont[
+  Language=Polish,
+]{Latin Modern Roman}
+agrafka
+\end{example}
+The \pai{polyglossia} package activates these features automatically so you
+don't have to worry about them if you use it.
+
+If your font supports it you may wish to enable automatic fractions insertion
+with \cargv{Fractions=On} key.
+\begin{example}
+1/2 3/4 123/456
+
+\setmainfont[
+  Fractions=On,
+]{Latin Modern Roman}
+1/2 3/4 123/456
+
+\setmainfont[
+  Fractions=On,
+]{Source Serif Pro}
+1/2 3/4 123/456
+\end{example}
+
+OpenType font format defines a lot of more font features, that may or may not
+be supported by your font of choice. Consult with the \pai*{fontspec} package
+documentation for a comprehensive description and examples.
+
+\subsection{Specifying Fonts via Filenames}
+
+If you do not want to install fonts in your system or you are working on a
+collaborative project where not everybody has specific fonts installed, you can
+specify the fonts directly via their filenames. In this case you must specify
+font variations manually. Because the filenames are usually very similar, it is
+possible to enter them using \cargv{*} patterns, where \cargv{*} is replaced by
+the main name defined. Extension may also be passed via the \cargv{Extension}
+key to avoid repetition. See \autoref{lst:fontloading} for a comparison of font
+loadings. If the font files are not present in the same directory as the
+document you may have to specify it directly using the \cargv{Path} key.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\setmainfont{Source Serif Pro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+
+\setmainfont{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+ 
+\setmainfont[
+  ItalicFont=SourceSerifPro-RegularIt.otf,
+  BoldFont=SourceSerifPro-Bold.otf,
+  BoldItalicFont=SourceSerifPro-BoldIt.otf,
+]{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+
+\setmainfont[
+  Extension=.otf,
+  UprightFont=*-Regular,
+  ItalicFont=*-RegularIt,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldIt,
+]{SourceSerifPro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}}
+\end{example}
+  \caption{Comparison of font loading with the \pai{fontspec}
+    package.}\label{lst:fontloading}
+\end{listing}
+
+The default \LaTeX{} fonts are rather atypical in that they distinguish between
+\textit{italics} and \textsl{slanted} font. Most fonts do not do this, so
+\pai{fontspec} defines slanted font to be the same as italics. This may be
+fixed by setting the \cargv{SlantedFont} key explicitly.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\setmainfont{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
+
+\setmainfont[
+  SlantedFont=Latin Modern Roman Slanted,
+]{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
+\end{example}
+
+\subsection{Defining New Fonts}
+
+So far we have only talked about changing the fonts for the whole document. It
+is possible however to define new fonts that are used only sporadically
+throughout the document, for emphasis or decorative purposes. It is possible to
+do so using the
+\begin{lscommand}
+  \csi{newfontfamily}[command: M, options: o, font: m]
+\end{lscommand}
+It defines new \carg{command} that works analogously to the \csi{rmfamily} or
+\csi{sffamily} commands.
+\begin{example}
+\newfontfamily{\sourcefamily}[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+
+Normal text when suddenly
+\ldots{} \sourcefamily
+a different font! 0123456789
+\end{example}
+This is especially useful when working with multiple languages as you have
+already seen in \autoref{sec:polyglossia}.
+
+The \csi{newfontfamily} checks whether the font family is already defined and
+raises an error if it is. Similarly to \autoref{sec:new_commands} the
+\csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
+redefine existing font families.
+
 \section{Spacing}
 
 \subsection{Line Spacing}\index{line spacing}
