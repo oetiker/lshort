@@ -929,8 +929,108 @@ raises an error if it is. Similarly to \autoref{sec:new_commands} the
 \csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
 redefine existing font families.
 
-\section{Spacing}
+\section{Lengths and Spacing}
 
+\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}
+\begingroup
+\DeclareSIUnit{\in}{in}
+\DeclareSIUnit{\pt}{pt}
+\DeclareSIUnit{\bp}{bp}
+\DeclareSIUnit{\sp}{sp}
+\DeclareSIUnit{\dd}{dd}
+\ExplSyntaxOn
+\NewDocumentCommand{\DimVal}{m}{
+  \num{\dim_to_decimal_in_sp:n {#1}}
+}
+\NewDocumentCommand{\fnum}{mm}{
+  \num[
+    number-mode=text,
+    parse-numbers=false,
+  ]{
+    \sfrac{
+      \num[number-mode=math,parse-numbers=true]{#1}
+    }{
+      \num[number-mode=math,parse-numbers=true]{#2}
+    }
+  }
+}
+
+\NewDocumentCommand{\fqty}{mmm}{
+  \qty[
+    number-mode=text,
+    parse-numbers=false,
+  ]{
+    \sfrac{
+      \num[number-mode=math,parse-numbers=true]{#1}
+    }{
+      \num[number-mode=math,parse-numbers=true]{#2}
+    }
+  }{#3}
+}
+\ExplSyntaxOff
+
+Throughout this booklet we have often presented commands that accept length as
+ont of its parameters such as \csi{\bs} or \csi{fontsize}. When introducing
+them we have used \unit{\cm} and \unit{\pt} which stand for centimetre and
+point, but these are not the only units available in \LaTeX{}.
+
+The most fundamental unit in \LaTeX{} is \unit{\sp} which stands for
+\emph{scaled point}. Its width is equal to \fqty{1}{65536}{\pt}, where
+\qty{1}{\pt} is equal to \fnum{1}{72.27} of an international inch which in turn
+is defined as exactly \qty{25.4}{\mm}. All units in \TeX{} are ultimately
+represented as a whole numbers of \unit{sp}. See \autoref{units} for the exact
+values.
+\begin{table}
+  \caption{\TeX{} Units.}\label{units}\index{units}
+  \begin{tabular}{@{}clrrl@{}}
+    \toprule
+    Unit                   & Meaning                                                                  & Definition           & {Value (\unit{\sp})} & Demo            \\
+    \midrule
+    \mintinline{latex}{cm} & centimetre                                                               & \qty{0.01}{\m}       & \DimVal{1cm}         & \demowidth{1cm} \\
+    \mintinline{latex}{mm} & millimetre                                                               & \qty{0.001}{\m}      & \DimVal{1mm}         & \demowidth{1mm} \\
+    \mintinline{latex}{in} & inch                                                                     & \qty{25.4}{\mm}      & \DimVal{1in}         & \demowidth{1in} \\
+    \mintinline{latex}{pt} & point                                                                    & \fqty{1}{72.27}{\in} & \DimVal{1pt}         & \demowidth{1pt} \\
+    \mintinline{latex}{sp} & scaled point                                                             & \fqty{1}{65536}{\pt} & \DimVal{1sp}         & \demowidth{1sp} \\
+    \mintinline{latex}{pc} & pica                                                                     & \qty{12}{\pt}        & \DimVal{1pc}         & \demowidth{1pc} \\
+    \mintinline{latex}{dd} & didot                                                                    & \qty{0.376065}{\mm}  & \DimVal{1dd}         & \demowidth{1dd} \\
+    \mintinline{latex}{cc} & cicero                                                                   & \qty{12}{\dd}        & \DimVal{1cc}         & \demowidth{1cc} \\
+    \mintinline{latex}{nd} & new didot                                                                & \qty{0.375}{\mm}     & \DimVal{1nd}         & \demowidth{1nd} \\
+    \mintinline{latex}{bp} & big point                                                                & \fqty{1}{72}{\in}    & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \mintinline{latex}{em} & \multicolumn{3}{l}{approx width of an \enquote*{M} in the current font}  & \demowidth{1em}                                               \\
+    \mintinline{latex}{ex} & \multicolumn{3}{l}{approx height of an \enquote*{x} in the current font} & \demowidth{1ex}                                               \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The last two units mentioned in the table are relative to the current font.
+Historically they were related to the \enquote*{M} and \enquote*{x} glyphs in a
+given font but today they are arbitrarily set by fonts. These units are useful
+if we want the length to scale proportionally when used with different font
+sizes. The \mintinline{latex}|em| unit is usually used for horizontal lengths,
+while the \mintinline{latex}|ex| is used for vertical lengths.
+\begin{example}
+\begin{minipage}[b]{0.5\linewidth} %!hide
+foo\\[1ex] bar
+\end{minipage}\begin{minipage}[b]{0.5\linewidth}%!hide
+
+\tiny foo\\[1ex] bar
+\end{minipage}%!hide
+\end{example}
+
+The desktop publishing point (DTP point) is the \emph{de facto} standard point
+as used in most programs, and it is defined as \fqty{1}{72}{\in}. For
+historical reasons the default \TeX{} points are a bit smaller, while the DTP
+points are called \enquote{big points}. While this shouldn't be noticeable in
+normal circumstances, remember to use \mintinline{latex}|bp| if exact point
+values are required of you.
+\begin{example}
+\fontsize{12pt}{15pt}\selectfont
+Text in 12 \TeX{} points.
+
+\fontsize{12bp}{15bp}\selectfont
+Text in 12 DTP points.
+\end{example}
+\endgroup
 \subsection{Line Spacing}\index{line spacing}
 
 If you want to use larger inter-line spacing in a
@@ -1013,45 +1113,19 @@ you start a document with body text and not with a sectioning command.
 \LaTeX{} determines the spaces between words and sentences
 automatically. To add horizontal space, use:\index{horizontal!space}
 \begin{lscommand}
-  \csi{hspace}\verb|{|\emph{length}\verb|}|
+  \csi{hspace}[length: m]
 \end{lscommand}
 If such a space should be kept even if it falls at the end or the
-start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
-\emph{length} in the simplest case is just a number plus a unit.  The
-most important units are listed in \autoref{units}.\index{units (\TeX)}\index{dimensions}
+start of a line, use \verb|\hspace*| instead of \verb|\hspace|.
 
 \begin{example}
 This\hspace{1.5cm}is a space
 of \qty{1.5}{\cm}.
 \end{example}
-\suppressfloats
-\begin{table}[htp]
-  \centering
-  \DeclareSIUnit{\in}{in}
-  \sisetup{
-    parse-numbers = false
-  }
-
-  \caption{\TeX{} Units.}\label{units}\index{units}
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    Unit        & Meaning                                                                               \\
-    \midrule
-    \texttt{mm} & millimetre $\approx$ \qty{1/25}{\in} \quad \demowidth{1mm}                            \\
-    \texttt{cm} & centimetre = \qty{10}{mm}  \quad \demowidth{1cm}                                      \\
-    \texttt{in} & inch $=$ \qty{25.4}{\mm} \quad \demowidth{1in}                                        \\
-    \texttt{pt} & point $\approx$ \qty{1/72}{\in} $\approx$ \qty{\frac{1}{3}}{\mm} \quad\demowidth{1pt} \\
-    \texttt{em} & approx width of an `M' in the current font \quad \demowidth{1em}                      \\
-    \texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}                     \\
-    \bottomrule
-  \end{tabular}
-
-  \bigskip
-\end{table}
 
 The command
 \begin{lscommand}
-  \csi{stretch}\verb|{|\emph{n}\verb|}|
+  \csi{stretch}[n: m]
 \end{lscommand}
 \noindent generates a special rubber space. It stretches until all the
 remaining space on a line is filled up. If multiple
@@ -1079,7 +1153,7 @@ The space between paragraphs, sections, subsections, \ldots\ is
 determined automatically by \LaTeX. If necessary, additional vertical
 space \emph{between two paragraphs} can be added with the command:
 \begin{lscommand}
-  \csi{vspace}\verb|{|\emph{length}\verb|}|
+  \csi{vspace}[length: m]
 \end{lscommand}
 
 This command should normally be used between two empty lines.  If the
@@ -1101,7 +1175,7 @@ This goes onto the last line of the page.\pagebreak
 Additional space between two lines of \emph{the same} paragraph or
 within a table is specified with the
 \begin{lscommand}
-  \csi{\bs}\verb|[|\emph{length}\verb|]|
+  \csi{\bs}[length: o]
 \end{lscommand}
 \noindent command.
 
