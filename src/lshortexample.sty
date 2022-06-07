@@ -21,7 +21,7 @@
 }
 
 \RequirePackage{changepage}
-\RequirePackage{frame}
+\RequirePackage{adjustbox}
 \RequirePackage{graphicx}
 \RequirePackage{verbatim}
 \RequirePackage{hyperref}
@@ -295,26 +295,26 @@
 \cs_new:Nn \show_output:n {
 \bool_if:NTF \__lshortexample_standalone_bool {
 \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-\fancyframebox{0.1pt}{0pt}{
+\begin{adjustbox}{frame = 0.4pt, Clip=0}
   \includegraphics[
     width=\__lshortexample_paperwidth,
     page=##1,
   ]{
     \__lshortexample_cache_dir_tl\l_tmpb_tl
   }
-}
+\end{adjustbox}
 \bool_if:nT {
 \__lshortexample_vertical_pages_bool &&
 !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
 } {\\[-1pt]}
 }
 } {
-\fancyframebox{0.1pt}{2mm}{
-  \begin{minipage}{\l_tmpa_dim-4mm-0.2pt}
+\begin{adjustbox}{frame = 0.4pt~2mm, Clip=0}
+  \begin{minipage}{\l_tmpa_dim-4mm-0.8pt}
     \sloppy
     \input{#1}
   \end{minipage}
-}
+\end{adjustbox}
 }
 }
 
