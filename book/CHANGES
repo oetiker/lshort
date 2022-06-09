@@ -15,6 +15,17 @@ UNRELEASED
 * rewrite tables intro / marcin-serwin
 * rewrite fancyhdr intro / marcin-serwin
 * lint files using chktex and latexindent / marcin-serwin
+* add listings and minted tutorial / marcin-serwin
+* add logical markup introduction / marcin-serwin
+* update TeX and LaTeX history / marcin-serwin
+* restructure the first two chapters / marcin-serwin
+* switch to `LuaLaTeX` / marcin-serwin
+* use `minted` throughout the booklet / marcin-serwin
+* add 'deprecated' appendix / marcin-serwin
+* standardized font size and `textwidth` in all three versions of the booklet / marcin-serwin
+* removed outdent and adjusted examples / marcin-serwin
+* switch to `autoref` from `hyperref` / marcin-serwin
+* use `microtype` / marcin-serwin
 
 6.4 2021.03.09
 --------------

@@ -6,6 +6,8 @@
 \RequirePackage{frame}
 \RequirePackage{graphicx}
 \RequirePackage{verbatim}
+\RequirePackage{hyperref}
+
 % L3 interface for verbatim
 \cs_new_eq:NN \verbatim_start: \verbatim@start
 
@@ -19,6 +21,15 @@
   \cs_set_protected:Nn \__lshortexample_func_temp:n {#1}
   \verbatim_set_processline:N \__lshortexample_func_temp:n
 }
+%%%
+
+% Messages
+\msg_new:nnn {lshortexample} {examplecompilationfailed} {\\
+  Current~ example~ compilation~ failed.~
+  Input~ file:~'#1'.~Template~ file:~'#2'.~
+  See~ the~ '#3'~ file~ for~ more~ info.
+}
+%%%
 
 \tl_new:N \__lshortexample_example_label
 \int_new:N \__lshortexample_example_counter
@@ -30,7 +41,7 @@
 
   extend .bool_set:N = \__lshortexample_extend,
   noextend .bool_set_inverse:N = \__lshortexample_extend,
-  extend .initial:n = true,
+  extend .initial:n = false,
 
   cache .bool_set:N = \__lshortexample_cache_bool,
   nocache .bool_set_inverse:N = \__lshortexample_cache_bool,
@@ -38,13 +49,13 @@
 
   biber .bool_set:N = \__lshortexample_biber_run,
   biber_dir .tl_set:N = \__lshortexample_biber_dir,
-  biber_dir .initial:n  = .,
+  biber_dir .initial:n  = src/examples/,
 
   cache_dir .tl_set:N  = \__lshortexample_cache_dir_tl,
-  cache_dir .initial:n  = example_cache/,
+  cache_dir .initial:n  = pdfbuild/example_cache/,
 
   template_dir .tl_set:N  = \__lshortexample_template_dir_tl,
-  template_dir .initial:n  = ../src/templates/,
+  template_dir .initial:n  = src/templates/,
 
   template .tl_set:N  = \__lshortexample_template_tl,
   template .initial:n  = default,
@@ -56,7 +67,7 @@
   paperheight .initial:n = {\fp_to_dim:n {sqrt(2) * \__lshortexample_paperwidth}},
 
   examplewidth .tl_set:N = \__lshortexample_examplewidth,
-  examplewidth .initial:n = 0.48\linewidth,
+  examplewidth .initial:n = 0.5\linewidth,
 
   verbatim_input_file_name .tl_set:N = \__lshortexample_verbatim_input_file,
   verbatim_input_file_name .initial:n = {\c_sys_jobname_str _input.exa},
@@ -75,6 +86,9 @@
 
   minted_language .tl_set:N = \__lshortexample_minted_language,
   minted_language .initial:n = latex,
+
+  vertical_mode .bool_set:N = \__lshortexample_vertical_mode_bool,
+  vertical_mode .initial:n = false,
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -116,84 +130,90 @@
       \dim_set:Nn \l_tmpb_dim {0pt}
     }
 
+    \int_compare:nNnF \@floatpenalty < 0 {
+        \medskip
+      }
     \begin{adjustwidth}{\l_tmpa_dim}{\l_tmpb_dim}
-      \bool_if:NTF \__lshortexample_standalone_bool {
-        \lshortexample_typeset_standalone_example:nn {
-          \__lshortexample_verbatim_input_file
-        } {
-          \__lshortexample_verbatim_output_file
-        }
+      \lshortexample_typeset_example:nn {
+        \__lshortexample_verbatim_input_file
       } {
-        \lshortexample_typeset_example:nn {
-          \__lshortexample_verbatim_input_file
-        } {
-          \__lshortexample_verbatim_output_file
-        }
+        \__lshortexample_verbatim_output_file
       }
       \label{\__lshortexample_example_label}
     \end{adjustwidth}
     \int_gincr:N \__lshortexample_example_counter
     \group_end:
+    \int_compare:nNnF \@floatpenalty < 0 {
+        \medskip
+      }
   \end{trivlist}
 }
 
-\cs_new:Nn \lshortexample_compile_command:nnn {
-  xelatex~
-  --output-directory=\__lshortexample_cache_dir_tl\c_space_tl
-  -interaction=nonstopmode\c_space_tl
-  --jobname=#1~'
-  \c_backslash_str def\c_backslash_str file{#2}
-  \c_backslash_str newlength{\c_backslash_str width}
-  \c_backslash_str setlength{\c_backslash_str width}{\dim_use:N \__lshortexample_paperwidth}
-  \c_backslash_str newlength{\c_backslash_str height}
-  \c_backslash_str setlength{\c_backslash_str height}{\dim_use:N \__lshortexample_paperheight}
-  \c_backslash_str input{#3}
-  '
+\cs_new:Nn \lshortexample_compile:nnn {
+  \exp_args:Nx \sys_get_shell:nnN {
+    lualatex~
+    --output-directory=\__lshortexample_cache_dir_tl\c_space_tl
+    \tl_to_str:n {
+      --interaction=nonstopmode~
+      --jobname=#1~'
+      \def\file{#2}
+      \newlength{\width}
+      \setlength{\width}
+    }
+    {\dim_use:N \__lshortexample_paperwidth}
+    \tl_to_str:n {
+      \newlength{\height}
+      \setlength{\height}
+    }
+    {\dim_use:N \__lshortexample_paperheight}
+    \tl_to_str:n {
+      \input{#3}' >&2; echo~$?
+    }
+  }
+  {} \l_tmpa_tl
+
+  \int_compare:nNnF \l_tmpa_tl = 0 {
+      \msg_error:nnnnn {lshortexample} {
+        examplecompilationfailed} {#2} {#3} {#1.log}
+    }
+}
+
+\cs_generate_variant:Nn \lshortexample_compile:nnn {
+  eee
 }
 
 \cs_new:Nn \lshortexample_compile_example:nn {
   \sys_shell_now:x {
     mkdir~-p~\__lshortexample_cache_dir_tl;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    }
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
   }
 }
 
 \cs_new:Nn \lshortexample_compile_biber_example:nn {
   \sys_shell_now:x {
     mkdir~-p~\__lshortexample_cache_dir_tl;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \sys_shell_now:x {
     biber~--input-directory~\__lshortexample_biber_dir~\c_space_tl~\__lshortexample_cache_dir_tl #2;
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    };
-    \lshortexample_compile_command:nnn {#2} {#1} {
-      \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
-    }
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
+  }
+  \lshortexample_compile:eee {#2} {#1} {
+    \__lshortexample_template_dir_tl\__lshortexample_template_tl.tex
   }
 }
 
-\cs_new:Nn \lshortexample_typeset_standalone_example:nn {
-  \group_begin:
-  \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
-  \dim_set:Nn \l_tmpa_dim {
-    \bool_if:NTF \__lshortexample_vertical_pages_bool {
-      \__lshortexample_paperwidth + 0.2pt
-    } {
-      (\__lshortexample_paperwidth + 0.2pt) * (
-      \__lshortexample_to_page - \__lshortexample_from_page + 1)
-    }
-  }
-  \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
-    \small\inputminted{\__lshortexample_minted_language}{#2}
-  \end{minipage}
-  \file_if_exist:nTF {\__lshortexample_cache_dir_tl\l_tmpb_tl.pdf} {
+\cs_new:Nn \lshortexample_ensure_output_exists:nn {
+  \file_if_exist:nTF {\__lshortexample_cache_dir_tl #2.pdf} {
     \bool_set:Nn \l_tmpa_bool {\c_false_bool}
   }{
     \bool_set:Nn \l_tmpa_bool {\c_true_bool}
@@ -202,38 +222,82 @@
     !\__lshortexample_cache_bool || \l_tmpa_bool
   } {
     \bool_if:NTF \__lshortexample_biber_run {
-      \lshortexample_compile_biber_example:nn {#1} {\l_tmpb_tl}
+      \lshortexample_compile_biber_example:nn {#1} {#2}
     } {
-      \lshortexample_compile_example:nn {#1} {\l_tmpb_tl}
+      \lshortexample_compile_example:nn {#1} {#2}
     }
   }
-  \begin{minipage}{\l_tmpa_dim}
-    \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-      \fancyframebox{0.1pt}{0pt}{
-        \includegraphics[
-          width=\__lshortexample_paperwidth,
-          page=##1]{
-          \__lshortexample_cache_dir_tl\l_tmpb_tl
-        }
-      }
-      \bool_if:nT {
-        \__lshortexample_vertical_pages_bool &&
-        !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
-      } {\\[-1pt]}
-    }
-  \end{minipage}
-  \group_end:
 }
 
 \cs_new:Nn \lshortexample_typeset_example:nn {
-  \begin{minipage}{\linewidth-\__lshortexample_examplewidth-0.2pt-6mm}
-    \small\inputminted{\__lshortexample_minted_language}{#2}
-  \end{minipage}
-  \fancyframebox{0.1pt}{3mm}{
-    \begin{minipage}{\__lshortexample_examplewidth}
-      \input{#1}
+  \group_begin:
+  \bool_if:NTF \__lshortexample_standalone_bool {
+    \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
+    \dim_set:Nn \l_tmpa_dim {
+      \bool_if:NTF \__lshortexample_vertical_pages_bool {
+        \__lshortexample_paperwidth + 0.2pt
+      } {
+        (\__lshortexample_paperwidth + 0.2pt) * (
+        \__lshortexample_to_page - \__lshortexample_from_page + 1)
+      }
+    }
+    \lshortexample_ensure_output_exists:nn {#1} {\l_tmpb_tl}
+  } {
+    \dim_set:Nn \l_tmpa_dim {\__lshortexample_examplewidth}
+  }
+  \bool_if:NTF \__lshortexample_vertical_mode_bool {
+    \begin{lined}*{
+        \bool_if:NTF \__lshortexample_standalone_bool {
+          \__lshortexample_examplewidth
+        } {
+          \l_tmpa_dim
+        }
+      }
+      \show_input_file:n {#2}
+      \centering
+      \show_output:n {#1}
+    \end{lined}
+  } {
+    \begin{minipage}{\dim_eval:n {\linewidth - \l_tmpa_dim}}
+      \show_input_file:n {#2}
+    \end{minipage}
+    \begin{minipage}{\l_tmpa_dim}
+      \show_output:n {#1}
     \end{minipage}
   }
+  \group_end:
+}
+
+\cs_new:Nn \show_input_file:n {
+  \inputminted[
+    fontsize=\small,
+  ]{\__lshortexample_minted_language}{#1}
+}
+
+\cs_new:Nn \show_output:n {
+\bool_if:NTF \__lshortexample_standalone_bool {
+\int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
+\fancyframebox{0.1pt}{0pt}{
+  \includegraphics[
+    width=\__lshortexample_paperwidth,
+    page=##1,
+  ]{
+    \__lshortexample_cache_dir_tl\l_tmpb_tl
+  }
+}
+\bool_if:nT {
+\__lshortexample_vertical_pages_bool &&
+!\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
+} {\\[-1pt]}
+}
+} {
+\fancyframebox{0.1pt}{2mm}{
+  \begin{minipage}{\l_tmpa_dim-4mm-0.2pt}
+    \sloppy
+    \input{#1}
+  \end{minipage}
+}
+}
 }
 
 \cs_new:Nn \lshortexample_verbatim_processline:n {

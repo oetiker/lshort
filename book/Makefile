@@ -7,11 +7,12 @@ OTHER = README CHANGES
 FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name "*.sty" \)  -print) src/title.tex
 
 # Define some variables
-LATEX=latex
-PDFLATEX=xelatex --enable-write18 -interaction=nonstopmode
-PDFLATEX_DEBUG_ARGS=-synctex=1 -file-line-error
+OUTPUT_DIR=pdfbuild
+PDFLATEX=lualatex --shell-escape --interaction=nonstopmode \
+	--output-directory=$(OUTPUT_DIR) --halt-on-error
+BIBER=biber --input-directory=src --output-directory=$(OUTPUT_DIR)
+PDFLATEX_DEBUG_ARGS=--synctex=1 --file-line-error
 MAKEINDEX=makeindex
-DVIPS=dvips
 
 .PHONY: quick all lulu
 
@@ -20,21 +21,26 @@ all: lshort.pdf lshort-letter.pdf lshort-a5.pdf
 
 lulu: lshort-body.pdf lshort-title.pdf
 
-%.pdf: $(FILES)
-	-mkdir pdfbuild
-	(TEXINPUTS=.:`pwd`/src:`pwd`/src/examples:${TEXINPUTS:-:}&&export TEXINPUTS&& cp src/biblio.bib pdfbuild/ && cd pdfbuild &&\
-	$(PDFLATEX) $(basename $@)&& $(PDFLATEX) $(basename $@)&& \
-	$(MAKEINDEX) -s ../src/lshort.ist $(basename $@) && biber $(basename $@) &&$(PDFLATEX) $(basename $@)&& \
-	(thumbpdf --resolution 10 $@ && $(PDFLATEX) $(basename $@))&& \
-	mv $@ .. )
+export TEXINPUTS::=src:src/examples:$(OUTPUT_DIR):$(TEXINPUTS)
+
+%.pdf: $(FILES) $(OUTPUT_DIR)
+	$(PDFLATEX) $(basename $@)
+	$(PDFLATEX) $(basename $@)
+	$(MAKEINDEX) -s src/lshort.ist $(OUTPUT_DIR)/$(basename $@)
+	$(BIBER) $(basename $@)
+	$(PDFLATEX) $(basename $@)
+	$(PDFLATEX) $(basename $@)
+	mv $(OUTPUT_DIR)/$@ .
+
+$(OUTPUT_DIR): src/lshort.bib
+	mkdir -p $(OUTPUT_DIR)
+	cp src/lshort.bib $(OUTPUT_DIR)/
 
 src/title.tex: Makefile fixdate.pl src/title.template.tex
 	perl fixdate.pl $(VERS) $(GITHUB_SHA) < src/title.template.tex > src/title.tex
 
-quick: $(FILES)
-	-mkdir pdfbuild
-	(TEXINPUTS=.:`pwd`/src:`pwd`/src/examples:${TEXINPUTS:-:}&&export TEXINPUTS && cd pdfbuild &&\
-	$(PDFLATEX) $(PDFLATEX_DEBUG_ARGS) lshort)
+quick: $(FILES) $(OUTPUT_DIR)
+	$(PDFLATEX) $(PDFLATEX_DEBUG_ARGS) lshort
 
 
 tar:	$(FILES)
@@ -55,4 +61,4 @@ dist:   rsync
 	echo upload lshort-$(VERS).zip to https://ctan.org/pkg/lshort-english
 
 clean:
-	rm -rf texbuild pdfbuild
+	rm -rf $(OUTPUT_DIR)

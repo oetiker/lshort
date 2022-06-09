@@ -1,0 +1,3 @@
+[submodule "book/font-IranNastaliq"]
+	path = book/font-IranNastaliq
+	url = https://github.com/font-store/font-IranNastaliq

@@ -48,7 +48,7 @@ in some cases inconsistent.
 
 \hologo{AmSLaTeX} is a part of the required distribution and is provided
 with all recent \LaTeX{} distributions. In this chapter, we assume
-\pai*{amsmath} is loaded in the preamble; \verb|\usepackage{amsmath}|.
+\pai*{amsmath} is loaded in the preamble; \mintinline{latex}|\usepackage{amsmath}|.
 
 \section{Single Equations}
 
@@ -75,9 +75,9 @@ rather than to break the paragraph apart.
 To do this, you enclose them between \verb|\begin{|\ei{equation}\verb|}| and
 \verb|\end{equation}|.\footnote{This is an \pai{amsmath} environment. If you don't
   have access to the package for some obscure reason, you can use \LaTeX's own
-  \ei{displaymath} environment instead.} You can then \ci{label} an equation number and refer to
-it somewhere else in the text by using the \ci{eqref} command. If you want to
-name the equation something specific, you \ci{tag} it instead.
+  \ei{displaymath} environment instead.} You can then \csi{label} an equation number and refer to
+it somewhere else in the text by using the \csi{eqref} command. If you want to
+name the equation something specific, you \csi{tag} it instead.
 \begin{example}
 Add $a$ squared and $b$ squared
 to get $c$ squared. Or, using
@@ -99,7 +99,7 @@ This is a reference to%
 
 If you don't want \LaTeX{} to number the equations, use the starred
 version of \ei{equation} using an asterisk, \ei{equation*}, or even easier, enclose the
-equation in \ci{[} and \ci{]}:\footnote{\index{equation!amsmath@\textsf{amsmath}}\index{equation!LaTeX@\LaTeX{}}
+equation in \csi{[} and \csi{]}:\footnote{\index{equation!amsmath@\textsf{amsmath}}\index{equation!LaTeX@\LaTeX{}}
   This is again from \pai{amsmath}.
   Standard \LaTeX{}'s has only the \ei{equation} environment without the star.}
 \begin{example}
@@ -113,7 +113,7 @@ or you can type less for the
 same effect:
  \[ a^2 + b^2 = c^2 \]
 \end{example}
-While \ci{[} is short and sweet, it does not allow switching between numbered and not numbered style as easily as
+While \csi{[} is short and sweet, it does not allow switching between numbered and not numbered style as easily as
 \ei{equation} and \ei{equation*}.
 
 Note the difference in typesetting style between \wi{text style} and \wi{display style}
@@ -131,18 +131,21 @@ And this is display style:
  \end{equation}
 \end{example}
 
-In text style, enclose tall or deep math expressions or sub
-expressions in \ci{smash}. This makes \LaTeX{} ignore the height of
-these expressions. This keeps the line spacing even.
+In text style, you may enclose tall or deep math expressions or sub
+expressions in \csi{smash}. This makes \LaTeX{} ignore the height of
+these expressions. This keeps the line spacing even, but risks overlapping the
+text around them.
 
 \begin{example}
 A $d_{e_{e_p}}$ mathematical
 expression  followed by a
 $h^{i^{g^h}}$ expression. As
 opposed to a smashed 
-\smash{$d_{e_{e_p}}$} expression 
+\smash{$d_{e_{e_p}}$}
+expression 
 followed by a
-\smash{$h^{i^{g^h}}$} expression.
+\smash{$h^{i^{g^h}}$}
+expression.
 \end{example}
 
 \subsection{Math Mode}
@@ -154,43 +157,41 @@ example, in \emph{math mode}:
 
   \item\index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
   are either derived logically from the mathematical expressions, or
-  have to be specified with special commands such as \ci{,}, \ci{quad} or
-  \ci{qquad} (we'll get back to that later, see Section~\ref{sec:math-spacing}).
+  have to be specified with special commands such as \csi{,}, \csi{quad} or
+  \csi{qquad} (we'll get back to that later, see \autoref{sec:math-spacing}).
 
   \item Empty lines are not allowed. Only one paragraph per formula.
 
   \item Each letter is considered to be the name of a variable and will be
         typeset as such. If you want to typeset normal text within a formula
         (normal upright font and normal spacing) then you have to enter the
-        text using the \ci{text} command (see also Section~\ref{sec:fontsz}~on
-        page~\pageref{sec:fontsz}).
+        text using the \csi{text} command (see also \autoref{sec:fontsz}~on
+        \autopageref{sec:fontsz}).
 
 \end{enumerate}
 \begin{example}
-$\forall x \in \mathbf{R}\colon
- \qquad x^{2} \geq 0$
+$\forall x \in \mathbf{R}
+  \colon x^{2} \geq 0$
 \end{example}
 \begin{example}
-$x^{2} \geq 0\qquad
- \text{for all }x\in\mathbf{R}$
+$x^{2} \geq 0 \text{ for all }
+  x\in\mathbf{R}$
 \end{example}
 
 Mathematicians can be very fussy about which symbols are used:
 it would be conventional here to use the `\wi{blackboard bold}' font,%
-\index{bold symbols} which is obtained using \ci{mathbb} from the
+\index{bold symbols} which is obtained using \csi{mathbb} from the
 package \pai*{amssymb}.\footnote{\pai{amssymb} is not a part
   of the \hologo{AmSLaTeX} bundle, but it is perhaps still a part of your \LaTeX{}
   distribution.}
-\ifx\mathbb\undefined\else
-  The last example becomes
-  \begin{example}
-$x^{2} \geq 0\qquad
- \text{for all } x 
+The last example becomes
+\begin{example}
+$x^{2} \geq 0
+ \text{ for all } x 
  \in \mathbb{R}$
 \end{example}
-\fi
-See Table~\ref{mathalpha} on page~\pageref{mathalpha} and
-Table~\ref{mathfonts} on page~\pageref{mathfonts} for more math fonts.
+See \autoref{mathalpha} on \autopageref{mathalpha} and
+\autoref{mathfonts} on \autopageref{mathfonts} for more math fonts.
 
 \section{Building Blocks of a Mathematical Formula}
 
@@ -198,13 +199,13 @@ In this section, we describe the most important commands used in mathematical
 typesetting. Most of the commands in this section will not require
 \textsf{amsmath} (if they do, it will be stated clearly), but load it anyway.
 
-\emph{Lowercase \wi{Greek letters}} are entered as \ci{alpha},
-\ci{beta}, \ci{gamma}, \ldots, uppercase letters
-are entered as \ci{Gamma}, \ci{Delta}, \ldots\footnote{There is no
+\emph{Lowercase \wi{Greek letters}} are entered as \csi{alpha},
+\csi{beta}, \csi{gamma}, \ldots, uppercase letters
+are entered as \csi{Gamma}, \csi{Delta}, \ldots\footnote{There is no
   uppercase Alpha, Beta etc.\ defined in \LaTeXe{} because it looks the same as a
   normal roman A, B\ldots{}}
 
-Take a look at Table~\ref{greekletters} on page~\pageref{greekletters} for a
+Take a look at \autoref{greekletters} on \autopageref{greekletters} for a
 list of Greek letters.
 \begin{example}
 $\lambda,\xi,\pi,\theta,
@@ -218,48 +219,52 @@ Most math mode commands act only on the next character, so if you
 want a command to affect several characters, you have to group them
 together using curly braces: \verb|{...}|.
 
-Table~\ref{binaryrel} on page~\pageref{binaryrel} lists a lot of binary
+\autoref{binaryrel} on \autopageref{binaryrel} lists a lot of binary
 relations like $\subseteq$ and $\perp$.
 
 \begin{example}
-$p^3_{ij} \qquad 
- m_\text{Knuth}\qquad
-\sum_{k=1}^3 k \\[5pt]
- a^x+y \neq a^{x+y}\qquad 
- e^{x^2} \neq {e^x}^2$
+$p^3_{ij}$ 
+\qquad%!hide
+$m_\text{Knuth}$
+\qquad%!hide
+$\sum_{k=1}^3 k$ \\[5pt]
+\qquad%!hide
+$a^x+y \neq a^{x+y}$
+\qquad%!hide
+$e^{x^2} \neq {(e^x)}^2$
 \end{example}
 
-The \emph{\wi{square root}} is entered as \ci{sqrt}; the
-\carg{n}-th root is generated with \ci*{sqrt}[n:o]. The size of
+The \emph{\wi{square root}} is entered as \csi{sqrt}; the
+\carg{n}-th root is generated with \csi{sqrt}[n:o]. The size of
 the root sign is determined automatically by \LaTeX. If just the sign
-is needed, use \ci{surd}.
+is needed, use \csi{surd}.
 
-% See various kinds of arrows like $\hookrightarrow$ and $\rightleftharpoons$ on
-% Table~\ref{tab:arrows} on page \pageref{tab:arrows}. 
 \begin{example}
-$\sqrt{x} = x^{1/2}
- \quad \sqrt[3]{2}
- \quad \sqrt{x^{2} + \sqrt{y}}
- \quad \surd[x^2 + y^2]$
+$\sqrt{x} = x^{1/2}$
+\qquad%!hide
+$\sqrt[3]{2}$ \\
+$\sqrt{x^{2} + \sqrt{y}}$
+\qquad%!hide
+$\surd[x^2 + y^2]$
 \end{example}
 
 While the \emph{\wi{dot}} sign to indicate%
 \index{dots!three}\index{vertical!dots}\index{horizontal!dots}
 the multiplication operation is normally left out, it is sometimes written
 to help the eye in grouping a formula.
-Use \ci{cdot} to typeset a single centered dot. \ci{cdots} is
-three centered \emph{\wi{dots}} while \ci{ldots} sets the dots low (on the
-baseline). Besides that, there are \ci{vdots} for
-vertical and \ci{ddots} for \wi{diagonal dots}. There are more examples in
-Section~\ref{sec:arraymat}.
+Use \csi{cdot} to typeset a single centred dot. \csi{cdots} is
+three centred \emph{\wi{dots}} while \csi{ldots} sets the dots low (on the
+baseline). Besides that, there are \csi{vdots} for
+vertical and \csi{ddots} for \wi{diagonal dots}. There are more examples in
+\autoref{sec:arraymat}.
 \begin{example}
 $\Psi = v_1 \cdot v_2
- \cdot \ldots \qquad 
- n! = 1 \cdot 2 
+ \cdot \ldots$ \\
+$n! = 1 \cdot 2 
  \cdots (n-1) \cdot n$
 \end{example}
 
-The commands \ci{overline} and \ci{underline} create
+The commands \csi{overline} and \csi{underline} create
 \emph{horizontal lines} directly over or under an expression:%
 \index{horizontal!line}\index{line!horizontal}
 \begin{example}
@@ -267,38 +272,42 @@ $0.\overline{3} =
  \underline{\underline{1/3}}$
 \end{example}
 
-The commands \ci{overbrace} and \ci{underbrace} create
+The commands \csi{overbrace} and \csi{underbrace} create
 long \emph{horizontal braces} over or under an expression:%
 \index{horizontal!brace}\index{brace!horizontal}
 \begin{example}
-$\underbrace{\overbrace{a+b+c}^6 
- \cdot \overbrace{d+e+f}^7}
+$\underbrace{
+  \overbrace{(a+b+c)}^6 
+ \cdot \overbrace{(d+e+f)}^7}
  _\text{meaning of life} = 42$
 \end{example}
 
 To add mathematical accents\index{mathematical!accents} such as \emph{small
   arrows} or \emph{\wi{tilde}} signs to variables, the commands
-given in Table~\ref{mathacc} on page~\pageref{mathacc} might be useful.  Wide hats and
-tildes covering several characters are generated with \ci{widetilde}
-and \ci{widehat}. Notice the difference between \ci{hat} and \ci{widehat} and the placement of
-\ci{bar} for a variable with subscript. The \wi{apostrophe} mark
+given in \autoref{mathacc} on \autopageref{mathacc} might be useful.  Wide hats and
+tildes covering several characters are generated with \csi{widetilde}
+and \csi{widehat}. Notice the difference between \csi{hat} and \csi{widehat} and the placement of
+\csi{bar} for a variable with subscript. The \wi{apostrophe} mark
 \ai{'} gives a \wi{prime}:
 % a dash is --
 \begin{example}
-$f(x) = x^2 \qquad f'(x) 
- = 2x \qquad f''(x) = 2\\[5pt]
- \hat{XY} \quad \widehat{XY}
- \quad \bar{x_0} \quad \bar{x}_0$
+$f(x) = x^2$ \\
+$f'(x) = 2x$ \\
+$f''(x) = 2$ \\
+$\hat{XY} \neq \widehat{XY}$ \\
+$\bar{x_0} \neq \bar{x}_0$
 \end{example}
 
 \emph{Vectors}\index{vectors} are often specified by adding small
 \wi{arrow symbols} on the tops of variables. This is done with the
-\ci{vec} command. The two commands \ci{overrightarrow} and
-\ci{overleftarrow} are useful to denote the vector from $A$ to $B$:
+\csi{vec} command. The two commands \csi{overrightarrow} and
+\csi{overleftarrow} are useful to denote the vector from $A$ to $B$:
 \begin{example}
-$\vec{a} \qquad
- \vec{AB} \qquad
- \overrightarrow{AB}$
+$\vec{a}$
+\quad%!hide
+$\vec{AB}$
+\quad%!hide
+$\overrightarrow{AB}$
 \end{example}
 
 Names of functions are often typeset in an upright
@@ -308,12 +317,12 @@ following commands to typeset the most common function names:%
 
 \begin{center}
   \begin{tabular}{llllll}
-    \ci{arccos} & \ci{cos}  & \ci{csc} & \ci{exp}  & \ci{ker}    & \ci{limsup} \\
-    \ci{arcsin} & \ci{cosh} & \ci{deg} & \ci{gcd}  & \ci{lg}     & \ci{ln}     \\
-    \ci{arctan} & \ci{cot}  & \ci{det} & \ci{hom}  & \ci{lim}    & \ci{log}    \\
-    \ci{arg}    & \ci{coth} & \ci{dim} & \ci{inf}  & \ci{liminf} & \ci{max}    \\
-    \ci{sinh}   & \ci{sup}  & \ci{tan} & \ci{tanh} & \ci{min}    & \ci{Pr}     \\
-    \ci{sec}    & \ci{sin}                                                     \\
+    \csi{arccos} & \csi{cos}  & \csi{csc} & \csi{exp}  & \csi{ker}    & \csi{limsup} \\
+    \csi{arcsin} & \csi{cosh} & \csi{deg} & \csi{gcd}  & \csi{lg}     & \csi{ln}     \\
+    \csi{arctan} & \csi{cot}  & \csi{det} & \csi{hom}  & \csi{lim}    & \csi{log}    \\
+    \csi{arg}    & \csi{coth} & \csi{dim} & \csi{inf}  & \csi{liminf} & \csi{max}    \\
+    \csi{sinh}   & \csi{sup}  & \csi{tan} & \csi{tanh} & \csi{min}    & \csi{Pr}     \\
+    \csi{sec}    & \csi{sin}                                                         \\
   \end{tabular}
 \end{center}
 
@@ -324,21 +333,24 @@ following commands to typeset the most common function names:%
 \end{equation*}
 \end{example}
 
-For functions missing from the list, use the \ci{DeclareMathOperator}
+For functions missing from the list, use the \csi{DeclareMathOperator}
 command. There is even a starred version for functions with limits.
-This command works only in the preamble so the commented lines in the
-example below must be put into the preamble.
+This command works only in the preamble.
 
 \begin{example}
-%\DeclareMathOperator{\argh}{argh}
-%\DeclareMathOperator*{\nut}{Nut}
+%!showbegin !hide
+% In preamble
+\DeclareMathOperator{\argh}{argh}
+\DeclareMathOperator*{\nut}{Nut}
+% ...
+%!showend !hide
 \begin{equation*}
   3\argh = 2\nut_{x=1}    
 \end{equation*}
 \end{example}
 
-For the \wi{modulo function}, there are two commands: \ci{bmod} for the
-binary operator ``$a \bmod b$'' and \ci{pmod}
+For the \wi{modulo function}, there are two commands: \csi{bmod} for the
+binary operator ``$a \bmod b$'' and \csi{pmod}
 for expressions
 such as ``$x\equiv a \pmod{b}$:''
 \begin{example}
@@ -347,7 +359,9 @@ $a\bmod b \\
 \end{example}
 
 A built-up \emph{\wi{fraction}} is typeset with the
-\ci*{frac}[numerator:m ! denominator:m]%chktex 26
+\begin{lscommand}
+  \csi{frac}[numerator:m, denominator:m]%chktex 26
+\end{lscommand}
 command.
 \begin{example}
 \ldots{} And since
@@ -361,36 +375,42 @@ $\frac{5}{6}$.
 \end{example}
 
 In in-line equations, the fraction is shrunk to
-fit the line. This style is obtainable in display style with \ci{tfrac}. The
-reverse, i.e.\ display style fraction in text, is made with \ci{dfrac}.
+fit the line. This style is obtainable in display style with \csi{tfrac}. The
+reverse, i.e.\ display style fraction in text, is made with \csi{dfrac}.
 Often the slashed form $1/2$ is preferable, because it looks better
 for small amounts of `fraction material:'
 \begin{example}
 In display style:
 \begin{equation*}
-  3/8 \qquad \frac{3}{8} 
-  \qquad \tfrac{3}{8}
+  3/8
+  \qquad%!hide
+  \frac{3}{8} 
+  \qquad%!hide
+  \tfrac{3}{8}
 \end{equation*}
 \end{example}
 
 \begin{example}
-In text style:
-$1\frac{1}{2}$~hours \qquad
+In text style: \\
+$1\frac{1}{2}$~hours
+\qquad%!hide
 $1\dfrac{1}{2}$~hours
 \end{example}
 
-Here the \ci{partial} command for \wi{partial derivative}s is used:
+Here the \csi{partial} command for \wi{partial derivative}s is used:
 \begin{example}
 \begin{equation*} 
-  \sqrt{\frac{x^2}{k+1}}\qquad
-  x^\frac{2}{k+1}\qquad
+  \sqrt{\frac{x^2}{k+1}}
+  \qquad%!hide
+  x^\frac{2}{k+1}
+  \qquad%!hide
   \frac{\partial^2f}
   {\partial x^2} 
 \end{equation*}
 \end{example}
 
 To typeset \wi{binomial coefficient}s or similar structures, use
-the command \ci{binom} from \pai{amsmath}:
+the command \csi{binom} from \pai{amsmath}:
 \begin{example}
 Pascal's rule is
 \begin{equation*}
@@ -400,7 +420,7 @@ Pascal's rule is
 \end{example}
 
 For \wi{binary relations} it may be useful to stack symbols over each other.
-\ci*{stackrel}[above:m ! below:m] puts the symbol given%chktex 26
+\csi{stackrel}[above:m, below:m] puts the symbol given%chktex 26
 in \carg{above} in superscript-like size over \carg{below} which
 is set in its usual position.
 \begin{example}
@@ -409,20 +429,22 @@ is set in its usual position.
 \end{equation*}
 \end{example}
 
-The \emph{\wi{integral operator}} is generated with \ci{int}, the
-\emph{\wi{sum operator}} with \ci{sum}, and the \emph{\wi{product operator}}
-with \ci{prod}. The upper and lower limits are specified with~\ai{\^{}}
+The \emph{\wi{integral operator}} is generated with \csi{int}, the
+\emph{\wi{sum operator}} with \csi{sum}, and the \emph{\wi{product operator}}
+with \csi{prod}. The upper and lower limits are specified with~\ai{\^{}}
 and~\ai{\_} like superscripts and subscripts:
 \begin{example}
 \begin{equation*}
-\sum_{i=1}^n \qquad
-\int_0^{\frac{\pi}{2}} \qquad
-\prod_\epsilon
+\sum_{i=1}^n
+  \qquad%!hide
+  \int_0^{\frac{\pi}{2}}
+  \qquad%!hide
+  \prod_\epsilon
 \end{equation*}
 \end{example}
 
 To get more control over the placement of indices in complex
-expressions, \pai{amsmath} provides the \ci{substack} command:
+expressions, \pai{amsmath} provides the \csi{substack} command:
 \begin{example}
 \begin{equation*}
 \sum^n_{\substack{0<i<n \\ 
@@ -434,46 +456,47 @@ expressions, \pai{amsmath} provides the \ci{substack} command:
 \LaTeX{} provides all sorts of symbols for \emph{\wi{bracketing}} and other
 \emph{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$). %chktex 9
 Round and square brackets can be entered with the corresponding keys and
-curly braces with \ci{\{}, but all other delimiters are generated with
-special commands (e.g.~\ci{updownarrow}).
+curly braces with \csi{\{}, but all other delimiters are generated with
+special commands (e.g.~\csi{updownarrow}).
 \begin{example}
 \begin{equation*}
 {a,b,c} \neq \{a,b,c\}
 \end{equation*}
 \end{example}
 
-If you put \ci{left} in front of an opening delimiter and
-\ci{right} in front of a closing delimiter, \LaTeX{} will automatically
+If you put \csi{left} in front of an opening delimiter and
+\csi{right} in front of a closing delimiter, \LaTeX{} will automatically
 determine the correct size of the delimiter. Note that you must close
-every \ci{left} with a corresponding \ci{right}. If you
-don't want anything on the right, use the invisible ``\ci{right.}'':
+every \csi{left} with a corresponding \csi{right}. If you
+don't want anything on the right, use the invisible \csi{right.} (with a dot):
 \begin{example}
 \begin{equation*}
 1 + \left(\frac{1}{1-x^{2}}
     \right)^3 \qquad 
-\left. \ddagger \frac{~}{~}\right)
+\left. \ddagger
+  \frac{~}{~}\right)
 \end{equation*}
 \end{example}
 
 In some cases it is necessary to specify the correct size of a
 mathematical delimiter\index{mathematical!delimiter} by hand,
-which can be done using the commands \ci{big}, \ci{Big}, \ci{bigg} and
-\ci{Bigg} as prefixes to most delimiter commands:
+which can be done using the commands \csi{big}, \csi{Big}, \csi{bigg} and
+\csi{Bigg} as prefixes to most delimiter commands:
 \begin{chktexignore}
   \begin{example}
 $\Big((x+1)(x-1)\Big)^{2}$\\
-$\big( \Big( \bigg( \Bigg( \quad
-\big\} \Big\} \bigg\} \Bigg\} \quad
-\big\| \Big\| \bigg\| \Bigg\| \quad
-\big\Downarrow \Big\Downarrow 
+$\big( \Big( \bigg( \Bigg($ 
+$\big\} \Big\} \bigg\} \Bigg\}$ 
+$\big\| \Big\| \bigg\| \Bigg\|$ 
+$\big\Downarrow \Big\Downarrow 
 \bigg\Downarrow \Bigg\Downarrow$
 \end{example}
 \end{chktexignore}
 
-For a list of all delimiters available, see Table~\ref{tab:delimiters} on page\pageref{tab:delimiters}.
+For a list of all delimiters available, see \autoref{tab:delimiters} on \autopageref{tab:delimiters}.
 
 You can find large list of symbols supported in math mode in
-Appendix\ref{symbols}.
+\autoref{symbols}.
 
 \section{Single Equations that are Too Long: multline}%
 \index{long equations}\label{sec:multline}
@@ -505,12 +528,12 @@ The easiest way to achieve such a wrapping is the use of the
 \noindent
 The difference from the \ei{equation} environment is that an arbitrary
 line-break (or also multiple line-breaks) can be introduced. This is
-done by putting a \ci{\bs} on those places where the equation needs
+done by putting a \csi{\bs} on those places where the equation needs
 to be wrapped. Similarly to \ei{equation*} there also exists a
 \ei{multline*} version for preventing an equation number.
 
 Often the
-\ei{IEEEeqnarray} environment (see Section~\ref{sec:IEEEeqnarray})
+\ei{IEEEeqnarray} environment (see \autoref{sec:IEEEeqnarray})
 will yield better results.  Consider the following
 situation:
 \begin{example}
@@ -537,7 +560,7 @@ it has the disadvantage that the equality sign loses its natural
 greater importance with respect to the plus operator in front of
 $k$. The better solution is provided by the
 \ei{IEEEeqnarray} environment that will be discussed in detail in
-Section~\ref{sec:IEEEeqnarray}.
+\autoref{sec:IEEEeqnarray}.
 
 \section{Multiple Equations}%
 \index{equation!multiple}\label{sec:IEEEeqnarray}
@@ -565,20 +588,18 @@ To group multiple equations the
   & = d + e
 \end{align}
 \end{example}
-
 this approach fails once a single line is too long:
 \begin{example}
 \begin{align}
   a & = b + c \\
-  & = d + e + f + g + h + i 
-  + j + k + l \nonumber \\
-  & + m + n + o \\
-  & = p + q + r + s
+  & = d + e + f
+  + g + h + i \nonumber \\
+  & + j + k + l \\
+  & = m + n + o + p
 \end{align}
 \end{example}
-\noindent
 Here $+\:m$ should be below $d$ and not below the equality sign. A
-\TeX{}pert will point out that \verb+\mathrel{\phantom{=}} \negmedspace {}+,
+\TeX{}pert will point out that \mintinline{latex}|\mathrel{\phantom{=}} \negmedspace{}|,
 would add the necessary space in front of \verb|+m+n+o|, but since most users
 lack that kind of imagination, a simpler solution would be nice.
 
@@ -586,10 +607,10 @@ This is the moment where the \ei{eqnarray} environment bursts onto the scene:
 \begin{example}
 \begin{eqnarray}
   a & = & b + c \\
-  & = & d + e + f + g + h + i 
-  + j + k + l \nonumber \\
-  && +\: m + n + o \\
-  & = & p + q + r + s
+  & = & d + e + f
+  + g + h + i \nonumber \\
+  && +\: j + k + l \\
+  & = & m + n + o + p
 \end{eqnarray}
 \end{example}
 
@@ -614,7 +635,7 @@ though there would be enough room on the left:
 \end{eqnarray}
 \end{example}
 
-\noindent While the environment offers a command \ci{lefteqn} that can
+\noindent While the environment offers a command \csi{lefteqn} that can
 be used when the LHS is too long:
 \begin{example}
 \begin{eqnarray}
@@ -626,7 +647,7 @@ be used when the LHS is too long:
 \end{eqnarray}
 \end{example}
 \noindent This is not optimal either as the RHS is too short and the array is
-not properly centered:
+not properly centred:
 \begin{example}
 \begin{eqnarray}
   \lefteqn{a + b + c + d 
@@ -661,7 +682,7 @@ your document: \small
 The strength of \ei{IEEEeqnarray} is the ability to specify
 the number of \emph{columns} in the equation array. Usually, this
 specification will be \cargv{\{rCl\}}, i.e., three columns, the
-first column right-justified, the middle one centered with a little
+first column right-justified, the middle one centred with a little
 more space around it (therefore we specify capital \cargv{C} instead of
 lower-case \cargv{c}) and the third column left-justified:
 \begin{example}
@@ -677,14 +698,14 @@ lower-case \cargv{c}) and the third column left-justified:
 \end{IEEEeqnarray}
 \end{example}
 Any number of columns can be specified:
-\verb+{c}+ will give only one column with all entries centered, or
+\verb+{c}+ will give only one column with all entries centred, or
 \verb+{rCll}+ would add a fourth, left-justified column to use
 for comments. Moreover, beside \cargv{l}, \cargv{c}, \cargv{r}, \cargv{L},
 \cargv{C}, \cargv{R} for math mode entries there are also \cargv{s},
-\cargv{t}, \cargv{u} for left, centered, and right text mode entries.
+\cargv{t}, \cargv{u} for left, centred, and right text mode entries.
 Additional space can be added with \cargv{.} and
 \cargv{/} and \cargv{?} in increasing order.\footnote{For more spacing
-  types refer to Section~\ref{sec:putting-qed-right}.}
+  types refer to \autoref{sec:putting-qed-right}.}
 Note the spaces around the equality signs in contrast to the space produced
 by the \ei{eqnarray} environment.
 
@@ -709,10 +730,9 @@ instead of
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c 
   \\
-  & = & d + e + f + g + h 
-  + i + j + k 
+  & = & d + e + f + g + h + i
   \\
-  & = & l + m + n
+  & = & j + k + l + m + n.
 \end{IEEEeqnarray}
 \end{example}
 we get
@@ -720,16 +740,15 @@ we get
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c 
   \\
-  & = & d + e + f + g + h 
-  + i + j + k 
+  & = & d + e + f + g + h + i
   \IEEEeqnarraynumspace\\
-  & = & l + m + n.
+  & = & j + k + l + m + n.
 \end{IEEEeqnarray}
 \end{example}
 
 If the LHS is too long, as a replacement for the faulty
-\ci{lefteqn} command, \ei{IEEEeqnarray} offers the
-\ci{IEEEeqnarraymulticol} command which works in all situations:
+\csi{lefteqn} command, \ei{IEEEeqnarray} offers the
+\csi{IEEEeqnarraymulticol} command which works in all situations:
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
   \IEEEeqnarraymulticol{3}{l}{
@@ -741,12 +760,12 @@ If the LHS is too long, as a replacement for the faulty
   & = & k + l + m
 \end{IEEEeqnarray}
 \end{example}
-The usage is identical to the \ci{multicolumns} command in the
+The usage is identical to the \csi{multicolumns} command in the
 \ei{tabular} environment. The first argument \cargv{\{3\}}
 specifies that three columns shall be combined into one which will be
 left-justified \carg{\{l\}}.
 
-Note that by inserting \ci{quad} commands one can easily adapt
+Note that by inserting \csi{quad} commands one can easily adapt
 the depth of the equation signs,\footnote{I think that one quad is the
   distance that looks good for most cases.} e.g.,
 \begin{example}
@@ -792,21 +811,21 @@ we should write
 The construction \verb|{} + l| forces the \verb|+|-sign to be an operator rather
 than just a sign, and the unwanted ensuing space between
 \verb|{}| and \verb|+| is compensated by a negative medium space
-\ci{negmedspace}.
+\csi{negmedspace}.
 
 If a particular line should not have an equation number, the
-number can be suppressed using \ci{nonumber} (or
-\ci{IEEEnonumber}). If on such a line a label
-\ci{label}[\ldots] is defined, then this label is passed on
+number can be suppressed using \csi{nonumber} (or
+\csi{IEEEnonumber}). If on such a line a label
+\csi{label}[\ldots: m] is defined, then this label is passed on
 to the next equation number that is not suppressed. Place the labels right before the line-break
-\ci{\bs} or the next to the equation it belongs to. Apart from
+\csi{\bs} or the next to the equation it belongs to. Apart from
 improving the readability of the source code this prevents a
-compilation error when a \ci{IEEEmulticol} command
+compilation error when a \csi{IEEEmulticol} command
 follows the label-definition.
 
 There also exists a starred version where all equation numbers are
 suppressed. In this case an equation number can be made to appear
-using the command \ci{IEEEyesnumber}:
+using the command \csi{IEEEyesnumber}:
 \begin{example}
 \begin{IEEEeqnarray*}{rCl}
   a & = & b + c \\
@@ -816,7 +835,7 @@ using the command \ci{IEEEyesnumber}:
 \end{example}
 
 Sub-numbers are also easily possible using
-\ci{IEEEyessubnumber}:
+\csi{IEEEyessubnumber}:
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c 
@@ -845,33 +864,35 @@ typeset correctly.
 \subsection{Pitfalls of naïvely entered units}
 
 Naïvely, one might write units like this:
-\begin{example}[examplewidth=6cm]
+\begin{example}
 The speed of light
 is 299792458 m/s.
 \end{example}
-\noindent This may look fine initially but if your document gets longer you will probably
+This may look fine initially but if your document gets longer you will probably
 get into a situation where an unfortunate linebreak occurs.
-\begin{example}[examplewidth=6cm]
+\begin{example}
 \ldots{} The speed of light
 is 299792458 m/s. Thus we
 can calculate \ldots
 \end{example}
-\noindent A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
+A non-breaking space will fix this problem, but the next one is already waiting---the space between numbers. Digits of
 long numbers should be grouped to make them easier to read. The above example
 should then written like this:
-\begin{example}[examplewidth=6cm]
+\begin{example}
 The speed of light is
 299\,792\,458~m/s.
 \end{example}
-\noindent Yet another problem arises when trying to write the units inside math
+Yet another problem arises when trying to write the units inside math
 mode
-\begin{example}[examplewidth=6cm]
-$10~\frac{m}{s} \cdot 12~s = 120~m$
+\begin{example}
+$10~\frac{m}{s}
+  \cdot 12~s = 120~m$
 \end{example}
-\noindent Here we need to make sure that the units are written in roman font.
+Here we need to make sure that the units are written in roman font.
 The above example should be then written as
-\begin{example}[examplewidth=6cm]
-$10~\frac{\mathrm{m}}{\mathrm{s}} 
+\begin{example}
+$10~\frac{\mathrm{m}}
+  {\mathrm{s}} 
   \cdot 12~\mathrm{s} 
   = 120~\mathrm{m}$
 \end{example}
@@ -881,11 +902,11 @@ $10~\frac{\mathrm{m}}{\mathrm{s}}
 
 The basic commands of \pai{siunitx} package are
 \begin{lscommand}
-  \ci{num}[options][number]\\
-  \ci{unit}[options][unit]\\
-  \ci*{qty}[options:o ! number:m ! unit:m]
+  \csi{num}[options: o, number: m]\\
+  \csi{unit}[options: o, unit: m]\\
+  \csi{qty}[options:o ! number:m ! unit:m]
 \end{lscommand}
-The \ci{num} command typesets a number, \ci{unit} typesets a unit, and \ci{qty}
+The \csi{num} command typesets a number, \csi{unit} typesets a unit, and \csi{qty}
 typesets a quantity, i.e.\ a number followed by a unit. All of the commands
 provide optional \carg{options} argument, which is a comma delimited key-value pair
 list that can influence the output of the command. The \carg{unit} argument can
@@ -916,26 +937,27 @@ is a quantity
 At first glance this may seem less convenient, but this enables the package to
 recognise the logical structure of the units, which means that the formatting
 can be changed on the fly.
-\begin{example}[examplewidth=0.32\linewidth]
-Which one do you prefer? \\
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+Which one do you prefer:
 $\unit{\newton} = \unit{
-  \kilo\gram\metre\per\square\second}$ \\
+  \kilo\gram\metre\per\square\second}$,
 $\unit{\newton} = \unit[per-mode = fraction]{
-  \kilo\gram\metre\per\second\squared}$ \\
+  \kilo\gram\metre\per\second\squared}$ or
 $\unit{\N} = \unit[per-mode = symbol]{
-  \kg\m\per\s\tothe{2}}$
+  \kg\m\per\s\tothe{2}}$?
 \end{example}
-The commands \ci{gram}, \ci{kilo}, \ci{per} are rather self explanatory. As you
+The commands \csi{gram}, \csi{kilo}, \csi{per} are rather self explanatory. As you
 can see we have also used the \cargv{per-mode} option to influence the unit
-style. While the command \ci{tothe} typesets arbitrary superscripts, the
-command \ci{of} typesets arbitrary subscripts, known as qualifiers.
-\begin{example}[examplewidth=0.32\linewidth]
-\unit{\kg\of{mol}}, \unit{\bel\of{i}}
+style. While the command \csi{tothe} typesets arbitrary superscripts, the
+command \csi{of} typesets arbitrary subscripts, known as qualifiers.
+\begin{example}
+\unit{\kg\of{mol}},
+\unit{\bel\of{i}}
 \end{example}
 
-Note that the \ci{per} command only works on the next unit. If we want it to
+Note that the \csi{per} command only works on the next unit. If we want it to
 apply to all following units we may use \cargv{sticky-per} option.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 The unit of thermal conductivity is
 \unit{\watt\per\metre\per\kelvin}
 or equivalently
@@ -945,62 +967,74 @@ or equivalently
 Sometimes you may want to make the units use a different colour so they figure more prominently. This can be done using \cargv{unit-color}. Options
 \cargv{number-color} and \cargv{color} may be used to colour only the numeric
 values or whole quantities. If you want to highlight a single unit in a
-compound unit, you may use the \ci{highlight} command.
-\begin{example}[examplewidth=0.2\linewidth]
-\qty[unit-color = red]{9.81}{\m\per\s\squared} \\
-\qty[number-color = blue]{9.81}{\m\per\s\squared} \\
-\qty[color = green]{9.81}{\m\per\s\squared}
+compound unit, you may use the \csi{highlight} command.
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\qty[unit-color = red   ]{9.81}{\m\per\s\squared},
+\qty[number-color = blue]{9.81}{\m\per\s\squared},
+\qty[color = green      ]{9.81}{\m\per\s\squared},
 \qty{9.81}{\m\per\highlight{orange}\s\squared}
 \end{example}
 
 Now let's turn our attention to numbers. The numeric values will always use dot
 as a decimal separator, regardless of entered symbol. If you want to use comma
 as a decimal separator, change the \cargv{output-decimal-marker} option.
-\begin{example}[examplewidth=0.2\linewidth]
+\begin{example}
 $\pi \approx \num{3.14159}$ \\
 $\pi \approx \num{3,14159}$ \\
-$\pi \approx \num[output-decimal-marker={,}]{3.14159}$
+$\pi \approx \num[
+  output-decimal-marker={,}
+]{3.14159}$
 \end{example}
 
 The numbers may also be entered using exponent notation. The symbol before
 exponent and base may be controlled using \cargv{exponent-product} and
 \cargv{exponent-base} options
-\begin{example}[examplewidth=0.25\linewidth]
+\begin{example}
 $\qty{1}{\tonne} = \qty{1e6}{\g}$ \\
-$\qty{1}{\gibi\byte} =
-  \qty[exponent-base = 2]{1e30}{\byte}$ \\
-$\qty{1}{\L} =
-  \qty[exponent-product = \cdot]{1e-3}{\cubic\m}$
+$\qty{1}{\gibi\byte} = \qty[
+  exponent-base = 2,
+]{1e30}{\byte}$ \\
+$\qty{1}{\L} = \qty[
+  exponent-product = \cdot,
+]{1e-3}{\cubic\m}$
 \end{example}
 
 If we want all numbers to be formatted using exponent notation, regardless of
 their entered form, we may use \cargv{exponent-mode} option.
-\begin{example}[examplewidth=0.3\linewidth]
+\begin{example}
 $2^{16} = \num{65536}$ \\
 $2^{16} = \num[
-  exponent-mode = scientific]{65536}$ \\
+  exponent-mode = scientific,
+]{65536}$ \\
 $2^{16} = \num[
-  exponent-mode = engineering]{65536}$ \\
-$2^{16} = \num[
-  exponent-mode = fixed]{65.536e3}$ \\
+  exponent-mode = engineering,
+]{65536}$ \\
 $2^{16} = \num[
   exponent-mode = fixed,
-  fixed-exponent = 7]{65.536e3}$
+]{65.536e3}$ \\
+$2^{16} = \num[
+  exponent-mode = fixed,
+  fixed-exponent = 5,
+]{65.536e3}$
 \end{example}
 
 In some fields it may be common to write uncertainty next to numbers. This may
 also be done in several ways. In order to customise the appearance of
 uncertainty use the \cargv{uncertainty-mode} option.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}
 $M_\oplus = \qty{
-  5.9722(6) e24}{\kg}$ \\
+  5.9722(6) e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty{
-  5.9722 +- 0.0006 e24}{\kg}$ \\
+  5.9722 +- 0.0006 e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty{
-  5.9722 \pm 0.0006 e24}{\kg}$ \\
+  5.9722 \pm 0.0006 e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty[
     uncertainty-mode = separate
-  ]{5.9722(6) e24}{\kg}$ \\
+  ]{5.9722(6) e24}{\kg}$
+  \\ %!hide
 $M_\oplus = \qty[
   uncertainty-mode = full
 ]{5.9722(6) e24}{\kg}$
@@ -1010,12 +1044,15 @@ By default \pai{siunitx} typesets the quantities in math mode. This may be
 especially jarring if you use different font for the document text. One simple
 solution is to set the \cargv{mode} option to \cargv{text}.
 % TODO: Add pointer to changing math fonts section when written.
-\begin{example}[examplewidth=0.4\linewidth]
-\setmainfont{SourceSansPro-Regular.otf} %!hide
+\begin{example}
+\setmainfont{Source Sans Pro} %!hide
 \qty{1}{\degreeCelsius} is
-equal to \qty{1}{\kelvin}, but
-\qty[mode = text]{0}{\degreeCelsius}
-is \qty[mode = text]{-273.15}{\kelvin}.
+equal to \qty{1}{\kelvin},
+but \qty[
+  mode = text,
+]{0}{\degreeCelsius} is \qty[
+  mode = text,
+]{-273.15}{\kelvin}.
 Bizarre, isn't it?
 \end{example}
 
@@ -1024,61 +1061,46 @@ of options check out the \pai{siunitx} package documentation.
 
 To avoid repeating the options with every use of commands, use the
 \begin{lscommand}
-  \ci{sisetup}[options]
+  \csi{sisetup}[options: m]
 \end{lscommand}
 command. It can be used in the preamble to ensure consistent style throughout
 the document, or inside the document when the style needs to be changed just
 in a given element, such as a table. These options may be also passed as package
-options. Figure~\ref{sistandaloneexa} shows an example usage of the package in
+options. \autoref{sistandaloneexa} shows an example usage of the package in
 a full document.
-\begin{figure}[htp]
-  \begin{example}[standalone, template=empty, paperwidth=6cm]
+\begin{listing}
+  \begin{example}[standalone, template=empty, examplewidth=\linewidth,paperwidth=12cm, paperheight=5.5cm, vertical_mode]
 \documentclass{article}
 
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
 \sloppy %!hide
 \usepackage{booktabs}
-\usepackage[
-  output-decimal-marker={,},
-  per-mode = fraction,
-  unit-color = red,
-]{siunitx}
+\usepackage[per-mode = fraction, unit-color = red]{siunitx}
 
 \begin{document}
-All the units in the document are
-typeset according to setup in the
-preamble: \qty{9.81}{\m\per\s\squared}.
-
+Units are typeset like this: \qty{9.81}{\m\per\s\squared}.
 \begin{table}[h]
-  \centering %!hide
-  \sisetup{
-    exponent-mode = fixed,
-    fixed-exponent = 1,
-  }
-  \begin{center}  
-    \begin{tabular}{@{}lr@{}}
-      \toprule
-      No. & Result (\unit{\kg}) \\
-      \midrule
-      1 & \num{12.3} \\ 
-      2 & \num{0.3} \\ 
-      3 & \num{1e2} \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \caption{Measurement results}%
-  \label{table}
+  \centering
+  \sisetup{exponent-mode = fixed, fixed-exponent = 1}
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    No. & Result (\unit{\kg}) \\
+    \midrule
+    1   & \num{12.3}          \\ 
+    2   & \num{0.3}           \\ 
+    3   & \num{1e2}           \\
+    \bottomrule
+  \end{tabular}
+  \caption{Measurement results.
+    Here custom options are used.}\label{table}
 \end{table}
 
-In table~\ref{table} custom
-options are used, but now we
-are back to normal:
-\qty{3.637e-4}{\m\squared\per\s}.
+Now we are back to normal: \qty{3.637e-4}{\m\squared\per\s}.
 \end{document}
 \end{example}
   \caption{An example of using \pai{siunitx} in a document.}%
   \label{sistandaloneexa}
-\end{figure}
+\end{listing}
 
 \subsection{Other \pai{siunitx} commands}
 
@@ -1088,22 +1110,25 @@ other useful commands.
 Angles are special in that they use base $60$ instead of base ten when
 subdividing. The command
 \begin{lscommand}
-  \ci{ang}[options][angle]
+  \csi{ang}[options: o, angle: m]
 \end{lscommand}
 exists in order to simplify entering them. If they are entered using semicolon
 as a separator, then the following numbers are treated as minutes and seconds.
 If they are given as a decimal number, they will be displayed as such.
 \begin{example}
-\ang{10} \\
-\ang{1;2;3} \\
+\ang{10}
+\qquad %!hide
+\ang{1;2;3}
+\qquad %!hide
 \ang{;;20} \\
-\ang{32.5} \\
+\ang{32.5}
+\qquad %!hide
 \qty{60}{\degree}
 \end{example}
 
 When listing several numbers we may use the
 \begin{lscommand}
-  \ci{numlist}[options][numbers]
+  \csi{numlist}[options: o, numbers: m]
 \end{lscommand}
 where \carg{numbers} are delimited by semicolons. This command is context aware
 which means it will produce correct results when used with \pai{polyglossia}.
@@ -1138,22 +1163,25 @@ This area is
 \end{example}
 
 If we are dealing with quantum mechanics then complex numbers may be useful.
-To typeset them use \ci{complexnum} and \ci{complexqty}. They can be entered in
+To typeset them use \csi{complexnum} and \csi{complexqty}. They can be entered in
 both Cartesian form and polar coordinates.
 
-\begin{example}[examplewidth=0.4\linewidth]
-The conjugate of \complexnum{2+3i} is
-\complexnum{2-3i} which is approximately
+\begin{example}[examplewidth=0.5\linewidth]
+The conjugate of
+\complexnum{2+3i} is
+\complexnum{2-3i}
+which is approximately
 \complexnum{3.6056:-56.310}. \\
 Why is my scale showing my
-weight is \complexqty{65+i21}{\kg}?
+weight is
+\complexqty{65+i21}{\kg}?
 \end{example}
 
 Sometimes the required unit that we want to use is missing. For example
 throughout this book the unit of typographical point is used when talking about
 font sizes. To define it we may use the
 \begin{lscommand}
-  \ci*{DeclareSIUnit}[options:o ! \texttt{t}unit:m ! symbol:m]
+  \csi{DeclareSIUnit}[options:o, unit:m, symbol:m]
 \end{lscommand}
 command. The \carg{unit} is the macro we will use in the interpreted mode,
 while the \carg{symbol} is the typeset symbol. The \carg{options} allows us to
@@ -1169,27 +1197,28 @@ This command may also be used when we want to adjust the appearance of
 predefined unit. For example, the default litre is typeset using uppercase
 \enquote*{L} and you may want to change it to use lowercase \enquote*{l}
 instead.
-\begin{example}[examplewidth=0.4\linewidth]
-Litre before redefining: \unit{\L}. \\
+\begin{example}
+Litre before redefining:
+\unit{\L}. \\
 \DeclareSIUnit{\litre}{l}
-Litre after redefining: \unit{\L}.
+Litre after redefining:
+\unit{\L}.
 \end{example}
 
 Similarly the commands
 \begin{lscommand}
-  \ci{DeclareSIPrefix}    \\
-  \ci{DeclareSIPower}     \\
-  \ci{DeclareSIQualifier}
+  \csi{DeclareSIPrefix}    \\
+  \csi{DeclareSIPower}     \\
+  \csi{DeclareSIQualifier}
 \end{lscommand}
 allow definition of unit-related macros in case additional are needed.
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \DeclareSIUnit{\pt}{pt}
 \DeclareSIPower\quartic\tothefourth{4}
 \DeclareSIPrefix\decakilo{dk}{4}
 \DeclareSIQualifier\polymer{pol}
 
-It's over
-\qty{9000}{\quartic\decakilo\pt\polymer}!
+It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
 \end{example}
 
 \subsection{Table columns with numbers}\label{sec:sitables}\index{decimal
@@ -1200,18 +1229,22 @@ them along the decimal point, so they can be compared easily. The \pai{siunitx}
 package adds the special column specifier \cargv{S} for this purpose to the
 \ei{tabular} environment. Non numeric data must be surrounded by curly brackets
 in such columns.
-\begin{example}[examplewidth=0.45\linewidth]
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular}{@{}lS@{}}
   \toprule
-  Day & {Candy eaten (\unit{\g})} \\
+  Day       & {Candy eaten (\unit{\g})} \\
   \midrule
-  Monday & .3011 \\
-  Tuesday & 54.86 \\
-  Wednesday & 1000.9722 \\
-  Thursday & -1000.9722 \\
+  Monday    & .3011                     \\
+  Tuesday   & 54.86                     \\
+  Wednesday & 1000.9722                 \\
+  Thursday  & -1000.9722                \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{A simple example of using \pai{siunitx}'s \cargv{S} column
+    specification.}
+\end{listing}
 
 When presenting numeric data, such as above, it is good to remember the
 following two rules
@@ -1223,40 +1256,41 @@ All the numbers in \cargv{S} columns are automatically parsed by \pai{siunitx},
 which means that if we use it, the first rule will be enforced for us.
 
 In order to influence parsing\slash{}displaying options of a
-single column, pass them in square brackets to the column specification.
-\begin{example}[examplewidth=0.38\linewidth]
+single column, pass them in square brackets to the column specification. See
+\autoref{lst:siunitxS} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \DeclareSIUnit{\eur}{\euro}
 \begin{tabular} {
-    @{}
-    l
-    S[
-      output-decimal-marker={,},
-      per-mode=symbol,
-    ]
-    @{}
+    @{}l
+    S[output-decimal-marker={,},
+      per-mode=symbol]@{}
   }
   \toprule
-  Candy & {Price (\unit{\eur\per\kg})} \\
+  Candy        & {Price (\unit{\eur\per\kg})} \\
   \midrule
-  Chocolate & 11.30 \\
-  Lollipops & 15.86 \\
-  Marshmallows & 5.97 \\
-  Golden taffy & 1125.12 \\
+  Chocolate    & 11.30                        \\
+  Lollipops    & 15.86                        \\
+  Marshmallows & 5.97                         \\
+  Golden taffy & 1125.12                      \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using optional parameters in a single \cargv{S}
+    column specification.}\label{lst:siunitxS}
+\end{listing}
 
 Besides standard options there are also table specific options that can be
 passed to the columns. An important one is \cargv{table-format}. By default the
 \cargv{S} specifier centres the decimal point leaving equal space to the left
 and to the right of it. This leads to a lot of empty space if lengths of
-integer and fraction parts are widely different.
-\begin{example}[examplewidth=0.5\linewidth]
+integer and fraction parts are widely different as can be seen in
+\autoref{lst:toowide}.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
 \begin{tabular} {@{}SS@{}}
   \toprule
-  \multicolumn{2}{c}{Weight} \\
-  \midrule
   {\unit{\ug}} & {\unit{\kg}} \\
   \midrule
   1 & 1e-9 \\
@@ -1266,12 +1300,17 @@ integer and fraction parts are widely different.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An anti-example of using \pai{siunitx}'s \cargv{S} column
+    specification without setting the \cargv{table-format}.}\label{lst:toowide}
+\end{listing}
 We can then use
 \cargv{table-format} to instruct \LaTeX{} how much space should be reserved
 before and after dot. For example \cargv{6.2} means that it should reserve
 space for 6 digits before the decimal point, and for two after. The format may
-also contain information about signs, exponents or text around numbers.
-\begin{example}[examplewidth=0.5\linewidth]
+also contain information about signs, exponents or text around numbers. See
+\autoref{lst:tableformat} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \sisetup{exponent-mode = fixed}
 \begin{tabular} {
     @{}
@@ -1291,11 +1330,15 @@ also contain information about signs, exponents or text around numbers.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using \pai{siunitx}'s \cargv{S} column
+    specification with the \cargv{table-format} key.}\label{lst:tableformat}
+\end{listing}
 
-By default numbers and text within the \cargv{S} columns and centered. If you
+By default numbers and text within the \cargv{S} columns and centred. If you
 want to change the alignment use the \cargv{table-number-alignment} and
-\cargv{table-text-alignment} options.
-\begin{example}[examplewidth=0.45\linewidth]
+\cargv{table-text-alignment} options. See \autoref{lst:salignment} for an example.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular} {
     @{}
     S[
@@ -1320,25 +1363,27 @@ want to change the alignment use the \cargv{table-number-alignment} and
   \bottomrule
 \end{tabular}
 \end{example}
-
-The numbers may also be aligned inside a \ci{multicol} or \ci{multirow},
-using the \ci{tablenum} command.
-\begin{example}[examplewidth=0.30\linewidth]
-\sisetup{
-  table-format = 4.4e1
-}
+  \caption{An example of aligning text and numbers inside the \pai{siunitx}'s \cargv{S} column.}\label{lst:salignment}
+\end{listing}
+The numbers may also be aligned inside a \csi{multicol} or \csi{multirow},
+using the \csi{tablenum} command as seen in \autoref{lst:tablenum}.
+\begin{listing}
+  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
+\sisetup{table-format = 4.4e1}
 \begin{tabular}{@{}lr@{}}
   \toprule
-  Candy & Friend \\
+  Candy     & Friend                         \\
   \midrule
-  Chocolate & Peter \\
-  Lollipop & Jane \\
-  \multicolumn{2}{c}{\tablenum{12,34 e0}} \\
+  Chocolate & Peter                          \\
+  Lollipop  & Jane                           \\
+  \multicolumn{2}{c}{\tablenum{12,34 e0}}    \\
   \multicolumn{2}{c}{\tablenum{333.5567 e1}} \\
-  \multicolumn{2}{c}{\tablenum{4563.21 e2}} \\
+  \multicolumn{2}{c}{\tablenum{4563.21 e2}}  \\
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using the \csi{tablenum} command.}\label{lst:tablenum}
+\end{listing}
 
 If you don't want the decimal alignment but still would like to have
 numbers in columns formatted by \pai{siunitx}, change the
@@ -1364,7 +1409,7 @@ numbers in columns formatted by \pai{siunitx}, change the
 \label{sec:arraymat}
 
 To typeset \emph{arrays}, use the \ei{array} environment. It works
-in a similar way to the \ei{tabular} environment. The \ci{\bs} command is
+in a similar way to the \ei{tabular} environment. The \csi{\bs} command is
 used to break the lines:
 \begin{example}
   \begin{equation*}
@@ -1378,7 +1423,7 @@ used to break the lines:
 \end{example}
 
 The \ei{array} environment can also be used to typeset \wi{piecewise function}s by
-using a ``\cargv{.}'' as an invisible \ci{right} delimiter:
+using a ``\cargv{.}'' as an invisible \csi{right} delimiter:
 \begin{example}
 \begin{equation*}
   |x| = \left\{
@@ -1432,14 +1477,14 @@ very often you need 10 columns!):
 \index{math spacing}
 If the spacing within formulae chosen by \LaTeX{}
 is not satisfactory, it can be adjusted by inserting special spacing
-commands: \ci{,} for $\frac{3}{18}\:\textrm{quad}$
-(\demowidth{0.166em}), \ci{:} for $\frac{4}{18}\: \textrm{quad}$
-(\demowidth{0.222em}) and \ci{;} for $\frac{5}{18}\: \textrm{quad}$
-(\demowidth{0.277em}).  The escaped space character \ci{\textvisiblespace}
+commands: \csi{,} for $\frac{3}{18}\:\textrm{quad}$
+(\demowidth{0.166em}), \csi{:} for $\frac{4}{18}\: \textrm{quad}$
+(\demowidth{0.222em}) and \csi{;} for $\frac{5}{18}\: \textrm{quad}$
+(\demowidth{0.277em}).  The escaped space character \csi{\textvisiblespace}
 generates a medium sized space comparable to the interword spacing and
-\ci{quad} (\demowidth{1em}) and \ci{qquad} (\demowidth{2em}) produce
-large spaces. The size of a \ci{quad} corresponds to the width of the
-character `M' of the current font. \ci{!} produces a
+\csi{quad} (\demowidth{1em}) and \csi{qquad} (\demowidth{2em}) produce
+large spaces. The size of a \csi{quad} corresponds to the width of the
+character `M' of the current font. \csi{!} produces a
 negative space of $-\frac{3}{18}\:\textrm{quad}$
 ($-$\demowidth{0.166em}).
 
@@ -1452,11 +1497,11 @@ negative space of $-\frac{3}{18}\:\textrm{quad}$
 \end{example}
 
 Note that `d' in the differential is conventionally set in roman.
-In the next example, we define a new command \ci{ud} (upright d) which produces
+In the next example, we define a new command \csi{ud} (upright d) which produces
 ``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
-$\text{d}$), so we don't have to write it every time. The \ci{NewDocumentCommand} is
+$\text{d}$), so we don't have to write it every time. The \csi{NewDocumentCommand} is
 placed in the preamble.  More on
-\ci{NewDocumentCommand} in Section~\ref{sec:new_commands} on page~\pageref{sec:new_commands}.
+\csi{NewDocumentCommand} in \autoref{sec:new_commands} on \autopageref{sec:new_commands}.
 \begin{example}[examplewidth=0.35\linewidth]
 \NewDocumentCommand{\ud}{}{\,\mathrm{d}}
 
@@ -1466,9 +1511,9 @@ placed in the preamble.  More on
 \end{example}
 
 If you want to typeset multiple integrals, you'll discover that the spacing
-between the integrals is too wide. You can correct it using \ci{!}, but
+between the integrals is too wide. You can correct it using \csi{!}, but
 \pai{amsmath} provides an easier way for fine-tuning
-the spacing, namely the \ci{iint}, \ci{iiint}, \ci{iiiint}, and \ci{idotsint}
+the spacing, namely the \csi{iint}, \csi{iiint}, \csi{iiiint}, and \csi{idotsint}
 commands.
 
 \begin{example}[examplewidth=0.35\linewidth]
@@ -1488,7 +1533,7 @@ For further details see~\cite{amstestmath} or Chapter~8 of \companion{}.
 \subsection{Phantoms}
 
 When vertically aligning text using \ai{\^} and \ai{\_} \LaTeX{} is sometimes
-just a little too helpful. Using the \ci{phantom} command you can
+just a little too helpful. Using the \csi{phantom} command you can
 reserve space for characters that do not show up in the final output.
 The easiest way to understand this is to look at an example:
 \begin{example}
@@ -1502,7 +1547,7 @@ If you want to typeset a lot of isotopes as in the example, the \pai{mhchem}
 package is very useful for typesetting isotopes and chemical formulae too.
 
 \section{Fiddling with the Math Fonts}\label{sec:fontsz}
-Different math fonts are listed on Table~\ref{mathalpha} on page~\pageref{mathalpha}.
+Different math fonts are listed on \autoref{mathalpha} on \autopageref{mathalpha}.
 \begin{example}
  $\Re \qquad
   \mathcal{R} \qquad
@@ -1514,15 +1559,15 @@ The last two require \pai{amssymb} or \pai{amsfonts}.
 Sometimes you need to tell \LaTeX{} the correct font
 size. In math mode, this is set with the following four commands:
 \begin{lscommand}
-  \ci{displaystyle}~($\displaystyle 123$)\\
-  \ci{textstyle}~($\textstyle 123$)\\
-  \ci{scriptstyle}~($\scriptstyle 123$)\\
-  \ci{scriptscriptstyle}~($\scriptscriptstyle 123$)
+  \csi{displaystyle}~($\displaystyle 123$)\\
+  \csi{textstyle}~($\textstyle 123$)\\
+  \csi{scriptstyle}~($\scriptstyle 123$)\\
+  \csi{scriptscriptstyle}~($\scriptscriptstyle 123$)
 \end{lscommand}
 
 If $\sum$ is placed in a fraction, it'll be typeset in text style unless you tell
 \LaTeX{} otherwise:
-\begin{example}
+\begin{example}[examplewidth=0.55\linewidth]
 \begin{equation*}
  P = \frac{\displaystyle{ 
    \sum_{i=1}^n (x_i- x)
@@ -1543,10 +1588,10 @@ Changing styles generally affects the way big operators and limits are displayed
 
 It is quite difficult to get bold symbols in \LaTeX{}; this is
 probably intentional as amateur typesetters tend to overuse them.  The
-font change command \ci{mathbf} gives bold letters, but these are
+font change command \csi{mathbf} gives bold letters, but these are
 roman (upright) whereas mathematical symbols are normally italic, and
 furthermore it doesn't work on lower case Greek letters.
-There is a \ci{boldmath} command, but \emph{this can only be used
+There is a \csi{boldmath} command, but \emph{this can only be used
   outside math mode}. It works for symbols too, though:
 \begin{example}
 $\mu, M \qquad 
@@ -1556,11 +1601,12 @@ $\mu, M \qquad
 
 The package \pai{amsbsy} (included by \pai{amsmath}) as well as the
 package \pai{bm} from the \pai{tools} bundle make this much easier as they include
-a \ci{boldsymbol} command:
+a \csi{boldsymbol} command:
 
 \begin{example}
-$\mu, M \qquad
-\boldsymbol{\mu}, \boldsymbol{M}$
+$\mu, M$
+$\boldsymbol{\mu}
+  \boldsymbol{M}$
 \end{example}
 
 \section{Theorems, Lemmas, \ldots}
@@ -1569,7 +1615,7 @@ When writing mathematical documents, you probably need a way to
 typeset ``Lemmas'', ``Definitions'', ``Axioms'' and similar
 structures.
 \begin{lscommand}
-  \ci*{newtheorem}[name:m ! counter:o ! text:m ! section:o]
+  \csi{newtheorem}[name:m, counter:o, text:m, section:o]
 \end{lscommand}
 The \carg{name} argument is a short keyword used to identify the
 ``theorem''. With the \carg{text} argument you define the actual name
@@ -1582,7 +1628,7 @@ argument to specify the \carg{name} of a previously declared
 sequence.  The \carg{section} argument allows you to specify the
 sectional unit within which the ``theorem'' should get its numbers.
 
-After executing the \ci{newtheorem} command in the preamble of your
+After executing the \csi{newtheorem} command in the preamble of your
 document, you can use the following command within the document.
 \begin{code}
 \verb|\begin{|\emph{name}\verb|}[|\emph{text}\verb|]|\\
@@ -1592,7 +1638,7 @@ This is my interesting theorem\\
 
 The \pai{amsthm} package (part of \hologo{AmSLaTeX}) provides the
 \begin{lscommand}
-  \ci{theoremstyle}[style]
+  \csi{theoremstyle}[style: m]
 \end{lscommand}
 command which lets you define what the theorem is all about by picking
 from three predefined styles: \cargv{definition} (fat title, roman body),
@@ -1601,7 +1647,7 @@ title, roman body).
 
 This should be enough theory. The following examples should
 remove any remaining doubt, and make it clear that the
-\ci{newtheorem} command is way too complex to understand.
+\csi{newtheorem} command is way too complex to understand.
 
 First define the theorems:
 
@@ -1629,7 +1675,7 @@ The ``Jury'' theorem uses the same counter as the ``Law''
 theorem, so it gets a number that is in sequence with
 the other ``Laws''. The argument in square brackets is used to specify
 a title or something similar for the theorem.
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 %!showbegin !hide
 \newtheorem{mur}{Murphy}[section]
 %!showend !hide
@@ -1645,7 +1691,7 @@ The ``Murphy'' theorem gets a number that is linked to the number of
 the current section. You could also use another unit, for example chapter or
 subsection.
 
-If you want to customize your theorems down to the last dot, the
+If you want to customise your theorems down to the last dot, the
 \pai{ntheorem} package offers a plethora of options.
 
 \subsection{Proofs and End-of-Proof Symbol}\label{sec:putting-qed-right}
@@ -1661,7 +1707,7 @@ The \pai{amsthm} package also provides the \ei{proof} environment.
 \end{proof}
 \end{example}
 
-With the command \ci{qedhere} you can move the `end of proof' symbol
+With the command \csi{qedhere} you can move the `end of proof' symbol
 around for situations where it would end up alone on a line.
 
 \begin{example}
@@ -1688,8 +1734,8 @@ Unfortunately, this correction does not work for \ei{IEEEeqnarray}:
 The reason for this is the internal structure of \ei{IEEEeqnarray}:
 it always puts two invisible columns at both sides of the array that
 only contain a stretchable space. By this \ei{IEEEeqnarray} ensures
-that the equation array is horizontally centered. The
-\ci{qedhere} command should actually be put \emph{outside} this
+that the equation array is horizontally centred. The
+\csi{qedhere} command should actually be put \emph{outside} this
 stretchable space, but this does not happen as these columns are
 invisible to the user.
 
@@ -1711,7 +1757,7 @@ on the left of the equations (which, if not specified, will be done
 automatically by \ei{IEEEeqnarray}!) and one on the right of the
 equations. But now on the right, \emph{after} the stretching column,
 we add an empty column \cargv{x}. This column will only be needed on
-the last line if the \ci{qedhere} command is put
+the last line if the \csi{qedhere} command is put
 there. Finally, we specify a \cargv{*}. This is a null-space that
 prevents \ei{IEEEeqnarray} from adding another unwanted \cargv{+}-space!
 

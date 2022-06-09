@@ -36,13 +36,19 @@ jobs:
     container: ghcr.io/xu-cheng/texlive-full:latest
 
     steps:
+      - name: Install tools
+        run: |
+          apk add make
+          apk add git
+          apk add py3-pygments
+
       - name: Checkout the repository
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Build all
         run: |
-          apk add make
-          apk add py3-pygments
           cd book
           make all
 

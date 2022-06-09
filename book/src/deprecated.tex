@@ -3,9 +3,9 @@
 
 \begin{intro}
   \LaTeX{} has been around for well over 30 years now. And it has remained
-  largely backward compatible. This means you can easily steal snipptes from
+  largely backward compatible. This means you can easily steal snippets from
   a friends document written ten years ago and use them in your document today.
-  In many instances this work without any problem. But eventhough \LaTeX{} seems happy
+  In many instances this work without any problem. But even though \LaTeX{} seems happy
   with the old code, you still should not do it. Have a look!
 \end{intro}
 
@@ -29,35 +29,25 @@
   \end{trivlist}
 }
 
-\cs_set:Nn \__lshort_fix_verb_arg:n {
-  \tl_set:Nn \l_tmpa_tl {#1}
-  \exp_args:NNx\tl_replace_all:Nnn \l_tmpa_tl {\char_generate:nn{13}{12}} {\\}
-  \tl_replace_all:Nnn \l_tmpa_tl {~} {\mbox{~}}
-  \tl_use:N \l_tmpa_tl
-}
-
 \NewDocumentCommand{\chto}{+v+v}{
   \begin{trivlist}
     \item
     \begin{minipage}{0.4\textwidth}
-      \ttfamily
-      \__lshort_fix_verb_arg:n {#1}
+      \mintinline{latex}:#1:
     \end{minipage}
     \hspace{\stretch{1}}
     \(\longrightarrow\)
     \hspace{\stretch{1}}
     \begin{minipage}{0.4\textwidth}
-      \ttfamily
-      \__lshort_fix_verb_arg:n {#2}
+      \mintinline{latex}:#2:
     \end{minipage}
   \end{trivlist}
 }
 \NewDocumentCommand{\vchto}{+v+v}{
   \begin{center}
-    \ttfamily
-    \__lshort_fix_verb_arg:n {#1}\\[.2cm]
+    \mintinline{latex}:#1:\\[.2cm]
     \(\big\downarrow\)\\[.2cm]
-    \__lshort_fix_verb_arg:n {#2}
+    \mintinline{latex}:#2:
   \end{center}
 }
 
@@ -67,16 +57,16 @@
 
 \section{Display Math}
 \instead{
-\ai{\&\&}
+\ai{\$\$}
 } {
-\ci{[}, \ci{]} \\
+\csi{[}, \csi{]} \\
 \ei*{equation*}\\
 \ei*{displaymath}\\
 (All with the \pai{amsmath} package.)
 }
 
-\ai{\&\&} is \hologo{plainTeX} syntax and it cannot be modified. The
-\ci{displaymath} and \ci{[} are \hologo{LaTeX} commands that are a bit better
+\ai{\$\$} is \hologo{plainTeX} syntax and it cannot be modified. The
+\ei{displaymath} and \csi{[} are \hologo{LaTeX} commands that are a bit better
 in terms of spacing and features and can be redefined. With \pai{amsmath} both
 of them are redefined to be synonyms for the \ei{equation*} which produces
 optimal and consistent spacing.
@@ -85,11 +75,11 @@ optimal and consistent spacing.
 
 \section{Typesetting Math}
 \instead{
-  \ci{over} \\
-  \ci{choose}
+  \csi{over} \\
+  \csi{choose}
 } {
-  \ci{frac} \\
-  \ci{binom} (\pai{amsmath})
+  \csi{frac} \\
+  \csi{binom} (\pai{amsmath})
 }
 
 These are \hologo{plainTeX} commands for producing fractions and binomial
@@ -105,18 +95,18 @@ code.
 
 \section{Defining New Commands}\label{sec:def}
 \instead{
-  \ci{newcommand} \\
-  \ci{renewcommand} \\
-  \ci{def}
+  \csi{newcommand} \\
+  \csi{renewcommand} \\
+  \csi{def}
 } {
-  \ci{NewDocumentCommand} \\
-  \ci{RenewDocumentCommand} \\
-  \ci{DeclareDocumentCommand}
+  \csi{NewDocumentCommand} \\
+  \csi{RenewDocumentCommand} \\
+  \csi{DeclareDocumentCommand}
 }
 
-Both \ci{newcommand} and \ci{renewcommand} are \hologo{LaTeX2e} macros. They
+Both \csi{newcommand} and \csi{renewcommand} are \hologo{LaTeX2e} macros. They
 are not as expressive as \texttt{...DocumentCommand} family  %chktex 11
-described in Section~\ref{sec:new_commands}. Their syntax only allows a single
+described in \autoref{sec:new_commands}. Their syntax only allows a single
 optional argument with default value (specified as second optional argument)
 followed by few mandatory ones (specified as number in first optional
 argument).
@@ -125,9 +115,9 @@ argument).
   |\NewDocumentCommand{\foo}{O{bar}mmmm}{ ... }|
 \end{chktexignore}
 
-The \ci{def} command is a \hologo{plainTeX} primitive. It \emph{always} defines
+The \csi{def} command is a \hologo{plainTeX} primitive. It \emph{always} defines
 the command, even if it was already defined. This is usually not desirable, but
-if it's needed you can use \ci{DeclareDocumentCommand}.
+if it's needed you can use \csi{DeclareDocumentCommand}.
 \begin{chktexignore}
   \vchto|\def\foo#1#2#3{ ... }|
   |\NewDocumentCommand{\foo}{mmm}{ ... }|
@@ -135,17 +125,17 @@ if it's needed you can use \ci{DeclareDocumentCommand}.
 
 \section{Copying Commands}
 \instead{
-  \ci{let}
+  \csi{let}
 } {
-  \ci{NewCommandCopy} \\
-  \ci{RenewCommandCopy} \\
-  \ci{DeclareCommandCopy}
+  \csi{NewCommandCopy} \\
+  \csi{RenewCommandCopy} \\
+  \csi{DeclareCommandCopy}
 }
 
-Similarly to~\ref{sec:def}, \ci{let} is a \hologo{plainTeX} primitive that does
+Similarly to \autoref{sec:def}, \csi{let} is a \hologo{plainTeX} primitive that
 does not guard against accidental redefinition. Moreover it does not work
-correctly with some \hologo{LaTeX} commands. Use \ci{NewCommandCopy} as
-described in Section~\ref{sec:copyingcommands}.
+correctly with some \hologo{LaTeX} commands. Use \csi{NewCommandCopy} as
+described in \autoref{sec:copyingcommands}.
 \chto|\let\foo\bar||\NewCommandCopy\foo\bar|
 
 \section{Aligning Equations}
@@ -162,7 +152,7 @@ described in Section~\ref{sec:copyingcommands}.
 aligning equations. However spacing around the binary operators in these is far
 from ideal. Therefore it is recommended to always use the \ei{align} environments
 from \pai{amsmath} or \ei{IEEEeqnarray} as described in
-Section~\ref{sec:IEEEeqnarray}.
+\autoref{sec:IEEEeqnarray}.
 \begin{chktexignore}
 \chto
 |\begin{eqnarray}
@@ -179,26 +169,26 @@ Section~\ref{sec:IEEEeqnarray}.
 
 \section{Changing Fonts}
 \instead{
-  \ci{bf} \\
-  \ci{rm} \\
-  \ci{sf} \\
-  \ci{tt} \\
-  \ci{it} \\
-  \ci{sc} \\
-  \ci{sl}
+  \csi{bf} \\
+  \csi{rm} \\
+  \csi{sf} \\
+  \csi{tt} \\
+  \csi{it} \\
+  \csi{sc} \\
+  \csi{sl}
 }{
-  \ci{bfseries} \\
-  \ci{rmfamily} \\
-  \ci{sffamily} \\
-  \ci{ttfamily} \\
-  \ci{itshape}  \\
-  \ci{scshape}  \\
-  \ci{slshape}
+  \csi{bfseries} \\
+  \csi{rmfamily} \\
+  \csi{sffamily} \\
+  \csi{ttfamily} \\
+  \csi{itshape}  \\
+  \csi{scshape}  \\
+  \csi{slshape}
 }
 
 These are \hologo{plainTeX} commands. Each of them resets the font to normal
 before changing it, so for example bold italics cannot be achieved using them.
-Use newer commands as described in Section~\ref{sec:fontsize}.
+Use newer commands as described in \autoref{sec:fontsize}.
 \chto|{\bf foo}||\textbf{foo}|
 \chto|{\bf foo}||{\bfseries foo}|
 
@@ -217,7 +207,7 @@ Use newer commands as described in Section~\ref{sec:fontsize}.
 The default \hologo{LaTeX2e} environments for changing text alignment make it
 nearly impossible to hyphenate words inside them. Therefore it is recommended
 to use the \pai{ragged2e} equivalents, as described in
-Section~\ref{sec:ragged}, that make the text less \enquote*{ragged} than it
+\autoref{sec:ragged}, that make the text less \enquote*{ragged} than it
 should be.
 \begin{chktexignore}  
 \chto|\begin{center}
@@ -238,13 +228,13 @@ should be.
   \texttt{>>} \\
   \texttt{''}
 }{
-  \ci{enquote} \\
-  \ci{enquote*}
+  \csi{enquote} \\
+  \csi{enquote*}
 }
 
 The \TeX{} version of entering quotes was to rely on ligatures for the given
 quotation mark. This method is not context aware and cannot be customised.
-Using \pai{csquotes} package as described in Section~\ref{sec:csquotes} allows
+Using \pai{csquotes} package as described in \autoref{sec:csquotes} allows
 greater control over the typesetting of the quotations.
 
 \chto|``quote''||\usepackage{csquotes}
@@ -265,7 +255,7 @@ with it. Firstly due to the way delimiting is handled you cannot put spaces
 \end{chktexignore}
 Second and more important problem is that it reads the whole input at once
 which risks overflowing \TeX{}'s memory. The \pai{verbatim} package described
-in Section~\ref{sec:verbatim} solves both of these problems.
+in \autoref{sec:verbatim} solves both of these problems.
 \begin{chktexignore}
 \chto|\begin{verbatim}
   code
@@ -283,7 +273,7 @@ in Section~\ref{sec:verbatim} solves both of these problems.
   \ei{biblatex} and \texttt{biber}
 }
 
-As was already mentioned in the Chapter~\ref{chap:bibliography} before
+As was already mentioned in the \autoref{chap:bibliography} before
 \texttt{biber} there was \texttt{bibtex}. It used \ei{natbib} package for
 typesetting the bibliography itself. Both of these are no longer maintained and
 don't handle UTF-8 input. However the \ei{natbib} styles (\eei{.bst} files)

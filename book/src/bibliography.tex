@@ -23,19 +23,19 @@ This chapter will describe two approaches to bibliography management in \LaTeX{}
 Produce a \wi{bibliography} with the \ei{thebibliography}
 environment.  Each entry starts with
 \begin{lscommand}
-  \ci{bibitem}[label][marker]
+  \csi{bibitem}[label: o, marker: m]
 \end{lscommand}
 The \carg{marker} is then used to cite the book, article or paper
 within the document.
 \begin{lscommand}
-  \ci{cite}[marker]
+  \csi{cite}[marker: m]
 \end{lscommand}
 If you do not use the \carg{label} option, the entries will get enumerated
 automatically.  The parameter after the \verb|\begin{thebibliography}|
 command defines how much space to reserve for the number of labels. In the example below,
 \cargv{\{99\}} tells \LaTeX{} to expect that none of the bibliography item numbers will be wider
 than the number 99.
-\begin{example}[standalone, paperwidth=7cm, paperheight=4cm]
+\begin{example}[standalone, paperwidth=6cm, paperheight=4cm]
 \begin{document} %!hide
 Partl~\cite{pa} has
 proposed that \ldots
@@ -117,15 +117,15 @@ Note that the above list is far from exhaustive both in terms of \carg{entry
 manual or the style you are using.
 
 Each \eei{.bib} file will typically contain multiple entries. See
-figure~\ref{fig:bibfile} for an example.
+\autoref{lst:bibfile} for an example.
 
-\begin{figure}[htp]
+\begin{listing}[htp]
   \begin{lined}{\textwidth}
-    \inputminted{bibtex}{../src/examples/example.bib}
+    \inputminted{bibtex}{src/examples/example.bib}
   \end{lined}
   \caption[An example of bibliography database]{An example bibliography
-    database for \hologo{biber} (\eei{.bib} file)}\label{fig:bibfile}
-\end{figure}
+    database for \hologo{biber} (\eei{.bib} file)}\label{lst:bibfile}
+\end{listing}
 
 \subsection{Using \pai{biblatex}}
 
@@ -133,7 +133,7 @@ In order to use biblatex, the following three commands are necessary.
 
 The \pai{biblatex} package must be loaded with the
 \begin{lscommand}
-  \ci*{usepackage}[options:o ! biblatex:vm]
+  \csi{usepackage}[options:o, biblatex:vm]
 \end{lscommand}
 command. The \carg{options} are comma delimited key value pairs that allow to
 customise the behaviour of biblatex package. Some of them will be explained
@@ -141,7 +141,7 @@ later.
 
 The command
 \begin{lscommand}
-  \ci*{addbibresource}[options:o ! file:m]
+  \csi{addbibresource}[options:o, file:m]
 \end{lscommand}
 must be put in the preamble. The \carg{file} is the name of the \eei{.bib} file
 containing bibliographic entries. You may also specify a remote location here,
@@ -149,7 +149,7 @@ but then you must also put \cargv{location=remote} in the \carg{options}.
 
 Finally the
 \begin{lscommand}
-  \ci*{printbibliography}[options:o]
+  \csi{printbibliography}[options:o]
 \end{lscommand}
 typesets the loaded bibliography. The \carg{options} may be used to alter the
 title or filter the entries included.
@@ -168,13 +168,17 @@ The first \LaTeX{} pass extracts the citation data from the document which are
 then read by \hologo{biber}. In the second pass, the bibliography is placed in the
 document and the third pass finally typesets the document with all the correct citations.
 
-Here is a complete example to show how the bits work together. In this and all the following examples, the \texttt{example.bib} file is assumed to be the same as in~\ref{fig:bibfile}.
-\begin{example}[standalone,
+\autoref{lst:biblatexfull} is a complete example that shows how the bits
+work together. In this and all the following examples, the \texttt{example.bib}
+file is assumed to be the same as in the \autoref{lst:bibfile}.
+\begin{listing}
+  \begin{example}[standalone,
   template=empty,
   biber,
-  biber_dir=../src/examples/,
-  paperwidth=7cm,
-  paperheight=9.9cm,
+  paperwidth=10cm,
+  paperheight=7.5cm,
+  vertical_mode,
+  examplewidth=0.9\linewidth,
 ]
 \documentclass{article}
 
@@ -184,26 +188,22 @@ Here is a complete example to show how the bits work together. In this and all t
 
 \begin{document}
 \setlength{\parindent}{0pt} %!hide
-\ldots{} Recently I was
-learning to use Bib\LaTeX{}
-from~\cite{lshort}. It seems
-very useful. \ldots
+\ldots{} Recently I was learning to use Bib\LaTeX{}
+from~\cite{lshort}. It seems very useful. \ldots
 
-\ldots{} which was already
-shown by Mrs.~Curie
-in~\cite{curie}.
-\ldots
+\ldots{} which was already shown by Mrs.~Curie
+in~\cite{curie}. \ldots
 
-\ldots{} this can be
-easily explained by
-the fact that Einstein
-was a time
-traveller~\cite{dream}.
-\ldots
+\ldots{} this can be easily explained by
+the fact that Einstein was a time
+traveller~\cite{dream}. \ldots
 
 \printbibliography
 \end{document}
 \end{example}
+  \caption{An example of using \pai{biblatex} to manage references in
+    an article}\label{lst:biblatexfull}
+\end{listing}
 
 \subsection{Controlling the bibliography}
 
@@ -215,12 +215,13 @@ allow sorting by citation order (\cargv{none}) and by the number of citations
 (\cargv{count}).
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=6.5cm,
   paperheight=5.5cm,
 ]
 % In preamble
-\usepackage[sorting=ynt]{biblatex}
+\usepackage[
+  sorting=ynt
+]{biblatex}
 
 % ...
 %!hidebegin
@@ -240,7 +241,6 @@ setting the preferred style via the \carg{style} option. Choose from
 several variations.
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=6.5cm,
   paperheight=7.2cm,
 ]
@@ -258,27 +258,26 @@ several variations.
 \begin{document}
 %!hideend
 \setlength{\parindent}{0pt} %!hide
-The validity of~\cite{dream} as a
-scientific source was
+The validity of~\cite{dream}
+as a scientific source was
 recently called into question
-though it correctly claims that
-polonium was first described
-in~\cite{curie}.
+though it correctly claims
+that polonium was first
+described in~\cite{curie}.
 %!hidebegin
 \printbibliography
 \end{document}
 \end{example}
 
-In contrast the \ei{thebibliography} environment, \pai{biblatex}'s
-\ci{printbibliography} command only prints entries that were referenced in the
+In contrast to the \ei{thebibliography} environment, the \pai{biblatex}'s
+\csi{printbibliography} command only prints entries that were referenced in the
 document. If you want to print entries not mentioned in the document, you may
-use the \ci{nocite}[marker] command. It will insert invisible citations, thus
+use the \csi{nocite}[marker: m] command. It will insert invisible citations, thus
 instructing \pai{biblatex} to put them in the bibliography. The special value
 \cargv{*} can be passed as a \carg{marker} if you want to print all entries in
 the database.
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=7cm,
 ]
@@ -288,7 +287,8 @@ the database.
 \begin{document}
 \setlength{\parindent}{0pt}
 %!hideend
-I've only cited~\cite{lshort}.
+I've only
+cited~\cite{lshort}.
 
 \nocite{*}
 \printbibliography
@@ -298,15 +298,14 @@ I've only cited~\cite{lshort}.
 
 If your bibliography gets really large it may make sense to split it into
 several parts. This can be done by passing filter options to the
-\ci{printbibliography} command. Available filters include \cargv{type},
+\csi{printbibliography} command. Available filters include \cargv{type},
 \cargv{category}, \cargv{keyword}. It may be useful to also change the titles of
 different categories using \cargv{title} option.
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
-  paperwidth=7cm,
-  paperheight=6cm,
+  paperwidth=6.5cm,
+  paperheight=6.5cm,
 ]
 %!hidebegin
 \usepackage{biblatex}
@@ -329,15 +328,15 @@ different categories using \cargv{title} option.
 \end{example}
 
 By default the bibliography does not appear in the table of contents. This is
-because it is using starred version of \ci{chapter}\slash\ci{section}
+because it is using starred version of \csi{chapter}\slash\csi{section}
 (depending on the class) to generate its heading. In order to change the default we
-may pass the option \cargv{heading} to \ci{printbibliography}. Available
+may pass the option \cargv{heading} to \csi{printbibliography}. Available
 options include
 \begin{description}
   \item[\cargv{bibliography}] the default, starred version of heading
   \item[\cargv{bibintoc}] starred version of heading, will appear in table of contents
   \item[\cargv{subbibliography}] will drop the bibliography one level in
-    hierarchy (\ci{section*} instead of \ci{chapter*} and so on)
+    hierarchy (\csi{section*} instead of \csi{chapter*} and so on)
   \item[\cargv{bibnumbered}] will use non starred version for heading, thus
     numbering it and appearing in table of contents
   \item[\cargv{subbibintoc}] will drop the bibliography one level and put it in
@@ -347,10 +346,10 @@ options include
   \item[\cargv{none}] will not print the heading
 \end{description}
 
-\begin{example}[standalone,
+\begin{example}[
+  standalone,
   biber,
-  biber_dir=../src/examples/,
-  paperwidth=7.6cm,
+  paperwidth=7cm,
   paperheight=7.5cm,
 ]
 %!hidebegin
@@ -369,7 +368,7 @@ options include
 
 \printbibliography[
   heading=subbibnumbered,
-  title=Bibliography
+  title=Bibliography,
 ]
 
 % ...
@@ -386,11 +385,12 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=3cm,
 ]
-\usepackage[maxnames=4]{biblatex}
+\usepackage[
+  maxnames=4,
+]{biblatex}
 %!hidebegin
 \addbibresource{example.bib}
 \sloppy
@@ -403,11 +403,12 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=7cm,
   paperheight=3cm,
 ]
-\usepackage[minnames=2]{biblatex}
+\usepackage[
+  minnames=2,
+]{biblatex}
 %!hidebegin
 \addbibresource{example.bib}
 \sloppy
@@ -420,22 +421,21 @@ then it will be shortened to \carg{minnames} and ``et al.'' will be added.
 
 \subsection{Citing commands}
 
-Until now we have only used the basic \ci{cite} command. \pai{biblatex} extends
+Until now we have only used the basic \csi{cite} command. \pai{biblatex} extends
 the command set to allow extra control with
 citations.
 
-Most of the citing commands (\ci{cite} included) allows to insert notes
+Most of the citing commands (\csi{cite} included) allows to insert notes
 around the citations:
 \begin{lscommand}
-  \ci*{cite}[pre:o ! post:o ! marker:m]
+  \csi{cite}[pre:o, post:o, marker:m]
 \end{lscommand}
-Other standard citation commands include \ci{parencite} (citation in
-parentheses), \ci{footcite} (in footnotes), \ci{textcite} (citation intended to
-be subject in a sentence), \ci{smartcite} (context dependent).
+Other standard citation commands include \csi{parencite} (citation in
+parentheses), \csi{footcite} (in footnotes), \csi{textcite} (citation intended to
+be subject in a sentence), \csi{smartcite} (context dependent).
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=5cm,
 ]
@@ -446,7 +446,8 @@ be subject in a sentence), \ci{smartcite} (context dependent).
 \sloppy
 \begin{document}
 %!hideend
-Indicate page in citation~\cite[25]{lshort}. 
+Indicate page in
+citation~\cite[25]{lshort}. 
 This citation is in
 parentheses~\parencite{curie}.
 Footnote cite~\footcite{dream}.
@@ -461,12 +462,11 @@ Again\footnote{Smart
 \end{example}
 
 Another set of commands allows us to extract specific information from
-the bibliographic entry, and use the information directly in the text. This is includes commands such as \ci{citeauthor},
-\ci{citetitle}, \ci{citeyear}, \ci{citedate}, \ci{citeurl}.
+the bibliographic entry, and use the information directly in the text. This is includes commands such as \csi{citeauthor},
+\csi{citetitle}, \csi{citeyear}, \csi{citedate}, \csi{citeurl}.
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=4cm,
 ]
@@ -478,20 +478,20 @@ the bibliographic entry, and use the information directly in the text. This is i
 \noindent
 %!hideend
 \Citetitle{lshort} is a book by
-\citeauthor{lshort}. Latest version was
-released in \citeyear{lshort}, or to
-be more precise on \citedate{lshort}. It
-is available at \citeurl{lshort}.
+\citeauthor{lshort}. Latest version
+was released in \citeyear{lshort},
+or to be more precise on
+\citedate{lshort}. It is available
+at \citeurl{lshort}.
 %!hidebegin
 \end{document}
 \end{example}
 
-If you want to be less tied to a specific style, the \ci{autocite}
+If you want to be less tied to a specific style, the \csi{autocite}
 command follows the citation style specified in the package options.
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=4cm,
 ]
@@ -508,14 +508,14 @@ command follows the citation style specified in the package options.
 \begin{document}
 \noindent
 %!hideend
-This is auto citation \autocite{curie}.
+This is auto citation
+\autocite{curie}.
 %!hidebegin
 \end{document}
 \end{example}
 
 \begin{example}[standalone,
   biber,
-  biber_dir=../src/examples/,
   paperwidth=5cm,
   paperheight=2cm,
 ]
@@ -553,9 +553,9 @@ like this
 
 \begin{example}[standalone,
   biber,
-  paperwidth=6cm,
+  paperwidth=5cm,
   paperheight=7cm,
-  minted_language=bibtex
+  minted_language=bibtex,
 ]
 %!hidebegin
 \begin{filecontents}{example2.bib} 

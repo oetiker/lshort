@@ -34,7 +34,7 @@ symbols can be found at \CTANref|CTAN:info/symbols/comprehensive|.
 \begin{table}[!h]
   \caption{Greek Letters.}\label{greekletters}
   \bigskip
-  There is no uppercase of some of the letters like \ci{Alpha}, \ci{Beta} and so
+  There is no uppercase of some of the letters like \csi{Alpha}, \csi{Beta} and so
   on, because they look the same as normal roman letters: A, B\ldots
   \begin{symbols}{*4{cl}}
     \mstX{\alpha}     & \mstX{\theta}     & \mstX{o}          & \mstX{\upsilon}  \\
@@ -54,7 +54,7 @@ symbols can be found at \CTANref|CTAN:info/symbols/comprehensive|.
 \begin{table}[!tbp]
   \caption{Binary Relations.}\label{binaryrel}
   \bigskip
-  You can negate the following symbols by prefixing them with a \ci{not} command.
+  You can negate the following symbols by prefixing them with a \csi{not} command.
   \begin{symbols}{*3{cl}}
     \mstX{<}           & \mstX{>}           & \mstX{=}          \\
     \mstX{\leq}or \verb|\le|   & \mstX{\geq}or \verb|\ge|   & \mstX{\equiv}     \\
@@ -213,31 +213,31 @@ symbols can be found at \CTANref|CTAN:info/symbols/comprehensive|.
 
 \begin{table}[tbp]
   \caption{Math Alphabets.}\label{mathalpha}
-  \bigskip See Table~\ref{mathfonts} on~\pageref{mathfonts} for other math fonts.
+  \bigskip See \autoref{mathfonts} on \autopageref{mathfonts} for other math fonts.
   \begin{symbols}{@{}*3l@{}}
     \toprule
     Example& Command &Required package\\
     \midrule
     \rule{0pt}{1.05em}$\mathrm{ABCDE abcde 1234}$
-    & \verb|\mathrm{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathrm{ABCDE abcde 1234}|
     &       \\
     $\mathit{ABCDE abcde 1234}$
-    & \verb|\mathit{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathit{ABCDE abcde 1234}|
     &       \\
     $\mathnormal{ABCDE abcde 1234}$
-    & \verb|\mathnormal{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathnormal{ABCDE abcde 1234}|
     &  \\
     $\mathcal{ABCDE abcde 1234}$
-    & \verb|\mathcal{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathcal{ABCDE abcde 1234}|
     &  \\
     $\mathscr{ABCDE abcde 1234}$
-    &\verb|\mathscr{ABCDE abcde 1234}|
+    &\mintinline{latex}|\mathscr{ABCDE abcde 1234}|
     &\pai{mathrsfs}\\
     $\mathfrak{ABCDE abcde 1234}$
-    & \verb|\mathfrak{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathfrak{ABCDE abcde 1234}|
     &\pai{amsfonts}  or \textsf{amssymb}  \\
     $\mathbb{ABCDE abcde 1234}$
-    & \verb|\mathbb{ABCDE abcde 1234}|
+    & \mintinline{latex}|\mathbb{ABCDE abcde 1234}|
     &\pai{amsfonts}  or \textsf{amssymb} \\
     \bottomrule
   \end{symbols}

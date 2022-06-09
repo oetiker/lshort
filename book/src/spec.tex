@@ -26,31 +26,31 @@ For a more in-depth view, please refer to \companion.\index{makeindex
 To enable their indexing feature of \LaTeX{}, the \pai{makeidx} package
 must be loaded in the preamble with
 \begin{lscommand}
-  \verb|\usepackage{makeidx}|
+  \mintinline{latex}|\usepackage{makeidx}|
 \end{lscommand}
 \noindent and the special indexing commands must be enabled by putting
 the
 \begin{lscommand}
-  \ci{makeindex}
+  \csi{makeindex}
 \end{lscommand}
 \noindent command in the preamble.
 
 The content of the index is specified with
 \begin{lscommand}
-  \ci{index}\verb|{|\emph{key}@\emph{formatted\_entry}\verb|}|
+  \csi{index}[{{«\bs carg{key}»@«\bs carg{formatted entry}»}}: c]
 \end{lscommand}
-\noindent commands, where \emph{formatted\_entry} will appear in the index
-and \emph{key} will be used for sorting.  The \emph{formatted\_entry} is
-optional. If it is missing the \emph{key} will be used. You enter the index
+\noindent commands, where \carg{formatted entry} will appear in the index
+and \carg{key} will be used for sorting.  The \carg{formatted entry} is
+optional. If it is missing the \carg{key} will be used. You enter the index
 commands at the points in the text that you want the final index entries to
-point to.  Table~\ref{index} explains the syntax with several examples.
+point to. \autoref{index} explains the syntax with several examples.
 
 \begin{table}[!tp]
   \centering
   \caption{Index Key Syntax Examples.}\label{index}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Code                                   & Index Entry           & Comment                \\
+    Code                                   & Entry                 & Explanation            \\
     \midrule
     \rule{0pt}{1.05em}\verb|\index{hello}| & hello, 1              & Plain entry            \\
     \verb|\index{hello!Peter}|             & \hspace*{2ex}Peter, 3 & Subentry under `hello' \\
@@ -78,14 +78,14 @@ file name, but this time with the extension \eei{.ind}. If now the
 \LaTeX{} input file is processed again, this sorted index gets
 included into the document at the point where \LaTeX{} finds
 \begin{lscommand}
-  \ci{printindex}
+  \csi{printindex}
 \end{lscommand}
 
 The \pai{showidx} package that comes with \LaTeXe{} prints out all
 index entries in the left margin of the text. This is quite useful for
 proofreading a document and verifying the index.
 
-Note that the \ci{index} command can affect your layout if not used carefully.
+Note that the \csi{index} command can affect your layout if not used carefully.
 
 \begin{chktexignore}
   \begin{example}
@@ -124,14 +124,14 @@ This statement is false.
 
 The primary command of the package is
 \begin{lscommand}
-  \ci{fancyhf}[places][field]
+  \csi{fancyhf}[places: o, field: m]
 \end{lscommand}
 The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
 combination of three letters:
 \begin{itemize}
   \item The first specifies whether the location is in the header (\cargv{H}) or in the
         footer (\cargv{F}).
-  \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for center and
+  \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for centre and
         \cargv{R} for right.
   \item The third letter defines whether the field should be printed on even
         (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
@@ -169,7 +169,7 @@ The previous statement is true.
 \end{document}
 \end{example}
 
-There are two additional commands \ci{fancyhead} and \ci{fancyfoot} that work
+There are two additional commands \csi{fancyhead} and \csi{fancyfoot} that work
 the same way except that they assume \cargv{H} and \cargv{F} respectively
 in their \carg{places} argument unless specified differently.
 \begin{example}[standalone, paperheight=3.5cm]
@@ -194,11 +194,11 @@ to its own quotation.
 The lines drawn by the \pai{fancyhdr} package may also be customised. To change
 their thickness redefine the
 \begin{lscommand}
-  \ci{headrulewidth} \\
-  \ci{footrulewidth}
+  \csi{headrulewidth} \\
+  \csi{footrulewidth}
 \end{lscommand}
 macros to the desired size.
-\begin{example}[standalone, paperheight=3cm]
+\begin{example}[standalone, paperheight=3cm, paperwidth=3cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr} %!hide
@@ -215,9 +215,9 @@ Do not read this sentence.
 By default headers and footers are as long as the text on the page. If you want
 to extend\slash{}shorten them use the
 \begin{lscommand}
-  \ci{fancyhfoffset}[places][offset]
+  \csi{fancyhfoffset}[places: o, offset: m]
 \end{lscommand}
-command. The \carg{places} argument is the same as in \ci{fancyhf} except that
+command. The \carg{places} argument is the same as in \csi{fancyhf} except that
 it cannot contain \cargv{C}.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -233,13 +233,13 @@ If this sentence is true,
 then \(2 + 2 = 5\).
 \end{document}%!hide
 \end{example}
-Similarly to \ci{fancyf}, \ci{fancyheadoffset} and \ci{fancyfootoffset} are
+Similarly to \csi{fancyf}, \csi{fancyheadoffset} and \csi{fancyfootoffset} are
 used the same way except they only modify header\slash{}footer.
 
 \subsection{Contents of the headers}
 
 The default footer of the article class contains the current page number. To
-use it inside the fancy header simply use the command \ci{thepage}.
+use it inside the fancy header simply use the command \csi{thepage}.
 \begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -261,13 +261,13 @@ terminology. Before we talk about the default ones let's consider how you can
 define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
   of \pai*{fancyhdr}.} package.
 \begin{lscommand}
-  \ci*{extramarks}[left:m ! right:m] \\
-  \ci{firstleftxmark} \\
-  \ci{firstrightxmark} \\
-  \ci{lastleftxmark} \\
-  \ci{lastrightxmark}
+  \csi{extramarks}[left:m, right:m] \\
+  \csi{firstleftxmark} \\
+  \csi{firstrightxmark} \\
+  \csi{lastleftxmark} \\
+  \csi{lastrightxmark}
 \end{lscommand}
-The \ci{extramarks} command is used to set the contents of \carg{left} and \carg{right}
+The \csi{extramarks} command is used to set the contents of \carg{left} and \carg{right}
 marks. Then you can access these marks inside the headers by using the appropriate
 command. The \texttt{first}- commands refer to the first mark occurring on the
 page, while the \texttt{last}- refer to the last one.
@@ -297,18 +297,18 @@ The first statement is false.
 Let us now look at the default marks defined by \LaTeX{}. After loading
 \pai{extramarks} these may be set and accessed similarly:
 \begin{lscommand}
-  \ci*{markboth}[left:m ! right:m] \\
-  \ci{firstleftmark} \\
-  \ci{firstrightmark} \\
-  \ci{lastleftmark} \\
-  \ci{lastrightmark}
+  \csi{markboth}[left:m, right:m] \\
+  \csi{firstleftmark} \\
+  \csi{firstrightmark} \\
+  \csi{lastleftmark} \\
+  \csi{lastrightmark}
 \end{lscommand}
 The only difference between these and the extra marks is that \LaTeX{} classes
 automatically fill them, so if you are not careful you may lose your content.
 \footnote{You may prevent this by setting the pagestyle to \cargv{myheadings}
-  and then redefining it to use it with \pai{fancyhdr} as describied later.}
-For example in the article class, \carg{left} is set by the \ci{section}
-command, while \carg{right} is set by the \ci{subsection} command.
+  and then redefining it to use it with \pai{fancyhdr} as described later.}
+For example in the article class, \carg{left} is set by the \csi{section}
+command, while \carg{right} is set by the \csi{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -327,12 +327,12 @@ command, while \carg{right} is set by the \ci{subsection} command.
 \subsection{Sub}
 \end{document}%!hide
 \end{example}
-Note that \ci{firstrightmark} is empty in the above example. This is caused by
-the fact that \ci{section} commands sets both marks, leaving the right one
+Note that \csi{firstrightmark} is empty in the above example. This is caused by
+the fact that \csi{section} commands sets both marks, leaving the right one
 empty.
 
 You may have noticed that section titles are typeset in uppercase when provided by
-marks commands. To disable this use the \ci{nouppercase} command inside the \ci{fancyhf}
+marks commands. To disable this use the \csi{nouppercase} command inside the \csi{fancyhf}
 command.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -340,7 +340,9 @@ command.
 \usepackage{fancyhdr}%!hide
 \usepackage{extramarks}%!hide
 \pagestyle{fancy}%!hide
-\fancyhead[R]{\nouppercase{\firstleftmark}}
+\fancyhead[R]{%
+  \nouppercase{\firstleftmark}%
+}
 
 \begin{document}%!hide
 \section{Today}
@@ -351,10 +353,10 @@ is opposite day.
 \subsection{Advanced commands}
 
 If you want even more control over the section titles you may redefine the
-\ci{sectionmark}.\footnote{Or \ci{chaptermark}, \ci{subsectionmark} \ldots} The
+\csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
 command receives the section title as its first argument, while the section
-number is available as \ci{thesection}.
-\begin{example}[standalone, paperheight=4cm]
+number is available as \csi{thesection}.
+\begin{example}[standalone, paperheight=4.5cm, paperwidth=4cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr}%!hide
@@ -362,7 +364,8 @@ number is available as \ci{thesection}.
 \pagestyle{fancy}%!hide
 \fancyhead[R]{\firstleftmark}
 \RenewDocumentCommand{\sectionmark}{m}{%
-  \markboth{Section no.\,\thesection: #1}{}%
+  \markboth{%
+    Section no.\,\thesection: #1}{}%
 }
 
 \begin{document}%!hide
@@ -372,7 +375,7 @@ if they are reading this then
 everybody is reading this.
 \end{document}%!hide
 \end{example}
-If you only want to change the right mark, use the \ci{markright} command.
+If you only want to change the right mark, use the \csi{markright} command.
 
 By default the field in the centre of the header\slash{}footer will expand equally
 to the left and to the right. This is usually the desired behaviour but in some
@@ -395,7 +398,7 @@ Section by Jane Doe
 \end{example}
 In this situation you may want to use the
 \begin{lscommand}
-  \ci*{fancycenter}[distance:o ! stretch:o ! left:m ! centre:m ! right:m]
+  \csi{fancycenter}[distance:o, stretch:o, left:m, centre:m, right:m]
 \end{lscommand}
 command that automatically shifts the centre toward the shorter text. The
 \carg{distance} is the minimal distance that the elements are always surrounded
@@ -429,14 +432,14 @@ You may want to present different headers\slash{}footers when the corresponding
 page starts with a float or ends with a footnote. The \pai{fancyhdr} package
 defines four commands that let you achieve this.
 \begin{lscommand}
-  \ci*{iftopfloat}[true branch:m ! false branch:m] \\
-  \ci*{ifbotfloat}[true branch:m ! false branch:m] \\
-  \ci*{iffloatpage}[true branch:m ! false branch:m] \\
-  \ci*{iffootnote}[true branch:m ! false branch:m]
+  \csi{iftopfloat}[true branch:m, false branch:m] \\
+  \csi{ifbotfloat}[true branch:m, false branch:m] \\
+  \csi{iffloatpage}[true branch:m, false branch:m] \\
+  \csi{iffootnote}[true branch:m, false branch:m]
 \end{lscommand}
-\ci{iftopfloat}/\ci{ifbotfloat} execute \carg{true branch} if a float sits at
-the top\slash{}bottom of the page. Similarly \ci{iffloatpage} checks whether
-the page is special float-only page and \ci{iffootnote} checks if footnote is
+\csi{iftopfloat}/\csi{ifbotfloat} execute \carg{true branch} if a float sits at
+the top\slash{}bottom of the page. Similarly \csi{iffloatpage} checks whether
+the page is special float-only page and \csi{iffootnote} checks if footnote is
 at the bottom of the page.
 \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -470,11 +473,11 @@ Ignore this footnote.%
 \end{document}%!hide
 \end{example}
 
-The lines in headers and footers are created by invoking \ci{headrule} and
-\ci{footrule} commands. If you want finer control over the lines consider
-redefining these macros. Use \ci{headruleskip} and \ci{footruleskip} to raise
+The lines in headers and footers are created by invoking \csi{headrule} and
+\csi{footrule} commands. If you want finer control over the lines consider
+redefining these macros. Use \csi{headruleskip} and \csi{footruleskip} to raise
 or lower them if necessary.
-\begin{example}[standalone, paperheight=4cm]
+\begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
 \usepackage{fancyhdr}%!hide
@@ -497,10 +500,10 @@ nameable in under twenty words.
 
 While working on a longer document you may want to have several page styles for
 different occasions. You may also notice that some commands (for example
-\ci{chapter}, \ci{maketitle}) change the page style to \cargv{plain} whether
+\csi{chapter}, \csi{maketitle}) change the page style to \cargv{plain} whether
 you want it or not. The solution to both of these problems is the
 \begin{lscommand}
-  \ci*{fancypagestyle}[name:m ! code:m]
+  \csi{fancypagestyle}[name:m, code:m]
 \end{lscommand}
 command. The \carg{name} is the name of page style to (re)define, while the %chktex 36
 \carg{code} is the code to set up the page style. All page styles declared this
@@ -536,12 +539,10 @@ This by itself is not spectacular, but the implementation of the
 \pai{verbatim} package added new functionality, which is
 why I am mentioning the package here. The \pai{verbatim}
 package provides the
-
 \begin{lscommand}
-  \ci{verbatiminput}\verb|{|\emph{filename}\verb|}|
+  \csi{verbatiminput}[filename: m]
 \end{lscommand}
-
-\noindent command, which allows you to include raw ASCII text into your
+command, which allows you to include raw ASCII text into your
 document as if it were inside a \ei{verbatim} environment.
 
 As the \pai{verbatim} package is part of the `tools' bundle, you
@@ -622,7 +623,7 @@ some words in the document are marked as hyperlinks. They link to other
 places in the document or even to other documents. If you click
 on such a hyperlink you get transported to the destination of the
 link. In the context of \LaTeX{}, this means that all occurrences of
-\ci{ref} and \ci{pageref} become hyperlinks. Additionally, the table
+\csi{ref} and \csi{pageref} become hyperlinks. Additionally, the table
 of contents, the index and all the other similar structures become
 collections of hyperlinks.
 
@@ -661,16 +662,16 @@ The \pai{hyperref} adds two cool features to your \LaTeX{} PDF files:
   \item All references in your document turn into hyperlinks.
 \end{enumerate}
 
-Just add \verb+\usepackage{hyperref}+ as the \emph{last} command into
+Just add \mintinline{latex}|\usepackage{hyperref}| as the \emph{last} command into
 the preamble of your document.
 
-Many options are available to customize the behaviour of the
+Many options are available to customise the behaviour of the
 \pai{hyperref} package:
 \begin{itemize}
   \item either as a comma separated list after the pdftex option\\
-        \verb+\usepackage{hyperref}+
+        \mintinline{latex}|\usepackage{hyperref}|
   \item or on individual lines with the command
-        \verb+\hypersetup{+\emph{options}\verb+}+.
+        \csi{hypersetup}[options: m].
 \end{itemize}
 
 In the following
@@ -688,8 +689,8 @@ list the default values are written in an upright font.
           Acrobat's menu
     \item [\texttt{pdffitwindow (=false,\textsl{true})}] adjust the
           initial magnification of the PDF when displayed
-    \item [\texttt{pdftitle (=\{text\})}] define the title that gets
-          displayed in the \texttt{Document Info} window of Acrobat
+    \item [\texttt{pdftitle (=\{text\})}] defines the title that gets
+          displayed in the \enquote{Document Info} window of Acrobat
     \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
     \item [\texttt{pdfnewwindow (=false,\textsl{true})}] define whether a new
           window should be opened when a link leads out of the current
@@ -763,7 +764,7 @@ When you just want to provide information for the
 In addition to the automatic hyperlinks for cross references, it is
 possible to embed explicit links using
 \begin{lscommand}
-  \ci{href}\verb|{|\emph{url}\verb|}{|\emph{text}\verb|}|
+  \csi{href}[url: m, text: m]
 \end{lscommand}
 
 The code
@@ -777,7 +778,7 @@ a click on the word ``\textcolor{magenta}{CTAN}''
 will take you to the CTAN website.
 
 If the destination of the link is not a URL but a local file,
-use the \ci{href} command without the \enquote*{\texttt{http://}} bit:
+use the \csi{href} command without the \enquote*{\texttt{http://}} bit:
 \begin{minted}{latex}
 The complete document is \href{manual.pdf}{here}
 \end{minted}
@@ -788,7 +789,7 @@ will open the file \texttt{manual.pdf}. (The filename is relative to
 the location of the current document).
 
 The author of an article might want her readers to easily send
-email messages by using the \ci{href} command inside the \ci{author}
+email messages by using the \csi{href} command inside the \csi{author}
 command on the title page of the document:
 \begin{code}
 \begin{minted}{latex}
@@ -798,8 +799,10 @@ command on the title page of the document:
 \end{code}
 Note that I have put the link so that my email address appears not only
 in the link but also on the page itself. I did this because the
-link\\
-\verb+\href{mailto:mary@oetiker.ch}{Mary Oetiker}+\\
+link
+\begin{code}
+  \mintinline{latex}|\href{mailto:mary@oetiker.ch}{Mary Oetiker}|
+\end{code}
 would
 work well within Acrobat, but once the page is printed the email address
 would not be visible anymore.
@@ -812,8 +815,8 @@ Messages like the following:
   identifier (name{page.1}) has been already used,
   duplicate ignored
 \end{verbatim}
-appear when a counter gets reinitialized, for example by using
-the command \ci{mainmatter} provided by the \texttt{book} document class. It
+appear when a counter gets reinitialised, for example by using
+the command \csi{mainmatter} provided by the \texttt{book} document class. It
 resets the page number counter to~1 prior to the first chapter of the
 book. But as the preface of the book also has a page number~1 all
 links to ``page 1'' would not be unique anymore, hence the notice
@@ -841,7 +844,7 @@ Token not allowed in a PDFDocEncoded string:
 Work around this problem by providing a text string for
 the bookmarks, which replaces the offending text:
 \begin{lscommand}
-  \ci{texorpdfstring}\verb|{|\emph{\TeX{} text}\verb|}{|\emph{Bookmark Text}\verb|}|
+  \csi{texorpdfstring}[\bs TeX{} text: m, Bookmark Text: m]
 \end{lscommand}
 
 Math expressions are a prime candidate for this kind of problem:
@@ -851,12 +854,12 @@ Math expressions are a prime candidate for this kind of problem:
         {E = mc ** 2}}
 \end{minted}
 \end{code}
-which turns \verb+\section{$E=mc^2$}+ to ``E = mc ** 2'' in the bookmark area.
+which turns \mintinline{latex}|\section{$E=mc^2$}| to ``E = mc ** 2'' in the bookmark area.
 
-If you write your document in Unicode and use the \verb+unicode+ option for
+If you write your document in Unicode and use the \cargv{unicode} option for
 the \pai{hyperref} package to use Unicode characters in bookmarks, this
 will give you a much larger selection of characters to pick from when
-when using \ci{texorpdfstring}.
+when using \csi{texorpdfstring}.
 
 \section{Working with \hologo{XeLaTeX} and PDF}%
 \label{sec:xetex}\index{PDF}\index{XeTeX@\hologo{XeTeX}}\index{XeLaTeX@\hologo{XeLaTeX}}
@@ -881,7 +884,7 @@ to use any font known to the operating system. If you have the \texttt{Linux
 \end{code}
 %
 in the preamble. This will normally detect the italic and bold versions as
-well, so \verb|\textit| and \verb|\textbf| will work as usual. When the
+well, so \mintinline{latex}|\textit| and \mintinline{latex}|\textbf| will work as usual. When the
 font is using OpenType technology you have access to many features which
 required switching to a separate font or using virtual fonts in the past.
 The main feature is the extended character set; a font may contain Latin,
@@ -932,7 +935,7 @@ to enable the Polish ligatures.
 
 Some fonts (like the commercial Adobe Garamond Premier Pro) contain
 alternative glyphs that are activated by default in \hologo{XeLaTeX}
-distributed with \TeX{}Live~2010\footnote{The behavior has changed with this
+distributed with \TeX{}Live~2010\footnote{The behaviour has changed with this
   version, it was off by default in earlier releases.}. The result is a stylish
 ``Q'' with a descender reaching below the following ``u''. To disable this
 feature you have to define the font with disabled contextuals:
@@ -948,7 +951,10 @@ To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
 \subsubsection{Where do I get OpenType fonts?}
 
 If you have \texttt{TeXLive} installed, you already have some at
-\url{.../texmf-dist/fonts/opentype}, just install them in your operating
+\begin{code}
+  \url{.../texmf-dist/fonts/opentype},
+\end{code}
+just install them in your operating
 system. This collection does not include \texttt{DejaVu}, which is available
 at \url{http://dejavu-fonts.org/}.
 
@@ -968,7 +974,7 @@ regular keyboard has not. So, how do I enter non-ASCII characters?
 
 If you write a large amount of text in a foreign language, you can install a
 keyboard for that language and print out the character positions. (Most
-operatings system have some sort of virtual keyboard, just make a
+operating system have some sort of virtual keyboard, just make a
 screenshot.)
 
 If you rarely need an exotic character, you can simply pick it in the
@@ -1013,7 +1019,7 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 % cran captur par ImageMagick (man ImageMagick) fonction  import
 % et convertie en jpg toujours par ImageMagick.
 
-\begin{figure}[htbp]
+\begin{listing}
   \begin{minted}{latex}
 \documentclass[10pt]{beamer}
 \mode<beamer>{%
@@ -1049,10 +1055,10 @@ The \pai{beamer} class uses \pai{graphicx}, \pai{color} and
 \end{document}
 \end{minted}
   \caption{Sample code for the \pai{beamer} class}%
-  \label{fig:code-beamer}
-\end{figure}
+  \label{lst:code-beamer}
+\end{listing}
 
-When you compile the code presented in figure~\ref{fig:code-beamer}
+When you compile the code presented in \autoref{lst:code-beamer}
 with \wi{pdf\LaTeX} you get a PDF file with a title page and a second page
 showing several items that will be revealed one at a time as you step
 though your presentation.
@@ -1074,32 +1080,32 @@ following modes are available:
 \end{description}
 The default mode is \texttt{beamer}, change it by setting a
 different mode as a global option, like
-\verb|\documentclass[10pt,handout]{beamer}| to print the handouts for
+\mintinline{latex}|\documentclass[10pt,handout]{beamer}| to print the handouts for
 example.
 
 The look of the screen presentation depends on the theme you choose. Pick one of the themes shipped with the beamer class or
 create your own. See the beamer class documentation in
 \texttt{beameruserguide.pdf} for more information on this.
 
-Let's have a closer look at the code in figure~\ref{fig:code-beamer}.
+Let's have a closer look at the code in \autoref{lst:code-beamer}.
 
-For the screen version of the presentation \verb|\mode<beamer>| we
-have chosen the \emph{Goettingen} theme to show a navigation panel
+For the screen version of the presentation \mintinline{latex}|\mode<beamer>| we
+have chosen the \cargv{Goettingen} theme to show a navigation panel
 integrated into the table of contents. The options allow us to choose the
 size of the panel (22~mm in this case) and its position (on the right
-side of the body text). The option \emph{hideothersubsections}, shows
+side of the body text). The option \cargv{hideothersubsections}, shows
 the chapter titles, but only the subsections of the present
-chapter. There are no special settings for \verb|\mode<trans>| and
-\verb|\mode<handout>|. They appear in their standard layout.
+chapter. There are no special settings for \mintinline{latex}|\mode<trans>| and
+\mintinline{latex}|\mode<handout>|. They appear in their standard layout.
 
-The commands \verb|\title{}|, \verb|\author{}|, \verb|\institute{}|,
-and\\ \verb|\titlegraphic{}| set the content of the title page. The
-optional arguments of \verb|\title[]{}| and \verb|\author[]{}|
+The commands \mintinline{latex}|\title{}|, \mintinline{latex}|\author{}|, \mintinline{latex}|\institute{}|,
+and\\ \mintinline{latex}|\titlegraphic{}| set the content of the title page. The
+optional arguments of \mintinline{latex}|\title[]{}| and \mintinline{latex}|\author[]{}|
 let you specify a special version of the title and the author
-name to be displayed on the panel of the \emph{Goettingen} theme.
+name to be displayed on the panel of the \cargv{Goettingen} theme.
 
 The titles and subtitles in the panel are created with normal
-\verb|\section{}| and \verb|\subsection{}| commands that you place
+\cs{section} and \cs{subsection} commands that you place
 \emph{outside} the \ei{frame} environment.
 
 The tiny navigation icons at the bottom of the screen also allow to
@@ -1108,22 +1114,22 @@ you choose.
 
 The contents of each slide or screen has to be placed inside a
 \ei{frame} environment. There is an optional argument in angular
-brackets (\verb|<| and \verb|>|), it allows us to suppress a particular
+brackets (\mintinline{latex}|<| and \mintinline{latex}|>|), it allows us to suppress a particular
 frame in one of the versions of the presentation. In the example the
 first page would not be shown in the handout version due to the
-\verb|<handout:0>| argument.
+\mintinline{latex}|<handout:0>| argument.
 
 It is highly recommended to set a title for each slide apart from the
-title slide. This is done with the command \verb|\frametitle{}|. If a
+title slide. This is done with the command \mintinline{latex}|\frametitle{}|. If a
 subtitle is necessary use the \ei{block} environment as shown
-in the example. Note that the sectioning commands \verb|\section{}|
-and \verb|\subsection{}| do not produce output on the slide proper.
+in the example. Note that the sectioning commands \mintinline{latex}|\section{}|
+and \mintinline{latex}|\subsection{}| do not produce output on the slide proper.
 
-The command \verb|\pause| in the itemize environment lets you reveal
+The command \mintinline{latex}|\pause| in the itemize environment lets you reveal
 the items one by one. For other presentation effects check out the
-commands \verb|\only|, \verb|\uncover|, \verb|\alt| and
-\verb|\temporal|. In many place it is possible to use angular brackets to
-further customize the presentation.
+commands \mintinline{latex}|\only|, \mintinline{latex}|\uncover|, \mintinline{latex}|\alt| and
+\mintinline{latex}|\temporal|. In many place it is possible to use angular brackets to
+further customise the presentation.
 
 In any case make sure to read through the beamer class documentation
 \texttt{beameruserguide.pdf} to get a complete picture of what is in

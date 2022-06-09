@@ -18,15 +18,15 @@
 
 The first information \LaTeX{} needs to know when processing an
 input file is the type of document the author wants to create. This
-is specified with the \ci{documentclass} command.
+is specified with the \csi{documentclass} command.
 \begin{lscommand}
-  \ci{documentclass}[options][class]
+  \csi{documentclass}[options:o, class: m]
 \end{lscommand}
 Here \carg{class} specifies the type of document to be created.
-Table~\ref{documentclasses} lists some of the available document classes. The
+\autoref{documentclasses} lists some of the available document classes. The
 \carg{\wi{option}s} parameter customises the behaviour of the document class.
 The options have to be separated by commas. The most common options for the
-standard document classes are listed in Table~\ref{options}.
+standard document classes are listed in \autoref{options}.
 
 \begin{table}
   \caption{Document Classes.}\label{documentclasses}
@@ -50,7 +50,7 @@ standard document classes are listed in Table~\ref{options}.
 \begin{table}
   \RenewDocumentCommand{\arraystretch}{}{1.2}
   \caption{Document Class Options.}\label{options}
-  \begin{tabular}{@{}>{\RaggedRight}p{3cm}p{9cm}@{}}
+  \begin{tabular}{@{}>{\RaggedRight}p{2.5cm}p{9cm}@{}}
     \toprule
     Options                                  & Description                   \\
     \midrule
@@ -96,7 +96,7 @@ standard document classes are listed in Table~\ref{options}.
 For example if an input file for a \LaTeX{} document starts with the
 line
 \begin{code}
-\ci*{documentclass}[11pt, twoside, a4paper:vo ! article: vm]
+\csi{documentclass}[{11pt, twoside, a4paper}: vo, article: vm]
 \end{code}
 then it instructs \LaTeX{} to typeset the document as an article
 with a base font size of eleven points, and to produce a
@@ -110,9 +110,9 @@ of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{
   style!headings@\texttt{headings}}\index{headings@\texttt{headings}}\index{page
   style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
 \begin{lscommand}
-  \ci{pagestyle}[style]
+  \csi{pagestyle}[style: m]
 \end{lscommand}
-command defines which one to use. Table~\ref{pagestyle} lists the predefined
+command defines which one to use. \autoref{pagestyle} lists the predefined
 page styles.
 
 \begin{table}
@@ -132,26 +132,26 @@ page styles.
     \cargv{myheadings} & similar to the \cargv{headings} style but leaves
     the headers and footers empty allowing for them to be defined by
     the author. A description of how to do this is in
-    Section~\ref{sec:fancy}.                                              \\
+    \autoref{sec:fancy}.                                                  \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 It is possible to change the page style of the current page with the command
 \begin{lscommand}
-  \ci{thispagestyle}[style]
+  \csi{thispagestyle}[style: m]
 \end{lscommand}
 
 You may also control the style of the displayed page numbers. To change it use
 the
 \begin{lscommand}
-  \ci{pagenumbering}[style]
+  \csi{pagenumbering}[style: m]
 \end{lscommand}
 command, where \carg{style} is one of the styles presented in
-table~\ref{tb:numberings}.
+\autoref{tb:numberings}.
 
 \begin{table}
-  \caption{Possible argument of the \ci{pagenumbering} command.}\label{tb:numberings}
+  \caption{Possible argument of the \csi{pagenumbering} command.}\label{tb:numberings}
   \begin{tabular}{@{}ll@{}}
     \toprule
     Style          & Description                                   \\
@@ -166,7 +166,7 @@ table~\ref{tb:numberings}.
 \end{table}
 
 A description how to create your own headers and footers can be found in
-Section~\ref{sec:fancy} on page~\pageref{sec:fancy}.
+\autoref{sec:fancy} on \autopageref{sec:fancy}.
 
 \section{Line Breaking and Page Breaking}
 
@@ -178,32 +178,32 @@ by optimising the contents of a whole paragraph. If necessary, it
 also hyphenates words that would not fit comfortably on a line.
 How the paragraphs are typeset depends on the document class.
 Normally the first line of a paragraph is indented, and there is no
-additional space between two paragraphs. Refer to Section~\ref{parsp}
+additional space between two paragraphs. Refer to \autoref{parsp}
 for more information.
 
 In special cases it might be necessary to order \LaTeX{} to break a
 line:
 \begin{lscommand}
-  \ci*{\bs}[length:o] or \ci{newline}
+  \csi{\bs}[length:o] or \csi{newline}
 \end{lscommand}
 starts a new line without starting a new paragraph. The optional \carg{length}
 argument adds additional space after the line.
 
 \begin{lscommand}
-  \ci*{\bs*}[length:o]
+  \csi{\bs*}[length:o]
 \end{lscommand}
 additionally prohibits a page break after the forced line break.
 
 \begin{lscommand}
-  \ci{newpage}
+  \csi{newpage}
 \end{lscommand}
 starts a new page.
 
 \begin{lscommand}
-  \ci*{linebreak}[n:o],
-  \ci*{nolinebreak}[n:o],
-  \ci*{pagebreak}[n:o],
-  \ci*{nopagebreak}[n:o]
+  \csi{linebreak}[n:o] \\
+  \csi{nolinebreak}[n:o] \\
+  \csi{pagebreak}[n:o] \\
+  \csi{nopagebreak}[n:o]
 \end{lscommand}
 suggest places where a break may (or may not) happen.
 They enable the author to influence their
@@ -217,15 +217,14 @@ the next section; this can lead to unpleasant gaps in your text.
 If you really want to start a ``new line'' or a ``new page'', then use the
 corresponding command. Guess their names!
 \begin{example}[examplewidth=0.4\linewidth]
-  Lorem ipsum dolor sit amet,\\
-  consectetur adipiscing elit,\\[1cm]
-  sed do eiusmod tempor\linebreak
-  incididunt ut labore\linebreak[1]
-  et dolore magna aliqua. Ut enim
-  ad minim veniam, quis \linebreak[3]
-  nostrud exercitation ullamco laboris
-  nisi ut aliquip\linebreak
-   ex ea commodo consequat. 
+  Start a new line here,\\
+  and also here but make
+  it bigger.\\[1cm]
+  Do a linebreak here\linebreak
+  and maybe here, \linebreak[1]
+  but no pressure.
+  Linebreak here\linebreak[3]
+  would be \emph{really} cool. 
 \end{example}
 
 \LaTeX{} always tries to produce the best line breaks possible. If it
@@ -236,14 +235,14 @@ input file. This happens most often when \LaTeX{} cannot find a
 suitable place to hyphenate a word.\footnote{Although \LaTeX{} gives
   you a warning when that happens (\texttt{Overfull \bs{}hbox}) and displays the
   offending line, such lines are not always easy to find. If you use
-  the option \texttt{draft} in the \ci{documentclass} command, these
+  the option \texttt{draft} in the \csi{documentclass} command, these
   lines will be marked with a thick black line on the right margin.}
 Instruct \LaTeX{} to lower its standards a little by giving
-the \ci{sloppy} command. It prevents such over-long lines by
+the \csi{sloppy} command. It prevents such over-long lines by
 increasing the inter-word spacing---even if the final output is not
 optimal.  In this case a warning (``\wi{underfull hbox}'') is given to
 the user.  In most such cases the result doesn't look very good. The
-command \ci{fussy} brings \LaTeX{} back to its default behaviour.
+command \csi{fussy} brings \LaTeX{} back to its default behaviour.
 
 \subsection{Hyphenation}\label{hyph}
 
@@ -254,7 +253,7 @@ about the exception.
 
 The command
 \begin{lscommand}
-  \ci{hyphenation}\verb|{|\emph{word list}\verb|}|
+  \csi{hyphenation}[word list: m]
 \end{lscommand}
 causes the words listed in the argument to be hyphenated only at the points
 marked by \enquote*{\texttt{-}}.  The argument of the command should only contain
@@ -263,7 +262,10 @@ normal letters by \LaTeX{}. The hyphenation hints are stored for the language
 that is active when the hyphenation command occurs. This means that if you
 place a hyphenation command into the preamble of your document it will
 influence the English language hyphenation. If you place the command after the
-\verb|\begin{document}| and you are using some package for national language
+\begin{chktexignore}
+  \mintinline{latex}|\begin{document}|
+\end{chktexignore}
+and you are using some package for national language
 support like \pai{polyglossia}, then the hyphenation hints will be active in
 the language activated through \pai{polyglossia}.
 
@@ -272,28 +274,29 @@ well as \enquote{Locomotion}, and it prevents \enquote{FORTRAN},
 \enquote{Fortran} and \enquote{fortran} from being hyphenated at all.  No
 special characters or symbols are allowed in the argument.
 \begin{code}
-\ci*{hyphenation}[FORTRAN Lo-co-mo-tion:vm]
+\csi{hyphenation}[FORTRAN Lo-co-mo-tion:vm]
 \end{code}
 
-The command \ci{-} inserts a discretionary hyphen into a word. This also
+The command \csi{-} inserts a discretionary hyphen into a word. This also
 becomes the only point hyphenation is allowed in this word. This command is
 especially useful for words containing special characters, because \LaTeX{}
 does not automatically hyphenate words containing special characters.
 \begin{example}
-I think this is: su\-per\-cal\-%
-i\-frag\-i\-lis\-tic\-ex\-pi\-%
-al\-i\-do\-cious
+I think this is: su\-per\-%
+cal\-i\-frag\-i\-lis\-tic\-%
+ex\-pi\-al\-i\-do\-cious
 \end{example}
 
 Several words can be kept together on one line with the command
 \begin{lscommand}
-  \ci{mbox}\verb|{|\emph{text}\verb|}|
+  \csi{mbox}[text: m]
 \end{lscommand}
 \noindent It causes its argument to be kept together under all circumstances.
 
 \begin{example}
-My phone number will change soon.
-It will be \mbox{0116 291 2319}.
+My phone number will
+change soon. It will
+be \mbox{0116 291 2319}.
 
 The parameter
 \mbox{[filename]} should
@@ -308,12 +311,12 @@ text strings:
 \begin{center}
   \begin{tabular}{@{}lll@{}}
     \toprule
-    Command     & Example   & Description              \\
+    Command      & Example   & Description               \\
     \midrule
-    \ci{today}  & \today    & Current date             \\
-    \ci{TeX}    & \TeX{}    & Your favorite typesetter \\
-    \ci{LaTeX}  & \LaTeX{}  & The Name of the Game     \\
-    \ci{LaTeXe} & \LaTeXe{} & The current incarnation  \\
+    \csi{today}  & \today    & Current date              \\
+    \csi{TeX}    & \TeX{}    & Your favourite typesetter \\
+    \csi{LaTeX}  & \LaTeX{}  & The Name of the Game      \\
+    \csi{LaTeXe} & \LaTeXe{} & The current incarnation   \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -323,7 +326,7 @@ text strings:
 \LaTeX{} knows four kinds of \wi{dash}es. Access three of them with different
 number of consecutive dashes. The fourth sign is actually not a dash at
 all---it is the mathematical minus sign. It is typed automatically when inside
-math mode which is described later in Chapter~\ref{chap:math}.
+math mode which is described later in \autoref{chap:math}.
 \begin{example}
 daughter-in-law, X-rated\\
 pages 13--67\\
@@ -336,44 +339,27 @@ writing compound words (and inserted automatically by \LaTeX{} when splitting a
 single words), en-dashes are used for writing a range of numbers and em-dashes
 are used to mark an interruption in speech or an abrupt change of thought.
 
-\section{Abstract}
-
-In scientific publications it is customary to start with an abstract which
-gives the reader a quick overview of what to expect. \LaTeX{} provides the
-\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
-in documents typeset with the article document class.
-
-\begin{example}[standalone, paperheight=3.5cm]
-\begin{document}%!hide
-\begin{abstract}
-  This paper will talk about abstracts.
-\end{abstract}
-
-Abstracts are very important \ldots
-\end{document}%!hide
-\end{example}
-
 \section{Slash (/)}\index{Slash}
 
 In order to typeset a slash between two words, one can simply type for example
 \texttt{read/write}, but this makes \LaTeX{} treat the two words as one.
 Hyphenation is disabled for these two words, so there may be
-\enquote*{overfull} errors.  To overcome this, use \ci{slash}.  For example
+\enquote*{overfull} errors.  To overcome this, use \csi{slash}.  For example
 type
 \begin{code}
-  \verb|read\slash write|
+  \mintinline{latex}|read\slash write|
 \end{code}
 which allows hyphenation.  Normal
 \enquote*{\texttt{/}} character may be still used for inline fractions.
 Typesetting units, such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be
-described in Section~\ref{sec:units}.
+described in \autoref{sec:units}.
 
 \section{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
 
 When writing about money these days, you need the Euro symbol. Many current
 fonts contain a Euro symbol. To typeset it use the command
 \begin{lscommand}
-  \ci{texteuro}
+  \csi{texteuro}
 \end{lscommand}
 
 If your font does not provide its own Euro symbol or if you do not like the
@@ -381,11 +367,11 @@ font's Euro symbol, you have two more choices:
 
 First the \pai{eurosym} package. It provides the official Euro symbol:
 \begin{lscommand}
-  \ci{usepackage}[official][eurosym]
+  \csi{usepackage}[official: vo, eurosym: m]
 \end{lscommand}
 If you prefer a Euro symbol that matches your font, use the option
 \texttt{gen} in place of the \texttt{official} option. Comparison of the
-available Euro symbols can be fount in Table~\ref{eurosymb}.
+available Euro symbols can be fount in \autoref{eurosymb}.
 
 \begin{table}
   \caption[Available Euro symbols]{The appearance of available Euro symbols based
@@ -396,11 +382,11 @@ available Euro symbols can be fount in Table~\ref{eurosymb}.
     \cmidrule(l){3-5}
     Package        & Command                       & Roman                           & Sans serif                    & Monospace \\
     \midrule
-    \emph{none}    & \ci{texteuro}                 & \huge\texteuro{}                & \huge\sffamily\texteuro{}
+    \emph{none}    & \csi{texteuro}                & \huge\texteuro{}                & \huge\sffamily\texteuro{}
                    & \huge\ttfamily\texteuro{}                                                                                   \\
-    eurosym        & \ci{euro}                     & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
+    eurosym        & \csi{euro}                    & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
                    & \huge\ttfamily\officialeuro{}                                                                               \\
-    {[gen]eurosym} & \ci{euro}                     & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
+    {[gen]eurosym} & \csi{euro}                    & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
                    & \huge\ttfamily\geneuro{}                                                                                    \\
     \bottomrule
   \end{tabular}
@@ -416,13 +402,15 @@ Therefore, entering \enquote*{\wi{ellipsis}} by just typing three
 dots would produce the wrong result. Instead, there is a special
 command for these dots. It is called
 \begin{lscommand}
-  \ci{ldots} (low dots)\index{...@\ldots}
+  \csi{ldots} (low dots)\index{...@\ldots}
 \end{lscommand}
 
 \begin{chktexignore}
   \begin{example}
-Not like this ... but like this:\\
-New York, Tokyo, Budapest, \ldots
+Not like this ...
+but like this:\\
+New York, Tokyo,
+Budapest, \ldots
 \end{example}
 \end{chktexignore}
 
@@ -435,7 +423,7 @@ symbols.
 {\large ff fi fl ffi \ldots}\quad
 instead of\quad {\large f\mbox{}f f\mbox{}i f\mbox{}l f\mbox{}f\mbox{}i \ldots}
 \end{code}
-These so-called \wi{ligature}s can be prohibited by inserting an \ci{mbox}\verb|{}|
+These so-called \wi{ligature}s can be prohibited by inserting an \mintinline{latex}|\mbox{}|
 between the two letters in question. This might be necessary with
 words built from two words.
 
@@ -445,14 +433,32 @@ Not shelfful\\
 but shelf\mbox{}ful
 \end{example}
 
+\section{Abstract}
+
+In scientific publications it is customary to start with an abstract which
+gives the reader a quick overview of what to expect. \LaTeX{} provides the
+\ei{abstract} environment for this purpose. Normally \ei{abstract} is used
+in documents typeset with the article document class.
+
+\begin{example}[standalone, paperheight=3.5cm]
+\begin{document}%!hide
+\begin{abstract}
+  This paper will talk about
+  abstracts.
+\end{abstract}
+
+Abstracts are very important \ldots
+\end{document}%!hide
+\end{example}
+
 \subsection{Accents and Special Characters}
 
 \LaTeX{} supports the use of \wi{accent}s and \wi{special character}s
-from many languages. Table~\ref{accents} shows all sorts of accents
+from many languages. \autoref{accents} shows all sorts of accents
 being applied to the letter o. Naturally other letters work too.
 
 To place an accent on top of an i or a j, its dots have to be
-removed. This is accomplished by typing \verb|\i| and \verb|\j|.
+removed. This is accomplished by typing \csi{i} and \csi{j}.
 \begin{chktexignore}
   \begin{example}
 H\^otel, na\"\i ve, \'el\`eve,\\
@@ -500,7 +506,7 @@ configured appropriately:
 \end{enumerate}
 
 Also entering text in your language of choice might be a bit cumbersome using
-all the commands from figure~\ref{accents}. To overcome this problem, until
+all the commands from \autoref{accents}. To overcome this problem, until
 recently you had to delve deep into the abyss of language specific encodings
 both for input as well as fonts. These days, with modern \TeX{} engines
 speaking UTF-8 natively, these problems have relaxed considerably.
@@ -521,8 +527,8 @@ your editor and \hologo{TeX} will understand them.
 Writing in different languages is easy, just load the \pai{polyglossia} package
 and specify the languages in the preamble using
 \begin{lscommand}
-  \ci{setdefaultlanguage}[options][language] \\
-  \ci{setotherlanguage}[options][language]
+  \csi{setdefaultlanguage}[options: o, language: m] \\
+  \csi{setotherlanguage}[options: o, language: m]
 \end{lscommand}
 where \carg{language} is either the name of the language to use such as
 \cargv{gaelic} or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
@@ -554,7 +560,6 @@ You may also use \ei{lang} environment that accepts the \carg{language} as its
 first argument. This is especially useful if you prefer to specify the language
 via BCP-47 tag since environment names cannot contain the
 \enquote*{\texttt{-}} symbol.
-
 \begin{example}
 \year=3022 \month=1 \day=19 %!hide
 \begin{lang}{de-AT}
@@ -563,10 +568,11 @@ via BCP-47 tag since environment names cannot contain the
 \end{example}
 
 You can also pass \carg{options} as an optional argument to the environment.
-
 \begin{example}
 \year=3023 \month=8 \day=17 %!hide
-\begin{german}[script=blackletter]
+\begin{german}[
+  script=blackletter
+]
   Heute ist nicht \today.
 \end{german}
 \end{example}
@@ -574,25 +580,24 @@ You can also pass \carg{options} as an optional argument to the environment.
 If you just need a word or a short phrase in a foreign language you can use
 either the
 \begin{lscommand}
-  \ci*{text\textit{language}}[options:o ! text:m]
+  \csi{text«\bs carg*{language}»}[options:o, text:m]
 \end{lscommand}
 or the
 \begin{lscommand}
-  \ci*{textlang}[options:o ! language:m ! text:m]
+  \csi{textlang}[options:o, language:m, text:m]
 \end{lscommand}
 command:
-\begin{example}[examplewidth=0.33\linewidth]
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 In Austria they write
 \textlang[variant=austrian]{de}{Jänner}
-instead of \textgerman{Januar}.
-And in the olden days \textlang{de}{August}
-was written
+instead of \textgerman{Januar}. And in the olden
+days \textlang{de}{August} was written
 \textgerman[script=blackletter]{Auguſt}.
 \end{example}
 
 For languages that are not very different from English, the results are not
 very impressive. We get correct hyphenation and some context aware commands
-such as \ci{today} adjust their output. However the further we stray from
+such as \csi{today} adjust their output. However the further we stray from
 English, the more useful will this commands become.
 
 Sometimes the font used in the main document does not contain glyphs that are
@@ -602,12 +607,12 @@ for that language.
 
 To set the fonts use the command
 \begin{lscommand}
-  \ci*{newfontfamily}[familyname:M ! options:o ! font:m]
+  \csi{newfontfamily}[familyname:M, options:o, font:m]
 \end{lscommand}
 from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
   by \pai{polyglossia} so you do not need to add it to a the preamble of your
   document.} which is described in much more detail in
-Section~\ref{sec:fontspec}.
+\autoref{sec:fontspec}.
 
 When changing the text language, \pai{polyglossia} checks whether a font family named
 \cargv{\textit{language}font} exists and changes to it if it's available.
@@ -621,22 +626,20 @@ while looking nearly identical to Latin Modern.\footnote{Both fonts are
 If you have the CMU font installed in your system (unlikely) or you are using
 \hologo{LuaLaTeX} then you can simply write
 \begin{minted}{latex}
-\newfontfamily\greekfont{CMU Serif}
+  \newfontfamily\greekfont{CMU Serif}
 \end{minted}
 
 If you are using \hologo{XeLaTeX} and don't have the font installed then you
 need to specify the font by its file name.
 \begin{minted}{latex}
-\newfontfamily\greekfont[
-  Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
-  BoldFont=*bx, BoldItalicFont=*bi,
-]{cmun}
+  \newfontfamily\greekfont[
+    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+    BoldFont=*bx, BoldItalicFont=*bi,
+  ]{Cm}
 \end{minted}
 
 With the appropriate fonts loaded, you can now write:
-{
-\setmonofont{cmuntt.otf}
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode,noextend]
 %!showbegin !hide
 % In the preamble (LuaLaTeX)
 \setotherlanguage{greek}
@@ -647,13 +650,15 @@ With the appropriate fonts loaded, you can now write:
 %!showend !hide
 
 \begin{chktexignore} %!hide
-\textrussian{Правда} is
+\textrussian{Правда} is a Russian newspaper. %!hide
+\textlang{greek}{ἀλήθεια} is truth or disclosure in %!hide
+%!showbegin %!hide
+\textrussian{«\fontspec{cmuntt.otf}Правда»} is a Russian newspaper.
+\textlang{greek}{«\fontspec{cmuntt.otf}ἀλήθεια»} is truth or disclosure in
+%!showend %!hide
+philosophy.
 \end{chktexignore} %!hide
-a Russian newspaper.
-\textlang{greek}{ἀλήθεια} is truth
-or disclosure in philosophy.
-  \end{example}
-}
+\end{example}
 
 \LaTeX{} actually uses three different fonts for typesetting documents. The
 above commands only set the default serif font used for the body text. The
@@ -663,39 +668,39 @@ a particular language, define \cargv{\textit{language}fontsf} family for sans se
 \cargv{\textit{language}fonttt} for monospace. For example, to define CMU as a
 font for Greek in all three fonts when using \hologo{LuaLaTeX} you would write
 \begin{minted}{latex}
-\newfontfamily\greekfont{CMU Serif}
-\newfontfamily\greekfontsf{CMU Sans Serif}
-\newfontfamily\greekfonttt{CMU Typewriter Text}
+  \newfontfamily\greekfont{CMU Serif}
+  \newfontfamily\greekfontsf{CMU Sans Serif}
+  \newfontfamily\greekfonttt{CMU Typewriter Text}
 \end{minted}
 \pagebreak[3]
 or in \hologo{XeLaTeX}
 \begin{minted}{latex}
-\newfontfamily\greekfont[
-  Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
-  BoldFont=*bx, BoldItalicFont=*bi,
-]{cmun}
-\newfontfamily\greekfontsf[
-  Extension=.otf, UprightFont=*ss, ItalicFont=*si,
-  BoldFont=*sx, BoldItalicFont=*so, 
-]{cmun}
-\newfontfamily\greekfonttt[
-  Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
-  BoldFont=*tb, BoldItalicFont=*tx, 
-]{cmun}
+  \newfontfamily\greekfont[
+    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+    BoldFont=*bx, BoldItalicFont=*bi,
+  ]{cmun}
+  \newfontfamily\greekfontsf[
+    Extension=.otf, UprightFont=*ss, ItalicFont=*si,
+    BoldFont=*sx, BoldItalicFont=*so, 
+  ]{cmun}
+  \newfontfamily\greekfonttt[
+    Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
+    BoldFont=*tb, BoldItalicFont=*tx, 
+  ]{cmun}
 \end{minted}
 
 The commands above redefine the fonts for languages used as \enquote*{other} in
 polyglossia. If you want to influence the font of the main document language
-use the \ci{setmainfont}, \ci{setsansfont} and \ci{setmonofont} that work the
+use the \csi{setmainfont}, \csi{setsansfont} and \csi{setmonofont} that work the
 same way but without the \carg{familyname} argument.
 \begin{minted}{latex}
-\setmainfont{CMU Serif}
-\setsansfont{CMU Sans Serif}
-\setmonofont{CMU Typewriter Text}
+  \setmainfont{CMU Serif}
+  \setsansfont{CMU Sans Serif}
+  \setmonofont{CMU Typewriter Text}
 \end{minted}
 
 If you want to learn even more about fonts, have a look at
-Section~\ref{sec:fontspec}.
+\autoref{sec:fontspec}.
 
 \subsubsection{Right to Left (RTL) languages}
 
@@ -709,27 +714,39 @@ Some languages are written left to right, others are written right to left
 loads \pai{bidi} this means that \pai{polyglossia} should be the last package
 loaded.)
 
-\begin{example}[standalone, template=empty, paperheight=4cm]
+\begin{example}[standalone, template=empty, paperwidth=0.35\linewidth, paperheight=4cm]
 \documentclass{article}
 
 \usepackage{polyglossia}
 \setdefaultlanguage{arabic}
-\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}%!hide 
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}
+\defaultfontfeatures[Iran Nastaliq] {
+  Path=font-IranNastaliq/WebFonts/,
+  Extension=.ttf,
+  UprightFont=IranNastaliq-Web,
+  Script=Arabic,
+}
+%!hideend
+\newfontfamily\arabicfont{Iran Nastaliq}
 
 \begin{document}
-This text will be typeset right to left.
+%!showbegin !hide
+«\textarabic{هذا نص عربي}»
+%!showend !hide
+هذا نص عربي
 \end{document}
 \end{example}
 
 The package \pai*{xepersian}\footnote{Works only with
   \hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
 supplies Persian \LaTeX-commands that allows you to enter commands like
-\ci{section} in Persian, which makes this really attractive to native speakers.
+\csi{section} in Persian, which makes this really attractive to native speakers.
 \pai{xepersian} is the only package that supports kashida\index{kashida} with
 \hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
 development.
 
-To typeset Arabic you may use the IranNastaliq font~\cite{font:IranNastaliq}
+To typeset Arabic you may use the Iran Nastaliq font~\cite{font:IranNastaliq}
 developed by the SCICT and updated by Mohammad Saleh Souzanchi.
 
 The \pai*{arabxetex} package supports several languages with
@@ -776,9 +793,9 @@ abbreviations.
 Any exception from these assumptions has to be specified by the author. A
 backslash in front of a space generates a space that will not be enlarged. A
 tilde~\enquote*{\ai{\~}} character generates a non-breaking space (prohibits a
-line break). The command \ci{@} in front of a period specifies that this
+line break). The command \csi{@} in front of a period specifies that this
 period terminates a sentence even when it follows an uppercase letter.
-\cih{"@}\index{~@ \verb.~.}\index{tilde@tilde (\verb.~.)}% chktex 18
+\csih{@}\ai{\~}\index{tilde@tilde (\verb.~.)}% chktex 18
 \index{., space after}
 
 \begin{example}
@@ -789,7 +806,7 @@ I like BASIC\@. What about you?
 
 The additional space after periods can be disabled with the command
 \begin{lscommand}
-  \ci{frenchspacing}
+  \csi{frenchspacing}
 \end{lscommand}
 which tells \LaTeX{} \emph{not} to insert more space after a period than after
 an ordinary character. This is very common in non-English languages
@@ -806,23 +823,23 @@ The following sectioning commands are available for the
 \texttt{article} class: \nopagebreak
 
 \begin{lscommand}
-  \ci{section}[title]\\
-  \ci{subsection}[title]\\
-  \ci{subsubsection}[title]\\
-  \ci{paragraph}[title]\\
-  \ci{subparagraph}[title]
+  \csi{section}[title: m]\\
+  \csi{subsection}[title: m]\\
+  \csi{subsubsection}[title: m]\\
+  \csi{paragraph}[title: m]\\
+  \csi{subparagraph}[title: m]
 \end{lscommand}
 
 If you want to split your document into parts without influencing the
 section or chapter numbering use
 \begin{lscommand}
-  \ci{part}[title]
+  \csi{part}[title: m]
 \end{lscommand}
 
 When you work with the \texttt{report} or \texttt{book} class,
 an additional top-level sectioning command becomes available
 \begin{lscommand}
-  \ci{chapter}[title]
+  \csi{chapter}[title: m]
 \end{lscommand}
 
 As the \texttt{article} class does not know about chapters, it is quite easy
@@ -833,7 +850,7 @@ titles will be set automatically by \LaTeX.
 \LaTeX{} creates a table of contents by taking the section headings
 and page numbers from the last compile cycle of the document. The command
 \begin{lscommand}
-  \ci{tableofcontents}
+  \csi{tableofcontents}
 \end{lscommand}
 \noindent expands to a table of contents at the place it is issued. A new
 document has to be compiled twice to get a correct \wi{table of contents}.
@@ -842,8 +859,8 @@ will tell you when this is necessary.
 
 All sectioning commands listed above also exist as starred versions. This
 generates section headings that do not show up in the table of contents and are
-not numbered. The command \verb|\section{Help}|, for example, would become
-\verb|\section*{Help}|.
+not numbered. The command \mintinline{latex}|\section{Help}|, for example,
+would become \mintinline{latex}|\section*{Help}|.
 
 Normally the section headings show up in the table of contents exactly
 as they are entered in the text. Sometimes this is not possible,
@@ -851,7 +868,7 @@ because the heading is too long to fit into the table of contents. The
 entry for the table of contents can then be specified as an
 optional argument in front of the actual heading.
 
-\begin{example}[standalone, paperwidth=7cm,paperheight=5cm]
+\begin{example}[standalone, paperwidth=6cm,paperheight=5cm]
 \begin{document}%!hide
 \tableofcontents
 
@@ -864,36 +881,41 @@ optional argument in front of the actual heading.
 
 The \wi{title} of the whole document is generated by issuing a
 \begin{lscommand}
-  \ci{maketitle}
+  \csi{maketitle}
 \end{lscommand}
-\noindent command. The contents of the title have to be defined by the commands
+command. The contents of the title have to be defined by the commands
 \begin{lscommand}
-  \ci{title}[title], \ci{author}[author]
-  and optionally \ci{date}[date]
+  \csi{title}[title: m], \csi{author}[author: m]
+  and optionally \csi{date}[date: m]
 \end{lscommand}
-\noindent before calling \verb|\maketitle|. In the argument to \ci{author}, you can supply several names separated by \ci{and} commands.
+before calling \mintinline{latex}|\maketitle|. In the argument to \csi{author}, you can supply several names separated by \csi{and} commands.
 
 An example of some of the commands mentioned above can be found in
-Figure~\ref{document} on page~\pageref{document}.
+\autoref{document} on \autopageref{document}.
 
 Apart from the sectioning commands explained above, \LaTeX{} defines four
 additional commands for use with the \texttt{book} class. They are useful for
 dividing your publication. The commands alter chapter headings and page
 numbering to work as you would expect in a book:
 \begin{description}
-  \item[\ci{frontmatter}] should be the very first command after
-    the start of the document body (\verb|\begin{document}|). It will switch page numbering to Roman
-    numerals and sections will be non-enumerated as if you were using
-    the starred sectioning commands (for example \verb|\chapter*{Preface}|)
-    but the sections will still show up in the table of contents.
-  \item[\ci{mainmatter}] comes right before the first chapter of
+  \item[\csi{frontmatter}] should be the very first command after the start of
+    the document body
+    \begin{chktexignore}
+  (\mintinline{latex}|\begin{document}|).
+\end{chktexignore}
+    It will switch page
+    numbering to Roman numerals and sections will be non-enumerated as if you were
+    using the starred sectioning commands (for example
+    \mintinline{latex}|\chapter*{Preface}|) but the sections will still show up in
+    the table of contents.
+  \item[\csi{mainmatter}] comes right before the first chapter of
     the book. It turns on Arabic page numbering and restarts the page
     counter.
-  \item[\ci{appendix}] marks the start of additional material in your book.
+  \item[\csi{appendix}] marks the start of additional material in your book.
     After this command chapters will be numbered with letters. Unlike others
     this method can also be used inside articles. In this case it changes the
     numbering of sections.
-  \item[\ci{backmatter}] should be inserted before the very last items
+  \item[\csi{backmatter}] should be inserted before the very last items
     in your book, such as the bibliography and the index. In the standard
     document classes, this has no visual effect.
 \end{description}
@@ -904,15 +926,15 @@ In books, reports and articles, there are often
 \wi{cross-references} to figures, tables and special segments of text.
 \LaTeX{} provides the following commands for cross referencing
 \begin{lscommand}
-  \ci{label}[marker], \ci{ref}[marker]
-  and \ci{pageref}[marker]
+  \csi{label}[marker: m], \csi{ref}[marker: m]
+  and \csi{pageref}[marker: m]
 \end{lscommand}
 where \carg{marker} is an identifier chosen by the user. \LaTeX{} replaces
-\ci{ref} by the number of the section, subsection, figure, table, or theorem
-after which the corresponding \ci{label} command was issued. \ci{pageref}
-prints the page number of the page where the \ci{label} command
+\csi{ref} by the number of the section, subsection, figure, table, or theorem
+after which the corresponding \csi{label} command was issued. \csi{pageref}
+prints the page number of the page where the \csi{label} command
 occurred.\footnote{Note that these commands are not aware of what they refer
-  to. \ci{label} just saves the last automatically generated number.} As with
+  to. \csi{label} just saves the last automatically generated number.} As with
 section titles and page numbers for the table of contents, the numbers from the
 previous compile cycle are used.
 
@@ -926,7 +948,7 @@ on page~\pageref{sec:this}.}
 \section{Footnotes}
 With the command
 \begin{lscommand}
-  \ci{footnote}[footnote text]
+  \csi{footnote}[footnote text: m]
 \end{lscommand}
 a footnote is printed at the foot of the current page.  Footnotes should always
 be put after the word or sentence they refer to. Footnotes referring to a
@@ -943,7 +965,7 @@ by people using \LaTeX.
 The \ei{itemize} environment is suitable for simple lists, the
 \ei{enumerate} environment for enumerated lists, and the
 \ei{description} environment for descriptions.
-\cih{item}
+\csih{item}
 
 \begin{example}
 \begin{enumerate}
@@ -1008,7 +1030,7 @@ You should \emph{not} use the \enquote*{\texttt{"}} for %chktex 18
 using a WYSIWYG program.  In publishing there are special opening and closing
 quotation marks. In \LaTeX{}, the \pai*{csquotes} package provides the
 \begin{lscommand}
-  \ci{enquote}[text]
+  \csi{enquote}[text: m]
 \end{lscommand}
 command that will automatically enclose the \carg{text} within the right
 quotes.
@@ -1026,7 +1048,7 @@ The \enquote*{x} key is here.
 \subsection{Formal Quotes}
 
 The above commands are useful when you want to use for example scare quotes. If
-you are actually quoting someone else it is better to use the \ci{textquote}
+you are actually quoting someone else it is better to use the \csi{textquote}
 command. It accepts an optional argument with the source of the quote.
 \begin{example}
 \textquote[A.~Einstein]{Why
@@ -1035,9 +1057,10 @@ command. It accepts an optional argument with the source of the quote.
 \end{example}
 
 For longer quotations you may want to use the \ei{displayquote} environment.
-\begin{example}
+\begin{example}[examplewidth=0.5\linewidth]
 As Einstein once said
-\begin{displayquote}[A.~Einstein]
+\begin{displayquote}[%
+  Albert Einstein]
   Whoever undertakes to
   set himself up as a judge
   of Truth and Knowledge is
@@ -1048,9 +1071,9 @@ As Einstein once said
 
 In academic writing there may be strict rules present when quotes should be
 typeset inline and when they should be typeset in display style based on their
-length. This can be achieved automatically using the \ci{blockquote} command.
+length. This can be achieved automatically using the \csi{blockquote} command.
 It will scan the text inside and typeset the quote accordingly.
-\begin{example}[examplewidth=0.4\textwidth]
+\begin{example}[examplewidth=0.5\textwidth]
 \csdisplaytrue%!hide
 \blockquote[Me]{A short quote}
 
@@ -1060,7 +1083,7 @@ It will scan the text inside and typeset the quote accordingly.
   display quote style
   according to my publisher.}
 \end{example}
-By default the \ci{blockquote} will switch to display quote style if the quote
+By default the \csi{blockquote} will switch to display quote style if the quote
 spans more than three lines or contains more than one paragraph. The number of
 lines may be changes using the \cargv{threshold} package options. If you prefer
 to count words instead of lines you may change the \cargv{thresholdtype} from
@@ -1070,7 +1093,7 @@ paragraphs and rely only on automatic lines\slash{}words counting, set the
 
 The quote attribution shown in the previous examples is especially useful when
 combined with bibliography commands described later in
-Chapter~\ref{chap:bibliography}.
+\autoref{chap:bibliography}.
 
 \subsection{Foreign Quotes}
 
@@ -1110,13 +1133,14 @@ quotation marks used based on the language of the surrounding text.
 
 If you are often quoting in foreign language you may get tired of first
 switching to a given language using a polyglossia command and then using
-\ci{textquote}. In order to avoid it, \pai{csquotes} defines additional
-\ci{foreignquote} command that take the language as its first language.
+\csi{textquote}. In order to avoid it, \pai{csquotes} defines additional
+\csi{foreignquote} command that take the language as its first language.
 \begingroup
 \setmonofont{cmuntt.otf}
 \begin{example}
 As Dostoevsky once wrote
-% TODO: Waiting for polyglossia fix
+%TODO:
+Waiting for polyglossia fix
 % \foreignquote{russian}{%
 %   Мир спасёт красота.}
 %!hidebegin
@@ -1125,7 +1149,7 @@ As Dostoevsky once wrote
 \textrussian{}
 \end{example}
 \endgroup
-The commands \ci{foreigntextquote}, \ci{foreignblockquote} and environment
+The commands \csi{foreigntextquote}, \csi{foreignblockquote} and environment
 \ei{foreigndisplayquote} are also available and work analogously to the ones
 described in previous section.
 
@@ -1143,7 +1167,8 @@ when loading the \pai{csquotes} package.
 %!showend !hide
 
 \setquotestyle[guillemets]{german} %!hide
-% TODO: Waiting for polyglossia fix
+%TODO:
+Waiting for polyglossia fix
 % \foreignquote{german}{%
 %   Deutsches zitat}
 \end{example}
@@ -1153,7 +1178,7 @@ when loading the \pai{csquotes} package.
 \ei{verse} environments. The \texttt{quotation} environment is useful for
 longer quotes going over several paragraphs, because it indents the first line
 of each paragraph. The \texttt{verse} environment is useful for poems where the
-line breaks are important. The lines are separated by issuing a \ci{\bs} at the
+line breaks are important. The lines are separated by issuing a \csi{\bs} at the
 end of a line and an empty line after each verse. Note that this environments
 are not defined by \pai{csquotes} so they do not accept optional argument with
 attribution and are not context sensitive.
@@ -1171,15 +1196,18 @@ favourite speech:
 \end{example}
 
 \begin{example}
-I know only one English poem by
-heart. It is about Humpty Dumpty.
+I know only one English
+poem by heart. It is
+about Humpty Dumpty.
 \begin{verse}
-Humpty Dumpty sat on a wall:\\
-Humpty Dumpty had a great fall.\\
-All the King's horses and all
-the King's men\\
-Couldn't put Humpty together
-again.
+  Humpty Dumpty sat
+  on a wall:\\
+  Humpty Dumpty had
+  a great fall.\\
+  All the King's horses
+  and all the King's men\\
+  Couldn't put Humpty
+  together again.
 \end{verse}
 \end{example}
 
@@ -1194,13 +1222,13 @@ problem.
 
 \subsection{Verbatim}\label{sec:verbatim}
 
-\LaTeX{} itself comes with the \ci{verb} command. It is unusual in that it does
+\LaTeX{} itself comes with the \csi{verb} command. It is unusual in that it does
 not use groups for getting its first argument. Instead you pass the argument between a
 chosen delimiters that can be any character except a letter, \verb|*| or
 space. For example to use \cargv{|} (which is typically used) as a delimiter
 you type
 \begin{lscommand}
-  \ci{verb}\verb+|+\carg{text}\verb+|+
+  \csi{verb}[|«\bs carg{text}»|: c]
 \end{lscommand}
 Text that is enclosed between these delimiters will be directly printed, as if
 typed on a typewriter, with all spaces, without any \LaTeX{} command being
@@ -1216,7 +1244,7 @@ argument of the \verb|\verb|
 command.
 \end{example}
 
-The starred version of the \ci{verb} command replaces spaces with the
+The starred version of the \csi{verb} command replaces spaces with the
 \enquote*{\textvisiblespace{}} symbol.
 
 \begin{chktexignore}
@@ -1251,14 +1279,14 @@ symbol instead of spaces.
 For code snippets it may be useful to store them in their dedicated files,
 outside the \LaTeX{} document. This allows to edit them in your editor of
 choice and makes the document code less cluttered. To accomplish this use the
-\ci{verbatiminput}[file] command from the \pai{verbatim} package.\footnote{This
+\csi{verbatiminput}[file: m] command from the \pai{verbatim} package.\footnote{This
   and following examples uses code snippets that can be found at \url{https://github.com/oetiker/lshort/tree/master/book/src/examples}.}
-\begin{example}
+\begin{example}[examplewidth=0.55\linewidth, vertical_mode]
 \verbatiminput{hello.c}
 \end{example}
-\ci{verbatiminput*} also exists and works exactly as you would predict.
+\csi{verbatiminput*} also exists and works exactly as you would predict.
 
-The \texttt{verbatim} environment and the \ci{verb}, \ci{verbatiminput}
+The \texttt{verbatim} environment and the \csi{verb}, \csi{verbatiminput}
 commands may not be used within parameters of other commands, so the below code
 will result in an error
 \begin{minted}{latex}
@@ -1272,11 +1300,11 @@ While the \ei{verbatim} environment is fine for small snippets, they are very
 crude and look basic. In order to make them a bit more fancy you may use the
 \pai*{listings} package. It defines
 \begin{lscommand}
-  \ci{lstinline} command that works like \ci{verb} \\
+  \csi{lstinline} command that works like \csi{verb} \\
   \ei{lstlisting} environment that works like \ei{verbatim} \\
-  \ci{lstinputlisting} command that works like \ci{verbatiminput}
+  \csi{lstinputlisting} command that works like \csi{verbatiminput}
 \end{lscommand}
-\begin{example}
+\begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \lstinline|\LaTeX{}|
 
 \begin{lstlisting}
@@ -1288,33 +1316,26 @@ Here is some \LaTeX{} code.
 
 As you can see by default it isn't much different from the \ei{verbatim
   environment}. The big difference is that every command accepts optional
-argument that allows to customize the output. The argument accepts comma
+argument that allows to customise the output. The argument accepts comma
 delimited key value list. For example to automatically highlight the code we
 may pass the \cargv{language} key.
-\begin{example}
-\lstinputlisting[
-  language=C,
-]{hello.c}
+\begin{example}[examplewidth=0.6\linewidth, vertical_mode]
+\lstinputlisting[language=C]{hello.c}
 \end{example}
 If a language has several dialects you may specify it inside square brackets
 before the language name. You must enclose this value in the curly brackets.
-\begin{example}
-\lstinputlisting[
-  language={[LaTeX]TeX},
-]{hello.tex}
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\lstinputlisting[language={[LaTeX]TeX}]{hello.tex}
 \end{example}
 When presenting code it is often that we want to point to a specific line. To
 save the reader from counting which line we mean, it is possible to print line
 numbers using \cargv{numbers} key. Its possible values are \cargv{none},
 \cargv{left} and \cargv{right}.
-\begin{example}
-\lstinputlisting[
-  language=C,
-  xleftmargin=1em,%!hide
-  numbers=left,
-]{hello.c}
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+\lstset{xleftmargin=1.2em}%!hide
+\lstinputlisting[language=C, numbers=left]{hello.c}
 \end{example}
-The appearance of numbers may be further customized with the following keys:
+The appearance of numbers may be further customised with the following keys:
 \begin{description}
   \item[\cargv{firstnumber}] allows you to specify the first number. Besides
     numbers this key can also contain two special values: \cargv{last} and
@@ -1326,26 +1347,27 @@ The appearance of numbers may be further customized with the following keys:
     15, 22, \ldots\) will be printed.
   \item[\cargv{numberblanklines}] controls whether line numbers are printed on
     empty lines. Either \cargv{true} or \cargv{false}.
-  \item[\cargv{numberstyle}] allows to customize the font for printing
-    numbers. It accepts switch commands described in Section~\ref{sec:fontsize}.
+  \item[\cargv{numberstyle}] allows to customise the font for printing
+    numbers. It accepts switch commands described in \autoref{sec:fontsize}.
 \end{description}
-\begin{example}
+\begin{example}[examplewidth=0.61\linewidth]
 \lstinputlisting[
   language=C,
   numbers=left,
   stepnumber=2,
   numberblanklines=false,
   firstnumber=4,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   numberstyle=\tiny,
 ]{hello.c}
 \end{example}
 
 If you have a long file and want to show it piecewise you can use the
 \cargv{firstline} and \cargv{lastline} keys.
-\begin{example}
-The \lstinline|main| function
-body consists of:
+\begin{example}[examplewidth=0.6\linewidth]
+The \lstinline|main|
+function body
+consists of:
 \lstinputlisting[
   language=C,
   firstline=5,
@@ -1355,29 +1377,33 @@ body consists of:
 
 If you are trying to typeset long lines you may order the \pai{listings} to
 automatically break them using the key \cargv{breaklines}.
-\begin{example}
+\begin{example}[examplewidth=0.6\linewidth]
 \lstinputlisting[
   language=python,
   numbers=left,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   breaklines,
 ]{factorial.py}
 \end{example}
-You may customize the indentation width with the \cargv{breakindent} key. It
-may be useful to indicate that a linebreak occured using \cargv{prebreak}
+You may customise the indentation width with the \cargv{breakindent} key. It
+may be useful to indicate that a linebreak occurred using \cargv{prebreak}
 and/or \cargv{postbreak} keys that include their contents before and after an
-artificial linebreak.
-\begin{example}
+artificial linebreak. \autoref{lst:prepostbreak} shows an example of doing it.
+\begin{listing}
+  \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \lstinputlisting[
   language=python,
   numbers=left,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   breaklines,
   breakindent=1cm,
   prebreak=\textrightarrow,
   postbreak=\textleftarrow,
 ]{factorial.py}
 \end{example}
+  \caption{An example of marking the artificial linebreaks in \ei{listing}
+    package.}\label{lst:prepostbreak}
+\end{listing}
 
 One of the neat features of the \pai{listings} package is that you can evaluate
 \LaTeX{} code inside the code itself. The easiest way is to pass the
@@ -1395,22 +1421,22 @@ cost x = show (
 \end{lstlisting}
 \end{example}
 
-This feature is especially useful with \ci{label} command. We can use it to
+This feature is especially useful with \csi{label} command. We can use it to
 point to a specific line of code without hardcoding it into the document.
 \begin{example}
 \begin{lstlisting}[
   texcl,
   numbers=left,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   language=haskell,
 ]
 cost x = show (
     foldr (+) 0 x 
   ) ++ " eur" -- \label{concat}
 \end{lstlisting}
-The \lstinline|++| in Haskell as
-seen in line~\ref{concat} means
-string concatenation.
+The \lstinline|++| in Haskell
+as seen in line~\ref{concat}
+means string concatenation.
 \end{example}
 This has the downside that it introduces empty comments that are just there to
 include label. To fix this we may use the \cargv{escapeinside} key that accepts
@@ -1420,27 +1446,29 @@ delimiters themselves will not be printed.
   \begin{lstlisting}[
   escapeinside={(*}{*)},
   numbers=left,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   language=haskell,
 ]
 cost x = show ( (*\label{show}*)
     foldr (+) 0 x 
   ) ++ " eur" (*(\texteuro)*)
 \end{lstlisting}
-The \lstinline|show| in Haskell as
-seen in line~\ref{show} converts
-its argument to a string.
+The \lstinline|show| in Haskell
+as seen in line~\ref{show}
+converts its argument to a string.
 \end{example}
 
-If you do not like the default style of listings, you may customize them using
-the \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
-\cargv{commentstyle}. Note that you will need some font changing commands which
-you will learn about in Section~\ref{sec:fontsize}.
-\begin{example}
+If you do not like the default style of listings, you may customise them using
+the
+\begin{lscommand}
+  \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
+  \cargv{commentstyle}
+\end{lscommand}
+keys. Note that you will need some font changing commands which
+you will learn about in \autoref{sec:fontsize}.
+\begin{example}[examplewidth=0.55\linewidth]
 \lstinputlisting[
   language=SQL,
-  numbers=left,
-  xleftmargin=1em, %!hide
   basicstyle=\ttfamily,
   commentstyle=\color{gray},
   keywordstyle=\itshape,
@@ -1448,14 +1476,14 @@ you will learn about in Section~\ref{sec:fontsize}.
 \end{example}
 
 If you intend to use similar options for many listings in the document you may
-use the \ci{lstset} command to set them beforehand. This way you will avoid
+use the \csi{lstset} command to set them beforehand. This way you will avoid
 repeating them with every time you want to typeset some code.
 
-\begin{example}[examplewidth=0.4\linewidth]
+\begin{example}[examplewidth=0.55\linewidth]
 \lstset{
   language=C,
   numbers=left,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   breaklines,
   basicstyle=\ttfamily,
   prebreak=\textrightarrow,
@@ -1463,8 +1491,10 @@ repeating them with every time you want to typeset some code.
 
 \lstinputlisting{hello.c}
 
-The statement \lstinline|int x = 1;|
-assigns 1 to variable \lstinline|x|.
+The statement
+\lstinline|int x = 1;|
+assigns 1 to variable
+\lstinline|x|.
 \end{example}
 
 \subsection{The \pai{minted} Package}
@@ -1478,9 +1508,9 @@ on a simple keyword search, so this is an option only for simple languages.
 If this is a problem for you it may be worth to consider the \pai*{minted}
 package. It relies on the Pygments~\cite{pygments} program to highlight code.
 In contrast to the \pai{listings} package, this program uses pushdown automata
-to color the code which may produce much better results. Moreover the
+to colour the code which may produce much better results. Moreover the
 predefined styles and language support are much richer than those offered by
-the \pai{listings} package. This is the package that is used to color examples
+the \pai{listings} package. This is the package that is used to colour examples
 throughout this booklet.
 
 Due to the fact that the \pai{minted} package relies on an external program
@@ -1507,14 +1537,14 @@ computer. Only enable this flag if the document comes from a trusted source.
 Once you meet this requirements you can use the package in a manner similar to
 the previous approaches. It provides
 \begin{lscommand}
-  \ci*{mintinline}[options:o ! language:m ! code:m] \\
-  \ci*{inputminted}[options:o ! language:m ! code:m] \\
-  \ei*{minted}[options:o ! language:m]
+  \csi{mintinline}[options:o, language:m, code:m] \\
+  \csi{inputminted}[options:o, language:m, code:m] \\
+  \ei*{minted}[options:o, language:m]
 \end{lscommand}
 In contrast to the \pai{listings} the \carg{language} is a required parameter.
-The command \ci{mintinline} works with both normal groups and custom
+The command \csi{mintinline} works with both normal groups and custom
 delimiters.
-\begin{example}
+\begin{example}[examplewidth=0.56\linewidth]
 \mintinline{latex}|\LaTeX{}|
 
 \begin{minted}{python}
@@ -1532,21 +1562,21 @@ the options have synonyms that makes their usage identical to the
 \pai{listings} package. For example to enable line numbers you may use the
 \cargv{linenos} key (which is a boolean value) or the \cargv{numbers} key
 (which accepts \cargv{left}, \cargv{right}, \cargv{none} or \cargv{both}).
-\begin{example}
+\begin{example}[examplewidth=0.56\linewidth]
 \inputminted[
   linenos,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
 ]{css}{review.css}
 \end{example}
 You can change the line numbering using \cargv{firstnumber} and
-\cargv{stepnumber}. Additionaly you may highlight some lines using the
+\cargv{stepnumber}. Additionally you may highlight some lines using the
 \cargv{highlightlines} key to draw attention to them. Note that
 \cargv{highlightlines} uses the transformed line numbers.
 \begin{chktexignore}
-\begin{example}
+\begin{example}[examplewidth=0.56\linewidth]
 \inputminted[
   linenos,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   firstnumber=5,
   stepnumber=3,
   highlightlines={6, 10-12}
@@ -1560,15 +1590,15 @@ characters. If you want the breaks to occur anywhere use the
 \cargv{breakanywhere} key. The breaking behaviour may be even more
 fine-tuned using the keys \cargv{breakbytoken}, \cargv{breakbytokenanywhere},
 \cargv{breakbefore} and \cargv{breakafter}.
-\begin{example}
+\begin{example}[examplewidth=0.55\linewidth]
 \inputminted[
   linenos,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   breaklines,
 ]{haskell}{quicksort.hs}
 \end{example}
 As you can see by default it inserts \enquote{\(\hookrightarrow\)} to indicate
-that automatic linebreak occured. You can customise the printed symbols using
+that automatic linebreak occurred. You can customise the printed symbols using
 the \cargv{breaksymbolleft} and \cargv{breaksymbolright} keys.
 
 In order to use \LaTeX{} inside the comments you can use either the
@@ -1578,7 +1608,7 @@ In order to use \LaTeX{} inside the comments you can use either the
 \begin{example}
 \begin{minted}[
   linenos,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   texcomments,
   escapeinside=||,
 ]{html}
@@ -1590,7 +1620,7 @@ In order to use \LaTeX{} inside the comments you can use either the
   <body>
     <div class="review">
       <!-- \LaTeX{} review -->
-      <p>It is awesome!</p>
+      <p>It's awesome!</p>
     </div>
   </body>
 </html>
@@ -1615,11 +1645,11 @@ code. In order to choose between them use the \cargv{style} key.
 \end{example}
 
 To avoid setting the options with every listing with every code snippet you
-include, you can use \ci{setminted} to define the default values.
+include, you can use \csi{setminted} to define the default values.
 \begin{example}
 \setminted{
   linenos,
-  xleftmargin=1em, %!hide
+  xleftmargin=1.2em, %!hide
   breaklines,
   style=xcode,
 }
@@ -1646,13 +1676,13 @@ writing this booklet. You will find some of them in this section.
 
 The environment \ei{tabular} has the following form
 \begin{lscommand}
-  \ei*{tabular}[pos:o ! colspec:m]
+  \ei*{tabular}[pos:o, colspec:m]
 \end{lscommand} %
 The \carg{colspec} argument, which stands for columns specifiers, defines the
 format of the columns in the table. Use an \cargv{l} for a column of left-aligned text,
 \cargv{r} for right-aligned text, and \cargv{c} for centred text. Inside the
 environment use \ai{\&} to go to next cell within the row and
-\ci{\textbackslash} to go to the next row.
+\csi{\bs} to go to the next row.
 \begin{example}
 \begin{tabular}{lcr}
   left & centre & right \\
@@ -1662,13 +1692,13 @@ environment use \ai{\&} to go to next cell within the row and
 Note that the text inside the cells will not be wrapped. If you want the column
 to contain justified text with linebreaks use the \cargv{p\{\carg{width}\}}
 column specifier, where \carg{width} is the width of the column.
-\begin{example}[examplewidth=0.43\linewidth]
-\begin{tabular}{lrp{3cm}}
-  left & right & Very long paragraph
-                 that gets broken into
-                 multiple lines. \\
-  1    & 2     & Another one,
-                 but shorter. \\
+\begin{example}
+\begin{tabular}{lp{3cm}}
+  left & Very long paragraph
+         that gets broken into
+         multiple lines. \\
+  1    & Another one,
+         but shorter. \\
 \end{tabular}
 \end{example}
 
@@ -1676,31 +1706,24 @@ The optional \carg{pos} argument specifies the vertical position of the table
 with respect to baseline of the text. There are three possible alignments:
 \cargv{c} centres the table (the default), \cargv{t} matches the baseline of
 the top row and \cargv{b} matches the baseline of the bottom row.
-\begin{example}[examplewidth=0.55\linewidth]
+\begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 text
-\begin{tabular}{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
 text
-\begin{tabular}[t]{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}[t]{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
 text
-\begin{tabular}[b]{ll}
-  1 & 2 \\
-  3 & 4 \\
-\end{tabular}
+\begin{tabular}[b]{ll} 1 & 2 \\ 3 & 4 \\ \end{tabular}
 text
 \end{example}
 
 What we have shown so far allows aligning some items in rows and columns,
 but real tables need visible headings. To insert them use the commands
-\ci{toprule}, \ci{midrule} and \ci{bottomrule} from the \pai{booktabs} package.
+\csi{toprule}, \csi{midrule} and \csi{bottomrule} from the \pai{booktabs} package.
 All of these accept an optional argument that specifies their thickness, but
-usually the default settings are just fine.
-\begin{example}[examplewidth=0.43\linewidth]
+usually the default settings are just fine. See
+\autoref{lst:booktabssimple} for an example of using these commands.
+\begin{listing}
+  \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \begin{tabular}{lcl}
   \toprule
   Alignment & Letter & Niceness  \\
@@ -1711,6 +1734,8 @@ usually the default settings are just fine.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{A simple table using the \ei{booktabs} commands.}\label{lst:booktabssimple}
+\end{listing}
 
 With these commands you are already able to produce simple, yet nicely looking
 tables. You may be are wondering why we have not mentioned how to add vertical
@@ -1718,9 +1743,11 @@ lines between the columns. Well, we did not mention them because the first rule
 of producing professional-looking tables is that you \emph{must not} use
 vertical lines.
 
-The second rule is to never use double lines such as these:
-\begin{chktexignore}
-  \begin{example}[examplewidth=0.43\linewidth]
+The second rule is to never use double lines such as these shown in
+\autoref{lst:doublerule}.
+\begin{listing}
+  \begin{chktexignore}
+  \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \begin{tabular}{lll}
   \toprule[0.1cm]
   \toprule
@@ -1735,17 +1762,19 @@ The second rule is to never use double lines such as these:
 \end{tabular}
 \end{example}
 \end{chktexignore}
-As you can see the lines are already of different weight in order to signify
+  \caption{An anti-example of using double rules inside a table.}\label{lst:doublerule}
+\end{listing}
+The default lines are already of different weight in order to signify
 their meaning. Using more lines than is necessary means cluttering the space
 without adding information. If you stick to these two rules your tables will
 look quite good already.
 
-To make the tables look even more sleek you may want to remove the padding in the
-first and last column. To control the space between the columns use the
+To make the tables look even more sleek you may want to remove the padding in
+the first and last column. To control the space between the columns use the
 \cargv{@\{\carg{sep}\}} column specifier, where \carg{sep} is either text or
-space. Space of arbitrary length can be inserted using the \ci{hspace}[width]
-command. The contents of the \carg{sep} arguments will be put between cells in
-the relevant column.
+space. Space of arbitrary length can be inserted using the \csi{hspace}[width:
+  m] command. The contents of the \carg{sep} arguments will be put between cells
+in the relevant column.
 \begin{example}[examplewidth=0.3\linewidth]
 \begin{tabular}{
   @{a} c @{\hspace{1cm}} c @{|} c @{ b}
@@ -1756,9 +1785,10 @@ the relevant column.
 \end{tabular}
 \end{example}
 If you leave the \carg{sep} empty it will suppress the padding between the
-columns.
-\begin{chktexignore}
-  \begin{example}[examplewidth=0.43\linewidth]
+columns. See \autoref{lst:sleek} for an example.
+\begin{listing}
+  \begin{chktexignore}
+  \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \begin{tabular}{@{}lll@{}}
   \toprule
   Person      & Face & Table       \\
@@ -1770,35 +1800,39 @@ columns.
 \end{tabular}
 \end{example}
 \end{chktexignore}
+  \caption{An example of using \cargv{@\{\}} column specifier to suppress outer separators.}\label{lst:sleek}
+\end{listing}
 
 Sometimes it may make sense to group columns under one heading. To achieve this
 we need two things: a way to group multiple heading columns and have a line
 covering the same columns, to sit underneath the merged heading cell. Use the
 \begin{lscommand}
-  \ci*{multicolumn}[ncols:m ! colspec:m ! text:m]
+  \csi{multicolumn}[ncols:m, colspec:m, text:m]
 \end{lscommand}
 command to merge the cells. The \carg{ncols} argument indicates how many
 columns should the \carg{text} span, while the \carg{colspec} is the column
 specification for the new content---the same as when starting a \ei{tabular}
-environment.
-\begin{chktexignore}
-  \begin{example}[examplewidth=0.43\linewidth]
+environment. See \autoref{lst:multicolumn} for an example.
+\begin{listing}
+  \begin{chktexignore}
+  \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 \begin{tabular}{@{}lll@{}}
   \toprule
-  Person      & Face & Table       \\
+  Person      & Face & Table                      \\
   \midrule
-  Me          & :)   & Nice        \\
-  You         & :]   & Sleek       \\
-  Your reader & \multicolumn{2}{c}{
-                  Not available}   \\
+  Me          & :)   & Nice                       \\
+  You         & :]   & Sleek                      \\
+  Your reader & \multicolumn{2}{c}{Not available} \\
   \bottomrule
 \end{tabular}
 \end{example}
 \end{chktexignore}
+  \caption{An example of using the \csi{multicolumn} command in a table.}\label{lst:multicolumn}
+\end{listing}
 
 To get a horizontal line to span multiple columns, use the command
 \begin{lscommand}
-  \ci*{cmidrule}[dim:o ! trim:p ! a--b:m]
+  \csi{cmidrule}[dim:o, trim:p, a-b:m]
 \end{lscommand}
 While the command uses nonstandard syntax for \carg{trim}, this is just an
 optional argument with different pair of delimiters.\footnote{This syntax
@@ -1809,30 +1843,31 @@ argument accepts any combination of \cargv{r}, \cargv{r\{\carg{dim}\}},
 \cargv{l} or \cargv{l\{\carg{dim}\}}. This allows you trim the rule from right
 or left, either by the package default or the specified \carg{dim}. It is
 usually recommended to trim the rules from the side where they touch other
-columns. Finally the only required argument \carg{a--b} is the span of columns
-to draw the line over.
-\begin{chktexignore}
-  \begin{example}[examplewidth=0.43\linewidth]
+columns. Finally the only required argument \carg{a-b} is the span of columns
+to draw the line over. See \autoref{lst:cmidrule} for an example.
+\begin{listing}
+  \begin{chktexignore}
+  \begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 \begin{tabular}{@{}lll@{}}
   \toprule
-              & \multicolumn{2}{c}{
-                  Reaction}        \\
+              & \multicolumn{2}{c}{Reaction}      \\
   \cmidrule(l){2-3}
-  Person      & Face & Exclamation \\
+  Person      & Face & Exclamation                \\
   \midrule
-  Me          & :)   & Nice        \\
-  You         & :]   & Sleek       \\
-  Your reader & \multicolumn{2}{c}{
-                  Not available}   \\
+  Me          & :)   & Nice                       \\
+  You         & :]   & Sleek                      \\
+  Your reader & \multicolumn{2}{c}{Not available} \\
   \bottomrule
 \end{tabular}
 \end{example}
 \end{chktexignore}
+  \caption{An example of using the \csi{cmidrule} command inside a table.}\label{lst:cmidrule}
+\end{listing}
 
 If you need a cell to span multiple rows instead of columns, then you have to
 use package \pai{multirow}. Its main command is a little more complicated
 \begin{lscommand}
-  \ci*{multirow}[vpos:o ! nrows:m ! width:m ! vmove:o ! text:m]
+  \csi{multirow}[vpos:o, nrows:m, width:m, vmove:o, text:m]
 \end{lscommand}
 The arguments are
 \begin{description}
@@ -1849,34 +1884,34 @@ The arguments are
     low or too high.
   \item[\carg{text}] is the text to be put in the cell.
 \end{description}
-Unlike with \ci{multicolumn} you still have to write all the cells in remaining
-rows, but they should be empty.
-\begin{chktexignore}
-  \begin{example}[examplewidth=0.4\linewidth]
+Unlike with \csi{multicolumn} you still have to write all the cells in remaining
+rows, but they should be empty. See \autoref{lst:multirow} for an example.
+\begin{listing}
+  \begin{chktexignore}
+  \begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 \begin{tabular}{@{}lll@{}}
   \toprule
-                & \multicolumn{2}{c}{
-                    Reaction}        \\
+              & \multicolumn{2}{c}{Reaction}      \\
   \cmidrule(l){2-3}
-  Person        & Face & Exclamation \\
+  Person      & Face            & Exclamation     \\
   \midrule
-  \multirow[t]{
-    2}{*}{VIPs} & :)   & Nice        \\
-                & :]   & Sleek       \\
-  Others        & \multicolumn{2}{c}{
-                    Not available}   \\
+  \multirow[t]{2}{*}{VIPs} & :) & Nice            \\
+              & :]              & Sleek           \\
+  Others      & \multicolumn{2}{c}{Not available} \\
   \bottomrule
 \end{tabular}
 \end{example}
 \end{chktexignore}
+  \caption{An example of using \csi{multirow} inside a table.}\label{lst:multirow}
+\end{listing}
 
-In general it is not a good idea to use the \ci{multirow} command for showing
+In general it is not a good idea to use the \csi{multirow} command for showing
 values common to multiple rows. Usually repeating the values in question makes
 the table more readable.
 
 When typesetting numerical data in the table, you may want to align it by
 decimal point. A way to do this (and more) is described in
-Section~\ref{sec:sitables}. The section also contains some guidelines about
+\autoref{sec:sitables}. The section also contains some guidelines about
 typesetting numerical data in tables.
 
 \subsection{Long Tables}
@@ -1886,8 +1921,9 @@ page. This poses a problem for especially long tables. If your table is not
 very wide you may get away with it by typesetting its rows side by side. You
 should then put a bigger space between those to indicate that these are
 separate either by using \cargv{@\{...\}} or by putting an empty column between
-those.
-\begin{example}[examplewidth=0.4\linewidth]
+those as shown in \autoref{lst:rowsnext}.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.6\linewidth]
 \begin{tabular}{@{}cllcl@{}}
   \toprule
   Digit & Word  && Digit & Word  \\
@@ -1900,6 +1936,8 @@ those.
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of producing table with rows next to each other.}\label{lst:rowsnext}
+\end{listing}
 
 This approach will obviously not work for \emph{really} long tables. This is
 where the \pai{longtable} package shines. It defines a \ei{longtable}
@@ -1907,27 +1945,31 @@ environment that works similarly to \ei{tabular} environment, but allows
 pagebreaks inside.
 
 \begin{lscommand}
-  \ei*{longtable}[align:o ! colspec:m]
+  \ei*{longtable}[align:o, colspec:m]
 \end{lscommand}
 In contrast to \ei{tabular}, the \ei{longtable} always starts a new paragraph
 and is centred by default. Thus the optional argument \carg{align} specifies
 whether the table should be centred, on the left or on the right. Use
 \cargv{c}, \cargv{l} and \cargv{r} to specify this. The \carg{colspec} argument
-is the same as in the \ei{tabular} environment.
+is the same as in the \ei{tabular} environment. See \autoref{lst:longtable}
+for an example.
 
-\begin{example}[standalone, to_page=2, paperwidth=4.5cm] 
+\begin{listing}
+  \begin{lined}{0.8\linewidth}
+    \begin{example}[standalone, to_page=2, paperwidth=4.5cm, paperheight=3.5cm, vertical_pages]
 %!hidebegin
+\geometry{margin=0.1cm}
 \usepackage{longtable}
 \usepackage{booktabs}
 \begin{document}
 %!hideend
 \begin{longtable}{cl}
   \toprule
-  Number & Word   \\
+  Number & Word \\
   \midrule
-  0      & Zero   \\
-  1      & One    \\
-  2      & Two    \\
+  0      & Zero \\
+  1      & One  \\
+  2      & Two  \\
   % ...
 %!hidebegin
   3      & Three \\
@@ -1937,63 +1979,68 @@ is the same as in the \ei{tabular} environment.
   7      & Seven \\
   8      & Eight \\
   9      & Nine  \\
-  10     & Ten       \\
-  11     & Eleven    \\
-  12     & Twelve    \\
-  13     & Thirteen  \\
-  14     & Fourteen  \\
-  15     & Fifteen   \\
-  16     & Sixteen   \\
-  17     & Seventeen \\
-  18     & Eighteen  \\
-  19     & Nineteen  \\
 %!hideend
-  20     & Twenty \\
+  10     & Ten  \\
   \bottomrule
 \end{longtable}
 \end{document} %!hide
 \end{example}
+  \end{lined}
+  \caption{An example of using the \ei{longtable} environment.}\label{lst:longtable}
+\end{listing}
 
 Note that the pagebreaks are always placed between rows. If you have some tall
-row thanks to \cargv{p\{...\}} specification, it will not broken.
-\begin{example}[standalone, to_page=2, paperwidth=4.5cm] 
+row thanks to \cargv{p\{...\}} specification, it will not broken as seen in
+\autoref{lst:longtablepars}.
+\begin{listing}
+  \begin{lined}{12cm}
+    \begin{example}[standalone, to_page=3, paperwidth=5.5cm, paperheight=2cm, vertical_pages]
 %!hidebegin
 \usepackage{longtable}
 \usepackage{booktabs}
 \begin{document}
 %!hideend
 \begin{longtable}{
-  cp{1cm}
+  cp{2cm}
 }
   \toprule
-  Number & Words  \\
+  Number & Words              \\
   \midrule
-  0      & Zero   \\
-  1      & Multi
-           paragraph
+  0      & Zero               \\
+  1      & Multi paragraph
            text.
 
-           It makes
-           the table
-           cell very
-           tall.  \\
-  2      & Two    \\
+           It makes the table
+           cell very tall.    \\
+  2      & Two                \\
   \bottomrule
 \end{longtable}
 \end{document} %!hide
 \end{example}
+  \end{lined}
+
+  \caption{An anti-example of using \ei{longtable} assuming it will break
+    the paragraphs inside the cells.}\label{lst:longtablepars}
+\end{listing}
 
 The \ei{longtable} environment defines also some additional commands that end
-table rows. One of them is \ci{\textbackslash*} which, similarly to its
+table rows. One of them is \csi{textbackslash*} which, similarly to its
 paragraph use, prohibits pagebreak after the row. Another useful commands are
-\ci{endhead}, \ci{endfirsthead}, \ci{endfoot} and \ci{endlastfoot}. If you end
+\csi{endhead}, \csi{endfirsthead}, \csi{endfoot} and \csi{endlastfoot}. If you end
 the row with them they will set the preceding rows as headers and footers of
-the table. The \ci{endhead} and \ci{endfoot} put the headers and footers on
-every page while \ci{endfirsthead} and \ci{endlastfoot} put them on the first
+the table. The \csi{endhead} and \csi{endfoot} put the headers and footers on
+every page while \csi{endfirsthead} and \csi{endlastfoot} put them on the first
 and last page. An example of using these commands is presented in
-figure~\ref{ex:longtable}.
-\begin{figure}[htp]
-  \begin{example}[standalone, to_page=2, paperwidth=4.3cm] 
+\autoref{lst:longtablerunning}.
+\begin{listing}
+  \begin{example}[
+    standalone,
+    to_page=2,
+    paperwidth=4.3cm,
+    paperheight=5cm,
+    examplewidth=8.7cm,
+    vertical_mode,
+  ]
 %!hidebegin
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -2001,25 +2048,21 @@ figure~\ref{ex:longtable}.
 %!hideend
 \begin{longtable}{cl}
   \toprule
-  \multicolumn{2}{c}{
-    V.~Important Table} \\
-  Number & Word         \\
+  \multicolumn{2}{c}{V.~Important Table} \\
+  Number & Word                           \\
   \midrule \endfirsthead
 
   \toprule
-  \multicolumn{2}{c}{
-    VIT (continued)} \\
-  Number & Word      \\
+  \multicolumn{2}{c}{VIT (continued)}    \\
+  Number & Word                          \\
   \midrule \endhead
 
   \midrule
-  \multicolumn{2}{c}{
-    Not the end} \\
+  \multicolumn{2}{c}{Not the end}        \\
   \bottomrule \endfoot
 
   \midrule
-  \multicolumn{2}{c}{
-    The end of VIT} \\
+  \multicolumn{2}{c}{The end of VIT}     \\
   \bottomrule \endlastfoot
 
   0      & Zero   \\
@@ -2034,28 +2077,27 @@ figure~\ref{ex:longtable}.
   7      & Seven \\
   8      & Eight \\
   9      & Nine  \\
-  10     & Ten    \\
-  11     & Eleven \\
   %!hideend
-  12     & Twelve \\
+  10     & Ten    \\
 \end{longtable}
 \end{document} %!hide 
 \end{example}
-  \caption{An example of \ei{longtable} with running headers and footers.}\label{ex:longtable}
-\end{figure}
+  \caption{An example of \ei{longtable} with running headers and
+    footers.}\label{lst:longtablerunning}
+\end{listing}
 
-Note that while you can use \ci{multicolumn} and \ci{multirow} normally within
+Note that while you can use \csi{multicolumn} and \csi{multirow} normally within
 the \ei{longtable} environment, the table may get very complicated and \LaTeX{}
 will then need several passes to properly calculate the column widths.
 
 \subsection{Advanced Tables and Non-Tables}
 
 In regular text you can specify the amount of space between two lines as an
-optional argument to the \ci{\textbackslash} command. Can the same be done
+optional argument to the \csi{\textbackslash} command. Can the same be done
 within the table? It turns out that it can, but there is one caveat. If you use
 it together with a \cargv{p\{...\}} column, the space specified will be different
 depending on column order.
-\begin{example}[standalone, paperheight=2.6cm]
+\begin{example}[standalone, paperheight=3cm, paperwidth=0.57\linewidth]
 \begin{document} %!hide
 \noindent %!hide
 \begin{tabular}{lp{1cm}}
@@ -2070,16 +2112,16 @@ depending on column order.
 \end{example}
 This counterintuitive behaviour is caused by the fact that the space to add is
 calculated based on the last column. In order to prevent that simply add
-\verb|\usepackage{array}| to your preamble. Since there are no downsides to
-this, it is recommended to always use this package when starting a new document
-to avoid breaking tables that rely on the original behaviour later. The
-\pai{array} package also defines some additional column specifiers.
+\mintinline{latex}|\usepackage{array}| to your preamble. Since there are no
+downsides to this, it is recommended to always use this package when starting a
+new document to avoid breaking tables that rely on the original behaviour
+later. The \pai{array} package also defines some additional column specifiers.
 
 The \cargv{p\{...\}} specifier allows to insert text with linebreaks into the
 table. The text always starts from the top though, so the \pai{array} package
 defines two additional specifiers \cargv{m\{...\}} for vertically centred text
 and \cargv{b\{...\}} for text put vertically at the bottom.
-\begin{example}
+\begin{example}[examplewidth=0.57\linewidth]
 \begin{tabular}{
   lp{1.4cm}m{1.4cm}b{1.4cm}
 }
@@ -2101,15 +2143,17 @@ can be used to put some code before and after a column.
   l
   >{\begin{em}}l<{\end{em}}
 }
-  normal text & emphasised text \\
-  normal text & emphasised text \\
-  normal text & emphasised text \\
+  text & emphasised text \\
+  text & emphasised text \\
+  text & emphasised text \\
 \end{tabular}
 \end{example}
 
-Some environments change the meaning of the \ci{\textbackslash} command thus
+% TODO: Find a useful environment that still does this.
+\begin{comment}
+Some environments change the meaning of the \csi{\textbackslash} command thus
 making it unavailable to go to the next row. In such occasions you may use the
-\ci{tabularnewline} command.
+\csi{tabularnewline} command.
 \begin{example}
 \begin{tabular}{
   >{\begin{FlushLeft}}
@@ -2130,12 +2174,13 @@ making it unavailable to go to the next row. In such occasions you may use the
   \tabularnewline
 \end{tabular}
 \end{example}
+\end{comment}
 
 While using \cargv{>\{...\}} and \cargv{<\{...\}} comes handy if we only have
 one such column, it quickly becomes inconvenient when many column of the same
 type appear in any tables. In that case it may be desirable to use the command
 \begin{lscommand}
-  \ci*{newcolumntype}[newcolspec:m ! definition:m]
+  \csi{newcolumntype}[newcolspec:m, definition:m]
 \end{lscommand}
 where \carg{newcolspec} is a single letter used for specification of columns
 and the \carg{definition} is what should be inserted in the table when using
@@ -2167,7 +2212,7 @@ it.
 
 In order to create a tic-tac-toe grid you need to put some vertical and
 horizontal lines of the same width. In order to do so you may use the
-\cargv{|}~(vertical bar) column specifier for vertical rules and \ci{hline} for
+\cargv{|}~(vertical bar) column specifier for vertical rules and \csi{hline} for
 horizontal rules.
 \begin{chktexignore}
   \begin{example}
@@ -2180,10 +2225,10 @@ horizontal rules.
 \end{tabular}
 \end{example}
 \end{chktexignore}
-In case your grid gets more complicated you may also need the \ci{cline}[a--b] %chktex 8
+In case your grid gets more complicated you may need the \csi{cline}[a-b: m] %chktex 8
 command which draws horizontal line that spans only over the specified rows.
 \begin{chktexignore}
-  \begin{example}[examplewidth=0.4\linewidth]
+  \begin{example}[examplewidth=0.35\linewidth]
 \begin{tabular}{|cccc|}
   \cline{4-4}
   a & a & \multicolumn{1}{c|}{a} & b \\
@@ -2201,7 +2246,7 @@ command which draws horizontal line that spans only over the specified rows.
 \LaTeX{} itself does not provide facilities to include images. In order to so
 it is necessary to use the \pai*{graphicx} package. It provides the
 \begin{lscommand}
-  \ci{includegraphics}[options][file]
+  \csi{includegraphics}[options: o, file: m]
 \end{lscommand}
 command that can be used to include the \carg{file} in the
 document.\footnote{In the examples below we are using images from the
@@ -2219,25 +2264,23 @@ The file may be either PDF, PNG or JPEG\@. If you omit the extension then
 contains dots (other than the extension dot) then its basename has to be put in
 curly braces like so:
 \begin{code}
-  \verb|\includegraphics{{image.with.dots}.jpg}|
+  \mintinline{latex}|\includegraphics{{image.with.dots}.jpg}|
 \end{code}
 
 The \carg{optoins} parameter is a comma delimited list of keys and values. The
 most basic keys are \cargv{width} and \cargv{height}. If only one is supplied
 then \LaTeX{} will calculate the other one to keep the aspect ratio of the
 original image.
-\begin{example}[examplewidth=2.7cm]
+\begin{example}[examplewidth=0.85\linewidth, vertical_mode]
 \includegraphics[width=2cm]{example-image}
-
 \includegraphics[height=1cm]{example-image}
-
 \includegraphics[width=2cm, height=1cm]{example-image}
 \end{example}
 
 You may also pass the \cargv{keepaspectratio} key. This will change the meaning
 of \cargv{width} and \cargv{height} keys to the \emph{maximum} possible width
 and height.
-\begin{example}
+\begin{example}[examplewidth=0.6\linewidth]
 \includegraphics[
   width=2cm,
   height=2cm,
@@ -2252,7 +2295,7 @@ and height.
 Instead of specifying width or height you may also pass the \cargv{scale}
 argument to scale it by a specific amount. Passing negative values will
 reflect the image.
-\begin{example}
+\begin{example}[examplewidth=0.6\linewidth]
 \includegraphics[
   scale=0.1,
 ]{example-image}
@@ -2263,7 +2306,7 @@ reflect the image.
   scale=-0.15,
 ]{example-image}
 %!hidebegin
-\vspace{1.1cm}
+\vspace{1.3cm}
 \end{example}
 
 If you want to rotate the picture you may pass the \cargv{angle} key. By
@@ -2272,7 +2315,7 @@ anchor point by specifying the \cargv{origin} key. Its value may contain one or
 two of the following specifications: \cargv{l} for left, \cargv{r} for right,
 \cargv{c} for centre, \cargv{t} for top, \cargv{b} for bottom and \cargv{B} for
 baseline (useful with \TikZ{} pictures as described in
-Chapter~\ref{chap:graphics}). So for example \cargv{lc} will rotate the image
+\autoref{chap:graphics}). So for example \cargv{lc} will rotate the image
 about the centre of its left edge, while \cargv{c} will rotate it around its
 centre.
 \begin{example}
@@ -2308,26 +2351,26 @@ point of rectangle.
 ]{example-image}
 \end{example}
 
-If you are including a PDF file, the \ci{includegraphics} will only include its
+If you are including a PDF file, the \csi{includegraphics} will only include its
 first page. If you want to specify a different page pass it to the \cargv{page}
 key.
 \begin{example}
 \includegraphics[
-  scale=0.1,
+  width=1.5cm,
 ]{example-image-a4-numbered}
 \includegraphics[
-  scale=0.1,
+  width=1.5cm,
   page=2,
 ]{example-image-a4-numbered}
 \includegraphics[
-  scale=0.1,
+  width=1.5cm,
   page=11,
 ]{example-image-a4-numbered}
 \end{example}
 
 If you pass the \cargv{draft} option then instead of images their name will be
 printed to save on file size and processing time. This key will be inherited
-from the \ci{documentclass} options if specified there.
+from the \csi{documentclass} options if specified there.
 \begin{example}
 \includegraphics[
   scale=0.3,
@@ -2340,9 +2383,11 @@ If you try writing a longer text with tables and images you will soon notice a
 problem: they cannot be broken across multiple pages (except for the
 \pai{longtable}). If you simply include them in normal text flow this will lead
 to a lot of empty space if the image is large and the text preceding it would
-be to close to the bottom of the page. In the example below the first page is
-half empty.
-\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+be to close to the bottom of the page. In the \autoref{lst:floatrationale} the
+first page is half empty.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \usepackage{ragged2e} %!hide
 \geometry{includefoot} %!hide
@@ -2353,12 +2398,18 @@ to take up some space.
 Below this text is an image.
 
 \begin{Center}
-  \includegraphics[scale=0.2]{example-image}
+  \includegraphics[
+    scale=0.2
+  ]{example-image}
 \end{Center}
 
 Here is more text.
 \end{document}%!hide
 \end{example}
+  \end{lined}
+  \caption{An anti-example of half-empty page due to a large, non-floated
+    image.}\label{lst:floatrationale}
+\end{listing}
 
 The solution to this problem is to `float' any figure or table that
 does not fit on the current page to a later page, while filling the
@@ -2382,7 +2433,7 @@ parameter
 The optional \carg{placement specifier} parameter is used to tell \LaTeX{}
 about the locations to which the float is allowed to be moved.  A
 \carg{placement specifier} is constructed by building a string of
-\emph{float-placing permissions}. See Table~\ref{tab:permiss} for a description
+\emph{float-placing permissions}. See \autoref{tab:permiss} for a description
 of available specifiers. Note that the order of specifiers does not matter.
 
 \begin{table}
@@ -2410,7 +2461,7 @@ of available specifiers. Note that the order of specifiers does not matter.
 
 For example, a table float could be started with the following line
 \begin{code}
-\verb|\begin{table}[!hbp]|
+\mintinline{latex}|\begin{table}[!hbp]|
 \end{code}
 The \wi{placement specifier} \cargv{[!hbp]} allows \LaTeX{} to
 place the table right here (\cargv{h}) or at the bottom (\cargv{b})
@@ -2443,8 +2494,13 @@ becomes stuck, blocking subsequent floats. In particular, you should never,
 ever use the [h] option---it is so bad that in more recent versions of \LaTeX,
 it is automatically replaced by [ht].
 
-Using floats, the previous example would look like this:
-\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+Using floats, the \autoref{lst:floatrationale} could be made better by
+rewriting it like in the \autoref{lst:floatexample}. As you can see there,
+\LaTeX{} now typeset the remaining text and delayed inserting the image until
+the next page.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \geometry{includefoot} %!hide
 \begin{document}%!hide
@@ -2455,46 +2511,48 @@ Below this text is an image.
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.2]{example-image}
+  \includegraphics[
+    scale=0.2
+  ]{example-image}
 \end{figure}
 
 Here is more text.
 \end{document}%!hide
 \end{example}
-As you can see, \LaTeX{} now typeset the remaining text and delayed inserting
-the image until the next page.
+  \end{lined}
+  \caption{An example of using \ei{figure} float to achieve dynamic image
+    placement inside a document.}\label{lst:floatexample}
+\end{listing}
 
 Having explained the difficult bit, there are some more things to mention about
 the \ei{table} and \ei{figure} environments. Use the
 \begin{lscommand}
-  \ci{caption}[short caption][full caption]
+  \csi{caption}[short caption: o, full caption: m]
 \end{lscommand}
 command to define a caption for the float. A running number and
 the string \enquote{Figure} or \enquote{Table} will be added by \LaTeX.
 
 The two commands
 \begin{lscommand}
-  \ci{listoffigures} and \ci{listoftables}
+  \csi{listoffigures} and \csi{listoftables}
 \end{lscommand}
-operate analogously to the \ci{tableofcontents} command, printing a list of
+operate analogously to the \csi{tableofcontents} command, printing a list of
 figures or tables, respectively.  These lists will display the whole caption,
 so if you tend to use long captions you must have a shorter version of the
 caption for the lists. This is accomplished by entering the short version in
-brackets after the \ci{caption} command.
+brackets after the \csi{caption} command.
 \begin{code}
-\verb|\caption[Short]{LLLLLoooooonnnnnggggg}|
+\mintinline{latex}|\caption[Short]{LLLLLoooooonnnnnggggg}|
 \end{code}
 
-Use \ci{label} and \ci{ref} to create a reference to a float within
-your text. Note that the \ci{label} command must come \emph{after} the
-\ci{caption} command since you want it to reference the number of the
-caption.
-
-The following example draws a square and inserts it into the
-document. You could use this if you wanted to reserve space for images
-you are going to paste into the finished document.
-
-\begin{example}[standalone, paperheight=4.5cm, to_page=2, vertical_pages]
+Use \csi{label} and \csi{ref} to create a reference to a float within
+your text. Note that the \csi{label} command must come \emph{after} the
+\csi{caption} command since you want it to reference the number of the
+caption. The \autoref{lst:floatrefs} presents an example usage of the described
+commands.
+\begin{listing}
+  \begin{lined}{11cm}
+    \begin{example}[standalone, paperheight=4.5cm, to_page=2, vertical_pages]
 \usepackage{graphicx} %!hide
 \geometry{includefoot} %!hide
 \begin{document}%!hide
@@ -2506,22 +2564,28 @@ the Figure~\ref{figure}.
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.2]{%
-    example-image}
-  \caption{An interesting figure}%
+  \includegraphics[
+    scale=0.2
+  ]{example-image}
+  \caption[A figure]{An
+    interesting figure}%
   \label{figure}
 \end{figure}
 
 Here is more text.
 \end{document}%!hide
 \end{example}
+  \end{lined}
+  \caption{An example of using \ei{figure} float together with references and
+    list of figures.}\label{lst:floatrefs}
+\end{listing}
 
 Under certain circumstances it might be necessary to use the
 \begin{lscommand}
-  \ci{clearpage} or even the \ci{cleardoublepage}
+  \csi{clearpage} or even the \csi{cleardoublepage}
 \end{lscommand}
 command. It orders \LaTeX{} to immediately place all floats remaining in the
-queues and then start a new page. \ci{cleardoublepage} even goes to a new
+queues and then start a new page. \csi{cleardoublepage} even goes to a new
 right-hand page.
 
 \subsection{Other Floats}
@@ -2529,27 +2593,35 @@ right-hand page.
 If you want to have other float lists than \enquote{Table} and \enquote{Figure}
 use the \pai*{newfloat} package. It provides the
 \begin{lscommand}
-  \ci{DeclareFloatingEnvironment}[options][name]
+  \csi{DeclareFloatingEnvironment}[options: o, name: m]
 \end{lscommand}
-For example the \verb|\DeclareFloatingEnvironment{cat}| will define a new
-environment \verb|cat| that can be used similarly to \ei{figure} and \ei{table}
-environment and \verb|\listofcats| that works analogously to \ci{listoftables}.
-You can customise the float using the \carg{options} to change the printed
-captions (\cargv{name}), list title (\cargv{listname}) or default placement
-(\cargv{placement}).
+For example the \mintinline{latex}|\DeclareFloatingEnvironment{cat}| will
+define a new environment \mintinline{latex}|cat| that can be used similarly to
+\ei{figure} and \ei{table} environment and \mintinline{latex}|\listofcats| that
+works analogously to \csi{listoftables}. You can customise the float using the
+\carg{options} to change the printed captions (\cargv{name}), list title
+(\cargv{listname}) or default placement (\cargv{placement}).
 
 \subsection{The \ei{longtable} Environment}
 
 Floating bodies occupy only a single page, thus putting \ei{longtable} into
 them does not make sense. Still you may want to have the \ei{longtable} listed
 in the list of tables with some caption. The \pai{longtable} package defines
-its own \ci{caption} command that you may use inside the environment. Its use
-is similar to the standard \ci{caption} command except that it is treated as a
-row. If you pass empty optional argument to the \ci{caption} command it will
+its own \csi{caption} command that you may use inside the environment. Its use
+is similar to the standard \csi{caption} command except that it is treated as a
+row. If you pass empty optional argument to the \csi{caption} command it will
 typeset normally but it won't be put in the list of tables, which is useful if
-you want to have a running caption.
+you want to have a running caption. See \autoref{lst:longrunningcaption} for an
+example.
 
-\begin{example}[standalone, to_page=2, paperwidth=4.1cm] 
+\begin{listing}
+  \begin{lined}{0.8\linewidth}
+    \begin{example}[standalone,
+    to_page=2,
+    paperwidth=4.1cm,
+    paperheight=4cm,
+    vertical_pages,
+]
 %!hidebegin
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -2557,14 +2629,14 @@ you want to have a running caption.
 \begin{document}
 %!hideend
 \begin{longtable}{@{}cl@{}}
-  \caption{Numbers} \\
+  \caption{Numbers}       \\
   \toprule
-  Number & Word         \\
+  Number & Word           \\
   \midrule \endfirsthead
 
   \caption[]{(continued)} \\
   \toprule
-  Number & Word      \\
+  Number & Word           \\
   \midrule \endhead
 
   \bottomrule \endfoot
@@ -2589,6 +2661,9 @@ you want to have a running caption.
 \end{longtable}
 \end{document} %!hide 
 \end{example}
+  \end{lined}
+  \caption{An example of \ei{longtable} with running caption.}\label{lst:longrunningcaption}
+\end{listing}
 
 \section{Big Projects}
 When working on big documents, you might want to split the input file
@@ -2597,27 +2672,28 @@ that.
 
 Use the
 \begin{lscommand}
-  \ci{include}[filename]
+  \csi{include}[filename: m]
 \end{lscommand}
 command in the document body to insert the contents of another file named
 \emph{filename.tex}. Note that \LaTeX{} will start a new page before processing
 the material input from \emph{filename.tex}.
 
 The second command can be used in the preamble. It allows you to
-instruct \LaTeX{} to only input some of the \verb|\include|d files.
+instruct \LaTeX{} to only input some of the \mintinline{latex}|\include|d % chktex 27
+files.
 \begin{lscommand}
-  \ci{includeonly}[filename\texttt{, }filename\texttt{, }\ldots]
+  \csi{includeonly}[{{«\bs carg{filename}», «\bs carg{filename}», ...}}: c]
 \end{lscommand}
 After this command is executed in the preamble of the document, only
-\ci{include} commands for the filenames that are listed in the
-argument of the \ci{includeonly} command will be executed.
+\csi{include} commands for the filenames that are listed in the
+argument of the \csi{includeonly} command will be executed.
 
-The \ci{include} command starts typesetting the included text on a new
-page. This is helpful when you use \ci{includeonly}, because the
+The \csi{include} command starts typesetting the included text on a new
+page. This is helpful when you use \csi{includeonly}, because the
 page breaks will not move, even when some include files are omitted.
 Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
-  \ci{input}[filename]
+  \csi{input}[filename: m]
 \end{lscommand}
 command. It simply includes the file specified.
 No flashy suits, no strings attached.
@@ -2629,8 +2705,8 @@ As \LaTeX{} runs faster in this mode you may save yourself valuable time.
 Usage is very simple:
 
 \begin{minted}{latex}
-\usepackage{syntonly}
-\syntaxonly
+  \usepackage{syntonly}
+  \syntaxonly
 \end{minted}
 When you want to produce pages, just comment out the second line
 (by adding a percent sign).

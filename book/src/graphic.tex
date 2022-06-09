@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\graphicscompanion}{\emph{The \LaTeX{} Graphics Companion}~\cite{graphicscompanion}}
-\newcommand{\hobby}{\emph{A User's Manual for \MP{}}~\cite{metapost}}
+\newcommand{\hobby}{\citetitle{metapost}~\cite{metapost}}
 \newcommand{\hoenig}{\emph{\TeX{} Unbound}~\cite{unbound}}
 \newcommand{\graphicsinlatex}{\emph{Graphics in \LaTeXe{}}~\cite{ursoswald}}
 
@@ -22,11 +22,11 @@ Creating graphical output with \LaTeX{} has a long tradition. It started out
 with the \ei{picture} environment which allows you to create graphics by
 cleverly placing predefined elements onto the canvas. A complete
 description can be found in the \manual. The \ei{picture} environment of
-\LaTeXe\ brings with it the \ci{qbezier} command, ``\texttt{q}'' meaning
+\LaTeXe\ brings with it the \csi{qbezier} command, ``\texttt{q}'' meaning
 ``quadratic''.  Many frequently used curves such as circles, ellipses, or
 catenaries can be satisfactorily approximated by quadratic B\'ezier curves,
 although this may require some mathematical toil. If, in addition, a
-programming language is used to generate \ci{qbezier} blocks of \LaTeX\
+programming language is used to generate \csi{qbezier} blocks of \LaTeX\
 input files, the \ei{picture} environment becomes quite powerful.
 
 Although programming pictures directly in \LaTeX\ is severely restricted,
@@ -44,9 +44,9 @@ Building on these basics, numerous packages have been written for specific
 purposes. A wide variety of these packages is described in detail in
 \graphicscompanion{}.
 
-Perhaps the most advanced graphical tool related with \LaTeX\ is \MP{}. It is a stand-alone application
-based on Donald E. Knuth's \MF{}. \MP{} has the very powerful and
-mathematically sophisticated programming language of \MF{} but contrary to \MF,
+Perhaps the most advanced graphical tool related with \LaTeX\ is \hologo{METAPOST}. It is a stand-alone application
+based on Donald E. Knuth's \hologo{METAFONT}. \hologo{METAPOST} has the very powerful and
+mathematically sophisticated programming language of \hologo{METAFONT} but contrary to \hologo{METAFONT},
 it generates encapsulated \PSi{} files,
 which can be imported in \LaTeX{} and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on~\cite{ursoswald}.
 
@@ -58,39 +58,39 @@ be found in \hoenig.
 
 As mentioned above the picture environment is part of standard \LaTeX{} and it is great for simple tasks and also if you want
 to control the exact positioning of individual elements on a page. But if you are about to do any serious graphics work, you should
-look at TikZ as presented in Section~\ref{sec:tikz} on page~\pageref{sec:tikz}.
+look at TikZ as presented in \autoref{sec:tikz} on \autopageref{sec:tikz}.
 
 \subsection{Basic Commands}
 
 A \ei{picture} environment\footnote{Believe it or not, the picture environment works out of the
   box, with standard \LaTeXe{} no package loading necessary.} is created with one of the two commands
 \begin{lscommand}
-  \ci{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\ci{end}\verb|{picture}|
+  \csi{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\csi{end}\verb|{picture}|
 \end{lscommand}
 \noindent or
 \begin{lscommand}
-  \ci{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\ci{end}\verb|{picture}|
+  \csi{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\csi{end}\verb|{picture}|
 \end{lscommand}
-The numbers $x,\,y,\,x_0,\,y_0$ refer to \ci{unitlength}, which can be reset any time
+The numbers $x,\,y,\,x_0,\,y_0$ refer to \csi{unitlength}, which can be reset any time
 (but not within a \ei{picture} environment) with a command such as
 \begin{lscommand}
-  \ci{setlength}\verb|{|\ci{unitlength}\verb|}{1.2cm}|
+  \csi{setlength}\verb|{|\csi{unitlength}\verb|}{1.2cm}|
 \end{lscommand}
-The default value of \ci{unitlength} is \texttt{1pt}. The first pair, $(x,y)$, effects
+The default value of \csi{unitlength} is \texttt{1pt}. The first pair, $(x,y)$, effects
 the reservation, within the document, of rectangular space for the picture. The optional
 second pair, $(x_0,y_0)$, assigns arbitrary coordinates to the bottom left corner of the
 reserved rectangle.
 
 Most drawing commands have one of the two forms
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
+  \csi{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
 \end{lscommand}
 \noindent or
 \begin{lscommand}
-  \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
+  \csi{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
 B\'ezier curves are an exception. They are drawn with the command
 \begin{lscommand}
-  \ci{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
+  \csi{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
 \end{lscommand}
 
 \subsection{Line Segments}
@@ -126,9 +126,9 @@ B\'ezier curves are an exception. They are drawn with the command
 \end{example}
 Line segments are drawn with the command
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
 \end{lscommand}
-The \ci{line} command has two arguments:
+The \csi{line} command has two arguments:
 \begin{enumerate}
   \item a direction vector,
   \item a length.
@@ -138,7 +138,7 @@ The components of the direction vector are restricted to the integers
   -6,\,-5,\,\ldots,\,5,\,6,
 \]
 and they have to be coprime (no common divisor except 1). The figure illustrates all
-25 possible slope values in the first quadrant. The length is relative to \ci{unitlength}.
+25 possible slope values in the first quadrant. The length is relative to \csi{unitlength}.
 The length argument is the vertical coordinate in the case of a vertical line segment, the
 horizontal coordinate in all other cases.
 
@@ -162,7 +162,7 @@ horizontal coordinate in all other cases.
 \end{example}
 Arrows are drawn with the command
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
 \end{lscommand}
 For arrows, the components of the direction vector are even more narrowly restricted than
 for line segments, namely to the integers
@@ -170,7 +170,7 @@ for line segments, namely to the integers
   -4,\,-3,\,\ldots,\,3,\,4.
 \]
 Components also have to be coprime (no common divisor except 1). Notice the effect of the
-\ci{thicklines} command on the two arrows pointing to the upper left.
+\csi{thicklines} command on the two arrows pointing to the upper left.
 
 \subsection{Circles}
 
@@ -208,11 +208,11 @@ Components also have to be coprime (no common divisor except 1). Notice the effe
 \end{example}
 The command
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{circle}\verb|{|\emph{diameter}\verb|}}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{circle}\verb|{|\emph{diameter}\verb|}}|
 \end{lscommand}
 \noindent draws a circle with center $(x,y)$ and diameter (not radius) \emph{diameter}.
 The \ei{picture} environment only admits diameters up to approximately 14\,mm,
-and even below this limit, not all diameters are possible. The \ci{circle*}
+and even below this limit, not all diameters are possible. The \csi{circle*}
 command produces disks (filled circles).
 
 As in the case of line segments, one may have to resort to additional packages,
@@ -247,9 +247,9 @@ See \graphicsinlatex\ for examples and Java source files.
 \end{picture}
 \end{example}
 As this example shows, text and formulas can be written into a \ei{picture} environment with
-the \ci{put} command in the usual way.
+the \csi{put} command in the usual way.
 
-\subsection{\ci{multiput} and \ci{linethickness}}
+\subsection{\csi{multiput} and \csi{linethickness}}
 
 \begin{example}
 \setlength{\unitlength}{2mm}
@@ -273,10 +273,10 @@ the \ci{put} command in the usual way.
 \end{example}
 The command
 \begin{lscommand}
-  \ci{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
+  \csi{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
 \end{lscommand}
 \noindent has 4 arguments: the starting point, the translation vector from one object to the next,
-the number of objects, and the object to be drawn. The \ci{linethickness} command applies to
+the number of objects, and the object to be drawn. The \csi{linethickness} command applies to
 horizontal and vertical line segments, but neither to oblique line segments, nor to circles.
 It does, however, apply to quadratic B\'ezier curves!
 
@@ -303,20 +303,22 @@ It does, however, apply to quadratic B\'ezier curves!
 \end{example}
 The command
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{oval}\verb|(|$w,h$\verb|)}|
 \end{lscommand}
 \noindent or
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
 \end{lscommand}
 \noindent produces an oval centered at $(x,y)$ and having width $w$ and height $h$. The optional
 \emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to
 ``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates.
 
-Line thickness can be controlled by two kinds of commands: \\
-\ci{linethickness}\verb|{|\emph{length}\verb|}|
-on the one hand, \ci{thinlines} and \ci{thicklines} on the other. While \ci{linethickness}\verb|{|\emph{length}\verb|}|
-applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \ci{thinlines} and \ci{thicklines}
+Line thickness can be controlled by two kinds of commands:
+\begin{lscommand}
+  \csi{linethickness}[length: m]
+\end{lscommand}
+on the one hand, \csi{thinlines} and \csi{thicklines} on the other. While \csi{linethickness}\verb|{|\emph{length}\verb|}|
+applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \csi{thinlines} and \csi{thicklines}
 apply to oblique line segments as well as to circles and ovals.
 
 \subsection{Multiple Use of Predefined Picture Boxes}
@@ -341,7 +343,7 @@ apply to oblique line segments as well as to circles and ovals.
 }
 \newsavebox{\folderb}
 \savebox{\folderb}
-  (40,32)[l]{%         definition
+  (40,32)[l]{% definition
   \put(0,14){\line(1,0){8}}
   \put(8,0){\usebox{\foldera}}
 }
@@ -353,15 +355,15 @@ apply to oblique line segments as well as to circles and ovals.
 \end{example}
 A picture box can be \emph{declared} by the command
 \begin{lscommand}
-  \ci{newsavebox}\verb|{|\emph{name}\verb|}|
+  \csi{newsavebox}\verb|{|\emph{name}\verb|}|
 \end{lscommand}
 \noindent then \emph{defined} by
 \begin{lscommand}
-  \ci{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
+  \csi{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
 \end{lscommand}
 \noindent and finally arbitrarily often be \emph{drawn} by
 \begin{lscommand}
-  \ci{put}\verb|(|$x,y$\verb|){|\ci{usebox}\verb|{|\emph{name}\verb|}}|
+  \csi{put}\verb|(|$x,y$\verb|){|\csi{usebox}\verb|{|\emph{name}\verb|}}|
 \end{lscommand}
 
 The optional \emph{position} parameter has the effect of defining the
@@ -371,15 +373,15 @@ position specifiers are \texttt{t}op and \texttt{r}ight.
 
 The \emph{name} argument refers to a \LaTeX{} storage bin and therefore is
 of a command nature (which accounts for the backslashes in the current
-example). Boxed pictures can be nested: In this example, \ci{foldera} is
-used within the definition of \ci{folderb}.
+example). Boxed pictures can be nested: In this example, \csi{foldera} is
+used within the definition of \csi{folderb}.
 
-The \ci{oval} command had to be used as the \ci{line} command does not work if the segment length is less than
+The \csi{oval} command had to be used as the \csi{line} command does not work if the segment length is less than
 about 3\,mm.
 
 \subsection{Quadratic B\'ezier Curves}
 
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \setlength{\unitlength}{0.8cm}
 \begin{picture}(6,4)
   \linethickness{0.075mm}
@@ -405,8 +407,8 @@ about 3\,mm.
 \end{example}
 As this example illustrates, splitting up a circle into 4 quadratic B\'ezier curves
 is not satisfactory. At least 8 are needed. The figure again shows the effect of
-the \ci{linethickness} command on horizontal or vertical lines, and of the
-\ci{thinlines} and the \ci{thicklines} commands on oblique line segments. It also
+the \csi{linethickness} command on horizontal or vertical lines, and of the
+\csi{thinlines} and the \csi{thicklines} commands on oblique line segments. It also
 shows that both kinds of commands affect quadratic B\'ezier curves, each command
 overriding all previous ones.
 
@@ -422,11 +424,11 @@ $S=(x,\,y)$ is then given by the equations
   \right.
 \end{equation}
 \noindent See \graphicsinlatex\ for a Java program which generates
-the necessary \ci{qbezier} command line.
+the necessary \csi{qbezier} command line.
 
 \subsection{Catenary}
 
-\begin{example}
+\begin{example}[examplewidth=0.47\linewidth]
 \setlength{\unitlength}{1cm}
 \begin{picture}(4.3,3.6)(-2.5,-0.25)
 \put(-2,0){\vector(1,0){4.4}}
@@ -461,7 +463,7 @@ the necessary \ci{qbezier} command line.
 
 In this figure, each symmetric half of the catenary $y=\cosh x -1$ is approximated by a quadratic
 B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value
-\(m=3.6269\). Using again equation (\ref{zwischenpunkt}), we can
+\(m=3.6269\). Using again \autoref{zwischenpunkt}, we can
 calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$.
 The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less
 than one percent.
@@ -470,7 +472,7 @@ This example points out the use of the optional argument of the \\
 \verb|\begin{picture}| command.
 The picture is defined in convenient ``mathematical'' coordinates, whereas by the command
 \begin{lscommand}
-  \ci{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
+  \csi{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
 \end{lscommand}
 \noindent its lower left corner (marked by the black disk) is assigned the coordinates $(-2.5,-0.25)$.
 
@@ -495,7 +497,7 @@ The picture is defined in convenient ``mathematical'' coordinates, whereas by th
   \put(-3,-2){\circle*{0.2}}
 \end{picture}
 \end{example}
-The control points of the two B\'ezier curves were calculated with formulas (\ref{zwischenpunkt}).
+The control points of the two B\'ezier curves were calculated with \autoref{zwischenpunkt}.
 The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2),\,m_2=1/\cosh^2 2$.
 Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
 is assigned the mathematical coordinates $(-3,-2)$ (black disk).
@@ -519,10 +521,10 @@ instead of actually explaining how it works, I will just show you a few examples
 so that you can get a first impression of how this tool works.
 
 First a simple nonsense diagram.
-\begin{example}
+\begin{example}[examplewidth=0.45\linewidth]
 \begin{tikzpicture}[scale=3]
   \clip (-0.1,-0.2)
-     rectangle (1.8,1.2);
+     rectangle (1.2,1.2);
   \draw[step=.25cm,gray,very thin]
        (-1.4,-1.4) grid (3.4,3.4);
   \draw (-1.5,0) -- (2.5,0);
@@ -536,28 +538,24 @@ First a simple nonsense diagram.
 \end{example}
 Note the semicolon (\texttt{;}) character. It separates the individual commands.
 
-A simple Venn diagram.
-\begin{example}
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.7\linewidth]
 \begin{tikzpicture}
-  \node[circle,draw,
-        minimum size=3cm,
-        label=120:{economics}]
-         at (0,0) {};
-  \node[circle,draw,
-        minimum size=3cm,
-        label=60:{psychology}]
-         at (1,0) {};
+  \node[circle,draw, minimum size=3cm,
+        label=120:{economics}] at (0,0) {};
+  \node[circle,draw, minimum size=3cm,
+        label=60:{psychology}] at (1,0) {};
   \node (i) at (0.5,-1) {};
-  \node at (0.6,-2.5)
-    {behavioral economics}
-    edge[->,thick,
-         out=60,in=-60] (i);
+  \node at (0.6,-2.5) {behavioral economics}
+    edge[->,thick, out=60,in=-60] (i);
 \end{tikzpicture}
 \end{example}
+  \caption{A simple Venn Diagram using \TikZ{}}\label{lst:venn}
+\end{listing}
 
 Note the foreach loops in the next example.
 \begin{example}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[scale=0.75]
   \tikzstyle{v}=[circle, minimum size=2mm,inner sep=0pt,draw]
   \foreach \i in {1,...,8}
     \foreach \j in {1,...,3}
@@ -576,7 +574,7 @@ Note the foreach loops in the next example.
 \end{tikzpicture}
 \end{example}
 
-With the \ci{usetikzlibrary}
+With the \csi{usetikzlibrary}
 command in the preamble you can enable a wide variety of additional
 features for drawing special shapes, like this box which is slightly bent.
 \begin{example}
@@ -595,7 +593,7 @@ features for drawing special shapes, like this box which is slightly bent.
 \end{tikzpicture}
 \end{example}
 
-\begin{example}
+\begin{example}[examplewidth=0.4\linewidth]
 \usetikzlibrary{positioning}
 \begin{tikzpicture}[xscale=6,
      yscale=8,>=stealth]
@@ -632,6 +630,7 @@ you will find a detailed tutorial on drawing this exact diagram.
           top color=white,bottom color=black!20,
           font=\ttfamily\tiny},
       nonterminal/.style={
+          align=center,
           rectangle,
           minimum size=6mm,
           thick,
@@ -641,18 +640,18 @@ you will find a detailed tutorial on drawing this exact diagram.
           font=\itshape\tiny}]
     \matrix[column sep=4mm] {
       % First row:
-                             &                                                  &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
+                             &                                                   &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
       % Second row:
-      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned integer}; &
-      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                &
-      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};            &
-      \node (p4) [point] {}; & \node (p5)     [point] {};                       &
-      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                &
-      \node (p7) [point] {}; &                                                  &
-      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned integer}; &
-      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                            \\
+      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned\\integer}; &
+      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                 &
+      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};             &
+      \node (p4) [point] {}; & \node (p5)     [point] {};                        &
+      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                 &
+      \node (p7) [point] {}; &                                                   &
+      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned\\integer}; &
+      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                             \\
       % Third row:
-                             &                                                  &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
+                             &                                                   &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
     };
     { [start chain]
     \chainin (p1);
