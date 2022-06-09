@@ -752,9 +752,9 @@ distributions and should be available in
 \begin{code}
   \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
 \end{code}
-directory, where the \cargv{...} denotes tha path \TeX{}Live was installed to.
+directory, where the \cargv{...} denotes the path \TeX{}Live was installed to.
 \hologo{LuaTeX} checks this directory automatically, so it should work fine,
-but if you are usign \hologo{XeTeX} you must first install these fonts in your
+but if you are using \hologo{XeTeX} you must first install these fonts in your
 system. You can also download and install them manually from the links provided
 in bibliography. Alternatively swap out their respective names with some other
 fonts installed in your system.
@@ -776,27 +776,27 @@ This commands change, respectively, the main font of the document, \textsf{the
   document}.
 \begin{example}
 Normal text.
-  \emph{Emphasized.} \\
+  \emph{Emphasised.} \\
 \textsf{Sans serif text.
-  \emph{Emphasized}.} \\
+  \emph{Emphasised}.} \\
 \texttt{Monospace text.
-  \emph{Emphasized}.} \\
+  \emph{Emphasised}.} \\
 
 \setmainfont{Source Serif Pro}
 \setsansfont{Source Sans Pro}
 \setmonofont{Source Code Pro}
 Normal text.
-  \emph{Emphasized.} \\
+  \emph{Emphasised.} \\
 \textsf{Sans serif text.
-  \emph{Emphasized}.} \\
+  \emph{Emphasised}.} \\
 \texttt{Monospace text.
-  \emph{Emphasized}.}
+  \emph{Emphasised}.}
 \end{example}
 Note that it is best to put these commands in the preamble of your document,
 because some fonts are frozen when the body starts.
 
 The optional \carg{options} argument accepts key value lists that allow to
-customize the font features. For example, many fonts contain the, so called,
+customise the font features. For example, many fonts contain the, so called,
 old style numerals that are not used by default. You can pass
 \cargv{Number=OldStyle} if you want to use them in your document.
 \begin{example}
@@ -929,6 +929,241 @@ raises an error if it is. Similarly to \autoref{sec:new_commands} the
 \csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
 redefine existing font families.
 
+\section{Colours}\label{sec:colors}\index{colours}
+
+\subsection{Font Colours}
+In the \autoref{sec:logical_structure} we have used different font colours in
+the example. These can be obtained with the \pai*{xcolor} package. It provides
+two commands to change the text colour:
+\begin{lscommand}
+  \csi{color}[model: o, color: m] \\
+  \csi{textcolor}[model: o, color: m, text: m]
+\end{lscommand}
+The \csi{color} is a switch version while \csi{textcolor} only applies to its
+argument. If no \carg{model} is specified, then \carg{color} is specified as
+colour expression. The simplest colour expression is just the name of the colour,
+for example \cargv{yellow} or \cargv{red}.
+\begin{example}
+\textcolor{yellow}{foo}
+
+\color{red} bar
+\end{example}
+The list of predefined colours can be found in \autoref{tbl:basecolors}. You can
+also pass \cargv{dvipsnames}, \cargv{svgnames} or \cargv{x11names} as a package
+options to extend the predefined colours. Consult the package documentation for
+a full list.
+\begin{table}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\DemoColor}{m}{
+    \raisebox{0.15cm}{\cargv{#1}} &
+    \fcolorbox{black}{#1}{\phantom{\rule{0.5cm}{0.5cm}}}
+  }
+  \ExplSyntaxOff
+  \caption{Basic colours predefined by the \pai{xcolor}
+    package.}\label{tbl:basecolors}
+  \begin{tabular}{@{}lc*2{@{\qquad}lc}@{}}
+    \toprule
+    Name                 & Demo                  &
+    Name                 & Demo                  &
+    Name                 & Demo                                       \\
+    \midrule
+    \DemoColor{black}    & \DemoColor{lightgray} & \DemoColor{purple} \\
+    \DemoColor{blue}     & \DemoColor{lime}      & \DemoColor{red}    \\
+    \DemoColor{brown}    & \DemoColor{magenta}   & \DemoColor{teal}   \\
+    \DemoColor{cyan}     & \DemoColor{olive}     & \DemoColor{violet} \\
+    \DemoColor{darkgray} & \DemoColor{orange}    & \DemoColor{white}  \\
+    \DemoColor{gray}     & \DemoColor{pink}      & \DemoColor{yellow} \\
+    \DemoColor{green}    &                       &                    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Another type of colour expression is a mix of two colours. The syntax is
+\begin{code}
+  \cargv{\carg{first color}!\carg{percentage}!\carg{second color}}.
+\end{code}
+The resulting colour will be the result of mixing
+\qty[parse-numbers=false]{\carg{percentage}}{\percent} of the \carg{first
+  color} and \qty[parse-numbers=false]{100-\carg{percentage}}{\percent} of the
+\carg{second color}. If you omit the \carg{second color} it defaults to white.
+\begin{example}
+\textcolor{green!100!red}{C}%
+\textcolor{green!80!red}{o}%
+\textcolor{green!60!red}{l}%
+\textcolor{green!40!red}{o}%
+\textcolor{green!20!red}{r}%
+\textcolor{green!0!red}{s} \\
+\textcolor{blue!100}{B}%
+\textcolor{blue!75}{l}%
+\textcolor{blue!50}{u}%
+\textcolor{blue!25}{e}
+\end{example}
+Colour mixing is left associative so
+\begin{code}
+  \cargv{\carg{A}!\carg{n}!\carg{B}!\carg{m}!\carg{C}}
+\end{code}
+means calculate the mixture of \carg{A} and \carg{B} and then mixture of the
+result and \carg{C}. You can also use the minus sign before the expression to
+get the complementary colour.
+\begin{example}
+\color{green!20!red!60!blue}
+\LaTeX{} \\
+\color{-green!20!red!60!blue}
+\LaTeX{}
+\end{example}
+
+\subsection{Models}
+
+While colour mixing via expression is useful for simple colour specification, it
+is often the case that we want to use colour that is defined in terms of its RGB
+or HSB values. Different input method colours can be specified using the optional
+\carg{model} argument. Note that it is case sensitive.
+
+The simplest model is \cargv{Gray}. It accepts a single number from \(0\)to
+\(15\) and produces a grey colour with the given brightness.
+\begin{example}
+\textcolor[Gray]{0}{Zero}    \\
+\textcolor[Gray]{3}{Three}   \\
+\textcolor[Gray]{7}{Seven}   \\
+\textcolor[Gray]{11}{Eleven} \\
+\textcolor[Gray]{15}{Fifteen}
+\end{example}
+
+You can input RGB values in three ways: \cargv{rgb}, \cargv{RGB} and
+\cargv{HTML} models. The \cargv{HTML} model accepts a hexadecimal colour code.
+The code may be either upper or lowercase.
+\begin{example}
+\textcolor[HTML]{e63946}{e63946}
+\textcolor[HTML]{06D6A0}{06D6A0}
+\end{example}
+The \cargv{rgb} model accepts three decimal numbers, each between \(0\) and
+\(1\), while the \cargv{RGB} model accepts three integers from \(0\) to \(255\).
+\begin{example}
+\textcolor[RGB]{255, 204, 102}{
+  255, 204, 102
+} \\
+\textcolor[rgb]{0.4, 0.4, 1.0}{
+  0.4, 0.4, 1.0
+}
+\end{example}
+
+If you prefer substractive colour model, both \cargv{cmy} and \cargv{cmyk} are
+available. These both accept decimal numbers between \(0\) and \(1\) to specify
+the amount of each colour.
+\begin{example}
+\textcolor[cmy]{0.7, 0.4, 0.3}{
+  0.7, 0.4, 0.3
+} \\
+\textcolor[cmyk]{
+  0.7, 0.4, 0.3, 0.5
+}{
+  0.7, 0.4, 0.3, 0.5
+}
+\end{example}
+
+There are three models that enable defining colours by HSB\@: \cargv{hsb},
+\cargv{Hsb} and \cargv{HSB}. The first two accept three decimal numbers for
+each value, the difference being that the \cargv{Hsb} accepts hue as an angle
+in degrees, that is a number between \(0\) and \(360\). The \cargv{hue} accepts
+it as a number between \(0\) and \(1\), while saturation and brightness
+are passed the same way in both model---as a number between \(0\) and \(1\).
+\begin{example}
+\textcolor[hsb]{
+  0.4, 0.8, 0.75
+}{
+  0.4, 0.8, 0.75
+}\\
+\textcolor[Hsb]{
+  144, 0.8, 0.75
+}{
+  144, 0.8, 0.75
+}
+\end{example}
+
+If you are writing a paper about light you may also find that the \cargv{wave}
+model comes in handy. It allows you to specify a colour by its wavelength. It
+accepts a single decimal number that represents a wavelength in visible
+spectrum in \unit{\nm}.
+\begin{example}
+\textcolor[wave]{452}{
+  If a light has wavelength
+  \qty{452}{\nm} it looks
+  like this.  
+} \\
+\textcolor[wave]{700}{
+  Light with wavelength above
+  \qty{814}{\nm} is called
+  infrared.
+}
+\end{example}
+
+\subsection{Defining Your Own Colours}
+
+If you want to use given colour more than once it probably makes sense to define
+it as a macro. While you could use the \csi{NewDocumentCommand} to define it,
+the \pai{xcolor} package provides a better way via the
+\begin{lscommand}
+  \csi{definecolor}[name: m, model: m, value: m].
+\end{lscommand}
+This makes it possible to use the newly defined colour in colour mixing and such.
+\begin{example}
+\definecolor{MyRed}{wave}{712}
+\textcolor{MyRed}{MyRed is
+  the perfect colour for you!}
+\textcolor{MyRed!60}{Tints
+  are also available!}
+\end{example}
+Be careful though, since it doesn't against redefinition. If you want to check
+whether you haven't redefined some colour put \csi{tracingcolors} in your
+preamble. This will produce warnings when redefinition happens.
+
+If you want to make sure a colour is present but don't want to redefine it if it
+already exists then \csi{providecolor} does exactly that. There is also
+\csi{colorlet} that simply creates a copy of a given colour similarly to the
+\csi{NewCommandCopy} command.
+
+Colours defined in different models may need to be converted when mixing them.
+This may lead to a situation where \mintinline{latex}|\color{a!75!b}| will
+result in different colour than \mintinline{latex}|\color{b!25!a}|. Keep that in
+mind when mixing your own colours.
+
+\subsection{Colourful Pages and Boxes}
+
+So far we have only considered changing font colour. It is however possible to
+also
+change the background colour of the document page. To do this use the
+\begin{lscommand}
+  \csi{pagecolor}[model: o, color: m]
+\end{lscommand}
+command, which arguments are the same as in the \csi{color} command. If you
+want to revert to the default transparent background you may do so with the
+\csi{nopagecolor} command.
+\begin{example}[standalone, paperheight=1cm]
+\usepackage{xcolor} %!hide
+\begin{document} %!hide
+\pagecolor{orange} \color{-orange}
+Small is colourful \ldots?
+\end{document} %!hide
+\end{example}
+
+If you only want to specify a background of some text instead of the whole page
+you can use the
+\begin{lscommand}
+  \csi{colorbox}[model: o, color: m, text: m] \\
+  \csi{fcolorbox}[model: o, color: m, model: o, color: m, text: m]
+\end{lscommand}
+commands. The first one only colours the background, while the second one
+allows also drawing a frame (the \enquote*{f} stands for \enquote{framed}).
+\begin{example}
+It is \colorbox{gray}{curious}
+how much can a document be
+enhanced or ruined by
+\fcolorbox{blue}{red}{
+  colours.
+}
+\end{example}
+Boxes are explored further in \autoref{sec:boxes}.
+
 \section{Lengths and Spacing}
 
 \subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}
@@ -970,7 +1205,7 @@ redefine existing font families.
 \ExplSyntaxOff
 
 Throughout this booklet we have often presented commands that accept length as
-ont of its parameters such as \csi{\bs} or \csi{fontsize}. When introducing
+one of its parameters such as \csi{\bs} or \csi{fontsize}. When introducing
 them we have used \unit{\cm} and \unit{\pt} which stand for centimetre and
 point, but these are not the only units available in \LaTeX{}.
 
@@ -1300,7 +1535,7 @@ here at all. Isn't that puzzling?
 \end{vardesc}
 \end{example}
 
-\section{Boxes}
+\section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each
 letter is a little box, which is then glued to other letters to form
 words. These are again glued to other words, but with special glue,
