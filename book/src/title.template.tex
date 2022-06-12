@@ -16,50 +16,55 @@
 % You should have received a copy of the GNU General Public License along with
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Contents: The title page
-% $Id$
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% !TEX root = ./lshort.tex
 
 \ifpdf
   \pdfbookmark{Title Page}{title}
 \fi
-\newlength{\centeroffset}
-\setlength{\centeroffset}{-0.5\oddsidemargin}
-\addtolength{\centeroffset}{0.5\evensidemargin}
-%\addtolength{\textwidth}{-\centeroffset}
 \thispagestyle{empty}
-\vspace*{\stretch{1}}
-\noindent\hspace*{\centeroffset}\makebox[0pt][l]{\begin{minipage}{\textwidth}
-    \begin{flushright}
-      {\Huge\bfseries The Not So Short\\
-        Introduction to \LaTeX{}\par}
-      \noindent\rule[-1ex]{\textwidth}{5pt}\\[2.5ex]
-      \hfill\emph{\Large Or \LaTeX{} in~\pageref*{LastPage} minutes}
-    \end{flushright}
-  \end{minipage}}
+\newgeometry{
+  hscale=0.8,
+  hcentering,
+  vmargin=0pt,
+}
 
-\vspace{\stretch{1}}
-\noindent\hspace*{\centeroffset}\makebox[0pt][l]{\begin{minipage}{\textwidth}
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\vspace*{\stretch{1}}
+\resizebox{\textwidth}{!}{
+  \parbox{10cm}{
+    \begin{center}
+      \Huge\bfseries
+      The Not So Short\\
+      Introduction to \LaTeX{}
+    \end{center}
+    \vspace{-1em}
+    \noindent\rule{\linewidth}{4pt}
+    \vspace{-2em}
     \begin{flushright}
-      {\bfseries
-        by Tobias Oetiker, Marcin Serwin\\[1.5ex]
-        Hubert Partl, Irene Hyna and Elisabeth Schlegl\\[3ex]}
+      \large\itshape
+      Or \LaTeX{} in~\pageref*{LastPage} minutes \hspace*{0.1cm}
+    \end{flushright}
+
+    \includegraphics[width=\linewidth]{images/title-illustration.pdf}
+
+    \begin{center}
+      \NewDocumentCommand{\separator}{}{\ \smash{\(
+          \vcenter{\hbox{\scalebox{2.5}{\cdot}}}
+          \)}\ }
+      \bfseries
+      Tobias Oetiker\separator{}Marcin Serwin\\[1.5ex]
+      Hubert Partl\separator{}Irene Hyna\separator{}Elisabeth Schlegl\\[3ex]
+    \end{center}
+    \begin{flushright}
+      \footnotesize
       !versionplaceholder!
     \end{flushright}
-  \end{minipage}}
+  } % chktex 6
+}
+\vspace*{\stretch{1}}
+\endgroup
 
-%\addtolength{\textwidth}{\centeroffset}
-\vspace{\stretch{2}}
-
+\restoregeometry
 \pagebreak
-
-\endinput
-
-%
-
-% Local Variables:
-% TeX-master: "lshort2e"
-% mode: latex
-% mode: flyspell
-% End:

@@ -11,7 +11,7 @@ Silent {
     \flushright \mainmatter \IEEEyessubnumber
     \endhead \endfoot \endlastfoot \endfirsthead
     \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
-    \bgroup \egroup
+    \bgroup \egroup \restoregeometry \itshape
 }
 
 MathEnvir {
