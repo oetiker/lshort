@@ -68,14 +68,14 @@ optional and finally three mandatory you would write \cargv{oommommm}. If the
 \carg{argspec} argument is empty then the command will take no arguments.
 
 This example defines a new command called \csi{tnss}. This is
-short for ``The Not So Short Introduction to \LaTeXe.'' Such a command
+short for ``The Not So Short Introduction to \LaTeX.'' Such a command
 could come in handy if you had to write the title of this book over
 and over again.
 
 \begin{example}
 \NewDocumentCommand{\tnss}{}{%
   The not so Short Introduction
-    to \LaTeXe}
+    to \LaTeX}
 This is \enquote{\tnss} \ldots{}
 \enquote{\tnss}
 \end{example}
@@ -87,7 +87,7 @@ you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
 \begin{example}
 \NewDocumentCommand{\txsit}{mm}
  {This is the \emph{#1}
-  #2 Introduction to \LaTeXe}
+  #2 Introduction to \LaTeX}
 
 % in the document body:
 \txsit{not so}{short}
@@ -100,7 +100,7 @@ a special marker \cargv{-NoValue-} will be inserted instead.
 \begin{example}
 \NewDocumentCommand{\txsit}{om}
 {This is the \emph{#1}
-  #2 Introduction to \LaTeXe}
+  #2 Introduction to \LaTeX}
 
 % in the document body:
 \txsit{definitive}
@@ -132,7 +132,7 @@ be used if you only need output for one of the branches. The example with
 \NewDocumentCommand{\txsit}{om}
 {This is the
   \IfValueT{#1}{\emph{#1} }%
-  #2 Introduction to \LaTeXe}
+  #2 Introduction to \LaTeX}
 
 % in the document body:
 \txsit{definitive}
@@ -151,7 +151,7 @@ if no value is supplied. Write
 \begin{example}
 \NewDocumentCommand{\txsit}{O{not so}m}
 {This is the \emph{#1}
-  #2 Introduction to \LaTeXe}
+  #2 Introduction to \LaTeX}
 
 % in the document body:
 \txsit{definitive}
@@ -169,7 +169,7 @@ that works analogously to the \csi{IfValueTF} command.
   \begin{example}
 \NewDocumentCommand{\txsit}{sO{not so}m}
 {This is the \emph{#2}
-  #3 Introduction to \LaTeXe%
+  #3 Introduction to \LaTeX%
   \IfBooleanT{#1}{%
     : Superstar Edition%
   }%
@@ -403,10 +403,10 @@ command to make the package available in your document.
 }
 
 \NewDocumentCommand{\tnss}{} {
-  The~not~so~Short~Introduction~to~\LaTeXe
+  The~not~so~Short~Introduction~to~\LaTeX
 }
 \NewDocumentCommand{\txsit}{O{not~so}} {
-  The~\emph{#1}~Short~Introduction~to~\LaTeXe
+  The~\emph{#1}~Short~Introduction~to~\LaTeX
 }
 
 \NewDocumentEnvironment{king}{} {
@@ -465,7 +465,7 @@ commands as implemented in the standard document classes.
 \textit{Italy}.}
 \end{example}
 
-One important feature of \LaTeXe{} is that the font attributes are
+One important feature of \LaTeX{} is that the font attributes are
 independent. This means that issuing size or even font
 changing commands, and still keep bold or slant attributes set
 earlier.
@@ -879,7 +879,7 @@ vertical space without having to worry about exact numbers.
   \csih{topmargin}
 \end{figure}\index{page layout}
 
-\LaTeXe{} allows you to specify the \wi{paper size} in the
+\LaTeX{} allows you to specify the \wi{paper size} in the
 \verb|\documentclass| command. It then automatically picks the right
 text \wi{margins}, but sometimes you may not be happy with
 the predefined values. Naturally, you can change them.
