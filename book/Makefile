@@ -1,5 +1,10 @@
-#	pstops "4:0L@0.8(22.5cm,-0.6cm)+1L@0.8(22.5cm,13.3cm),2L@0.8(22.5cm,-0.6cm)+3L@0.8(22.5cm,13.3cm)" \
-SHELL = /bin/sh
+# Copyright (C) 2022 Tobias Oetiker, Marcin Serwin
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
 VERS = 7.0
 
 OTHER = README CHANGES
