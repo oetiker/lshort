@@ -28,6 +28,11 @@
 - removed outdent and adjusted examples / marcin-serwin
 - switch to `autoref` from `hyperref` / marcin-serwin
 - use `microtype` / marcin-serwin
+- update license / marcin-serwin
+- drop the `2e` from the title / marcin-serwin
+- redesign the title page with illustration / marcin-serwin
+- restructure the repo / marcin-serwin
+- update readme / marcin-serwin
 
 ## 6.4 2021.03.09
 
