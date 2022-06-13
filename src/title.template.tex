@@ -1,0 +1,70 @@
+% The Not So Short Introduction to LaTeX
+%
+% Copyright (C) 1995--2022 Tobias Oetiker, Marcin Serwin, Hubert Partl,
+% Irene Hyna, Elisabeth Schlegl and Contributors.
+%
+% This document is free software: you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by the Free
+% Software Foundation, either version 3 of the License, or (at your option) any
+% later version.
+%
+% This document is distributed in the hope that it will be useful, but WITHOUT
+% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+% FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public License along with
+% this document.  If not, see <https://www.gnu.org/licenses/>.
+
+% !TEX root = ./lshort.tex
+
+\ifpdf
+  \pdfbookmark{Title Page}{title}
+\fi
+\thispagestyle{empty}
+\newgeometry{
+  hscale=0.8,
+  hcentering,
+  vmargin=0pt,
+}
+
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\vspace*{\stretch{1}}
+\resizebox{\textwidth}{!}{
+  \parbox{10cm}{
+    \begin{center}
+      \Huge\bfseries
+      The Not So Short\\
+      Introduction to \LaTeX{}
+    \end{center}
+    \vspace{-1em}
+    \noindent\rule{\linewidth}{4pt}
+    \vspace{-2em}
+    \begin{flushright}
+      \large\itshape
+      Or \LaTeX{} in~\pageref*{LastPage} minutes \hspace*{0.1cm}
+    \end{flushright}
+
+    \includegraphics[width=\linewidth]{images/title-illustration.pdf}
+
+    \begin{center}
+      \NewDocumentCommand{\separator}{}{\ \smash{\(
+          \vcenter{\hbox{\scalebox{2.5}{\cdot}}}
+          \)}\ }
+      \bfseries
+      Tobias Oetiker\separator{}Marcin Serwin\\[1.5ex]
+      Hubert Partl\separator{}Irene Hyna\separator{}Elisabeth Schlegl\\[3ex]
+    \end{center}
+    \begin{flushright}
+      \footnotesize
+      !versionplaceholder!
+    \end{flushright}
+  } % chktex 6
+}
+\vspace*{\stretch{1}}
+\endgroup
+
+\restoregeometry
+\cleardoublepage

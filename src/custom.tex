@@ -1,0 +1,1140 @@
+% The Not So Short Introduction to LaTeX
+%
+% Copyright (C) 1995--2022 Tobias Oetiker, Marcin Serwin, Hubert Partl,
+% Irene Hyna, Elisabeth Schlegl and Contributors.
+%
+% This document is free software: you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by the Free
+% Software Foundation, either version 3 of the License, or (at your option) any
+% later version.
+%
+% This document is distributed in the hope that it will be useful, but WITHOUT
+% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+% FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public License along with
+% this document.  If not, see <https://www.gnu.org/licenses/>.
+
+% !TEX root = ./lshort.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Customising LaTeX output
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Customising \LaTeX}\label{chap:custom}
+
+\begin{intro}
+  Documents produced with the commands you have learned up to this
+  point will look acceptable to a large audience. While they are not
+  fancy-looking, they obey all the established rules of good
+  typesetting, which will make them easy to read and pleasant to look at.
+
+  However, there are situations where \LaTeX{} does not provide a
+  command or environment that matches your needs, or the output
+  produced by some existing command may not meet your requirements.
+
+  In this chapter, I will try to give some hints on
+  how to teach \LaTeX{} new tricks and how to make it produce output
+  that looks different from what is provided by default.
+\end{intro}
+
+\section{New Commands, Environments and Packages}
+
+At the beginning of this book we have mentioned that \LaTeX{} allows us to
+write documents using logical markup, with commands like \csi{emph} or \csi{section}. There
+may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.
+You may have noticed that all the
+commands I introduce in this book are typeset in a box, and that they show up
+in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. Thus I
+can write:
+
+\begin{example}
+\begin{lscommand}
+\csi{dum}
+\end{lscommand}
+\end{example}
+
+In this example, I am using both a new environment called
+\ei{lscommand}, which is responsible for drawing the box around the
+command, and a new command named \csi{ci}, which typesets the command
+name and makes a corresponding entry in the index. Check
+this out by looking up the \csi{dum} command in the index at the back
+of this book, where you'll find an entry for \csi{dum}, pointing to
+every page where I mentioned the \csi{dum} command.
+
+If I ever decide that I do not like having the commands typeset in
+a box any more, I can simply change the definition of the
+\ei{lscommand} environment to create a new look. This is much
+easier than going through the whole document to hunt down all the
+places where I have used some generic \LaTeX{} commands to draw a
+box around some word.
+
+\subsection{New Commands}\label{sec:new_commands}
+
+To add your own commands, use the
+\begin{lscommand}
+  \csi{NewDocumentCommand}[name:M, argspec:m, definition:m]
+\end{lscommand}
+\noindent command. It requires three arguments: the \carg{name} of the command
+you want to create, the \carg{argspec} (argument specification) and the
+\emph{definition} of the command.
+
+The \carg{argspec} argument specifies the number and types of arguments the
+command receives. The two most important types are \cargv{m}, for \emph{mandatory} and \cargv{o} for \emph{optional}. To create a
+command that takes two optional arguments, then two mandatory, then again one
+optional and finally three mandatory you would write \cargv{oommommm}. If the
+\carg{argspec} argument is empty then the command will take no arguments.
+
+This example defines a new command called \csi{tnss}. This is
+short for ``The Not So Short Introduction to \LaTeX.'' Such a command
+could come in handy if you had to write the title of this book over
+and over again.
+
+\begin{example}
+\NewDocumentCommand{\tnss}{}{%
+  The not so Short Introduction
+    to \LaTeX}
+This is \enquote{\tnss} \ldots{}
+\enquote{\tnss}
+\end{example}
+
+The next example illustrates how to define a new
+command that takes two arguments. In order to refer to the received arguments
+you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
+
+\begin{example}
+\NewDocumentCommand{\txsit}{mm}
+ {This is the \emph{#1}
+  #2 Introduction to \LaTeX}
+
+% in the document body:
+\txsit{not so}{short}
+
+\txsit{very}{long}
+\end{example}
+
+If your command accepts an optional argument but the user does not supply one,
+a special marker \cargv{-NoValue-} will be inserted instead.
+\begin{example}
+\NewDocumentCommand{\txsit}{om}
+{This is the \emph{#1}
+  #2 Introduction to \LaTeX}
+
+% in the document body:
+\txsit{definitive}
+
+\txsit[very]{long}
+\end{example}
+In order to test whether the user supplied a value, use
+\begin{lscommand}
+  \csi{IfValueTF}[argument:m, value version:m, no value version:m]
+\end{lscommand}
+macro.
+\begin{example}
+\NewDocumentCommand{\MyCommand}{o}{
+  \IfValueTF {#1} {
+    Optional argument: #1.
+  } {
+    No optional argument given.
+  }%
+}
+
+\MyCommand\\
+\MyCommand[hello]
+\end{example}
+
+There are two variations of it: \csi{IfValueT} and \csi{IfValueF} which may
+be used if you only need output for one of the branches. The example with
+\cargv{-NoValue-} in the output could be fixed by writing
+\begin{example}
+\NewDocumentCommand{\txsit}{om}
+{This is the
+  \IfValueT{#1}{\emph{#1} }%
+  #2 Introduction to \LaTeX}
+
+% in the document body:
+\txsit{definitive}
+
+\txsit[very]{long}
+\end{example}
+The commands \csi{IfNoValueTF}, \csi{IfNoValueT} and \csi{IfNoValueF}
+work exactly the same, but the value\slash{}no-value branches are swapped.
+
+Often you will want to use optional arguments when present but use some default
+values when the user does not provide them. This could be achieved by
+\csi{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
+It works like \cargv{o} but allows to set a default
+if no value is supplied. Write
+
+\begin{example}
+\NewDocumentCommand{\txsit}{O{not so}m}
+{This is the \emph{#1}
+  #2 Introduction to \LaTeX}
+
+% in the document body:
+\txsit{definitive}
+
+\txsit[very]{long}
+\end{example}
+
+Another useful argument specification is \cargv{s}, short for star. This
+argument allows to provide different definitions based on whether the
+starred or non-starred version of command was issued by the user. It uses
+\csi{IfBooleanTF} command (and its variations\csih{IfBooleanT}\csih{IfBooleanF})
+that works analogously to the \csi{IfValueTF} command.
+
+\begin{chktexignore}
+  \begin{example}
+\NewDocumentCommand{\txsit}{sO{not so}m}
+{This is the \emph{#2}
+  #3 Introduction to \LaTeX%
+  \IfBooleanT{#1}{%
+    : Superstar Edition%
+  }%
+}
+
+% in the document body:
+\txsit{long}\\
+\txsit*{long}
+\end{example}
+\end{chktexignore}
+
+These are just the most common argument specifications. For a full description,
+take a look at the \pai*{xparse} package documentation.\footnote{This
+  package is loaded automatically in new \LaTeX{} releases, so you probably do not
+  need to put \cs{usepackage}[xparse: vm] in your preamble.}
+
+\LaTeX{} will not allow you to create a new command that would
+overwrite an existing one. But there is a special command in case you
+explicitly want this: \csi{RenewDocumentCommand}.
+It uses the same syntax as the \csi{NewDocumentCommand}
+command.
+
+In some cases you might want to use the \csi{ProvideDocumentCommand}
+command. It works like \csi{NewDocumentCommand}, but if the command is
+already defined, \LaTeX{} will silently ignore it.
+
+\subsection{New Environments}
+The \csi{NewDocumentEnvironment} command lets you create your own environments. It has the
+following syntax:
+
+\begin{lscommand}
+  \small
+  \csi{NewDocumentEnvironment}[name:m, argspec:m, at begin:m, at end:m]
+\end{lscommand}
+The \carg{argspec} argument is the same as in the
+\csi{NewDocumentCommand} command. The contents of \carg{at begin} and \carg{at
+  end} arguments will be inserted respectively when the commands
+\csi{begin}[name: m] and \csi{end}[name: m] is encountered. The example
+presented in \autoref{lst:kingenv} illustrates the usage of this command.
+\begin{listing}
+  \begin{example}
+\NewDocumentEnvironment{king}{}{%
+  \emph{Listen! For the
+    king made a statement:}%
+  \\[1em]%
+} {%
+  \\[1em]%
+  \emph{This concludes
+    the king's statement.}%
+}
+
+\begin{king}
+My humble subjects \ldots
+\end{king}
+\end{example}
+  \caption{An example of using \csi{NewDocumentEnvironment}
+    command.}\label{lst:kingenv}
+\end{listing}
+
+Note that when environment argument are read, they are read \emph{after} the
+\csi{begin}[name: m] command. This may be especially counter intuitive when we
+consider the \cargv{s} specification. \autoref{lst:kingsenv} illustrates this.
+\begin{listing}
+  \begin{example}
+\NewDocumentEnvironment{king}{s}{%
+  \IfBooleanTF{#1}{
+    \begin{center}
+      \emph{Thus spoke Charles I:}
+      \\[1em]%
+    \end{center}%
+  } {
+    \emph{Listen! For the
+      king made a statement:}%
+      \\[1em]%
+  }%
+} {%
+  \\[1em]%
+  \emph{This concludes
+    the king's statement.}%
+}
+
+\begin{king}*
+My humble subjects \ldots
+\end{king}
+\end{example}
+  \caption{An example of using \cargv{s} specifier when defining a new
+    environment.}\label{lst:kingsenv}
+\end{listing}
+If you want to create a starred version of an environment (similarly to some
+\hologo{AmSLaTeX} environments) you have to define it separately.
+\begin{minted}{latex}
+\NewDocumentEnvironment{king}{moo} { ... } { ... }
+\NewDocumentEnvironment{king*}{moo} { ... } { ... }
+\end{minted}
+Obviously you can use the same internal commands to define them, for example
+renaming the previous implementation to \cargv{kinginternal} making the
+\cargv{king} and \cargv{king*} a thin wrapper around it.
+
+The \csi{NewDocumentEnvironment} also introduces a special argument
+specification: \cargv{+b}, short for body.\footnote{The \cargv{+} indicates
+  that it may contain multiple paragraphs.} It is only allowed as the last
+argument in the \carg{argspec}. It allows you to receive the body of the
+environment as an argument.
+\begin{example}
+\NewDocumentEnvironment{twice}{+b} {%
+  First time:\\ #1
+
+  Second time:\\ #1
+} {}
+
+\begin{twice}
+This will be printed twice!
+\end{twice}
+\end{example}
+While this makes one of the \carg{at begin}, \carg{at end} arguments redundant,
+they are still required. (In the example above we provided an empty \carg{at
+  end}.)
+
+Do not overuse \cargv{+b} as this will both make the environments subject to
+some limitations (e.g.\ \csi{verb} will not be allowed inside) and slow down the
+typesetting.
+
+Similarly to the \csi{NewDocumentCommand} \LaTeX{} makes sure that you do not
+define an environment that already exists. If you ever want to change an
+existing environment, use the \csi{RenewDocumentEnvironment} command. Its
+arguments are the same as the \csi{NewDocumentEnvironment} command.
+
+\subsection{Copying commands}\label{sec:copyingcommands}
+
+When redefining commands you may want to use the original version of the
+command. Your initial code may look like this
+\begin{minted}{latex}
+\RenewDocumentCommand{\emph}{m}{%
+  \emph{#1}~(\enquote{#1} is emphasised)%
+}
+\end{minted}
+but when you try to compile the document you will receive the error
+\begin{minted}{console}
+! TeX capacity exceeded, sorry [input stack size=5000].
+\end{minted}
+
+To understand why this happens it is instructive to consider how \TeX{} expands
+the defined commands. The above \csi{RenewDocumentCommand} tells the \TeX{}
+engine that whenever \csi{emph}[foo:vm] is seen it must replace it with
+\mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
+problem here. In the next stage it will again replace the \csi{emph}[foo:vm]
+yielding
+\begin{minted}{latex}
+\emph{foo}~(\enquote{foo} is emphasised)~
+  (\enquote{foo} is emphasised)
+\end{minted}
+This process will never end and at some point \TeX{}
+simply gives up.
+
+Note that
+\begin{minted}{latex}
+\NewDocumentCommand{\oldemph}{m}{\emph{#1}}
+\RenewDocumentCommand{\emph}{m}{%
+  \oldemph{#1}~(\enquote{#1} is emphasised)%
+}
+\end{minted}
+will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
+with \verb|\emph{...}| and the cycle repeats.
+
+In order to avoid this problem a special command exists
+\begin{lscommand}
+  \csi{NewCommandCopy}[name:M, command:M]
+\end{lscommand}
+It makes the \carg{name} the exact copy of the \carg{command}. The following example shows how this works
+\begin{example}[examplewidth=0.35\linewidth]
+\NewDocumentCommand{\foo}{}{Batman!}
+
+\NewDocumentCommand{\newfoo}{}{\foo}
+\NewCommandCopy{\copiedfoo}{\foo}
+
+\RenewDocumentCommand{\foo}{}{Na Na Na}
+
+\foo{} \newfoo{} \copiedfoo{}
+\end{example}
+
+This is precisely the behaviour we need in order to redefine the \csi{emph}
+command as we have tried to do earlier.
+\begin{example}[examplewidth=0.35\linewidth]
+\NewCommandCopy{\oldemph}{\emph}
+\RenewDocumentCommand{\emph}{m}{%
+  \oldemph{#1}~(\enquote{#1}
+  is emphasised)%
+}
+
+And here it \emph{comes}.
+\end{example}
+
+\subsection{Command-line \LaTeX}
+
+If you work on a Unix-like OS, you might be using Makefiles to build your
+\LaTeX{} projects. In that connection it might be interesting to produce
+different versions of the same document by calling \LaTeX{} with command-line
+parameters. If you add the following structure to your document:
+
+\begin{minted}{latex}
+\IfBooleanTF{\blackandwhite} {
+  % "black and white" mode; do something...
+} {
+  % "color" mode; do something different...
+}
+\end{minted}
+
+Now compile document like this:
+\begin{verbatim}
+xelatex '\NewCommandCopy{\blackandwhite}{\BooleanTrue}
+    \input{test.tex}'
+\end{verbatim}
+First the command \verb|\blackandwhite| is defined as the \csi{BooleanTrue} macro which
+holds a special value used in \csi{IfBooleanTF} checks. Then the actual file is
+read with input. By setting \verb|\blackandwhite| to \csi{BooleanFalse} the
+colour version of the document would be produced.
+
+\subsection{Your Own Package}
+
+If you define a lot of new environments and commands, the preamble of
+your document will get quite long. In this situation, it is a good
+idea to create a \LaTeX{} package containing all your command and
+environment definitions. Use the \csi{usepackage}
+command to make the package available in your document.
+
+\begin{listing}
+  \begin{lined}{\textwidth}
+    \begin{minted}{latex}
+\ProvidesExplPackage{demopack}{2022-05-05}{0.1}{%
+  Package by Tobias Oetiker
+}
+
+\NewDocumentCommand{\tnss}{} {
+  The~not~so~Short~Introduction~to~\LaTeX
+}
+\NewDocumentCommand{\txsit}{O{not~so}} {
+  The~\emph{#1}~Short~Introduction~to~\LaTeX
+}
+
+\NewDocumentEnvironment{king}{} {
+  \begin{quote}
+} {
+  \end{quote}
+}
+\end{minted}
+  \end{lined}
+  \caption{Example Package.}\label{package}
+\end{listing}
+
+Writing a package basically consists of copying the contents of your document
+preamble (with minor adjustments) into a separate file with a name ending in
+\texttt{.sty}. There is one special command,
+\begin{lscommand}
+  \csi{ProvidesExplPackage}[package name:m, date:m, version:m, description:m]
+\end{lscommand}
+\noindent for use at the very beginning of your package file. This command
+tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
+that all whitespace is ignored. You may have noticed that in many of the
+examples above we had to end most lines with \ai{\%} to get correct
+spacing in the output. In \emph{expl mode}, spaces have to be added explicitly if needed at all. They are usually
+quite rare when writing a package. To insert spaces, use
+the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
+  you want to insert non-breaking space in \emph{expl mode}, use
+  \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
+
+The arguments are used to provide information about package in the log file. If
+you use this package and look at the log file you will find
+\begin{verbatim}
+Package: demopack 2022-05-05 v0.1 Package by Tobias Oetiker
+\end{verbatim}
+in the \eei{.log} file.
+
+\csi{ProvidesExplPackage} will also issue a sensible error message when you try
+to include a package twice. \autoref{package} shows a small example package
+that contains the commands defined in the examples above.
+
+\section{Fonts and Sizes}\label{sec:fontsize}
+
+\subsection{Font Changing Commands}\index{font}\index{font size}
+\LaTeX{} chooses the appropriate font
+and font size based on the logical structure of the document
+(sections, footnotes, \ldots).  In some cases, one might like to change
+fonts and sizes by hand. To do this, use the commands listed in
+\autoref{fonts} and \autoref{sizes}. The actual size of each font
+is a design issue and depends on the document class and its options.
+\autoref{tab:pointsizes} shows the absolute point size for these
+commands as implemented in the standard document classes.
+
+\begin{example}
+{\small The small and
+\textbf{bold} Romans ruled}
+{\Large all of great big
+\textit{Italy}.}
+\end{example}
+
+One important feature of \LaTeX{} is that the font attributes are
+independent. This means that issuing size or even font
+changing commands, and still keep bold or slant attributes set
+earlier.
+
+In \emph{math mode} use the font changing \emph{commands} to
+temporarily exit \emph{math mode} and enter some normal text. If you want to
+switch to another font for math typesetting you need another
+special set of commands; refer to \autoref{mathfonts}.
+
+\begin{table}[!bp]
+  \centering
+  \caption{Fonts.}\label{fonts}
+  %
+  % Alan suggested not to tell about the other form of the command
+  % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
+  %
+  \begin{tabular}{@{}ll@{\qquad}ll@{}}
+    \toprule
+    Command                      & Font                       & Command & Font \\
+    \midrule
+    \fni{textrm}\verb|{...}|     & \textrm{\wi{roman}}        &
+    \fni{textsf}\verb|{...}|     & \textsf{\wi{sans serif}}                    \\
+    \fni{texttt}\verb|{...}|     & \texttt{typewriter}                         \\[6pt]
+    \fni{textmd}\verb|{...}|     & \textmd{medium}            &
+    \fni{textbf}\verb|{...}|     & \textbf{\wi{bold face}}                     \\[6pt]
+    \fni{textup}\verb|{...}|     & \textup{\wi{upright}}      &
+    \fni{textit}\verb|{...}|     & \textit{\wi{italic}}                        \\
+    \fni{textsl}\verb|{...}|     & \textsl{\wi{slanted}}      &
+    \fni{textsc}\verb|{...}|     & \textsc{\wi{Small Caps}}                    \\[6pt]
+    \fni{textnormal}\verb|{...}| & \textnormal{document} font &         &      \\
+    \bottomrule
+  \end{tabular}
+
+  \bigskip
+\end{table}
+
+\begin{table}[!bp]
+  \centering
+  \caption{Font Sizes.}\label{sizes}\index{font size}
+  \begin{tabular}{@{}ll@{\qquad}ll@{}}
+    \toprule
+    Command                     & Size                                    & Command & Size \\
+    \midrule
+    \fni{tiny}                  & \tiny        tiny                       &
+    \fni{Large}                 & \Large       larger                                      \\
+    \fni{scriptsize}            & \scriptsize  very small                 &
+    \fni{LARGE}                 & \LARGE       very large                                  \\
+    \fni{footnotesize}          & \footnotesize  quite small              &
+    \multirow{2}{*}{\fni{huge}} & \multirow{2}{*}{\huge        huge}                       \\
+    \fni{small}                 & \small            small                 &         &      \\
+    \fni{normalsize}            & \normalsize  normal                     &
+    \multirow{2}{*}{\fni{Huge}} & \multirow{2.2}{*}{\Huge        largest}                  \\
+    \fni{large}                 & \large       large                      &         &      \\
+    \bottomrule
+  \end{tabular}%
+  \bigskip
+\end{table}
+
+\begin{table}[!tb]
+  \centering
+  \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
+    Standard Classes depending on the class option. The default class option is
+    \cargv{10pt}.}\label{tab:pointsizes}\label{tab:sizes}
+  \sisetup{table-format=2.0}
+  \begin{tabular}{@{}lSSS@{}}
+    \toprule
+                       & \multicolumn{3}{c}{Size (\unit{pt})}                                   \\
+    \cmidrule(l){2-4}
+    Command            & {\cargv{10pt}}                       & {\cargv{11pt}} & {\cargv{12pt}} \\
+    \midrule
+    \csi{tiny}         & 5                                    & 6              & 6              \\
+    \csi{scriptsize}   & 7                                    & 8              & 8              \\
+    \csi{footnotesize} & 8                                    & 9              & 10             \\
+    \csi{small}        & 9                                    & 10             & 11             \\
+    \csi{normalsize}   & 10                                   & 11             & 12             \\
+    \csi{large}        & 12                                   & 12             & 14             \\
+    \csi{Large}        & 14                                   & 14             & 17             \\
+    \csi{LARGE}        & 17                                   & 17             & 20             \\
+    \csi{huge}         & 20                                   & 20             & 25             \\
+    \csi{Huge}         & 25                                   & 25             & 25             \\
+    \bottomrule
+  \end{tabular}
+
+  \bigskip
+\end{table}
+
+\begin{table}[!bp]
+  \centering
+  \caption{Math Fonts.}\label{mathfonts}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Command                      & Font                           \\
+    \midrule
+    \fni{mathrm}\verb|{...}|     & $\mathrm{Roman\ Font}$         \\
+    \fni{mathbf}\verb|{...}|     & $\mathbf{Boldface\ Font}$      \\
+    \fni{mathsf}\verb|{...}|     & $\mathsf{Sans\ Serif\ Font}$   \\
+    \fni{mathtt}\verb|{...}|     & $\mathtt{Typewriter\ Font}$    \\
+    \fni{mathit}\verb|{...}|     & $\mathit{Italic\ Font}$        \\
+    \fni{mathcal}\verb|{...}|    & $\mathcal{CALLIGRAPHIC\ FONT}$ \\
+    \fni{mathnormal}\verb|{...}| & $\mathnormal{Normal\ Font}$    \\
+    \bottomrule
+  \end{tabular}
+
+  %\begin{tabular}{@{}lll@{}}
+  %\textit{Command}&\textit{Example}&    \textit{Output}\\[6pt]
+  %\fni{mathcal}\verb|{...}|&    \verb|$\mathcal{B}=c$|&     $\mathcal{B}=c$\\
+  %\fni{mathscr}\verb|{...}|&    \verb|$\mathscr{B}=c$|&     $\mathscr{B}=c$\\
+  %\fni{mathrm}\verb|{...}|&     \verb|$\mathrm{K}_2$|&      $\mathrm{K}_2$\\
+  %\fni{mathbf}\verb|{...}|&     \verb|$\sum x=\mathbf{v}$|& $\sum x=\mathbf{v}$\\
+  %\fni{mathsf}\verb|{...}|&     \verb|$\mathsf{G\times R}$|&        $\mathsf{G\times R}$\\
+  %\fni{mathtt}\verb|{...}|&     \verb|$\mathtt{L}(b,c)$|&   $\mathtt{L}(b,c)$\\
+  %\fni{mathnormal}\verb|{...}|& \verb|$\mathnormal{R_{19}}\neq R_{19}$|&
+  %$\mathnormal{R_{19}}\neq R_{19}$\\
+  %\fni{mathit}\verb|{...}|&     \verb|$\mathit{ffi}\neq ffi$|& $\mathit{ffi}\neq ffi$
+  %\end{tabular}
+
+  \bigskip
+\end{table}
+
+In connection with the font size commands, \wi{curly braces} play a
+significant role. They are used to build \emph{groups}.  Groups
+limit the scope of most \LaTeX{} commands.\index{grouping}
+
+\begin{example}
+He likes {\LARGE large and
+{\small small} letters}.
+\end{example}
+
+The font size commands also change the line spacing, but only if the
+paragraph ends within the scope of the font size command. The closing curly
+brace \verb|}| should therefore not come too early.  Note the position of
+the \csi{par} command in the next two examples.\footnote{\texttt{\bs{}par}
+  is equivalent to a blank line}
+
+\begin{example}
+{\Large Don't read this!
+ It is not true.
+ You can believe me!\par}
+\end{example}
+
+\begin{example}
+{\Large This is not true either.
+But remember I am a liar.}\par
+\end{example}
+
+If you want to activate a size changing command for a whole paragraph
+of text or even more, you might want to use the environment syntax for
+font changing commands.
+
+\begin{example}
+\begin{Large}
+This is not true.
+But then again, what is these
+days \ldots
+\end{Large}
+\end{example}
+
+\noindent This will save you from counting lots of curly braces.
+
+\subsection{Danger, Will Robinson, Danger}
+
+As noted at the beginning of this chapter, it is dangerous to clutter
+your document with explicit commands like this, because they work in
+opposition to the basic idea of \LaTeX{}, which is to separate the
+logical and visual markup of your document.  This means that if you
+use the same font changing command in several places in order to
+typeset a special kind of information, you should use
+\csi{NewDocumentCommand} to define a ``logical wrapper command'' for the font
+changing command.
+
+\begin{example}
+\NewDocumentCommand{\oops}{m}{%
+ \textbf{#1}}
+Do not \oops{enter} this room,
+it's occupied by \oops{machines}
+of unknown origin and purpose.
+\end{example}
+
+This approach has the advantage that you can decide at some later
+stage that you want to use a visual representation of danger other
+than \verb|\textbf|, without having to wade through your document,
+identifying all the occurrences of \verb|\textbf| and then figuring out
+for each one whether it was used for pointing out danger or for some other
+reason.
+
+Please note the difference between telling \LaTeX{} to
+\emph{emphasise} something and telling it to use a different
+\emph{font}. The \csi{emph} command is context aware, while the font commands are absolute.
+
+\begin{example}
+\textit{You can also
+  \emph{emphasise} text if
+  it is set in italics,}
+\textsf{in a
+  \emph{sans-serif} font,}
+\texttt{or in
+  \emph{typewriter} style.}
+\end{example}
+
+\subsection{Advice}
+
+To conclude this journey into the land of fonts and font sizes,
+here is a little word of advice:\nopagebreak
+
+\begin{quote}
+  \underline{\textbf{Remember\Huge!}} \textit{The}
+  \textsf{M\textbf{\LARGE O} \texttt{R}\textsl{E}} fonts \Huge you
+  \tiny use \footnotesize \textbf{in} a \small \texttt{document},
+  \large \textit{the} \normalsize more \textsc{readable} and
+  \textsl{\textsf{beautiful} it bec\large o\Large m\LARGE e\huge s}.
+\end{quote}
+
+\section{Spacing}
+
+\subsection{Line Spacing}\index{line spacing}
+
+If you want to use larger inter-line spacing in a
+document, change its value by putting the
+\begin{lscommand}
+  \csi{linespread}\verb|{|\emph{factor}\verb|}|
+\end{lscommand}
+\noindent command into the preamble of your document.
+Use \verb|\linespread{1.3}| for ``one and a half'' line
+spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
+the lines are not spread, so the default line spread factor
+is~1.\index{double line spacing}
+
+Note that the effect of the \csi{linespread} command is rather drastic and
+not appropriate for published work. So if you have a good reason for
+changing the line spacing you might want to use the command:
+\begin{lscommand}
+  \verb|\setlength{\baselineskip}{1.5\baselineskip}|
+\end{lscommand}
+
+\begin{example}
+{\setlength{\baselineskip}%
+           {1.5\baselineskip}
+This paragraph is typeset with
+the baseline skip set to 1.5 of
+what it was before. Note the
+par command at the end of the
+paragraph.\par}
+
+This paragraph has a clear
+purpose, it shows that after the
+curly brace has been closed,
+everything is back to normal.
+\end{example}
+
+\subsection{Paragraph Formatting}\label{parsp}
+
+In \LaTeX{}, there are two parameters influencing paragraph layout.
+By placing a definition like
+\begin{code}
+\csi{setlength}\verb|{|\csi{parindent}\verb|}{0pt}| \\
+\verb|\setlength{|\csi{parskip}\verb|}{1ex plus 0.5ex minus 0.2ex}|
+\end{code}
+in the preamble of the input file, you can change the layout of
+paragraphs. These two commands increase the space between two paragraphs
+while setting the paragraph indent to zero.
+
+The \texttt{plus} and \texttt{minus} parts of the length above tell
+\TeX{} that it can compress and expand the inter-paragraph skip by the
+amount specified, if this is necessary to properly fit the paragraphs
+onto the page.
+
+In continental Europe,
+paragraphs are often separated by some space and not indented. But
+beware, this also has its effect on the table of contents. Its lines
+get spaced more loosely now as well. To avoid this, you might want to
+move the two commands from the preamble into your document to some
+place below the command \verb|\tableofcontents| or to not use them at all,
+because you'll find that most professional books use indenting and not
+spacing to separate paragraphs.
+
+If you want to indent a paragraph that is not indented, use
+\begin{lscommand}
+  \csi{indent}
+\end{lscommand}
+\noindent at the beginning of the paragraph.\footnote{To indent the first paragraph after each section head, use
+  the \pai{indentfirst} package in the `tools' bundle.} Obviously,
+this will only have an effect when \verb|\parindent| is not set to
+zero.
+
+To create a non-indented paragraph, use
+\begin{lscommand}
+  \csi{noindent}
+\end{lscommand}
+\noindent as the first command of the paragraph. This might come in handy when
+you start a document with body text and not with a sectioning command.
+
+\subsection{Horizontal Space}\label{sec:hspace}
+
+\LaTeX{} determines the spaces between words and sentences
+automatically. To add horizontal space, use:\index{horizontal!space}
+\begin{lscommand}
+  \csi{hspace}\verb|{|\emph{length}\verb|}|
+\end{lscommand}
+If such a space should be kept even if it falls at the end or the
+start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
+\emph{length} in the simplest case is just a number plus a unit.  The
+most important units are listed in \autoref{units}.\index{units (\TeX)}\index{dimensions}
+
+\begin{example}
+This\hspace{1.5cm}is a space
+of \qty{1.5}{\cm}.
+\end{example}
+\suppressfloats
+\begin{table}[htp]
+  \centering
+  \DeclareSIUnit{\in}{in}
+  \sisetup{
+    parse-numbers = false
+  }
+
+  \caption{\TeX{} Units.}\label{units}\index{units}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Unit        & Meaning                                                                               \\
+    \midrule
+    \texttt{mm} & millimetre $\approx$ \qty{1/25}{\in} \quad \demowidth{1mm}                            \\
+    \texttt{cm} & centimetre = \qty{10}{mm}  \quad \demowidth{1cm}                                      \\
+    \texttt{in} & inch $=$ \qty{25.4}{\mm} \quad \demowidth{1in}                                        \\
+    \texttt{pt} & point $\approx$ \qty{1/72}{\in} $\approx$ \qty{\frac{1}{3}}{\mm} \quad\demowidth{1pt} \\
+    \texttt{em} & approx width of an `M' in the current font \quad \demowidth{1em}                      \\
+    \texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}                     \\
+    \bottomrule
+  \end{tabular}
+
+  \bigskip
+\end{table}
+
+The command
+\begin{lscommand}
+  \csi{stretch}\verb|{|\emph{n}\verb|}|
+\end{lscommand}
+\noindent generates a special rubber space. It stretches until all the
+remaining space on a line is filled up. If multiple
+\verb|\hspace{\stretch{|\emph{n}\verb|}}| commands are issued on the same
+line, they occupy all available space in proportion of their respective
+stretch factors.
+
+\begin{example}
+x\hspace{\stretch{1}}
+x\hspace{\stretch{3}}x
+\end{example}
+
+When using horizontal space together with text, it may make sense to make
+the space adjust its size relative to the size of the current font.
+This can be done by using the text-relative units \texttt{em} and
+\texttt{ex}:
+
+\begin{example}
+{\Large{}big\hspace{1em}y}\\
+{\tiny{}tin\hspace{1em}y}
+\end{example}
+
+\subsection{Vertical Space}
+The space between paragraphs, sections, subsections, \ldots\ is
+determined automatically by \LaTeX. If necessary, additional vertical
+space \emph{between two paragraphs} can be added with the command:
+\begin{lscommand}
+  \csi{vspace}\verb|{|\emph{length}\verb|}|
+\end{lscommand}
+
+This command should normally be used between two empty lines.  If the
+space should be preserved at the top or at the bottom of a page, use
+the starred version of the command, \verb|\vspace*|, instead of \verb|\vspace|.\index{vertical space}
+
+The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
+be used to typeset text on the last line of a page, or to centre text
+vertically on a page.
+\begin{code}
+\begin{minted}{latex}
+Some text \ldots
+
+\vspace{\stretch{1}}
+This goes onto the last line of the page.\pagebreak
+\end{minted}
+\end{code}
+
+Additional space between two lines of \emph{the same} paragraph or
+within a table is specified with the
+\begin{lscommand}
+  \csi{\bs}\verb|[|\emph{length}\verb|]|
+\end{lscommand}
+\noindent command.
+
+With \csi{bigskip} and \csi{smallskip} you can skip a predefined amount of
+vertical space without having to worry about exact numbers.
+
+\section{Page Layout}
+
+\begin{figure}[!hp]
+  \begin{center}
+    \makeatletter\@mylayout\makeatother
+  \end{center}
+  \vspace*{1.8cm}
+  \caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}\label{fig:layout}
+  \csih{footskip}
+  \csih{headheight}
+  \csih{headsep}
+  \csih{marginparpush}
+  \csih{marginparsep}
+  \csih{marginparwidth}
+  \csih{oddsidemargin}
+  \csih{paperheight}
+  \csih{paperwidth}
+  \csih{textheight}
+  \csih{textwidth}
+  \csih{topmargin}
+\end{figure}\index{page layout}
+
+\LaTeX{} allows you to specify the \wi{paper size} in the
+\verb|\documentclass| command. It then automatically picks the right
+text \wi{margins}, but sometimes you may not be happy with
+the predefined values. Naturally, you can change them.
+%no idea why this is needed here ...
+\thispagestyle{fancyplain}
+\autoref{fig:layout} shows all the parameters that can be changed.
+The figure was produced with the \pai{layout} package from the tools bundle.%
+\footnote{\CTANref|pkg/tools|}
+
+\textbf{WAIT!} \ldots before you launch into a ``Let's make that
+narrow page a bit wider'' frenzy, take a few seconds to think. As with
+most things in \LaTeX, there is a good reason for the page layout to
+be as it is.
+
+Sure, compared to your off-the-shelf MS Word page, it looks awfully
+narrow. But take a look at your favourite book\footnote{I mean a real
+  printed book produced by a reputable publisher.} and count the number
+of characters on a standard text line. You will find that there are no
+more than about 66 characters on each line. Now do the same on your
+\LaTeX{} page. You will find that there are also about 66 characters
+per line.  Experience shows that the reading gets difficult as soon as
+there are more characters on a single line. This is because it is
+difficult for the eyes to move from the end of one line to the start of the next one.
+This is also why newspapers are typeset in multiple columns.
+
+So if you increase the width of your body text, keep in mind that you
+are making life difficult for the readers of your paper. But enough
+of the cautioning, I promised to tell you how you do it \ldots
+
+\LaTeX{} provides two commands to change these parameters. They are
+usually used in the document preamble.
+
+The first command assigns a fixed value to any of the parameters:
+\begin{lscommand}
+  \csi{setlength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
+\end{lscommand}
+
+The second command adds a length to any of the parameters:
+\begin{lscommand}
+  \csi{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
+\end{lscommand}
+
+This second command is actually more useful than the \csi{setlength}
+command, because it works relative to the existing settings.
+To add one centimetre to the overall text width, I put the
+following commands into the document preamble:
+\begin{code}
+\verb|\addtolength{\hoffset}{-0.5cm}|\\
+\verb|\addtolength{\textwidth}{1cm}|
+\end{code}
+
+In this context, you might want to look at the \pai{calc} package.
+It allows you to use arithmetic operations in the argument of \csi{setlength}
+and other places where numeric values are entered into function
+arguments.
+
+\section{More Fun With Lengths}
+
+Whenever possible, I avoid using absolute lengths in
+\LaTeX{} documents. I rather try to base things on the width or height
+of other page elements. For the width of a figure this could
+be \verb|\textwidth| in order to make it fill the page.
+
+The following 3 commands allow you to determine the width, height and
+depth of a text string.
+
+\begin{lscommand}
+  \csi{settoheight}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
+  \csi{settodepth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
+  \csi{settowidth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|
+\end{lscommand}
+
+\noindent The example below shows a possible application of these commands.
+
+\begin{example}[examplewidth=0.45\linewidth]
+\newenvironment{vardesc}[1]{%
+  \settowidth{\parindent}{#1:\ }
+  \makebox[0pt][r]{#1:\ }}{}
+
+\begin{displaymath}
+a^2+b^2=c^2
+\end{displaymath}
+
+\begin{vardesc}{Where}$a$,
+$b$ --- are adjacent to the right
+angle of a right-angled triangle.
+
+$c$ --- is the hypotenuse of
+the triangle and feels lonely.
+
+$d$ --- finally does not show up
+here at all. Isn't that puzzling?
+\end{vardesc}
+\end{example}
+
+\section{Boxes}
+\LaTeX{} builds up its pages by pushing around boxes. At first, each
+letter is a little box, which is then glued to other letters to form
+words. These are again glued to other words, but with special glue,
+which is elastic so that a series of words can be squeezed or
+stretched as to exactly fill a line on the page.
+
+I admit, this is a very simplistic version of what really happens, but the
+point is that \TeX{} operates on glue and boxes. Letters are not the only
+things that can be boxes. You can put virtually everything into a box,
+including other boxes. Each box will then be handled by \LaTeX{} as if it
+were a single letter.
+
+In earlier chapters you encountered some boxes, although I did
+not tell you. The \ei{tabular} environment and the \csi{includegraphics}, for
+example, both produce a box. This means that you can easily arrange two
+tables or images side by side. You just have to make sure that their
+combined width is not larger than the textwidth.
+
+You can also pack a paragraph of your choice into a box with either
+the
+
+\begin{lscommand}
+  \csi{parbox}\verb|[|\emph{pos}\verb|]{|\emph{width}\verb|}{|\emph{text}\verb|}|
+\end{lscommand}
+
+\noindent command or the
+
+\begin{lscommand}
+  \verb|\begin{|\ei{minipage}\verb|}[|\emph{pos}\verb|]{|\emph{width}\verb|}| text
+  \verb|\end{|\ei{minipage}\verb|}|
+\end{lscommand}
+
+\noindent environment. The \texttt{pos} parameter can take one of the letters
+\texttt{c, t} or \texttt{b} to control the vertical alignment of the box,
+relative to the baseline of the surrounding text. \texttt{width} takes
+a length argument specifying the width of the box. The main difference
+between a \ei{minipage} and a \csi{parbox} is that you cannot use all commands
+and environments inside a \ei{parbox}, while almost anything is possible in
+a \ei{minipage}.
+
+While \csi{parbox} packs up a whole paragraph doing line breaking and
+everything, there is also a class of boxing commands that operates
+only on horizontally aligned material. We already know one of them;
+it's called \csi{mbox}. It simply packs up a series of boxes into
+another one, and can be used to prevent \LaTeX{} from breaking two
+words. As boxes can be put inside boxes, these horizontal box packers
+give you ultimate flexibility.
+
+\begin{lscommand}
+  \csi{makebox}\verb|[|\emph{width}\verb|][|\emph{pos}\verb|]{|\emph{text}\verb|}|
+\end{lscommand}
+
+\noindent \texttt{width} defines the width of the resulting box as
+seen from the outside.\footnote{This means it can be smaller than the
+  material inside the box. You can even set the
+  width to 0pt so that the text inside the box will be typeset without
+  influencing the surrounding boxes.}  Besides the length
+expressions, you can also use \csi{width}, \csi{height}, \csi{depth}, and
+\csi{totalheight} in the width parameter. They are set from values
+obtained by measuring the typeset \emph{text}. The \emph{pos} parameter takes
+a one letter value: \textbf{c}enter, flush\textbf{l}eft,
+flush\textbf{r}ight, or \textbf{s}pread the text to fill the box.
+
+The command \csi{framebox} works exactly the same as \csi{makebox}, but
+it draws a box around the text.
+
+The following example shows you some things you could do with
+the \csi{makebox} and \csi{framebox} commands.
+
+\begin{example}
+\makebox[\textwidth]{%
+    c e n t r a l}\par
+\makebox[\textwidth][s]{%
+    s p r e a d}\par
+\framebox[1.1\width]{Guess I'm
+    framed now!} \par
+\hspace{1cm} %!hide
+\framebox[0.8\width][r]{Bummer,
+    I am too wide} \par
+\framebox[1cm][l]{never
+    mind, so am I}
+Can you read this?
+\end{example}
+
+Now that we control the horizontal, the obvious next step is to go for
+the vertical.\footnote{Total control is only to be obtained by
+  controlling both the horizontal and the vertical \ldots}
+No problem for \LaTeX{}. The
+
+\begin{lscommand}
+  \csi{raisebox}\verb|{|\emph{lift}\verb|}[|\emph{extend-above-baseline}\verb|][|\emph{extend-below-baseline}\verb|]{|\emph{text}\verb|}|
+\end{lscommand}
+
+\noindent command lets you define the vertical properties of a
+box. You can use \csi{width}, \csi{height}, \csi{depth}, and
+\csi{totalheight} in the first three parameters, in order to act
+upon the size of the box inside the \emph{text} argument.
+
+\begin{example}[examplewidth=0.45\linewidth]
+\raisebox{0pt}[0pt][0pt]{\Large%
+\textbf{Aaaa\raisebox{-0.3ex}{a}%
+\raisebox{-0.7ex}{aa}%
+\raisebox{-1.2ex}{r}%
+\raisebox{-2.2ex}{g}%
+\raisebox{-4.5ex}{h}}}
+she shouted, but not even the next
+one in line noticed that something
+terrible had happened to her.
+\end{example}
+
+\section{Rules}\label{sec:rule}
+
+A few pages back you may have noticed the command
+
+\begin{lscommand}
+  \csi{rule}\verb|[|\emph{lift}\verb|]{|\emph{width}\verb|}{|\emph{height}\verb|}|
+\end{lscommand}
+
+\noindent In normal use it produces a simple black box.
+
+\begin{example}
+\rule{3mm}{.1pt}%
+\rule[-1mm]{5mm}{1cm}%
+\rule{3mm}{.1pt}%
+\rule[1mm]{1cm}{5mm}%
+\rule{3mm}{.1pt}
+\end{example}
+
+\noindent This is useful for drawing vertical and horizontal
+lines. The line on the title page, for example, has been created with a
+\csi{rule} command.
+
+\bigskip
+\begin{FlushRight}
+  The End.
+\end{FlushRight}
+
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:

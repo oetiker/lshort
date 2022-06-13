@@ -1,0 +1,208 @@
+% The Not So Short Introduction to LaTeX
+%
+% Copyright (C) 1995--2022 Tobias Oetiker, Marcin Serwin, Hubert Partl,
+% Irene Hyna, Elisabeth Schlegl and Contributors.
+%
+% This document is free software: you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by the Free
+% Software Foundation, either version 3 of the License, or (at your option) any
+% later version.
+%
+% This document is distributed in the hope that it will be useful, but WITHOUT
+% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+% FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public License along with
+% this document.  If not, see <https://www.gnu.org/licenses/>.
+
+% !TEX root = ./lshort.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Who contributed to this Document
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Thank you!}
+\noindent Much of the material used in this introduction comes from an
+Austrian introduction to \LaTeX\ 2.09 written in German by:
+\begin{verse}
+  \contrib{Hubert Partl}{partl@mail.boku.ac.at}%
+  {Zentraler Informatikdienst der Universit\"at f\"ur Bodenkultur Wien}
+  \contrib{Irene Hyna}{Irene.Hyna@bmwf.ac.at}%
+  {Bundesministerium f\"ur Wissenschaft und Forschung Wien}
+  \contrib{Elisabeth Schlegl}{no email}%
+  {in Graz}
+\end{verse}
+
+If you are interested in the German document, you can find a version
+updated for \LaTeXe{} by J\"org Knappen at
+\CTAN|info/lshort/german|
+
+\newpage \noindent The
+following individuals helped with corrections, suggestions and
+material to improve this paper. They put in a big effort to help me
+get this document into its present shape. I would like to
+sincerely thank all of them. Naturally, all the mistakes you'll find
+in this book are mine. If you ever find a word that is spelled
+correctly, it must have been one of the people below dropping me a
+line.
+
+If you want to contribute to this booklet, you can find all the source code
+on \url{https://github.com/oetiker/lshort}. Your pull requests will be
+appreciated.
+
+\begin{flushleft}
+  \small
+  Eric~Abrahamsen,        % <eric@ericabrahamsen.net>
+  Lenimar~Nunes~de~Andrade, % <lenimar@mat.ufpb.br> 12 Nov 1999
+  Eilinger~August,        % <eaugust@student.ethz.ch>
+  Rosemary~Bailey,        % <r.a.bailey@qmw.ac.uk> 0.2
+  Barbara~Beeton,         % <bnb@ams.org>
+  Marc~Bevand,            % <bevand_m@epita.fr>
+  Connor~Blakey,          % it's Ligatures!
+  Salvatore~Bonaccorso,   % <bonaccos@ee.ethz.ch>
+  Pietro~Braione,         % <braione@elet.polimi.it>
+  Friedemann~Brauer,      % <fbrauer@is.dal.ca> 3.4
+  Markus~Br\"uhwiler,     % <m.br@switzerland.org>
+  Jan~Busa,               % <busaj@ccsun.tuke.sk>
+  David~Carlisle,         % GONE <carlisle@cs.man.ac.uk> 1.0
+  Neil~Carter,            % <n.carter@Swansea.ac.uk>
+  Carl~Cerecke,           % <cdc@cosc.canterbury.ac.nz>
+  Mike~Chapman,           % <chapman@eeh.ee.ethz.ch> 3.16
+  Pierre~Chardaire,       % <pc@sys.uea.ac.uk>
+  Xingyou~Chen,           % <niatlantice@gmail.com> 5.04
+  Christopher~Chin,       % <chris.chin@rmit.edu.au> 3.1
+  Diego~Clavadetscher,    % <dc@clavatax.ch>
+  Wim~van~Dam,            % GONE <wimvdam@cs.kun.nl> 2.2
+  Benjamin~Deschwanden    % <vdeschwb@student.ethz.ch>
+  Jan~Dittberner,         % <jan@jan-dittberner.de> 3.15
+  Michael~John~Downes,    % <mjd@ams.org> 14 Oct 1999
+  Matthias~Dreier,        % <dreier@ostium.ch>
+  David~Dureisseix,       % <dureisse@lmt.ens-cachan.fr> 1.1
+  Hans~Ehrbar,            % <ehrbar@econ.utah.edu>
+  Elliot,                 % GONE <enh-a@minster.york.ac.uk> 1.1
+  Rockrush~Engch,         % <niatlantice@gmail.com>
+  William~Faulk,          % <wfaulk@webassign.net>
+  Robin~Fairbairns,       % <robin.fairbairns@cl.cam.ac.uk> 0.2 1.0
+  Johan~Falk,             % <johan@vaxjonexus.com> 5.0.1
+  J\"org~Fischer,         % <j.fischer@xpoint.at> 3.16
+  Frank~Fischli,          % <fischlifaenger@gmx.ch>
+  Daniel~Flipo,           % <daniel.flipo@univ-lille1.fr>
+  Frank,                  % <frank@freezone.co.uk> 11 Feb 2000
+  Mic~Milic~Frederickx,   % <mic.milic@web.de>
+  David~Frey,             % <david@eos.lugs.ch> 2.2
+  Erik~Frisk,             % <frisk@isy.liu.se> 3.4
+  Hans~Fugal,             % <hans@fugal.net>
+  Robert~Funnell,         % <robert.funnell@mcgill.ca> 5.1
+  Greg~Gamble,            % <gregg@maths.uwa.edu.au> 2.2
+  Andy~Goth,              % <unununium@openverse.com>
+  Cyril~Goutte,           % <goutte@ei.dtu.dk> 2.1 2.2
+  Kasper~B.~Graversen,    % <kbg@dkik.dk>
+  Arlo~Griffiths,         % <a.griffiths@let.leidenuniv.nl>
+  Alexandre~Guimond,      % <guimond@iro.umontreal.ca> 0.9
+  Neil~Hammond,           % <nfh@dmu.ac.uk> 0.3
+  Christoph~Hamburger,    % <ch.hamburger@gmail.com>
+  Rasmus~Borup~Hansen,    % GONE <rbhfamos@math.ku.dk> 0.2 0.9 0.91 0.92 1.9.9
+  Joseph~Hilferty,        % <hilferty@fil.ub.es>
+  Daniel~Hirsbrunner,     % <dhirsbrunner1@gmail.com>
+  Martien~Hulsen,         % <m.a.hulsen@Wbmt.tudelft.nl> 1.0 1.1
+  Bj\"orn Hvittfeldt,     % <bjorn@hvittfeldt.com> 3.13
+  Morten~H\o gholm,       % <morten.hoegholm@latex-project.org>
+  Werner~Icking,          % <werner.icking@gmd.de> 3.1
+  Eric~Jacoboni,          % GONE <jacoboni@enseeiht.fr> 0.1 0.9
+  Jakob,                  % <diness@get2net.dk>
+  Alan~Jeffrey,           % <alanje@cogs.sussex.ac.uk> 0.2
+  Martin~Jenkins,         % xqp.ltd@gmail.com 5.04
+  Byron~Jones,            % <bj@dmu.ac.uk> 1.1
+  David~Jones,            % GONE <djones@ca.mcmaster.dcss.insight> 1.1
+  Johannes-Maria~Kaltenbach, % <kaltenbach@zeiss.de> 3.01
+  Nils~Kanning,           % <nils@kanning.de>
+  Andrzej~Kawalec,        % GONE <akawalec@prz.rzeszow.pl> 1.9.9
+  Christian~Kern,         % <ck@unixen.hrz.uni-oldenburg.de> 2.1
+  Alain~Kessi,            % <alain_kessi@hotmail.com> 2.2
+  Axel~Kielhorn,          % <a.kielhorn@web.de>
+  Sander~de~Kievit,       % <Skievit@ucu.uu.nl>
+  Kjetil~Kjernsmo,        % <kjetil.kjernsmo@astro.uio.no> 3.2
+  Tobias~Klauser,		% <tklauser@access.unizh.ch> 4.17
+  J\"org~Knappen,         % <knappen@vkpmzd.kph.uni-mainz.de> 0.1
+  Michael~Koundouros,     % <mkoundouros@hotmail.com>
+  Matt~Kraai,             % <matt.kraai@amo.abbott.com>
+  Tobias~Krewer,          % <tobias.krewer@googlemail.com>
+  Flori~Lambrechts,       % <f.lambrechts@softhome.net>
+  Mike~Lee,               % <rmrstar@gmail.com>
+  Maik~Lehradt,           % <greek@uni-paderborn.de> 0.1
+  R\'emi~Letot,           % <r_letot@yahoo.com>
+  Axel~Liljencrantz,	% <axel.liljencrantz@byv.kth.se>
+  Jasper~Loy,             % <jasper.loy@gmail.com>
+  Johan~Lundberg,         % <p99jlu@physto.se>
+  Martin~Maechler,        % <maechler@stat.math.ethz.ch> 2.2
+  Alexander~Mai,          % <alexander.mai@physik.tu-darmstadt.de> 3.8
+  Claus~Malten,           % GONE <asi138%bitnet.djukfa11@bitnet.cearn> 1.1
+  Kevin~Van~Maren,        % <vanmaren@fast.cs.utah.edu> 24 Nov 1999
+  Pablo~Markin,
+  I.~J.~Vera~Mar\'un,     % <i.j.veramarun@ewi.utwente.nl>
+  Hendrik~Maryns,         % <hendrik.maryns@ugent.be>
+  Chris~McCormack,        % GONE <chrismc@eecs.umich.edu> 0.1
+  Aleksandar~S.~Milosevic, % <aleksandar.milosevic@yale.edu>
+  Henrik~Mitsch,          % <henrik.mitsch@gmx.at>
+  Stefan~M.~Moser,        % <stefan.moser@ieee.org>
+  Armin~M\"uller,		% arm.in@web.de
+  Philipp~Nagele,         % <philipp.nagele@t-systems.com>
+  Richard~Nagy,           % <r.nagy@nameshield.net>
+  Manuel~Oetiker,         % <manuel@oetiker.ch>
+  Urs~Oswald,             % <osurs@bluewin.ch>
+  Hubert~Partl,           % <partl@mail.boku.ac.at> 0.2 1.1
+  Marcelo~Pasin,          % <pasin@di.fc.ul.pt>
+  Martin~Pfister,		% <m@rtinpfister.ch>
+  Lan~Thuy~Pham,          % <lan.thuy.pham@gmail.com>
+  Breno~Pietracci,        % <bpietracci@gmail.com>
+  Demerson~Andre~Polli,   % <polli@linux.ime.usp.br>
+  Maksym~Polyakov,        % <polyama@myrealbox.com>
+  Nikos~Pothitos,		% <n.pothitos@di.uoa.gr>
+  John~Refling,           % <refling@sierra.lbl.gov> 0.1 0.9
+  Mike~Ressler,           % <ressler@cougar.jpl.nasa.gov> 0.1 0.2 0.9 1.0 1.9.9
+  Brian~Ripley,           % <ripley@stats.ox.ac.uk> 2.1
+  Kurt~Rosenfeld,		% <kurt@isis.poly.edu>
+  Bernd~Rosenlecher,      % <9rosenle@informatik.uni-hamburg.de> 10 Feb 2000
+  Chris~Rowley,           % <c.a.rowley@open.ac.uk> 0.91
+  Young~U.~Ryu,           % <ryoung@utdallas.edu> 2.1
+  Risto~Saarelma,         % <risto.saarelma@cs.helsinki.fi>
+  Andr{\'a}s~Salamon,     % <andras.salamon@comlab.ox.ac.uk>
+  Jos\'e~Carlos~Santos,   % <jcsantos@fc.up.pt>
+  Christopher~Sawtell,    % <csawtell@xtra.co.nz> 1 Sep 1999
+  Gilles~Schintgen,       % <gschintgen@internet.lu>
+  Craig~Schlenter,        % <cschle@lucy.ee.und.ac.za> 0.1 0.2 0.9
+  Hanspeter~Schmid,       % <schmid@isi.ee.ethz.ch>
+  Baron~Schwartz,         % <bps7j@cs.virginia.edu>
+  John~Scott,             % <jscott@member.fsf.org>
+  Jordi~Serra~i~Solanich, % <solanich@gmail.com>
+  Miles~Spielberg,        % <zeibach@hotmail.com>
+  Susan~Stewart,
+  Matthieu~Stigler,
+  Geoffrey~Swindale,      % <geofftswin@ntlworld.com>
+  Laszlo~Szathmary,       % <szathml@delfin.klte.hu>
+  Boris~Tobotras,         % <tobotras@jet.msk.su>
+  Josef~Tkadlec,          % <tkadlec@math.feld.cvut.cz> 2.0 2.2
+  Scott~Veirs,            % <scottv@ocean.washington.edu>
+  Didier~Verna,           % <verna@inf.enst.fr> 2.2
+  Carl-Gustav~Werner,     % <carl-gustav.werner@math.lu.se> 11 Oct 1999, 3.16
+  Fabian~Wernli,          % <wernli@iap.fr> 3.2
+  Matthew~Widmann,        % <mtwdmn@gmail.com>
+  David~Woodhouse,        % <dwmw2@infradead.org> 3.16
+  Chris~York,             % <c.s.york@Cummins.com> 21 Nov 1999
+  Rick~Zaccone,           % <zaccone@bucknell.edu> 2.2
+  Fritz~Zaucker,          % <zaucker@ee.ethz.ch> 3.0
+  and Mikhail~Zotov.      % <zotov@eas.npi.msu.su> 3.1
+\end{flushleft}
+
+\vspace*{\stretch{1}}
+
+\pagebreak
+\endinput
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:

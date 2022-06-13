@@ -1,0 +1,84 @@
+% The Not So Short Introduction to LaTeX
+%
+% Copyright (C) 1995--2022 Tobias Oetiker, Marcin Serwin, Hubert Partl,
+% Irene Hyna, Elisabeth Schlegl and Contributors.
+%
+% This document is free software: you can redistribute it and/or modify it
+% under the terms of the GNU General Public License as published by the Free
+% Software Foundation, either version 3 of the License, or (at your option) any
+% later version.
+%
+% This document is distributed in the hope that it will be useful, but WITHOUT
+% ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+% FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+% details.
+%
+% You should have received a copy of the GNU General Public License along with
+% this document.  If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents: Main Input File of the LaTeX2e Introduction
+% $Id$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% lshort.tex - The not so short introduction to LaTeX   
+%                                                      by Tobias Oetiker
+%                                                     oetiker@ee.ethz.ch
+%
+%                           based on LKURTZ.TEX Uni Graz & TU Wien, 1987
+%-----------------------------------------------------------------------
+%
+% To compile lshort, you need TeX 3.x, LaTeX and makeindex
+%
+% The sources files of the Intro are:
+%      lshort.tex (this file),
+%      titel.tex, contrib.tex, biblio.tex
+%      things.tex, typeset.tex, math.tex, lssym.tex, spec.tex,
+%      lshort.sty, fancyheadings.sty
+%
+% Further the  verbatim.sty and the layout.sty 
+% from the LaTeX Tools distribution is
+% required.
+%
+%
+% To print the AMS symbols you need the AMS fonts and the packages
+% amsfonts, eufrak and eucal from (AMS LaTeX 1.2)
+%
+% ---------------------------------------------------------------------
+\begin{document}
+\include{title}
+\include{copyright}
+\frontmatter
+\include{contrib}
+\include{overview}
+\tableofcontents
+\listoffigures
+\listoftables
+\enlargethispage{\baselineskip}
+\mainmatter
+\include{basics}
+\include{realworld}
+\include{math}
+\include{bibliography}
+\include{spec}
+\include{graphic}
+\include{custom}
+\appendix
+\include{appendix}
+\include{lssym}
+\include{deprecated}
+\include{license}
+\backmatter
+\nocite{*}
+\printbibliography[heading=bibintoc]
+\refstepcounter{chapter}
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+\end{document}
+
+%
+
+% Local Variables:
+% TeX-master: "lshort2e"
+% mode: latex
+% mode: flyspell
+% End:
