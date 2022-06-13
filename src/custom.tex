@@ -472,18 +472,18 @@ that contains the commands defined in the examples above.
 \begin{description}
   \item[family] The collection of fonts. For example, \enquote*{Latin Modern
       Roman} or \enquote*{Source Code Pro}.
-  \item[series] The heaviness of the font. For example, \enquote*{bold} or
+  \item[series] The weight of the font. For example, \enquote*{bold} or
     \enquote*{medium}.
   \item[shape] The shape of glyphs within a font family. For example,
     \enquote*{small caps} or \enquote*{italics}.
   \item[size] The size of the glyphs. For example, \enquote*{\qty{10}{pt}} or
     \enquote*{\qty{12}{pt}}.
 \end{description}
-Normally \LaTeX{} chooses the appropriate font and font size based on the
+\LaTeX{} automatically chooses the appropriate font family, series, shape and size based on the
 logical structure of the document (sections, footnotes, emphasis, \ldots). It
 is possible however to instruct \LaTeX{} manually which font to use. It is
-important to note that, while they can be mixed, not every combination of
-family\slash{}series\slash{}shape is supported.
+important to note that not every combination of
+family\slash{}series\slash{}shape exists as an actual font. \LaTeX{} will complain if you try for something that does not exist.
 
 \LaTeX{} predefines three font families to use throughout the document: the
 upright or roman family accessible via \csi{textrm}, the \textsf{sans serif
@@ -708,11 +708,10 @@ If you need to access even more font variants and shapes\footnote{For example
 
 \subsection{Danger, Will Robinson, Danger}
 
-As noted at the beginning of this chapter, it is dangerous to clutter your
-document with explicit commands like this, because they work in opposition to
-the basic idea of \LaTeX{} described in \autoref{sec:logical_structure}, which
-is to separate the logical and visual markup of your document. This means that
-if you use the same font changing command in several places in order to typeset
+Note! Using explicit font setting commands defy the the basic idea of \LaTeX{} described in \autoref{sec:logical_structure}, which is to separate the logical and visual markup
+where the fonts get switched automaticcaly according to the requirements of the context.
+A simple rule of thumb:
+If you use the same font changing command in several places in order to typeset
 a special kind of information, you should use \csi{NewDocumentCommand} to
 define a \enquote{logical wrapper command} for the font changing command.
 
@@ -752,11 +751,11 @@ distributions and should be available in
 \begin{code}
   \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
 \end{code}
-directory, where the \cargv{...} denotes the path \TeX{}Live was installed to.
+the directory, where the \cargv{...} denotes the path \TeX{}Live was installed to.
 \hologo{LuaTeX} checks this directory automatically, so it should work fine,
 but if you are using \hologo{XeTeX} you must first install these fonts in your
 system. You can also download and install them manually from the links provided
-in bibliography. Alternatively swap out their respective names with some other
+in the bibliography. Alternatively swap out their respective names with some other
 fonts installed in your system.
 
 Many free OpenType fonts are available at \url{https://fontlibrary.org/}.
@@ -810,8 +809,8 @@ old style numerals that are not used by default. You can pass
 \end{example}
 
 Some fonts also provide special glyphs for a given language. For example the
-Latin Modern Font provides a special \enquote{fk} ligature for Polish language.
-You can pass \cargv{Language} key set to a given language to enable these
+Latin Modern Font provides a special \enquote{fk} ligature for the Polish language.
+You can set the \cargv{Language} key to a given language to enable these
 features.
 \begin{example}
 agrafka
@@ -840,7 +839,7 @@ with \cargv{Fractions=On} key.
 1/2 3/4 123/456
 \end{example}
 
-OpenType font format defines a lot of more font features, that may or may not
+The OpenType font format defines a lot of more font features, that may or may not
 be supported by your font of choice. Consult with the \pai*{fontspec} package
 documentation for a comprehensive description and examples.
 
@@ -931,8 +930,8 @@ redefine existing font families.
 
 \section{Colours}\label{sec:colors}\index{colours}
 
-\subsection{Font Colours}
-In the \autoref{sec:logical_structure} we have used different font colours in
+\subsection{Coloured Text}
+In the \autoref{sec:logical_structure} we have used different text colours in
 the example. These can be obtained with the \pai*{xcolor} package. It provides
 two commands to change the text colour:
 \begin{lscommand}
@@ -1047,8 +1046,8 @@ The \cargv{rgb} model accepts three decimal numbers, each between \(0\) and
 }
 \end{example}
 
-If you prefer substractive colour model, both \cargv{cmy} and \cargv{cmyk} are
-available. These both accept decimal numbers between \(0\) and \(1\) to specify
+If you prefer the substractive colour model, both \cargv{cmy} and \cargv{cmyk} are
+available. They accept decimal numbers between \(0\) and \(1\) to specify
 the amount of each colour.
 \begin{example}
 \textcolor[cmy]{0.7, 0.4, 0.3}{
@@ -1099,7 +1098,7 @@ spectrum in \unit{\nm}.
 
 \subsection{Defining Your Own Colours}
 
-If you want to use given colour more than once it probably makes sense to define
+If you want to use a given colour more than once it makes sense to define
 it as a macro. While you could use the \csi{NewDocumentCommand} to define it,
 the \pai{xcolor} package provides a better way via the
 \begin{lscommand}
@@ -1129,7 +1128,7 @@ mind when mixing your own colours.
 
 \subsection{Colourful Pages and Boxes}
 
-So far we have only considered changing font colour. It is however possible to
+So far we have only considered changing text colour. It is however possible to
 also
 change the background colour of the document page. To do this use the
 \begin{lscommand}
