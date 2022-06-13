@@ -273,7 +273,7 @@ consider the \cargv{s} specification. \autoref{lst:kingsenv} illustrates this.
 My humble subjects \ldots
 \end{king}
 \end{example}
-  \caption{An example of using \cargv{s} specifier when defining a new
+  \caption{An example of using the \cargv{s} specifier when defining a new
     environment.}\label{lst:kingsenv}
 \end{listing}
 If you want to create a starred version of an environment (similarly to some
@@ -325,9 +325,9 @@ command. Your initial code may look like this
 }
 \end{minted}
 but when you try to compile the document you will receive the error
-\begin{minted}{console}
+\begin{verbatim}
 ! TeX capacity exceeded, sorry [input stack size=5000].
-\end{minted}
+\end{verbatim}
 
 To understand why this happens it is instructive to consider how \TeX{} expands
 the defined commands. The above \csi{RenewDocumentCommand} tells the \TeX{}
@@ -335,9 +335,8 @@ engine that whenever \csi{emph}[foo:vm] is seen it must replace it with
 \mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
 problem here. In the next stage it will again replace the \csi{emph}[foo:vm]
 yielding
-\begin{minted}{latex}
-\emph{foo}~(\enquote{foo} is emphasised)~
-  (\enquote{foo} is emphasised)
+\begin{minted}[breaklines]{latex}
+\emph{foo}~(\enquote{foo} is emphasised)~(\enquote{foo} is emphasised)
 \end{minted}
 This process will never end and at some point \TeX{}
 simply gives up.
@@ -349,8 +348,9 @@ Note that
   \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{minted}
-will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
-with \verb|\emph{...}| and the cycle repeats.
+will suffer the same fate since \mintinline{latex}|\oldemph{...}| %chktex 11 
+will  be replaced by \TeX{} with \mintinline{latex}|\emph{...}| and %chktex 11
+the  cycle repeats.
 
 In order to avoid this problem a special command exists
 \begin{lscommand}
@@ -441,17 +441,17 @@ Writing a package basically consists of copying the contents of your document
 preamble (with minor adjustments) into a separate file with a name ending in
 \texttt{.sty}. There is one special command,
 \begin{lscommand}
-  \csi{ProvidesExplPackage}[package name:m, date:m, version:m, description:m]
+  \csi{ProvidesExplPackage}[name:m, date:m, version:m, description:m]
 \end{lscommand}
-\noindent for use at the very beginning of your package file. This command
-tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
-that all whitespace is ignored. You may have noticed that in many of the
-examples above we had to end most lines with \ai{\%} to get correct
-spacing in the output. In \emph{expl mode}, spaces have to be added explicitly if needed at all. They are usually
-quite rare when writing a package. To insert spaces, use
-the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
-  you want to insert non-breaking space in \emph{expl mode}, use
-  \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
+for use at the very beginning of your package file. This command tells the
+\LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of
+this is that all whitespace is ignored. You may have noticed that in many of
+the examples above we had to end most lines with \ai{\%} to get correct spacing
+in the output. In \emph{expl mode}, spaces have to be added explicitly if
+needed at all. They are usually quite rare when writing a package. To insert
+spaces, use the \ai{\~} character, which normally denotes non-breaking
+space.\footnote{If you want to insert non-breaking space in \emph{expl mode},
+  use \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
 
 The arguments are used to provide information about package in the log file. If
 you use this package and look at the log file you will find
@@ -467,87 +467,158 @@ that contains the commands defined in the examples above.
 \section{Fonts and Sizes}\label{sec:fontsize}
 
 \subsection{Font Changing Commands}\index{font}\index{font size}
-\LaTeX{} chooses the appropriate font
-and font size based on the logical structure of the document
-(sections, footnotes, \ldots).  In some cases, one might like to change
-fonts and sizes by hand. To do this, use the commands listed in
-\autoref{fonts} and \autoref{sizes}. The actual size of each font
-is a design issue and depends on the document class and its options.
-\autoref{tab:pointsizes} shows the absolute point size for these
-commands as implemented in the standard document classes.
 
+\LaTeX{} fonts are influenced by four parameters
+\begin{description}
+  \item[family] The collection of fonts. For example, \enquote*{Latin Modern
+      Roman} or \enquote*{Source Code Pro}.
+  \item[series] The weight of the font. For example, \enquote*{bold} or
+    \enquote*{medium}.
+  \item[shape] The shape of glyphs within a font family. For example,
+    \enquote*{small caps} or \enquote*{italics}.
+  \item[size] The size of the glyphs. For example, \enquote*{\qty{10}{pt}} or
+    \enquote*{\qty{12}{pt}}.
+\end{description}
+\LaTeX{} automatically chooses the appropriate font family, series, shape and
+size based on the logical structure of the document (sections, footnotes,
+emphasis, \ldots). It is possible however to instruct \LaTeX{} manually which
+font to use. It is important to note that not every combination of
+family\slash{}series\slash{}shape exists as an actual font. \LaTeX{} will
+complain if you try for something that does not exist.
+
+\LaTeX{} predefines three font families to use throughout the document: the
+upright or roman family accessible via \csi{textrm}, the \textsf{sans serif
+  family} accessible via \csi{textsf} and monospace or typewriter family
+accessible via \csi{texttt}.
 \begin{example}
-{\small The small and
-\textbf{bold} Romans ruled}
-{\Large all of great big
-\textit{Italy}.}
+\textrm{Roman is the default
+  in articles.} \\
+\textsf{Sans serif is used in
+  presentations.} \\
+\texttt{Monospace is used in
+  verbatim code blocks.}
 \end{example}
 
-One important feature of \LaTeX{} is that the font attributes are
-independent. This means that issuing size or even font
-changing commands, and still keep bold or slant attributes set
-earlier.
+There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold
+(\csi{textbf}).
+\begin{example}
+\textmd{The default.} \\
+\textbf{Bold font.}
+\end{example}
 
-In \emph{math mode} use the font changing \emph{commands} to
-temporarily exit \emph{math mode} and enter some normal text. If you want to
-switch to another font for math typesetting you need another
-special set of commands; refer to \autoref{mathfonts}.
+Shapes are a bit more complicated. The three basic shapes are: italics
+(\csi{textit}), oblique or slanted\footnote{Oblique shape differs from the
+  italics in that italic shape uses different glyphs while oblique shape
+  uses the same glyphs but slanted. The difference is really obvious
+  \fontshape{ui}\selectfont when you look at the unslanted italic font.}
+(\csi{textsl}) and small capitals (\csi{textsc}).
+\begin{example}
+\textit{Italic shape.} \\
+\textsl{Slanted shape.} \\
+\textsc{Small Capitals.}
+\end{example}
+However there are two additional shapes that are not provided by default
+\LaTeX{} fonts: swash (\csi{textsw}), for decorative fonts and spaced caps and
+small caps (\csi{textssc}). These are rarely used but may come in handy when
+using custom fonts as described in \autoref{sec:fontspec}.
+\begin{example}
+\setmainfont{EB Garamond} %!hide
+Question vs. \textsw{Question}
+\end{example}
+In addition two virtual shapes are provided: upright (\csi{textup}) and
+upper-lowercase (\csi{textulc}). These are not actually shapes but utility
+commands. The former one switches back to upright font while the latter
+disables small capitals. The command \csi{textnormal} is just the combination
+of the two.
+\begin{example}
+\textsl{\textsc{Back to
+  \textup{upright.}}} \\
+\textsl{\textsc{Back to
+  \textulc{lowercase.}}} \\
+\textsl{\textsc{Back to
+  \textnormal{normal.}}}
+\end{example}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Fonts.}\label{fonts}
-  %
-  % Alan suggested not to tell about the other form of the command
-  % e.g. \verb|\sffamily| or \verb|\bfseries|. This seems a good thing to me.
-  %
-  \begin{tabular}{@{}ll@{\qquad}ll@{}}
+All of the commands described above also exist in their switch version. Instead
+of receiving the text via argument, they change the font permanently until it is
+changed again. For example, the switch version of \csi{textit} and \csi{textrm}
+are \csi{itshape} and \csi{rmfamily}, respectively. While the argument versions
+are useful for defining commands, switch versions are especially useful when
+defining your own environments.
+\begin{example}
+Only \textit{argument} is
+affected. After \itshape
+everything is in italics
+until \upshape is encountered.
+\end{example}
+Both argument and switch versions of the described commands are presented in
+\autoref{tbl:fonts}.
+\begin{table}
+  \caption{Default font changing commands of \LaTeX.}\label{tbl:fonts}
+  \begin{tabular}{@{}lll@{}}
     \toprule
-    Command                      & Font                       & Command & Font \\
+    Argument Command         & Switch           & Example                      \\
     \midrule
-    \fni{textrm}\verb|{...}|     & \textrm{\wi{roman}}        &
-    \fni{textsf}\verb|{...}|     & \textsf{\wi{sans serif}}                    \\
-    \fni{texttt}\verb|{...}|     & \texttt{typewriter}                         \\[6pt]
-    \fni{textmd}\verb|{...}|     & \textmd{medium}            &
-    \fni{textbf}\verb|{...}|     & \textbf{\wi{bold face}}                     \\[6pt]
-    \fni{textup}\verb|{...}|     & \textup{\wi{upright}}      &
-    \fni{textit}\verb|{...}|     & \textit{\wi{italic}}                        \\
-    \fni{textsl}\verb|{...}|     & \textsl{\wi{slanted}}      &
-    \fni{textsc}\verb|{...}|     & \textsc{\wi{Small Caps}}                    \\[6pt]
-    \fni{textnormal}\verb|{...}| & \textnormal{document} font &         &      \\
+    \csi{textrm}[text:m]     & \csi{rmfamily}   & \textrm{\wi{roman}}          \\
+    \csi{textsf}[text:m]     & \csi{sffamily}   & \textsf{\wi{sans serif}}     \\
+    \csi{texttt}[text:m]     & \csi{ttfamily}   & \texttt{typewriter}          \\[6pt]
+    \csi{textmd}[text:m]     & \csi{mdseries}   & \textmd{medium}              \\
+    \csi{textbf}[text:m]     & \csi{bfseries}   & \textbf{\wi{bold face}}      \\[6pt]
+    \csi{textup}[text:m]     & \csi{upshape}    & \textup{\wi{upright}}        \\
+    \csi{textit}[text:m]     & \csi{itshape}    & \textit{\wi{italic}}         \\
+    \csi{textsl}[text:m]     & \csi{slshape}    & \textsl{\wi{slanted}}        \\
+    \csi{textsc}[text:m]     & \csi{scshape}    & \textsc{\wi{Small Caps}}     \\
+    \csi{textsw}[text:m]     & \csi{swshape}    & \textsw{\wi{Queen of Swash}} \\[6pt]
+    \csi{textnormal}[text:m] & \csi{normalfont} & \textnormal{document} font   \\
     \bottomrule
   \end{tabular}
-
-  \bigskip
 \end{table}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Font Sizes.}\label{sizes}\index{font size}
+When working with switch versions of fonts that are slanted right it is
+important to remember about \wi{italic correction}. This is a small space after
+the end of right slanting text that is sometimes necessary to avoid overlapping
+letters. It is inserted using \csi{/} command.
+\begin{chktexignore}  
+\begin{example}
+Without: {\itshape oof}bar \\
+With: {\itshape oof\/}bar
+\end{example}
+\end{chktexignore}
+The italic correction is handled automatically by the argument versions of the
+commands.
+
+In contrast to the previous font changing commands, the size of font can only
+be controlled via switch versions. \LaTeX{} predefines some switches for
+changing font size, see \autoref{sizes} and \autoref{tab:pointsizes} for their
+description.
+\begin{table}
+  \caption{Commands changing font size.}\label{sizes}\index{font size}
   \begin{tabular}{@{}ll@{\qquad}ll@{}}
     \toprule
-    Command                     & Size                                    & Command & Size \\
+    Command                     & Size                             &
+    Command                     & Size                               \\
     \midrule
-    \fni{tiny}                  & \tiny        tiny                       &
-    \fni{Large}                 & \Large       larger                                      \\
-    \fni{scriptsize}            & \scriptsize  very small                 &
-    \fni{LARGE}                 & \LARGE       very large                                  \\
-    \fni{footnotesize}          & \footnotesize  quite small              &
-    \multirow{2}{*}{\fni{huge}} & \multirow{2}{*}{\huge        huge}                       \\
-    \fni{small}                 & \small            small                 &         &      \\
-    \fni{normalsize}            & \normalsize  normal                     &
-    \multirow{2}{*}{\fni{Huge}} & \multirow{2.2}{*}{\Huge        largest}                  \\
-    \fni{large}                 & \large       large                      &         &      \\
+    \csi{tiny}                  & \tiny tiny                       &
+    \csi{Large}                 & \Large larger                      \\
+    \csi{scriptsize}            & \scriptsize very small           &
+    \csi{LARGE}                 & \LARGE very large                  \\
+    \csi{footnotesize}          & \footnotesize  quite small       &
+    \multirow{2}{*}{\csi{huge}} & \multirow{2}{*}{\huge huge}        \\
+    \csi{small}                 & \small small                     &
+                                &                                    \\
+    \csi{normalsize}            & \normalsize  normal              &
+    \multirow{2}{*}{\csi{Huge}} & \multirow{2.2}{*}{\Huge largest}   \\
+    \csi{large}                 & \large large                     &
+                                &                                    \\
     \bottomrule
-  \end{tabular}%
-  \bigskip
+  \end{tabular}
 \end{table}
 
-\begin{table}[!tb]
-  \centering
-  \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
-    Standard Classes depending on the class option. The default class option is
+\begin{table}
+  \caption[Absolute point sizes in standard classes.]{Absolute point sizes in
+    standard classes depending on the class option. The default class option is
     \cargv{10pt}.}\label{tab:pointsizes}\label{tab:sizes}
-  \sisetup{table-format=2.0}
+  \sisetup{table-format=2.2}
   \begin{tabular}{@{}lSSS@{}}
     \toprule
                        & \multicolumn{3}{c}{Size (\unit{pt})}                                   \\
@@ -557,102 +628,95 @@ special set of commands; refer to \autoref{mathfonts}.
     \csi{tiny}         & 5                                    & 6              & 6              \\
     \csi{scriptsize}   & 7                                    & 8              & 8              \\
     \csi{footnotesize} & 8                                    & 9              & 10             \\
-    \csi{small}        & 9                                    & 10             & 11             \\
-    \csi{normalsize}   & 10                                   & 11             & 12             \\
-    \csi{large}        & 12                                   & 12             & 14             \\
-    \csi{Large}        & 14                                   & 14             & 17             \\
-    \csi{LARGE}        & 17                                   & 17             & 20             \\
-    \csi{huge}         & 20                                   & 20             & 25             \\
-    \csi{Huge}         & 25                                   & 25             & 25             \\
+    \csi{small}        & 9                                    & 10             & 10.95          \\
+    \csi{normalsize}   & 10                                   & 10.95          & 12             \\
+    \csi{large}        & 12                                   & 12             & 14.4           \\
+    \csi{Large}        & 14.4                                 & 14.4           & 17.28          \\
+    \csi{LARGE}        & 17.28                                & 17.28          & 20.74          \\
+    \csi{huge}         & 20.74                                & 20.74          & 24.88          \\
+    \csi{Huge}         & 24.88                                & 24.88          & 24.88          \\
     \bottomrule
   \end{tabular}
-
-  \bigskip
 \end{table}
 
-\begin{table}[!bp]
-  \centering
-  \caption{Math Fonts.}\label{mathfonts}
-  \begin{tabular}{@{}ll@{}}
+When using these commands it is important to remember that the
+line spacing is only updated after the paragraph ends. To avoid putting empty
+lines before the closing curly brace you may use the \csi{par} command.
+\begin{example}
+{\Large Here the line spacing
+  is not updated. A bit tight!}
+
+{\Large Much better! I can
+  breathe freely again!\par}
+\end{example}
+
+An arbitrary font size can be specified using the
+\begin{lscommand}
+  \csi{fontsize}[size: m, line skip: m]\csi{selectfont}
+\end{lscommand}
+command combo. The \carg{line skip} determines the height of the text line and
+should be usually around \(1.2\) times larger than the \carg{size}.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\fontsize{2cm}{2.4cm}\selectfont A big one!
+\end{example}
+
+Fun fact: \LaTeX{} default font is a bit unusual in that it looks slightly
+different depending on its size. The difference is presented in the table below
+where the text written using different sizes was rescaled to the same height.
+\begin{center}
+  \begin{tabular}{@{}lll@{}}
     \toprule
-    Command                      & Font                           \\
+    \csi{tiny}                           &
+    \csi{normalsize}                     &
+    \csi{Huge}                             \\
     \midrule
-    \fni{mathrm}\verb|{...}|     & $\mathrm{Roman\ Font}$         \\
-    \fni{mathbf}\verb|{...}|     & $\mathbf{Boldface\ Font}$      \\
-    \fni{mathsf}\verb|{...}|     & $\mathsf{Sans\ Serif\ Font}$   \\
-    \fni{mathtt}\verb|{...}|     & $\mathtt{Typewriter\ Font}$    \\
-    \fni{mathit}\verb|{...}|     & $\mathit{Italic\ Font}$        \\
-    \fni{mathcal}\verb|{...}|    & $\mathcal{CALLIGRAPHIC\ FONT}$ \\
-    \fni{mathnormal}\verb|{...}| & $\mathnormal{Normal\ Font}$    \\
+    \resizebox{!}{2em}{\tiny Text}       &
+    \resizebox{!}{2em}{\normalsize Text} &
+    \resizebox{!}{2em}{\Huge Text}         \\
     \bottomrule
   \end{tabular}
+\end{center}
 
-  %\begin{tabular}{@{}lll@{}}
-  %\textit{Command}&\textit{Example}&    \textit{Output}\\[6pt]
-  %\fni{mathcal}\verb|{...}|&    \verb|$\mathcal{B}=c$|&     $\mathcal{B}=c$\\
-  %\fni{mathscr}\verb|{...}|&    \verb|$\mathscr{B}=c$|&     $\mathscr{B}=c$\\
-  %\fni{mathrm}\verb|{...}|&     \verb|$\mathrm{K}_2$|&      $\mathrm{K}_2$\\
-  %\fni{mathbf}\verb|{...}|&     \verb|$\sum x=\mathbf{v}$|& $\sum x=\mathbf{v}$\\
-  %\fni{mathsf}\verb|{...}|&     \verb|$\mathsf{G\times R}$|&        $\mathsf{G\times R}$\\
-  %\fni{mathtt}\verb|{...}|&     \verb|$\mathtt{L}(b,c)$|&   $\mathtt{L}(b,c)$\\
-  %\fni{mathnormal}\verb|{...}|& \verb|$\mathnormal{R_{19}}\neq R_{19}$|&
-  %$\mathnormal{R_{19}}\neq R_{19}$\\
-  %\fni{mathit}\verb|{...}|&     \verb|$\mathit{ffi}\neq ffi$|& $\mathit{ffi}\neq ffi$
-  %\end{tabular}
+In math mode the font changing commands typeset normal text. If you want to
+switch to another font for math typesetting you need another special set of
+commands presented in \autoref{mathfonts}.
+\begin{example}
+\(
+  \textnormal{Normal text }
+  \mathbf{math mode \frac{1}{2}}
+\)
+\end{example}
 
-  \bigskip
+\begin{table}
+  \caption{Math Fonts.}\label{mathfonts}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Command                   & Example                  & Comment                \\
+    \midrule
+    \csi{mathrm}[text: m]     & $\mathrm{ABCabc123}$     &                        \\
+    \csi{mathbf}[text: m]     & $\mathbf{ABCabc123}$     &                        \\
+    \csi{mathsf}[text: m]     & $\mathsf{ABCabc123}$     &                        \\
+    \csi{mathtt}[text: m]     & $\mathtt{ABCabc123}$     &                        \\
+    \csi{mathit}[text: m]     & $\mathit{ABCabc123}$     &                        \\
+    \csi{mathcal}[text: m]    & $\mathcal{ABC}$          & Only uppercase letters \\
+    \csi{mathnormal}[text: m] & $\mathnormal{ABCabc123}$ & Old style numerals     \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-In connection with the font size commands, \wi{curly braces} play a
-significant role. They are used to build \emph{groups}.  Groups
-limit the scope of most \LaTeX{} commands.\index{grouping}
-
-\begin{example}
-He likes {\LARGE large and
-{\small small} letters}.
-\end{example}
-
-The font size commands also change the line spacing, but only if the
-paragraph ends within the scope of the font size command. The closing curly
-brace \verb|}| should therefore not come too early.  Note the position of
-the \csi{par} command in the next two examples.\footnote{\texttt{\bs{}par}
-  is equivalent to a blank line}
-
-\begin{example}
-{\Large Don't read this!
- It is not true.
- You can believe me!\par}
-\end{example}
-
-\begin{example}
-{\Large This is not true either.
-But remember I am a liar.}\par
-\end{example}
-
-If you want to activate a size changing command for a whole paragraph
-of text or even more, you might want to use the environment syntax for
-font changing commands.
-
-\begin{example}
-\begin{Large}
-This is not true.
-But then again, what is these
-days \ldots
-\end{Large}
-\end{example}
-
-\noindent This will save you from counting lots of curly braces.
+If you need to access even more font variants and shapes\footnote{For example
+  the aforementioned \fontshape{ui}\selectfont upright italic shape.} check out
+\citetitle{fntguide}~\cite{fntguide}.
 
 \subsection{Danger, Will Robinson, Danger}
 
-As noted at the beginning of this chapter, it is dangerous to clutter
-your document with explicit commands like this, because they work in
-opposition to the basic idea of \LaTeX{}, which is to separate the
-logical and visual markup of your document.  This means that if you
-use the same font changing command in several places in order to
-typeset a special kind of information, you should use
-\csi{NewDocumentCommand} to define a ``logical wrapper command'' for the font
-changing command.
+Note! Using explicit font setting commands defies the the basic idea of
+\LaTeX{} described in \autoref{sec:logical_structure}, which is to separate the
+logical and visual markup. The fonts should get switched automatically
+according to the requirements of the context. A simple rule of thumb: If you
+use the same font changing command in several places in order to typeset a
+special kind of information, you should use \csi{NewDocumentCommand} to define
+a \enquote{logical wrapper command} for the font changing command.
 
 \begin{example}
 \NewDocumentCommand{\oops}{m}{%
@@ -664,24 +728,10 @@ of unknown origin and purpose.
 
 This approach has the advantage that you can decide at some later
 stage that you want to use a visual representation of danger other
-than \verb|\textbf|, without having to wade through your document,
-identifying all the occurrences of \verb|\textbf| and then figuring out
+than \csi{textbf}, without having to wade through your document,
+identifying all the occurrences of \csi{textbf} and then figuring out
 for each one whether it was used for pointing out danger or for some other
 reason.
-
-Please note the difference between telling \LaTeX{} to
-\emph{emphasise} something and telling it to use a different
-\emph{font}. The \csi{emph} command is context aware, while the font commands are absolute.
-
-\begin{example}
-\textit{You can also
-  \emph{emphasise} text if
-  it is set in italics,}
-\textsf{in a
-  \emph{sans-serif} font,}
-\texttt{or in
-  \emph{typewriter} style.}
-\end{example}
 
 \subsection{Advice}
 
@@ -689,23 +739,558 @@ To conclude this journey into the land of fonts and font sizes,
 here is a little word of advice:\nopagebreak
 
 \begin{quote}
-  \underline{\textbf{Remember\Huge!}} \textit{The}
-  \textsf{M\textbf{\LARGE O} \texttt{R}\textsl{E}} fonts \Huge you
+  \underline{\textbf{Reme\(\mathfrak{mber}\)\Huge!}} \textit{The}
+  \textsf{M\textbf{\LARGE O} \(\mathcal{R}\)\textsl{E}} fonts \Huge you
   \tiny use \footnotesize \textbf{in} a \small \texttt{document},
   \large \textit{the} \normalsize more \textsc{readable} and
   \textsl{\textsf{beautiful} it bec\large o\Large m\LARGE e\huge s}.
 \end{quote}
 
-\section{Spacing}
+\section{Custom Fonts with \pai{fontspec}}\label{sec:fontspec}
 
+In the following examples we use Adobe Source fonts~\cites{sourceserif,
+  sourcesans, sourcecodepro}. These fonts are included with \TeX{}Live \LaTeX{}
+distributions and should be available in the directory
+\begin{code}
+  \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
+\end{code}
+where the \cargv{...} denotes the path \TeX{}Live was installed to.
+\hologo{LuaTeX} checks this directory automatically, so it should work fine,
+but if you are using \hologo{XeTeX} you must first install these fonts in your
+system. You can also download and install them manually from the links provided
+in the bibliography. Alternatively swap out their respective names with some other
+fonts installed in your system.
+
+Many free OpenType fonts are available at \url{https://fontlibrary.org/}.
+
+\subsection{Main Document Fonts}
+
+If you are not pleased with the default Latin Modern font, you can change it to
+any font installed in your system using the \pai*{fontspec} package. It provides
+three main commands for changing document fonts:
+\begin{lscommand}
+  \csi{setmainfont}[options: o, font: m] \\
+  \csi{setsansfont}[options: o, font: m] \\
+  \csi{setmonofont}[options: o, font: m]
+\end{lscommand}
+This commands change, respectively, the main font of the document, \textsf{the
+  sans serif font used in the document} and \texttt{the monospace font in the
+  document}.
+\begin{example}
+Normal text.
+  \emph{Emphasised.} \\
+\textsf{Sans serif text.
+  \emph{Emphasised}.} \\
+\texttt{Monospace text.
+  \emph{Emphasised}.} \\
+
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+\setmonofont{Source Code Pro}
+Normal text.
+  \emph{Emphasised.} \\
+\textsf{Sans serif text.
+  \emph{Emphasised}.} \\
+\texttt{Monospace text.
+  \emph{Emphasised}.}
+\end{example}
+Note that it is best to put these commands in the preamble of your document,
+because some fonts are frozen when the body starts.
+
+The optional \carg{options} argument accepts key value lists that allow to
+customise the font features. For example, many fonts contain the, so called,
+old style numerals that are not used by default. You can pass
+\cargv{Number=OldStyle} if you want to use them in your document.
+\begin{example}
+\setmainfont{Source Serif Pro}
+0123456789
+
+\setmainfont[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+0123456789
+\end{example}
+
+Some fonts also provide special glyphs for a given language. For example the
+Latin Modern Font provides a special
+\enquote{\setmainfont[Language=Polish]{Latin Modern Roman}fk} ligature for the
+Polish language. You can set the \cargv{Language} key to a given language to
+enable these features.
+\begin{example}
+agrafka
+
+\setmainfont[
+  Language=Polish,
+]{Latin Modern Roman}
+agrafka
+\end{example}
+The \pai{polyglossia} package activates these features automatically so you
+don't have to worry about them if you use it.
+
+If your font supports it you may wish to enable automatic fractions insertion
+with \cargv{Fractions=On} key.
+\begin{example}
+1/2 3/4 123/456
+
+\setmainfont[
+  Fractions=On,
+]{Latin Modern Roman}
+1/2 3/4 123/456
+
+\setmainfont[
+  Fractions=On,
+]{Source Serif Pro}
+1/2 3/4 123/456
+\end{example}
+
+The OpenType font format defines a lot of more font features, that may or may not
+be supported by your font of choice. Consult with the \pai*{fontspec} package
+documentation for a comprehensive description and examples.
+
+\subsection{Specifying Fonts via Filenames}
+
+If you do not want to install fonts in your system or you are working on a
+collaborative project where not everybody has specific fonts installed, you can
+specify the fonts directly via their filenames. In this case you must specify
+font variations manually. Because the filenames are usually very similar, it is
+possible to enter them using \cargv{*} patterns, where \cargv{*} is replaced by
+the main name defined. Extension may also be passed via the \cargv{Extension}
+key to avoid repetition. See \autoref{lst:fontloading} for a comparison of font
+loading techniques. If the font files are not present in the same directory as
+the document you may have to specify it directly using the \cargv{Path} key.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\setmainfont{Source Serif Pro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+
+\setmainfont{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+ 
+\setmainfont[
+  ItalicFont=SourceSerifPro-RegularIt.otf,
+  BoldFont=SourceSerifPro-Bold.otf,
+  BoldItalicFont=SourceSerifPro-BoldIt.otf,
+]{SourceSerifPro-Regular.otf}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}} \\
+
+\setmainfont[
+  Extension=.otf,
+  UprightFont=*-Regular,
+  ItalicFont=*-RegularIt,
+  BoldFont=*-Bold,
+  BoldItalicFont=*-BoldIt,
+]{SourceSerifPro}
+Normal text. \textit{Italics.} \textbf{Bold.}
+\textit{\textbf{Bold italics.}}
+\end{example}
+  \caption{Comparison of font loading with the \pai{fontspec}
+    package.}\label{lst:fontloading}
+\end{listing}
+
+The default \LaTeX{} fonts are rather atypical in that they distinguish between
+\textit{italics} and \textsl{slanted} font. Most fonts do not do this, so
+\pai{fontspec} defines slanted font to be the same as italics. This may be
+fixed by setting the \cargv{SlantedFont} key explicitly.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\setmainfont{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
+
+\setmainfont[
+  SlantedFont=Latin Modern Roman Slanted,
+]{Latin Modern Roman}
+\textit{italics} vs. \textsl{slanted}
+\end{example}
+
+\subsection{Defining New Fonts}
+
+So far we have only talked about changing the fonts for the whole document. It
+is possible however to define new fonts that are used only sporadically
+throughout the document, for emphasis or decorative purposes. It is possible to
+do so using the
+\begin{lscommand}
+  \csi{newfontfamily}[command: M, options: o, font: m]
+\end{lscommand}
+It defines new \carg{command} that works analogously to the \csi{rmfamily} or
+\csi{sffamily} commands.
+\begin{example}
+\newfontfamily{\sourcefamily}[
+  Numbers=OldStyle,
+]{Source Serif Pro}
+
+Normal text when suddenly
+\ldots{} \sourcefamily
+a different font! 0123456789
+\end{example}
+This is especially useful when working with multiple languages as you have
+already seen in \autoref{sec:polyglossia}.
+
+The \csi{newfontfamily} checks whether the font family is already defined and
+raises an error if it is. Similarly to \autoref{sec:new_commands} the
+\csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
+redefine existing font families.
+
+\section{Colours}\label{sec:colors}\index{colours}
+
+\subsection{Coloured Text}
+In the \autoref{sec:logical_structure} we have used different text colours to
+illustrate an example. These can be obtained with the \pai*{xcolor} package. It
+provides three commands to change the colour of text:
+\begin{lscommand}
+  \csi{color}[model: o, color: m] \\
+  \csi{textcolor}[model: o, color: m, text: m]
+  \csi{mathcolor}[model: o, color: m, text: m]
+\end{lscommand}
+The \csi{color} is a switch version while \csi{textcolor} and \csi{mathcolor}
+only apply to their argument. If no \carg{model} is specified, then
+\carg{color} is specified as colour expression. The simplest colour expression
+is just the name of the colour, for example \cargv{yellow} or \cargv{red}.
+\begin{example}
+\textcolor{yellow}{foo} \\
+\color{red} baz
+\[
+  \mathcolor{blue}{
+    \sum_{k=0}
+  }^{10} i
+\]
+\end{example}
+The list of predefined colours can be found in \autoref{tbl:basecolors}. You can
+also pass \cargv{dvipsnames}, \cargv{svgnames} or \cargv{x11names} as a package
+options to extend the predefined colours. Consult the package documentation for
+a full list.
+\begin{table}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\DemoColor}{m}{
+    \raisebox{0.15cm}{\cargv{#1}} &
+    \fcolorbox{black}{#1}{\phantom{\rule{0.5cm}{0.5cm}}}
+  }
+  \ExplSyntaxOff
+  \caption{Basic colours predefined by the \pai{xcolor}
+    package.}\label{tbl:basecolors}
+  \begin{tabular}{@{}lc*2{@{\qquad}lc}@{}}
+    \toprule
+    Name                 & Demo                  &
+    Name                 & Demo                  &
+    Name                 & Demo                                       \\
+    \midrule
+    \DemoColor{black}    & \DemoColor{lightgray} & \DemoColor{purple} \\
+    \DemoColor{blue}     & \DemoColor{lime}      & \DemoColor{red}    \\
+    \DemoColor{brown}    & \DemoColor{magenta}   & \DemoColor{teal}   \\
+    \DemoColor{cyan}     & \DemoColor{olive}     & \DemoColor{violet} \\
+    \DemoColor{darkgray} & \DemoColor{orange}    & \DemoColor{white}  \\
+    \DemoColor{gray}     & \DemoColor{pink}      & \DemoColor{yellow} \\
+    \DemoColor{green}    &                       &                    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Another type of colour expression is a mix of two colours. The syntax is
+\begin{code}
+  \cargv{\carg{first color}!\carg{percentage}!\carg{second color}}.
+\end{code}
+The resulting colour will be the result of mixing
+\qty[parse-numbers=false]{\carg{percentage}}{\percent} of the \carg{first
+  color} and \qty[parse-numbers=false]{100-\carg{percentage}}{\percent} of the
+\carg{second color}. If you omit the \carg{second color} it defaults to white.
+\begin{example}
+\textcolor{green!100!red}{C}%
+\textcolor{green!80!red}{o}%
+\textcolor{green!60!red}{l}%
+\textcolor{green!40!red}{o}%
+\textcolor{green!20!red}{r}%
+\textcolor{green!0!red}{s} \\
+\textcolor{blue!100}{B}%
+\textcolor{blue!75}{l}%
+\textcolor{blue!50}{u}%
+\textcolor{blue!25}{e}
+\end{example}
+Colour mixing is left associative so
+\begin{code}
+  \cargv{\carg{A}!\carg{n}!\carg{B}!\carg{m}!\carg{C}}
+\end{code}
+means calculate the mixture of \carg{A} and \carg{B} and then mixture of the
+result and \carg{C}. You can also use the minus sign before the expression to
+get the complementary colour.
+\begin{example}
+\color{green!20!red!60!blue}
+\LaTeX{} \\
+\color{-green!20!red!60!blue}
+\LaTeX{}
+\end{example}
+
+\subsection{Models}
+
+While colour mixing via expression is useful for simple colour specification, it
+is often the case that we want to use colour that is defined in terms of its RGB
+or HSB values. Different input method colours can be specified using the optional
+\carg{model} argument. Note that it is case sensitive.
+
+The simplest model is \cargv{Gray}. It accepts a single number from \(0\)to
+\(15\) and produces a grey colour with the given brightness.
+\begin{example}
+\textcolor[Gray]{0}{Zero}    \\
+\textcolor[Gray]{3}{Three}   \\
+\textcolor[Gray]{7}{Seven}   \\
+\textcolor[Gray]{11}{Eleven} \\
+\textcolor[Gray]{15}{Fifteen}
+\end{example}
+
+You can input RGB values in three ways: \cargv{rgb}, \cargv{RGB} and
+\cargv{HTML} models. The \cargv{HTML} model accepts a hexadecimal colour code.
+The code may be either upper or lowercase.
+\begin{example}
+\textcolor[HTML]{e63946}{e63946}
+\textcolor[HTML]{06D6A0}{06D6A0}
+\end{example}
+The \cargv{rgb} model accepts three decimal numbers, each between \(0\) and
+\(1\), while the \cargv{RGB} model accepts three integers from \(0\) to \(255\).
+\begin{example}
+\textcolor[RGB]{255, 204, 102}{
+  255, 204, 102
+} \\
+\textcolor[rgb]{0.4, 0.4, 1.0}{
+  0.4, 0.4, 1.0
+}
+\end{example}
+
+If you prefer the substractive colour model, both \cargv{cmy} and \cargv{cmyk} are
+available. They accept decimal numbers between \(0\) and \(1\) to specify
+the amount of each colour.
+\begin{example}
+\textcolor[cmy]{0.7, 0.4, 0.3}{
+  0.7, 0.4, 0.3
+} \\
+\textcolor[cmyk]{
+  0.7, 0.4, 0.3, 0.5
+}{
+  0.7, 0.4, 0.3, 0.5
+}
+\end{example}
+
+There are three models that enable defining colours by HSB\@: \cargv{hsb},
+\cargv{Hsb} and \cargv{HSB}. The first two accept three decimal numbers for
+each value, the difference being that the \cargv{Hsb} accepts hue as an angle
+in degrees, that is a number between \(0\) and \(360\). The \cargv{hsb} accepts
+it as a number between \(0\) and \(1\), while saturation and brightness
+are passed the same way in both model---as a number between \(0\) and \(1\).
+\begin{example}
+\textcolor[hsb]{
+  0.4, 0.8, 0.75
+}{
+  0.4, 0.8, 0.75
+}\\
+\textcolor[Hsb]{
+  144, 0.8, 0.75
+}{
+  144, 0.8, 0.75
+}
+\end{example}
+The \cargv{HSB} in turn accepts all three as integers---each between \(0\) and
+\(240\).
+\begin{example}
+\textcolor[HSB]{
+  144, 200, 120
+}{
+  144, 200, 120
+}
+\end{example}
+
+If you are writing a paper about light you may also find that the \cargv{wave}
+model comes in handy. It allows you to specify a colour by its wavelength. It
+accepts a single decimal number that represents a wavelength in visible
+spectrum in nanometres.
+\begin{example}
+\textcolor[wave]{452}{
+  If a light has wavelength
+  \qty{452}{\nm} it looks
+  like this.  
+} \\
+\textcolor[wave]{700}{
+  Light with wavelength above
+  \qty{814}{\nm} is called
+  infrared.
+}
+\end{example}
+
+\subsection{Defining Your Own Colours}
+
+If you want to use a given colour more than once it makes sense to define
+it as a macro. While you could use the \csi{NewDocumentCommand} to define it,
+the \pai{xcolor} package provides a better way via the
+\begin{lscommand}
+  \csi{definecolor}[name: m, model: m, value: m].
+\end{lscommand}
+command. Using it makes it possible to use the newly defined colour in colour
+mixing and such.
+\begin{example}
+\definecolor{MyRed}{wave}{712}
+\textcolor{MyRed}{MyRed is
+  the perfect colour for you!}
+\textcolor{MyRed!60}{Tints
+  are also available!}
+\end{example}
+Be careful though, since it doesn't guard against redefinition. If you want to
+check whether you haven't redefined some colour put \csi{tracingcolors} in your
+preamble. This will produce warnings when redefinition happens.
+
+If you want to make sure a colour is present but don't want to redefine it if it
+already exists then \csi{providecolor} does exactly that. There is also
+\csi{colorlet} that simply creates a copy of a given colour similarly to the
+\csi{NewCommandCopy} command.
+
+Colours defined in different models may need to be converted when mixing them.
+This may lead to a situation where \mintinline{latex}|\color{a!75!b}| will
+result in different colour than \mintinline{latex}|\color{b!25!a}|. Keep that in
+mind when mixing your own colours.
+
+\subsection{Colourful Pages and Boxes}
+
+So far we have only considered changing the text colour. It is however possible
+to also change the background colour of the document page. To do this use the
+\begin{lscommand}
+  \csi{pagecolor}[model: o, color: m]
+\end{lscommand}
+command, which accepts the same arguments as the \csi{color} command. If you
+want to revert to the default transparent background you may do so with the
+\csi{nopagecolor} command.
+\begin{example}[standalone, paperheight=1cm]
+\usepackage{xcolor} %!hide
+\begin{document} %!hide
+\pagecolor{orange} \color{-orange}
+Small is colourful \ldots?
+\end{document} %!hide
+\end{example}
+
+If you only want to specify a background of some text instead of the whole page
+you can use the
+\begin{lscommand}
+  \csi{colorbox}[model: o, color: m, text: m] \\
+  \csi{fcolorbox}[model: o, color: m, model: o, color: m, text: m]
+\end{lscommand}
+commands. The first one only colours the background, while the second one
+allows also drawing a frame (the \enquote*{f} stands for \enquote{framed}).
+\begin{example}
+It is \colorbox{gray}{curious}
+how much can a document be
+enhanced or ruined by
+\fcolorbox{blue}{red}{
+  colours.
+}
+\end{example}
+Boxes are explored further in \autoref{sec:boxes}.
+
+\section{Lengths and Spacing}
+
+\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}
+\begingroup
+\DeclareSIUnit{\in}{in}
+\DeclareSIUnit{\pt}{pt}
+\DeclareSIUnit{\bp}{bp}
+\DeclareSIUnit{\sp}{sp}
+\DeclareSIUnit{\dd}{dd}
+\ExplSyntaxOn
+\NewDocumentCommand{\DimVal}{m}{
+  \num{\dim_to_decimal_in_sp:n {#1}}
+}
+\NewDocumentCommand{\fnum}{mm}{
+  \num[
+    number-mode=text,
+    parse-numbers=false,
+  ]{
+    \sfrac{
+      \num[number-mode=math,parse-numbers=true]{#1}
+    }{
+      \num[number-mode=math,parse-numbers=true]{#2}
+    }
+  }
+}
+
+\NewDocumentCommand{\fqty}{mmm}{
+  \qty[
+    number-mode=text,
+    parse-numbers=false,
+  ]{
+    \sfrac{
+      \num[number-mode=math,parse-numbers=true]{#1}
+    }{
+      \num[number-mode=math,parse-numbers=true]{#2}
+    }
+  }{#3}
+}
+\ExplSyntaxOff
+
+Throughout this booklet we have often presented commands that accept length as
+one of its parameters such as \csi{\bs} or \csi{fontsize}. When introducing
+them we have used \unit{\cm} and \unit{\pt} which stand for centimetre and
+point, but these are not the only units available in \LaTeX{}.
+
+The most fundamental unit in \LaTeX{} is \unit{\sp} which stands for
+\emph{scaled point}. Its width is equal to \fqty{1}{65536}{\pt}, where
+\qty{1}{\pt} is equal to \fnum{1}{72.27} of an international inch which in turn
+is defined as exactly \qty{25.4}{\mm}. All units in \TeX{} are ultimately
+represented as a whole numbers of \unit{sp}. See \autoref{units} for the exact
+values.
+\begin{table}
+  \caption{\TeX{} Units.}\label{units}\index{units}
+  \begin{tabular}{@{}clrrl@{}}
+    \toprule
+    Unit                   & Meaning                                                                  & Definition           & {Value (\unit{\sp})} & Demo            \\
+    \midrule
+    \mintinline{latex}{cm} & centimetre                                                               & \qty{0.01}{\m}       & \DimVal{1cm}         & \demowidth{1cm} \\
+    \mintinline{latex}{mm} & millimetre                                                               & \qty{0.001}{\m}      & \DimVal{1mm}         & \demowidth{1mm} \\
+    \mintinline{latex}{in} & inch                                                                     & \qty{25.4}{\mm}      & \DimVal{1in}         & \demowidth{1in} \\
+    \mintinline{latex}{pt} & point                                                                    & \fqty{1}{72.27}{\in} & \DimVal{1pt}         & \demowidth{1pt} \\
+    \mintinline{latex}{sp} & scaled point                                                             & \fqty{1}{65536}{\pt} & \DimVal{1sp}         & \demowidth{1sp} \\
+    \mintinline{latex}{pc} & pica                                                                     & \qty{12}{\pt}        & \DimVal{1pc}         & \demowidth{1pc} \\
+    \mintinline{latex}{dd} & didot                                                                    & \qty{0.376065}{\mm}  & \DimVal{1dd}         & \demowidth{1dd} \\
+    \mintinline{latex}{cc} & cicero                                                                   & \qty{12}{\dd}        & \DimVal{1cc}         & \demowidth{1cc} \\
+    \mintinline{latex}{nd} & new didot                                                                & \qty{0.375}{\mm}     & \DimVal{1nd}         & \demowidth{1nd} \\
+    \mintinline{latex}{bp} & big point                                                                & \fqty{1}{72}{\in}    & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \mintinline{latex}{em} & \multicolumn{3}{l}{approx width of an \enquote*{M} in the current font}  & \demowidth{1em}                                               \\
+    \mintinline{latex}{ex} & \multicolumn{3}{l}{approx height of an \enquote*{x} in the current font} & \demowidth{1ex}                                               \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The last two units mentioned in the table are relative to the current font.
+Historically they were related to the \enquote*{M} and \enquote*{x} glyphs in a
+given font but today they are arbitrarily set by fonts. These units are useful
+if we want the length to scale proportionally when used with different font
+sizes. The \mintinline{latex}|em| unit is usually used for horizontal lengths,
+while the \mintinline{latex}|ex| is used for vertical lengths.
+\begin{example}
+\begin{minipage}[b]{0.5\linewidth} %!hide
+foo\\[1ex] bar
+\end{minipage}\begin{minipage}[b]{0.5\linewidth}%!hide
+
+\tiny foo\\[1ex] bar
+\end{minipage}%!hide
+\end{example}
+
+The desktop publishing point (DTP point) is the \emph{de facto} standard point
+as used in most programs, and it is defined as \fqty{1}{72}{\in}. For
+historical reasons the default \TeX{} points are a bit smaller, while the DTP
+points are called \enquote{big points}. While this shouldn't be noticeable in
+normal circumstances, remember to use \mintinline{latex}|bp| if exact point
+values are required of you.
+\begin{example}
+\fontsize{12pt}{15pt}\selectfont
+Text in 12 \TeX{} points.
+
+\fontsize{12bp}{15bp}\selectfont
+Text in 12 DTP points.
+\end{example}
+\endgroup
 \subsection{Line Spacing}\index{line spacing}
 
 If you want to use larger inter-line spacing in a
 document, change its value by putting the
 \begin{lscommand}
-  \csi{linespread}\verb|{|\emph{factor}\verb|}|
+  \csi{linespread}[factor: m]
 \end{lscommand}
-\noindent command into the preamble of your document.
+command into the preamble of your document.
 Use \verb|\linespread{1.3}| for ``one and a half'' line
 spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
 the lines are not spread, so the default line spread factor
@@ -715,7 +1300,7 @@ Note that the effect of the \csi{linespread} command is rather drastic and
 not appropriate for published work. So if you have a good reason for
 changing the line spacing you might want to use the command:
 \begin{lscommand}
-  \verb|\setlength{\baselineskip}{1.5\baselineskip}|
+  \mintinline{latex}|\setlength{\baselineskip}{1.5\baselineskip}|
 \end{lscommand}
 
 \begin{example}
@@ -780,45 +1365,19 @@ you start a document with body text and not with a sectioning command.
 \LaTeX{} determines the spaces between words and sentences
 automatically. To add horizontal space, use:\index{horizontal!space}
 \begin{lscommand}
-  \csi{hspace}\verb|{|\emph{length}\verb|}|
+  \csi{hspace}[length: m]
 \end{lscommand}
 If such a space should be kept even if it falls at the end or the
-start of a line, use \verb|\hspace*| instead of \verb|\hspace|.  The
-\emph{length} in the simplest case is just a number plus a unit.  The
-most important units are listed in \autoref{units}.\index{units (\TeX)}\index{dimensions}
+start of a line, use \verb|\hspace*| instead of \verb|\hspace|.
 
 \begin{example}
 This\hspace{1.5cm}is a space
 of \qty{1.5}{\cm}.
 \end{example}
-\suppressfloats
-\begin{table}[htp]
-  \centering
-  \DeclareSIUnit{\in}{in}
-  \sisetup{
-    parse-numbers = false
-  }
-
-  \caption{\TeX{} Units.}\label{units}\index{units}
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    Unit        & Meaning                                                                               \\
-    \midrule
-    \texttt{mm} & millimetre $\approx$ \qty{1/25}{\in} \quad \demowidth{1mm}                            \\
-    \texttt{cm} & centimetre = \qty{10}{mm}  \quad \demowidth{1cm}                                      \\
-    \texttt{in} & inch $=$ \qty{25.4}{\mm} \quad \demowidth{1in}                                        \\
-    \texttt{pt} & point $\approx$ \qty{1/72}{\in} $\approx$ \qty{\frac{1}{3}}{\mm} \quad\demowidth{1pt} \\
-    \texttt{em} & approx width of an `M' in the current font \quad \demowidth{1em}                      \\
-    \texttt{ex} & approx height of an `x' in the current font \quad \demowidth{1ex}                     \\
-    \bottomrule
-  \end{tabular}
-
-  \bigskip
-\end{table}
 
 The command
 \begin{lscommand}
-  \csi{stretch}\verb|{|\emph{n}\verb|}|
+  \csi{stretch}[n: m]
 \end{lscommand}
 \noindent generates a special rubber space. It stretches until all the
 remaining space on a line is filled up. If multiple
@@ -846,7 +1405,7 @@ The space between paragraphs, sections, subsections, \ldots\ is
 determined automatically by \LaTeX. If necessary, additional vertical
 space \emph{between two paragraphs} can be added with the command:
 \begin{lscommand}
-  \csi{vspace}\verb|{|\emph{length}\verb|}|
+  \csi{vspace}[length: m]
 \end{lscommand}
 
 This command should normally be used between two empty lines.  If the
@@ -868,7 +1427,7 @@ This goes onto the last line of the page.\pagebreak
 Additional space between two lines of \emph{the same} paragraph or
 within a table is specified with the
 \begin{lscommand}
-  \csi{\bs}\verb|[|\emph{length}\verb|]|
+  \csi{\bs}[length: o]
 \end{lscommand}
 \noindent command.
 
@@ -993,7 +1552,7 @@ here at all. Isn't that puzzling?
 \end{vardesc}
 \end{example}
 
-\section{Boxes}
+\section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each
 letter is a little box, which is then glued to other letters to form
 words. These are again glued to other words, but with special glue,

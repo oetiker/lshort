@@ -22,7 +22,7 @@
 % $Id$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Specialities}\label{chap:spec}
+\chapter{Specialities}\label{specialities}
 \begin{intro}
   When putting together a large document, \LaTeX{} will help with some special
   features like index generation, automatic linking to relevant pages and other
@@ -546,27 +546,6 @@ You may be disappointed.
 \end{document}
 \end{example}
 
-\section{The Verbatim Package}
-
-Earlier in this book, you got to know the \ei{verbatim}
-\emph{environment}.  In this section, you are going to learn about the
-\pai{verbatim} \emph{package}. The \pai{verbatim} package is basically
-a re-implementation of the \ei{verbatim} environment that works around
-some of the limitations of the original \ei{verbatim} environment.
-This by itself is not spectacular, but the implementation of the
-\pai{verbatim} package added new functionality, which is
-why I am mentioning the package here. The \pai{verbatim}
-package provides the
-\begin{lscommand}
-  \csi{verbatiminput}[filename: m]
-\end{lscommand}
-command, which allows you to include raw ASCII text into your
-document as if it were inside a \ei{verbatim} environment.
-
-As the \pai{verbatim} package is part of the `tools' bundle, you
-should find it pre-installed on most systems. If you want to know more
-about this package, make sure to read~\cite{pack:verbatim}.
-
 \section{Installing Extra Packages}\label{sec:Packages}
 
 Most \LaTeX{} installations come with a large set of pre-installed
@@ -635,385 +614,271 @@ time before moving on to step~\ref{step:final}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{\LaTeX{} and PDF}\label{sec:pdftex}\index{PDF}
-\secby{Daniel Flipo}{Daniel.Flipo@univ-lille1.fr}%
-PDF is a portable \wi{hypertext} document format. Much as in a web page,
-some words in the document are marked as hyperlinks. They link to other
-places in the document or even to other documents. If you click
-on such a hyperlink you get transported to the destination of the
-link. In the context of \LaTeX{}, this means that all occurrences of
-\csi{ref} and \csi{pageref} become hyperlinks. Additionally, the table
-of contents, the index and all the other similar structures become
-collections of hyperlinks.
+\begingroup
+\LshortExampleSetup{hide_hyperref=false}
 
-Most web pages you find today are written in HTML \emph{(HyperText
-  Markup Language)}. This format has two significant disadvantages
-when writing scientific documents:
-\begin{enumerate}
-  \item Including mathematical formulae into HTML documents is not
-        generally supported. While there is a standard for it, most browsers
-        used today do not support it, or lack the required fonts.
-  \item Printing HTML documents is possible, but the results vary widely
-        between platforms and browsers. The results are miles removed from
-        the quality we have come to expect in the \LaTeX{} world.
-\end{enumerate}
+The initial release of \TeX{} predated the PDF format by nearly 16 years. The
+original output files it produced---\eei{.dvi}s---were meant to be only
+printed. Today many documents are never or seldom printed, we read them
+directly on a screen. PDF format contains many improvements for viewing
+documents like this but they are not implemented in core \LaTeX{}. These are
+accessible via the \pai*{hyperref} package.
 
-There have been many attempts to create translators from \LaTeX{} to
-HTML\@. Some were even quite successful in the sense that they are able
-to produce legible web pages from a standard \LaTeX{} input file. But
-all of them cut corners left and right to get the job done. As soon as
-you start using more complex \LaTeX{} features and external packages
-things tend to fall apart. Authors wishing to preserve the unique
-typographic quality of their documents even when publishing on the web
-turn to PDF \emph{(Portable Document Format)}, which preserves the
-layout of the document and permits hypertext
-navigation. Most modern browsers come with plugins that allow the
-direct display of PDF documents.
+\subsection{Hypertext Links}\label{hyperlinks}
 
-All modern \TeX{} engines can generate PDF files out of the box. If you worked through this introduction until here you will already be familiar with the process.
+Hyperlinks are used to quickly jump around the document. The prime example of
+using them is the table of contents, you don't have to manually scroll to a
+given page---just click on a given chapter and you will be immediately
+transported there. You already know that table of contents can be typeset using
+the \csi{tableofcontents} command, but it doesn't contain any hyperlinks.
 
-\subsection{Hypertext Links}\label{ssec:pdfhyperref}
-
-The \pai{hyperref} adds two cool features to your \LaTeX{} PDF files:
-
-\begin{enumerate}
-  \item The paper size is set according to your specification in the document class call.
-  \item All references in your document turn into hyperlinks.
-\end{enumerate}
-
-Just add \mintinline{latex}|\usepackage{hyperref}| as the \emph{last} command into
-the preamble of your document.
-
-Many options are available to customise the behaviour of the
-\pai{hyperref} package:
-\begin{itemize}
-  \item either as a comma separated list after the pdftex option\\
-        \mintinline{latex}|\usepackage{hyperref}|
-  \item or on individual lines with the command
-        \csi{hypersetup}[options: m].
-\end{itemize}
-
-In the following
-list the default values are written in an upright font.
-
-\begin{FlushLeft}
-  \begin{description}
-    \item [\texttt{bookmarks (=true,\textsl{false})}] show or hide the
-          bookmarks bar when displaying the document
-    \item [\texttt{unicode (=false,\textsl{true})}] allows the use of
-          characters of non-Latin based languages in Acrobat's bookmarks
-    \item [\texttt{pdftoolbar (=true,\textsl{false})}] show or hide
-          Acrobat's toolbar
-    \item [\texttt{pdfmenubar (=true,\textsl{false})}] show or hide
-          Acrobat's menu
-    \item [\texttt{pdffitwindow (=false,\textsl{true})}] adjust the
-          initial magnification of the PDF when displayed
-    \item [\texttt{pdftitle (=\{text\})}] defines the title that gets
-          displayed in the \enquote{Document Info} window of Acrobat
-    \item [\texttt{pdfauthor (=\{text\})}] the name of the PDF's author
-    \item [\texttt{pdfnewwindow (=false,\textsl{true})}] define whether a new
-          window should be opened when a link leads out of the current
-          document
-    \item [\texttt{colorlinks (=false,\textsl{true})}] surround the
-          links by colour frames (\texttt{false}) or colour the text of the links
-          (\texttt{true}). The colour of these links can be configured
-          using the following options (default colours are shown):
-          \begin{description}
-            \item [\texttt{linkcolor (=red)}] colour of internal
-                  links (sections, pages, etc.)
-            \item [\texttt{citecolor (=green)}] colour of
-                  citation links (bibliography)
-            \item [\texttt{filecolor (=magenta)}] colour of file
-                  links
-            \item [\texttt{urlcolor (=cyan)}] colour of URL
-                  links (mail, web)
-          \end{description}
-  \end{description}
-\end{FlushLeft}
-
-If you are happy with the defaults, use
-\begin{code}
+Luckily the process of updating your document is extremely easy: just add
+\mintinline{latex}|\usepackage{hyperref}| as the \emph{last} package loaded in
+your preamble. Doing so redefines internal \LaTeX{} commands to produce
+hyperlinks.
+\begin{example}
+%!hidebegin
+\hypersetup{
+  hidelinks,
+  pdfborder=0 0 1,
+}
+%!showbegin !hideend
+% In preamble
+\usepackage{hyperref}
+%!showend !hide
+% ...
+The reference to this section
+now looks like that:\footnote{
+  Footnotes are also
+  made into hyperlinks.}
+Section~\ref{hyperlinks} is
+on page~\pageref{hyperlinks}.
+The hyperref bibliographic
+entry is~\cite{pack:hyperref}.
+\end{example}
+By default links are marked by a red box around them. This box
+is only visible when viewing the document on screen and will not be printed.
+The boxes are, however, rather ugly, so you may want to add the \cargv{colorlinks}
+option while loading the package.
+\begin{example}
+%!showbegin !hide
+% In preamble
+\usepackage[
+  colorlinks
+]{hyperref}
+%!showend !hide
+% ...
+The reference to this section
+now looks like that:
+Section~\ref{hyperlinks} is
+on page~\pageref{hyperlinks}.
+\end{example}
+This is the option used throughout this booklet and assumed in further
+examples. While this makes the links more visually appealing, it has the
+disadvantage that the coloured links will be printed. To marry the best of both
+worlds you can use the \pai*{ocgx2} package with the option
+\cargv{ocgcolorlinks} like this
+\begin{code}  
 \begin{minted}{latex}
 \usepackage{hyperref}
+\usepackage[ocglinks]{ocgx2}
 \end{minted}
 \end{code}
+Be warned though that it is not well supported by popular PDF viewers. Another
+option is to use option \cargv{hidelinks} that makes the links clickable but
+does not distinguish them visually.
 
-To have the bookmark list open and links in colour
-(the \texttt{=true} values are optional):
-\begin{code}
-\begin{minted}{latex}
-\usepackage[bookmarks,colorlinks]{hyperref}
-\end{minted}
-\end{code}
-
-When creating PDFs destined for printing, coloured links are not a
-good thing as they end up in gray in the final output, making it
-difficult to read. Use colour frames, which are not printed:
-\begin{code}
-\begin{minted}{latex}
-\usepackage{hyperref}
-\hypersetup{colorlinks=false}
-\end{minted}
-\end{code}
-\noindent or make links black:
-\begin{code}
-\begin{minted}{latex}
-\usepackage{hyperref}
-\hypersetup{colorlinks,%
-            citecolor=black,%
-            filecolor=black,%
-            linkcolor=black,%
-            urlcolor=black,%
-            pdftex}
-\end{minted}
-\end{code}
-
-When you just want to provide information for the
-\texttt{Document Info} section of the PDF file:
-\begin{code}
-\begin{minted}{latex}
-\usepackage[pdfauthor={Pierre Desproges},%
-            pdftitle={Des femmes qui tombent},%
-            pdftex]{hyperref}
-\end{minted}
-\end{code}
-
-\vspace{\baselineskip}
-
-In addition to the automatic hyperlinks for cross references, it is
-possible to embed explicit links using
+In addition to redefining internal \LaTeX{} command, \pai{hyperref} defines
+some additional ones. To typeset URLs you can now use the \csi{url} command.
+\begin{example}
+\url{https://www.ctan.org/}
+\end{example}
+If you want to display different text for the clickable link you can use the
 \begin{lscommand}
-  \csi{href}[url: m, text: m]
+  \csi{href}[URL: m, text: m]
 \end{lscommand}
+command. Note that if you intend for the document to be useful when printed,
+you have to provide the full URLs anyway.
+\begin{example}
+Packages can be found on
+\href{https://www.ctan.org/}{
+  CTAN}.
+\end{example}
 
-The code
-\begin{code}
+A similar command is
+\begin{lscommand}
+  \csi{hyperref}[marker: o, text: m]
+\end{lscommand}
+that allows to create a hyperlink within the document with a different text.
+\begin{example}
+\hyperref[hyperlinks]{
+  Hyperlinks section}
+describes the usage of
+hyperlinks.
+\end{example}
+To avoid nesting hyperlinks inside one another, \pai{hyperref} provides starred
+versions of \csi{ref} and \csi{pageref} commands that produce text without
+hyperlinking them.
+\begin{example}
+\hyperref[hyperlinks]{
+  Section~\ref*{hyperlinks}}
+describes the usage of
+hyperlinks.
+
+This ref~\ref*{hyperlinks}
+is not hyperlinked.
+\end{example}
+
+Throughout this booklet you have seen references such as
+\enquote*{\autoref{hyperlinks} on \autopageref{hyperlinks}}. While this could
+be achieved using the aforementioned \csi{hyperref} command, this usecase is so
+common that \pai{hyperref} provides two commands that make it much easier:
+\begin{lscommand}
+  \csi{autoref}[marker: m] \\
+  \csi{autopageref}[marker: m]
+\end{lscommand}
+Their usage is identical to the \csi{ref} and \csi{pageref} commands, but they
+produce additional text based on the counter the \carg{marker} refers to.
+\begin{example}
+\RenewDocumentCommand{\chapterautorefname}{}{chapter} %!hide
+\autoref{hyperlinks} in
+\autoref{specialities} on
+\autopageref{hyperlinks}.
+\end{example}
+The names are controlled by commands such as \cs{autorefchaptername} or
+\cs{autorefsectionname}. See the \pai*{hyperref} documentation for a full list.
+
+So far we have used the default colours for URLs, hyperlinks. These can be
+changed using the \csi{hypersetup} command. It accepts a key value list
+customising the appearance of links. Colours may be specified using
+\cargv{linkcolor}, \cargv{citecolor} and \cargv{urlcolor}. If you have the
+\pai{xcolor} package loaded, you may specify colours the same way as described
+in \autoref{sec:colors}.
+% TODO: Add colors section.
+\begin{chktexignore}
+\begin{example}
+\hypersetup{
+  urlcolor = pink,
+  citecolor = purple,
+  linkcolor = teal!50!yellow,
+}
+\url{https://www.ctan.org/} \\
+\cite{pack:hyperref} \\
+\autoref{hyperlinks}
+\end{example}
+\end{chktexignore}
+
+You can also adjust the borders around the links. The basic key is
+\cargv{pdfborder}. It accepts three numbers: horizontal corner radius, vertical
+corner radius and border width.
+\begin{example}
+\hypersetup{pdfborder = 0 0 1}
+\url{https://www.ctan.org/} \\
+\hypersetup{pdfborder = 10 10 3}
+\url{https://www.ctan.org/} \\
+\hypersetup{pdfborder = 10 5 2}
+\url{https://www.ctan.org/} \\
+\hypersetup{pdfborder = 2 7 5}
+\url{https://www.ctan.org/}
+\end{example}
+The colour of the boxes may be adjusted similarly to the text colours with the
+\cargv{linkbordercolor}, \cargv{citebordercolor} and \cargv{urlbordercolor}
+keys, assuming the \pai{xcolor} package is loaded.
+\begin{chktexignore}
+  \begin{example}
+\hypersetup{
+  pdfborder = 0 0 2,
+  urlbordercolor = violet,
+  citebordercolor = pink,
+  linkbordercolor = teal,
+}
+\url{https://www.ctan.org/} \\
+\cite{pack:hyperref} \\
+\autoref{hyperlinks}
+\end{example}
+\end{chktexignore}
+
+\subsection{Document Metadata}\label{sec:pdfmeta}
+
+Another thing that may be adjusted with the \pai{hyperref} package is document
+metadata. These are information about your document that are not visible in the
+document itself, but may be used by your PDF viewer in various ways. For
+example, the title of the document may be shown in its top window bar.
+
+Additional information about your document may be set using \cargv{pdfinfo}
+key. This key itself accepts a key value list of document properties.
 \begin{minted}{latex}
-The \href{http://www.ctan.org}{CTAN} website.
+\hypersetup{
+  pdfinfo = {
+    Title = Title of the Book,
+    Author = {Us, Ourselves and We},
+    Subject = Book creation with LaTeX,
+    Creator = Our House,
+    Keywords = {LaTeX, typesetting},
+    Producer = LuaTeX,
+  }
+}
 \end{minted}
-\end{code}
-produces the output ``\href{http://www.ctan.org}{CTAN}'';
-a click on the word ``\textcolor{magenta}{CTAN}''
-will take you to the CTAN website.
 
-If the destination of the link is not a URL but a local file,
-use the \csi{href} command without the \enquote*{\texttt{http://}} bit:
-\begin{minted}{latex}
-The complete document is \href{manual.pdf}{here}
-\end{minted}
-which produces the text ``The complete document is \textcolor{cyan}{here}''.
-A click on the word
-``\textcolor{cyan}{here}''
-will open the file \texttt{manual.pdf}. (The filename is relative to
-the location of the current document).
+You can also control the way your document presents itself when opening. For
+example you can choose whether the bookmarks should be shown
+(\cargv{bookmarksopen}), whether external links should be opened in new windows
+(\cargv{pdfnewwindow}) whether the pages should initially fit the window
+(\cargv{pdffitwindow}).
 
-The author of an article might want her readers to easily send
-email messages by using the \csi{href} command inside the \csi{author}
-command on the title page of the document:
-\begin{code}
-\begin{minted}{latex}
-\author{Mary Oetiker $<$\href{mailto:mary@oetiker.ch}%
-       {mary@oetiker.ch}$>$
-\end{minted}
-\end{code}
-Note that I have put the link so that my email address appears not only
-in the link but also on the page itself. I did this because the
-link
-\begin{code}
-  \mintinline{latex}|\href{mailto:mary@oetiker.ch}{Mary Oetiker}|
-\end{code}
-would
-work well within Acrobat, but once the page is printed the email address
-would not be visible anymore.
+If you want to set the metadata without redefining internal \LaTeX{} commands
+to produce links, you may pass \mintinline{latex}{implicit=false} to
+\pai{hyperref} package options.
+\endgroup
 
-\subsection{Problems with Links}
+\subsection{Problems with Outline}
 
-Messages like the following:
-\begin{verbatim}
-! pdfTeX warning (ext4): destination with the same
-  identifier (name{page.1}) has been already used,
-  duplicate ignored
-\end{verbatim}
-appear when a counter gets reinitialised, for example by using
-the command \csi{mainmatter} provided by the \texttt{book} document class. It
-resets the page number counter to~1 prior to the first chapter of the
-book. But as the preface of the book also has a page number~1 all
-links to ``page 1'' would not be unique anymore, hence the notice
-that ``\verb+duplicate+ has been \verb+ignored+.''
-
-The counter measure consists of putting \texttt{plainpages=false} into
-the hyperref options. This unfortunately only helps with the page
-counter.
-An even more radical solution is to use the option\\
-\texttt{hypertexnames=false}, but this will cause the page links in
-the index to stop working.
-
-\subsection{Problems with Bookmarks}
-
-The text displayed by bookmarks does not always look like you expect
-it to look. Because bookmarks are \enquote{just text}, fewer
-characters are available for bookmarks than for normal \LaTeX{} text.
-Hyperref will normally notice such problems and put up a warning:
+The \pai{hyperref} package automatically uses table of contents generated by
+the document as a document outline for easier navigation. This may lead to some
+problems if your section titles contain some non-text content (for example,
+\enquote{\LaTeX}). If this is the case, then it will be ignored by the
+\pai{hyperref}
+package and the following warning will be reported
 \begin{code}
 \begin{verbatim}
 Package hyperref Warning:
 Token not allowed in a PDFDocEncoded string:
 \end{verbatim}
 \end{code}
-Work around this problem by providing a text string for
-the bookmarks, which replaces the offending text:
+To get around this problem you can use the
 \begin{lscommand}
-  \csi{texorpdfstring}[\bs TeX{} text: m, Bookmark Text: m]
+  \csi{texorpdfstring}[\bs TeX{} text: m, outline text: m]
 \end{lscommand}
-
-Math expressions are a prime candidate for this kind of problem:
-\begin{code}
+command. Its first argument, \carg{\TeX{} text}, is the text to be displayed
+inside the document, while the second is the fallback for \pai{hyperref} to
+use. An example would be to change
 \begin{minted}{latex}
-\section{\texorpdfstring{$E=mc^2$}%
-        {E = mc ** 2}}
+\section{\LaTeX{} is awesome!}
 \end{minted}
-\end{code}
-which turns \mintinline{latex}|\section{$E=mc^2$}| to ``E = mc ** 2'' in the bookmark area.
-
-If you write your document in Unicode and use the \cargv{unicode} option for
-the \pai{hyperref} package to use Unicode characters in bookmarks, this
-will give you a much larger selection of characters to pick from when
-when using \csi{texorpdfstring}.
-
-\section{Working with \hologo{XeLaTeX} and PDF}%
-\label{sec:xetex}\index{PDF}\index{XeTeX@\hologo{XeTeX}}\index{XeLaTeX@\hologo{XeLaTeX}}
-
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
-Most of the things said in the previous section are valid for \hologo{XeLaTeX} as well.
-
-There is a Wiki at \url{http://wiki.xelatex.org/doku.php} that collects
-information relevant to \hologo{XeTeX} and \hologo{XeLaTeX}.
-
-\subsection{The Fonts}\label{sec:fontspec}
-
-In addition to the normal \texttt{tfm} based fonts, \hologo{XeLaTeX} is able
-to use any font known to the operating system. If you have the \texttt{Linux
-  Libertine} fonts installed, you can simply say
-
-\begin{code}
+to
 \begin{minted}{latex}
-\usepackage{fontspec}
-\setmainfont[Ligatures=TeX]{Linux Libertine}
+\section{\texorpdfstring{\LaTeX}{LaTeX} is awesome!}
 \end{minted}
-\end{code}
-%
-in the preamble. This will normally detect the italic and bold versions as
-well, so \mintinline{latex}|\textit| and \mintinline{latex}|\textbf| will work as usual. When the
-font is using OpenType technology you have access to many features which
-required switching to a separate font or using virtual fonts in the past.
-The main feature is the extended character set; a font may contain Latin,
-Greek and Cyrillic characters and the corresponding ligatures.
 
-Many fonts contain at least two kinds of numerals, the normal lining
-numerals and so called old style (or lower case) numerals, which partly
-extend below the baseline. They may contain proportional numerals (the ``1''
-takes less space than the ``0'') or monospaced numerals which are suitable
-for tables.
-
-\begin{code}
+While the above method may be necessary for some complicated math formulae
+that need to be nicely printed in the outline, usually the replacement texts
+are rather obvious for a given command. In this case you can use the
+\begin{lscommand}
+  \csi{pdfstringdefDisableCommands}[commands: m]
+\end{lscommand}
+command, which allows you to define general fallbacks for some commands. The
+\carg{commands} argument is a list of redefinitions to be done when evaluating
+outline titles. Commands may be redefined using the
+\csi{RenewExpandableDocumentCommand} command. For a description of how to
+redefine the commands see \autoref{sec:new_commands}. An example of using this
+command would be
 \begin{minted}{latex}
-\newfontfamily\LLln[Numbers=Lining]{(font)}
-\newfontfamily\LLos[Numbers=OldStyle]{(font)}
-\newfontfamily\LLlnm[
-  Numbers=Lining,Numbers=Monospaced
-]{(font)}
-\newfontfamily\LLosm[
-  Numbers=OldStyle,Numbers=Monospaced
-]{(font)}
+\pdfstringdefDisableCommands {
+  \RenewExpandableDocumentCommand{\ldots}{}{...}
+  \RenewExpandableDocumentCommand{\LaTeX}{}{LaTeX}
+  \RenewExpandableDocumentCommand{\emph}{m}{*#1*}
+}
 \end{minted}
-\end{code}
-
-Almost all OpenType fonts contain the standard ligatures (fl fi ffi) but
-there are also some rare or historical ligatures like st, ct and tz. You may
-not want to use them in a technical report but they are fine for a novel. To
-enable these ligatures use either of the following lines:
-
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Ligatures=Rare]{(font)}
-\setmainfont[Ligatures=Historic]{(font)}
-\setmainfont[Ligatures=Historic,Ligatures=Rare]{(font)}
-\end{minted}
-\end{code}
-
-Not every font contains both sets of ligature, consult the font
-documentation or just try it out. Sometimes these ligatures are language
-dependent; for example a ligature used in Polish (fk) is not used in English. You have
-to add
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Language=Polish]{(font)}
-\end{minted}
-\end{code}
-to enable the Polish ligatures.
-
-Some fonts (like the commercial Adobe Garamond Premier Pro) contain
-alternative glyphs that are activated by default in \hologo{XeLaTeX}
-distributed with \TeX{}Live~2010\footnote{The behaviour has changed with this
-  version, it was off by default in earlier releases.}. The result is a stylish
-``Q'' with a descender reaching below the following ``u''. To disable this
-feature you have to define the font with disabled contextuals:
-
-\begin{code}
-\begin{minted}{latex}
-\setmainfont[Contextuals=NoAlternate]{(font)}
-\end{minted}
-\end{code}
-
-To learn about fonts in \hologo{XeLaTeX} read the \pai{fontspec} manual.
-
-\subsubsection{Where do I get OpenType fonts?}
-
-If you have \texttt{TeXLive} installed, you already have some at
-\begin{code}
-  \url{.../texmf-dist/fonts/opentype},
-\end{code}
-just install them in your operating
-system. This collection does not include \texttt{DejaVu}, which is available
-at \url{http://dejavu-fonts.org/}.
-
-Make sure that each font is only installed \emph{once}, otherwise
-interesting results may happen.
-
-You can use every font installed on your computer, but remember that other
-users may not have these fonts. The Zapfino font used in the \pai{fontspec}
-manual is included in Mac OSX, but is not available on Windows
-computers.\footnote{A commercial version of the font called Zapfino Extra is
-  available.}
-
-\subsubsection{Entering Unicode Characters}
-
-The number of characters in a font has grown but the number of keys on a
-regular keyboard has not. So, how do I enter non-ASCII characters?
-
-If you write a large amount of text in a foreign language, you can install a
-keyboard for that language and print out the character positions. (Most
-operating system have some sort of virtual keyboard, just make a
-screenshot.)
-
-If you rarely need an exotic character, you can simply pick it in the
-character palette.
-
-Some environments (e.\,g.\ the X Window System) offer many methods to enter
-non-ASCII characters. Some editors (e.\,g. Vim and Emacs) offer ways to
-enter these characters. Read the manual for the tools you are using.
-
-\subsection{Compatibility Between \hologo{XeLaTeX} and \hologo{pdfLaTeX}}
-
-There are a few things that are different between \hologo{XeLaTeX} and \hologo{pdfLaTeX}.
-
-\begin{itemize}
-  \item A \hologo{XeLaTeX} document has to be written in
-        Unicode (UTF-8) while \hologo{pdfLaTeX} may use different input encodings.
-  \item The \pai{microtype} packages does not work with \hologo{XeLaTeX} yet,
-        support for character protrusion is already under development.
-  \item Everything font related has to be reviewed. (Unless you want to stick
-        to Latin Modern.)
-\end{itemize}
 
 \section{Creating Presentations}%
 \label{sec:beamer}

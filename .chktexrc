@@ -11,7 +11,8 @@ Silent {
     \flushright \mainmatter \IEEEyessubnumber
     \endhead \endfoot \endlastfoot \endfirsthead
     \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
-    \bgroup \egroup \restoregeometry \itshape \cleardoublepage
+    \bgroup \egroup \sourcefamily \restoregeometry
+    \itshape \cleardoublepage
 }
 
 MathEnvir {

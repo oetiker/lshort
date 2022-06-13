@@ -21,7 +21,7 @@
 }
 
 \RequirePackage{changepage}
-\RequirePackage{frame}
+\RequirePackage{adjustbox}
 \RequirePackage{graphicx}
 \RequirePackage{verbatim}
 \RequirePackage{hyperref}
@@ -107,6 +107,13 @@
 
   vertical_mode .bool_set:N = \__lshortexample_vertical_mode_bool,
   vertical_mode .initial:n = false,
+
+  hide_hyperref .bool_set:N = \l__lshortexample_hide_hyperref_bool,
+  hide_hyperref .initial:n = true,
+}
+
+\DeclareDocumentCommand\LshortExampleSetup { m } {
+  \keys_set:nn { lshortexample } { #1 }
 }
 
 \NewDocumentEnvironment{example}{!o} {
@@ -253,9 +260,9 @@
     \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
     \dim_set:Nn \l_tmpa_dim {
       \bool_if:NTF \__lshortexample_vertical_pages_bool {
-        \__lshortexample_paperwidth + 0.2pt
+        \__lshortexample_paperwidth + 0.8pt
       } {
-        (\__lshortexample_paperwidth + 0.2pt) * (
+        (\__lshortexample_paperwidth + 0.8pt) * (
         \__lshortexample_to_page - \__lshortexample_from_page + 1)
       }
     }
@@ -295,26 +302,37 @@
 \cs_new:Nn \show_output:n {
 \bool_if:NTF \__lshortexample_standalone_bool {
 \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
-\fancyframebox{0.1pt}{0pt}{
+\begin{adjustbox}{frame = 0.4pt, Clip=0}
   \includegraphics[
-    width=\__lshortexample_paperwidth,
+    width=\__lshortexample_paperwidth-0.4pt,
     page=##1,
   ]{
     \__lshortexample_cache_dir_tl\l_tmpb_tl
   }
-}
+\end{adjustbox}
 \bool_if:nT {
 \__lshortexample_vertical_pages_bool &&
 !\int_compare_p:nNn {##1} = {\__lshortexample_to_page}
 } {\\[-1pt]}
 }
 } {
-\fancyframebox{0.1pt}{2mm}{
-  \begin{minipage}{\l_tmpa_dim-4mm-0.2pt}
+\begin{adjustbox}{frame = 0.4pt~2mm, Clip=0}
+  \begin{minipage}{\l_tmpa_dim-4mm-0.8pt}
     \sloppy
+    \RenewExpandableDocumentCommand{\thempfootnote}{}{
+      \@arabic\c@mpfootnote
+    }
+
+    \bool_if:NT \l__lshortexample_hide_hyperref_bool {
+      \NewCommandCopy{\old@ref}{\ref}
+      \RenewDocumentCommand{\ref}{}{\old@ref*}
+      \NewCommandCopy{\old@pageref}{\pageref}
+      \RenewDocumentCommand{\pageref}{}{\old@pageref*}
+      \RenewCommandCopy\@footnotemark\H@@footnotemark
+    }
     \input{#1}
   \end{minipage}
-}
+\end{adjustbox}
 }
 }
 
