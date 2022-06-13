@@ -260,9 +260,9 @@
     \tl_set:Nn \l_tmpb_tl {\file_mdfive_hash:n {#1}}
     \dim_set:Nn \l_tmpa_dim {
       \bool_if:NTF \__lshortexample_vertical_pages_bool {
-        \__lshortexample_paperwidth + 0.2pt
+        \__lshortexample_paperwidth + 0.8pt
       } {
-        (\__lshortexample_paperwidth + 0.2pt) * (
+        (\__lshortexample_paperwidth + 0.8pt) * (
         \__lshortexample_to_page - \__lshortexample_from_page + 1)
       }
     }
@@ -304,7 +304,7 @@
 \int_step_inline:nnn {\__lshortexample_from_page} {\__lshortexample_to_page} {
 \begin{adjustbox}{frame = 0.4pt, Clip=0}
   \includegraphics[
-    width=\__lshortexample_paperwidth,
+    width=\__lshortexample_paperwidth-0.4pt,
     page=##1,
   ]{
     \__lshortexample_cache_dir_tl\l_tmpb_tl

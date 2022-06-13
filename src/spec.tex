@@ -616,11 +616,12 @@ time before moving on to step~\ref{step:final}.
 \section{\LaTeX{} and PDF}\label{sec:pdftex}\index{PDF}
 \begingroup
 \LshortExampleSetup{hide_hyperref=false}
+
 The initial release of \TeX{} predated the PDF format by nearly 16 years. The
-original output files it produced---\eei{.dvi}s---were not meant to be read
-on screen, only printed. Today many documents are never or seldom
-printed, we read them directly on a screen. PDF format contains many
-improvements to this but they are not implemented in core \LaTeX{}. These are
+original output files it produced---\eei{.dvi}s---were meant to be only
+printed. Today many documents are never or seldom printed, we read them
+directly on a screen. PDF format contains many improvements for viewing
+documents like this but they are not implemented in core \LaTeX{}. These are
 accessible via the \pai*{hyperref} package.
 
 \subsection{Hypertext Links}\label{hyperlinks}
@@ -633,10 +634,8 @@ the \csi{tableofcontents} command, but it doesn't contain any hyperlinks.
 
 Luckily the process of updating your document is extremely easy: just add
 \mintinline{latex}|\usepackage{hyperref}| as the \emph{last} package loaded in
-your preamble. It redefines many \LaTeX{} commands to produce hyperlinked text.
-
-Simply including the \pai{hyperref} package in your preamble redefines
-internal \LaTeX{} commands to produce hyperlinks.
+your preamble. Doing so redefines internal \LaTeX{} commands to produce
+hyperlinks.
 \begin{example}
 %!hidebegin
 \hypersetup{
@@ -746,8 +745,8 @@ produce additional text based on the counter the \carg{marker} refers to.
 \autoref{specialities} on
 \autopageref{hyperlinks}.
 \end{example}
-The names are controlled by commands such as \cs{chaptername} or
-\cs{sectionname}. See the \pai*{hyperref} documentation for a full list.
+The names are controlled by commands such as \cs{autorefchaptername} or
+\cs{autorefsectionname}. See the \pai*{hyperref} documentation for a full list.
 
 So far we have used the default colours for URLs, hyperlinks. These can be
 changed using the \csi{hypersetup} command. It accepts a key value list

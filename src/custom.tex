@@ -273,7 +273,7 @@ consider the \cargv{s} specification. \autoref{lst:kingsenv} illustrates this.
 My humble subjects \ldots
 \end{king}
 \end{example}
-  \caption{An example of using \cargv{s} specifier when defining a new
+  \caption{An example of using the \cargv{s} specifier when defining a new
     environment.}\label{lst:kingsenv}
 \end{listing}
 If you want to create a starred version of an environment (similarly to some
@@ -325,9 +325,9 @@ command. Your initial code may look like this
 }
 \end{minted}
 but when you try to compile the document you will receive the error
-\begin{minted}{console}
+\begin{verbatim}
 ! TeX capacity exceeded, sorry [input stack size=5000].
-\end{minted}
+\end{verbatim}
 
 To understand why this happens it is instructive to consider how \TeX{} expands
 the defined commands. The above \csi{RenewDocumentCommand} tells the \TeX{}
@@ -335,9 +335,8 @@ engine that whenever \csi{emph}[foo:vm] is seen it must replace it with
 \mintinline{latex}|\emph{foo}~(\enquote{foo} is emphasised)|. You may already see the
 problem here. In the next stage it will again replace the \csi{emph}[foo:vm]
 yielding
-\begin{minted}{latex}
-\emph{foo}~(\enquote{foo} is emphasised)~
-  (\enquote{foo} is emphasised)
+\begin{minted}[breaklines]{latex}
+\emph{foo}~(\enquote{foo} is emphasised)~(\enquote{foo} is emphasised)
 \end{minted}
 This process will never end and at some point \TeX{}
 simply gives up.
@@ -349,8 +348,9 @@ Note that
   \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{minted}
-will suffer the same fate since \verb|\oldemph{...}| will be replaced by \TeX{}
-with \verb|\emph{...}| and the cycle repeats.
+will suffer the same fate since \mintinline{latex}|\oldemph{...}| %chktex 11 
+will  be replaced by \TeX{} with \mintinline{latex}|\emph{...}| and %chktex 11
+the  cycle repeats.
 
 In order to avoid this problem a special command exists
 \begin{lscommand}
@@ -441,17 +441,17 @@ Writing a package basically consists of copying the contents of your document
 preamble (with minor adjustments) into a separate file with a name ending in
 \texttt{.sty}. There is one special command,
 \begin{lscommand}
-  \csi{ProvidesExplPackage}[package name:m, date:m, version:m, description:m]
+  \csi{ProvidesExplPackage}[name:m, date:m, version:m, description:m]
 \end{lscommand}
-\noindent for use at the very beginning of your package file. This command
-tells the \LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of this is
-that all whitespace is ignored. You may have noticed that in many of the
-examples above we had to end most lines with \ai{\%} to get correct
-spacing in the output. In \emph{expl mode}, spaces have to be added explicitly if needed at all. They are usually
-quite rare when writing a package. To insert spaces, use
-the \ai{\~} character, which normally denotes non-breaking space.\footnote{If
-  you want to insert non-breaking space in \emph{expl mode}, use
-  \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
+for use at the very beginning of your package file. This command tells the
+\LaTeX{} to process the  file in \emph{expl mode}. The most visible effect of
+this is that all whitespace is ignored. You may have noticed that in many of
+the examples above we had to end most lines with \ai{\%} to get correct spacing
+in the output. In \emph{expl mode}, spaces have to be added explicitly if
+needed at all. They are usually quite rare when writing a package. To insert
+spaces, use the \ai{\~} character, which normally denotes non-breaking
+space.\footnote{If you want to insert non-breaking space in \emph{expl mode},
+  use \csi{nobreakspace}.} Paragraphs can be started with the \csi{par} command.
 
 The arguments are used to provide information about package in the log file. If
 you use this package and look at the log file you will find
@@ -479,11 +479,12 @@ that contains the commands defined in the examples above.
   \item[size] The size of the glyphs. For example, \enquote*{\qty{10}{pt}} or
     \enquote*{\qty{12}{pt}}.
 \end{description}
-\LaTeX{} automatically chooses the appropriate font family, series, shape and size based on the
-logical structure of the document (sections, footnotes, emphasis, \ldots). It
-is possible however to instruct \LaTeX{} manually which font to use. It is
-important to note that not every combination of
-family\slash{}series\slash{}shape exists as an actual font. \LaTeX{} will complain if you try for something that does not exist.
+\LaTeX{} automatically chooses the appropriate font family, series, shape and
+size based on the logical structure of the document (sections, footnotes,
+emphasis, \ldots). It is possible however to instruct \LaTeX{} manually which
+font to use. It is important to note that not every combination of
+family\slash{}series\slash{}shape exists as an actual font. \LaTeX{} will
+complain if you try for something that does not exist.
 
 \LaTeX{} predefines three font families to use throughout the document: the
 upright or roman family accessible via \csi{textrm}, the \textsf{sans serif
@@ -498,15 +499,16 @@ accessible via \csi{texttt}.
   verbatim code blocks.}
 \end{example}
 
-There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold (\csi{textbf}).
+There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold
+(\csi{textbf}).
 \begin{example}
 \textmd{The default.} \\
 \textbf{Bold font.}
 \end{example}
 
 Shapes are a bit more complicated. The three basic shapes are: italics
-(\csi{textit}), oblique or slanted\footnote{The difference between oblique and
-  italic shapes is that italic shape uses different glyphs while oblique shape
+(\csi{textit}), oblique or slanted\footnote{Oblique shape differs from the
+  italics in that italic shape uses different glyphs while oblique shape
   uses the same glyphs but slanted. The difference is really obvious
   \fontshape{ui}\selectfont when you look at the unslanted italic font.}
 (\csi{textsl}) and small capitals (\csi{textsc}).
@@ -524,10 +526,10 @@ using custom fonts as described in \autoref{sec:fontspec}.
 Question vs. \textsw{Question}
 \end{example}
 In addition two virtual shapes are provided: upright (\csi{textup}) and
-upper-lowercase (\csi{textulc}). These are not actually shapes but they change
-the current shape to, respectively switch back to upright font and to disable
-small capitals. The command \csi{textnormal} is just the combination of the
-two.
+upper-lowercase (\csi{textulc}). These are not actually shapes but utility
+commands. The former one switches back to upright font while the latter
+disables small capitals. The command \csi{textnormal} is just the combination
+of the two.
 \begin{example}
 \textsl{\textsc{Back to
   \textup{upright.}}} \\
@@ -538,9 +540,9 @@ two.
 \end{example}
 
 All of the commands described above also exist in their switch version. Instead
-of receiving the text via argument they change the font permanently until it is
+of receiving the text via argument, they change the font permanently until it is
 changed again. For example, the switch version of \csi{textit} and \csi{textrm}
-are \csi{itshape} and \csi{rmfamily} respectively. While the argument versions
+are \csi{itshape} and \csi{rmfamily}, respectively. While the argument versions
 are useful for defining commands, switch versions are especially useful when
 defining your own environments.
 \begin{example}
@@ -552,7 +554,7 @@ until \upshape is encountered.
 Both argument and switch versions of the described commands are presented in
 \autoref{tbl:fonts}.
 \begin{table}
-  \caption{Default Font Changing Commands of \LaTeX.}\label{tbl:fonts}
+  \caption{Default font changing commands of \LaTeX.}\label{tbl:fonts}
   \begin{tabular}{@{}lll@{}}
     \toprule
     Argument Command         & Switch           & Example                      \\
@@ -590,7 +592,7 @@ be controlled via switch versions. \LaTeX{} predefines some switches for
 changing font size, see \autoref{sizes} and \autoref{tab:pointsizes} for their
 description.
 \begin{table}
-  \caption{Commands Changing Font Size.}\label{sizes}\index{font size}
+  \caption{Commands changing font size.}\label{sizes}\index{font size}
   \begin{tabular}{@{}ll@{\qquad}ll@{}}
     \toprule
     Command                     & Size                             &
@@ -613,8 +615,8 @@ description.
 \end{table}
 
 \begin{table}
-  \caption[Absolute Point Sizes in Standard Classes]{Absolute Point Sizes in
-    Standard Classes depending on the class option. The default class option is
+  \caption[Absolute point sizes in standard classes.]{Absolute point sizes in
+    standard classes depending on the class option. The default class option is
     \cargv{10pt}.}\label{tab:pointsizes}\label{tab:sizes}
   \sisetup{table-format=2.2}
   \begin{tabular}{@{}lSSS@{}}
@@ -708,12 +710,13 @@ If you need to access even more font variants and shapes\footnote{For example
 
 \subsection{Danger, Will Robinson, Danger}
 
-Note! Using explicit font setting commands defy the the basic idea of \LaTeX{} described in \autoref{sec:logical_structure}, which is to separate the logical and visual markup
-where the fonts get switched automaticcaly according to the requirements of the context.
-A simple rule of thumb:
-If you use the same font changing command in several places in order to typeset
-a special kind of information, you should use \csi{NewDocumentCommand} to
-define a \enquote{logical wrapper command} for the font changing command.
+Note! Using explicit font setting commands defies the the basic idea of
+\LaTeX{} described in \autoref{sec:logical_structure}, which is to separate the
+logical and visual markup. The fonts should get switched automatically
+according to the requirements of the context. A simple rule of thumb: If you
+use the same font changing command in several places in order to typeset a
+special kind of information, you should use \csi{NewDocumentCommand} to define
+a \enquote{logical wrapper command} for the font changing command.
 
 \begin{example}
 \NewDocumentCommand{\oops}{m}{%
@@ -747,11 +750,11 @@ here is a little word of advice:\nopagebreak
 
 In the following examples we use Adobe Source fonts~\cites{sourceserif,
   sourcesans, sourcecodepro}. These fonts are included with \TeX{}Live \LaTeX{}
-distributions and should be available in
+distributions and should be available in the directory
 \begin{code}
   \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
 \end{code}
-the directory, where the \cargv{...} denotes the path \TeX{}Live was installed to.
+where the \cargv{...} denotes the path \TeX{}Live was installed to.
 \hologo{LuaTeX} checks this directory automatically, so it should work fine,
 but if you are using \hologo{XeTeX} you must first install these fonts in your
 system. You can also download and install them manually from the links provided
@@ -809,9 +812,10 @@ old style numerals that are not used by default. You can pass
 \end{example}
 
 Some fonts also provide special glyphs for a given language. For example the
-Latin Modern Font provides a special \enquote{fk} ligature for the Polish language.
-You can set the \cargv{Language} key to a given language to enable these
-features.
+Latin Modern Font provides a special
+\enquote{\setmainfont[Language=Polish]{Latin Modern Roman}fk} ligature for the
+Polish language. You can set the \cargv{Language} key to a given language to
+enable these features.
 \begin{example}
 agrafka
 
@@ -852,8 +856,8 @@ font variations manually. Because the filenames are usually very similar, it is
 possible to enter them using \cargv{*} patterns, where \cargv{*} is replaced by
 the main name defined. Extension may also be passed via the \cargv{Extension}
 key to avoid repetition. See \autoref{lst:fontloading} for a comparison of font
-loadings. If the font files are not present in the same directory as the
-document you may have to specify it directly using the \cargv{Path} key.
+loading techniques. If the font files are not present in the same directory as
+the document you may have to specify it directly using the \cargv{Path} key.
 \begin{listing}
   \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
 \setmainfont{Source Serif Pro}
@@ -931,21 +935,26 @@ redefine existing font families.
 \section{Colours}\label{sec:colors}\index{colours}
 
 \subsection{Coloured Text}
-In the \autoref{sec:logical_structure} we have used different text colours in
-the example. These can be obtained with the \pai*{xcolor} package. It provides
-two commands to change the text colour:
+In the \autoref{sec:logical_structure} we have used different text colours to
+illustrate an example. These can be obtained with the \pai*{xcolor} package. It
+provides three commands to change the colour of text:
 \begin{lscommand}
   \csi{color}[model: o, color: m] \\
   \csi{textcolor}[model: o, color: m, text: m]
+  \csi{mathcolor}[model: o, color: m, text: m]
 \end{lscommand}
-The \csi{color} is a switch version while \csi{textcolor} only applies to its
-argument. If no \carg{model} is specified, then \carg{color} is specified as
-colour expression. The simplest colour expression is just the name of the colour,
-for example \cargv{yellow} or \cargv{red}.
+The \csi{color} is a switch version while \csi{textcolor} and \csi{mathcolor}
+only apply to their argument. If no \carg{model} is specified, then
+\carg{color} is specified as colour expression. The simplest colour expression
+is just the name of the colour, for example \cargv{yellow} or \cargv{red}.
 \begin{example}
-\textcolor{yellow}{foo}
-
-\color{red} bar
+\textcolor{yellow}{foo} \\
+\color{red} baz
+\[
+  \mathcolor{blue}{
+    \sum_{k=0}
+  }^{10} i
+\]
 \end{example}
 The list of predefined colours can be found in \autoref{tbl:basecolors}. You can
 also pass \cargv{dvipsnames}, \cargv{svgnames} or \cargv{x11names} as a package
@@ -1063,7 +1072,7 @@ the amount of each colour.
 There are three models that enable defining colours by HSB\@: \cargv{hsb},
 \cargv{Hsb} and \cargv{HSB}. The first two accept three decimal numbers for
 each value, the difference being that the \cargv{Hsb} accepts hue as an angle
-in degrees, that is a number between \(0\) and \(360\). The \cargv{hue} accepts
+in degrees, that is a number between \(0\) and \(360\). The \cargv{hsb} accepts
 it as a number between \(0\) and \(1\), while saturation and brightness
 are passed the same way in both model---as a number between \(0\) and \(1\).
 \begin{example}
@@ -1078,11 +1087,20 @@ are passed the same way in both model---as a number between \(0\) and \(1\).
   144, 0.8, 0.75
 }
 \end{example}
+The \cargv{HSB} in turn accepts all three as integers---each between \(0\) and
+\(240\).
+\begin{example}
+\textcolor[HSB]{
+  144, 200, 120
+}{
+  144, 200, 120
+}
+\end{example}
 
 If you are writing a paper about light you may also find that the \cargv{wave}
 model comes in handy. It allows you to specify a colour by its wavelength. It
 accepts a single decimal number that represents a wavelength in visible
-spectrum in \unit{\nm}.
+spectrum in nanometres.
 \begin{example}
 \textcolor[wave]{452}{
   If a light has wavelength
@@ -1104,7 +1122,8 @@ the \pai{xcolor} package provides a better way via the
 \begin{lscommand}
   \csi{definecolor}[name: m, model: m, value: m].
 \end{lscommand}
-This makes it possible to use the newly defined colour in colour mixing and such.
+command. Using it makes it possible to use the newly defined colour in colour
+mixing and such.
 \begin{example}
 \definecolor{MyRed}{wave}{712}
 \textcolor{MyRed}{MyRed is
@@ -1112,8 +1131,8 @@ This makes it possible to use the newly defined colour in colour mixing and such
 \textcolor{MyRed!60}{Tints
   are also available!}
 \end{example}
-Be careful though, since it doesn't against redefinition. If you want to check
-whether you haven't redefined some colour put \csi{tracingcolors} in your
+Be careful though, since it doesn't guard against redefinition. If you want to
+check whether you haven't redefined some colour put \csi{tracingcolors} in your
 preamble. This will produce warnings when redefinition happens.
 
 If you want to make sure a colour is present but don't want to redefine it if it
@@ -1128,13 +1147,12 @@ mind when mixing your own colours.
 
 \subsection{Colourful Pages and Boxes}
 
-So far we have only considered changing text colour. It is however possible to
-also
-change the background colour of the document page. To do this use the
+So far we have only considered changing the text colour. It is however possible
+to also change the background colour of the document page. To do this use the
 \begin{lscommand}
   \csi{pagecolor}[model: o, color: m]
 \end{lscommand}
-command, which arguments are the same as in the \csi{color} command. If you
+command, which accepts the same arguments as the \csi{color} command. If you
 want to revert to the default transparent background you may do so with the
 \csi{nopagecolor} command.
 \begin{example}[standalone, paperheight=1cm]
