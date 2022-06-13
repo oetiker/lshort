@@ -20,15 +20,14 @@ jobs:
 
       - name: Run ChkTeX
         run: |
-          cd book
           make src/title.tex
           cd src
-          chktex lshort.tex -l ../../.chktexrc
+          chktex lshort.tex -l ../.chktexrc
 
       - name: Run latexindent
         run: |
-          latexindent -kv -m -l .localSettings.yaml book/src/*.tex > /dev/null
-          cat book/src/indent.log
+          latexindent -kv -m -l .localSettings.yaml src/*.tex > /dev/null
+          cat src/indent.log
 
   build_latex:
     name: Build LaTeX
@@ -49,7 +48,6 @@ jobs:
 
       - name: Build all
         run: |
-          cd book
           make all
 
       - name: Upload artifacts
@@ -57,5 +55,5 @@ jobs:
         with:
           name: result
           path: |
-            book/*.pdf
-            book/pdfbuild/*.log
+            *.pdf
+            pdfbuild
