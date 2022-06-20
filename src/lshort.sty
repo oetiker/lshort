@@ -350,29 +350,10 @@
 \RenewExpandableDocumentCommand{\fps@figure}{}{htpb}
 \ExplSyntaxOff
 
-%\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}
-%
-%
-% Symbol Entry for Math Symbol Tables
-%
-\newcommand{\mstX}[1]{$#1$&\mintinline{latex}|#1|\hspace*{1ex}}
-% normal text ....
-\newcommand{\mstSC}[1]{#1&\mintinline{latex}|#1|\hspace*{1ex}}
 % for accents in text mode
 \newcommand{\mstA}[1]{\mintinline{latex}|#1|&#1}
 \newcommand{\mstB}[2]{\texttt{\mintinline{latex}|#1|{} #2}&#1#2}
 
-\newcommand{\mstW}[2]{$#1{#2}$&
-  \mintinline{latex}|#1|\texttt{\string{\string#2\string}}\hspace*{1ex}}
-\newcommand{\mstY}[1]{$\big#1$ &\mintinline{latex}|#1|}
-% Mathsymbol Table
-\newsavebox{\symbbox}
-\newenvironment{symbols}[1]%
-{\par\vspace*{2ex}
-  \renewcommand{\arraystretch}{1.1}
-  \begin{lrbox}{\symbbox}
-    \hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
-      {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
 %
 % Print |--| to show a distance
 %
