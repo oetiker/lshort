@@ -17,504 +17,746 @@
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
 % !TEX root = ./lshort.tex
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Contents: Math typesetting with LaTeX
-% $Id$
-%
-% Changes by Stefan M. Moser: 2008/10/22
-%
-% -Section 2: "Single Equations": added comment about preference of
-%  equation* over \[
-% -Replaced (almost) all examples with \[ by equation*
-% -New section 4: "Single Equations that are Too Long: multline"
-% -New section 5: "Multiple Equations"
-% -Section 6: "Arrays and Matrices": made a full section and added
-%  some material
-% -Section 9: "Theorems, Lemmas, ...": added a subsection about proofs
-%  with new material
-%
-% Other Changes:
-% -in lshort.sty: 
-%    *example environment adapted: changed in three places
-%     \textwidth by \linewidth. This is necessary for
-%     example-environment within a itemize-list.
-%    *added \RequirePackage[retainorgcmds]{IEEEtrantools}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Typesetting Mathematical Formulae}\label{chap:math}
 
 \begin{intro}
-  Now you are ready! In this chapter, we will attack the main strength
-  of \TeX{}: mathematical typesetting. But be warned, this chapter
-  only scratches the surface. While the things explained here are
-  sufficient for many people, don't despair if you can't find a
-  solution to your mathematical typesetting needs here. It is highly likely
-  that your problem is addressed in \hologo{AmSLaTeX}.
+  The \TeX{} typesetting system has become nearly ubiquitous when it comes to
+  typesetting mathematics. Many projects offer to export its mathematical
+  formulae to \LaTeX{} (for example SageMath~\cite{sagemath}) or allow to enter
+  them in \LaTeX{} or \LaTeX{}-derived syntax (for example
+  Wikipedia~\cite{enwiki:1091087776}). In this chapter you will learn how to
+  insert math formulae into your document.
 \end{intro}
 
-\section{The \hologo{AmSLaTeX} bundle}
+\section{Modern Mathematics}
 
-If you want to typeset (advanced) \wi{mathematics}, you should
-use \hologo{AmSLaTeX}. The \hologo{AmSLaTeX} bundle is a collection of packages and classes for
-mathematical typesetting. We will mostly deal with the \pai{amsmath} package
-which is a part of the bundle. \hologo{AmSLaTeX} is produced by The \emph{\wi{American Mathematical Society}}
-and it is used extensively for mathematical typesetting. \LaTeX{} itself does provide
-some basic features and environments for mathematics, but they are limited (or
-maybe it's the other way around: \hologo{AmSLaTeX} is \emph{unlimited}!) and
-in some cases inconsistent.
+While core \LaTeX{} is able to produce high quality mathematics output on its
+own, there are some are areas where it is lacking and some of its choices are
+rather dated. To overcome these limitations we are going to use two packages:
+\pai*{mathtools} and \pai*{unicode-math}.
 
-\hologo{AmSLaTeX} is a part of the required distribution and is provided
-with all recent \LaTeX{} distributions. In this chapter, we assume
-\pai*{amsmath} is loaded in the preamble; \mintinline{latex}|\usepackage{amsmath}|.
+The \pai*{amsmath} from the \hologo{AmSLaTeX} bundle was originally developed
+by The \emph{\wi{American Mathematical Society}} in 1995 to use for their own
+publications, but became pretty much indispensable for typesetting any advanced
+mathematics in \LaTeX. It extends the command set to easily typeset matrices,
+declare custom operators and much more. However the problem with it becoming so
+ubiquitous is that changing it would break a lot of old documents, which is
+highly undesirable. Fortunately, the \pai{mathtools} package exists---it loads
+the \pai{amsmath} fixing some of its undesirable behaviours and provides some
+additional commands.
 
-\section{Single Equations}
+The original \TeX{} used its own font encoding for typesetting mathematics,
+which is still used by default in \LaTeX{}. In recent years a new standard
+appeared: OpenType math extensions\footnote{Its internal structure is actually
+  based on \TeX{} font tables.} which makes it possible to use standardised
+Unicode characters inside documents. The \pai{unicode-math} package adds
+support for these fonts in \LaTeX{} allowing you to use more symbols and makes
+the commands for accessing math symbols a bit more consistent. The problem with
+\pai{unicode-math} is the opposite of the \pai{amsmath}---it is a relatively
+new player in the game and it changes some of the fundamental \TeX{}
+assumptions, so it may not work well with some packages (especially if they're
+old). Unfortunately there is no easy way out of this and you may have to give
+up either these packages or unicode math fonts.
 
-A mathematical formula can be typeset in-line within a paragraph (\emph{\wi{text style}}), or the paragraph can be broken and the formula typeset separately
-(\emph{\wi{display style}}). Mathematical \wi{equation}s
-\emph{within} a paragraph are entered
-between \ai{\$} and \ai{\$}:
+Throughout this section it is assumed that your preamble contains these two
+lines in this order:
+\begin{minted}{latex}
+\usepackage{mathtools}
+\usepackage[
+  math-style=ISO,
+  warnings-off={mathtools-colon, mathtools-overbracket},
+]{unicode-math}
+\end{minted}
+The \cargv{math-style=ISO} key fixes a small inconsistency in original \TeX{}
+regarding the shape of uppercase Greek letters. The \cargv{warnings-off} key
+disables two warnings about overwriting some \pai{mathtools}
+commands.\footnote{These are \csi{overbracket}, \csi{underbracket},
+  \csi{coloneq}, \csi{dblcolon}, \csi{coloneqq}, \csi{Coloneqq} and
+  \csi{eqqcolon}. Disable this package option and read these warnings if you are
+  going to use them.}
+
+\section{Single Equations}\label{sec:single_equations}
+
+\LaTeX{} distinguishes between two styles of typesetting the formulae:
+\emph{\wi{text style}} and \emph{\wi{display style}}. The text style is used
+typeset inline math in running text, like this \(\sum_{k=0}^\infty
+\frac{1}{k}\), while the display style is used to typeset bigger equations on
+their own line, like this
+\[
+  \sum_{k=0}^\infty \frac{1}{k}.
+\]
+
+To typeset inline formulae, put it between \csi{(} and \csi{)} commands, while
+\csi{[} and \csi{]} typesets it in display mode.
+\begin{chktexignore}  
 \begin{example}
-Add $a$ squared and $b$ squared
-to get $c$ squared. Or, using 
-a more mathematical approach:
-$a^2 + b^2 = c^2$
+Not like this 3-1=0,
+but like this \(3-1=2\)
+or this
+\[
+  3 - 1 = 2
+\]
 \end{example}
-\begin{example}
-\TeX{} is pronounced as 
-$\tau\epsilon\chi$\\[5pt]
-100~m$^{3}$ of water\\[5pt]
-This comes from my $\heartsuit$
-\end{example}
+\end{chktexignore}
 
-If you want your larger equations to be set apart
-from the rest of the paragraph, it is preferable to \emph{display} them
-rather than to break the paragraph apart.
-To do this, you enclose them between \verb|\begin{|\ei{equation}\verb|}| and
-\verb|\end{equation}|.\footnote{This is an \pai{amsmath} environment. If you don't
-  have access to the package for some obscure reason, you can use \LaTeX's own
-  \ei{displaymath} environment instead.} You can then \csi{label} an equation number and refer to
-it somewhere else in the text by using the \csi{eqref} command. If you want to
-name the equation something specific, you \csi{tag} it instead.
+It is often the case that we want to refer to a specific formula or equation in
+the book. To make this possible a special \ei{equation} environment exists that
+typesets the formula in display mode and adds a number to the right. The
+equations can be labelled and refereed to using commands described in
+\autoref{sec:crossref}.
 \begin{example}
-Add $a$ squared and $b$ squared
-to get $c$ squared. Or, using
-a more mathematical approach
- \begin{equation}
-   a^2 + b^2 = c^2
- \end{equation}
-Einstein says
- \begin{equation}
-   E = mc^2 \label{clever}
- \end{equation}
-He didn't say
- \begin{equation}
-  1 + 1 = 3 \tag{dumb}
- \end{equation}
-This is a reference to%
-~\eqref{clever}. 
+\begin{equation}
+  \label{trivial}
+  2 + 2 = 4
+\end{equation}
+The equation~\ref{trivial}
+is true.
 \end{example}
-
-If you don't want \LaTeX{} to number the equations, use the starred
-version of \ei{equation} using an asterisk, \ei{equation*}, or even easier, enclose the
-equation in \csi{[} and \csi{]}:\footnote{\index{equation!amsmath@\textsf{amsmath}}\index{equation!LaTeX@\LaTeX{}}
-  This is again from \pai{amsmath}.
-  Standard \LaTeX{}'s has only the \ei{equation} environment without the star.}
+Two additional commands exist \csi{eqref} and \csi{tag}. The first one is
+similar to the \cs{ref} command but encloses its label in parentheses to match
+the appearance of the equation label. The second one allows you to customise
+the the visible label of the equation.
 \begin{example}
-Add $a$ squared and $b$ squared
-to get $c$ squared. Or, using
-a more mathematical approach
- \begin{equation*}
-   a^2 + b^2 = c^2
- \end{equation*}
-or you can type less for the
-same effect:
- \[ a^2 + b^2 = c^2 \]
+\begin{equation}
+  \tag{Ingsoc's theorem}
+  \label{ingsoc}
+  2 + 2 = 5
+\end{equation}
+The~\eqref{ingsoc} is false.
 \end{example}
-While \csi{[} is short and sweet, it does not allow switching between numbered and not numbered style as easily as
-\ei{equation} and \ei{equation*}.
-
-Note the difference in typesetting style between \wi{text style} and \wi{display style}
-equations:
-\begin{example}
-This is text style: 
-$\lim_{n \to \infty} 
- \sum_{k=1}^n \frac{1}{k^2} 
- = \frac{\pi^2}{6}$.
-And this is display style:
- \begin{equation}
-  \lim_{n \to \infty} 
-  \sum_{k=1}^n \frac{1}{k^2} 
-  = \frac{\pi^2}{6}
- \end{equation}
-\end{example}
-
-In text style, you may enclose tall or deep math expressions or sub
-expressions in \csi{smash}. This makes \LaTeX{} ignore the height of
-these expressions. This keeps the line spacing even, but risks overlapping the
-text around them.
-
-\begin{example}
-A $d_{e_{e_p}}$ mathematical
-expression  followed by a
-$h^{i^{g^h}}$ expression. As
-opposed to a smashed 
-\smash{$d_{e_{e_p}}$}
-expression 
-followed by a
-\smash{$h^{i^{g^h}}$}
-expression.
-\end{example}
+The starred version, \ei{equation*}, is a synonym of \csi{[}.
 
 \subsection{Math Mode}
 
-There are also differences between \emph{\wi{math mode}} and \emph{text mode}. For
-example, in \emph{math mode}:
-
-\begin{enumerate}
-
-  \item\index{spacing!math mode} Most spaces and line breaks do not have any significance, as all spaces
-  are either derived logically from the mathematical expressions, or
-  have to be specified with special commands such as \csi{,}, \csi{quad} or
-  \csi{qquad} (we'll get back to that later, see \autoref{sec:math-spacing}).
-
-  \item Empty lines are not allowed. Only one paragraph per formula.
-
-  \item Each letter is considered to be the name of a variable and will be
-        typeset as such. If you want to typeset normal text within a formula
-        (normal upright font and normal spacing) then you have to enter the
-        text using the \csi{text} command (see also \autoref{sec:fontsz}~on
-        \autopageref{sec:fontsz}).
-
-\end{enumerate}
+The commands and environments mentioned in the previous section enter what's
+called \emph{\wi{math mode}}, as opposed to the \emph{text mode} outside them.
+There are numerous differences between those. For starters, most of the
+whitespaces are ignored in math mode.
 \begin{example}
-$\forall x \in \mathbf{R}
-  \colon x^{2} \geq 0$
+\(123xyz\) is the same as \(
+  1 2 3 x y z
+\).
 \end{example}
+The spaces around symbols are derived logically from the mathematical
+expressions. We will talk more about those in \autoref{sec:math-spacing}. Since
+in math formulae there is no concept of a paragraph leaving empty lines inside
+math mode is \emph{not} allowed. Doing so will result in the \enquote{Bad math
+  environment delimiter.} error.
+
+Another difference is the fact that all letters are treated as mathematical
+variables. This changes their font style to \textit{italic} and changes the
+spacing around them.
 \begin{example}
-$x^{2} \geq 0 \text{ for all }
-  x\in\mathbf{R}$
+Compare office to \(office\).
+\end{example}
+If you want to typeset normal text within formulae you can use the \csi{text}
+command.
+\begin{example}
+\( 1 + \text{one} = 2\)
 \end{example}
 
-Mathematicians can be very fussy about which symbols are used:
-it would be conventional here to use the `\wi{blackboard bold}' font,%
-\index{bold symbols} which is obtained using \csi{mathbb} from the
-package \pai*{amssymb}.\footnote{\pai{amssymb} is not a part
-  of the \hologo{AmSLaTeX} bundle, but it is perhaps still a part of your \LaTeX{}
-  distribution.}
-The last example becomes
+Finally, additional commands and syntax become available that allow to typeset
+mathematical notation. For example, the \ai{\^{}} and \ai{\_} characters can
+now be used to typeset superscript and subscript, respectively.%
+\index{subscript}\index{superscript}
 \begin{example}
-$x^{2} \geq 0
- \text{ for all } x 
- \in \mathbb{R}$
+\( a^2 + b^2 = c^2 \) \\
+\( A_x = G_{\text{foo}} \)
 \end{example}
-See \autoref{mathalpha} on \autopageref{mathalpha} and
-\autoref{mathfonts} on \autopageref{mathfonts} for more math fonts.
 
-\section{Building Blocks of a Mathematical Formula}
+\section{Building Blocks of a Mathematical Formulae}
 
 In this section, we describe the most important commands used in mathematical
-typesetting. Most of the commands in this section will not require
-\textsf{amsmath} (if they do, it will be stated clearly), but load it anyway.
+typesetting. The list of symbols introduced here is far from comprehensive. If
+you need some additional symbols be sure to check out~\cite{detexify,
+  unicode-math-symbols, latexcomp} since there is a high chance it already
+exists.
 
-\emph{Lowercase \wi{Greek letters}} are entered as \csi{alpha},
-\csi{beta}, \csi{gamma}, \ldots, uppercase letters
-are entered as \csi{Gamma}, \csi{Delta}, \ldots\footnote{There is no
-  uppercase Alpha, Beta etc.\ defined in \LaTeX{} because it looks the same as a
-  normal roman A, B\ldots{}}
+\subsection{Basic Arithmetic}
 
-Take a look at \autoref{greekletters} on \autopageref{greekletters} for a
-list of Greek letters.
+You can probably guess how to typeset addition, subtraction and equality based
+on the previous examples. To typeset multiplication and division symbols you can
+use \csi{times} and \csi{div} commands.
 \begin{example}
-$\lambda,\xi,\pi,\theta,
- \mu,\Phi,\Omega,\Delta$
+\( (4 \times 6) \div 3 = 8 \)
+\end{example}
+If you prefer to use dots for multiplication or slash for division you can use
+\csi{cdot} and \csi{divslash}, respectively. To typeset negated equality you can
+precede the equal sign with \csi{not}.
+\begin{example}
+\( (5 \cdot 3) \divslash 2
+  \not= 7 \)
+\end{example}
+Alternatively you can use \csi{neq} which will produce the same result. The
+\csi{not} notation is more general in that it works with many more symbols.
+
+To typeset weak inequalities you can use the \csi{leq} (less or equal) and
+\csi{geq} (greater or equal) commands. If you prefer slanted versions swap them
+for \csi{leqslant} and \csi{geqslant}.
+\begin{example}
+\( 1 \leq 2 \) vs.\ 
+\(1 \leqslant 2\)
 \end{example}
 
-\emph{Exponents, Superscripts and Subscripts} can be specified using%
-\index{exponent}\index{subscript}\index{superscript}
-the \ai{\^} and the \ai{\_} characters.
-Most math mode commands act only on the next character, so if you
-want a command to affect several characters, you have to group them
-together using curly braces: \verb|{...}|.
-
-\autoref{binaryrel} on \autopageref{binaryrel} lists a lot of binary
-relations like $\subseteq$ and $\perp$.
-
+Exponentiation can be achieved using the superscript \ai{\^{}}\index{exponent}
+character, but there are some subtleties. During typesetting, superscript
+adapts to the height of the previous character. This is usually correct, but
+when dealing with parentheses it may be a bit too low.
 \begin{example}
-$p^3_{ij}$ 
-\qquad%!hide
-$m_\text{Knuth}$
-\qquad%!hide
-$\sum_{k=1}^3 k$ \\[5pt]
-\qquad%!hide
-$a^x+y \neq a^{x+y}$
-\qquad%!hide
-$e^{x^2} \neq {(e^x)}^2$
+\( a^2 \) is fine, but what
+about \( (a^2)^2 \)?
+\end{example}
+In the example above the second superscript doesn't know about the first one
+inside, and it adapts only to the height of the closing parenthesis. To fix
+this enclose the parentheses in a group.
+\begin{example}
+\( {(a^2)}^2 \) is better.
+\end{example}
+In \autoref{sec:delimiters} we will also talk about growing parentheses that do
+not have this problem.
+
+To enter \wi{square root}s use the \csi{sqrt} command. It will automatically
+overline the expression it received as the argument.
+\begin{example}
+From Homer's theorem it 
+follows that
+\[
+  \sqrt{a} + \sqrt{b} = \sqrt{c}
+\]
+so we can see that
+\(c = \sqrt{2x^2+7}\).
+\end{example}
+The full syntax of the \csi{sqrt} is actually
+\begin{lscommand}
+  \csi{sqrt}[n: o, expr: m]
+\end{lscommand}
+The optional argument \carg{n} allows you to typeset \carg{n}-th root
+radicals.\footnote{The name \csi{sqrt} is a bit misleading in that respect
+  \smiley.}
+\begin{example}
+Find three positive integers
+\(a, b\) and \(c\), such that
+\[
+  a = \sqrt[7]{b^7 + c^7}
+\]
 \end{example}
 
-The \emph{\wi{square root}} is entered as \csi{sqrt}; the
-\carg{n}-th root is generated with \csi{sqrt}[n:o]. The size of
-the root sign is determined automatically by \LaTeX. If just the sign
-is needed, use \csi{surd}.
-
+Finally typesetting built-up fractions is made possible by the
+\begin{lscommand}
+  \csi{frac}[numerator:m, denominator:m]
+\end{lscommand}
+command.
 \begin{example}
-$\sqrt{x} = x^{1/2}$
-\qquad%!hide
-$\sqrt[3]{2}$ \\
-$\sqrt{x^{2} + \sqrt{y}}$
-\qquad%!hide
-$\surd[x^2 + y^2]$
+And since
+\[
+  \frac{a}{b} \leq
+  \frac{a+c}{b+d} \leq
+  \frac{c}{d}
+\]
+it follows that
+\(x = \frac{\sqrt{z+3}}{y^3}\).
 \end{example}
 
-While the \emph{\wi{dot}} sign to indicate%
-\index{dots!three}\index{vertical!dots}\index{horizontal!dots}
-the multiplication operation is normally left out, it is sometimes written
-to help the eye in grouping a formula.
-Use \csi{cdot} to typeset a single centred dot. \csi{cdots} is
-three centred \emph{\wi{dots}} while \csi{ldots} sets the dots low (on the
-baseline). Besides that, there are \csi{vdots} for
-vertical and \csi{ddots} for \wi{diagonal dots}. There are more examples in
-\autoref{sec:arraymat}.
+\subsection{Logic and Set Theory}
+
+The basic logical operations can be typeset using rather self explanatory
+commands: \csi{lnot}, \csi{land}, \csi{lor}, \csi{implies} and \csi{iff}.
 \begin{example}
-$\Psi = v_1 \cdot v_2
- \cdot \ldots$ \\
-$n! = 1 \cdot 2 
- \cdots (n-1) \cdot n$
+\[
+  p \land q \iff 
+  \lnot (p \implies \lnot q) 
+\]
+\end{example}
+There's also a left facing implication named \csi{impliedBy}. Some less
+established logical symbols can be also found under less intuitive names such
+as \csi{veebar} that produces \(\veebar\) used by some for exclusive
+disjunction. If you intend to use them make sure to use commands described in
+\autoref{sec:new_commands} to create meaningful synonyms.
+
+The quantifiers symbols can be typeset using \csi{forall} and \csi{exists}
+commands.
+\begin{example}
+\[
+  \lnot\forall_{q} P(q) \iff
+  \exists_{q}\lnot P(q)
+\]
 \end{example}
 
-The commands \csi{overline} and \csi{underline} create
-\emph{horizontal lines} directly over or under an expression:%
-\index{horizontal!line}\index{line!horizontal}
+To typeset sets use the \csi{\{} and \csi{\}} commands.
 \begin{example}
-$0.\overline{3} = 
- \underline{\underline{1/3}}$
+\(\{1, 2, 3, \ldots, 100\}\)
+\end{example}
+To indicate set membership (\enquote{is element of}) you can use the \csi{in}
+command.\footnote{Try to guess its left-flipped version name.} Sets defined by
+a predicate are often written using a set-builder notation with a colon. The
+naïve way would be to write it like this
+\begin{example}
+\( \{x \in X:
+  \exists_n x^n = 1\} \)
+\end{example}
+The result doesn't look right though. The reason is the aforementioned
+automatic spacing based on mathematical meaning. The \mintinline{latex}|:|
+character is used in \LaTeX{} for ratios, such as \(1:2\), which is why it has
+equal spacing on both of its sides. To typeset colons in a set-builder notation
+use the \csi{colon} command instead.
+\begin{example}
+\(\{ X \ni x\colon
+  \exists_n x^n = 1\} \)
 \end{example}
 
-The commands \csi{overbrace} and \csi{underbrace} create
-long \emph{horizontal braces} over or under an expression:%
-\index{horizontal!brace}\index{brace!horizontal}
+The usual set inclusion symbols are accessible as \csi{subset}, \csi{subseteq}
+and \csi{subsetneq}, while their flipped versions are accessible as
+\csi{supset}, \csi{supseteq} and \csi{supsetneq}. The set union symbol is
+hiding behind \csi{cup} while set intersection is \csi{cap}. Set difference is
+just \csi{setminus} though. You may also find \csi{emptyset} useful.
 \begin{example}
-$\underbrace{
-  \overbrace{(a+b+c)}^6 
- \cdot \overbrace{(d+e+f)}^7}
- _\text{meaning of life} = 42$
+% TODO: Waiting for unicode-math fix
+\RenewDocumentCommand{\setminus}{}{\smallsetminus}
+\[
+  \emptyset
+  \subset X \setminus X
+  \subseteq X \cap \emptyset
+  \subsetneq X
+  \supseteq X \cup X
+\]
 \end{example}
 
-To add mathematical accents\index{mathematical!accents} such as \emph{small
-  arrows} or \emph{\wi{tilde}} signs to variables, the commands
-given in \autoref{mathacc} on \autopageref{mathacc} might be useful.  Wide hats and
-tildes covering several characters are generated with \csi{widetilde}
-and \csi{widehat}. Notice the difference between \csi{hat} and \csi{widehat} and the placement of
-\csi{bar} for a variable with subscript. The \wi{apostrophe} mark
-\ai{'} gives a \wi{prime}:
-% a dash is --
+\subsection{Greek Letters}
+
+Every mathematician knows that Latin alphabet just isn't enough. Accessing the
+Greek alphabet is as easy as typing \csi{alpha}, \csi{beta}, \csi{gamma},
+\ldots{} for lowercase letters and \csi{Alpha}, \csi{Beta}, \csi{Gamma},
+\ldots{} for uppercase letters.%
+\csih{alpha}\csih{beta}\csih{gamma}\csih{delta}\csih{epsilon}\csih{zeta}%
+\csih{eta}\csih{theta}\csih{iota}\csih{kappa}\csih{lambda}\csih{mu}%
+\csih{nu}\csih{xi}\csih{omicron}\csih{pi}\csih{rho}\csih{sigma}\csih{tau}%
+\csih{upsilon}\csih{phi}\csih{chi}\csih{psi}\csih{omega}\csih{Alpha}%
+\csih{Beta}\csih{Gamma}\csih{Delta}\csih{Epsilon}\csih{Zeta}\csih{Eta}%
+\csih{Theta}\csih{Iota}\csih{Kappa}\csih{Lambda}\csih{Mu}\csih{Nu}\csih{Xi}%
+\csih{Omicron}\csih{Pi}\csih{Rho}\csih{Sigma}\csih{Tau}\csih{Upsilon}%
+\csih{Phi}\csih{Chi}\csih{Psi}\csih{Omega}
 \begin{example}
-$f(x) = x^2$ \\
-$f'(x) = 2x$ \\
-$f''(x) = 2$ \\
-$\hat{XY} \neq \widehat{XY}$ \\
-$\bar{x_0} \neq \bar{x}_0$
+Let \(\epsilon\) be a small
+number and let  \(\Epsilon\)
+be a large number.
+\end{example}
+As you can see above in most fonts (including the default \LaTeX{} one) there
+is no visual difference between some uppercase Greek letters and their Latin
+equivalents. If you want to use them, make sure they do not clash in your
+document.
+
+Some Greek letters have defined variants. These are accessible by prepending
+the word \texttt{var} before the letter name, for example \csi{varepsilon}. A
+list of all defined variants is presented in \autoref{tbl:greek_variants}.
+\begin{table}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\VariantShowcase}{m}{
+    \csi{var#1} & \(\use:c{var#1}\) & \(\use:c{#1}\)
+  }
+  \ExplSyntaxOff
+  \caption{Available variants of Greek letters.}\label{tbl:greek_variants}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    Command & Variant & Main  \\
+    \midrule
+    \VariantShowcase{epsilon} \\
+    \VariantShowcase{kappa}   \\
+    \VariantShowcase{phi}     \\
+    \VariantShowcase{pi}      \\
+    \VariantShowcase{rho}     \\
+    \VariantShowcase{sigma}   \\
+    \VariantShowcase{theta}   \\
+    \VariantShowcase{Theta}   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Note that all of the Greek letters in math mode, similarly to Latin letters,
+are considered to be mathematical variables. In particular \csi{pi}
+\emph{should not} be used to denote the famous constant.
+
+\subsection{Mathematical Fonts and How To Use Them}
+
+When writing mathematics it is often the case that we use different fonts for
+mathematical symbols depending on the object they represent. For example the
+variables are typeset using the italic font, while known sets often get
+a fancy double-struck ((also known as \enquote*{blackboard bold})) font, for example \(\symbb{N}\). You can access various fonts by using
+the family of \cs{sym...} commands. For example to typeset double-struck
+letters use the \csi{symbb} command.
+\begin{example}
+\[
+  \forall_{p \in \symbb{P}}
+  \exists_{n \in \symbb{N}}
+  p < 5 \lor p = 24n + 1
+\]
+\end{example}
+All font changing commands are listed in \autoref{tbl:sym_commands}.
+\begin{table}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\Ncmmr}{m}{
+    \setmathfont{New Computer Modern Math Regular}
+    #1
+    \setmathfont{Latin Modern Math}
+  }
+
+  \NewDocumentCommand{\LStr}{}{ABCabc\ \ldots}
+  \NewDocumentCommand{\GStr}{}{
+    \Alpha\Beta\Gamma\alpha\beta\gamma\ \ldots}
+  \NewDocumentCommand{\NStr}{}{123\ \ldots}
+  \ExplSyntaxOff
+  \caption{Commands that change the font of mathematical symbols. Empty
+    example field indicates that the Unicode does not define glyphs in the
+    given set.}\label{tbl:sym_commands}
+  \begin{minipage}{\linewidth}
+    \centering
+    \begin{tabular}{@{}*4l@{}}
+      \toprule
+                      & \multicolumn{3}{c}{Example}                                                           \\
+      \cmidrule(l){2-4}
+      Command         & Latin                        & Greek                          & Numerals              \\
+      \midrule
+
+      \csi{symup}     & \(\symup{\LStr}\)            & \(\symup{\GStr}\)              & \(\symup{\NStr}\)     \\
+      \csi{symbfup}   & \(\symbfup{\LStr}\)          & \(\symbfup{\GStr}\)            & \(\symbfup{\NStr}\)   \\
+      \csi{symit}     & \(\symit{\LStr}\)            & \(\symit{\GStr}\)              &                       \\
+      \csi{symbfit}   & \(\symbfit{\LStr}\)          & \(\symbfit{\GStr}\)            &                       \\
+      \csi{symsfup}   & \(\symsfup{\LStr}\)          &                                & \(\symsfup{\NStr}\)   \\
+      \csi{symbfsfup} & \(\symbfsfup{\LStr}\)        & \(\symbfsfup{\GStr}\)          & \(\symbfsfup{\NStr}\) \\
+      \csi{symsfit}   & \(\symsfit{\LStr}\)          &                                &                       \\
+      \csi{symbfsfit} & \(\symbfsfit{\LStr}\)        & \(\symbfsfit{\GStr}\)          &                       \\
+      \csi{symtt}     & \(\symtt{\LStr}\)            &                                & \(\symtt{\NStr}\)     \\
+      \csi{symbb}\footnote{
+        In Greek set only the four presented glyphs (\cs{Gamma}, \cs{Pi},
+        \cs{gamma} and \cs{pi}) are defined by the Unicode standard.
+      }               & \(\symbb{\LStr}\)            & \(\symbb{\Gamma\Pi\gamma\pi}\) & \(\symbb{\NStr}\)     \\
+      \csi{symbbit}\footnote{
+        Only the five presented glyphs (\texttt{D}, \texttt{d}, \texttt{e},
+        \texttt{i} and \texttt{j}) are defined by the Unicode standard.
+      }               & \(\symbbit{Ddeij}\)          &                                &                       \\
+      \csi{symscr}\footnote{
+        The default font does not contain lowercase glyphs. Here they are shown
+        using a different font.
+      }               & \Ncmmr{\(\symscr{\LStr}\)}   &                                &                       \\
+      \csi{symbfscr}\footnote{
+        Same as above.
+      }               & \Ncmmr{\(\symbfscr{\LStr}\)} &                                &                       \\
+      \csi{symfrak}   & \(\symfrak{\LStr}\)          &                                &                       \\
+      \csi{symbffrak} & \(\symbffrak{\LStr}\)        &                                &                       \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+Avoid writing these commands directly in your formulas, you should create
+logical wrappers around them. For example, the
+\citetitle{iso80000-2}~\cite{iso80000-2} standard states that mathematical
+constants should be written in a Roman (upright) font. Writing
+\mintinline{latex}|\symrm{e}| every time we want to refer to the base of
+natural logarithm will make the code less readable, so below we create simple
+wrappers for the constants we are going to use.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\NewDocumentCommand{\e}{}{\symrm{e}}
+\NewDocumentCommand{\im}{}{\symrm{i}}
+\NewDocumentCommand{\cpi}{}{\symrm{\pi}}
+\[ \e^{\im\cpi} + 1 = 0 \]
 \end{example}
 
-\emph{Vectors}\index{vectors} are often specified by adding small
-\wi{arrow symbols} on the tops of variables. This is done with the
-\csi{vec} command. The two commands \csi{overrightarrow} and
-\csi{overleftarrow} are useful to denote the vector from $A$ to $B$:
+Known functions such as \(\sin\) or \(\log\) should also be written in Roman,
+however you should not use the \csi{symrm} command to do so. As the name of the
+command indicates, it is meant to be used for mathematical symbols. Since in
+\(\sin\) name \(s\), \(i\) and \(n\) are not symbols, but a components of a
+single operator name, there are separate commands for typesetting these.
+Fortunately you do not have to access them directly since many of the standard
+functions are already defined.
 \begin{example}
-$\vec{a}$
-\quad%!hide
-$\vec{AB}$
-\quad%!hide
-$\overrightarrow{AB}$
+\NewDocumentCommand{\cpi}{}{\symrm{\pi}} %!hide
+\NewDocumentCommand{\e}{}{\symrm{e}} %!hide
+\( \cos(2\cpi) = \ln(\e) \)
 \end{example}
-
-Names of functions are often typeset in an upright
-font, and not in italics as variables are, so \LaTeX{} supplies the
-following commands to typeset the most common function names:%
-\index{mathematical!functions}
-
-\begin{center}
+The full list of predefined functions is presented in \autoref{tbl:functions}.
+\begin{table}
+  \caption{All functions predefined by \LaTeX{}.}\label{tbl:functions}
   \begin{tabular}{llllll}
+    \toprule
     \csi{arccos} & \csi{cos}  & \csi{csc} & \csi{exp}  & \csi{ker}    & \csi{limsup} \\
     \csi{arcsin} & \csi{cosh} & \csi{deg} & \csi{gcd}  & \csi{lg}     & \csi{ln}     \\
     \csi{arctan} & \csi{cot}  & \csi{det} & \csi{hom}  & \csi{lim}    & \csi{log}    \\
     \csi{arg}    & \csi{coth} & \csi{dim} & \csi{inf}  & \csi{liminf} & \csi{max}    \\
     \csi{sinh}   & \csi{sup}  & \csi{tan} & \csi{tanh} & \csi{min}    & \csi{Pr}     \\
     \csi{sec}    & \csi{sin}                                                         \\
+    \bottomrule
   \end{tabular}
-\end{center}
+\end{table}
 
-\begin{example}
-\begin{equation*}
-  \lim_{x \rightarrow 0}
-  \frac{\sin x}{x}=1
-\end{equation*}
-\end{example}
-
-For functions missing from the list, use the \csi{DeclareMathOperator}
-command. There is even a starred version for functions with limits.
-This command works only in the preamble.
-
-\begin{example}
+If these are not enough for you, use the \csi{DeclareMathOperator} command to
+define your own. It can be only used in the preamble.
+\begin{example}[vertical_mode, examplewidth=0.6\linewidth]
 %!showbegin !hide
 % In preamble
 \DeclareMathOperator{\argh}{argh}
+% ...
+%!showend !hide
+\[ \argh(x) = \sinh(\max(x, x^2)) \]
+\end{example}
+
+\subsection{Big Operators}
+
+At the beginning of the \autoref{sec:single_equations} we have shown the
+summation operator to show off capabilities of mathematical typesetting. To
+typeset it use the \csi{sum} command. Its lower and upper limits are specified
+by the sub- and superscript operators.
+\begin{example}
+\(
+  \sum_{k=0}^{n} \frac{1}{k^2}
+\)
+\end{example}
+As you saw its appearance in text style starkly differs from the one in the
+display style.
+\begin{example}
+\[
+  \sum_{k=0}^{n} \frac{1}{k^2}
+\]
+\end{example}
+
+This is an example of what's commonly known as big operator. There are other
+such operators, such as \csi{prod} for products, or \csi{bigwedge} for
+conjunctions. Some of the functions listed in \autoref{tbl:functions} are also
+big operators.
+\begin{example}
+\[
+  c = \max_{x\in X} f(x)
+\]
+\end{example}
+
+You can define your own big operators by using a starred version of the
+\csi{DeclareMathOperator} command.
+\begin{example}[vertical_mode, examplewidth=0.6\linewidth]
+%!showbegin !hide
+% In preamble
 \DeclareMathOperator*{\nut}{Nut}
 % ...
 %!showend !hide
-\begin{equation*}
-  3\argh = 2\nut_{x=1}    
-\end{equation*}
+\[ \nut_y = \lim_{x \to y} \argh{x} \]
 \end{example}
 
-For the \wi{modulo function}, there are two commands: \csi{bmod} for the
-binary operator ``$a \bmod b$'' and \csi{pmod}
-for expressions
-such as ``$x\equiv a \pmod{b}$:''
+If you have a long limit, it may make sense to typeset it vertically instead of
+horizontally. This can be done using the \csi{substack} command. Inside you can
+place \cs{\bs} to indicate where new lines should be started.
 \begin{example}
-$a\bmod b \\
- x\equiv a \pmod{b}$
-\end{example}
-
-A built-up \emph{\wi{fraction}} is typeset with the
-\begin{lscommand}
-  \csi{frac}[numerator:m, denominator:m]%chktex 26
-\end{lscommand}
-command.
-\begin{example}
-\ldots{} And since
-\begin{equation*}
-  \frac{1}{2} 
-  + \frac{1}{3}
-  = \frac{5}{6},
-\end{equation*}
-then the answers is
-$\frac{5}{6}$.
-\end{example}
-
-In in-line equations, the fraction is shrunk to
-fit the line. This style is obtainable in display style with \csi{tfrac}. The
-reverse, i.e.\ display style fraction in text, is made with \csi{dfrac}.
-Often the slashed form $1/2$ is preferable, because it looks better
-for small amounts of `fraction material:'
-\begin{example}
-In display style:
-\begin{equation*}
-  3/8
-  \qquad%!hide
-  \frac{3}{8} 
-  \qquad%!hide
-  \tfrac{3}{8}
-\end{equation*}
-\end{example}
-
-\begin{example}
-In text style: \\
-$1\frac{1}{2}$~hours
-\qquad%!hide
-$1\dfrac{1}{2}$~hours
-\end{example}
-
-Here the \csi{partial} command for \wi{partial derivative}s is used:
-\begin{example}
-\begin{equation*} 
-  \sqrt{\frac{x^2}{k+1}}
-  \qquad%!hide
-  x^\frac{2}{k+1}
-  \qquad%!hide
-  \frac{\partial^2f}
-  {\partial x^2} 
-\end{equation*}
-\end{example}
-
-To typeset \wi{binomial coefficient}s or similar structures, use
-the command \csi{binom} from \pai{amsmath}:
-\begin{example}
-Pascal's rule is
-\begin{equation*}
- \binom{n}{k} =\binom{n-1}{k}
- + \binom{n-1}{k-1}
-\end{equation*}
-\end{example}
-
-For \wi{binary relations} it may be useful to stack symbols over each other.
-\csi{stackrel}[above:m, below:m] puts the symbol given%chktex 26
-in \carg{above} in superscript-like size over \carg{below} which
-is set in its usual position.
-\begin{example}
-\begin{equation*}
- f_n(x) \stackrel{*}{\approx} 1
-\end{equation*}
-\end{example}
-
-The \emph{\wi{integral operator}} is generated with \csi{int}, the
-\emph{\wi{sum operator}} with \csi{sum}, and the \emph{\wi{product operator}}
-with \csi{prod}. The upper and lower limits are specified with~\ai{\^{}}
-and~\ai{\_} like superscripts and subscripts:
-\begin{example}
-\begin{equation*}
-\sum_{i=1}^n
-  \qquad%!hide
-  \int_0^{\frac{\pi}{2}}
-  \qquad%!hide
-  \prod_\epsilon
-\end{equation*}
-\end{example}
-
-To get more control over the placement of indices in complex
-expressions, \pai{amsmath} provides the \csi{substack} command:
-\begin{example}
-\begin{equation*}
-\sum^n_{\substack{0<i<n \\ 
-        j\subseteq i}}
+\[
+  \sum^n_{
+    \substack{0<i<n \\ 
+    j\subseteq i}
+  }
    P(i,j) = Q(i,j)
-\end{equation*}
+\]
 \end{example}
 
-\LaTeX{} provides all sorts of symbols for \emph{\wi{bracketing}} and other
-\emph{\wi{delimiters}} (e.g.~$[\;\langle\;\|\;\updownarrow$). %chktex 9
-Round and square brackets can be entered with the corresponding keys and
-curly braces with \csi{\{}, but all other delimiters are generated with
-special commands (e.g.~\csi{updownarrow}).
+Integral symbol is also a big operator, but it only shifts the lower limit left.
 \begin{example}
-\begin{equation*}
-{a,b,c} \neq \{a,b,c\}
-\end{equation*}
+\[
+  \int_a^b \liminf_{a \to x} a^2
+\]
 \end{example}
-
-If you put \csi{left} in front of an opening delimiter and
-\csi{right} in front of a closing delimiter, \LaTeX{} will automatically
-determine the correct size of the delimiter. Note that you must close
-every \csi{left} with a corresponding \csi{right}. If you
-don't want anything on the right, use the invisible \csi{right.} (with a dot):
+Due to the fact that the symbol is very slanted to the right,
+typesetting multiple integrals leads to excessive space around them. You
+should use \csi{iint},\csi{iiint},\csi{iiiint} if you want to typeset them.
 \begin{example}
-\begin{equation*}
-1 + \left(\frac{1}{1-x^{2}}
-    \right)^3 \qquad 
-\left. \ddagger
-  \frac{~}{~}\right)
-\end{equation*}
+\[ \int\int\int\int \]
+vs.\ 
+\[ \iiiint \]
 \end{example}
 
-In some cases it is necessary to specify the correct size of a
-mathematical delimiter\index{mathematical!delimiter} by hand,
-which can be done using the commands \csi{big}, \csi{Big}, \csi{bigg} and
-\csi{Bigg} as prefixes to most delimiter commands:
+If you want to suppress the big operators limits and typeset normal sub- or
+supscript next to them, you can simply surround them with curly braces.
+\begin{example}
+\[
+  {\sum_{a}}^b
+  \qquad%!hide
+  {\int}_a^b
+  \qquad%!hide
+  {\nut^b}_a
+\]
+\end{example}
+However if a long long limit is present this may lead to excessive spacing
+before the sub- or supscripts.
+\begin{example}
+\[ {\sum_{loooooong}}^{b} \]
+\end{example}
+To fix the issue use the
+\begin{lscommand}
+  \csi{sideset}[left: m, right: m, symbol: m]
+\end{lscommand}
+command. It surrounds the \carg{symbol} with left and right commands before
+typesetting its limits.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\[ \sideset{^{a}}{^{b}}{\sum}_{loooooong} \]
+\end{example}
+
+\subsection{Math Accents}
+
+To denote arithmetic mean taken over a variable, a notation with a bar over the
+variable is used: \(\bar x\). If you remember the \autoref{accents} from
+\autopageref{accents} you may think that it would be possible to write it as
+\mintinline{latex}|\=x|. This will not work though. In fact none of the
+commands from this table will work in math mode. There is a good conceptual
+reason for that---the accents listed there are meant to typeset non-Latin
+letters that are used in various languages. The character
+\mintinline{latex}|\"u| is meant to represent u-umlaut and the correct glyph
+for it will be chosen if it exists in the current font. In math we don't want
+an u-umlaut---we want \enquote{double dot above} operator applied to variable
+\(u\), thus different commands are used to achieve that.
+
+To actually get a bar over a variable you can use the \csi{bar} command. Other
+accents\index{mathematical!accents} include \csi{hat}, \csi{grave},
+\csi{acute}, \csi{tilde} or \csi{ddot}. Refer to~\cite{unicode-math-symbols}
+for a full list.
+\begin{example}
+\(\bar{x}\) \(\hat{x}\)
+\(\grave{x}\) \(\acute{x}\)
+\(\tilde{x}\) \(\ddot{x}\)
+\end{example}
+
+Some accents also exist in a \enquote*{wide} version. These can encompass more
+than one character. Compare \csi{hat} to \csi{widehat} in the example below.
+\begin{example}
+\(\hat{ABC}\) vs.\
+\(\widehat{ABC}\)
+\end{example}
+The wide version of \csi{bar} accent is called \csi{overline}. It is useful if
+you want to mark the repetend of a decimal fraction.
+\begin{example}
+\(0.123\overline{456789}\)
+\end{example}
+
+Some wide accents even have limits. For example, the \csi{overbrace} and
+\csi{underbrace} commands enable you to create horizontal braces with an
+expression above or below them.
+\begin{example}
+\[
+  \underbrace{
+    \overbrace{(a+b+c)}^6 
+    \times
+    \overbrace{(d+e+f)}^7
+  }_{\text{meaning of life}}=42
+\]
+\end{example}
+
+If the default accents are not enough for you you can create your own using
+\csi{overset} and \csi{underset}.
+\begin{example}
+\(\overset{\text{foo}}{x}\)
+\(\underset{\times}{A}\)
+\end{example}
+These commands may also be used when creating custom \wi{binary relations},
+though you may check whether the one you are trying to define is not already predefined.
+\begin{example}
+\(a \overset{\text{def}}{=} b\)
+vs.\ \(a \eqdef b\)
+\end{example}
+
+\subsection{Delimiters}\label{sec:delimiters}
+
+Besides the standard parentheses, brackets and braces, \LaTeX{} provides all
+sorts of symbols for \wi{delimiters}, such as
+\begin{example}
+\[
+  \langle x \rangle
+  \; %!hide
+  \lBrack x \rBrack 
+  \; %!hide
+  \lfloor x \rfloor
+  \; %!hide
+  \lvert x \rvert
+\]
+\end{example}
+While all of them work fine for small input, things get ugly when the
+expression inside them starts getting tall.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\[
+  {\lfloor
+    \frac
+    {{\langle\sum_{k=1}^{\infty} k^{-4}\rangle}^3}
+    {\frac{{\lvert\{a,b,c\}\rvert}^8}{{(x^4)}^3}}
+  \rfloor}^6
+\]
+\end{example}
+
+To fix this you can use the \csi{left} and \csi{right} commands. These take one
+argument---the delimiter to extend---and adapt its size based on the content
+they delimit. You must close every \csi{left} with a corresponding \csi{right}
+but they do not have to use the same delimiter.
 \begin{chktexignore}
-  \begin{example}
-$\Big((x+1)(x-1)\Big)^{2}$\\
-$\big( \Big( \bigg( \Bigg($ 
-$\big\} \Big\} \bigg\} \Bigg\}$ 
-$\big\| \Big\| \bigg\| \Bigg\|$ 
-$\big\Downarrow \Big\Downarrow 
-\bigg\Downarrow \Bigg\Downarrow$
+\begin{example}
+\[
+  \left(
+    \frac{1}{1 +
+      \frac{1}{1 +
+        \frac{1}{1 +
+          \frac{1}{1 +
+            \ldots}}}}
+  \right]
+\]
+\end{example}
+\end{chktexignore}
+If you want to typeset delimiter only on one side of the expression, a special
+value may be passed: the dot character \ai{.}, which is treated as an invisible
+delimiter.
+\begin{example}
+\[
+  x = \left.
+    \sum_{k=1}^{\infty}
+      \frac{1}{k^2}
+  \right\}
+\]
+\end{example}
+
+While using the \csi{left} and \csi{right} commands directly is sometimes
+necessary, the simplest case of using some predefined delimiters on both sides
+is the most common. For this usage the command
+\begin{lscommand}
+  \csi{DeclarePairedDelimiter}[name: M, left delim: m, right delim: m]
+\end{lscommand}
+is really useful. It declares the \carg{name} command which simply encloses its
+argument between \carg{left delim} and \carg{right delim}, while its starred
+version additionally uses \csi{left} and \csi{right} commands when typesetting
+delimiters.
+\begin{chktexignore}
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\size}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\mean}{\langle}{\rangle}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\parens}{(}{)}
+\[
+  \floor*{
+    \frac
+    {\mean*{\sum_{k=1}^{\infty} k^{-4}}^3}
+    {\frac{\size*{\set{a,b,c}}^8}{\parens*{x^4}^3}}
+  }^6
+\]
 \end{example}
 \end{chktexignore}
 
-For a list of all delimiters available, see \autoref{tab:delimiters} on \autopageref{tab:delimiters}.
+In some special circumstances you may also want to select the size of the
+delimiter yourself. You can do this using  \csi{big}, \csi{Big}, \csi{bigg} and
+\csi{Bigg} commands. These may be either prepended to delimiting symbol with
+\enquote{l} and \enquote{r} suffixes or passed as an optional argument to a
+declared delimiter.
+\begin{chktexignore}
+  \begin{example}
+\DeclarePairedDelimiter{%
+  \set}{\{}{\}}
+\( \bigl[ \ddagger \Biggr) \)
+\quad %!hide
+\( \set[\Big]{1,\frac{3}{4}} \)
+\end{example}
+\end{chktexignore}
 
-You can find large list of symbols supported in math mode in
-\autoref{symbols}.
+If the \csi{DeclarePairedDelimiter} is not enough for you, there also exists
+more powerful \csi{DeclarePairedDelimiterX}, which is described in the
+documentation of \pai*{mathtools} package.
 
 \section{Single Equations that are Too Long: multline}%
 \index{long equations}\label{sec:multline}

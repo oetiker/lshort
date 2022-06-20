@@ -12,7 +12,7 @@ Silent {
     \endhead \endfoot \endlastfoot \endfirsthead
     \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
     \bgroup \egroup \sourcefamily \restoregeometry
-    \itshape \cleardoublepage
+    \itshape \cleardoublepage \IfValueT
 }
 
 MathEnvir {
@@ -20,7 +20,8 @@ MathEnvir {
 }
 
 WipeArg {
-    \ai:{} \csi:*{} \carg:{} \cargv:{} \mstX:{}
+    \ai:{} \csi:*{} \cs:*{} \carg:{} \cargv:{} \mstX:{}
     \complexnum:{}
     \url:{}
+    \citetitle:{}
 }
