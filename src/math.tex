@@ -1069,12 +1069,12 @@ Fortunately thanks to the logical nature of \LaTeX{} markup and the excellent
 \pai*{siunitx} package you do not need to know most of the rules. Just use the special unit-commands provided by the package and all the units in your document will be
 typeset correctly.
 
-\subsection{Pitfalls of naïvely entered units}
+\subsection{Pitfalls of Naïvely Entered Units}
 
 Naïvely, one might write units like this:
 \begin{example}
 The speed of light
-is 299792458 m/s.
+is exactly 299792458 m/s.
 \end{example}
 This may look fine initially but if your document gets longer you will probably
 get into a situation where an unfortunate linebreak occurs.
@@ -1093,35 +1093,35 @@ The speed of light is
 Yet another problem arises when trying to write the units inside math
 mode
 \begin{example}
-$10~\frac{m}{s}
-  \cdot 12~s = 120~m$
+\(10~\frac{m}{s}
+  \cdot 12~s = 120~m\)
 \end{example}
 Here we need to make sure that the units are written in roman font.
 The above example should be then written as
 \begin{example}
-$10~\frac{\mathrm{m}}
+\(10~\frac{\mathrm{m}}
   {\mathrm{s}} 
   \cdot 12~\mathrm{s} 
-  = 120~\mathrm{m}$
+  = 120~\mathrm{m}\)
 \end{example}
 \noindent Hopefully these examples illustrate why a better method is needed.
 
-\subsection{Basic commands of the \pai{siunitx} package}
+\subsection{Basic Commands of the \pai{siunitx} Package}
 
 The basic commands of \pai{siunitx} package are
 \begin{lscommand}
   \csi{num}[options: o, number: m]\\
   \csi{unit}[options: o, unit: m]\\
-  \csi{qty}[options:o ! number:m ! unit:m]
+  \csi{qty}[options:o, number:m, unit:m]
 \end{lscommand}
-The \csi{num} command typesets a number, \csi{unit} typesets a unit, and \csi{qty}
-typesets a quantity, i.e.\ a number followed by a unit. All of the commands
-provide optional \carg{options} argument, which is a comma delimited key-value pair
-list that can influence the output of the command. The \carg{unit} argument can
-be provided in one of two styles, either \enquote{literal} or
-\enquote{interpreted}.
+The \csi{num} command typesets a number, \csi{unit} typesets a unit, and
+\csi{qty} typesets a quantity, i.e.\ a number followed by a unit. All of the
+commands provide optional \carg{options} argument, which is a comma delimited
+key-value pair list that can influence the output of the command. The
+\carg{unit} argument can be provided in one of two styles, either
+\enquote{literal} or \enquote{interpreted}.
 
-In literal mode units are entered as string of letters
+In literal mode units are entered as strings of letters
 \begin{example}
 \unit{kg} is a unit,
 \qty{10}{m/s} is a quantity
@@ -1147,12 +1147,12 @@ recognise the logical structure of the units, which means that the formatting
 can be changed on the fly.
 \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
 Which one do you prefer:
-$\unit{\newton} = \unit{
-  \kilo\gram\metre\per\square\second}$,
-$\unit{\newton} = \unit[per-mode = fraction]{
-  \kilo\gram\metre\per\second\squared}$ or
-$\unit{\N} = \unit[per-mode = symbol]{
-  \kg\m\per\s\tothe{2}}$?
+\(\unit{\newton} = \unit{
+  \kilo\gram\metre\per\square\second}\),
+\(\unit{\newton} = \unit[per-mode = fraction]{
+  \kilo\gram\metre\per\second\squared}\) or
+\(\unit{\N} = \unit[per-mode = symbol]{
+  \kg\m\per\s\tothe{2}}\)?
 \end{example}
 The commands \csi{gram}, \csi{kilo}, \csi{per} are rather self explanatory. As you
 can see we have also used the \cargv{per-mode} option to influence the unit
@@ -1163,8 +1163,8 @@ command \csi{of} typesets arbitrary subscripts, known as qualifiers.
 \unit{\bel\of{i}}
 \end{example}
 
-Note that the \csi{per} command only works on the next unit. If we want it to
-apply to all following units we may use \cargv{sticky-per} option.
+Note that the \csi{per} command by default only works on the next unit. If we
+want it to apply to all following units we may use \cargv{sticky-per} option.
 \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 The unit of thermal conductivity is
 \unit{\watt\per\metre\per\kelvin}
@@ -1187,65 +1187,68 @@ Now let's turn our attention to numbers. The numeric values will always use dot
 as a decimal separator, regardless of entered symbol. If you want to use comma
 as a decimal separator, change the \cargv{output-decimal-marker} option.
 \begin{example}
-$\pi \approx \num{3.14159}$ \\
-$\pi \approx \num{3,14159}$ \\
-$\pi \approx \num[
+\(\pi \approx \num{3.14159}\)
+\\ %!hide
+\(\pi \approx \num{3,14159}\)
+\\ %!hide
+\(\pi \approx \num[
   output-decimal-marker={,}
-]{3.14159}$
+]{3.14159}\)
 \end{example}
 
 The numbers may also be entered using exponent notation. The symbol before
 exponent and base may be controlled using \cargv{exponent-product} and
 \cargv{exponent-base} options
 \begin{example}
-$\qty{1}{\tonne} = \qty{1e6}{\g}$ \\
-$\qty{1}{\gibi\byte} = \qty[
+\(\qty{1}{\tonne} 
+  = \qty{1e6}{\g}\) \\
+\(\qty{1}{\gibi\byte} = \qty[
   exponent-base = 2,
-]{1e30}{\byte}$ \\
-$\qty{1}{\L} = \qty[
+]{1e30}{\byte}\) \\
+\(\qty{1}{\L} = \qty[
   exponent-product = \cdot,
-]{1e-3}{\cubic\m}$
+]{1e-3}{\cubic\m}\)
 \end{example}
 
 If we want all numbers to be formatted using exponent notation, regardless of
 their entered form, we may use \cargv{exponent-mode} option.
 \begin{example}
-$2^{16} = \num{65536}$ \\
-$2^{16} = \num[
+\(2^{16} = \num{65536}\) \\
+\(2^{16} = \num[
   exponent-mode = scientific,
-]{65536}$ \\
-$2^{16} = \num[
+]{65536}\) \\
+\(2^{16} = \num[
   exponent-mode = engineering,
-]{65536}$ \\
-$2^{16} = \num[
+]{65536}\) \\
+\(2^{16} = \num[
   exponent-mode = fixed,
-]{65.536e3}$ \\
-$2^{16} = \num[
+]{65.536e3}\) \\
+\(2^{16} = \num[
   exponent-mode = fixed,
   fixed-exponent = 5,
-]{65.536e3}$
+]{65.536e3}\)
 \end{example}
 
 In some fields it may be common to write uncertainty next to numbers. This may
 also be done in several ways. In order to customise the appearance of
 uncertainty use the \cargv{uncertainty-mode} option.
 \begin{example}
-$M_\oplus = \qty{
-  5.9722(6) e24}{\kg}$
+\(M_\oplus = \qty{
+  5.9722(6) e24}{\kg}\)
   \\ %!hide
-$M_\oplus = \qty{
-  5.9722 +- 0.0006 e24}{\kg}$
+\(M_\oplus = \qty{
+  5.9722 +- 0.0006 e24}{\kg}\)
   \\ %!hide
-$M_\oplus = \qty{
-  5.9722 \pm 0.0006 e24}{\kg}$
+\(M_\oplus = \qty{
+  5.9722 \pm 0.0006 e24}{\kg}\)
   \\ %!hide
-$M_\oplus = \qty[
+\(M_\oplus = \qty[
     uncertainty-mode = separate
-  ]{5.9722(6) e24}{\kg}$
+  ]{5.9722(6) e24}{\kg}\)
   \\ %!hide
-$M_\oplus = \qty[
+\(M_\oplus = \qty[
   uncertainty-mode = full
-]{5.9722(6) e24}{\kg}$
+]{5.9722(6) e24}{\kg}\)
 \end{example}
 
 By default \pai{siunitx} typesets the quantities in math mode. This may be
@@ -1310,12 +1313,12 @@ Now we are back to normal: \qty{3.637e-4}{\m\squared\per\s}.
   \label{sistandaloneexa}
 \end{listing}
 
-\subsection{Other \pai{siunitx} commands}
+\subsection{Other \pai{siunitx} Commands}
 
 Besides the basic commands described above \pai{siunitx} also defines several
 other useful commands.
 
-Angles are special in that they use base $60$ instead of base ten when
+Angles are special in that they use base \(60\) instead of base \(10\) when
 subdividing. The command
 \begin{lscommand}
   \csi{ang}[options: o, angle: m]
@@ -1354,7 +1357,7 @@ letter.
 \begin{example}
 Pick a number from
 range \numrange{1}{10}. \\
-\numproduct{2x5} is $10$. \\
+\numproduct{2x5} is \(10\). \\
 \begin{german}
   \numrange{1}{10}
 \end{german}
@@ -1429,7 +1432,7 @@ allow definition of unit-related macros in case additional are needed.
 It's over \qty{9000}{\quartic\decakilo\pt\polymer}!
 \end{example}
 
-\subsection{Table columns with numbers}\label{sec:sitables}\index{decimal
+\subsection{Table Columns with Numbers}\label{sec:sitables}\index{decimal
   alignment}
 
 When typesetting tables which contain numeric data it is often useful to align
@@ -1576,7 +1579,7 @@ want to change the alignment use the \cargv{table-number-alignment} and
 The numbers may also be aligned inside a \csi{multicol} or \csi{multirow},
 using the \csi{tablenum} command as seen in \autoref{lst:tablenum}.
 \begin{listing}
-  \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
+  \begin{example}[examplewidth=0.75\linewidth, vertical_mode]
 \sisetup{table-format = 4.4e1}
 \begin{tabular}{@{}lr@{}}
   \toprule
@@ -1595,8 +1598,10 @@ using the \csi{tablenum} command as seen in \autoref{lst:tablenum}.
 
 If you don't want the decimal alignment but still would like to have
 numbers in columns formatted by \pai{siunitx}, change the
-\cargv{table-alignment-mode} to \cargv{none}.
-\begin{example}[examplewidth=0.45\linewidth]
+\cargv{table-alignment-mode} to \cargv{none}. See \autoref{lst:snoalignment}
+for an example.
+\begin{listing}
+  \begin{example}
 \sisetup{
   table-alignment-mode = none,
   output-decimal-marker = {,},
@@ -1612,6 +1617,9 @@ numbers in columns formatted by \pai{siunitx}, change the
   \bottomrule
 \end{tabular}
 \end{example}
+  \caption{An example of using the \cargv{S} column specifier without aligning
+    numbers.}\label{lst:snoalignment}
+\end{listing}
 
 \section{Arrays and Matrices}%
 \label{sec:arraymat}
