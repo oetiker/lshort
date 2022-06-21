@@ -1621,72 +1621,110 @@ for an example.
     numbers.}\label{lst:snoalignment}
 \end{listing}
 
-\section{Arrays and Matrices}%
-\label{sec:arraymat}
+\section{Matrices and the like}\label{sec:arraymat}
 
-To typeset \emph{arrays}, use the \ei{array} environment. It works
-in a similar way to the \ei{tabular} environment. The \csi{\bs} command is
-used to break the lines:
+Typesetting matrices\index{matrix} in \LaTeX{} is possible with the \ei{matrix}
+environment from the \pai*{amsmath} packages. It simply aligns the lines and
+columns similarly to \env{tabular} and does not produce any delimiters around
+its contents. In contrast to tabular it does not accept column specification
+and each of its entries is typeset in math mode. The maximum number of columns a matrix can have is \(10\).
 \begin{example}
-  \begin{equation*}
-    \mathbf{X} = \left( 
-      \begin{array}{ccc}
-        x_1 & x_2 & \ldots \\
-        x_3 & x_4 & \ldots \\
-        \vdots & \vdots & \ddots
-      \end{array} \right)
-  \end{equation*}
+\( \left[
+  \begin{matrix}
+  1 & 2 \\
+  3 & 4 \\
+  \end{matrix}
+  \right] \)
 \end{example}
 
-The \ei{array} environment can also be used to typeset \wi{piecewise function}s by
-using a ``\cargv{.}'' as an invisible \csi{right} delimiter:
-\begin{example}
-\begin{equation*}
-  |x| = \left\{
-    \begin{array}{rl}
-      -x & \text{if } x < 0,\\
-      0 & \text{if } x = 0,\\
-      x & \text{if } x > 0.
-    \end{array} \right.
-\end{equation*}
-\end{example}
-The \ei{cases} environment from \pai{amsmath} simplifies
-the syntax, so it is worth a look:
-\begin{example}
-  \begin{equation*}
-    |x| = 
-    \begin{cases}
-      -x & \text{if } x < 0,\\
-      0 & \text{if } x = 0,\\
-      x & \text{if } x > 0.
-    \end{cases} 
-\end{equation*}
-\end{example}
+Because matrices are usually delimited, there are five additional versions that
+simply surround the matrix contents within delimiters. These are
+\begin{description}
+  \item[\ei{pmatrix}] that uses parentheses as delimiters:
+    \(\bigl(
+    \begin{smallmatrix}
+      1 & 2 \\
+      3 & 4 \\
+    \end{smallmatrix}
+    \bigr)\).
+  \item[\ei{bmatrix}] that uses brackets as delimiters:
+    \(\bigl[
+      \begin{smallmatrix}
+        1 & 2 \\
+        3 & 4 \\
+      \end{smallmatrix}
+      \bigr]\).
+  \item[\ei{Bmatrix}] that uses braces as delimiters:
+    \(\bigl\{
+    \begin{smallmatrix}
+      1 & 2 \\
+      3 & 4 \\
+    \end{smallmatrix}
+    \bigr\}\).
+  \item[\ei{vmatrix}] that uses vertical lines as delimiters:
+    \(\bigl\vert
+    \begin{smallmatrix}
+      1 & 2 \\
+      3 & 4 \\
+    \end{smallmatrix}
+    \bigr\vert\).
+  \item[\ei{Vmatrix}] that uses double vertical lines as delimiters:
+    \(\bigl\Vert
+    \begin{smallmatrix}
+      1 & 2 \\
+      3 & 4 \\
+    \end{smallmatrix}
+    \bigr\Vert\).
+\end{description}
 
-Matrices\index{matrix} can be typeset by \ei{array}, but
-\pai{amsmath} provides a better solution using the different \ei{matrix}
-environments. There are six versions with different delimiters: \ei{matrix}
-(none), \ei{pmatrix} $($, \ei{bmatrix} $[$, \ei{Bmatrix} $\{$, \ei{vmatrix} $\vert$ and
-\ei{Vmatrix} $\Vert$. You don't have to specify the number of columns as with
-\ei{array}. The maximum number is 10, but it is customisable (though it is not
-very often you need 10 columns!):
+Matrices used these environments are rather large, because they are meant to be
+typeset in display math. If for some reason you want to typeset a matrix within
+text you may get better results with the \ei{smallmatrix} environment. Note
+that there are no delimited variants of it so you must provide delimiters
+yourself.
 \begin{example}
-\begin{equation*}
-  \begin{matrix} 
+Compare \(
+  \begin{matrix}
     1 & 2 \\
-    3 & 4 
-  \end{matrix} \qquad
-  \begin{bmatrix} 
-    p_{11} & p_{12} & \ldots 
-    & p_{1n} \\
-    p_{21} & p_{22} & \ldots 
-    & p_{2n} \\
-    \vdots & \vdots & \ddots 
-    & \vdots \\
-    p_{m1} & p_{m2} & \ldots 
-    & p_{mn} 
-  \end{bmatrix}
-\end{equation*}
+    3 & 4 \\
+  \end{matrix}
+\) with \(
+  \begin{smallmatrix}
+    1 & 2 \\
+    3 & 4 \\
+  \end{smallmatrix}
+\)
+\end{example}
+
+With matrices you could provide p
+
+With the \ei{matrix} environment could also be used to typeset \wi{piecewise
+  function}s by using the \cargv{.} character as an invisible \csi{right}
+delimiter with brace. However, a much better alternative is the \ei{cases}
+environments. Its contents are left aligned and the delimiters are already
+provided.
+\begin{example}
+\[
+  |x| = 
+  \begin{cases}
+    -x & \text{if } x < 0, \\
+    0  & \text{if } x = 0, \\
+    x  & \text{if } x > 0.
+  \end{cases} 
+\]
+\end{example}
+
+If you need more control over the alignment of the individual columns you may
+also use the \ei{array} environment. It accepts the column specifier, just like
+the \env{tabular}, but typesets its contents in math mode. Note that it
+introduces a bit more spacing compared to the \ei{matrix} environments.
+\begin{example}
+\[
+  \begin{array}{rcl}
+    12 & 1 & 21 \\
+    1 & 22 & 101 \\
+  \end{array}
+\]
 \end{example}
 
 \section{Spacing in Math Mode}\label{sec:math-spacing}%
