@@ -322,6 +322,8 @@
     \RenewExpandableDocumentCommand{\thempfootnote}{}{
       \@arabic\c@mpfootnote
     }
+    \setcounter{equation}{0}
+    \counterwithout{equation}{chapter}
 
     \bool_if:NT \l__lshortexample_hide_hyperref_bool {
       \NewCommandCopy{\old@ref}{\ref}

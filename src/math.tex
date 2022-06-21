@@ -758,334 +758,285 @@ If the \csi{DeclarePairedDelimiter} is not enough for you, there also exists
 more powerful \csi{DeclarePairedDelimiterX}, which is described in the
 documentation of \pai*{mathtools} package.
 
-\section{Single Equations that are Too Long: multline}%
-\index{long equations}\label{sec:multline}
+\section{Multiline Equations}\index{long equations}
 
-If an equation is too long, we have to wrap it somehow. Unfortunately,
-wrapped equations are usually less easy to read than not wrapped
-ones. To improve the readability, there are certain rules on how to do
-the wrapping:
-\begin{enumerate}
-  \item In general one should always wrap an equation \emph{before} an
-        equality sign or an operator.
-  \item A wrap before an equality sign is preferable to a wrap before
-        any operator.
-  \item A wrap before a plus- or minus-operator is preferable to a wrap
-        before a multiplication-operator.
-  \item Any other type of wrap should be avoided if at all possible.
-\end{enumerate}
-The easiest way to achieve such a wrapping is the use of the
-\ei{multline} en\-vi\-ron\-ment:\footnote{The
-  \ei{multline} environment is from \pai{amsmath}.}
-\begin{example}
-\begin{multline}
-  a + b + c + d + e + f 
-  + g + h + i  
-  \\
-  = j + k + l + m + n 
-\end{multline}
-\end{example}
-\noindent
-The difference from the \ei{equation} environment is that an arbitrary
-line-break (or also multiple line-breaks) can be introduced. This is
-done by putting a \csi{\bs} on those places where the equation needs
-to be wrapped. Similarly to \ei{equation*} there also exists a
-\ei{multline*} version for preventing an equation number.
-
-Often the
-\ei{IEEEeqnarray} environment (see \autoref{sec:IEEEeqnarray})
-will yield better results.  Consider the following
-situation:
+The math environments so far discussed only allow typesetting a single line
+equation. However, sometimes an equation might be too long to fit.
 \begin{example}
 \begin{equation}
   a = b + c + d + e + f 
   + g + h + i + j 
   + k + l + m + n + o + p  
-  \label{eq:equation_too_long}
 \end{equation}
 \end{example}
-\noindent
-Here it is actually the RHS that is too long to fit on one line. The
-\ei{multline} environment creates the following output:
+In this case it is necessary to introduce linebreaks inside the equation. When
+doing so, it is important to remember a few rules to improve the readability:
+\begin{enumerate}
+  \item In general one should always break an equation \emph{before} an
+        equality sign or an operator.
+  \item A break before an equality sign is preferable to a break before
+        any operator.
+  \item A break before a plus- or minus-operator is preferable to a break
+        before a multiplication-operator.
+  \item Any other type of break should be avoided if at all possible.
+\end{enumerate}
+
+This section will introduce several environments to typeset equations with
+linebreaks inside them. These and more are described in more detail in the
+\pai*{amsmath} package documentation.
+
+\subsection{Long Equations}\label{sec:multline}
+
+The easiest way to display long equations is the \ei{multline} environment. It
+allows to introduce linebreaks with the \csi{\bs} command.
 \begin{example}
 \begin{multline}
-  a = b + c + d + e + f 
-  + g + h + i + j \\
-  + k + l + m + n + o + p
+  a + b + c + d + e + f
+  + g + h + i \\
+  = j + k + l + m + n
+\end{multline}
+\end{example}
+The first line in \ei{multline} environment is aligned to the left, the last
+one to the right, while all the others are centred.
+\begin{example}
+\begin{multline}
+  l + e + f + t \\
+  + c + e + n + t + r + e \\
+  = r + i + g + h + t
 \end{multline}
 \end{example}
 
-This is better than~\eqref{eq:equation_too_long}, but
-it has the disadvantage that the equality sign loses its natural
-greater importance with respect to the plus operator in front of
-$k$. The better solution is provided by the
-\ei{IEEEeqnarray} environment that will be discussed in detail in
-\autoref{sec:IEEEeqnarray}.
+If you do not want some particular inner line centred, you can use
+\csi{shoveleft} and \csi{shoveright} commands to force the line to be left or
+right aligned.
+\begin{example}
+\begin{multline}
+  l + e + f + t \\
+  \shoveleft{+ left + again} \\
+  \shoveright{+ now + right} \\
+  = r + i + g + h + t
+\end{multline}
+\end{example}
 
-\section{Multiple Equations}%
-\index{equation!multiple}\label{sec:IEEEeqnarray}
+Similarly to \ei{equation*} there also exists a \ei{multline*} version that
+suppresses the equation number.
 
-In the most general situation we have a sequence of several
-equalities that do not fit onto one line. Here we need to work with
-vertical alignment in order to keep the array of equations in a nice
-and readable structure.
+\subsection{Multiple Unaligned Equations}\index{equation!multiple}
 
-Before we offer our suggestions on how to do this, we start with a few
-bad examples that show the biggest drawbacks of some common solutions.
+Sometimes we may want to typeset several related equations, but typesetting
+them within several \env{equation} environments produces unneeded spacing
+between them.
+\begin{example}
+\begin{equation}
+  2 + 2 = 4
+\end{equation}
+\begin{equation}
+  2 \times 2 = 4
+\end{equation}
+\begin{equation}
+  2 + 2 \times 2 = 6
+\end{equation}
+\end{example}
+In that case you may use the \ei{gather} environment. It allows you to break
+lines using the \csi{\bs} command and centres each equation.
+\begin{example}
+\begin{gather}
+  2 + 2 = 4 \\
+  2 \times 2 = 4 \\
+  2 + 2 \times 2 = 6
+\end{gather}
+\end{example}
+The equation numbering commands such as \csi{eqref}, \csi{label} and \csi{tag}
+now apply to a single line they are present in. Additionally the command
+\csi{notag} is defined that allows you to suppress equation numbering for a
+single line.
+\begin{example}
+\begin{gather}
+  2 + 2 = 4
+    \tag{Easy}\label{easy} \\
+  2 \times 2 = 4 \notag \\
+  2 + 2 \times 2 = 6
+    \label{hard}
+\end{gather}
+The~\eqref{easy} is easier
+than~\eqref{hard}.
+\end{example}
+The above example also illustrates that the centring of the equations inside
+the environment may depend upon the length of the tag. Keep that in mind if
+your tags and/or equations get long.
 
-\subsection{Problems with Traditional Commands}%
-\label{sec:problems_traditional}
+As always, the starred version of the environment, \ei{gather*}, suppresses
+all equation numbers.
 
-To group multiple equations the
-\ei{align} environment\footnote{The \ei{align} environment can
-  also be used to group several blocks of equations beside each other.
-  Another excellent use case for the
-  \ei{IEEEeqnarray} environment. Try an argument like
-  \cargv{\{rCl+rCl\}}.} could be used:
+\subsection{Multiple Aligned Equations}
+
+If the gathered equations have a natural midpoint, it may be the case that the
+\ei{align} environment is much better suited to typeset them. It allows you to
+align the equations by inserting the \ai{\&} character, similarly to the
+\env{tabular} environment. Note that the \ai{\&} should come \emph{before} any
+binary operator in order to produce the correct spacing.
 \begin{example}
 \begin{align}
-  a & = b + c \\
-  & = d + e
+  2 + 2 & = 2 \times 2 \\
+  3 + 3 & \neq 3 \times 3 \\
+  2 + 2 \times 2 & < 8
 \end{align}
 \end{example}
-this approach fails once a single line is too long:
+
+The environment allows to put more than one equation in a single line by
+using several \ai{\&}. They are considered to be paired, so every second
+alignment character will produce a bigger space to accommodate for the spacing
+between columns.
 \begin{example}
 \begin{align}
-  a & = b + c \\
-  & = d + e + f
-  + g + h + i \nonumber \\
-  & + j + k + l \\
-  & = m + n + o + p
+  a & \succeq b & c & \leq d \\
+  a & \geq d & d & \prec c
 \end{align}
 \end{example}
-Here $+\:m$ should be below $d$ and not below the equality sign. A
-\TeX{}pert will point out that \mintinline{latex}|\mathrel{\phantom{=}} \negmedspace{}|,
-would add the necessary space in front of \verb|+m+n+o|, but since most users
-lack that kind of imagination, a simpler solution would be nice.
 
-This is the moment where the \ei{eqnarray} environment bursts onto the scene:
+The \ei{align} environment is also really useful when writing transformations of
+a single equation in multiple lines.
 \begin{example}
-\begin{eqnarray}
+\begin{align}
+  \sum_{k=0}^n k 
+    &= \sum_{k=0}^{n-1} k + n \\
+    &= \frac{n(n-1)}{2} + n \\
+    &= \frac{n(n+1)}{2}
+\end{align}
+\end{example}
+We may use the additional columns and the \csi{text} command to put line by
+line comments in such transformations.
+\begin{example}
+\begin{align*}
+  \sum_{k=0}^n k
+    &= \sum_{k=0}^{n-1} k + n
+      && \text{definition} \\
+    &= \frac{n(n - 1)}{2} + n
+      && \text{induction} \\
+    &= \frac{n(n + 1)}{2}
+      && \text{trivial}
+\end{align*}
+\end{example}
+
+\subsection{Equations as Building Blocks}
+
+All the environments presented above can be used inside another equations by
+appending \enquote{-ed} to their name. They no longer number the equations
+inside them and accept an optional vertical positioning argument, with the
+same semantics as the one accepted by tabular (see \autoref{sec:tables} on
+\autopageref{sec:tables}).
+\begin{example}
+\[
+  \begin{multlined}[t]
+    1 + 2 \\
+    + 3 + 4
+  \end{multlined} =
+  \begin{gathered}[c]
+    1 + 2 \\
+    + 3 + 4
+  \end{gathered} =
+  \begin{aligned}[b]
+    1 & + 2 \\
+      & + 3 + 4
+  \end{aligned}
+\]
+\end{example}
+These are useful if you want to, for example, break an equation into multiple
+lines with alignment, but still retain only a single equation number.
+\begin{example}
+\begin{equation}
+  \begin{aligned}
+    2 + 2 \times 2 
+      &= 2 \times 2 + 2 \\ 
+      &\neq 2 \times (2 + 2) \\ 
+  \end{aligned}
+\end{equation}
+\end{example}
+They can be also freely nested, if a need arises.
+\begin{example}
+\begin{align}
+  a + b + c
+    &= \begin{multlined}[t]
+      long \\
+      multiline \\
+      equation \\
+      inside \\
+      align
+    \end{multlined} \\
+    &= \begin{aligned}[t]
+      1 &+ long \\
+        &- aligned \\
+        &+ equation \\
+        &\div inside \\
+        &\times align
+    \end{aligned} \\
+    &= d + e + f
+\end{align}
+\end{example}
+
+\subsection{IEEEeqnarray Environment}\label{sec:IEEEeqnarray_intro}
+
+If the environments defined in \ei{amsmath} do not meet your needs, you can try
+the \ei{IEEEeqnarray} from the \pai*{IEEEtrantools} package. It allows you to
+specify the alignment of each math column separately similarly to the
+\env{tabular} environment. Here we will present some of its basic
+functionalities. More can found in its official manual~\cite{IEEEtran_HOWTO}.
+The part about \texttt{IEEEeqnarray} can be found in Appendix~F.
+
+To specify columns use \cargv{l}, \cargv{c} and \cargv{r}. Their uppercase
+version also adds a small space around the column, which is useful in case of
+binary operators. For example to emulate the \ei{align} environment we could
+use \cargv{rCl}, i.e., three columns, the first column right-justified, the
+middle one centred with a little more space around it and the third column
+left-justified:
+\begin{example}
+\begin{IEEEeqnarray}{rCl}
   a & = & b + c \\
-  & = & d + e + f
-  + g + h + i \nonumber \\
-  && +\: j + k + l \\
-  & = & m + n + o + p
-\end{eqnarray}
-\end{example}
-
-It is better but still not optimal. The spaces around the equality signs are too big.
-Particularly, they are \emph{not} the same as in the
-\ei{multline} and \ei{equation} environments:
-\begin{example}
-\begin{eqnarray}
-  a & = & a = a
-\end{eqnarray}
-\end{example}
-
-\noindent \ldots and the expression sometimes overlaps with the equation number even
-though there would be enough room on the left:
-\begin{example}
-\begin{eqnarray}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h^2 
-  + i^2 + j 
-  \label{eq:faultyeqnarray}
-\end{eqnarray}
-\end{example}
-
-\noindent While the environment offers a command \csi{lefteqn} that can
-be used when the LHS is too long:
-\begin{example}
-\begin{eqnarray}
-  \lefteqn{a + b + c + d 
-    + e + f + g + h}\nonumber\\
-  & = & i + j + k + l + m 
-  \\
-  & = & n + o + p + q + r + s
-\end{eqnarray}
-\end{example}
-\noindent This is not optimal either as the RHS is too short and the array is
-not properly centred:
-\begin{example}
-\begin{eqnarray}
-  \lefteqn{a + b + c + d 
-    + e + f + g + h} 
-  \nonumber \\
-  & = & i + j 
-\end{eqnarray}
-\end{example}
-
-\noindent Having badmouthed the competition sufficiently, I can now steer you gently towards the glorious \ldots
-
-\subsection{IEEEeqnarray Environment}%
-\label{sec:IEEEeqnarray_intro}
-
-The \ei{IEEEeqnarray} environment is a very powerful command with
-many options. Here, we will only introduce its basic
-functionalities. For more information please refer to the
-manual.\footnote{For the official manual see~\cite{IEEEtran_HOWTO}.
-  The part about \texttt{IEEEeqnarray}
-  can be found in Appendix~F.}
-
-First of all, in order to be able to use the
-\ei{IEEEeqnarray} environment one needs to load the
-package\footnote{The \pai{IEEEtrantools} package may not be included in your setup, it can be found on CTAN.}
-\pai*{IEEEtrantools}. Include the following line in the header of
-your document: \small
-\begin{minted}{latex}
-\usepackage{IEEEtrantools}
-\end{minted}
-\normalsize
-
-The strength of \ei{IEEEeqnarray} is the ability to specify
-the number of \emph{columns} in the equation array. Usually, this
-specification will be \cargv{\{rCl\}}, i.e., three columns, the
-first column right-justified, the middle one centred with a little
-more space around it (therefore we specify capital \cargv{C} instead of
-lower-case \cargv{c}) and the third column left-justified:
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h 
-  + i + j + k \nonumber\\
-  && \negmedspace{} + l 
-  + m + n + o 
-  \\
-  & = & p + q + r + s
-\end{IEEEeqnarray}
-\end{example}
-Any number of columns can be specified:
-\verb+{c}+ will give only one column with all entries centred, or
-\verb+{rCll}+ would add a fourth, left-justified column to use
-for comments. Moreover, beside \cargv{l}, \cargv{c}, \cargv{r}, \cargv{L},
-\cargv{C}, \cargv{R} for math mode entries there are also \cargv{s},
-\cargv{t}, \cargv{u} for left, centred, and right text mode entries.
-Additional space can be added with \cargv{.} and
-\cargv{/} and \cargv{?} in increasing order.\footnote{For more spacing
-  types refer to \autoref{sec:putting-qed-right}.}
-Note the spaces around the equality signs in contrast to the space produced
-by the \ei{eqnarray} environment.
-
-\subsection{Common Usage}%
-\label{sec:common-usage}
-
-In the following we will describe how we use \ei{IEEEeqnarray} to
-solve the most common problems.
-
-If a line overlaps with the equation number as in%
-~\eqref{eq:faultyeqnarray}, the command
-\small
-\begin{minted}{latex}
-\IEEEeqnarraynumspace
-\end{minted}
-\normalsize
-can be used: it has to be added in the corresponding line and makes
-sure that the whole equation array is shifted by the size of the
-equation numbers (the shift depends on the size of the number!):
-instead of
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h + i
-  \\
-  & = & j + k + l + m + n.
-\end{IEEEeqnarray}
-\end{example}
-we get
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h + i
-  \IEEEeqnarraynumspace\\
-  & = & j + k + l + m + n.
+  & = & d + e + f + g + h \\
+  & = & i + j + k 
 \end{IEEEeqnarray}
 \end{example}
 
-If the LHS is too long, as a replacement for the faulty
-\csi{lefteqn} command, \ei{IEEEeqnarray} offers the
-\csi{IEEEeqnarraymulticol} command which works in all situations:
+In contrast to the \pai{amsmath} environments, the \ei{IEEEeqnarray} does not
+try to avoid the numbering collision with its content.
+\begin{example}
+\begin{IEEEeqnarray}{rCl}
+  a & = & b + c \\
+  & = & d + e + f 
+    + g + h + i + j \\
+  & = & k + l + m + n.
+\end{IEEEeqnarray}
+\end{example}
+To avoid it use the \csi{IEEEeqnarraynumspace} in the offending line. It will
+shift the whole equation left to accommodate for the number present in the
+given line.
+\begin{example}
+\begin{IEEEeqnarray}{rCl}
+  a & = & b + c  \\
+  & = & d + e + f 
+    + g + h + i + j
+    \IEEEeqnarraynumspace \\
+  & = & k + l + m + n.
+\end{IEEEeqnarray}
+\end{example}
+
+You can also use the \csi{IEEEeqnarraymulticol} to adjust only a single line
+within the environment, with its usage similar to the \cs{multicol}.
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
   \IEEEeqnarraymulticol{3}{l}{
-    a + b + c + d + e + f 
-    + g + h
-  }\nonumber\\ \quad
-  & = & i + j 
-  \\
-  & = & k + l + m
-\end{IEEEeqnarray}
-\end{example}
-The usage is identical to the \csi{multicolumns} command in the
-\ei{tabular} environment. The first argument \cargv{\{3\}}
-specifies that three columns shall be combined into one which will be
-left-justified \carg{\{l\}}.
-
-Note that by inserting \csi{quad} commands one can easily adapt
-the depth of the equation signs,\footnote{I think that one quad is the
-  distance that looks good for most cases.} e.g.,
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  \IEEEeqnarraymulticol{3}{l}{
-    a + b + c + d + e + f 
-    + g + h
-  }\nonumber\\ \qquad\qquad
-  & = & i + j
-  \\
-  & = & k + l + m
+    a + b + c + d = e + f 
+  } \\
+  e + f & = & g + h \\
+  & = & i + j + k + l + m
 \end{IEEEeqnarray}
 \end{example}
 
-If an equation is split into two or more lines, \LaTeX{}
-interprets the first $+$ or $-$ as a sign instead of operator.
-Therefore, it is necessary to add an empty group \verb|{}| before the operator: instead of
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h 
-  + i + j + k \nonumber\\
-  && + l + m + n + o 
-  \\
-  & = & p + q + r + s
-\end{IEEEeqnarray}
-\end{example}
-we should write
-\begin{example}
-\begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \\
-  & = & d + e + f + g + h 
-  + i + j + k \nonumber\\
-  && \negmedspace{} + l 
-  + m + n + o 
-  \\
-  & = & p + q + r + s
-\end{IEEEeqnarray}
-\end{example}
-\noindent Note the space difference between $+$ and $l$!
-The construction \verb|{} + l| forces the \verb|+|-sign to be an operator rather
-than just a sign, and the unwanted ensuing space between
-\verb|{}| and \verb|+| is compensated by a negative medium space
-\csi{negmedspace}.
-
-If a particular line should not have an equation number, the
-number can be suppressed using \csi{nonumber} (or
-\csi{IEEEnonumber}). If on such a line a label
-\csi{label}[\ldots: m] is defined, then this label is passed on
-to the next equation number that is not suppressed. Place the labels right before the line-break
-\csi{\bs} or the next to the equation it belongs to. Apart from
-improving the readability of the source code this prevents a
-compilation error when a \csi{IEEEmulticol} command
-follows the label-definition.
-
-There also exists a starred version where all equation numbers are
-suppressed. In this case an equation number can be made to appear
-using the command \csi{IEEEyesnumber}:
+If a particular line should not have an equation number, the number can be
+suppressed using \csi{notag} as discussed before. Additionally the
+\pai{IEEEtrantools} defines \csi{IEEEyesnumber} and \csi{IEEEyessubnumber}. The
+former command can be used to turn on the numbering if the starred version of
+the environment is used.
 \begin{example}
 \begin{IEEEeqnarray*}{rCl}
   a & = & b + c \\
@@ -1093,19 +1044,16 @@ using the command \csi{IEEEyesnumber}:
   & = & f + g
 \end{IEEEeqnarray*}
 \end{example}
-
-Sub-numbers are also easily possible using
-\csi{IEEEyessubnumber}:
+The latter changes numbering to indicate subexpressions.
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
-  a & = & b + c 
-  \IEEEyessubnumber\\
-  & = & d + e 
-  \nonumber\\
-  & = & f + g 
-  \IEEEyessubnumber  
+  a & = & b + c \\
+  & = & d + e \notag \\
+  & = & f + g
+    \IEEEyessubnumber  
 \end{IEEEeqnarray}
 \end{example}
+Note that eventual \cs{label} commands should follow after these.
 
 \section{Units}\label{sec:units}\index{units (SI)}\index{SI}
 
