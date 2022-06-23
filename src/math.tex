@@ -1908,67 +1908,84 @@ correctly.
 \end{multline*}
 \end{example}
 
-\section{Fiddling with the Math Fonts}\label{sec:fontsz}
-Different math fonts are listed on \autoref{mathalpha} on \autopageref{mathalpha}.
+\section{Fiddling with Math Styles}\label{sec:fontsz}
+
+You have already seen that \LaTeX{} typesets mathematics different, based on
+whether it is in inline or display style. There are actually four styles, the
+additional two being typically used for sup- and subscripts. If you want to
+change the style chosen by \LaTeX{} you can do so by using the commands
+presented in \autoref{tbl:math_styles}.
+\begin{table}
+  \NewDocumentCommand{\mathipsum}{}{\sum_{k = 0}^{\infty} ABCabc123}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\ShowStyle}{m}{
+    \csi{#1} & \(\use:c{#1} \mathipsum \)
+  }
+  \ExplSyntaxOff
+  \caption{Math style commands available in \LaTeX{}}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Command & Example             \\
+    \midrule
+    \ShowStyle{displaystyle}      \\
+    \ShowStyle{textstyle}         \\
+    \ShowStyle{scriptstyle}       \\
+    \ShowStyle{scriptscriptstyle} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The \csi{frac} command by default decreases the style of its contents by one
+level when possible.
 \begin{example}
- $\Re \qquad
-  \mathcal{R} \qquad
-  \mathfrak{R} \qquad
-  \mathbb{R} \qquad $  
+\[
+  \frac
+    {\frac
+      {\frac{1}{2}}
+      {2}}
+    {2}
+\]
 \end{example}
-The last two require \pai{amssymb} or \pai{amsfonts}.
-
-Sometimes you need to tell \LaTeX{} the correct font
-size. In math mode, this is set with the following four commands:
-\begin{lscommand}
-  \csi{displaystyle}~($\displaystyle 123$)\\
-  \csi{textstyle}~($\textstyle 123$)\\
-  \csi{scriptstyle}~($\scriptstyle 123$)\\
-  \csi{scriptscriptstyle}~($\scriptscriptstyle 123$)
-\end{lscommand}
-
-If $\sum$ is placed in a fraction, it'll be typeset in text style unless you tell
-\LaTeX{} otherwise:
-\begin{example}[examplewidth=0.55\linewidth]
-\begin{equation*}
- P = \frac{\displaystyle{ 
-   \sum_{i=1}^n (x_i- x)
-   (y_i- y)}} 
-   {\displaystyle{\left[
-   \sum_{i=1}^n(x_i-x)^2
-   \sum_{i=1}^n(y_i- y)^2
-   \right]^{1/2}}}
-\end{equation*}    
-\end{example}
-Changing styles generally affects the way big operators and limits are displayed.
-
-% This is not a math accent, and no maths book would be set this way.
-% mathop gets the spacing right.
-
-\subsection{Bold Symbols}%
-\index{bold symbols}
-
-It is quite difficult to get bold symbols in \LaTeX{}; this is
-probably intentional as amateur typesetters tend to overuse them.  The
-font change command \csi{mathbf} gives bold letters, but these are
-roman (upright) whereas mathematical symbols are normally italic, and
-furthermore it doesn't work on lower case Greek letters.
-There is a \csi{boldmath} command, but \emph{this can only be used
-  outside math mode}. It works for symbols too, though:
+If you want to prevent it, use the appropriate command in its arguments.
 \begin{example}
-$\mu, M \qquad 
-\mathbf{\mu}, \mathbf{M}$
-\qquad \boldmath{$\mu, M$}
+\[
+\frac
+  {\displaystyle
+   \sum_{k=1}^n (x_k - x)^2}
+  {\displaystyle
+   \left(
+    \sum_{k=1}^n (x_k - x)
+   \right)^2}
+\]
 \end{example}
 
-The package \pai{amsbsy} (included by \pai{amsmath}) as well as the
-package \pai{bm} from the \pai{tools} bundle make this much easier as they include
-a \csi{boldsymbol} command:
-
+When typesetting formulae within text, you may enclose tall or deep math
+expressions or sub expressions in \csi{smash}. This makes \LaTeX{} ignore the
+height of these expressions and keeps the line spacing even, but risks
+overlapping the text around them.
 \begin{example}
-$\mu, M$
-$\boldsymbol{\mu}
-  \boldsymbol{M}$
+A \(d_{e_{e_p}}\) mathematical
+expression followed by a
+\(h^{i^{g^h}}\) expression.
+As opposed to a smashed 
+\smash{\(d_{e_{e_p}}\)}
+expression followed by a
+\smash{\(h^{i^{g^h}}\)}
+expression.
+\end{example}
+
+The \csi{smash} command accepts an optional argument---either \cargv{t} or
+\cargv{b}---that only changes the height of top and bottom parts of symbol to
+zero. This may be useful in some rare circumstances, for example when adjacent
+radical symbols don't line up due to differing content heights.
+\begin{example}
+\(  \sqrt{x} 
+  + \sqrt{y} 
+  + \sqrt{z}\)
+vs.\
+\(  \sqrt{x} 
+  + \sqrt{\smash[b]{y}} 
+  + \sqrt{z} \)
 \end{example}
 
 \section{Theorems, Lemmas, \ldots}
