@@ -1729,76 +1729,184 @@ introduces a bit more spacing compared to the \ei{matrix} environments.
 
 \section{Spacing in Math Mode}\label{sec:math-spacing}%
 \index{math spacing}
-If the spacing within formulae chosen by \LaTeX{}
-is not satisfactory, it can be adjusted by inserting special spacing
-commands: \csi{,} for $\frac{3}{18}\:\textrm{quad}$
-(\demowidth{0.166em}), \csi{:} for $\frac{4}{18}\: \textrm{quad}$
-(\demowidth{0.222em}) and \csi{;} for $\frac{5}{18}\: \textrm{quad}$
-(\demowidth{0.277em}).  The escaped space character \csi{\textvisiblespace}
-generates a medium sized space comparable to the interword spacing and
-\csi{quad} (\demowidth{1em}) and \csi{qquad} (\demowidth{2em}) produce
-large spaces. The size of a \csi{quad} corresponds to the width of the
-character `M' of the current font. \csi{!} produces a
-negative space of $-\frac{3}{18}\:\textrm{quad}$
-($-$\demowidth{0.166em}).
 
+\subsection{Mathematical Object Classes}
+
+\LaTeX{} decides how much space to surround the symbols in math mode based
+on their \emph{class}. For example, the \(\leq\) belongs to class of binary
+relations so it is typeset with surrounding spaces. The class of a symbol can be
+changed using the commands listed in \autoref{tbl:math_classes}.
+\begin{table}
+  \caption{Commands to influence mathematical object classes}\label{tbl:math_classes}
+  \begin{tabular}{@{}cp{4.5cm}p{2.5cm}@{}}
+    \toprule
+    Command         & Explanation
+                    & Examples                                                       \\
+    \midrule
+    \csi{mathord}   & Ordinary symbols, that do not require any special handling
+                    & \mintinline{latex}|x| \(x\) \newline \csi{bot} \(\bot\)        \\
+    \csi{mathop}    & Large operators, that are vertically centred within expression
+                    & \csi{sum} \(\sum\) \newline \csi{bigcap} \(\bigcap\)           \\
+    \csi{mathbin}   & Binary operators, with extra spacing around them
+                    & \mintinline{latex}|+| \(+\) \newline \csi{times} \(\times\)    \\
+    \csi{mathrel}   & Binary relations, with extra spacing around them
+                    & \mintinline{latex}|=| \(=\) \newline \csi{succeq} \(\succeq\)  \\
+    \csi{mathopen}  & Symbols that open groups, with space before
+                    & \mintinline{latex}|(| \((\) \newline \csi{lBrack} \(\lBrack\)  \\ %chktex 36
+    \csi{mathclose} & Symbols that close groups, with space after
+                    & \mintinline{latex}|)| \()\) \newline \csi{rBrack} \(\rBrack\)  \\
+    \csi{mathpunct} & Punctuation symbols, with space after
+                    & \mintinline{latex}|,| \(,\) \newline \csi{colon} \(\colon\)    \\ %chktex 40
+    \bottomrule
+  \end{tabular}
+\end{table}
+For example, the symbol \(R\) is normally treated as alphabetical character,
+but we may force it to treat is as relation symbol using the \csi{mathrel}
+command.
 \begin{example}
-\begin{equation*}
-  \int_1^2 \ln x \mathrm{d}x 
-  \qquad
-  \int_1^2 \ln x \,\mathrm{d}x
-\end{equation*}
+Let \(R\) be any relation.
+We should now write it like 
+this \(a \mathrel{R} b\),
+and not like this \(a R b\).
 \end{example}
 
-Note that `d' in the differential is conventionally set in roman.
-In the next example, we define a new command \csi{ud} (upright d) which produces
-``$\,\mathrm{d}$'' (notice the spacing \demowidth{0.166em} before the
-$\text{d}$), so we don't have to write it every time. The \csi{NewDocumentCommand} is
-placed in the preamble.  More on
-\csi{NewDocumentCommand} in \autoref{sec:new_commands} on \autopageref{sec:new_commands}.
-\begin{example}[examplewidth=0.35\linewidth]
-\NewDocumentCommand{\ud}{}{\,\mathrm{d}}
-
-\begin{equation*}
- \int_a^b f(x)\ud x 
-\end{equation*}
+It is important to use symbols with proper classes while typesetting
+mathematics. Some symbols may look the same as a single glyph but are different
+in terms of their classes. For example, the \csi{bot} and \csi{perp} look very
+similar, but the former is meant to typeset a symbol, while the latter
+represents relation of perpendicularity.
+\begin{example}
+Let \(x \in \{\top, \bot\}\).
+\\ %!hide
+Given two lines \(k \perp l\).
 \end{example}
 
-If you want to typeset multiple integrals, you'll discover that the spacing
-between the integrals is too wide. You can correct it using \csi{!}, but
-\pai{amsmath} provides an easier way for fine-tuning
-the spacing, namely the \csi{iint}, \csi{iiint}, \csi{iiiint}, and \csi{idotsint}
-commands.
-
-\begin{example}[examplewidth=0.35\linewidth]
-\NewDocumentCommand{\ud}{}{\,\mathrm{d}}
-
-\begin{IEEEeqnarray*}{c}
-  \int\int f(x)g(y) 
-                  \ud x \ud y \\
-  \int\!\!\!\int 
-         f(x)g(y) \ud x \ud y \\
-  \iint f(x)g(y)  \ud x \ud y 
-\end{IEEEeqnarray*}
+Presented commands should not be used throughout the body of the document. If
+you want use a new symbol (for example, an image) or repurpose an old one (such
+as the \(R\) relation), define a logical wrapper for it that uses the
+appropriate class inside.
+\begin{example}
+\NewDocumentCommand{\modulo}{}{%
+  \mathbin{\%}%
+}
+\( 17 \modulo 3 = 2 \)
 \end{example}
 
-For further details see~\cite{amstestmath} or Chapter~8 of \companion{}.
+\subsection{Manual Spacing}
+
+If the spacing within formulae chosen by \LaTeX{} is not satisfactory, it can
+be adjusted manually. The most basic command to do so is
+\begin{lscommand}
+  \csi{mspace}[width: m]
+\end{lscommand}
+The \carg{width} is specified using a special unit \enquote{\unit{mu}}, which
+is roughly equal to \sfrac{1}{18} of the width of letter \enquote{M} in the
+current math font.\footnote{Units are explained in more detail in
+  \autoref{sec:dimensions}.}
+\begin{example}
+\( 1 \mspace{18mu} 2 \)
+\\ %!hide
+\textinterrobang{} vs.\
+\( ? \mspace{-7mu} ! \)
+\end{example}
+There also exist predefined synonyms for the values most commonly used. These
+are presented in \autoref{tbl:math_space} and are usually sufficient when
+creating a document.
+\begin{table}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\ShowSpace}{m}{\(\rightarrow \mspace{-2mu} #1 \leftarrow\)}
+  \ExplSyntaxOff
+  \caption{Commands for manual math spacing}\label{tbl:math_space}
+  \begin{tabular}{llll}
+    \toprule
+    Command             & Alias   & Equivalent to                        & Effect                     \\
+    \midrule
+    \emph{none}         &         &                                      & \ShowSpace{}               \\[0.5em]
+    \csi{thinspace}     & \csi{,} & \mintinline{latex}|\mathspace{3mu}|  & \ShowSpace{\thinspace}     \\
+    \csi{medspace}      & \csi{:} & \mintinline{latex}|\mathspace{4mu}|  & \ShowSpace{\medspace}      \\
+    \csi{thickspace}    & \csi{;} & \mintinline{latex}|\mathspace{5mu}|  & \ShowSpace{\thickspace}    \\
+    \csi{quad}          &         & \mintinline{latex}|\mathspace{18mu}| & \ShowSpace{\quad}          \\
+    \csi{qquad}         &         & \mintinline{latex}|\mathspace{36mu}| & \ShowSpace{\qquad}         \\[0.5em]
+    \csi{negthinspace}  & \csi{!} & \mintinline{latex}|\mathspace{-3mu}| & \ShowSpace{\negthinspace}  \\
+    \csi{negmedspace}   &         & \mintinline{latex}|\mathspace{-4mu}| & \ShowSpace{\negmedspace}   \\
+    \csi{negthickspace} &         & \mintinline{latex}|\mathspace{-5mu}| & \ShowSpace{\negthickspace} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+For example, if you wanted to define the \enquote{d} in differentials, you may
+want to insert a small space behind it to separate it from the contents of the
+integral.
+\begin{example}
+\NewDocumentCommand{\ud}{}{%
+  \,\symrm{d}%
+}
+\[
+  \int_a^b f(x)\ud x 
+\]
+\end{example}
+
+The negative spaces can also be used if you want to create your own
+mathematical symbols by overlaying existing ones.
+\begin{example}
+\NewDocumentCommand{\myrel}{}{
+  \mathrel{
+    -\mspace{-11mu}
+    \infty{}
+    \mspace{-11mu}-
+  }
+}
+\( x \myrel y \)
+\end{example}
 
 \subsection{Phantoms}
 
-When vertically aligning text using \ai{\^} and \ai{\_} \LaTeX{} is sometimes
-just a little too helpful. Using the \csi{phantom} command you can
-reserve space for characters that do not show up in the final output.
-The easiest way to understand this is to look at an example:
+In some situations it may be useful to insert the space that would normally be
+occupied by some existing symbol. While you could eyeball it and insert
+appropriate \csi{mspace}, there is a better way to do so---phantoms. There are
+three commands for inserting phantoms.
+\begin{lscommand}
+  \csi{phantom}[text: m] \\
+  \csi{vphantom}[text: m] \\
+  \csi{hphantom}[text: m]
+\end{lscommand}
+Each of them typesets an invisible box that has dimensions equal to the text
+that it received as an argument. The \csi{vphantom} has zero width, while the
+\csi{hphantom} has zero height.
+
+For example, when creating left superscripts and subscripts, they will be
+aligned to the left, since they actually apply to the previous (empty) symbol.
+A simple fix would be to pad the space using appropriate phantom. In real world
+it would be better to use the \csi{prescript} from the \pai{mathtools} package.
 \begin{example}
-\begin{equation*}
-{}^{14}_{6}\text{C}
-\qquad \text{versus} \qquad
-{}^{14}_{\phantom{1}6}\text{C}
-\end{equation*}
+\( {}^{14}_{6}A \) vs.\
+\( \prescript{14}{6}A \) vs.\
+\( {}^{14}_{\phantom{1}6}A \)
 \end{example}
-If you want to typeset a lot of isotopes as in the example, the \pai{mhchem}
-package is very useful for typesetting isotopes and chemical formulae too.
+Left superscripts and subscripts are often found in chemistry, when typesetting
+isotopes. If you intend to use \LaTeX{} for that, it is better to use a
+dedicated package, such as \pai*{chemformula} or \pai*{mhchem}.
+
+The \csi{vphantom} is useful if you want to typeset a formula which uses
+extending delimiters over multiple lines, since they only work with a single
+line formulae inside them. Using that command we can artificially increase the
+height of the subformula, so the height of the delimiters will be calculated
+correctly.
+\begin{example}
+\NewDocumentCommand{\ud}{}{\,\symrm{d}} %!hide
+\begin{multline*}
+  f(a, b) = \left(
+    \int_a^b f(x)
+    loooooong
+  \right. \\
+  \left.
+    \vphantom{
+      \int_a^b f(x)
+      loooooong
+    }
+    short \ud x
+  \right)
+\end{multline*}
+\end{example}
 
 \section{Fiddling with the Math Fonts}\label{sec:fontsz}
 Different math fonts are listed on \autoref{mathalpha} on \autopageref{mathalpha}.

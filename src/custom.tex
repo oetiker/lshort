@@ -1183,7 +1183,8 @@ Boxes are explored further in \autoref{sec:boxes}.
 
 \section{Lengths and Spacing}
 
-\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}
+\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}%
+\label{sec:dimensions}
 \begingroup
 \DeclareSIUnit{\in}{in}
 \DeclareSIUnit{\pt}{pt}
@@ -1236,30 +1237,33 @@ values.
   \caption{\TeX{} Units.}\label{units}\index{units}
   \begin{tabular}{@{}clrrl@{}}
     \toprule
-    Unit                   & Meaning                                                                  & Definition           & {Value (\unit{\sp})} & Demo            \\
+    Unit                   & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
     \midrule
-    \mintinline{latex}{cm} & centimetre                                                               & \qty{0.01}{\m}       & \DimVal{1cm}         & \demowidth{1cm} \\
-    \mintinline{latex}{mm} & millimetre                                                               & \qty{0.001}{\m}      & \DimVal{1mm}         & \demowidth{1mm} \\
-    \mintinline{latex}{in} & inch                                                                     & \qty{25.4}{\mm}      & \DimVal{1in}         & \demowidth{1in} \\
-    \mintinline{latex}{pt} & point                                                                    & \fqty{1}{72.27}{\in} & \DimVal{1pt}         & \demowidth{1pt} \\
-    \mintinline{latex}{sp} & scaled point                                                             & \fqty{1}{65536}{\pt} & \DimVal{1sp}         & \demowidth{1sp} \\
-    \mintinline{latex}{pc} & pica                                                                     & \qty{12}{\pt}        & \DimVal{1pc}         & \demowidth{1pc} \\
-    \mintinline{latex}{dd} & didot                                                                    & \qty{0.376065}{\mm}  & \DimVal{1dd}         & \demowidth{1dd} \\
-    \mintinline{latex}{cc} & cicero                                                                   & \qty{12}{\dd}        & \DimVal{1cc}         & \demowidth{1cc} \\
-    \mintinline{latex}{nd} & new didot                                                                & \qty{0.375}{\mm}     & \DimVal{1nd}         & \demowidth{1nd} \\
-    \mintinline{latex}{bp} & big point                                                                & \fqty{1}{72}{\in}    & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
-    \mintinline{latex}{em} & \multicolumn{3}{l}{approx width of an \enquote*{M} in the current font}  & \demowidth{1em}                                               \\
-    \mintinline{latex}{ex} & \multicolumn{3}{l}{approx height of an \enquote*{x} in the current font} & \demowidth{1ex}                                               \\
+    \mintinline{latex}{cm} & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
+    \mintinline{latex}{mm} & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
+    \mintinline{latex}{in} & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
+    \mintinline{latex}{pt} & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
+    \mintinline{latex}{sp} & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
+    \mintinline{latex}{pc} & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
+    \mintinline{latex}{dd} & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
+    \mintinline{latex}{cc} & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
+    \mintinline{latex}{nd} & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
+    \mintinline{latex}{bp} & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \mintinline{latex}{em} & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
+    \mintinline{latex}{ex} & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
+    \mintinline{latex}{mu} & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The last two units mentioned in the table are relative to the current font.
-Historically they were related to the \enquote*{M} and \enquote*{x} glyphs in a
-given font but today they are arbitrarily set by fonts. These units are useful
-if we want the length to scale proportionally when used with different font
-sizes. The \mintinline{latex}|em| unit is usually used for horizontal lengths,
-while the \mintinline{latex}|ex| is used for vertical lengths.
+The last three units mentioned in the table are relative to the current font
+used. Historically they were related to the \enquote*{M} and \enquote*{x}
+glyphs in a given font but today they are arbitrarily set by fonts. These units
+are useful if we want the length to scale proportionally when used with
+different font sizes. The \mintinline{latex}|em| unit is usually used for
+horizontal lengths, while the \mintinline{latex}|ex| is used for vertical
+lengths. The \mintinline{latex}|mu| unit can only be used in math mode for math
+spacing (see \autoref{sec:math-spacing}).
 \begin{example}
 \begin{minipage}[b]{0.5\linewidth} %!hide
 foo\\[1ex] bar
