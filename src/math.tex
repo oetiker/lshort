@@ -1988,213 +1988,128 @@ vs.\
   + \sqrt{z} \)
 \end{example}
 
-\section{Theorems, Lemmas, \ldots}
+\section{Theorems and Proofs}
 
-When writing mathematical documents, you probably need a way to
-typeset ``Lemmas'', ``Definitions'', ``Axioms'' and similar
-structures.
+When writing mathematical documents, you probably need a way to typeset
+\enquote{Lemmas}, \enquote{Definitions}, \enquote{Axioms} and similar
+structures. These are known as \emph{theorems} in \LaTeX{} and can be created
+using the
 \begin{lscommand}
-  \csi{newtheorem}[name:m, counter:o, text:m, section:o]
+  \csi{newtheorem}[name:m, counter:o, caption:m, section:o]
 \end{lscommand}
-The \carg{name} argument is a short keyword used to identify the
-``theorem''. With the \carg{text} argument you define the actual name
-of the ``theorem'', which will be printed in the final document.
+command. The \carg{name} argument is name of the newly created environment used
+to typeset the theorem. The \carg{caption} argument defines the actual name,
+which will be printed in the final document.
 
-The arguments in square brackets are optional. They are both used to
-specify the numbering used on the ``theorem''. Use  the \carg{counter}
-argument to specify the \carg{name} of a previously declared
-``theorem''. The new ``theorem'' will then be numbered in the same
-sequence.  The \carg{section} argument allows you to specify the
-sectional unit within which the ``theorem'' should get its numbers.
+The optional arguments are both used to specify the numbering used on the
+\enquote{theorem}. Only one of them may be present. Use the \carg{counter}
+argument to specify the \carg{name} of a previously declared \enquote{theorem}.
+This will make the new theorem to be numbered the same way as the old one. The
+\carg{section} argument allows you to specify the sectional unit within which
+the theorem should get its numbers. The starred version of the command defines
+a theorem without a counter.
 
-After executing the \csi{newtheorem} command in the preamble of your
-document, you can use the following command within the document.
-\begin{code}
-\verb|\begin{|\emph{name}\verb|}[|\emph{text}\verb|]|\\
-This is my interesting theorem\\
-\verb|\end{|\emph{name}\verb|}|     
-\end{code}
+After executing the \csi{newtheorem} command in the preamble of your document,
+you can use the following environment within the document.
+\begin{minted}{latex}
+\begin{«\carg{name}»}[«\carg{title}»]
+This is my interesting theorem
+\end{«\carg{name}»}
+\end{minted}
+The optional \carg{title} argument can be used to locally typeset the theorem
+name next to the caption.
+\begin{example}[standalone, paperheight=4cm]
+\newtheorem{proposition}{Proposition}
+% ...
+\begin{document} %!hide
+\begin{proposition}
+  I propose that this should 
+  be enough of dummy text.
+\end{proposition}
+\begin{proposition}[More]
+  It is not enough for more
+  than one proposition.
+\end{proposition}
+\end{document}%!hide
+\end{example}
 
-The \pai{amsthm} package (part of \hologo{AmSLaTeX}) provides the
+The \pai*{amsthm} package provides the
 \begin{lscommand}
   \csi{theoremstyle}[style: m]
 \end{lscommand}
-command which lets you define what the theorem is all about by picking
-from three predefined styles: \cargv{definition} (fat title, roman body),
-\cargv{plain} (fat title, italic body) or \cargv{remark} (italic
-title, roman body).
+command which lets you further customise a theorem by picking from three
+predefined styles: \cargv{definition} (bold title, roman body), \cargv{plain}
+(bold title, italic body) or \cargv{remark} (italic title, roman body). An
+example of using these commands is presented in \autoref{lst:theorems}
+\begin{listing}
+  \begin{lined}{\textwidth}
+    \begin{example}[standalone, paperheight=6cm]
+\usepackage{amsthm}
 
-This should be enough theory. The following examples should
-remove any remaining doubt, and make it clear that the
-\csi{newtheorem} command is way too complex to understand.
-
-First define the theorems:
-
-\begin{minted}{latex}
-\theoremstyle{definition} \newtheorem{law}{Law}
-\theoremstyle{plain}      \newtheorem{jury}[law]{Jury}
-\theoremstyle{remark}     \newtheorem*{marg}{Margaret}
-\end{minted}
-
-\begin{example}
-\begin{law}\label{law:box}
-Don't hide in the witness box
-\end{law}
-\begin{jury}[The Twelve]
-It could be you! So beware and
-see law~\ref{law:box}.\end{jury}
-\begin{jury}
-You will disregard the last
-statement.\end{jury}
-\begin{marg}No, No, No\end{marg}
-\begin{marg}Denis!\end{marg}
+\theoremstyle{definition}
+\newtheorem{axiom}{Axiom}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[axiom]{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+% ...
+\begin{document} %!hide
+\section{First}
+\begin{axiom}[Uncertainty]
+  Nothing is certain.
+\end{axiom}
+\begin{theorem}
+  It is uncertain whether
+  this theorem is true.
+\end{theorem}
+\begin{remark}[Other things]
+  Other things are
+  probably also uncertain.
+\end{remark}
+\end{document}%!hide
 \end{example}
-
-The ``Jury'' theorem uses the same counter as the ``Law''
-theorem, so it gets a number that is in sequence with
-the other ``Laws''. The argument in square brackets is used to specify
-a title or something similar for the theorem.
-\begin{example}[examplewidth=0.45\linewidth]
-%!showbegin !hide
-\newtheorem{mur}{Murphy}[section]
-%!showend !hide
-
-\begin{mur} If there are two or 
-more ways to do something, and 
-one of those ways can result in
-a catastrophe, then someone 
-will do it.\end{mur}
-\end{example}
-
-The ``Murphy'' theorem gets a number that is linked to the number of
-the current section. You could also use another unit, for example chapter or
-subsection.
+  \end{lined}
+  \caption{An example of creating several theorem environments with different
+    styles.}\label{lst:theorems}
+\end{listing}
 
 If you want to customise your theorems down to the last dot, the
-\pai{ntheorem} package offers a plethora of options.
+\pai*{ntheorem} package offers a plethora of options.
 
-\subsection{Proofs and End-of-Proof Symbol}\label{sec:putting-qed-right}
-
-The \pai{amsthm} package also provides the \ei{proof} environment.
-
+The \pai{amsthm} package also provides the \ei{proof} environment to use with theorems.
+\begin{example}
+\begin{proof}
+  Trivial.
+\end{proof}
+\end{example}
+The QED symbol (\(\qedsymbol\)) is put at the end of the last line in the
+environment. This may create unnecessary lines if the proof does not end with a
+paragraph.
+\begin{example}
+\begin{proof}
+  Trivial, use
+  \[ E=mc^2. \]
+\end{proof}
+\end{example}
+You can adjust its placement using the \csi{qedhere} command.
 \begin{example}
 \begin{proof}
  Trivial, use
- \begin{equation*}
-   E=mc^2.
- \end{equation*}
+ \[ E=mc^2. \qedhere \]
 \end{proof}
 \end{example}
 
-With the command \csi{qedhere} you can move the `end of proof' symbol
-around for situations where it would end up alone on a line.
-
+If you do not like the default symbol you can redefine the \csi{qedsymbol}
+macro to your liking.
 \begin{example}
+\RenewDocumentCommand{%
+  \qedsymbol}{}{QED}
 \begin{proof}
- Trivial, use
- \begin{equation*}
-   E=mc^2. \qedhere
- \end{equation*}
+  Trivial.
+\end{proof}
+\RenewDocumentCommand{%
+  \qedsymbol}{}{\(\QED\)}
+\begin{proof}
+  Trivial.
 \end{proof}
 \end{example}
-
-Unfortunately, this correction does not work for \ei{IEEEeqnarray}:
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with an equation array:
-  \begin{IEEEeqnarray*}{rCl}
-    a & = & b + c \\
-    & = & d + e. \qedhere
-  \end{IEEEeqnarray*}  
-\end{proof}
-\end{example}
-\noindent
-The reason for this is the internal structure of \ei{IEEEeqnarray}:
-it always puts two invisible columns at both sides of the array that
-only contain a stretchable space. By this \ei{IEEEeqnarray} ensures
-that the equation array is horizontally centred. The
-\csi{qedhere} command should actually be put \emph{outside} this
-stretchable space, but this does not happen as these columns are
-invisible to the user.
-
-There is a very simple remedy. Define the stretching
-explicitly!
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with an equation array:
-  \begin{IEEEeqnarray*}{+rCl+x*}
-    a & = & b + c \\
-    & = & d + e. & \qedhere
-  \end{IEEEeqnarray*}  
-\end{proof}
-\end{example}
-\noindent
-Note that the \cargv{+} in \verb|{+rCl+x*}| denotes stretchable spaces, one
-on the left of the equations (which, if not specified, will be done
-automatically by \ei{IEEEeqnarray}!) and one on the right of the
-equations. But now on the right, \emph{after} the stretching column,
-we add an empty column \cargv{x}. This column will only be needed on
-the last line if the \csi{qedhere} command is put
-there. Finally, we specify a \cargv{*}. This is a null-space that
-prevents \ei{IEEEeqnarray} from adding another unwanted \cargv{+}-space!
-
-In the case of equation numbering, there is a similar problem. Comparing
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with a numbered equation:
-  \begin{equation}
-    a = b + c.
-  \end{equation}
-\end{proof}
-\end{example}
-\noindent
-with
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with a numbered equation:
-  \begin{equation}
-    a = b + c. \qedhere
-  \end{equation}
-\end{proof}
-\end{example}
-\noindent
-you notice that in the (correct) second version the $\Box$ is much
-closer to the equation than in the first version.
-
-Similarly, the correct way of putting the QED-symbol at the end of an
-equation array is as follows:
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with an equation array:
-  \begin{IEEEeqnarray}{+rCl+x*}
-    a & = & b + c \\
-    & = & d + e. \\
-    &&& \qedhere\nonumber
-  \end{IEEEeqnarray}  
-\end{proof}
-\end{example}
-\noindent
-which contrasts with
-\begin{example}
-\begin{proof}
-  This is a proof that ends
-  with an equation array:
-  \begin{IEEEeqnarray}{rCl}
-    a & = & b + c \\
-    & = & d + e.
-  \end{IEEEeqnarray}  
-\end{proof}
-\end{example}
-
-%
-
-% Local Variables:
-% TeX-master: "lshort"
-% mode: latex
-% mode: flyspell
-% End:
