@@ -17,6 +17,7 @@
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
 % !TEX root = ./lshort.tex
+% chktex-file 11
 \chapter{Things You Shouldn't Use}
 
 \begin{intro}
@@ -30,21 +31,24 @@
 \begingroup
 \ExplSyntaxOn
 \NewDocumentCommand{\instead}{mm}{
-  \begin{trivlist}
-    \item
-    \begin{tabular}{@{}l@{}l@{}}
-      \toprule
-      Instead~of                         & Use \\
-      \midrule
-      \begin{minipage}[t]{0.5\textwidth}
-        #1
-      \end{minipage} &
-      \begin{minipage}[t]{0.5\textwidth}
-        #2
-      \end{minipage}        \\
-      \bottomrule
-    \end{tabular}
-  \end{trivlist}
+  \begin{tabular}{@{}l@{}l@{}}
+    \toprule
+    Instead~of                         & Use \\
+    \midrule
+    \begin{minipage}[t]{0.5\textwidth}
+      #1
+    \end{minipage} &
+    \begin{minipage}[t]{0.5\textwidth}
+      #2
+    \end{minipage}        \\
+    \bottomrule
+  \end{tabular}
+  \medskip
+  \par\noindent
+  \nopagebreak
+  \peek_remove_spaces:n {
+    \lshort_gobblepars:
+  }
 }
 
 \NewDocumentCommand{\chto}{+v+v}{
@@ -73,7 +77,7 @@
 \RenewDocumentCommand{\section}{m}{\oldsec{\ldots{}~for~#1}}
 \ExplSyntaxOff
 
-\section{Display Math}
+\section{Display Math}\label{sec:display_math}
 \instead{
 \ai{\$\$}
 } {
@@ -85,24 +89,46 @@
 
 \ai{\$\$} is \hologo{plainTeX} syntax and it cannot be modified. The
 \ei{displaymath} and \csi{[} are \hologo{LaTeX} commands that are a bit better
-in terms of spacing and features and can be redefined. With \pai{amsmath} both
-of them are redefined to be synonyms for the \ei{equation*} which produces
-optimal and consistent spacing.
+in terms of spacing and features, but most importantly they can be redefined.
+With \pai{amsmath}, both of them are redefined to be synonyms for the
+\ei{equation*} which produces optimal and consistent spacing.
 
 \chto|$$ 2 + 2 = 4 $$||\[ 2 + 2 = 4 \]| %chktex 45
+
+\section{Inline Math}
+\instead{
+  \ai{\$}
+} {
+  \csi{(}, \csi{)}
+}
+
+Similarly to the \autoref{sec:display_math}, \ai{\$} is \hologo{plainTeX} syntax
+and it cannot be redefined. Currently there are no visual differences between
+it and the new version, because the \ai{\$} works fine, but it may become an
+issue if you want to modify it yourself. Moreover the \csi{(}, \csi{)} commands
+can detect math mode nesting and produce an error if it happens.
+
+\chto|$ 2 + 2 = 4 $||\( 2 + 2 = 4 \)|
 
 \section{Typesetting Math}
 \instead{
   \csi{over} \\
-  \csi{choose}
+  \csi{choose} \\
+  \csi{overwithdelims} \\
+  \csi{atop} \\
+  \csi{atopwithdelims} \\
+  \csi{above} \\
+  \csi{abovewithdelims}
 } {
   \csi{frac} \\
-  \csi{binom} (\pai{amsmath})
+  \csi{binom} (\pai{amsmath}) \\
+  \csi{genfrac} (\pai{amsmath})
 }
 
-These are \hologo{plainTeX} commands for producing fractions and binomial
-coefficients. Due to their unusual syntax, their use may lead to ambiguous
-code.
+These are \hologo{plainTeX} commands for producing fractions, binomial
+coefficients and related structures. Due to their unusual syntax, their use may
+lead to ambiguous code. It's better to use the commands described in
+\autoref{sec:fractions}.
 \begin{chktexignore}
 \chto|{a \over b}||\frac{a}{b}|
 \chto|{a \choose b}|
@@ -123,7 +149,7 @@ code.
 }
 
 Both \csi{newcommand} and \csi{renewcommand} are \hologo{LaTeX2e} macros. They
-are not as expressive as \texttt{...DocumentCommand} family  %chktex 11
+are not as expressive as \texttt{...DocumentCommand} family
 described in \autoref{sec:new_commands}. Their syntax only allows a single
 optional argument with default value (specified as second optional argument)
 followed by few mandatory ones (specified as number in first optional
@@ -170,7 +196,7 @@ described in \autoref{sec:copyingcommands}.
 aligning equations. However spacing around the binary operators in these is far
 from ideal. Therefore it is recommended to always use the \ei{align} environments
 from \pai{amsmath} or \ei{IEEEeqnarray} as described in
-\autoref{sec:IEEEeqnarray}.
+\autoref{sec:aligned_equations}.
 \begin{chktexignore}
 \chto
 |\begin{eqnarray}
@@ -267,7 +293,7 @@ greater control over the typesetting of the quotations.
 }
 
 \LaTeX{} comes with a \ei{verbatim} environment built into the core, however there are problems
-with it. Firstly due to the way delimiting is handled you cannot put spaces
+with it. Firstly, due to the way delimiting is handled you cannot put spaces
 \begin{chktexignore}
   between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|.
 \end{chktexignore}
@@ -294,9 +320,85 @@ in \autoref{sec:verbatim} solves both of these problems.
 As was already mentioned in the \autoref{chap:bibliography} before
 \texttt{biber} there was \texttt{bibtex}. It used \ei{natbib} package for
 typesetting the bibliography itself. Both of these are no longer maintained and
-don't handle UTF-8 input. However the \ei{natbib} styles (\eei{.bst} files)
-don't work with \ei{biblatex} so if you are forced to use one you don't have a
-choice.
+don't handle UTF-8 input, so they should be avoided. However the \ei{natbib}
+styles (\eei{.bst} files) don't work with \ei{biblatex} so if you are forced to
+use one you don't have a choice.
 \chto|\usepackage{natbib}||\usepackage{biblatex}|
+
+\section{Creating Relations and Operators}
+\instead{
+  \csi{stackrel} \\
+  \csi{stackbin}
+}{
+  \csi{overset}
+}
+
+The commands are primitives that always define the underlying symbol to be
+either a relation or binary operator. The \csi{overset} detects this based on
+the symbol that is overset. See \autoref{sec:math_accents} for an example of
+usage.
+\chto|\stackrel{f}{=}||\overset{f}{=}|
+\chto|\stackbin{f}{+}||\overset{f}{+}|
+
+\section{Changing Math Font}
+\instead{
+  \csi{mathrm}  \\
+  \csi{mathit}  \\
+  \csi{mathbf}  \\
+  \csi{mathcal} \\
+  \csi{mathscr} \\
+  \csi{mathbb}  \\
+  \csi{mathfrak}
+}{
+  \csi{symrm}   \\
+  \csi{symit}   \\
+  \csi{symbf}   \\
+  \csi{symcal}  \\
+  \csi{symscr}  \\
+  \csi{symbb}   \\
+  \csi{symfrak} \\
+  (\pai{unicode-math} package)
+}
+
+When \LaTeX{} typesets operators it uses \mintinline{latex}{\math...} commands
+to typeset their name, usually \csi{mathrm}. This uses a different font
+compared to the symbols used in mathematics.
+\begin{example}
+\(\mathit{ffi}\) vs.\
+  \(\symit{ffi}\)
+\end{example}
+These commands should not be used for changing the font for symbols. For
+historical reasons, some of the \mintinline{latex}{\math...} commands are
+actually just synonyms for the symbol versions. For example there is no
+\csi{mathscr} version for math operators, so it is just a synonym for
+\csi{symscr}. For operators it is better to use the \csi{DeclareMathOperator}
+command.
+
+\vchto|\(\mathrm{foo}(\mathcal{F})\)||\DeclareMathOperator{\foo}{foo}
+% ...
+\(\foo(\symcal{F})\)|
+
+\section{Spacing}
+\instead{
+  \csi{vskip} \\
+  \csi{hskip} \\
+  \csi{mskip} \\
+  \csi{kern}  \\
+  \csi{mkern}
+}{
+  \csi{vspace} \\
+  \csi{hspace} \\
+  \csi{mspace} (\pai{amsmath} package)
+}
+
+These commands are \TeX{} primitives that use nonstandard syntax, which may
+lead to weird errors. It is preferable to use the \LaTeX{} equivalents, which
+use the standard syntax. The \csi{kern} primitive acts as either a vertical or
+a horizontal space, depending on whether it is used, respectively, between
+paragraphs or inside one.
+\begin{chktexignore}  
+\chto|\vskip 1cm||\vspace{1cm}|
+\chto|\mskip 1mu||\mspace{1mu}|
+\end{chktexignore}
 
 \endgroup
