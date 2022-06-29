@@ -1911,87 +1911,6 @@ correctly.
 \end{multline*}
 \end{example}
 
-\section{Fiddling with Math Styles}\label{sec:fontsz}
-
-You have already seen that \LaTeX{} typesets mathematics different, based on
-whether it is in inline or display style. There are actually four styles, the
-additional two being typically used for sup- and subscripts. If you want to
-change the style chosen by \LaTeX{} you can do so by using the commands
-presented in \autoref{tbl:math_styles}.
-\begin{table}
-  \NewDocumentCommand{\mathipsum}{}{\sum_{k = 0}^{\infty} ABCabc123}
-  \ExplSyntaxOn
-  \NewDocumentCommand{\ShowStyle}{m}{
-    \csi{#1} & \(\use:c{#1} \mathipsum \)
-  }
-  \ExplSyntaxOff
-  \caption{Math style commands available in
-    \LaTeX{}}\label{tbl:math_styles}
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    Command & Example             \\
-    \midrule
-    \ShowStyle{displaystyle}      \\
-    \ShowStyle{textstyle}         \\
-    \ShowStyle{scriptstyle}       \\
-    \ShowStyle{scriptscriptstyle} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-The \csi{frac} command by default decreases the style of its contents by one
-level when possible.
-\begin{example}
-\[
-  \frac
-    {\frac
-      {\frac{1}{2}}
-      {2}}
-    {2}
-\]
-\end{example}
-If you want to prevent it, use the appropriate command in its arguments.
-\begin{example}
-\[
-\frac
-  {\displaystyle
-   \sum_{k=1}^n (x_k - x)^2}
-  {\displaystyle
-   \left(
-    \sum_{k=1}^n (x_k - x)
-   \right)^2}
-\]
-\end{example}
-
-When typesetting formulae within text, you may enclose tall or deep math
-expressions or sub expressions in \csi{smash}. This makes \LaTeX{} ignore the
-height of these expressions and keeps the line spacing even, but risks
-overlapping the text around them.
-\begin{example}
-A \(d_{e_{e_p}}\) mathematical
-expression followed by a
-\(h^{i^{g^h}}\) expression.
-As opposed to a smashed 
-\smash{\(d_{e_{e_p}}\)}
-expression followed by a
-\smash{\(h^{i^{g^h}}\)}
-expression.
-\end{example}
-
-The \csi{smash} command accepts an optional argument---either \cargv{t} or
-\cargv{b}---that only changes the height of top and bottom parts of symbol to
-zero. This may be useful in some rare circumstances, for example when adjacent
-radical symbols don't line up due to differing content heights.
-\begin{example}
-\(  \sqrt{x} 
-  + \sqrt{y} 
-  + \sqrt{z}\)
-vs.\
-\(  \sqrt{x} 
-  + \sqrt{\smash[b]{y}} 
-  + \sqrt{z} \)
-\end{example}
-
 \section{Theorems and Proofs}
 
 When writing mathematical documents, you probably need a way to typeset
@@ -2116,6 +2035,87 @@ macro to your liking.
 \begin{proof}
   Trivial.
 \end{proof}
+\end{example}
+
+\section{Fiddling with Math Styles}\label{sec:fontsz}
+
+You have already seen that \LaTeX{} typesets mathematics different, based on
+whether it is in inline or display style. There are actually four styles, the
+additional two being typically used for sup- and subscripts. If you want to
+change the style chosen by \LaTeX{} you can do so by using the commands
+presented in \autoref{tbl:math_styles}.
+\begin{table}
+  \NewDocumentCommand{\mathipsum}{}{\sum_{k = 0}^{\infty} ABCabc123}
+  \ExplSyntaxOn
+  \NewDocumentCommand{\ShowStyle}{m}{
+    \csi{#1} & \(\use:c{#1} \mathipsum \)
+  }
+  \ExplSyntaxOff
+  \caption{Math style commands available in
+    \LaTeX{}}\label{tbl:math_styles}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Command & Example             \\
+    \midrule
+    \ShowStyle{displaystyle}      \\
+    \ShowStyle{textstyle}         \\
+    \ShowStyle{scriptstyle}       \\
+    \ShowStyle{scriptscriptstyle} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The \csi{frac} command by default decreases the style of its contents by one
+level when possible.
+\begin{example}
+\[
+  \frac
+    {\frac
+      {\frac{1}{2}}
+      {2}}
+    {2}
+\]
+\end{example}
+If you want to prevent it, use the appropriate command in its arguments.
+\begin{example}
+\[
+\frac
+  {\displaystyle
+   \sum_{k=1}^n (x_k - x)^2}
+  {\displaystyle
+   \left(
+    \sum_{k=1}^n (x_k - x)
+   \right)^2}
+\]
+\end{example}
+
+When typesetting formulae within text, you may enclose tall or deep math
+expressions or sub expressions in \csi{smash}. This makes \LaTeX{} ignore the
+height of these expressions and keeps the line spacing even, but risks
+overlapping the text around them.
+\begin{example}
+A \(d_{e_{e_p}}\) mathematical
+expression followed by a
+\(h^{i^{g^h}}\) expression.
+As opposed to a smashed 
+\smash{\(d_{e_{e_p}}\)}
+expression followed by a
+\smash{\(h^{i^{g^h}}\)}
+expression.
+\end{example}
+
+The \csi{smash} command accepts an optional argument---either \cargv{t} or
+\cargv{b}---that only changes the height of top and bottom parts of symbol to
+zero. This may be useful in some rare circumstances, for example when adjacent
+radical symbols don't line up due to differing content heights.
+\begin{example}
+\(  \sqrt{x} 
+  + \sqrt{y} 
+  + \sqrt{z}\)
+vs.\
+\(  \sqrt{x} 
+  + \sqrt{\smash[b]{y}} 
+  + \sqrt{z} \)
 \end{example}
 
 \section{Dots}
