@@ -77,6 +77,11 @@
 \RequirePackage[autostyle]{csquotes}
 \RequirePackage{multirow}
 \RequirePackage{xfrac}
+\DeclareInstance{xfrac}{LatinModernRoman(0)}{text} { 
+  slash-right-kern=-.15em,
+  slash-left-kern=-.15em,
+}
+
 \RequirePackage{siunitx}
 \RequirePackage{lastpage}
 \RequirePackage{mathtools}

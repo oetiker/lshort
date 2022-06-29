@@ -2113,3 +2113,98 @@ macro to your liking.
   Trivial.
 \end{proof}
 \end{example}
+
+\section{More About Fractions}\label{sec:fractions}
+
+You have already learned about the \csi{frac} command for typesetting built-up
+fractions. Its output depends on whether it is typeset in display or text
+style.
+\begin{example}
+\(\frac{1}{2}\) vs.\
+\[\frac{1}{2}\]
+\end{example}
+
+If you don't want to type \csi{displaystyle} or \csi{textstyle} every time to
+correct the style of fractions you can use \csi{tfrac} and \csi{dfrac}. These
+always typeset the fractions in text or display style, respectively.
+\begin{example}
+\(\dfrac{1}{2}\) vs.\
+\(\tfrac{1}{2}\)
+\[\dfrac{1}{2}\text{ vs.\ }
+  \tfrac{1}{2}\]
+\end{example}
+
+When writing the fractions in-line, often the slashed form \(1/2\) is
+preferable for small fractions. You may also want to use the \pai*{xfrac}
+package and the \csi{sfrac} command it provides to typeset them in a slashed
+form with smaller numbers.
+\begin{example}
+\(\frac{1}{2}\) vs.\ \(1/2\)
+vs.\ \sfrac{1}{2} vs.\ ½
+\end{example}
+Note that the \csi{sfrac} essentially \enquote*{fakes} the fraction by manually
+placing relevant symbols in the given positions. If the faked version is not to
+your liking, the package provides more customisation options. These are
+described in the package documentation. Some fonts support arbitrary fractions
+as symbols, which may produce better results; you can find more information
+about it in the \autoref{sec:fontspec}.
+
+If you have tried writing continued fractions, you may have noticed that the
+spacing is not ideal. The \pai{amsmath} package defines a special \csi{cfrac}
+command to fix this issue.
+\begin{example}
+\[
+  \dfrac{1}{
+    1 + \dfrac{1}{
+      1 + \dfrac{1}{
+        1 + \dotsb}}}
+\]
+vs.\
+\[
+  \cfrac{1}{
+    1 + \cfrac{1}{
+      1 + \cfrac{1}{
+        1 + \dotsb}}}
+\]
+\end{example}
+
+Binomial coefficients can be typeset using the \csi{binom}, \csi{tbinom} and
+\csi{dbinom} commands. These work analogously to the \csi{frac}, \csi{tfrac}
+and \csi{dfrac} commands.
+\begin{example}
+\[
+  \sum_{k=0}^{n} \binom{n}{k}
+    = 2^{n}
+\]
+\end{example}
+
+The built-up fractions and binomial coefficients are specialised examples of a
+more general command called \csi{genfrac}. It allows you to typeset one
+expression over another with an optional line between them and delimiters. Its
+full syntax is
+\begin{lscommand}
+  \csi{genfrac}[left:m, right:m, thickness:m, style: m, num:m, den: m]
+\end{lscommand}
+The \carg{left} and \carg{right} arguments are left and right delimiters, such
+as parentheses in the case of \csi{binom}. The \carg{thickness} determines the
+thickness of the line between the expressions, if you leave it empty it
+defaults to the same as this used by \csi{frac}. The \carg{style} is a number
+from \(0\) to \(3\) and overrides the default math style used to typeset the
+symbol, for example, the \csi{tfrac} sets it to \(1\) to always typeset the
+symbol in text style.
+
+For example, to create a wrapper for the unsigned Stirling numbers of the first
+kind you could write
+\begin{chktexignore}  
+\begin{example}
+\NewDocumentCommand{\stirfst}{}{
+  \genfrac{[}{]}{0cm}{}
+}
+\[
+  \sum_{k=0}^{n} \stirfst{n}{k}
+    = n!
+\]
+\end{example}
+\end{chktexignore}
+You should avoid using \csi{genfrac} inside the body of the document and always
+define logical wrappers if you intend to use it in multiple places.
