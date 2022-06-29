@@ -2114,6 +2114,55 @@ macro to your liking.
 \end{proof}
 \end{example}
 
+\section{Dots}
+
+Oftentimes when writing mathematical expressions you may want to omit some part
+of them that is easy to deduce, such as writing \(0, 1, 2, \dots\) to indicate
+a sequence of all natural numbers. In the simplest case you can use the
+\csi{dots} commands. It attempts to adjust its output based on the surrounding
+symbols.
+\begin{example}
+\(1, 2, 3, \dots, 100\) vs.\
+\(1 + 2 + 3 + \dots + 100\)
+\end{example}
+
+If the spacing chosen by \LaTeX{} is not adequate to your usage you can specify
+it explicitly by using
+\begin{description}
+  \item[\csi{dotsc}] for dots between commas (\(1, 2, \dotsc, 100\))
+  \item[\csi{dotsb}] for dots between binary operators or relations (\(1 < 2 <
+    \dotsb < 100\))
+  \item[\csi{dotsm}] for dots indicating multiplication (\(X_1 X_2 \dotsm
+    X_{100}\))
+  \item[\csi{dotsi}] for dots between integrals (\(\int_{X_1}\int_{X_2}
+    \dotsi \int_{X_{100}}\))
+  \item[\csi{dotso}] for dots in situations not matched by any of the above
+    (\(1\dotso+\))
+\end{description}
+\begin{example}
+\(1 + 2 + 3 + \dots\) vs.\ 
+\(1 + 2 + 3 + \dotsb\) 
+\end{example}
+You can also redefine the above wrappers if the version chosen by \LaTeX{} is
+not to your liking. By default all of these commands choose either between
+\csi{ldots}, for dots on baseline, and \csi{cdots}, for centered dots.
+\begin{example}
+\RenewDocumentCommand{%
+  \dotsb}{}{\ldots}
+\( 1 + 2 + 3 + \dotsb + 100 \)
+\end{example}
+
+In case of matrices you may also need non-horizontal dots. These are accessible
+under the commands \csi{vdots} (vertical dots \(\vdots\)), \csi{ddots}
+(descending dots \(\ddots\)) and \csi{adots} (ascending dots \(\adots\)).
+\begin{example}
+\[ \begin{bmatrix}
+  a_{1,1} & \cdots  & a_{1,n} \\
+  \vdots  & \ddots & \vdots  \\
+  a_{m,1} & \cdots  & a_{m,n} \\
+\end{bmatrix} \]
+\end{example}
+
 \section{More About Fractions}\label{sec:fractions}
 
 You have already learned about the \csi{frac} command for typesetting built-up

@@ -1,5 +1,5 @@
 CmdLine {
-    -eall -n22 -n30 -e16 -n46 -n21 -n29 -n3 -n17
+    -eall -n22 -n30 -e16 -n46 -n21 -n29 -n3 -n17 -n11
 }
 
 VerbEnvir {
