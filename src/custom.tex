@@ -50,13 +50,13 @@ can write:
 
 \begin{example}
 \begin{lscommand}
-\csi{dum}
+  \csi{dum}
 \end{lscommand}
 \end{example}
 
 In this example, I am using both a new environment called
 \ei{lscommand}, which is responsible for drawing the box around the
-command, and a new command named \csi{ci}, which typesets the command
+command, and a new command named \csi{csi}, which typesets the command
 name and makes a corresponding entry in the index. Check
 this out by looking up the \csi{dum} command in the index at the back
 of this book, where you'll find an entry for \csi{dum}, pointing to
@@ -71,22 +71,25 @@ box around some word.
 
 \subsection{New Commands}\label{sec:new_commands}
 
-To add your own commands, use the
+You have already learned some basic command creation in
+\autoref{sec:simple_commands}. The main command is the
 \begin{lscommand}
   \csi{NewDocumentCommand}[name:M, argspec:m, definition:m]
 \end{lscommand}
-\noindent command. It requires three arguments: the \carg{name} of the command
-you want to create, the \carg{argspec} (argument specification) and the
-\emph{definition} of the command.
+It requires three arguments: the \carg{name} of the command you want to create,
+the \carg{argspec} (argument specification) and the \emph{definition} of the
+command.
 
 The \carg{argspec} argument specifies the number and types of arguments the
-command receives. The two most important types are \cargv{m}, for \emph{mandatory} and \cargv{o} for \emph{optional}. To create a
-command that takes two optional arguments, then two mandatory, then again one
-optional and finally three mandatory you would write \cargv{oommommm}. If the
-\carg{argspec} argument is empty then the command will take no arguments.
+command receives. The two most important types are \cargv{m}, for
+\emph{mandatory} and \cargv{o} for \emph{optional}. To create a command that
+takes two optional arguments, then two mandatory, then again one optional and
+finally three mandatory you would write \cargv{oommommm}. If the \carg{argspec}
+argument is empty then the command will take no arguments, as you have already
+seen.
 
 This example defines a new command called \csi{tnss}. This is
-short for ``The Not So Short Introduction to \LaTeX.'' Such a command
+short for \enquote{The Not So Short Introduction to \LaTeX}. Such a command
 could come in handy if you had to write the title of this book over
 and over again.
 
@@ -98,9 +101,10 @@ This is \enquote{\tnss} \ldots{}
 \enquote{\tnss}
 \end{example}
 
-The next example illustrates how to define a new
-command that takes two arguments. In order to refer to the received arguments
-you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
+The next example illustrates how to define a new command that takes two
+arguments. In order to refer to the received arguments you use
+\mintinline{latex}|#1| for the first argument, \mintinline{latex}|#2| for the
+second, and so on.
 
 \begin{example}
 \NewDocumentCommand{\txsit}{mm}
@@ -200,19 +204,18 @@ that works analogously to the \csi{IfValueTF} command.
 \end{chktexignore}
 
 These are just the most common argument specifications. For a full description,
-take a look at the \pai*{xparse} package documentation.\footnote{This
-  package is loaded automatically in new \LaTeX{} releases, so you probably do not
-  need to put \cs{usepackage}[xparse: vm] in your preamble.}
+take a look at the~\cite{usrguide3}.
 
-\LaTeX{} will not allow you to create a new command that would
-overwrite an existing one. But there is a special command in case you
-explicitly want this: \csi{RenewDocumentCommand}.
-It uses the same syntax as the \csi{NewDocumentCommand}
-command.
+As we have discussed in \autoref{sec:simple_commands}, \LaTeX{} will not allow
+you to create a new command that would overwrite an existing one, you can do so
+using \csi{RenewDocumentCommand}. It uses the same argument specification
+syntax as the \csi{NewDocumentCommand} command.
 
-In some cases you might want to use the \csi{ProvideDocumentCommand}
-command. It works like \csi{NewDocumentCommand}, but if the command is
-already defined, \LaTeX{} will silently ignore it.
+In some cases you might want to use the \csi{ProvideDocumentCommand} command.
+It works like \csi{NewDocumentCommand}, but if the command is already defined,
+\LaTeX{} will silently ignore the new definition. Yet another variant is the
+\csi{DeclareDocumentCommand}. It always creates the given command, overwriting
+old definition if it exists.
 
 \subsection{New Environments}
 The \csi{NewDocumentEnvironment} command lets you create your own environments. It has the
