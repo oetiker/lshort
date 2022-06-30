@@ -511,10 +511,10 @@ There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold
 
 Shapes are a bit more complicated. The three basic shapes are: italics
 (\csi{textit}), oblique or slanted\footnote{Oblique shape differs from the
-  italics in that italic shape uses different glyphs while oblique shape
-  uses the same glyphs but slanted. The difference is really obvious
-  \fontshape{ui}\selectfont when you look at the unslanted italic font.}
-(\csi{textsl}) and small capitals (\csi{textsc}).
+  italics in that italic shape uses different glyphs while oblique shape uses
+  the same glyphs but slanted. The difference is really obvious
+  \fontspec{cmunui.otf} when you look at the unslanted italic
+  font.} (\csi{textsl}) and small capitals (\csi{textsc}).
 \begin{example}
 \textit{Italic shape.} \\
 \textsl{Slanted shape.} \\
@@ -681,7 +681,7 @@ where the text written using different sizes was rescaled to the same height.
 \end{center}
 
 If you need to access even more font variants and shapes\footnote{For example
-  the aforementioned \fontshape{ui}\selectfont upright italic shape.} check out
+  the aforementioned \fontspec{cmunui.otf} upright italic shape.} check out
 \citetitle{fntguide}~\cite{fntguide}.
 
 \subsection{Danger, Will Robinson, Danger}
@@ -974,6 +974,7 @@ alternative script letters.
 
 \(\symscr{ABCDabcd}\) vs.\
 \(\symcal{ABCDabcd}\) 
+\setmathfont{Latin Modern Math} %!hide
 \end{example}
 
 The default behaviour of the \csi{not} command is to combine the negating glyph
