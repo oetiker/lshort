@@ -1254,7 +1254,6 @@ uncertainty use the \cargv{uncertainty-mode} option.
 By default \pai{siunitx} typesets the quantities in math mode. This may be
 especially jarring if you use different font for the document text. One simple
 solution is to set the \cargv{mode} option to \cargv{text}.
-% TODO: Add pointer to changing math fonts section when written.
 \begin{example}
 \setmainfont{Source Sans Pro} %!hide
 \qty{1}{\degreeCelsius} is
@@ -1266,9 +1265,13 @@ but \qty[
 ]{-273.15}{\kelvin}.
 Bizarre, isn't it?
 \end{example}
+If your document contains both math and normal text it is probably better to
+use matching math fonts. You will learn more about it in
+\autoref{sec:math_fonts}.
 
-The behaviour of the commands may be customised even further. For a full list
-of options check out the \pai{siunitx} package documentation.
+The behaviour of the commands when it comes to typesetting units and quantities
+may be customised even further. For a full list of options check out the
+\pai{siunitx} package documentation.
 
 To avoid repeating the options with every use of commands, use the
 \begin{lscommand}
