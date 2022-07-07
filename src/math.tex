@@ -22,29 +22,28 @@
 
 \begin{intro}
   The \TeX{} typesetting system has become nearly ubiquitous when it comes to
-  typesetting mathematics. Many projects offer to export its mathematical
-  formulae to \LaTeX{} (for example, SageMath~\cite{sagemath}) or allow to enter
-  them in \LaTeX{} or \LaTeX{}-derived syntax (for example,
-  Wikipedia~\cite{enwiki:1091087776}). In this chapter you will learn how to
-  insert math formulae into your document.
+  typesetting mathematics. Many software packages even offer to export their
+  mathematical formulae to \LaTeX{} (for example, SageMath~\cite{sagemath}) or
+  allow to enter math expressions in \LaTeX{} or \LaTeX{}-derived syntax (for
+  example, Wikipedia~\cite{enwiki:1091087776}). In this chapter you will learn
+  how to insert math formulae into your document.
 \end{intro}
 
 \section{Modern Mathematics}
 
-While core \LaTeX{} is able to produce high quality mathematics output on its
-own, there are some areas where it is lacking and some of its choices are
-rather dated. To overcome these limitations we are going to use two packages:
-\pai*{mathtools} and \pai*{unicode-math}.
+While core \LaTeX{} is able to produce high quality mathematics output out of
+the box, there are a few areas where it is lacking useful features and some of
+the design choices have not aged well over the last 30 years. The
+\emph{\wi{American Mathematical Society}} was very interested in \TeX{} from
+the earliest days and sponsored the development of several well received
+enhancements to improve \LaTeX{} math abilities. The enhancements are known as
+\hologo{AmSTeX} and \hologo{AmSLaTeX}.
 
-The \pai*{amsmath} from the \hologo{AmSLaTeX} bundle was originally developed
-by The \emph{\wi{American Mathematical Society}} in 1995 to use for their own
-publications, but became pretty much indispensable for typesetting any advanced
-mathematics in \LaTeX. It extends the command set to easily typeset matrices,
-declare custom operators and much more. However the problem with it becoming so
-ubiquitous is that changing it would break a lot of old documents, which is
-highly undesirable. Fortunately, the \pai{mathtools} package exists---it loads
-the \pai{amsmath} while fixing some of its undesirable behaviours and provides
-some additional commands.
+These days the \hologo{AmSLaTeX} features and more is provided by the
+\pai*{mathtools} package which loads \pai{amsmath} package internally, adjusts
+some settings and fixes some behaviours and adds some additional commands. We
+recommend load it together with the \pai*{unicode-math} package for an optimal
+math-writing experience.
 
 The original \TeX{} used its own font encoding for typesetting mathematics,
 which is still used by default in \LaTeX{}. In recent years a new standard
@@ -53,11 +52,9 @@ appeared: OpenType math extensions\footnote{Its internal structure is actually
 Unicode characters inside documents. The \pai{unicode-math} package adds
 support for these fonts in \LaTeX{} allowing you to use more symbols and makes
 the commands for accessing math symbols a bit more consistent. The problem with
-\pai{unicode-math} is the opposite of the \pai{amsmath}---it is a relatively
-new player in the game and it changes some of the fundamental \TeX{}
-assumptions, so it may not work well with some packages (especially if they're
-old). Unfortunately there is no easy way out of this and you may have to give
-up either these packages or unicode math fonts.
+\pai{unicode-math} is the some of the older math packages rely on the
+classic math font encoding. So if you have to use them, then do not use the
+\pai{unicode-math} package to save your sanity.
 
 Throughout this section it is assumed that your preamble contains these two
 lines in this order:
@@ -78,7 +75,7 @@ commands.\footnote{These are \csi{overbracket}, \csi{underbracket},
 
 \section{Single Equations}\label{sec:single_equations}
 
-\LaTeX{} distinguishes between two styles of typesetting the formulae:
+\LaTeX{} distinguishes between two styles of typesetting formulae:
 \emph{\wi{text style}} and \emph{\wi{display style}}. The text style is used
 typeset inline math in running text, like this \(\sum_{k=0}^\infty
 \frac{1}{k}\), while the display style is used to typeset bigger equations on
@@ -113,10 +110,10 @@ equations can be labelled and refereed to using commands described in
 The equation~\ref{trivial}
 is true.
 \end{example}
-Two additional commands exist \csi{eqref} and \csi{tag}. The first one is
-similar to the \cs{ref} command but encloses its label in parentheses to match
-the appearance of the equation label. The second one allows you to customise
-the the visible label of the equation.
+The commands \csi{eqref} and \csi{tag} make cross-referencing in math context
+even simpler. The first one is similar to the \cs{ref} command but encloses its
+label in parentheses to match the appearance of the equation label. The second
+one allows you to customise the the visible label of the equation.
 \begin{example}
 \begin{equation}
   \tag{Ingsoc's theorem}
@@ -129,10 +126,11 @@ The starred version, \ei{equation*}, is a synonym of \csi{[}.
 
 \subsection{Math Mode}
 
-The commands and environments mentioned in the previous section enter what's
-called \emph{\wi{math mode}}, as opposed to the \emph{text mode} outside them.
-There are numerous differences between those. For starters, most of the
-whitespaces are ignored in math mode.
+The commands and environments mentioned in the previous section activate a
+special math-optimised version of the \LaTeX{} language. It is commonly known
+as \emph{\wi{math mode}}. \LaTeX{} normally operates in \emph{text mode}. There
+are numerous differences between the two modes. For starters, most of the
+whitespace is ignored in math mode.
 \begin{example}
 \(123xyz\) is the same as \(
   1 2 3 x y z
@@ -145,12 +143,12 @@ math mode is \emph{not} allowed. Doing so will result in the \enquote{Bad math
   environment delimiter.} error.
 
 Another difference is the fact that all letters are treated as mathematical
-variables. This changes their font style to \textit{italic} and changes the
-spacing around them.
+variables. Variables are printed using an \textit{italic} font, and the
+spacing around is wider than in text-mode.
 \begin{example}
 Compare office to \(office\).
 \end{example}
-If you want to typeset normal text within formulae you can use the \csi{text}
+If you want to typeset normal text within a formulae you can use the \csi{text}
 command.
 \begin{example}
 \( 1 + \text{one} = 2\)
@@ -164,7 +162,7 @@ now be used to typeset \wi{superscript}s and \wi{subscript}s, respectively.
 \( A_x = G_{\text{foo}} \)
 \end{example}
 
-\section{Building Blocks of a Mathematical Formulae}
+\section{Building Blocks of Mathematical Formulae}
 
 In this section, we describe the most important commands used in mathematical
 typesetting. The list of symbols introduced here is far from comprehensive. If
@@ -198,17 +196,17 @@ for \csi{leqslant} and \csi{geqslant}.
 \(1 \leqslant 2\)
 \end{example}
 
-Exponentiation can be achieved using the superscript \ai{\^{}}\index{exponent}
-character, but there are some subtleties. During typesetting, superscript
-adapts to the height of the previous character. This is usually correct, but
-when dealing with parentheses it may be a bit too low.
+Exponents are written using the superscript \ai{\^{}}\index{exponent}
+character. \LaTeX{} will adapt the size and position of the superscript to the
+the height of the previous character. This is usually correct, but when
+parentheses are present the position may be a bit too low.
 \begin{example}
 \( a^2 \) is fine, but what
 about \( (a^2)^2 \)?
 \end{example}
 In the example above the second superscript doesn't know about the first one
-inside, and it adapts only to the height of the closing parenthesis. To fix
-this enclose the parentheses in a group.
+inside the parenthesis, and it adapts only to the height of the closing
+parenthesis. To fix this enclose the parentheses in a group.
 \begin{example}
 \( {(a^2)}^2 \) is better.
 \end{example}
@@ -379,10 +377,11 @@ are considered to be mathematical variables. In particular \csi{pi}
 
 When writing mathematics it is often the case that we use different fonts for
 mathematical symbols depending on the object they represent. For example, the
-variables are typeset using the italic font, while known sets often get
-a fancy double-struck (also known as \enquote*{blackboard bold}) font, for example, \(\symbb{N}\). You can access various fonts by using
-the family of \cs{sym...} commands. For example, to typeset double-struck
-letters use the \csi{symbb} command.
+variables are typeset using an italic font, while known sets often get a fancy
+double-struck (also known as \enquote*{blackboard bold}) font, for example,
+\(\symbb{N}\). You can access various fonts by using the family of \cs{sym...}
+commands. For example, to typeset double-struck letters use the \csi{symbb}
+command.
 \begin{example}
 \[
   \forall_{p \in \symbb{P}}
@@ -461,7 +460,7 @@ wrappers for the constants we are going to use.
 \[ \e^{\im\cpi} + 1 = 0 \]
 \end{example}
 
-Known functions such as \(\sin\) or \(\log\) should also be written in Roman,
+Functions such as \(\sin\) or \(\log\) should be written in Roman style,
 however you should not use the \csi{symrm} command to do so. As the name of the
 command indicates, it is meant to be used for mathematical symbols. Since in
 \enquote{\(\sin\)} name \(s\), \(i\) and \(n\) are not symbols, but a
@@ -501,16 +500,16 @@ define your own. It can be only used in the preamble.
 
 \subsection{Big Operators}
 
-At the beginning of the \autoref{sec:single_equations} we have shown the
+At the beginning of the \autoref{sec:single_equations} we have used the
 summation operator to show off capabilities of mathematical typesetting. To
-typeset it use the \csi{sum} command. Its lower and upper limits are specified
+typeset it use the \csi{sum} command, its lower and upper limits are specified
 by the sub- and superscript operators.
 \begin{example}
 \(
   \sum_{k=0}^{n} \frac{1}{k^2}
 \)
 \end{example}
-As you saw its appearance in text style starkly differs from the one in the
+The appearance in text style differs massively from the one in
 display style.
 \begin{example}
 \[
@@ -552,23 +551,25 @@ place \cs{\bs} to indicate where new lines should be started.
 \]
 \end{example}
 
-Integral symbol is also a big operator, but it only shifts the lower limit left.
+The integral symbol is also a big operator, but it only shifts the lower limit
+left.
 \begin{example}
 \[
   \int_a^b \liminf_{a \to x} a^2
 \]
 \end{example}
-Due to the fact that the symbol is very slanted to the right,
-typesetting multiple integrals leads to excessive space around them. You
-should use \csi{iint},\csi{iiint},\csi{iiiint} if you want to typeset them.
+Due to the fact that the symbol is very slanted to the right, typesetting
+multiple integrals leads to excessive space around them. Use
+\csi{iint},\csi{iiint},\csi{iiiint} instead, for improved spacing.
 \begin{example}
 \[ \int\int\int\int \]
 vs.\ 
 \[ \iiiint \]
 \end{example}
 
-If you want to suppress the big operators limits and typeset normal sub- or
-supscript next to them, you can simply surround them with curly braces.
+If you want to suppress the big operators limit-placement-behaviour and typeset
+normal sub- or supscript next to them, you can simply surround them with curly
+braces.
 \begin{example}
 \[
   {\sum_{a}}^b
@@ -642,14 +643,14 @@ expression above or below them.
 \]
 \end{example}
 
-If the default accents are not enough for you you can create your own using
+You can even create your own math-accents using
 \csi{overset} and \csi{underset}.
 \begin{example}
 \(\overset{\text{foo}}{x}\)
 \(\underset{\times}{A}\)
 \end{example}
 These commands may also be used when creating custom \wi{binary relations},
-though you may check whether the one you are trying to define is not already predefined.
+make sure that you do not overwrite existing commands!
 \begin{example}
 \(a \overset{\text{def}}{=} b\)
 vs.\ \(a \eqdef b\)
@@ -670,7 +671,7 @@ sorts of symbols for \wi{delimiters}, such as
   \lvert x \rvert
 \]
 \end{example}
-While all of them work fine for small input, things get ugly when the
+While all of them work fine for bungalow-style math, things get ugly when the
 expression inside them starts getting tall.
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
 \[
@@ -682,9 +683,9 @@ expression inside them starts getting tall.
 \]
 \end{example}
 
-To fix this you can use the \csi{left} and \csi{right} commands. These take one
+To fix this you can use the \csi{left} and \csi{right} commands. They take one
 argument---the delimiter to extend---and adapt its size based on the content
-they delimit. You must close every \csi{left} with a corresponding \csi{right}
+they delimit. You must close every \csi{left} with a corresponding \csi{right},
 but they do not have to use the same delimiter.
 \begin{chktexignore}
 \begin{example}
@@ -903,8 +904,8 @@ a single equation in multiple lines.
     &= \frac{n(n+1)}{2}
 \end{align}
 \end{example}
-We may use the additional columns and the \csi{text} command to put line by
-line comments in such transformations.
+We can even use additional columns to add line by
+line comments with the \csi{text} command in such transformations.
 \begin{example}
 \begin{align*}
   \sum_{k=0}^n k
@@ -1020,7 +1021,7 @@ given line.
 \end{example}
 
 You can also use the \csi{IEEEeqnarraymulticol} to adjust only a single line
-within the environment, with its usage similar to the \cs{multicol}.
+within the environment, with its usage similar to the \cs{multicol} environment.
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
   \IEEEeqnarraymulticol{3}{l}{
@@ -1058,15 +1059,16 @@ Note that eventual \cs{label} commands should follow after these.
 
 When dealing with real world data you will often find yourself writing units
 such as \qty{10}{\kg} or \qty{25}{\coulomb\per\mole}. In technical writing it
-is crucial to accurately convey values to avoid errors and ambiguity.
-The \emph{International System of Units} (\emph{SI})~\cite{si}, comes with a detailed set
-of typesetting rules. For example, you may have noticed that in the
-first sentence the space between \num{10} and \unit{\kg} is smaller than
+is crucial to accurately convey values to avoid errors and ambiguity. The
+\emph{International System of Units} (\emph{SI})~\cite{si}, comes with a
+detailed set of typesetting rules. For example, you may have noticed that in
+the first sentence the space between \num{10} and \unit{\kg} is smaller than
 between the words.
 
 Fortunately thanks to the logical nature of \LaTeX{} markup and the excellent
-\pai*{siunitx} package you do not need to know most of the rules. Just use the special unit-commands provided by the package and all the units in your document will be
-typeset correctly.
+\pai*{siunitx} package you do not need to know most of the rules. Just use the
+special unit-commands provided by the package and all the units in your
+document will be typeset correctly.
 
 \subsection{Pitfalls of Naïvely Entered Units}
 
@@ -1084,7 +1086,7 @@ can calculate \ldots
 \end{example}
 A non-breaking space will fix this problem, but the next one is already
 waiting---the space between numbers. Digits of long numbers should be grouped
-to make them easier to read. The above example should then written like this:
+to make them easier to read. The above example should then be written like this:
 \begin{example}
 The speed of light is
 299~792~458~m/s.
@@ -1171,7 +1173,8 @@ or equivalently
 \unit[sticky-per]{\m\kg\per\s\cubed\K}. 
 \end{example}
 
-Sometimes you may want to make the units use a different colour so they figure more prominently. This can be done using \cargv{unit-color}. Options
+Sometimes you may want to make the units use a different colour so they figure
+more prominently. This can be done using \cargv{unit-color}. Options
 \cargv{number-color} and \cargv{color} may be used to colour only the numeric
 values or whole quantities. If you want to highlight a single unit in a
 compound unit, you may use the \csi{highlight} command.
@@ -1283,7 +1286,11 @@ in a given element, such as a table. These options may be also passed as package
 options. \autoref{sistandaloneexa} shows an example usage of the package in
 a full document.
 \begin{listing}
-  \begin{example}[standalone, template=empty, examplewidth=\linewidth,paperwidth=12cm, paperheight=5.5cm, vertical_mode]
+  \begin{example}[standalone,
+    template=empty,
+    examplewidth=\linewidth,paperwidth=12cm,
+    paperheight=5.5cm,
+    vertical_mode]
 \documentclass{article}
 
 \usepackage[paperheight=\height,paperwidth=\width,margin=0.3cm]{geometry} %!hide
@@ -1376,10 +1383,9 @@ This area is
 \qtyproduct{2x5}{\metre}.
 \end{example}
 
-If we are dealing with quantum mechanics then complex numbers may be useful.
-To typeset them use \csi{complexnum} and \csi{complexqty}. They can be entered in
+If we are dealing with quantum mechanics then complex numbers may be useful. To
+typeset them use \csi{complexnum} and \csi{complexqty}. They can be entered in
 both Cartesian form and polar coordinates.
-
 \begin{example}[examplewidth=0.5\linewidth]
 The conjugate of
 \complexnum{2+3i} is
@@ -1550,7 +1556,8 @@ also contain information about signs, exponents or text around numbers. See
 
 By default numbers and text within the \cargv{S} columns and centred. If you
 want to change the alignment use the \cargv{table-number-alignment} and
-\cargv{table-text-alignment} options. See \autoref{lst:salignment} for an example.
+\cargv{table-text-alignment} options. See \autoref{lst:salignment} for an
+example.
 \begin{listing}
   \begin{example}[examplewidth=0.7\linewidth, vertical_mode]
 \begin{tabular} {
@@ -1577,7 +1584,8 @@ want to change the alignment use the \cargv{table-number-alignment} and
   \bottomrule
 \end{tabular}
 \end{example}
-  \caption{An example of aligning text and numbers inside the \pai{siunitx}'s \cargv{S} column.}\label{lst:salignment}
+  \caption{An example of aligning text and numbers inside the \pai{siunitx}'s
+    \cargv{S} column.}\label{lst:salignment}
 \end{listing}
 The numbers may also be aligned inside a \csi{multicol} or \csi{multirow},
 using the \csi{tablenum} command as seen in \autoref{lst:tablenum}.
@@ -1630,7 +1638,8 @@ Typesetting matrices\index{matrix} in \LaTeX{} is possible with the \ei{matrix}
 environment from the \pai*{amsmath} packages. It simply aligns the lines and
 columns similarly to \env{tabular} and does not produce any delimiters around
 its contents. In contrast to tabular it does not accept column specification
-and each of its entries is typeset in math mode. The maximum number of columns a matrix can have is \(10\).
+and each of its entries is typeset in math mode. The maximum number of columns
+a matrix can have is \(10\).
 \begin{example}
 \( \left[
   \begin{matrix}
@@ -2000,7 +2009,8 @@ example of using these commands is presented in \autoref{lst:theorems}
 If you want to customise your theorems down to the last dot, the
 \pai*{ntheorem} package offers a plethora of options.
 
-The \pai{amsthm} package also provides the \ei{proof} environment to use with theorems.
+The \pai{amsthm} package also provides the \ei{proof} environment to use with
+theorems.
 \begin{example}
 \begin{proof}
   Trivial.
