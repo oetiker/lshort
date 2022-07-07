@@ -32,12 +32,16 @@
 \RequirePackage{fontspec}
 \RequirePackage[math-style=ISO]{unicode-math}
 \setmainfont[
-  SlantedFont=Latin Modern Roman Slanted
+  SlantedFont=Latin Modern Roman Slanted,
+  UprightFeatures={SmallCapsFont={Latin Modern Roman Caps}},
+  ItalicFeatures={SmallCapsFont={LM Roman Caps 10 Oblique}},
 ]{Latin Modern Roman}
 \setsansfont{Latin Modern Sans}
 \setmonofont[
   SlantedFont=Latin Modern Mono Slanted,
   BoldSlantedFont=LM Mono Light 10 Bold Oblique,
+  UprightFeatures={SmallCapsFont={Latin Modern Roman Caps}},
+  ItalicFeatures={SmallCapsFont={LM Mono Caps 10 Oblique}},
 ]{Latin Modern Mono}
 
 \RequirePackage{polyglossia}
