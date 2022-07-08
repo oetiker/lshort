@@ -793,8 +793,8 @@ The easiest way to display long equations is the \ei{multline} environment. It
 allows to introduce linebreaks with the \csi{\bs} command.
 \begin{example}
 \begin{multline}
-  a + b + c + d + e + f
-  + g + h + i \\
+  a + b + c + d + e
+  + f + g + h + i \\
   = j + k + l + m + n
 \end{multline}
 \end{example}
@@ -802,9 +802,9 @@ The first line in \ei{multline} environment is aligned to the left, the last
 one to the right, while all the others are centred.
 \begin{example}
 \begin{multline}
-  l + e + f + t \\
-  + c + e + n + t + r + e \\
-  = r + i + g + h + t
+  a + b + c + d + e \\
+  + f + g + h + i \\
+  = j + k + l + m + n
 \end{multline}
 \end{example}
 
@@ -813,10 +813,10 @@ If you do not want some particular inner line centred, you can use
 right aligned.
 \begin{example}
 \begin{multline}
-  l + e + f + t \\
-  \shoveleft{+ left + again} \\
-  \shoveright{+ now + right} \\
-  = r + i + g + h + t
+  a + b + c \\
+  \shoveleft{+ d + e + f} \\
+  \shoveright{+ g + h + i} \\
+  = j + k + l + m + n
 \end{multline}
 \end{example}
 
@@ -959,20 +959,17 @@ They can be also freely nested, if a need arises.
 \begin{align}
   a + b + c
     &= \begin{multlined}[t]
-      long \\
-      multiline \\
-      equation \\
-      inside \\
-      align
+      d + e \\
+      + e + f \\
+      + h
     \end{multlined} \\
     &= \begin{aligned}[t]
-      1 &+ long \\
-        &- aligned \\
-        &+ equation \\
-        &\div inside \\
-        &\times align
+      i &+ j \\
+        &- k \\
+        &\div m \\
+        &\times n
     \end{aligned} \\
-    &= d + e + f
+    &= o + p + q
 \end{align}
 \end{example}
 
@@ -982,15 +979,15 @@ If the environments defined in \ei{amsmath} do not meet your needs, you can try
 the \ei{IEEEeqnarray} from the \pai*{IEEEtrantools} package. It allows you to
 specify the alignment of each math column separately similarly to the
 \env{tabular} environment. Here we will present some of its basic
-functionalities. More can found in its official manual~\cite{IEEEtran_HOWTO}.
-The part about \texttt{IEEEeqnarray} can be found in Appendix~F.
+functionalities. More information about \texttt{IEEEeqnarray} can found in
+Appendix~F of~\cite{IEEEtran_HOWTO}.
 
 To specify columns use \cargv{l}, \cargv{c} and \cargv{r}. Their uppercase
 version also adds a small space around the column, which is useful in case of
 binary operators. For example, to emulate the \ei{align} environment we could
 use \cargv{rCl}, i.e., three columns, the first column right-justified, the
 middle one centred with a little more space around it and the third column
-left-justified:
+left-justified.
 \begin{example}
 \begin{IEEEeqnarray}{rCl}
   a & = & b + c \\
