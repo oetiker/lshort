@@ -33,6 +33,9 @@
 - redesign the title page with illustration / marcin-serwin
 - restructure the repo / marcin-serwin
 - update readme / marcin-serwin
+- drop the lssymb appendix / marcin-serwin
+- rewrite the math appendix to focus on `unicode-math` / marcin-serwin
+- add sections about changing math fonts / marcin-serwin
 
 ## 6.4 2021.03.09
 

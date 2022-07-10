@@ -12,6 +12,7 @@ jobs:
       - name: Install tools
         run: |
           apk add make
+          tlmgr update --self
           tlmgr install chktex
           tlmgr install latexindent
 
@@ -37,6 +38,7 @@ jobs:
     steps:
       - name: Install tools
         run: |
+          tlmgr update --self
           tlmgr update graphics
           tlmgr update xcolor
           apk add make

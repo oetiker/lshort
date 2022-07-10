@@ -509,9 +509,107 @@ Stra\ss e
   \bigskip
 \end{table}
 
-\section{International Language Support}\label{sec:polyglossia}
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}%
-\index{international} When you write documents in \wi{language}s
+\section{Simple Commands}\label{sec:simple_commands}
+
+Oftentimes when writing a document you will find yourself typing the same
+name\slash{}logo\slash{}complicated text in multiple places. If that's the case
+you risk introducing typos in these. In case of brand logos it is also often
+the case that they define a preferred way to introduce them in text, such as
+all uppercase or starting with a lowercase letter even at the beginning of the
+sentence.
+
+We have already seen a solution for this problem---commands. For example to
+refer to \LaTeX{}, which uses a rather complicated logo within text, you don't
+have to put pictures or manually space letters---just use the \csi{LaTeX}
+command. In \LaTeX{} you can define your own commands that may replace
+complicated sequence of commands producing given text.
+
+For example, let's imagine that you are writing an article about Polish
+notation. In doing so, you may have to refer to the the inventor of the
+notation, Jan Łukasiewicz. His last name may not be easy to remember and to
+type for someone who does not speak Polish. It also starts with letter
+\enquote*{Ł} which may not be easily accessible on your keyboard, so you will
+have to use \csi{L} which will make the code less readable.
+
+\LaTeX{} enables you to define your own commands using the
+\begin{lscommand}
+  \csi{NewDocumentCommand}[name:M, {{}}:c, definition:m]
+\end{lscommand}
+command. The \carg{name} is the name of the command that you will use in the
+code, while the \carg{definition} is the output it will produce. The second
+argument is left empty for now but will be explored in
+\autoref{sec:new_commands}
+\begin{example}
+\NewDocumentCommand{\lukas}{}{%
+  Łukasiewicz%
+}
+
+Polish notation (also known as
+\lukas{} notation, due to its
+inventor, Jan \lukas) is a
+mathematical notation \ldots{}
+\end{example}
+In the example above we have used \ai{\%} comments to avoid introducing spaces.
+If you need a refresher on this technique, refer to \autoref{sec:comments}.
+
+While the \enquote*{Ł} character is available in \LaTeX{} using the \csi{L}
+command, this is not the case for all unicode characters. For example, the
+default font contains a glyph for commercial minus sign (⁒), used in some German
+speaking countries, but does not define a command to enter it. If you want to
+avoid copy-pasting it into your code constantly you can set up a command to
+typeset it for you.
+\begin{example}
+\NewDocumentCommand{%
+  \comminus}{}{⁒}
+
+Now I can type ⁒ or \comminus.
+\end{example}
+
+Yet another usage is to define a command for a simple string, but one you may
+want to change later. For example, let's image you are writing a novel, but are
+not so sure about your protagonist name. You can define a command for
+typesetting it, and in case of changing your name you will be able to modify it
+in one place instead of hunting down every single instance of their name
+throughout the book.
+\begin{example}
+\NewDocumentCommand{%
+  \hero}{}{Launcelot}
+
+\hero{} unsheathed his sword.
+He  had a bad feeling about
+this place from the start.
+\end{example}
+
+The \csi{NewDocumentCommand} checks if a command with the given name is already
+defined and raises an error if it does. This means that you can freely use it
+to define your own commands without worrying about breaking some internal
+commands used by \LaTeX{} or used packages. But sometimes redefining existing
+commands is actually what you want, for example, many packages allow for
+customisation in that way. In that case you should use
+\csi{RenewDocumentCommand}. It works the same way as the former command, but it
+raises error if a command with the given name is \emph{not} already defined.
+\begin{example}
+\RenewDocumentCommand{%
+  \ldots}{}{...}
+
+I like my ellipsis looking
+uglier \ldots
+\end{example}
+
+The presented commands can be used with nearly all features of \LaTeX{}. While
+here we have only dealt with text, the commands may be used to insert pictures
+or mathematical notations. It is especially useful for the latter case, since
+mathematical symbols are often repurposed to mean different things and
+consistency of their usage is very important.
+
+Note that the described commands are actually much more powerful and will be
+discussed further in \autoref{sec:new_commands}.
+
+\section{International Language Support}\label{sec:polyglossia}%
+\index{international}
+\secby{Axel Kielhorn}{A.Kielhorn@web.de}
+
+When you write documents in \wi{language}s
 other than English, there are three areas where \LaTeX{} has to be
 configured appropriately:
 
@@ -938,7 +1036,7 @@ numbering to work as you would expect in a book:
     document classes, this has no visual effect.
 \end{description}
 
-\section{Cross References}
+\section{Cross References}\label{sec:crossref}
 
 In books, reports and articles, there are often
 \wi{cross-references} to figures, tables and special segments of text.

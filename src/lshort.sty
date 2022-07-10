@@ -30,6 +30,20 @@
 \RequirePackage{ragged2e}
 
 \RequirePackage{fontspec}
+\RequirePackage[math-style=ISO]{unicode-math}
+\setmainfont[
+  SlantedFont=Latin Modern Roman Slanted,
+  UprightFeatures={SmallCapsFont={Latin Modern Roman Caps}},
+  ItalicFeatures={SmallCapsFont={LM Roman Caps 10 Oblique}},
+]{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont[
+  SlantedFont=Latin Modern Mono Slanted,
+  BoldSlantedFont=LM Mono Light 10 Bold Oblique,
+  UprightFeatures={SmallCapsFont={Latin Modern Roman Caps}},
+  ItalicFeatures={SmallCapsFont={LM Mono Caps 10 Oblique}},
+]{Latin Modern Mono}
+
 \RequirePackage{polyglossia}
 \setdefaultlanguage{english}
 \setotherlanguage{german}
@@ -67,9 +81,15 @@
 \RequirePackage[autostyle]{csquotes}
 \RequirePackage{multirow}
 \RequirePackage{xfrac}
+\DeclareInstance{xfrac}{LatinModernRoman(0)}{text} { 
+  slash-right-kern=-.15em,
+  slash-left-kern=-.15em,
+}
+
 \RequirePackage{siunitx}
 \RequirePackage{lastpage}
-\RequirePackage{amsmath, amssymb, amsthm, amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage{amsthm}
 \RequirePackage{mathrsfs}
 \RequirePackage{microtype}
 \RequirePackage{IEEEtrantools}
@@ -214,6 +234,10 @@
   \csih{#1}
 }
 
+\NewDocumentCommand{\csiv}{vo}{
+  \csi{#1}[#2]
+}
+
 \NewDocumentCommand{\carg}{sm}{
   \textnormal{
     \IfBooleanTF {#1} {
@@ -350,29 +374,10 @@
 \RenewExpandableDocumentCommand{\fps@figure}{}{htpb}
 \ExplSyntaxOff
 
-%\noindent\addvspace{1ex}\small #1 <\texttt{#2}>\par\addvspace{2ex}\noindnet\ignorespaces}
-%
-%
-% Symbol Entry for Math Symbol Tables
-%
-\newcommand{\mstX}[1]{$#1$&\mintinline{latex}|#1|\hspace*{1ex}}
-% normal text ....
-\newcommand{\mstSC}[1]{#1&\mintinline{latex}|#1|\hspace*{1ex}}
 % for accents in text mode
 \newcommand{\mstA}[1]{\mintinline{latex}|#1|&#1}
 \newcommand{\mstB}[2]{\texttt{\mintinline{latex}|#1|{} #2}&#1#2}
 
-\newcommand{\mstW}[2]{$#1{#2}$&
-  \mintinline{latex}|#1|\texttt{\string{\string#2\string}}\hspace*{1ex}}
-\newcommand{\mstY}[1]{$\big#1$ &\mintinline{latex}|#1|}
-% Mathsymbol Table
-\newsavebox{\symbbox}
-\newenvironment{symbols}[1]%
-{\par\vspace*{2ex}
-  \renewcommand{\arraystretch}{1.1}
-  \begin{lrbox}{\symbbox}
-    \hspace*{4ex}\begin{tabular}{@{}#1@{}}}%
-      {\end{tabular}\end{lrbox}\makebox[\linewidth]{\usebox{\symbbox}}\par\medskip}
 %
 % Print |--| to show a distance
 %

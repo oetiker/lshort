@@ -50,13 +50,13 @@ can write:
 
 \begin{example}
 \begin{lscommand}
-\csi{dum}
+  \csi{dum}
 \end{lscommand}
 \end{example}
 
 In this example, I am using both a new environment called
 \ei{lscommand}, which is responsible for drawing the box around the
-command, and a new command named \csi{ci}, which typesets the command
+command, and a new command named \csi{csi}, which typesets the command
 name and makes a corresponding entry in the index. Check
 this out by looking up the \csi{dum} command in the index at the back
 of this book, where you'll find an entry for \csi{dum}, pointing to
@@ -71,22 +71,25 @@ box around some word.
 
 \subsection{New Commands}\label{sec:new_commands}
 
-To add your own commands, use the
+You have already learned some basic command creation in
+\autoref{sec:simple_commands}. The main command is the
 \begin{lscommand}
   \csi{NewDocumentCommand}[name:M, argspec:m, definition:m]
 \end{lscommand}
-\noindent command. It requires three arguments: the \carg{name} of the command
-you want to create, the \carg{argspec} (argument specification) and the
-\emph{definition} of the command.
+It requires three arguments: the \carg{name} of the command you want to create,
+the \carg{argspec} (argument specification) and the \emph{definition} of the
+command.
 
 The \carg{argspec} argument specifies the number and types of arguments the
-command receives. The two most important types are \cargv{m}, for \emph{mandatory} and \cargv{o} for \emph{optional}. To create a
-command that takes two optional arguments, then two mandatory, then again one
-optional and finally three mandatory you would write \cargv{oommommm}. If the
-\carg{argspec} argument is empty then the command will take no arguments.
+command receives. The two most important types are \cargv{m}, for
+\emph{mandatory} and \cargv{o} for \emph{optional}. To create a command that
+takes two optional arguments, then two mandatory, then again one optional and
+finally three mandatory you would write \cargv{oommommm}. If the \carg{argspec}
+argument is empty then the command will take no arguments, as you have already
+seen.
 
 This example defines a new command called \csi{tnss}. This is
-short for ``The Not So Short Introduction to \LaTeX.'' Such a command
+short for \enquote{The Not So Short Introduction to \LaTeX}. Such a command
 could come in handy if you had to write the title of this book over
 and over again.
 
@@ -98,9 +101,10 @@ This is \enquote{\tnss} \ldots{}
 \enquote{\tnss}
 \end{example}
 
-The next example illustrates how to define a new
-command that takes two arguments. In order to refer to the received arguments
-you use \verb|#1| for the first argument, \verb|#2| for the second, and so on.
+The next example illustrates how to define a new command that takes two
+arguments. In order to refer to the received arguments you use
+\mintinline{latex}|#1| for the first argument, \mintinline{latex}|#2| for the
+second, and so on.
 
 \begin{example}
 \NewDocumentCommand{\txsit}{mm}
@@ -200,19 +204,18 @@ that works analogously to the \csi{IfValueTF} command.
 \end{chktexignore}
 
 These are just the most common argument specifications. For a full description,
-take a look at the \pai*{xparse} package documentation.\footnote{This
-  package is loaded automatically in new \LaTeX{} releases, so you probably do not
-  need to put \cs{usepackage}[xparse: vm] in your preamble.}
+take a look at the~\cite{usrguide3}.
 
-\LaTeX{} will not allow you to create a new command that would
-overwrite an existing one. But there is a special command in case you
-explicitly want this: \csi{RenewDocumentCommand}.
-It uses the same syntax as the \csi{NewDocumentCommand}
-command.
+As we have discussed in \autoref{sec:simple_commands}, \LaTeX{} will not allow
+you to create a new command that would overwrite an existing one, you can do so
+using \csi{RenewDocumentCommand}. It uses the same argument specification
+syntax as the \csi{NewDocumentCommand} command.
 
-In some cases you might want to use the \csi{ProvideDocumentCommand}
-command. It works like \csi{NewDocumentCommand}, but if the command is
-already defined, \LaTeX{} will silently ignore it.
+In some cases you might want to use the \csi{ProvideDocumentCommand} command.
+It works like \csi{NewDocumentCommand}, but if the command is already defined,
+\LaTeX{} will silently ignore the new definition. Yet another variant is the
+\csi{DeclareDocumentCommand}. It always creates the given command, overwriting
+old definition if it exists.
 
 \subsection{New Environments}
 The \csi{NewDocumentEnvironment} command lets you create your own environments. It has the
@@ -508,10 +511,10 @@ There are only two predefined \LaTeX{} series: medium (\csi{textmd}) and bold
 
 Shapes are a bit more complicated. The three basic shapes are: italics
 (\csi{textit}), oblique or slanted\footnote{Oblique shape differs from the
-  italics in that italic shape uses different glyphs while oblique shape
-  uses the same glyphs but slanted. The difference is really obvious
-  \fontshape{ui}\selectfont when you look at the unslanted italic font.}
-(\csi{textsl}) and small capitals (\csi{textsc}).
+  italics in that italic shape uses different glyphs while oblique shape uses
+  the same glyphs but slanted. The difference is really obvious
+  \fontspec{cmunui.otf} when you look at the unslanted italic
+  font.} (\csi{textsl}) and small capitals (\csi{textsc}).
 \begin{example}
 \textit{Italic shape.} \\
 \textsl{Slanted shape.} \\
@@ -677,35 +680,8 @@ where the text written using different sizes was rescaled to the same height.
   \end{tabular}
 \end{center}
 
-In math mode the font changing commands typeset normal text. If you want to
-switch to another font for math typesetting you need another special set of
-commands presented in \autoref{mathfonts}.
-\begin{example}
-\(
-  \textnormal{Normal text }
-  \mathbf{math mode \frac{1}{2}}
-\)
-\end{example}
-
-\begin{table}
-  \caption{Math Fonts.}\label{mathfonts}
-  \begin{tabular}{@{}lll@{}}
-    \toprule
-    Command                   & Example                  & Comment                \\
-    \midrule
-    \csi{mathrm}[text: m]     & $\mathrm{ABCabc123}$     &                        \\
-    \csi{mathbf}[text: m]     & $\mathbf{ABCabc123}$     &                        \\
-    \csi{mathsf}[text: m]     & $\mathsf{ABCabc123}$     &                        \\
-    \csi{mathtt}[text: m]     & $\mathtt{ABCabc123}$     &                        \\
-    \csi{mathit}[text: m]     & $\mathit{ABCabc123}$     &                        \\
-    \csi{mathcal}[text: m]    & $\mathcal{ABC}$          & Only uppercase letters \\
-    \csi{mathnormal}[text: m] & $\mathnormal{ABCabc123}$ & Old style numerals     \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 If you need to access even more font variants and shapes\footnote{For example
-  the aforementioned \fontshape{ui}\selectfont upright italic shape.} check out
+  the aforementioned \fontspec{cmunui.otf} upright italic shape.} check out
 \citetitle{fntguide}~\cite{fntguide}.
 
 \subsection{Danger, Will Robinson, Danger}
@@ -847,7 +823,7 @@ The OpenType font format defines a lot of more font features, that may or may no
 be supported by your font of choice. Consult with the \pai*{fontspec} package
 documentation for a comprehensive description and examples.
 
-\subsection{Specifying Fonts via Filenames}
+\subsection{Specifying Fonts via Filenames}\label{ssec:fonts_filename}
 
 If you do not want to install fonts in your system or you are working on a
 collaborative project where not everybody has specific fonts installed, you can
@@ -931,6 +907,89 @@ The \csi{newfontfamily} checks whether the font family is already defined and
 raises an error if it is. Similarly to \autoref{sec:new_commands} the
 \csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
 redefine existing font families.
+
+\subsection{Math Fonts}\label{sec:math_fonts}
+
+The package \pai{unicode-math}, introduced in \autoref{chap:math}, uses
+\pai{fontspec} under the hood and already enables you to use any OpenType math
+font within your document. The main command to do so is called
+\csi{setmathfont}. It accepts either a font name or a filename. In contrast to
+the text fonts that often consist of multiple files, math fonts typically
+consist of a single file, thus specifying it via a filename is not as
+complicated as presented in \autoref{ssec:fonts_filename}.
+\begin{code}
+  \begin{minted}{latex}
+\setmathfont{STIX Two Math}
+  \end{minted}
+\end{code}
+is equivalent to
+\begin{code}
+  \begin{minted}{latex}
+\setmathfont{STIXTwoMath-Regular.otf}
+  \end{minted}
+\end{code}
+and the latter works in both \hologo{LuaLaTeX} and \hologo{XeLaTeX}. While
+changing math fonts throughout the document is possible, it may lead to some
+problems; prefer to set them in the preamble for the whole document.
+\begin{example}
+\setoperatorfont\symrm%!hide
+\setmainfont{Garamond Libre}
+\setmathfont{Garamond Math}
+Now we are using Garamond fonts.
+\[
+  \symrm{e}^{\symrm{\pi}
+    \symrm{i}} + 1 = 0 \quad
+  \sum_{i=0}^\infty \iint_a^b
+  \lim_{h\to0}\frac{\sqrt[3]{
+    \symbb{A}}}{2^h}\,\symrm{d}x
+\]
+\setmathfont{Latin Modern Math} %!hide
+\end{example}
+
+Not all math fonts have the same character coverage. For example, the default
+font doesn't have lowercase script letters. If you don't want to switch the
+fonts entirely but just use some of the characters from a different fonts, you
+can use the \cargv{range} key in the options to the \csi{setmathfont} command.
+\begin{example}
+\(xyz = \symscr{Hello}\) vs.\
+\setmathfont[
+  range=scr,
+]{STIX Two Math}
+\(xyz = \symscr{Hello}\)
+\setmathfont{Latin Modern Math} %!hide
+\end{example}
+You can also set it to exact unicode ranges if you need more control over
+replaced symbols.
+
+Some fonts define two types of script font roundhand and chancery. These are
+normally available as the first stylistic set feature of the font. You can map
+\csi{symcal} which is normally a synonym for \csi{symscr}, to produce the
+alternative script letters.
+\begin{example}
+\setmathfont{STIX Two Math}
+\setmathfont[
+  range={cal, bfcal},
+  StylisticSet=1,
+]{STIX Two Math}
+
+\(\symscr{ABCDabcd}\) vs.\
+\(\symcal{ABCDabcd}\) 
+\setmathfont{Latin Modern Math} %!hide
+\end{example}
+
+The default behaviour of the \csi{not} command is to combine the negating glyph
+with the following symbol. This usually produces satisfactory results. If the
+font defines a dedicated negated symbol it is probably better to use it in such
+situations. The \csi{not} command is able to use a predefined mapping to use
+such glyphs based on the negated symbol. If the default mapping does not
+contain the combination or you prefer to use a different negation you can
+create a new mapping by using \csi{NewNegationCommand}.
+\begin{example}
+\(\not\cong\) vs.\
+\NewNegationCommand{%
+    \cong}{\simneqq}%
+\(\not\cong\)
+\end{example}
 
 \section{Colours}\label{sec:colors}\index{colours}
 
@@ -1183,7 +1242,8 @@ Boxes are explored further in \autoref{sec:boxes}.
 
 \section{Lengths and Spacing}
 
-\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}
+\subsection{\LaTeX{} Units}\index{units (\TeX)}\index{dimensions}%
+\label{sec:dimensions}
 \begingroup
 \DeclareSIUnit{\in}{in}
 \DeclareSIUnit{\pt}{pt}
@@ -1236,30 +1296,33 @@ values.
   \caption{\TeX{} Units.}\label{units}\index{units}
   \begin{tabular}{@{}clrrl@{}}
     \toprule
-    Unit                   & Meaning                                                                  & Definition           & {Value (\unit{\sp})} & Demo            \\
+    Unit                   & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
     \midrule
-    \mintinline{latex}{cm} & centimetre                                                               & \qty{0.01}{\m}       & \DimVal{1cm}         & \demowidth{1cm} \\
-    \mintinline{latex}{mm} & millimetre                                                               & \qty{0.001}{\m}      & \DimVal{1mm}         & \demowidth{1mm} \\
-    \mintinline{latex}{in} & inch                                                                     & \qty{25.4}{\mm}      & \DimVal{1in}         & \demowidth{1in} \\
-    \mintinline{latex}{pt} & point                                                                    & \fqty{1}{72.27}{\in} & \DimVal{1pt}         & \demowidth{1pt} \\
-    \mintinline{latex}{sp} & scaled point                                                             & \fqty{1}{65536}{\pt} & \DimVal{1sp}         & \demowidth{1sp} \\
-    \mintinline{latex}{pc} & pica                                                                     & \qty{12}{\pt}        & \DimVal{1pc}         & \demowidth{1pc} \\
-    \mintinline{latex}{dd} & didot                                                                    & \qty{0.376065}{\mm}  & \DimVal{1dd}         & \demowidth{1dd} \\
-    \mintinline{latex}{cc} & cicero                                                                   & \qty{12}{\dd}        & \DimVal{1cc}         & \demowidth{1cc} \\
-    \mintinline{latex}{nd} & new didot                                                                & \qty{0.375}{\mm}     & \DimVal{1nd}         & \demowidth{1nd} \\
-    \mintinline{latex}{bp} & big point                                                                & \fqty{1}{72}{\in}    & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
-    \mintinline{latex}{em} & \multicolumn{3}{l}{approx width of an \enquote*{M} in the current font}  & \demowidth{1em}                                               \\
-    \mintinline{latex}{ex} & \multicolumn{3}{l}{approx height of an \enquote*{x} in the current font} & \demowidth{1ex}                                               \\
+    \mintinline{latex}{cm} & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
+    \mintinline{latex}{mm} & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
+    \mintinline{latex}{in} & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
+    \mintinline{latex}{pt} & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
+    \mintinline{latex}{sp} & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
+    \mintinline{latex}{pc} & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
+    \mintinline{latex}{dd} & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
+    \mintinline{latex}{cc} & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
+    \mintinline{latex}{nd} & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
+    \mintinline{latex}{bp} & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \mintinline{latex}{em} & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
+    \mintinline{latex}{ex} & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
+    \mintinline{latex}{mu} & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-The last two units mentioned in the table are relative to the current font.
-Historically they were related to the \enquote*{M} and \enquote*{x} glyphs in a
-given font but today they are arbitrarily set by fonts. These units are useful
-if we want the length to scale proportionally when used with different font
-sizes. The \mintinline{latex}|em| unit is usually used for horizontal lengths,
-while the \mintinline{latex}|ex| is used for vertical lengths.
+The last three units mentioned in the table are relative to the current font
+used. Historically they were related to the \enquote*{M} and \enquote*{x}
+glyphs in a given font but today they are arbitrarily set by fonts. These units
+are useful if we want the length to scale proportionally when used with
+different font sizes. The \mintinline{latex}|em| unit is usually used for
+horizontal lengths, while the \mintinline{latex}|ex| is used for vertical
+lengths. The \mintinline{latex}|mu| unit can only be used in math mode for math
+spacing (see \autoref{sec:math-spacing}).
 \begin{example}
 \begin{minipage}[b]{0.5\linewidth} %!hide
 foo\\[1ex] bar
@@ -1540,14 +1603,14 @@ depth of a text string.
 a^2+b^2=c^2
 \end{displaymath}
 
-\begin{vardesc}{Where}$a$,
-$b$ --- are adjacent to the right
+\begin{vardesc}{Where}\(a\),
+\(b\) --- are adjacent to the right
 angle of a right-angled triangle.
 
-$c$ --- is the hypotenuse of
+\(c\) --- is the hypotenuse of
 the triangle and feels lonely.
 
-$d$ --- finally does not show up
+\(d\) --- finally does not show up
 here at all. Isn't that puzzling?
 \end{vardesc}
 \end{example}
