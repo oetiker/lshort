@@ -298,6 +298,14 @@
   \IfBooleanTF {#1} { \env* } { \env }{#2}[#3]
   \eih{#2}
 }
+
+\NewDocumentCommand{\clih}{m} {
+  \index{\textsf{#1} class}
+}
+
+\NewDocumentCommand{\cli}{m} {
+  \textsf{#1}\clih{#1}
+}
 \ExplSyntaxOff
 % Indexentry for a word (Word inserted into the text)
 \newcommand{\wi}[1]{\index{#1}#1}
