@@ -17,707 +17,724 @@
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
 % !TEX root = ./lshort.tex
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\graphicscompanion}{\emph{The \LaTeX{} Graphics Companion}~\cite{graphicscompanion}}
-\newcommand{\hobby}{\citetitle{metapost}~\cite{metapost}}
-\newcommand{\hoenig}{\emph{\TeX{} Unbound}~\cite{unbound}}
-\newcommand{\graphicsinlatex}{\emph{Graphics in \LaTeXe{}}~\cite{ursoswald}}
-
-\chapter{Producing Mathematical Graphics}\label{chap:graphics}
+%chktex-file 36
+%chktex-file 8
+\chapter{Graphics in Your Document}\label{chap:graphics}
 
 \begin{intro}
-  Most people use \LaTeX\ for typesetting their text. And since the structure oriented approach to authoring is so convenient, \LaTeX\ also offers a,
-  if somewhat restricted, means for producing graphical output from textual
-  descriptions. Furthermore, quite a number of \LaTeX\ extensions have been created
-  in order to overcome these restrictions. In this section, you will learn about a
-  few of them.
+  Few documents today contain no graphics inside them. While photos and
+  drawings can be easily inserted, integrating diagrams and schematics
+  seamlessly with your document might prove difficult. Fonts, colours and lines
+  must be adjusted so that they do not look out of place. Furthermore, later
+  changes to your document layout may force you to redo this work. Fortunately
+  it is possible to create your graphics directly in \LaTeX{} which will
+  automatically take care of of adjusting the aforementioned settings and keep
+  them in sync with the document itself.
 \end{intro}
 
 \section{Overview}
 
+When working with graphics in any setting it is important to keep few things
+in mind. Roughly, there are three types of pictures that you may find yourself
+dealing with:
+\begin{description}
+  \item[Photo] is any picture that contains realistic shading and lots of
+    details. These may not necessarily be photos but also photo-realistic
+    renders or screenshots from video games. In photos exact pixel colour is not
+    really important and lossy compression can be used without visible quality
+    degradation. It is best to store these using JPEG format or similar.
+  \item[Drawing] is a picture with flat colours and relatively few details. This
+    category includes, for example,  pixel art and screenshots of programs
+    interface. Here lossy compression would result in visible degradation and
+    wouldn't be so efficient anyway. It is best to use lossless compression
+    format such as PNG\@. This will ensure that each picture is reproduced with
+    pixel-perfect fidelity and keep their size small.
+  \item[Diagram] is a very simple graphics that contains text, lines and other
+    simple geometric objects. Logos and schematics are prime examples of these.
+    Ideally they should be all stored as vector based graphics in formats such
+    as SVG or PDF, since this will enable you to scale them effortlessly and
+    make them look good regardless of size.
+\end{description}
+
+You have already learned about including photos and drawings in
+\autoref{sec:images}. You could similarly use these techniques to include
+diagrams and this is totally fine. Some programs, such as
+Inkscape~\cite{inkscape}, even support ways to easily include produced graphics
+in \LaTeX{} documents. However, this chapter will focus on drawing diagrams
+directly in \LaTeX{}. This has many advantages, such as logical structuring,
+plain text format and seamless integration with document layout.
+
 Creating graphical output with \LaTeX{} has a long tradition. It started out
 with the \ei{picture} environment which allows you to create graphics by
-cleverly placing predefined elements onto the canvas. A complete
-description can be found in the \manual. The \ei{picture} environment of
-\LaTeX{} brings with it the \csi{qbezier} command, ``\texttt{q}'' meaning
-``quadratic''.  Many frequently used curves such as circles, ellipses, or
-catenaries can be satisfactorily approximated by quadratic B\'ezier curves,
-although this may require some mathematical toil. If, in addition, a
-programming language is used to generate \csi{qbezier} blocks of \LaTeX\
-input files, the \ei{picture} environment becomes quite powerful.
+cleverly placing predefined elements onto the canvas. Unfortunately, this
+environment is not very robust and so many alternatives were developed over the
+years such as \pai*{metapost}, \pai*{asymptote} or \pai*{xypic}. Today one of
+the widely used packages is \pai*{pgf} (short for \enquote{Portable Graphics
+  Format}) and its user interface \TikZ{} (short for \enquote{\TikZ{} ist
+  \textit{kein} Zeichenprogramm}---German for \enquote{\TikZ{} is \textit{not}
+  a drawing program}). This chapter will introduce you to the basic concepts of
+writing graphics in \TikZ{}. More detailed tutorials can be found in \pai{pgf}
+documentation.
 
-Although programming pictures directly in \LaTeX\ is severely restricted,
-and often rather tiresome, there are still reasons for doing so. The documents
-thus produced are ``small'' with respect to bytes, and there are no additional
-graphics files to be dragged along.
+While \TikZ{} is a powerful and versatile language, using it for creating more
+complicated graphics may not always be easy. Many packages and libraries build
+upon \pai{pgf} foundation to simplify creating specialised diagrams, such as
+\pai*{pgfplots} for plotting functions and presenting data or
+\pai*{commutative-diagrams} for creating commutative diagrams. It's usually a
+good idea to search CTAN if a specialised package doesn't already solve your
+problem instead of writing \TikZ{} code from the ground up yourself.
 
-This has been the state of things until a few years ago when Till Tantau of
-\pai{beamer} fame came up with the Portable Graphics Format \pai{pgf} and its
-companion package TikZ (\pai{tikz}). This system lets you create high
-quality vector graphics with all current \TeX{} systems including full
-support for pdf.
+\section{Basic Usage}
 
-Building on these basics, numerous packages have been written for specific
-purposes. A wide variety of these packages is described in detail in
-\graphicscompanion{}.
-
-Perhaps the most advanced graphical tool related with \LaTeX\ is \hologo{METAPOST}. It is a stand-alone application
-based on Donald E. Knuth's \hologo{METAFONT}. \hologo{METAPOST} has the very powerful and
-mathematically sophisticated programming language of \hologo{METAFONT} but contrary to \hologo{METAFONT},
-it generates encapsulated \PSi{} files,
-which can be imported in \LaTeX{} and even pdf\LaTeX{}. For an introduction, see \hobby, or the tutorial on~\cite{ursoswald}.
-
-A very thorough discussion of \LaTeX{} and \TeX{} strategies for graphics (and fonts) can
-be found in \hoenig.
-
-\section{The \texttt{picture} Environment}
-\secby{Urs Oswald}{osurs@bluewin.ch}
-
-As mentioned above the picture environment is part of standard \LaTeX{} and it is great for simple tasks and also if you want
-to control the exact positioning of individual elements on a page. But if you are about to do any serious graphics work, you should
-look at TikZ as presented in \autoref{sec:tikz} on \autopageref{sec:tikz}.
-
-\subsection{Basic Commands}
-
-A \ei{picture} environment\footnote{Believe it or not, the picture environment works out of the
-  box, with standard \LaTeX{} no package loading necessary.} is created with one of the two commands
-\begin{lscommand}
-  \csi{begin}\verb|{picture}(|$x,y$\verb|)|\ldots\csi{end}\verb|{picture}|
-\end{lscommand}
-\noindent or
-\begin{lscommand}
-  \csi{begin}\verb|{picture}(|$x,y$\verb|)(|$x_0,y_0$\verb|)|\ldots\csi{end}\verb|{picture}|
-\end{lscommand}
-The numbers $x,\,y,\,x_0,\,y_0$ refer to \csi{unitlength}, which can be reset any time
-(but not within a \ei{picture} environment) with a command such as
-\begin{lscommand}
-  \csi{setlength}\verb|{|\csi{unitlength}\verb|}{1.2cm}|
-\end{lscommand}
-The default value of \csi{unitlength} is \texttt{1pt}. The first pair, $(x,y)$, effects
-the reservation, within the document, of rectangular space for the picture. The optional
-second pair, $(x_0,y_0)$, assigns arbitrary coordinates to the bottom left corner of the
-reserved rectangle.
-
-Most drawing commands have one of the two forms
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\emph{object}\verb|}|
-\end{lscommand}
-\noindent or
-\begin{lscommand}
-  \csi{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|\end{lscommand}
-B\'ezier curves are an exception. They are drawn with the command
-\begin{lscommand}
-  \csi{qbezier}\verb|(|$x_1,y_1$\verb|)(|$x_2,y_2$\verb|)(|$x_3,y_3$\verb|)|
-\end{lscommand}
-
-\subsection{Line Segments}
+To use \pai{pgf} and \TikZ{} it is sufficient to put the following line in your
+preamble:
+\begin{minted}{latex}
+  \usepackage{tikz}
+\end{minted}
+Doing so will provide you with the \ei{tikzpicture} environment and \csi{tikz}
+command, inside of which you can execute \TikZ{} commands. Each \TikZ{} command
+is terminated with a semicolon (\verb|;|). The simplest command is the
+\csi{draw} command, which draws points connected by path. Points may be given
+in either Cartesian coordinates \((x, y)\) or polar coordinates
+\((\theta\mathpunct{:} r)\), where \(\theta\) is specified in degrees, while
+distances are specified in centimetres by default. The path
+between points may be specified in many ways, the simplest of which is
+\ltx|--|, which draws a straight line.
 \begin{example}
-\setlength{\unitlength}{5cm}
-\begin{picture}(1,1)
-  \put(0,0){\line(0,1){1}}
-  \put(0,0){\line(1,0){1}}
-  \put(0,0){\line(1,1){1}}
-  \put(0,0){\line(1,2){.5}}
-  \put(0,0){\line(1,3){.3333}}
-  \put(0,0){\line(1,4){.25}}
-  \put(0,0){\line(1,5){.2}}
-  \put(0,0){\line(1,6){.1667}}
-  \put(0,0){\line(2,1){1}}
-  \put(0,0){\line(2,3){.6667}}
-  \put(0,0){\line(2,5){.4}}
-  \put(0,0){\line(3,1){1}}
-  \put(0,0){\line(3,2){1}}
-  \put(0,0){\line(3,4){.75}}
-  \put(0,0){\line(3,5){.6}}
-  \put(0,0){\line(4,1){1}}
-  \put(0,0){\line(4,3){1}}
-  \put(0,0){\line(4,5){.8}}
-  \put(0,0){\line(5,1){1}}
-  \put(0,0){\line(5,2){1}}
-  \put(0,0){\line(5,3){1}}
-  \put(0,0){\line(5,4){1}}
-  \put(0,0){\line(5,6){.8333}}
-  \put(0,0){\line(6,1){1}}
-  \put(0,0){\line(6,5){1}}
-\end{picture}
-\end{example}
-Line segments are drawn with the command
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{line}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
-\end{lscommand}
-The \csi{line} command has two arguments:
-\begin{enumerate}
-  \item a direction vector,
-  \item a length.
-\end{enumerate}
-The components of the direction vector are restricted to the integers
-\[
-  -6,\,-5,\,\ldots,\,5,\,6,
-\]
-and they have to be coprime (no common divisor except 1). The figure illustrates all
-25 possible slope values in the first quadrant. The length is relative to \csi{unitlength}.
-The length argument is the vertical coordinate in the case of a vertical line segment, the
-horizontal coordinate in all other cases.
-
-\subsection{Arrows}
-
-\begin{example}
-\setlength{\unitlength}{0.75mm}
-\begin{picture}(60,40)
-  \put(30,20){\vector(1,0){30}}
-  \put(30,20){\vector(4,1){20}}
-  \put(30,20){\vector(3,1){25}}
-  \put(30,20){\vector(2,1){30}}
-  \put(30,20){\vector(1,2){10}}
-  \thicklines
-  \put(30,20){\vector(-4,1){30}}
-  \put(30,20){\vector(-1,4){5}}
-  \thinlines
-  \put(30,20){\vector(-1,-1){5}}
-  \put(30,20){\vector(-1,-4){5}}
-\end{picture}
-\end{example}
-Arrows are drawn with the command
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{vector}\verb|(|$x_1,y_1$\verb|){|$length$\verb|}}|
-\end{lscommand}
-For arrows, the components of the direction vector are even more narrowly restricted than
-for line segments, namely to the integers
-\[
-  -4,\,-3,\,\ldots,\,3,\,4.
-\]
-Components also have to be coprime (no common divisor except 1). Notice the effect of the
-\csi{thicklines} command on the two arrows pointing to the upper left.
-
-\subsection{Circles}
-
-\begin{example}
-\setlength{\unitlength}{1mm}
-\begin{picture}(60, 40)
-  \put(20,30){\circle{1}}
-  \put(20,30){\circle{2}}
-  \put(20,30){\circle{4}}
-  \put(20,30){\circle{8}}
-  \put(20,30){\circle{16}}
-  \put(20,30){\circle{32}}
-
-  \put(40,30){\circle{1}}
-  \put(40,30){\circle{2}}
-  \put(40,30){\circle{3}}
-  \put(40,30){\circle{4}}
-  \put(40,30){\circle{5}}
-  \put(40,30){\circle{6}}
-  \put(40,30){\circle{7}}
-  \put(40,30){\circle{8}}
-  \put(40,30){\circle{9}}
-  \put(40,30){\circle{10}}
-  \put(40,30){\circle{11}}
-  \put(40,30){\circle{12}}
-  \put(40,30){\circle{13}}
-  \put(40,30){\circle{14}}
-
-  \put(15,10){\circle*{1}}
-  \put(20,10){\circle*{2}}
-  \put(25,10){\circle*{3}}
-  \put(30,10){\circle*{4}}
-  \put(35,10){\circle*{5}}
-\end{picture}
-\end{example}
-The command
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{circle}\verb|{|\emph{diameter}\verb|}}|
-\end{lscommand}
-\noindent draws a circle with center $(x,y)$ and diameter (not radius) \emph{diameter}.
-The \ei{picture} environment only admits diameters up to approximately 14\,mm,
-and even below this limit, not all diameters are possible. The \csi{circle*}
-command produces disks (filled circles).
-
-As in the case of line segments, one may have to resort to additional packages,
-such as \pai{eepic} or \pai{pstricks}.
-For a thorough description of these packages, see \graphicscompanion.
-
-There is also a possibility within the
-\ei{picture} environment. If one is not afraid of doing the necessary calculations
-(or leaving them to a program), arbitrary circles and ellipses can be patched
-together from quadratic B\'ezier curves.
-See \graphicsinlatex\ for examples and Java source files.
-
-\subsection{Text and Formulas}
-
-\begin{example}
-\setlength{\unitlength}{0.8cm}
-\begin{picture}(6,5)
-  \thicklines
-  \put(1,0.5){\line(2,1){3}}
-  \put(4,2){\line(-2,1){2}}
-  \put(2,3){\line(-2,-5){1}}
-  \put(0.7,0.3){$A$}
-  \put(4.05,1.9){$B$}
-  \put(1.7,2.95){$C$}
-  \put(3.1,2.5){$a$}
-  \put(1.3,1.7){$b$}
-  \put(2.5,1.05){$c$}
-  \put(0.3,4){$F=
-    \sqrt{s(s-a)(s-b)(s-c)}$}
-  \put(3.5,0.4){$\displaystyle
-    s:=\frac{a+b+c}{2}$}
-\end{picture}
-\end{example}
-As this example shows, text and formulas can be written into a \ei{picture} environment with
-the \csi{put} command in the usual way.
-
-\subsection{\csi{multiput} and \csi{linethickness}}
-
-\begin{example}
-\setlength{\unitlength}{2mm}
-\begin{picture}(30,20)
-  \linethickness{0.075mm}
-  \multiput(0,0)(1,0){26}%
-    {\line(0,1){20}}
-  \multiput(0,0)(0,1){21}%
-    {\line(1,0){25}}
-  \linethickness{0.15mm}
-  \multiput(0,0)(5,0){6}%
-    {\line(0,1){20}}
-  \multiput(0,0)(0,5){5}%
-    {\line(1,0){25}}
-  \linethickness{0.3mm}
-  \multiput(5,0)(10,0){2}%
-    {\line(0,1){20}}
-  \multiput(0,5)(0,10){2}%
-    {\line(1,0){25}}
-\end{picture}
-\end{example}
-The command
-\begin{lscommand}
-  \csi{multiput}\verb|(|$x,y$\verb|)(|$\Delta x,\Delta y$\verb|){|$n$\verb|}{|\emph{object}\verb|}|
-\end{lscommand}
-\noindent has 4 arguments: the starting point, the translation vector from one object to the next,
-the number of objects, and the object to be drawn. The \csi{linethickness} command applies to
-horizontal and vertical line segments, but neither to oblique line segments, nor to circles.
-It does, however, apply to quadratic B\'ezier curves!
-
-\subsection{Ovals}
-
-\begin{example}
-\setlength{\unitlength}{0.75cm}
-\begin{picture}(6,4)
-  \linethickness{0.075mm}
-  \multiput(0,0)(1,0){7}%
-    {\line(0,1){4}}
-  \multiput(0,0)(0,1){5}%
-    {\line(1,0){6}}
-  \thicklines
-  \put(2,3){\oval(3,1.8)}
-  \thinlines
-  \put(3,2){\oval(3,1.8)}
-  \thicklines
-  \put(2,1){\oval(3,1.8)[tl]}
-  \put(4,1){\oval(3,1.8)[b]}
-  \put(4,3){\oval(3,1.8)[r]}
-  \put(3,1.5){\oval(1.8,0.4)}
-\end{picture}
-\end{example}
-The command
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{oval}\verb|(|$w,h$\verb|)}|
-\end{lscommand}
-\noindent or
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{oval}\verb|(|$w,h$\verb|)[|\emph{position}\verb|]}|
-\end{lscommand}
-\noindent produces an oval centered at $(x,y)$ and having width $w$ and height $h$. The optional
-\emph{position} arguments \texttt{b}, \texttt{t}, \texttt{l}, \texttt{r} refer to
-``top'', ``bottom'', ``left'', ``right'', and can be combined, as the example illustrates.
-
-Line thickness can be controlled by two kinds of commands:
-\begin{lscommand}
-  \csi{linethickness}[length: m]
-\end{lscommand}
-on the one hand, \csi{thinlines} and \csi{thicklines} on the other. While \csi{linethickness}\verb|{|\emph{length}\verb|}|
-applies only to horizontal and vertical lines (and quadratic B\'ezier curves), \csi{thinlines} and \csi{thicklines}
-apply to oblique line segments as well as to circles and ovals.
-
-\subsection{Multiple Use of Predefined Picture Boxes}
-
-\begin{example}
-\setlength{\unitlength}{0.5mm}
-\begin{picture}(120,168)
-\newsavebox{\foldera}
-\savebox{\foldera}
-  (40,32)[bl]{% definition
-  \multiput(0,0)(0,28){2}
-    {\line(1,0){40}}
-  \multiput(0,0)(40,0){2}
-    {\line(0,1){28}}
-  \put(1,28){\oval(2,2)[tl]}
-  \put(1,29){\line(1,0){5}}
-  \put(9,29){\oval(6,6)[tl]}
-  \put(9,32){\line(1,0){8}}
-  \put(17,29){\oval(6,6)[tr]}
-  \put(20,29){\line(1,0){19}}
-  \put(39,28){\oval(2,2)[tr]}
-}
-\newsavebox{\folderb}
-\savebox{\folderb}
-  (40,32)[l]{% definition
-  \put(0,14){\line(1,0){8}}
-  \put(8,0){\usebox{\foldera}}
-}
-\put(34,26){\line(0,1){102}}
-\put(14,128){\usebox{\foldera}}
-\multiput(34,86)(0,-37){3}
-  {\usebox{\folderb}}
-\end{picture}
-\end{example}
-A picture box can be \emph{declared} by the command
-\begin{lscommand}
-  \csi{newsavebox}\verb|{|\emph{name}\verb|}|
-\end{lscommand}
-\noindent then \emph{defined} by
-\begin{lscommand}
-  \csi{savebox}\verb|{|\emph{name}\verb|}(|\emph{width,height}\verb|)[|\emph{position}\verb|]{|\emph{content}\verb|}|
-\end{lscommand}
-\noindent and finally arbitrarily often be \emph{drawn} by
-\begin{lscommand}
-  \csi{put}\verb|(|$x,y$\verb|){|\csi{usebox}\verb|{|\emph{name}\verb|}}|
-\end{lscommand}
-
-The optional \emph{position} parameter has the effect of defining the
-`anchor point' of the savebox. In the example it is set to \texttt{bl} which
-puts the anchor point into the bottom left corner of the savebox. The other
-position specifiers are \texttt{t}op and \texttt{r}ight.
-
-The \emph{name} argument refers to a \LaTeX{} storage bin and therefore is
-of a command nature (which accounts for the backslashes in the current
-example). Boxed pictures can be nested: In this example, \csi{foldera} is
-used within the definition of \csi{folderb}.
-
-The \csi{oval} command had to be used as the \csi{line} command does not work if the segment length is less than
-about 3\,mm.
-
-\subsection{Quadratic B\'ezier Curves}
-
-\begin{example}[examplewidth=0.45\linewidth]
-\setlength{\unitlength}{0.8cm}
-\begin{picture}(6,4)
-  \linethickness{0.075mm}
-  \multiput(0,0)(1,0){7}
-    {\line(0,1){4}}
-  \multiput(0,0)(0,1){5}
-    {\line(1,0){6}}
-  \thicklines
-  \put(0.5,0.5){\line(1,5){0.5}}
-  \put(1,3){\line(4,1){2}}
-  \qbezier(0.5,0.5)(1,3)(3,3.5)
-  \thinlines
-  \put(2.5,2){\line(2,-1){3}}
-  \put(5.5,0.5){\line(-1,5){0.5}}
-  \linethickness{1mm}
-  \qbezier(2.5,2)(5.5,0.5)(5,3)
-  \thinlines
-  \qbezier(4,2)(4,3)(3,3)
-  \qbezier(3,3)(2,3)(2,2)
-  \qbezier(2,2)(2,1)(3,1)
-  \qbezier(3,1)(4,1)(4,2)
-\end{picture}
-\end{example}
-As this example illustrates, splitting up a circle into 4 quadratic B\'ezier curves
-is not satisfactory. At least 8 are needed. The figure again shows the effect of
-the \csi{linethickness} command on horizontal or vertical lines, and of the
-\csi{thinlines} and the \csi{thicklines} commands on oblique line segments. It also
-shows that both kinds of commands affect quadratic B\'ezier curves, each command
-overriding all previous ones.
-
-Let $P_1=(x_1,\,y_1),\,P_2=(x_2,\,y_2)$ denote the end points, and $m_1,\,m_2$ the
-respective slopes, of a quadratic B\'ezier curve. The intermediate control point
-$S=(x,\,y)$ is then given by the equations
-\begin{equation} \label{zwischenpunkt}
-  \left\{
-  \begin{aligned}{rcl}
-    x & = & \displaystyle \frac{m_2 x_2-m_1x_1-(y_2-y_1)}{m_2-m_1}, \\
-    y & = & y_i+m_i(x-x_i)\qquad (i=1,\,2).
-  \end{aligned}
-  \right.
-\end{equation}
-\noindent See \graphicsinlatex\ for a Java program which generates
-the necessary \csi{qbezier} command line.
-
-\subsection{Catenary}
-
-\begin{example}[examplewidth=0.47\linewidth]
-\setlength{\unitlength}{1cm}
-\begin{picture}(4.3,3.6)(-2.5,-0.25)
-\put(-2,0){\vector(1,0){4.4}}
-\put(2.45,-.05){$x$}
-\put(0,0){\vector(0,1){3.2}}
-\put(0,3.35){\makebox(0,0){$y$}}
-\qbezier(0.0,0.0)(1.2384,0.0)
-  (2.0,2.7622)
-\qbezier(0.0,0.0)(-1.2384,0.0)
-  (-2.0,2.7622)
-\linethickness{.075mm}
-\multiput(-2,0)(1,0){5}
-  {\line(0,1){3}}
-\multiput(-2,0)(0,1){4}
-  {\line(1,0){4}}
-\linethickness{.2mm}
-\put( .3,.12763){\line(1,0){.4}}
-\put(.5,-.07237){\line(0,1){.4}}
-\put(-.7,.12763){\line(1,0){.4}}
-\put(-.5,-.07237){\line(0,1){.4}}
-\put(.8,.54308){\line(1,0){.4}}
-\put(1,.34308){\line(0,1){.4}}
-\put(-1.2,.54308){\line(1,0){.4}}
-\put(-1,.34308){\line(0,1){.4}}
-\put(1.3,1.35241){\line(1,0){.4}}
-\put(1.5,1.15241){\line(0,1){.4}}
-\put(-1.7,1.35241){\line(1,0){.4}}
-\put(-1.5,1.15241){\line(0,1){.4}}
-\put(-2.5,-0.25){\circle*{0.2}}
-\end{picture}
-\end{example}
-
-In this figure, each symmetric half of the catenary $y=\cosh x -1$ is approximated by a quadratic
-B\'ezier curve. The right half of the curve ends in the point \((2,\,2.7622)\), the slope there having the value
-\(m=3.6269\). Using again \autoref{zwischenpunkt}, we can
-calculate the intermediate control points. They turn out to be $(1.2384,\,0)$ and $(-1.2384,\,0)$.
-The crosses indicate points of the \emph{real} catenary. The error is barely noticeable, being less
-than one percent.
-
-This example points out the use of the optional argument of the \\
-\verb|\begin{picture}| command.
-The picture is defined in convenient ``mathematical'' coordinates, whereas by the command
-\begin{lscommand}
-  \csi{begin}\verb|{picture}(4.3,3.6)(-2.5,-0.25)|
-\end{lscommand}
-\noindent its lower left corner (marked by the black disk) is assigned the coordinates $(-2.5,-0.25)$.
-
-\subsection{Rapidity in the Special Theory of Relativity}
-
-\begin{example}
-\setlength{\unitlength}{0.8cm}
-\begin{picture}(6,4)(-3,-2)
-  \put(-2.5,0){\vector(1,0){5}}
-  \put(2.7,-0.1){$\chi$}
-  \put(0,-1.5){\vector(0,1){3}}
-  \multiput(-2.5,1)(0.4,0){13}
-    {\line(1,0){0.2}}
-  \multiput(-2.5,-1)(0.4,0){13}
-    {\line(1,0){0.2}}
-  \put(0.2,1.4)
-    {$\beta=v/c=\tanh\chi$}
-  \qbezier(0,0)(0.8853,0.8853)
-    (2,0.9640)
-  \qbezier(0,0)(-0.8853,-0.8853)
-    (-2,-0.9640)
-  \put(-3,-2){\circle*{0.2}}
-\end{picture}
-\end{example}
-The control points of the two B\'ezier curves were calculated with \autoref{zwischenpunkt}.
-The positive branch is determined by $P_1=(0,\,0),\,m_1=1$ and $P_2=(2,\,\tanh 2),\,m_2=1/\cosh^2 2$.
-Again, the picture is defined in mathematically convenient coordinates, and the lower left corner
-is assigned the mathematical coordinates $(-3,-2)$ (black disk).
-
-\section{The PGF and TikZ Graphics Packages}\label{sec:tikz}
-
-Today every \LaTeX{} output generation system can create nice vector graphics,
-it's just the interfaces that are rather diverse. The \pai{pgf} package provides an
-abstraction layer over these interface. The
-\pai{pgf} package comes with a large manual/tutorial of its own~\cite{pgfplot}.
-So we are only going to scratch the surface of the package with this little
-section.
-
-The \pai{pgf} package comes with a high level access language provided by the  \pai{tikz} package.
-TikZ provides highly efficient commands to
-draw graphics right from inside your document. Use the \ei{tikzpicture}
-environment to wrap your TikZ commands.
-
-As mentioned above, there is an excellent manual for \pai{pgf} and friends. So
-instead of actually explaining how it works, I will just show you a few examples
-so that you can get a first impression of how this tool works.
-
-First a simple nonsense diagram.
-\begin{example}[examplewidth=0.45\linewidth]
-\begin{tikzpicture}[scale=3]
-  \clip (-0.1,-0.2)
-     rectangle (1.2,1.2);
-  \draw[step=.25cm,gray,very thin]
-       (-1.4,-1.4) grid (3.4,3.4);
-  \draw (-1.5,0) -- (2.5,0);
-  \draw (0,-1.5) -- (0,1.5);
-  \draw (0,0) circle (1cm);
-  \filldraw[fill=green!20!white,
-            draw=green!50!black]
-    (0,0) -- (3mm,0mm)
-         arc (0:30:3mm) -- cycle;
-\end{tikzpicture}
-\end{example}
-Note the semicolon (\texttt{;}) character. It separates the individual commands.
-
-\begin{listing}
-  \begin{example}[vertical_mode, examplewidth=0.7\linewidth]
 \begin{tikzpicture}
-  \node[circle,draw, minimum size=3cm,
-        label=120:{economics}] at (0,0) {};
-  \node[circle,draw, minimum size=3cm,
-        label=60:{psychology}] at (1,0) {};
-  \node (i) at (0.5,-1) {};
-  \node at (0.6,-2.5) {behavioral economics}
-    edge[->,thick, out=60,in=-60] (i);
+  \draw (0, 0)
+    -- (15:4)
+    -- (0, 2);
+\end{tikzpicture}
+\tikz{\draw (0, 0) -- (1,1);}
+\end{example}
+Oftentimes you will want to close the shape you are drawing. Instead of
+repeating the first point it is better to use \cargv{cycle}. In addition to
+being more clear about the intention, it also produces better looking
+line connection.
+\begin{example}[vertical_mode, examplewidth=0.75\linewidth]
+\begin{tikzpicture}
+\begin{scope}[spy using outlines={circle, magnification=15, size=1.2cm, connect spies}] %!hide
+  \draw (0, 0) -- (2, 0) -- (60: 2) -- (0, 0);
+  \spy on (0,0) in node [left] at (-0.1, 0.9); %!hide
+\end{scope} %!hide
+\end{tikzpicture}
+vs.\ 
+\begin{tikzpicture}
+\begin{scope}[spy using outlines={circle, magnification=15, size=1.2cm, connect spies}] %!hide
+  \draw (0, 0) -- (2, 0) -- (60: 2) -- cycle;
+  \spy on (0,0) in node [left] at (-0.1, 0.9); %!hide
+\end{scope} %!hide
 \end{tikzpicture}
 \end{example}
-  \caption{A simple Venn Diagram using \TikZ{}}\label{lst:venn}
+
+The \csi{draw} command is in reality just a shortcut to a more general
+command---the \csi{path} command. It accepts a path in the same way, but action
+must be specified as an optional argument, the \csi{draw} command simply
+supplies the \cargv{draw} action. The \cargv{fill} action fills the area under
+the specified path. Multiple actions may be supplied.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\begin{tikzpicture}
+  \path[draw]
+    (0, 0) -- (0, 2) -- (2, 2) -- (2, 0) -- cycle;
+\end{tikzpicture}
+\begin{tikzpicture}
+  \path[fill]
+    (0, 0) -- (0, 2) -- (2, 2) -- (2, 0) -- cycle;
+\end{tikzpicture}
+\end{example}
+
+By default \TikZ{} pictures will adjust their size to the minimal rectangle
+surrounding it. If you want to specify the bounding box yourself use the
+\cargv{use as bounding box} action or the equivalent \csi{useasboundingbox}
+command.
+\begin{chktexignore}
+\begin{example}[vertical_mode, examplewidth=0.6\linewidth]
+\tikz{\draw (0, 0) -- (1, 0);}
+vs.\
+\tikz{\draw (0, 1) -- (1, 1);}
+vs.\
+\tikz{
+  \useasboundingbox (0, 0) -- (0, 1)
+    -- (1, 1) -- (1, 0) -- cycle;
+  \draw (0, 1) -- (1, 1);
+}
+\end{example}
+\end{chktexignore}
+
+Normal \LaTeX{} input may be displayed inside the, so called, nodes. To create
+a node use the
+\begin{lscommand}
+  \csi{node}[«{}» («\bs carg{name}») at «\bs carg{coordinate}» {«\bs carg{input}»};: c]
+\end{lscommand}
+command. The \carg{name} argument is optional and enables you to use the
+\carg{name} as a shorthand for node's coordinate.
+\begin{example}
+\begin{tikzpicture}
+  \node (text) at (0,0) {%
+    Some \LaTeX{} text};
+  \node (A) at (3, 1) {\(A\)};
+  \node (B) at (0, 2) {\(B\)};
+  \draw (A) -- (text) -- (B);
+\end{tikzpicture}
+\end{example}
+By default \TikZ{} attempts to position the lines between nodes in a smart way.
+If you want to set them manually you can specify the exact point on a node
+after a dot. The available points are, for example, \cargv{north},
+\cargv{west}, \cargv{south east} and so on. You can also put a number, which
+will be interpreted as an angle.
+\begin{example}
+\begin{tikzpicture}
+  \node (T) at (1,1) {%
+    Some \LaTeX{} text};
+  \node (A) at (0, 0) {\(A\)};
+  \node (B) at (2, 0) {\(B\)};
+  \draw (A.north) -- (B.south);
+  \draw (T.0) -- (T.145)
+    -- (T.265) -- cycle;
+\end{tikzpicture}
+\end{example}
+
+Nodes can be also created directly while creating paths by typing \ltx{node}
+after a given coordinate or a line. If they are added after a line, they will
+be placed at the midpoint.
+\begin{example}
+\begin{tikzpicture}
+  \draw (0, 0) node {Start}
+    -- node {Midpoint}
+    (3, 1) node {End};
+\end{tikzpicture}
+\end{example}
+
+If you want to create an empty node for the purpose of naming a specific point,
+it is better to use the \csi{coordinate} command instead of a \csi{node}. This
+ensures that the node is actually empty, since nodes created by \csi{node} by
+default take up some space even if no content is present in them.
+\begin{example}
+\begin{tikzpicture}
+  \draw [help lines] (0, 0) grid (2, 1); % !hide
+  \coordinate (A) at (0, 0);
+  \coordinate (B) at (1, 1);
+  \node (C) at (2, 0) {};
+  \draw (A) -- (B) -- (C);
+\end{tikzpicture}
+\end{example}
+
+\section{Curves and Shapes}
+
+So far we have always used \ltx|--| to connect points, however,
+this is not the only way. For example, if you wanted to only use horizontal and
+vertical lines you could specify \ltx/-|/ or \ltx/|-/ (depending on preferred
+order) as connection between points.
+\begin{example}
+\tikz{\draw (0, 0) |- (2, 1);}
+\tikz{\draw (0, 0) -| (2, 1);}
+\end{example}
+
+If you want to create curved lines the simplest way is to use \ltx{to} to
+connect points. By default it works the same as \ltx{--}, but it can receive
+optional argument with \cargv{in} and \cargv{out} keys to define the angle of
+connection.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\tikzset{baseline} \vspace{-0.3cm} %!hide
+\tikz{\draw (0, 0) to[out=90, in=-90] (2, 0);}
+\tikz{\draw (0, 0) to[out=45] (2, 0);}
+\vspace{-0.5cm} %!hide
+\end{example}
+The \cargv{looseness} key may be used to define how much the curve is outstretched.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\tikzset{baseline} \vspace{-1cm} %!hide
+\tikz{\draw (0, 0)
+  to[out=90, in=-90, looseness=0.5] (2, 0);}
+\tikz{\draw (0, 0) 
+  to[out=90, in=-90, looseness=2] (2, 0);}
+\vspace{-1cm} %!hide
+\end{example}
+Often it might be easier to specify the angles relatively using \cargv{bend
+  left} and \cargv{bend right} keys. If no angle is provided they will use a
+default value.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\tikz{\draw (0, 0) to[bend left] (2, 0);}
+\tikz{\draw (0, 0) to[bend right=90] (2, 0);}
+\end{example}
+
+If you need even finer control over the curves you can use the
+\ltx{.. controls ..} connection for specifying them as Bézier curve with one
+or two control points.
+\begin{chktexignore}  
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\vspace{-0.5cm} %!hide
+\tikz{\draw (0, 0) .. controls (1, 1) .. (2, 0);}
+\tikz{\draw (0, 0) .. controls (.5, 2) and (3, 1)
+  .. (2, 0);}
+\end{example}
+\end{chktexignore}
+
+In addition to curves, the points may also be connected using various shapes.
+For example the \ltx{grid} draws a grid between the points, while
+\ltx{rectangle} draws a rectangle.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\tikz{\draw (0, 0) grid (2, 2);}
+\tikz{\draw (0, 0) rectangle (3, 1);}
+\end{example}
+To specify how fine the grid is, use the \cargv{step} key.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\tikz{\draw (0, 0) grid[step=0.5] (2, 2);}
+\tikz{\draw (0, 0) grid[step=1.5] (2, 2);}
+\end{example}
+
+Other shapes may also be drawn this way, sometimes requiring a specific syntax.
+For example the \ltx{circle} interprets the left coordinate as its centre and
+receives its radius via the \cargv{radius} key. You can also specify \cargv{x
+  radius} and \cargv{y radius} separately, thus drawing an ellipse\footnote{The
+  \cargv{ellipse} shape can also be used in the same way if the naming irks you
+  \smiley.}.
+\begin{example}[vertical_mode, examplewidth=0.9\linewidth]
+\tikz{\draw (0, 0) circle[radius=1];}
+\tikz{\draw (0, 0) circle[x radius=2, y radius=0.5];}
+\end{example}
+Many more shapes are available, such as \ltx{arc}, \ltx{parabola} or \ltx{sin}.
+Be sure to checkout the documentation for the specifics of their use.
+
+\section{Customising Paths and Nodes}
+
+By default all paths are drawn using a black continuous lines. You can modify
+them by passing options to the \csi{draw} command. For example, simply passing
+a colour name will change the colour of the drawn line.
+\begin{example}
+\tikz{\draw[red]
+  (0, 0) -- (1, 1);}
+\tikz{\draw[blue]
+  (0, 0) -- (1, 1);}
+\end{example}
+
+The thickness of a line can be controlled by passing \cargv{line width} key
+(specified in points by default), or using some predefined values such as
+\cargv{semithick}, \cargv{very thin} or \cargv{ultra thick}.
+\begin{example}
+\tikz{\draw[line width=2]
+  (0, 0) -- (1, 1);}
+\tikz{\draw[very thin]
+  (0, 0) -- (1, 1);}
+\end{example}
+
+The endings of lines can also be customised using several different keys. For
+example \cargv{line cap} allows you to change the drawn lines to have rounded
+corners.
+\begin{example}
+\tikz{\draw[line width=10]
+  (0, 0) -- (1, 1);}
+\tikz{\draw[line width=10,
+  line cap=round]
+  (0, 0) -- (1, 1);}
+\end{example}
+You can also turn them into arrows by specifying \cargv{arrows} key.
+\begin{example}
+\tikz{\draw[arrows=->]
+  (0, 0) -- (1, 1);}
+\tikz{\draw[arrows=<<->]
+  (0, 0) -- (1, 1);}
+\end{example}
+
+The lines don't need to be continuous either. You can specify \cargv{dash
+  pattern} or use one of the predefined ones to create dashed paths.
+\begin{example}
+\tikz{\draw[dash pattern=
+  on 4 off 1 on 2 off 1]
+  (0, 0) -- (1, 1);}
+\tikz{\draw[dotted]
+  (0, 0) -- (1, 1);}
+\end{example}
+
+You can also adjust how the lines are connected with other lines. For example,
+you can pass \cargv{line join} set to \cargv{round}, \cargv{bevel}, or
+\cargv{miter}.
+\begin{example}
+\tikzset{every picture/.style={line width=6pt}} %!hide
+\tikz{\draw[line join=round]
+  (0, 0) -- (0.5, 1) -- (1, 0);}
+\tikz{\draw[line join=bevel]
+  (0, 0) -- (0.5, 1) -- (1, 0);}
+\end{example}
+If you want the line joins to be rounded you can also pass the \cargv{rounded
+  corners} key with the value set to the radius of the arc.
+\begin{example}
+\tikz{\draw[rounded corners]
+  (0, 0) -- (0.5, 1) -- (1, 0);}
+\tikz{\draw[rounded corners=25]
+  (0, 0) -- (0.5, 1) -- (1, 0);}
+\end{example}
+
+Now, let's turn our attention nodes. By default node's boundary is not drawn,
+but you can pass \cargv{draw} and \cargv{fill}, possibly set to a colour, to
+reveal it.
+\begin{example}
+\tikz{\node[draw] (0, 0)
+  {Some Text};}
+\tikz{\node[fill=red] (0, 0)
+  {Some Text};}
+\end{example}
+As you can see all nodes are rectangles, but they can be changed to circles if
+you pass the \cargv{circle} key to their options.
+\begin{example}
+\tikz{\node[draw, circle]
+  (0, 0) {Some text};}
+\end{example}
+
+If you want to input multi line text inside nodes, you have to specify the
+\cargv{align} key; without it new lines will be simply ignored. Possible values
+are \cargv{left}, \cargv{center} and \cargv{right}.
+\begin{example}
+\tikz{\node[draw, align=left]
+  (0, 0) {Some more\\ text};}
+\tikz{\node[draw, align=center]
+  (0, 0) {Even more \\ text};}
+\end{example}
+
+When nodes are placed along a path, their position may be adjusted using
+\cargv{anchor} key. Its value is the point of node which should be anchored at
+the given point in path.
+\begin{example}
+\tikz{\draw
+  (0, 0) node[anchor=south] {A}
+  -- node[anchor=north west] {B}
+  (1, 1) node[anchor=135] {C};
+}
+\end{example}
+Usually using relative commands such as \cargv{left} or \cargv{above right} for
+this purpose leads to a more readable code, though they are not as powerful.
+\begin{example}
+\tikz{\draw
+  (0, 0) node[above] {A}
+  -- node[below right] {B}
+  (1, 1) node[right] {C};
+}
+\end{example}
+
+All of the options can be obviously freely combined, but the resulting style
+specification may turn out to be long. To avoid retyping it for many nodes or
+paths you can define styles. Some predefined styles already exist. For example,
+the \cargv{help lines} style sets the colour of lines to grey and makes them a
+bit thinner, which is useful for drawing helping grids, when drawing your own
+pictures.
+\begin{example}
+\begin{tikzpicture}
+  \draw[help lines]
+    (0, 0) grid (3,3);
+  \draw (1, 1) -- (3,2);
+  \draw (1.5, 2.5)
+    circle[radius=0.5];
+\end{tikzpicture}
+\end{example}
+To define your own style, pass key of the form
+\cargv{\carg{name}/.style=\carg{options}} to the \TikZ{} environment or
+command options.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\begin{tikzpicture}[
+  my line/.style={dotted, ultra thick},
+  my node/.style={draw, circle},
+]
+  \draw[my line] (0, 0) -- (3, 1);
+  \node[my node] at (4, 0.5) {A};
+\end{tikzpicture}
+\end{example}
+If you want to set up some styles globally you can also use the \csi{tikzset}
+command.
+\begin{example}
+\tikzset{
+  red style/.style={draw=red},
+}
+\tikz{\draw[red style]
+  (0, 0) -- (1, 1) -- (2, 0);}
+\tikz{\node[red style]
+  at (0, 0) {Red node};}
+\end{example}
+If you want to avoid specifying the style with every node or path within
+\TikZ{} picture, you can also set a special styles \cargv{every node} and
+\cargv{every path} to change them all at once.
+\begin{example}
+\begin{tikzpicture}[
+  every path/.style={
+    ultra thick, dotted},
+  every node/.style={
+    circle, draw=red},
+]
+  \draw (0, 0) -- (3, 1);
+  \node at (4, 0.5) {A};
+\end{tikzpicture}
+\end{example}
+
+\section{Coordinates}
+
+So far we have always used the default centimetres for specifying coordinates,
+however it is possible to use any \LaTeX{} dimension (see
+\autoref{sec:dimensions} for details).
+\begin{example}
+\tikz{\draw (0, 0)
+  -- (1in, 1pt);}
+\tikz{\draw (0, 0)
+  -- (1dd, 1em);}
+\end{example}
+
+It is also possible to rescale how the distances are measured by using the
+\cargv{scale} key. This is useful if you find that your picture is too big or
+too small after drawing it, or if there exist some intuitive coordinate system
+(for example, when drawing function plots).
+\begin{example}
+\tikz[scale=2]{\draw
+  (0, 0) -- (1, 1);}
+\tikz{\draw (0, 0) -- (2, 2);}
+\end{example}
+You can also specify \cargv{xscale} and \cargv{yscale} separately.
+
+When specifying scale you can use simple arithmetic operations. For example, to
+change the dimensionless values to inches, you can pass \ltx{scale=1in/1cm}.
+\begin{example}
+\tikz[scale=1in/1cm]{\draw
+  (0, 0) -- (1, 0.5);}
+\tikz[scale=1em/1cm]{\draw
+  (0, 0) -- (1, 0.5);}
+\end{example}
+Keep in mind that coordinates with dimensions will also be scaled, which may
+have unintended consequences. More robust way of changing the dimensionless
+values are the \cargv{x} and \cargv{y} keys.
+\begin{example}
+\tikz[x=1in, y=1in]{\draw
+  (0, 0) -- (1, 0.5);}
+\tikz[x=1em, y=10ex]{\draw
+  (0, 0) -- (1, 0.5);}
+\end{example}
+
+You can actually specify three dimensional coordinates when drawing pictures.
+By default, the third coordinate is interpreted as a vector pointing \(45\)
+degrees to the bottom left and is a bit shorter (formally \((0, 0, 1)\) is  the
+same as \((-0.385, -0.385)\)). This gives the effect of parallel (or
+axonometric) projection.
+\begin{example}[vertical_mode, examplewidth=0.85\linewidth]
+\begin{tikzpicture}[scale=2]
+  \draw (0, 0, 0) -- (0, 0, 1) -- (0, 1, 1) -- 
+    (0, 1, 0) -- cycle;
+  \draw (1, 0, 0) -- (1, 0, 1) -- (1, 1, 1) -- 
+    (1, 1, 0) -- cycle;
+  \draw (0, 0, 0) -- (1, 0, 0) (0, 0, 1) -- (1, 0, 1)
+    (0, 1, 1) -- (1, 1, 1) (1, 1, 0) -- (0, 1, 0);
+\end{tikzpicture}
+\end{example}
+Its length and direction can also be changed by using \cargv{z} key.
+
+Sometimes it may be easier to specify the path by using coordinates relative to
+the previous point instead of absolute ones. To do so prepend \ltx{++} to the
+coordinate, which will be interpreted as the previous specified point with the
+coordinate added.
+\begin{example}
+\begin{tikzpicture}[scale=2]
+  \draw (0, 0) -- ++(0, 1) -- 
+    ++(1, 0) -- ++(0, -1) --
+    cycle;
+  \draw (1.5, 0) -- ++(0, 1) -- 
+    ++(1, 0) -- ++(0, -1) --
+    cycle;
+\end{tikzpicture}
+\end{example}
+
+Scaling is not the only transformation that can be applied to points. It is
+also possible to rotate, shift or apply an arbitrary linear transformation by
+specifying its matrix. Check out the documentation for a detailed description.
+\begin{example}
+\begin{tikzpicture}[rotate=45]
+  \draw (0, 0) -- (0, 1) -- 
+    (1, 1) -- (1, 0) -- cycle;
+\end{tikzpicture}
+\end{example}
+It is also possible to apply transformations to a single command.
+\begin{example}
+\begin{tikzpicture}
+  \draw (0, 0) -- (1, 1);
+  \draw[red, xshift=1cm]
+    (0, 0) -- (1, 1);
+\end{tikzpicture}
+\end{example}
+If you want to apply the same transformation to more than one command within
+the same picture you can use \ei{scope} environment. It is especially useful
+when your picture consists of more than one subpictures each of which is more
+or less independent.
+\begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\begin{tikzpicture}
+  \begin{scope}[rotate=45]
+    \draw (0, 0) rectangle (1, 1);
+    \draw (0, 0) -- (1, 1);
+  \end{scope}
+  \begin{scope}[xshift=2cm]
+    \draw (0.5, 0.5) circle [radius=0.5];
+    \draw (0, 0) -- (1, 1);
+  \end{scope}
+\end{tikzpicture}
+\end{example}
+
+When \TikZ{} pictures are positioned within text, their bottom part matches the
+baseline of the text. If you want to modify it you can use \cargv{baseline} key
+to set at which \(y\) coordinate should the baseline be. If no dimension is
+specified it defaults to \(0\).
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+text \tikz{\draw (0, 0) circle [radius=1em];}
+text \tikz[baseline]{\draw 
+  (0, 0) circle [radius=1em];}
+text \tikz[baseline=-0.5ex]{\draw
+  (0, 0) circle [radius=1em];} text
+\end{example}
+
+\section{Reusing Pictures}
+
+Sometimes you may wish to put the same picture in few places of a bigger
+picture. While you could use commands described in
+\autoref{sec:simple_commands}, this would be problematic since modifying their
+placement or style is non-trivial. \TikZ{} comes with its own method of
+defining smaller pictures called pics. They can be created by passing
+\cargv{\carg{name}/.pic=\carg{commands}} to the \TikZ{} environment or command
+and then used by invoking \csi{pic} command. An example of using it is
+presented in \autoref{lst:pics}.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.9\linewidth]
+\begin{tikzpicture}[
+  heart/.pic={
+    \draw (0,0) .. controls (-1, 0.7) and (-0.2, 1.7) 
+    .. (0, 1) .. controls  (0.2, 1.7) and (1, 0.7) 
+    .. (0, 0);
+  },
+]
+  \pic at (0, 0) {heart};
+  \pic[red] at (1, 1) {heart};
+
+  \begin{scope}[xshift=2cm, every pic/.style={scale=0.2}]
+    \draw (0, 0) pic {heart} -- (1, 1) pic {heart} --
+      (0, 1) pic {heart} -- (1, 0) pic {heart} -- cycle;
+  \end{scope}
+\end{tikzpicture}
+\end{example}
+  \caption{An example of using pics in \TikZ{}.}\label{lst:pics}
+\end{listing}
+If you find yourself repeating a lot of simple commands (for example, drawing
+ticks on an axis) you may simplify your code by using \csi{foreach} command. It
+repeats the drawing command for each value in a provided list, so that you can
+only write repeatable code once and only modify the important parts.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\begin{tikzpicture}
+  \draw (0, 0) circle[radius=1cm];
+  \foreach \i in {0, 60, 120, 180, 240, 300} {
+    \draw (0, 0) -- (\i: 1);
+    \fill (\i: 1) circle[radius=0.1cm];
+  }
+\end{tikzpicture}
+\end{example}
+If your values are a simple arithmetic sequence you can only provide first two
+and last value, replacing the rest with triple dots.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+\begin{tikzpicture}
+  \draw (0, 0) circle[radius=1cm];
+  \foreach \i in {0, 20, ..., 340} {
+    \draw (0, 0) -- (\i: 1);
+    \fill (\i: 1) circle[radius=0.1cm];
+  }
+\end{tikzpicture}
+\end{example}
+You can also iterate over pairs by separating respective parts by \ltx{/}.
+\begin{example}
+\begin{tikzpicture}
+  \foreach \i/\j in {0/a,
+    1/b, 2/c, 3/d} {
+    \node[draw] at (\i, 0) {\j};
+  }
+\end{tikzpicture}
+\end{example}
+
+\section{Libraries}
+
+\pai{pgf} and \TikZ{} do not rely on \LaTeX{}. In fact they can be used with
+any \TeX{} based system or the \TeX{} itself. For this reason \TikZ{} provides
+its own system of extensions that does not use \LaTeX{}'s \cs{usepackage}
+command. Extensions of \TikZ{} are called libraries and can be loaded using
+\csi{usetikzlibrary} command which receives a list of comma separated
+libraries.
+
+For example, if you intend to draw some geometric problems, you will often find
+yourself looking for intersections of some objects. While you could calculate
+their exact coordinates by hand, the \cargv{intersections} library will do it
+for you. An example of using it is presented in \autoref{lst:intersections};
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+%!showbegin !hide
+% In preamble
+\usetikzlibrary{intersections}
+% ...
+%!showend !hide
+
+\begin{tikzpicture}
+  \draw[name path=O] (0, 0) circle [radius=1];
+  \draw[name path=L] (-2, -1.5) -- (3, 1);
+
+  \fill[red, name intersections={of=O and L}]
+    (intersection-1) circle[radius=2pt]
+    (intersection-2) circle[radius=2pt];
+\end{tikzpicture}
+\end{example}
+  \caption{An example of using \cargv{intersections}
+    library.}\label{lst:intersections}
 \end{listing}
 
-Note the foreach loops in the next example.
-\begin{example}
-\begin{tikzpicture}[scale=0.75]
-  \tikzstyle{v}=[circle, minimum size=2mm,inner sep=0pt,draw]
-  \foreach \i in {1,...,8}
-    \foreach \j in {1,...,3}
-      \node[v]
-        (G-\i-\j) at (\i,\j) {};
-  \foreach \i in {1,...,8}
-    \foreach \j/\o in {1/2,2/3}
-      \draw[->]
-        (G-\i-\j) -- (G-\i-\o);
-  \foreach \i/\n in
-    {1/2,2/3,3/4,4/5,5/6,6/7,7/8}
-    \foreach \j/\o in {1/2,2/3} {
-       \draw[->] (G-\i-\j) -- (G-\n-\o);
-       \draw[->] (G-\n-\j) -- (G-\i-\o);
-    }
+Other libraries extend the number of available shapes. For example, the
+\cargv{arrows.meta} library defines a lot of additional arrow tips if you do
+not like the classical one. Some of the available ones are presented in
+\autoref{lst:arrows.meta}.
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+%!showbegin !hide
+% In preamble
+\usetikzlibrary{arrows.meta}
+% ...
+%!showend !hide
+
+\tikzset{every path/.style={ultra thick}} %!hide2
+\tikz{\draw[->] (0, 0) -- (1, 1);}
+\tikz{\draw[-{Circle}] (0, 0) -- (1, 1);}
+\tikz{\draw[-{Stealth}] (0, 0) -- (1, 1);}
+\tikz{\draw[-{Stealth[round]}] (0, 0) -- (1, 1);}
+\tikz{\draw[-{Diamond[open]}] (0, 0) -- (1, 1);}
+\end{example}
+  \caption{Some of the arrow tips defined by \cargv{arrows.meta}
+    library.}\label{lst:arrows.meta}
+\end{listing}
+Oftentimes you may want to perform additional computations on existing
+coordinates. The \cargv{calc} library allows you to do so by enclosing them
+within \verb|$| symbols.
+\begin{example}[vertical_mode, examplewidth=0.8\linewidth]
+%!showbegin !hide
+% In preamble
+\usetikzlibrary{calc}
+% ...
+%!showend !hide
+
+\begin{tikzpicture}
+  \coordinate (A) at (1, -1);
+  \coordinate (B) at (0, 1);
+  \draw[red, ->] (0, 0) -- node[above] {\(A\)} (A);
+  \draw[blue, ->] (0, 0) -- node[left] {\(B\)} (B);
+  \draw[green, ->] (0, 0) -- 
+      node[below right] {\(A+2B\)} ($(A)+2*(B)$);
 \end{tikzpicture}
 \end{example}
 
-With the \csi{usetikzlibrary}
-command in the preamble you can enable a wide variety of additional
-features for drawing special shapes, like this box which is slightly bent.
-\begin{example}
-\usetikzlibrary{%
-  decorations.pathmorphing}
-\begin{tikzpicture}[
-     decoration={bent,aspect=.3}]
- \draw [decorate,fill=lightgray]
-        (0,0) rectangle (5.5,4);
- \node[circle,draw]
-        (A) at (.5,.5) {A};
- \node[circle,draw]
-        (B) at (5,3.5) {B};
- \draw[->,decorate] (A) -- (B);
- \draw[->,decorate] (B) -- (A);
-\end{tikzpicture}
-\end{example}
+If you have a lot of \TikZ{} code in your document you may notice that
+compiling your document takes up much more time than initially. This is because
+\TikZ{} redraws each picture with every \LaTeX{} pass. If this starts getting
+annoying you can cache your images to external files and reuse them on
+subsequent runs. To do this simply put the following code in your preamble.
+\begin{minted}{latex}
+\usetikzlibrary{external}
+\tikzexternalize
+\end{minted}
+This method has some limitations, but should be sufficient for most uses. Read
+up on it in documentation if problems occur.
 
-\begin{example}[examplewidth=0.4\linewidth]
-\usetikzlibrary{positioning}
-\begin{tikzpicture}[xscale=6,
-     yscale=8,>=stealth]
-  \tikzstyle{v}=[circle,
-     minimum size=1mm,draw,thick]
-  \node[v] (a) {$1$};
-  \node[v] (b) [right=of a] {$2$};
-  \node[v] (c) [below=of a] {$2$};
-  \node[v] (d) [below=of b] {$1$};
-  \draw[thick,->]
-        (a) to node {} (c);
-  \draw[thick,->]
-        (a) to node {} (d);
-  \draw[thick,->]
-        (b) to node {} (d);
-\end{tikzpicture}
-\end{example}
-
-You can even draw syntax diagrams that look as if they came straight from a book on
-Pascal programming. The code is a bit more daunting than the example above,
-so I will just show you the result. If you have a look at the \pai{pgf} documentation
-you will find a detailed tutorial on drawing this exact diagram.
-
-\begin{center}
-  \begin{tikzpicture}[point/.style={coordinate},thick,draw=black!50,>=stealth',
-      tip/.style={->,shorten >=1pt},every join/.style={rounded corners},
-      skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}},
-      hv path/.style={to path={-| (\tikztotarget)}},
-      vh path/.style={to path={|- (\tikztotarget)}},
-      terminal/.style={
-          rounded rectangle,
-          minimum size=6mm,
-          thick,draw=black!50,
-          top color=white,bottom color=black!20,
-          font=\ttfamily\tiny},
-      nonterminal/.style={
-          align=center,
-          rectangle,
-          minimum size=6mm,
-          thick,
-          draw=red!50!black!50,         % 50% red and 50% black,
-          top color=white,              % a shading that is white at the top...
-          bottom color=red!50!black!20, % and something else at the bottom
-          font=\itshape\tiny}]
-    \matrix[column sep=4mm] {
-      % First row:
-                             &                                                   &   &  &  &  &  &  &  &  &  & \node (plus) [terminal] {+}; \\
-      % Second row:
-      \node (p1) [point] {}; & \node (ui1)    [nonterminal] {unsigned\\integer}; &
-      \node (p2) [point] {}; & \node (dot)    [terminal]    {.};                 &
-      \node (p3) [point] {}; & \node (digit) [terminal]     {digit};             &
-      \node (p4) [point] {}; & \node (p5)     [point] {};                        &
-      \node (p6) [point] {}; & \node (e)      [terminal]    {E};                 &
-      \node (p7) [point] {}; &                                                   &
-      \node (p8) [point] {}; & \node (ui2)    [nonterminal] {unsigned\\integer}; &
-      \node (p9) [point] {}; & \node (p10)    [point]       {};                                                                             \\
-      % Third row:
-                             &                                                   &   &  &  &  &  &  &  &  &  & \node (minus)[terminal] {-}; \\
-    };
-    { [start chain]
-    \chainin (p1);
-    \chainin (ui1)   [join=by tip];
-    \chainin (p2)    [join];
-    \chainin (dot)   [join=by tip];
-    \chainin (p3)    [join];
-    \chainin (digit) [join=by tip];
-    \chainin (p4)    [join];
-    { [start branch=digit loop]
-    \chainin (p3) [join=by {skip loop=-6mm,tip}];
-    }
-    \chainin (p5)    [join,join=with p2 by {skip loop=6mm,tip}];
-    \chainin (p6)    [join];
-    \chainin (e)     [join=by tip];
-    \chainin (p7)    [join];
-    { [start branch=plus]
-    \chainin (plus) [join=by {vh path,tip}];
-    \chainin (p8)    [join=by {hv path,tip}];
-    }
-    { [start branch=minus]
-    \chainin (minus) [join=by {vh path,tip}];
-    \chainin (p8)    [join=by {hv path,tip}];
-    }
-    \chainin (p8)    [join];
-    \chainin (ui2)   [join=by tip];
-    \chainin (p9)    [join,join=with p6 by {skip loop=-11mm,tip}];
-    \chainin (p10)   [join=by tip];
-    }
-  \end{tikzpicture}
-\end{center}
-
-And there is more, if you have to draw plots of numerical data or
-functions, you should have a closer look at the  \pai{pgfplot}
-package. It provides everything you need to draw plots. It can even
-call the external \texttt{gnuplot} command to evaluate actual
-functions you wrote into the graph.
-
-For more inspiration make sure to visit Kjell Magne Fauske's excellent
-\url{http://www.texample.net/tikz/}. It contains an ever expanding store of
-beautiful graphs and other \LaTeX{} code. On \TeX{}ample.net you will also
-find a
-\href{http://www.texample.net/tikz/resources/#tools-that-generate-pgftikz-code}{list
-  of tools to work with PGF/TikZ} so that you do not have to write all that
-code by hand.
-
-%%% Local Variables:
-%%% TeX-master: "lshort.tex"
-%%% mode: flyspell
-%%% TeX-PDF-mode: t
-%%% End:
+There are many more libraries, most of which are described in the \pai*{pgf}
+package documentation. Check it out if you haven't found solution to your
+problem here.

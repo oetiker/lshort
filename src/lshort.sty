@@ -67,11 +67,12 @@
 \RequirePackage{hologo} % for \XeTeX logo *ak*
 \RequirePackage{verbatim}
 \RequirePackage{listings}
-\RequirePackage[kpsewhich, cachedir=pdfbuild/minted_cache, chapter]{minted}
 \RequirePackage{flafter}
+\RequirePackage[kpsewhich, cachedir=pdfbuild/minted_cache, chapter]{minted}
 \setminted{
   escapeinside=«»,
 }
+\newmintinline[ltx]{latex}{}
 
 \RequirePackage{fancyhdr}
 \RequirePackage{booktabs}
@@ -104,45 +105,12 @@
 \cfoot[]{}
 % \RequirePackage{pgfbaseplot}
 \RequirePackage{tikz}
-\RequirePackage{pgf}
-\usepgfmodule{plot}
-\usetikzlibrary{%
-  arrows,%
-  calc,%
-  fit,%
-  patterns,%
-  plotmarks,%
-  shapes.geometric,%
-  shapes.misc,%
-  shapes.symbols,%
-  shapes.arrows,%
-  shapes.callouts,%
-  shapes.multipart,%
-  shapes.gates.logic.US,%
-  shapes.gates.logic.IEC,%
-  er,%
-  automata,%
-  backgrounds,%
-  chains,%
-  topaths,%
-  trees,%
-  petri,%
-  mindmap,%
-  matrix,%
-  calendar,%
-  folding,%
-  fadings,%
-  through,%
-  positioning,%
-  scopes,%
-  decorations.fractals,%
-  decorations.shapes,%
-  decorations.text,%
-  decorations.pathmorphing,%
-  decorations.pathreplacing,%
-  decorations.footprints,%
-  decorations.markings,%
-  shadows}
+\usetikzlibrary{
+  spy,
+  intersections,
+  arrows.meta,
+  calc,
+}
 \addtolength{\headheight}{1.6pt}
 %
 %

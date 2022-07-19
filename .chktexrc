@@ -24,4 +24,6 @@ WipeArg {
     \complexnum:{}
     \url:{}
     \citetitle:{}
+    \tikz:[]{}
+    \ltx:{}
 }
