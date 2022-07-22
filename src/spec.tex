@@ -889,24 +889,27 @@ command would be
 }
 
 \TeX{} and \LaTeX{} were primarily designed for creating text documents and
-this is were they shine. Still, it is possible to use them for creating
-presentations---while they will lack fancy animations and transitions (they are
-still just a PDF file after all), you will be able to tap into other strengths
-of \LaTeX{} ecosystem such as logical markup, math typesetting and capabilities
-enabled by various packages.
+that is where they shine. Still, it is also possible to use them for creating
+presentations, but they will lack fancy animations and transitions---they are
+just cleverly set up PDF files after all. But on the plus side, you will be
+able to tap into all the strengths of \LaTeX{} ecosystem such as logical
+markup, math typesetting and all the typesetting magic provided by the various
+packages.
 
 Historically there have been several ways to create presentations, for example
-the standard \LaTeX{}'s \cli{slides} class or the \pai{powerdot} package. While
+the standard \LaTeX{} \cli{slides} class or the \pai{powerdot} package. While
 these are still supported, this booklet will focus on the \pai*{beamer} package
-that is most widely used today. We will only scratch the possibilities enabled
-by the package, for a more in-depth tutorial please see the User Guide
-distributed with it.
+which is the most popular option these days. This section will only scratch the
+surface of \pai{beamer}'s capabilities. For a more in-depth tutorial please see
+the User Guide~\cite{pack:beamer} distributed with it.
 
 \subsection{Basic Usage}
 
 The \pai{beamer} package provides the \cli{beamer} class, which loads all the
 necessary packages. The most basic environment is the \ei{frame} environment
-which denotes a single \enquote{slide} of your presentation.
+which adds a single page to your presentation.\footnote{Other presentation
+  software often uses the them \enquote{slide} instead of frame, but slides are
+  a slightly different concept in \pai{beamer}.}
 \begin{example}
 %!showbegin !hide
 \documentclass{beamer}
@@ -924,7 +927,7 @@ The full syntax of the \ei{frame} is actually
 \end{lscommand}
 Where \carg{options} is a key value list of options applied to the frame while
 \carg{title} and \carg{subtitle} are displayed at the top of the slide. Despite
-the curly braces these are actually optional arguments and has been
+the curly braces these are actually optional arguments and have been
 omitted in the previous example.
 \begin{example}
 \begin{document} %!hide
@@ -937,12 +940,12 @@ omitted in the previous example.
 \end{frame}
 \end{document} %!hide
 \end{example}
-The title and subtitle may be also specified using \csi{frametitle} and
+The title and subtitle can also be specified using the \csi{frametitle} and
 \csi{framesubtitle} commands.
 
-Similarly to an article you can specify title, author and date of presentation
+As in the standard classes you can specify title, author and date in the preamble
 using the \csi{title}, \csi{author} and \csi{date} commands. The
-\csi{maketitle} may then be used to create a title frame.
+\csi{maketitle} will then use theses settings to create a title frame.
 \begin{example}
 \author{Jane Doe}
 \title{Interesting Title}
@@ -954,19 +957,19 @@ using the \csi{title}, \csi{author} and \csi{date} commands. The
 \end{document} %!hide
 \end{example}
 Additionally \csi{subtitle}, \csi{institute} and \csi{titlegraphic} are
-available for a richer title frame. The \csi{date} is often repurposed to hold
+available to add extra information to the title frame. The \csi{date} is often repurposed to hold
 the conference name, since it is more informative than the exact date. Some
-themes (discussed later) display these fields in each slide. If you find that
-they are too long for such use, you may specify shorter versions via optional
+themes (discussed later) display these fields on each slide. If you find that
+they are too long for such use, you may specify shorter versions via the optional
 argument like this:
 \begin{minted}{latex}
   \title[Short Title]{A Title That Is Too Long}
 \end{minted}
 
-The sectioning commands, such as \csi{section}, are meant to be used between
-frames and define a structure of presentation. Using them has no visible impact
-on the frames themselves, but it will create nice \csi{tableofcontents}
-output that will be properly hyperlinked.
+Sectioning commands, such as \csi{section}, are meant to be used between frames
+and define the structure of the presentation. Using them has no visible impact
+on the frames themselves, but they allow for a  nice \csi{tableofcontents} with
+properly hyperlinked entries.
 \begin{example}
 \begin{document} %!hide
 \begin{frame}{Outline}
@@ -988,10 +991,10 @@ output that will be properly hyperlinked.
 \end{document} %!hide
 \end{example}
 
-In addition to the \csi{emph} command, \cli{beamer} provides additional means
-of emphasis within the slide: the \csi{alert} command typesets its argument
-using a bright red colour, while the \ei{block} environment displays its
-contents with a title and separated from the rest of the text.
+\cli{beamer} provides special comands for emphasizing information on the slide:
+the \csi{alert} command typesets its argument using a bright red colour, the
+\ei{block} environment displays its contents with a title and separated from
+the rest of the text.
 \begin{example}
 \begin{document} %!hide
 \begin{frame} %!hide
@@ -1009,9 +1012,8 @@ Here we will talk about
 \end{frame} %!hide
 \end{document} %!hide
 \end{example}
-Many \pai{amsmath}\footnote{\pai{amsmath} is loaded automatically by
-  \cli{beamer}.} environments, such as \ei{theorem} or \ei{proof} are redefined
-to also produce blocks.
+Beamer redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded automatically by
+  \cli{beamer}.} environments, such as \ei{theorem} or \ei{proof} to also produce blocks.
 
 You will find that most of the \LaTeX{} commands and environments, such as
 \cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable
@@ -1033,13 +1035,14 @@ Hello!
 
 \subsection{Overlay Specification}
 
-So far, the created frames are very static---they show all of their contents at
-once. It is, however, possible to show a frame piece-wise, in order to not
+So far, the created frames were very static---they showed all of their contents
+at once. It is, however, possible to show a frame piece-wise, in order to not
 overwhelm an audience with lots of information.
 
 The simplest way to do so is the \csi{pause} command. It splits the frame so
 that the content before the pause is present on the previous page while the
-rest of the frame is present on the next page.
+rest of the frame is present on the next page. These partial frames are called
+slides.
 \begin{example}[
   vertical_mode,
   to_page=3,
@@ -1081,8 +1084,8 @@ numbers (separated by \cargv{-}) or a comma delimited list of the two.
 \end{example}
 \end{chktexignore}
 The \csi{pause} command uses \csi{onslide} internally together with a counter,
-so these can be mixed together as desired, though care is required to properly
-set the slide numbers correctly.
+so these can be mixed together as desired, though care is required to set the
+slide numbers correctly.
 
 A similar command is \csi{uncover}. It accepts the same optional \carg{overlay
   specification} argument but only applies it to its mandatory argument.
@@ -1104,7 +1107,8 @@ A similar command is \csi{uncover}. It accepts the same optional \carg{overlay
 \end{chktexignore}
 There are more commands that accept \carg{overlay specification} argument, and
 many more preexisting commands and environments that are extended by
-\pai{beamer} to support them. Refer to its User Guide for more examples.
+\pai{beamer} to support them. Refer to its User Guide~\cite{pack:beamer} for
+more examples.
 
 By default the contents that are not uncovered are not shown at all. If you
 don't want to have a lot of empty space on your slides or you prefer not to
@@ -1128,7 +1132,7 @@ text as transparent. To do so, use the \csi{setbeamercovered} with the
 \end{frame}
 \end{document} %!hide
 \end{example}
-There are other possible arguments to this commands. For example, the
+There are other possible arguments to these commands. For example, the
 \cargv{dynamic} argument makes the text more transparent the later it is
 shown.\footnote{The effect is amplified a bit in the below example, so it is
   more visible. The default variant works better when there are more
@@ -1183,7 +1187,7 @@ at~\cite{AnotherBeamerThemeMatrix}.
 The \csi{usefonttheme} command can be used in a similar fashion. By default the
 text in frames is typeset using sans serif font. This choice makes sense,
 because it is easier to read on lower resolution projectors, but is less
-relevant if you use high-resolution display to present it. You can pass
+relevant if you use high-resolution display for presentation. You can pass
 \cargv{serif} option to switch to default \LaTeX{} font.
 \begin{example}
 \usefonttheme{serif}
@@ -1200,13 +1204,13 @@ relevant if you use high-resolution display to present it. You can pass
 \end{document} %!hide
 \end{example}
 
-More granular customisation is also possible using
+More granular customisation is also possible using the
 \begin{lscommand}
   \csi{setbeamerfont}[element: m, attributes: m] \\
   \csi{setbeamercolor}[element: m, attributes: m]
 \end{lscommand}
-commands. The \carg{element} argument is the element for which the customised
-font or colour should apply, while the \carg{attributes} specify the attributes
+commands. The \carg{element} argument is the element to which the customised
+font or colour should be applied, while the \carg{attributes} specify the attributes
 such as \cargv{size}, \cargv{shape} or \cargv{family} for fonts, and
 \cargv{fg} (foreground) or \cargv{bg} (background) for colours. Fonts are
 further discussed in \autoref{sec:fontspec}, while colours are touched upon in
@@ -1258,12 +1262,12 @@ next to the Latin ones.
 \end{example}
 
 By default, \pai{beamer} typesets the slides onto \(4 : 3\) pages. If your
-projector supports that, you may prefer to change aspect ratio to a wider one.
-You may do so by passing the \cargv{aspectratio} to the \cs{documentclass}
-options. It accepts a single integer that encodes the desired ratio, for
-example \cargv{169} is interpreted as \(16:9\), while \cargv{54} is interpreted
-as \(5:4\). Wider ratios are especially useful if you want to include a sidebar
-with table of contents on your slides.
+projector uses other aspect ratio, you may prefer to change it accordingly. You
+may do so by passing the \cargv{aspectratio} to the \cs{documentclass} options.
+It accepts a single integer that encodes the desired ratio, for example
+\cargv{169} is interpreted as \(16:9\), while \cargv{54} is interpreted as
+\(5:4\). Wider ratios are especially useful if you want to include a sidebar
+with the table of contents into your slides.
 \begin{example}[paperwidth=8cm]
 %!showbegin !hide
 \documentclass[
