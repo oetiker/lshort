@@ -39,8 +39,7 @@ jobs:
       - name: Install tools
         run: |
           tlmgr update --self
-          tlmgr update graphics
-          tlmgr update xcolor
+          tlmgr update --all
           apk add make
           apk add git
           apk add py3-pygments
