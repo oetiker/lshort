@@ -36,6 +36,7 @@
 - drop the lssymb appendix / marcin-serwin
 - rewrite the math appendix to focus on `unicode-math` / marcin-serwin
 - add sections about changing math fonts / marcin-serwin
+- rewrite the beamer section / marcin-serwin
 
 ## 6.4 2021.03.09
 
