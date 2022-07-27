@@ -5,6 +5,9 @@ verbatimEnvironments:
   code: 1
   chktexignore: 1
 
+verbatimCommands:
+  ltx: 1
+
 modifyLineBreaks:
   textWrapOptions:
     columns: 0

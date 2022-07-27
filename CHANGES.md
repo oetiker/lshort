@@ -37,6 +37,7 @@
 - rewrite the math appendix to focus on `unicode-math` / marcin-serwin
 - add sections about changing math fonts / marcin-serwin
 - rewrite the beamer section / marcin-serwin
+- rewrite the graphics chapter to focus on TikZ / marcin-serwin
 
 ## 6.4 2021.03.09
 
