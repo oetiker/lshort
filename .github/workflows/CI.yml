@@ -3,8 +3,22 @@ name: CI
 on: [push, pull_request]
 
 jobs:
+  skip_check:
+    name: Skip check
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          cancel_others: 'true'
+          paths: '["src/**", "Makefile", "fixdate.pl"]'
+
   check:
     name: Check LaTeX
+    needs: skip_check
+    if: ${{ needs.skip_check.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     container: ghcr.io/xu-cheng/texlive-small:latest
 
@@ -32,6 +46,8 @@ jobs:
 
   build_latex:
     name: Build LaTeX
+    needs: skip_check
+    if: ${{ needs.skip_check.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
     container: ghcr.io/xu-cheng/texlive-full:latest
 
@@ -39,8 +55,7 @@ jobs:
       - name: Install tools
         run: |
           tlmgr update --self
-          tlmgr update graphics
-          tlmgr update xcolor
+          tlmgr update --all
           apk add make
           apk add git
           apk add py3-pygments
