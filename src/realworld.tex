@@ -478,7 +478,8 @@ areas where \LaTeX{} has to be configured appropriately:
 
 \begin{enumerate}
   \item All automatically generated text strings (\enquote{Table of Contents},
-        \enquote{List of Figures}, \ldots) have to be adapted to the new language.
+        \enquote{List of Figures}, \ldots) have to be adapted to the new
+        language.
   \item \LaTeX{} needs to know the hyphenation rules for the current language.
   \item Language specific typographic rules. For example, in French there is a
         mandatory space before each colon character (:).
@@ -495,8 +496,8 @@ stick with \pai{babel}.
 Initial versions of \TeX{} were intended to only support English language and
 thus assumed that source files were ASCII encoded, that is, using format that
 only supported Latin alphabet and few symbols common on computers. With the
-popularization of \LaTeX{} outside English-speaking world, the situation has
-slowly improved and today modern \TeX{} engines speak UTF-8 natively, which
+popularization of \LaTeX{} outside the English-speaking world, the situation
+has slowly improved. These days \TeX{} engines speak UTF-8 natively, which
 considerably eases the usage of \LaTeX{} when typesetting non-English
 documents. Thus inputting non-English characters is as easy as:
 \begin{chktexignore}  
@@ -508,13 +509,15 @@ documents. Thus inputting non-English characters is as easy as:
 \end{chktexignore}
 
 Due to backward compatibility \LaTeX{} still supports entering \wi{accent}s and
-\wi{special character}s via dedicated commands. These are not very useful these
-days, but might still come in handy when the accented characters appear
-infrequently throughout the document. These are listed in \autoref{accents}.
-Keep in mind that while older \TeX{} engines worked by combining accents with
-existing letters manually, nowadays they simply look up the correct glyph in
-the font. This means that accents and characters can no longer be freely
-combined and will produce output only if the font supports the combination.
+\wi{special character}s via dedicated commands. These are not very useful if
+you are typing in your native language and have all the necessery characters on
+your keyboard. But they might still come in handy when the accented characters
+from another language appear infrequently throughout the document. The commands
+for adding accents to characters are listed in \autoref{accents}. Keep in mind
+that while older \TeX{} engines worked by combining accents with existing
+letters manually, nowadays they simply look up the correct glyph in the font.
+This means that accents and characters can no longer be freely combined and
+will produce output only if the font supports the combination.
 
 \begin{table}
   \caption{Accents and Special Characters.}\label{accents}
@@ -547,8 +550,8 @@ to overlook we recommend you put
 \begin{minted}{latex}
 \tracinglostchars=3
 \end{minted}
-somewhere in your preamble. This command will elevate the warnings to error
-status, so they will be much harder to miss.
+somewhere in the preamble of the document. This command will elevate the
+warnings to error status, so they will be much harder to miss.
 
 \subsection{Polyglossia Usage}
 
@@ -737,8 +740,8 @@ If you want to learn even more about fonts, have a look at
 Some languages are written left to right, others are written right to left
 (RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
   supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
-  \pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
-  much more limited than \pai{bidi}.} in order to support RTL languages. The
+  \pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it
+  is much more limited than \pai{bidi}.} in order to support RTL languages. The
 \pai{bidi} package should be the last package you load, even after
 \pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
 loads \pai{bidi} this means that \pai{polyglossia} should be the last package
@@ -815,10 +818,9 @@ punctuation for these languages.
 
 \section{Simple Commands}\label{sec:simple_commands}
 
-Oftentimes when writing a document you will find yourself typing the same
-name\slash{}logo\slash{}complicated text in multiple places. If that's the case
-you risk introducing typos in these. In case of brand logos it is also often
-the case that they define a preferred way to introduce them in text, such as
+You will find yourself typing the same name\slash{}logo\slash{}complicated text
+in multiple places in your documents. This is tedious and it bears the risk of
+introducing typos. Brand logos also often have special casing rules, such as
 all uppercase or starting with a lowercase letter even at the beginning of the
 sentence.
 
@@ -1017,7 +1019,8 @@ command. The contents of the title have to be defined by the commands
   \csi{title}[title: m], \csi{author}[author: m]
   and optionally \csi{date}[date: m]
 \end{lscommand}
-before calling \mintinline{latex}|\maketitle|. In the argument to \csi{author}, you can supply several names separated by \csi{and} commands.
+before calling \mintinline{latex}|\maketitle|. In the argument to \csi{author},
+you can supply several names separated by \csi{and} commands.
 
 An example of some of the commands mentioned above can be found in
 \autoref{document} on \autopageref{document}.
