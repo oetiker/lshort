@@ -469,24 +469,54 @@ Abstracts are very important \ldots
 \end{document}%!hide
 \end{example}
 
-\subsection{Accents and Special Characters}
+\section{International Language Support}\label{sec:polyglossia}%
+\index{international}
+\secby{Axel Kielhorn}{A.Kielhorn@web.de}
 
-\LaTeX{} supports the use of \wi{accent}s and \wi{special character}s
-from many languages. \autoref{accents} shows all sorts of accents
-being applied to the letter o. Naturally other letters work too.
+When you write documents in \wi{language}s other than English, there are three
+areas where \LaTeX{} has to be configured appropriately:
 
-To place an accent on top of an i or a j, its dots have to be
-removed. This is accomplished by typing \csi{i} and \csi{j}.
-\begin{chktexignore}
-  \begin{example}
-H\^otel, na\"\i ve, \'el\`eve,\\
-sm\o rrebr\o d, !`Se\~norita!,\\
-Sch\"onbrunner Schlo\ss{}
-Stra\ss e
+\begin{enumerate}
+  \item All automatically generated text strings (\enquote{Table of Contents},
+        \enquote{List of Figures}, \ldots) have to be adapted to the new language.
+  \item \LaTeX{} needs to know the hyphenation rules for the current language.
+  \item Language specific typographic rules. For example, in French there is a
+        mandatory space before each colon character (:).
+\end{enumerate}
+
+The package \pai*{polyglossia} is a replacement for the venerable \pai{babel}
+package. It takes care of the hyphenation patterns and automatically generated
+text strings in your documents. Polyglossia works only with \hologo{XeTeX}
+and \hologo{LuaTeX} engines, so if you are using \hologo{pdfTeX} you'll have to
+stick with \pai{babel}.
+
+\subsection{Entering Characters}
+
+Initial versions of \TeX{} were intended to only support English language and
+thus assumed that source files were ASCII encoded, that is, using format that
+only supported Latin alphabet and few symbols common on computers. With the
+popularization of \LaTeX{} outside English-speaking world, the situation has
+slowly improved and today modern \TeX{} engines speak UTF-8 natively, which
+considerably eases the usage of \LaTeX{} when typesetting non-English
+documents. Thus inputting non-English characters is as easy as:
+\begin{chktexignore}  
+\begin{example}
+  Hôtel, naïve, élève, \\
+  smørrebrød, ¡Señorita!, \\
+  Schönbrunner Schloß, Żółć
 \end{example}
 \end{chktexignore}
-\begin{table}[!hbp]
-  \centering
+
+Due to backward compatibility \LaTeX{} still supports entering \wi{accent}s and
+\wi{special character}s via dedicated commands. These are not very useful these
+days, but might still come in handy when the accented characters appear
+infrequently throughout the document. These are listed in \autoref{accents}.
+Keep in mind that while older \TeX{} engines worked by combining accents with
+existing letters manually, nowadays they simply look up the correct glyph in
+the font. This means that accents and characters can no longer be freely
+combined and will produce output only if the font supports the combination.
+
+\begin{table}
   \caption{Accents and Special Characters.}\label{accents}
   \begin{tabular}{@{}*3{ll@{\qquad}}ll@{}}
     \toprule
@@ -505,9 +535,280 @@ Stra\ss e
   \index{dotless \i{} and \j}\index{Scandinavian letters}%
   \index{ae@\ae}\index{umlaut}\index{grave}\index{acute}%
   \index{oe@\oe}\index{aa@\aa}
-
-  \bigskip
 \end{table}
+
+The Unicode standard defines over \num{100 000} glyphs for use across many
+languages and specialized disciplines. Currently no font implements the whole
+set, so if you are working with a lot of non-Latin characters you will, sooner
+or later, find one that is not supported by your currently selected font. In
+such case, \LaTeX{} will simply not typeset the requested character and print a
+\enquote{Missing character} warning in its log. Because such warnings are easy
+to overlook we recommend you put
+\begin{minted}{latex}
+\tracinglostchars=3
+\end{minted}
+somewhere in your preamble. This command will elevate the warnings to error
+status, so they will be much harder to miss.
+
+\subsection{Polyglossia Usage}
+
+Writing in different languages is easy, just load the \pai{polyglossia} package
+and specify the languages in the preamble using
+\begin{lscommand}
+  \csi{setdefaultlanguage}[options: o, language: m] \\
+  \csi{setotherlanguage}[options: o, language: m]
+\end{lscommand}
+where \carg{language} is either the name of the language to use such as
+\cargv{gaelic} or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
+\cargv{ru-luna1918}. When specifying language via its name you may pass
+additional \carg{options} to decide between its variants for example
+\cargv{variant=british} or \cargv{script=Arabic}. Note that when loading a
+language, either via tag or with options, all variants are loaded and the
+tag\slash{}options specified are just the defaults. For a full list of
+supported languages and variants see the \pai{polyglossia} package
+documentation.
+
+To write a paragraph in German, you can use the \ei{german} environment:
+
+\begin{example}
+%!showbegin !hide
+% In the preamble
+\setdefaultlanguage{english}
+\setotherlanguage{german}
+% ...
+%!showend !hide
+\year=3022 \month=1 \day=19 %!hide
+Today is not \today.
+
+\begin{german}
+  Heute ist nicht \today.
+\end{german}
+\end{example}
+
+You may also use \ei{lang} environment that accepts the \carg{language} as its
+first argument. This is especially useful if you prefer to specify the language
+via BCP-47 tag since environment names cannot contain the
+\enquote*{\texttt{-}} symbol.
+\begin{example}
+\year=3022 \month=1 \day=19 %!hide
+\begin{lang}{de-AT}
+  Heute ist nicht \today.
+\end{lang}
+\end{example}
+
+You can also pass \carg{options} as an optional argument to the environment.
+\begin{example}
+\year=3023 \month=8 \day=17 %!hide
+\begin{german}[
+  script=blackletter
+]
+  Heute ist nicht \today.
+\end{german}
+\end{example}
+
+If you just need a word or a short phrase in a foreign language you can use
+either the
+\begin{lscommand}
+  \csi{text«\bs carg*{language}»}[options:o, text:m]
+\end{lscommand}
+or the
+\begin{lscommand}
+  \csi{textlang}[options:o, language:m, text:m]
+\end{lscommand}
+command:
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
+In Austria they write
+\textlang[variant=austrian]{de}{Jänner}
+instead of \textgerman{Januar}. And in the olden
+days \textlang{de}{August} was written
+\textgerman[script=blackletter]{Auguſt}.
+\end{example}
+
+For languages that are not very different from English, the results are not
+very impressive. We get correct hyphenation and some context aware commands
+such as \csi{today} adjust their output. However the further we stray from
+English, the more useful will this commands become.
+
+Sometimes the font used in the main document does not contain glyphs that are
+required in the second language. The default Latin Modern font for example does
+not contain Cyrillic letters. The solution is to define a custom font that will
+be used for that language.
+
+To set the fonts use the command
+\begin{lscommand}
+  \csi{newfontfamily}[familyname:M, options:o, font:m]
+\end{lscommand}
+from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
+  by \pai{polyglossia} so you do not need to add it to a the preamble of your
+  document.} which is described in much more detail in
+\autoref{sec:fontspec}.
+
+When changing the text language, \pai{polyglossia} checks whether a font family
+named \cargv{\textit{language}font} exists and changes to it if it's available.
+
+If you are happy with the default Latin Modern font, you may want to try the
+\enquote{CMU} font which contains some additional Cyrillic or Greek glyphs
+while looking nearly identical to Latin Modern.\footnote{Both fonts are
+  actually based on the Computer Modern font, designed by Donald Knuth for the
+  first \TeX{} versions.}
+
+If you have the CMU font installed in your system (unlikely) or you are using
+\hologo{LuaLaTeX} then you can simply write
+\begin{minted}{latex}
+  \newfontfamily\greekfont{CMU Serif}
+\end{minted}
+
+If you are using \hologo{XeLaTeX} and don't have the font installed then you
+need to specify the font by its file name.
+\begin{minted}{latex}
+  \newfontfamily\greekfont[
+    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+    BoldFont=*bx, BoldItalicFont=*bi,
+  ]{Cm}
+\end{minted}
+
+With the appropriate fonts loaded, you can now write:
+\begin{example}[examplewidth=0.8\linewidth, vertical_mode,noextend]
+%!showbegin !hide
+% In the preamble (LuaLaTeX)
+\setotherlanguage{greek}
+\newfontfamily\greekfont{CMU Serif}
+\setotherlanguage{russian}
+\newfontfamily\russianfont{CMU Serif}
+% ...
+%!showend !hide
+
+\begin{chktexignore} %!hide
+\textrussian{Правда} is a Russian newspaper. %!hide
+\textlang{greek}{ἀλήθεια} is truth or disclosure in %!hide
+%!showbegin %!hide
+\textrussian{«\fontspec{cmuntt.otf}Правда»} is a Russian newspaper.
+\textlang{greek}{«\fontspec{cmuntt.otf}ἀλήθεια»} is truth or disclosure in
+%!showend %!hide
+philosophy.
+\end{chktexignore} %!hide
+\end{example}
+
+\LaTeX{} actually uses three different fonts for typesetting documents. The
+above commands only set the default serif font used for the body text. The
+other fonts are \textsf{sans serif} (used in presentations slides) and
+\texttt{monospace} (used when displaying code). In order to adjust the fonts
+used for a particular language, define \cargv{\textit{language}fontsf} family
+for sans serif and \cargv{\textit{language}fonttt} for monospace. For example,
+to define CMU as a font for Greek in all three fonts when using
+\hologo{LuaLaTeX} you would write
+\begin{minted}{latex}
+  \newfontfamily\greekfont{CMU Serif}
+  \newfontfamily\greekfontsf{CMU Sans Serif}
+  \newfontfamily\greekfonttt{CMU Typewriter Text}
+\end{minted}
+\pagebreak[3]
+or in \hologo{XeLaTeX}
+\begin{minted}{latex}
+  \newfontfamily\greekfont[
+    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
+    BoldFont=*bx, BoldItalicFont=*bi,
+  ]{cmun}
+  \newfontfamily\greekfontsf[
+    Extension=.otf, UprightFont=*ss, ItalicFont=*si,
+    BoldFont=*sx, BoldItalicFont=*so, 
+  ]{cmun}
+  \newfontfamily\greekfonttt[
+    Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
+    BoldFont=*tb, BoldItalicFont=*tx, 
+  ]{cmun}
+\end{minted}
+
+The commands above redefine the fonts for languages used as \enquote*{other} in
+polyglossia. If you want to influence the font of the main document language
+use the \csi{setmainfont}, \csi{setsansfont} and \csi{setmonofont} that work the
+same way but without the \carg{familyname} argument.
+\begin{minted}{latex}
+  \setmainfont{CMU Serif}
+  \setsansfont{CMU Sans Serif}
+  \setmonofont{CMU Typewriter Text}
+\end{minted}
+
+If you want to learn even more about fonts, have a look at
+\autoref{sec:fontspec}.
+
+\subsection{Right to Left (RTL) languages}
+
+Some languages are written left to right, others are written right to left
+(RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
+  supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
+  \pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
+  much more limited than \pai{bidi}.} in order to support RTL languages. The
+\pai{bidi} package should be the last package you load, even after
+\pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
+loads \pai{bidi} this means that \pai{polyglossia} should be the last package
+loaded.)
+
+\begin{example}[standalone, template=empty, paperwidth=0.35\linewidth, paperheight=4cm]
+\documentclass{article}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{arabic}
+%!hidebegin
+\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}
+\defaultfontfeatures[Iran Nastaliq] {
+  Path=src/font-IranNastaliq/WebFonts/,
+  Extension=.ttf,
+  UprightFont=IranNastaliq-Web,
+  Script=Arabic,
+}
+%!hideend
+\newfontfamily\arabicfont{Iran Nastaliq}
+
+\begin{document}
+%!showbegin !hide
+«\textarabic{هذا نص عربي}»
+%!showend !hide
+هذا نص عربي % !hide
+\end{document}
+\end{example}
+
+The package \pai*{xepersian}\footnote{Works only with
+  \hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
+supplies Persian \LaTeX-commands that allows you to enter commands like
+\csi{section} in Persian, which makes this really attractive to native speakers.
+\pai{xepersian} is the only package that supports kashida\index{kashida} with
+\hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
+development.
+
+To typeset Arabic you may use the Iran Nastaliq font~\cite{font:IranNastaliq}
+developed by the SCICT and updated by Mohammad Saleh Souzanchi.
+
+The \pai*{arabxetex} package supports several languages with
+an Arabic script:
+\begin{itemize}
+  \item arab (Arabic)\index{Arabic}
+  \item persian\index{Persian}
+  \item urdu\index{Urdu}
+  \item sindhi\index{Sindhi}
+  \item pashto\index{Pashto}
+  \item ottoman (turk)\index{Ottoman}\index{Turkish}
+  \item kurdish\index{Kurdish}
+  \item kashmiri\index{Kashmiri}
+  \item malay (jawi)\index{Malay}\index{Jawi}
+  \item uighur\index{Uighur}
+\end{itemize}
+
+It offers a font mapping that enables \hologo{XeLaTeX} to process input
+using the Arab\TeX{} ASCII transcription.
+
+There is no package available for Hebrew\index{Hebrew} because none is needed.
+The Hebrew support in \pai{polyglossia} should be sufficient. But you do need a
+suitable font with real Unicode Hebrew. SBL Hebrew~\cite{font:sblhebrew} is a
+non-free font available for non-commercial use. Another font, available under
+the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
+
+\subsection{Chinese, Japanese and Korean (CJK)}%
+\index{Chinese}\index{Japanese}\index{Korean}
+
+The package \pai*{xeCJK}\footnote{Works only with
+  \hologo{XeLaTeX}.} takes care of font selection and
+punctuation for these languages.
 
 \section{Simple Commands}\label{sec:simple_commands}
 
@@ -604,297 +905,6 @@ consistency of their usage is very important.
 
 Note that the described commands are actually much more powerful and will be
 discussed further in \autoref{sec:new_commands}.
-
-\section{International Language Support}\label{sec:polyglossia}%
-\index{international}
-\secby{Axel Kielhorn}{A.Kielhorn@web.de}
-
-When you write documents in \wi{language}s
-other than English, there are three areas where \LaTeX{} has to be
-configured appropriately:
-
-\begin{enumerate}
-  \item All automatically generated text strings (\enquote{Table of Contents},
-        \enquote{List of Figures}, \ldots) have to be adapted to the new language.
-  \item \LaTeX{} needs to know the hyphenation rules for the current language.
-  \item Language specific typographic rules. In French for example, there is a
-        mandatory space before each colon character (:).
-\end{enumerate}
-
-Also entering text in your language of choice might be a bit cumbersome using
-all the commands from \autoref{accents}. To overcome this problem, until
-recently you had to delve deep into the abyss of language specific encodings
-both for input as well as fonts. These days, with modern \TeX{} engines
-speaking UTF-8 natively, these problems have relaxed considerably.
-
-The package \pai*{polyglossia} is a replacement for the venerable \pai{babel}
-package. It takes care of the hyphenation patterns and automatically generated
-text strings in your documents. Polyglossia works only with \hologo{XeTeX}
-and \hologo{LuaTeX} engines.
-
-\subsection{Polyglossia Usage}
-
-So far there has been no advantage to using a Unicode \hologo{TeX} engine. This
-changes when we leave English and move to a language that uses non-Latin
-alphabet like Greek or Russian. With a Unicode based system, you can
-simply\footnote{For small values of simple.} enter the native characters in
-your editor and \hologo{TeX} will understand them.
-
-Writing in different languages is easy, just load the \pai{polyglossia} package
-and specify the languages in the preamble using
-\begin{lscommand}
-  \csi{setdefaultlanguage}[options: o, language: m] \\
-  \csi{setotherlanguage}[options: o, language: m]
-\end{lscommand}
-where \carg{language} is either the name of the language to use such as
-\cargv{gaelic} or \cargv{japanese}, or its BCP-47 tag such as \cargv{de-CH} or
-\cargv{ru-luna1918}. When specifying language via its name you may pass
-additional \carg{options} to decide between its variants for example
-\cargv{variant=british} or \cargv{script=Arabic}. Note that when loading a
-language, either via tag or with options, all variants are loaded and the
-tag\slash{}options specified are just the defaults. For a full list of supported
-languages and variants see the \pai{polyglossia} package documentation.
-
-To write a paragraph in German, you can use the \ei{german} environment:
-
-\begin{example}
-%!showbegin !hide
-% In the preamble
-\setdefaultlanguage{english}
-\setotherlanguage{german}
-% ...
-%!showend !hide
-\year=3022 \month=1 \day=19 %!hide
-Today is not \today.
-
-\begin{german}
-  Heute ist nicht \today.
-\end{german}
-\end{example}
-
-You may also use \ei{lang} environment that accepts the \carg{language} as its
-first argument. This is especially useful if you prefer to specify the language
-via BCP-47 tag since environment names cannot contain the
-\enquote*{\texttt{-}} symbol.
-\begin{example}
-\year=3022 \month=1 \day=19 %!hide
-\begin{lang}{de-AT}
-  Heute ist nicht \today.
-\end{lang}
-\end{example}
-
-You can also pass \carg{options} as an optional argument to the environment.
-\begin{example}
-\year=3023 \month=8 \day=17 %!hide
-\begin{german}[
-  script=blackletter
-]
-  Heute ist nicht \today.
-\end{german}
-\end{example}
-
-If you just need a word or a short phrase in a foreign language you can use
-either the
-\begin{lscommand}
-  \csi{text«\bs carg*{language}»}[options:o, text:m]
-\end{lscommand}
-or the
-\begin{lscommand}
-  \csi{textlang}[options:o, language:m, text:m]
-\end{lscommand}
-command:
-\begin{example}[examplewidth=0.8\linewidth, vertical_mode]
-In Austria they write
-\textlang[variant=austrian]{de}{Jänner}
-instead of \textgerman{Januar}. And in the olden
-days \textlang{de}{August} was written
-\textgerman[script=blackletter]{Auguſt}.
-\end{example}
-
-For languages that are not very different from English, the results are not
-very impressive. We get correct hyphenation and some context aware commands
-such as \csi{today} adjust their output. However the further we stray from
-English, the more useful will this commands become.
-
-Sometimes the font used in the main document does not contain glyphs that are
-required in the second language. The default Latin Modern font for example does not
-contain Cyrillic letters. The solution is to define a custom font that will be used
-for that language.
-
-To set the fonts use the command
-\begin{lscommand}
-  \csi{newfontfamily}[familyname:M, options:o, font:m]
-\end{lscommand}
-from the \pai{fontspec} package\footnote{\pai{fontspec} is loaded automatically
-  by \pai{polyglossia} so you do not need to add it to a the preamble of your
-  document.} which is described in much more detail in
-\autoref{sec:fontspec}.
-
-When changing the text language, \pai{polyglossia} checks whether a font family named
-\cargv{\textit{language}font} exists and changes to it if it's available.
-
-If you are happy with the default Latin Modern font, you may want to try the \enquote{CMU} font
-which contains some additional Cyrillic or Greek glyphs
-while looking nearly identical to Latin Modern.\footnote{Both fonts are
-  actually based on the Computer Modern font, designed by Donald Knuth for
-  the first \TeX{} versions.}
-
-If you have the CMU font installed in your system (unlikely) or you are using
-\hologo{LuaLaTeX} then you can simply write
-\begin{minted}{latex}
-  \newfontfamily\greekfont{CMU Serif}
-\end{minted}
-
-If you are using \hologo{XeLaTeX} and don't have the font installed then you
-need to specify the font by its file name.
-\begin{minted}{latex}
-  \newfontfamily\greekfont[
-    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
-    BoldFont=*bx, BoldItalicFont=*bi,
-  ]{Cm}
-\end{minted}
-
-With the appropriate fonts loaded, you can now write:
-\begin{example}[examplewidth=0.8\linewidth, vertical_mode,noextend]
-%!showbegin !hide
-% In the preamble (LuaLaTeX)
-\setotherlanguage{greek}
-\newfontfamily\greekfont{CMU Serif}
-\setotherlanguage{russian}
-\newfontfamily\russianfont{CMU Serif}
-% ...
-%!showend !hide
-
-\begin{chktexignore} %!hide
-\textrussian{Правда} is a Russian newspaper. %!hide
-\textlang{greek}{ἀλήθεια} is truth or disclosure in %!hide
-%!showbegin %!hide
-\textrussian{«\fontspec{cmuntt.otf}Правда»} is a Russian newspaper.
-\textlang{greek}{«\fontspec{cmuntt.otf}ἀλήθεια»} is truth or disclosure in
-%!showend %!hide
-philosophy.
-\end{chktexignore} %!hide
-\end{example}
-
-\LaTeX{} actually uses three different fonts for typesetting documents. The
-above commands only set the default serif font used for the body text. The
-other fonts are \textsf{sans serif} (used in presentations slides) and
-\texttt{monospace} (used when displaying code). In order to adjust the fonts used for
-a particular language, define \cargv{\textit{language}fontsf} family for sans serif and
-\cargv{\textit{language}fonttt} for monospace. For example, to define CMU as a
-font for Greek in all three fonts when using \hologo{LuaLaTeX} you would write
-\begin{minted}{latex}
-  \newfontfamily\greekfont{CMU Serif}
-  \newfontfamily\greekfontsf{CMU Sans Serif}
-  \newfontfamily\greekfonttt{CMU Typewriter Text}
-\end{minted}
-\pagebreak[3]
-or in \hologo{XeLaTeX}
-\begin{minted}{latex}
-  \newfontfamily\greekfont[
-    Extension=.otf, UprightFont=*rm, ItalicFont=*ti,
-    BoldFont=*bx, BoldItalicFont=*bi,
-  ]{cmun}
-  \newfontfamily\greekfontsf[
-    Extension=.otf, UprightFont=*ss, ItalicFont=*si,
-    BoldFont=*sx, BoldItalicFont=*so, 
-  ]{cmun}
-  \newfontfamily\greekfonttt[
-    Extension=.otf, UprightFont=*btl, ItalicFont=*bto,
-    BoldFont=*tb, BoldItalicFont=*tx, 
-  ]{cmun}
-\end{minted}
-
-The commands above redefine the fonts for languages used as \enquote*{other} in
-polyglossia. If you want to influence the font of the main document language
-use the \csi{setmainfont}, \csi{setsansfont} and \csi{setmonofont} that work the
-same way but without the \carg{familyname} argument.
-\begin{minted}{latex}
-  \setmainfont{CMU Serif}
-  \setsansfont{CMU Sans Serif}
-  \setmonofont{CMU Typewriter Text}
-\end{minted}
-
-If you want to learn even more about fonts, have a look at
-\autoref{sec:fontspec}.
-
-\subsubsection{Right to Left (RTL) languages}
-
-Some languages are written left to right, others are written right to left
-(RTL). \pai{polyglossia} needs the \pai*{bidi} package\footnote{\pai{bidi}
-  supports only the \hologo{XeTeX} engine. If you use \hologo{LuaTeX}
-  \pai{polyglossia} uses the \pai*{luabidi} package, but keep in mind that it is
-  much more limited than \pai{bidi}.} in order to support RTL languages. The
-\pai{bidi} package should be the last package you load, even after
-\pai{hyperref} which is usually the last package. (Since \pai{polyglossia}
-loads \pai{bidi} this means that \pai{polyglossia} should be the last package
-loaded.)
-
-\begin{example}[standalone, template=empty, paperwidth=0.35\linewidth, paperheight=4cm]
-\documentclass{article}
-
-\usepackage{polyglossia}
-\setdefaultlanguage{arabic}
-%!hidebegin
-\usepackage[paperheight=\height,paperwidth=\width,margin=1cm,includefoot]{geometry}
-\defaultfontfeatures[Iran Nastaliq] {
-  Path=src/font-IranNastaliq/WebFonts/,
-  Extension=.ttf,
-  UprightFont=IranNastaliq-Web,
-  Script=Arabic,
-}
-%!hideend
-\newfontfamily\arabicfont{Iran Nastaliq}
-
-\begin{document}
-%!showbegin !hide
-«\textarabic{هذا نص عربي}»
-%!showend !hide
-هذا نص عربي % !hide
-\end{document}
-\end{example}
-
-The package \pai*{xepersian}\footnote{Works only with
-  \hologo{XeLaTeX}.}\index{Persian} offers support for the Persian language. It
-supplies Persian \LaTeX-commands that allows you to enter commands like
-\csi{section} in Persian, which makes this really attractive to native speakers.
-\pai{xepersian} is the only package that supports kashida\index{kashida} with
-\hologo{XeLaTeX}. A package for Syriac which uses a similar algorithm is under
-development.
-
-To typeset Arabic you may use the Iran Nastaliq font~\cite{font:IranNastaliq}
-developed by the SCICT and updated by Mohammad Saleh Souzanchi.
-
-The \pai*{arabxetex} package supports several languages with
-an Arabic script:
-\begin{itemize}
-  \item arab (Arabic)\index{Arabic}
-  \item persian\index{Persian}
-  \item urdu\index{Urdu}
-  \item sindhi\index{Sindhi}
-  \item pashto\index{Pashto}
-  \item ottoman (turk)\index{Ottoman}\index{Turkish}
-  \item kurdish\index{Kurdish}
-  \item kashmiri\index{Kashmiri}
-  \item malay (jawi)\index{Malay}\index{Jawi}
-  \item uighur\index{Uighur}
-\end{itemize}
-
-It offers a font mapping that enables \hologo{XeLaTeX} to process input
-using the Arab\TeX{} ASCII transcription.
-
-There is no package available for Hebrew\index{Hebrew} because none is needed.
-The Hebrew support in \pai{polyglossia} should be sufficient. But you do need a
-suitable font with real Unicode Hebrew. SBL Hebrew~\cite{font:sblhebrew} is a
-non-free font available for non-commercial use. Another font, available under
-the SIL Open Font License, is Ezra SIL~\cite{font:ezrasil}.
-
-\subsubsection{Chinese, Japanese and Korean (CJK)}%
-\index{Chinese}\index{Japanese}\index{Korean}
-
-The package \pai*{xeCJK}\footnote{Works only with
-  \hologo{XeLaTeX}.} takes care of font selection and
-punctuation for these languages.
 
 \section{The Space Between Words}
 
