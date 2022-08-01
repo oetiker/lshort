@@ -1358,40 +1358,65 @@ Text in 12 \TeX{} points.
 Text in 12 DTP points.
 \end{example}
 \endgroup
+
 \subsection{Line Spacing}\index{line spacing}
 
-If you want to use larger inter-line spacing in a
-document, change its value by putting the
+When using custom fonts, you may find that the default line spacing does not
+match your taste. You could redefine it using the above \csi{fontsize}
+commands, however, this will be overwritten once you use size changing commands
+described in \autoref{sizes}.
+
+To make such adjustments easier \LaTeX{} defines the
 \begin{lscommand}
   \csi{linespread}[factor: m]
 \end{lscommand}
-command into the preamble of your document.
-Use \verb|\linespread{1.3}| for ``one and a half'' line
-spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
-the lines are not spread, so the default line spread factor
-is~1.\index{double line spacing}
-
-Note that the effect of the \csi{linespread} command is rather drastic and
-not appropriate for published work. So if you have a good reason for
-changing the line spacing you might want to use the command:
-\begin{lscommand}
-  \mintinline{latex}|\setlength{\baselineskip}{1.5\baselineskip}|
-\end{lscommand}
-
+command. Once used, each line skip will be multiplied by the \carg{factor}.
+Note, that outside the preamble, you must follow it by \csi{selectfont} for the
+changes to be visible.
 \begin{example}
-{\setlength{\baselineskip}%
-           {1.5\baselineskip}
+\linespread{0.9}\selectfont
+If you want to save paper, set
+the linespread to a value
+below 1 to sacrifice a bit of
+space between lines.
+
+\linespread{1.1}\selectfont
+On the other hand, if your
+assignmeent is short a few
+pages, setting it to a value
+above 1 might just save you
+some typing.
+\end{example}
+
+Using the \csi{linespread} command it's also possible to create an effect of
+\enquote{one and a half} or \enquote{double} line spacing. Recall that the
+default line spacing is around \qty{1.2}{em}. Thus if you want to make the
+document use double line spacing you have to set the \carg{factor} to
+\(\sfrac{2}{1.2} \approx 1.667\).
+
+Note that setting the \csi{linespread} will change the line spacing
+\emph{everywhere}---including footnotes, table of contents and floats. Doing so
+is not always desirable, so another approach is to set the \csi{baselineskip}
+length. This will only affect the line spacing of the main document text.
+Similarly to the size changing commands it affects the whole paragraph.
+\begin{example}
+{\setlength{\baselineskip}{%
+  1.5\baselineskip}
 This paragraph is typeset with
 the baseline skip set to 1.5 of
 what it was before. Note the
 par command at the end of the
 paragraph.\par}
 
-This paragraph has a clear
-purpose, it shows that after the
-curly brace has been closed,
-everything is back to normal.
+Here the line spacing returns
+to normal, because line skip
+changes are local to a group.
 \end{example}
+
+Yet another approach is to use a dedicated package, like \pai*{setspace} that
+defines \csi{doublespacing} and similar commands. Note that in general you
+should avoid using excessive line spacing, unless you are emulating an old
+document look.
 
 \subsection{Paragraph Formatting}\label{parsp}
 
