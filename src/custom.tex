@@ -932,10 +932,14 @@ is equivalent to
 and the latter works in both \hologo{LuaLaTeX} and \hologo{XeLaTeX}. While
 changing math fonts throughout the document is possible, it may lead to some
 problems; prefer to set them in the preamble for the whole document.
-\begin{example}
-\setoperatorfont\symrm%!hide
-\setmainfont{Garamond Libre}
+\begin{example}[standalone, paperheight=2.5cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\setmainfont{EB Garamond}
 \setmathfont{Garamond Math}
+% ...
+
+\begin{document} %!hide
+\noindent %!hide
 Now we are using Garamond fonts.
 \[
   \symrm{e}^{\symrm{\pi}
@@ -944,20 +948,23 @@ Now we are using Garamond fonts.
   \lim_{h\to0}\frac{\sqrt[3]{
     \symbb{A}}}{2^h}\,\symrm{d}x
 \]
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 
 Not all math fonts have the same character coverage. For example, the default
 font doesn't have lowercase script letters. If you don't want to switch the
 fonts entirely but just use some characters from a different font, you
 can use the \cargv{range} key in the options to the \csi{setmathfont} command.
-\begin{example}
+\begin{example}[standalone, paperheight=1cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\begin{document} %!hide
+\noindent %!hide
 \(xyz = \symscr{Hello}\) vs.\
 \setmathfont[
   range=scr,
 ]{STIX Two Math}
 \(xyz = \symscr{Hello}\)
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 You can also set it to exact Unicode ranges if you need more control over
 replaced symbols.
@@ -966,16 +973,20 @@ Some fonts define two types of script font \emph{roundhand} and \emph{chancery}.
 normally available as the first stylistic set feature of the font. You can map
 \csi{symcal} which is normally a synonym for \csi{symscr}, to produce the
 alternative script letters.
-\begin{example}
+\begin{example}[standalone, paperheight=1cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\begin{document} %!hide
+% TODO: Waiting for unicode-math fix
 \setmathfont{STIX Two Math}
 \setmathfont[
   range={cal, bfcal},
   StylisticSet=1,
 ]{STIX Two Math}
 
+\noindent %!hide
 \(\symscr{ABCDabcd}\) vs.\
 \(\symcal{ABCDabcd}\) 
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 
 The default behaviour of the \csi{not} command, is to combine the negating glyph
