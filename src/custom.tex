@@ -1305,24 +1305,24 @@ is defined as exactly \qty{25.4}{\mm}. All units in \TeX{} are ultimately
 represented as a whole numbers of \unit{sp}. See \autoref{units} for the exact
 values.
 \begin{table}
-  \caption{\TeX{} Units.}\label{units}\index{units}
+  \caption{\LaTeX{} Units.}\label{units}\index{units}
   \begin{tabular}{@{}clrrl@{}}
     \toprule
-    Unit                   & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
+    Unit     & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
     \midrule
-    \mintinline{latex}{cm} & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
-    \mintinline{latex}{mm} & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
-    \mintinline{latex}{in} & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
-    \mintinline{latex}{pt} & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
-    \mintinline{latex}{sp} & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
-    \mintinline{latex}{pc} & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
-    \mintinline{latex}{dd} & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
-    \mintinline{latex}{cc} & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
-    \mintinline{latex}{nd} & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
-    \mintinline{latex}{bp} & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
-    \mintinline{latex}{em} & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
-    \mintinline{latex}{ex} & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
-    \mintinline{latex}{mu} & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
+    \ltx|cm| & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
+    \ltx|mm| & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
+    \ltx|in| & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
+    \ltx|pt| & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
+    \ltx|sp| & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
+    \ltx|pc| & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
+    \ltx|dd| & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
+    \ltx|cc| & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
+    \ltx|nd| & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
+    \ltx|bp| & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \ltx|em| & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
+    \ltx|ex| & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
+    \ltx|mu| & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1359,6 +1359,185 @@ Text in 12 DTP points.
 \end{example}
 \endgroup
 
+\subsection{Horizontal Space}\label{sec:hspace}
+
+\LaTeX{} determines the spaces between words and sentences automatically.
+However, similarly to commands described in \autoref{sec:math_spacing}, there are
+ways to influence the spaces in normal text. For example, to add horizontal
+space, you can use:\index{horizontal!space}
+\begin{lscommand}
+  \csi{hspace}[length: m]
+\end{lscommand}
+The \carg{length} argument can be specified using units described in previous
+section in the usual way. You can use decimal and even negative numbers as
+values.
+\begin{example}
+This\hspace{1.5cm}is a space
+of \qty{1.5}{\cm}. A bit too
+cramped\hspace{-5pt}here.
+\end{example}
+The space added that way will disappear if it lands on the end of a line,
+similarly to an interword spacing. If you want to retain it there use the
+starred version of the command.
+\begin{example}
+The gap here is\hspace{1cm}%
+\linebreak missing.
+
+Here the gap is\hspace*{1cm}%
+\linebreak not missing.
+\end{example}
+
+So far all the lengths we have seen have been \emph{rigid}\index{rigid
+  length}\index{length!rigid}, that is the length is exactly as specified. But
+you probably noticed that the spaces between words are not rigid---they can
+stretch and shrink, so that \TeX{} can make the right margin equal. Lengths
+that can do that are called \emph{rubber} lengths\index{rubber
+  length}\index{length!rubber}.
+
+Such lengths can be specified using a special \ltx{plus} and \ltx{minus}
+syntax. For example to specify that a space can stretch if a need arises you
+can specify it by writing \ltx{plus} followed by the maximum allowed stretch.
+\begin{example}
+This small\hspace{1em plus 2cm}%
+space may grow if a need arises.
+
+Here\hspace{1em plus 2cm}the
+need\linebreak very much arises.
+\end{example}
+The additional space can extend even beyond the specified maximum, but in such
+cases \LaTeX{} will print a warning.
+
+The shrinking can be specified in a similar way using the \ltx{minus} syntax.
+\begin{example}
+This\hspace{1em minus 2em}%
+space may disappear if it gets
+too crampy.
+\end{example}
+
+When there are multiple rubber spaces in text \TeX{} calculates the amount of
+stretch proportionally to the specified maximum. Thus if \TeX{} needs
+additional \qty{2}{\cm} of whitespace and one length has \ltx{plus 1cm} while
+the other has \ltx{plus 3cm} modifier, it will result in the first one being
+enlarged by \(\left(\frac{1}{1+3}\right) \times \qty{2}{\cm}\) while the second
+one by \(\left(\frac{3}{1+3}\right) \times \qty{2}{\cm}\).
+\begin{example}
+This\hspace{0pt plus 3cm}is
+stretched\hspace{0pt plus 1cm}%
+three\linebreak times as much.
+\end{example}
+
+With these informations you can use the spaces to automatically centre the text
+in a page by setting the allowed stretching to a high number.
+\begin{example}
+\hspace*{0pt plus 100cm}Hello
+\hspace*{0pt plus 100cm}
+\linebreak
+\end{example}
+This approach will, however, interfere with the spacing inside the centred
+expression, since the spaces are still distributed proportionally. The effect
+will be getting smaller if you set the allowed stretching to a larger number
+but it will still be present. For situations like these, \TeX{} actually
+supports a concept of infinitely stretchable space---by using the special
+\cargv{fill} unit, allowed only as stretching and shrinking value, we can
+ensure that all the other rubber lengths will not stretch.\footnote{\TeX{}
+  actually recognises three orders of infinity: \cargv{fil}, \cargv{fill} and
+  \cargv{filll}, but as a document author you should stick to using only the
+  second one. The first order infinity---\cargv{fil}---is used by some of the
+  internal \LaTeX{} such as \cs{\bs} or \cs{newpage}. The third one can be used
+  to disallow stretching of the second order infinity when it's needed in some
+  very rare circumstances.}
+\begin{example}
+\hspace*{0pt plus 1fill}%
+No\hspace{0pt plus 100cm}
+stretching allowed.%
+\hspace*{0pt plus 1fill}%
+\linebreak
+\end{example}
+
+Because the \cargv{fill} value is often used with zero width space \LaTeX{}
+defines a macro that simplifies entering it---the
+\begin{lscommand}
+  \csi{stretch}[n: m]
+\end{lscommand}
+command.
+\begin{example}
+\hspace*{\stretch{1}}
+is equivalent to
+\hspace*{0pt plus 1fill}
+\linebreak
+\end{example}
+The \carg{n} argument is the coefficient by which the \cargv{fill} is
+multiplied. Recall that the spaces are distributed proportionally and this is
+still the case when infinities are involved.
+\begin{example}
+x\hspace{\stretch{1}}%
+x\hspace{\stretch{3}}x
+\end{example}
+
+Still, the most common value to use is \ltx{\hspace{0pt plus 1fill}} and so
+\LaTeX{} defines \csi{hfill} that is equivalent to it. It's often used when you
+want to flush the rest of the line right.
+\begin{example}
+Peter Pan\hfill Neverland
+
+Dear Wendy, \ldots
+\end{example}
+
+\subsection{Vertical Space}
+
+You have already seen that vertical space between lines can be inserted using
+\csi{\bs} command. However, it does not work well when used for spacing between
+paragraphs---the reason being that it always starts a new line, so if it's used
+at the end of paragraph, it will end in an empty line.
+\begin{example}
+Paragraph.\\
+
+There's an empty line above.
+\end{example}
+\LaTeX{} has a dedicated command for setting the space between paragraphs, the
+\begin{lscommand}
+  \csi{vspace}[length: m]
+\end{lscommand}
+command. It works similarly to the \cs{hspace} command, however when used
+inside a line it will only produce the space after the line is ended.
+\begin{example}
+Some\vspace{1em} text that
+spans multiple lines.
+\end{example}
+Since it does not produce empty lines when used, it is perfect for inserting a
+space between paragraphs. Similarly to the \cs{hspace} command, the space will
+be discarded if it lands at the end of a page---use the starred version if this
+is not desirable.
+
+The rubber lengths, \csi{stretch} and \csi{vfill} work just as you would expect
+them when it comes to vertical space. However, since manual vertical spacing is
+much more common compared to manual horizontal spacing, \LaTeX{} also declares
+three semantic commands for inserting them:
+\begin{lscommand}
+  \csi{bigskip} \\
+  \csi{medskip} \\
+  \csi{smallskip}
+\end{lscommand}
+The exact sizes of these skips is dependent on the class used. These are useful
+when creating your own environments or to indicate a thought break
+between paragraphs.\index{vertical space}
+
+There also exist the \csi{addvspace command}, which works similarly to the
+\cs{vspace} command, however when multiple such commands are entered one after
+another, only the one with the biggest length will be used. Note that using it
+will lead to an error if it is not used between paragraphs.
+\begin{example}
+Hello.
+
+\addvspace{1pt}
+\addvspace{1em}
+\addvspace{1cm}
+There is \qty{1}{\cm} space
+above me.
+\end{example}
+This command is useful if you want to ensure that a vertical space is present
+but avoid entering several of them accidentally.
+
 \subsection{Line Spacing}\index{line spacing}
 
 When using custom fonts, you may find that the default line spacing does not
@@ -1382,7 +1561,7 @@ space between lines.
 
 \linespread{1.1}\selectfont
 On the other hand, if your
-assignmeent is short a few
+assignment is short a few
 pages, setting it to a value
 above 1 might just save you
 some typing.
@@ -1459,80 +1638,6 @@ To create a non-indented paragraph, use
 \end{lscommand}
 \noindent as the first command of the paragraph. This might come in handy when
 you start a document with body text and not with a sectioning command.
-
-\subsection{Horizontal Space}\label{sec:hspace}
-
-\LaTeX{} determines the spaces between words and sentences
-automatically. To add horizontal space, use:\index{horizontal!space}
-\begin{lscommand}
-  \csi{hspace}[length: m]
-\end{lscommand}
-If such a space should be kept even if it falls at the end or the
-start of a line, use \verb|\hspace*| instead of \verb|\hspace|.
-
-\begin{example}
-This\hspace{1.5cm}is a space
-of \qty{1.5}{\cm}.
-\end{example}
-
-The command
-\begin{lscommand}
-  \csi{stretch}[n: m]
-\end{lscommand}
-\noindent generates a special rubber space. It stretches until all the
-remaining space on a line is filled up. If multiple
-\verb|\hspace{\stretch{|\emph{n}\verb|}}| commands are issued on the same
-line, they occupy all available space in proportion of their respective
-stretch factors.
-
-\begin{example}
-x\hspace{\stretch{1}}
-x\hspace{\stretch{3}}x
-\end{example}
-
-When using horizontal space together with text, it may make sense to make
-the space adjust its size relative to the size of the current font.
-This can be done by using the text-relative units \texttt{em} and
-\texttt{ex}:
-
-\begin{example}
-{\Large{}big\hspace{1em}y}\\
-{\tiny{}tin\hspace{1em}y}
-\end{example}
-
-\subsection{Vertical Space}
-The space between paragraphs, sections, subsections, \ldots\ is
-determined automatically by \LaTeX. If necessary, additional vertical
-space \emph{between two paragraphs} can be added with the command:
-\begin{lscommand}
-  \csi{vspace}[length: m]
-\end{lscommand}
-
-This command should normally be used between two empty lines.  If the
-space should be preserved at the top or at the bottom of a page, use
-the starred version of the command, \verb|\vspace*|, instead of \verb|\vspace|.\index{vertical space}
-
-The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
-be used to typeset text on the last line of a page, or to centre text
-vertically on a page.
-\begin{code}
-\begin{minted}{latex}
-Some text \ldots
-
-\vspace{\stretch{1}}
-This goes onto the last line of the page.\pagebreak
-\end{minted}
-\end{code}
-
-Additional space between two lines of \emph{the same} paragraph or
-within a table is specified with the
-\begin{lscommand}
-  \csi{\bs}[length: o]
-\end{lscommand}
-\noindent command.
-
-With \csi{bigskip} and \csi{smallskip} you can skip a predefined amount of
-vertical space without having to worry about exact numbers.
 
 \section{Page Layout}
 
