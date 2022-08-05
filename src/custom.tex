@@ -1538,6 +1538,116 @@ above me.
 This command is useful if you want to ensure that a vertical space is present
 but avoid entering several of them accidentally.
 
+\subsection{Length Variables}
+
+Like many things in \LaTeX, lengths can be stored inside commands to allow
+reuse.
+\begin{example}
+\NewDocumentCommand{%
+  \mylength}{}{2em}
+foo\hspace{\mylength}bar
+\end{example}
+However, \LaTeX{} provides dedicated length variables, which are much better
+suited for the purpose. These are created using
+\begin{lscommand}
+  \csi{newlength}[variable: M]
+\end{lscommand}
+and set using
+\begin{lscommand}
+  \csi{setlength}[variable: M, length: m]
+\end{lscommand}
+It's important to note that \csi{newlength} declares the length globally, but
+\csi{setlength} only affects the current group. If you declare a length
+variable without setting it, it will have a default value of zero.
+
+In contrast to the command approach, length variables are stored as numbers and
+not as text. This allows you to to do simple arithmetic operations, for
+example, to scale them by prepending them with a number.
+\begin{example}
+\newlength{\mylength}
+\setlength{\mylength}{2em}
+foo\hspace{0.5\mylength}bar%
+\hspace{2\mylength}baz
+\end{example}
+In order to increase an existing length variable you can use \csi{addtolength}.
+\begin{example}
+\setlength{\mylength}{2em} %!hide
+foo\hspace{\mylength}bar\\
+\addtolength{\mylength}{2em}
+foo\hspace{\mylength}bar
+\end{example}
+
+Since length variables are not stored as text macros, but as \TeX{} internal
+numbers, trying to typeset them in a document results in an error. To translate
+them back into their textual representation use the \csi{the} command. Note
+that their value will always be printed using points as units.
+\begin{chktexignore}  
+\begin{example}
+\setlength{\mylength}{1cm}
+\the\mylength
+\end{example}
+\end{chktexignore}
+
+Lengths can be also determined dynamically from the content. The following
+commands allow you to determine the width, height and depth of a \LaTeX{} text
+and assign it to length variable.
+\begin{lscommand}
+  \csi{settoheight}[variable: M, element: m]\\
+  \csi{settodepth}[variable: M, element: m] \\
+  \csi{settowidth}[variable: M, element: m]
+\end{lscommand}
+The element height is calculated by taking into account the part of the element
+that extends above baseline, while the depth takes into account the part that
+extends below baseline.
+\begin{example}[vertical_mode, examplewidth=0.85\linewidth]
+\newlength{\myheight} \settoheight{\myheight}{Major}
+\newlength{\mydepth} \settodepth{\mydepth}{Major}
+\newlength{\mywidth} \settowidth{\mywidth}{Major}
+The word Major has width of \the\mywidth, height of
+\the\myheight{} and depth of \the\mydepth.
+\end{example}
+
+These commands are especially useful when creating your own environments
+requiring complicated alignment or spacing. An example of using them is
+presented in \autoref{lst:fun_with_lengths}.
+
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.85\linewidth]
+\newlength{\vardescindent}
+\NewDocumentEnvironment{vardesc}{m}{%
+  \settowidth{\vardescindent}{#1:\ }%
+  \RenewDocumentCommand{\item}{so}{%
+    \IfBooleanTF{##1}{#1: }{\\\hspace*{\vardescindent}}%
+    \IfValueT{##2}{##2 ---}%
+  }%
+  \ignorespaces
+}{}
+
+\[  a^2+b^2=c^2 \]
+\begin{vardesc}{Where}
+  \item*[\(a\), \(b\)] are adjacent to the right angle
+    of a right-angled triangle.
+  \item[\(c\)] is the hypotenuse of the triangle and
+    feels lonely.
+  \item[\(d\)] finally does not show up here at all.
+    Isn't that puzzling?
+\end{vardesc}
+\end{example}
+  \caption{An example of using \cs{settowidth} to align all of the
+    definitions to a preceding phrase.}\label{lst:fun_with_lengths}
+\end{listing}
+
+As you will see \LaTeX{} uses length variables for many things. When
+typesetting document you can use some of them when setting lengths to make them
+relative. For example, the \csi{linewidth} length holds the length of the
+current line. You can use it when inserting a picture to make it fill the page
+or scale it to take up half the space available.
+\begin{example}
+\includegraphics[
+  width=0.5\linewidth,
+]{example-image}
+\end{example}
+
 \subsection{Line Spacing}\index{line spacing}
 
 When using custom fonts, you may find that the default line spacing does not
@@ -1717,45 +1827,6 @@ In this context, you might want to look at the \pai{calc} package.
 It allows you to use arithmetic operations in the argument of \csi{setlength}
 and other places where numeric values are entered into function
 arguments.
-
-\section{More Fun With Lengths}
-
-Whenever possible, I avoid using absolute lengths in
-\LaTeX{} documents. I rather try to base things on the width or height
-of other page elements. For the width of a figure this could
-be \verb|\textwidth| in order to make it fill the page.
-
-The following 3 commands allow you to determine the width, height, and
-depth of a text string.
-
-\begin{lscommand}
-  \csi{settoheight}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \csi{settodepth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \csi{settowidth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|
-\end{lscommand}
-
-\noindent The example below shows a possible application of these commands.
-
-\begin{example}[examplewidth=0.45\linewidth]
-\newenvironment{vardesc}[1]{%
-  \settowidth{\parindent}{#1:\ }
-  \makebox[0pt][r]{#1:\ }}{}
-
-\begin{displaymath}
-a^2+b^2=c^2
-\end{displaymath}
-
-\begin{vardesc}{Where}\(a\),
-\(b\) --- are adjacent to the right
-angle of a right-angled triangle.
-
-\(c\) --- is the hypotenuse of
-the triangle and feels lonely.
-
-\(d\) --- finally does not show up
-here at all. Isn't that puzzling?
-\end{vardesc}
-\end{example}
 
 \section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each
