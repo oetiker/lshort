@@ -1,6 +1,15 @@
 name: CI
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'    
+
 
 jobs:
   skip_check:
