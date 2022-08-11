@@ -17,6 +17,7 @@
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
 % !TEX root = ./lshort.tex
+
 \chapter{\LaTeX{} Basics}\label{chap:basics}
 \begin{intro}
   The first part of this chapter presents a short
@@ -33,14 +34,13 @@
 \TeX{} is a computer program created by Donald E. Knuth\index{Knuth, Donald
   E.}~\cite{texbook}. The original program was aimed at typesetting text and
 mathematical formulae. Knuth started writing the \TeX{} typesetting engine in
-1977 to explore the potential of the digital printing equipment that was
-beginning to infiltrate the publishing industry at that time, especially in
-the hope that he could reverse the trend of deteriorating typographical
+1977 to explore the potential of the digital printing equipment. These new devices were
+beginning to infiltrate the publishing industry at that time. His goal was to reverse the trend of deteriorating typographical
 quality that he saw affecting his own books and articles. The first stable
 version of \TeX{} was released in 1982. Version 3.0 was released in 1989 to
 better support 8-bit characters and multiple languages. Knuth considered the
 \TeX-design to be complete with the release of Version 3. \TeX{} is renowned
-for being extremely stable, for running on many different kinds of computers,
+for being extremely stable, for running on many kinds of computers,
 and for being virtually bug free. The version number of \TeX{} is converging
 to the \(\pi\) constant and is now at \(3.141592653\).
 
@@ -82,9 +82,9 @@ Today four \TeX{} engines are actively maintained: the original \TeX{},
 either \hologo{XeTeX} or \hologo{LuaTeX}. The examples presented should produce
 the same results on both engines (except where otherwise noted). The basic
 examples will work with \hologo{pdfTeX}\footnote{The original \TeX{} will not
-  work at all, because \LaTeX{} requires \hologo{eTeX}-enabled engine since
+  work at all, because \LaTeX{} requires an \hologo{eTeX}-enabled engine since
   2017~\cite{etex-kernel}.} too, but we suggest to switch to \hologo{XeTeX} or
-\hologo{LuaTeX} from the start, to avoid problems down the road as you explore
+\hologo{LuaTeX} from the start, to avoid complications down the road as you explore
 more advanced concepts.
 
 \subsection{\LaTeX{}}
@@ -107,9 +107,9 @@ The same year when \LaTeXe{} was released, the \LaTeX3 project started. Its aim
 was to create improved standard for writing \LaTeX{} documents, fixing some of
 the mistakes that were made when defining the initial \LaTeX{} macros. While at
 the beginning it was planned to release \LaTeX3 as a standalone system that was
-not backward compatible with \LaTeXe{}, in the end it was decided that
-abandoning the huge collection of third party packages written for \LaTeXe{}
-over the years, would be a mistake. Thus the development team decided that
+not backward compatible with \LaTeXe{}, in the end the consensus was that
+abandoning the huge collection of third party packages written for \LaTeXe{},
+would be a mistake. Thus, the development team decided that
 \LaTeX3 would be slowly backported into \LaTeXe{} format, while avoiding
 breaking changes as much as reasonably possible~\cite{quovadis}.
 
@@ -157,21 +157,21 @@ made before actually sending the document to the printer.
 Typographical design is a craft. Unskilled authors often commit
 serious formatting errors by assuming that book design is mostly a
 question of aesthetics---\enquote{If a document looks good artistically,
-  it is well designed.} But as a document has to be read and not hung
+  it is well-designed.} But as a document has to be read and not hung
 up in a picture gallery, the readability and comprehensibility is
 much more important than the beautiful look of it.
 Examples:
 \begin{itemize}
   \item The font size and the numbering of headings have to be chosen to make
         the structure of chapters and sections clear to the reader.
-  \item The line length has to be short enough not to strain
+  \item The line length has to be short enough to not strain
         the eyes of the reader, while long enough to fill the page
         beautifully.
 \end{itemize}
 
-With \wi{WYSIWYG} systems, authors often generate aesthetically
+With \wi{WYSIWYG} systems, authors tend to generate aesthetically
 pleasing documents with very little or inconsistent structure.
-\LaTeX{} prevents such formatting errors by forcing the author to
+\LaTeX{} prevents such problems by forcing the author to
 declare the \emph{logical} structure of his document. \LaTeX{} then
 chooses the most suitable layout.
 
@@ -180,8 +180,8 @@ chooses the most suitable layout.
 When people from the \wi{WYSIWYG} world meet people who use \LaTeX{},
 they often discuss \enquote{the \wi{advantages of \LaTeX{}} over a normal
   word processor} or the opposite.  The best thing to do when such
-a discussion starts is to keep a low profile, since such discussions
-often get out of hand. But sometimes there is no escaping \ldots
+a discussion starts, is to keep a low profile, since such discussions
+like to get out of hand. But sometimes there is no escaping \ldots
 
 \medskip\noindent So here is some ammunition. The main advantages
 of \LaTeX{} over normal word processors are the following:
@@ -190,8 +190,7 @@ of \LaTeX{} over normal word processors are the following:
 
   \item Professionally crafted layouts are available, which make a
         document really look as if \enquote{printed}.
-  \item The typesetting of mathematical formulae is supported in a
-        convenient way.
+  \item The typesetting of mathematical formulae is supported out of the box.
   \item Users only need to learn a few easy-to-understand commands
         that specify the logical structure of a document. They almost never
         need to tinker with the actual layout of the document.
@@ -205,7 +204,7 @@ of \LaTeX{} over normal word processors are the following:
   \item \LaTeX{} encourages authors to write well-structured texts,
         because this is how \LaTeX{} works---by specifying structure.
   \item \TeX, the formatting engine of \LaTeX, is highly portable and free.
-        Therefore the system runs on almost any hardware platform
+        Therefore, the system runs on almost any hardware platform
         available.
 
         %
@@ -235,7 +234,7 @@ can tell you hundreds \smiley.
 The input for \LaTeX{} is a plain text file. On \Unix{} systems text files are
 pretty common. On Windows, one would use Notepad to create a text file. It
 contains the text of the document, as well as the commands that tell \LaTeX{}
-how to typeset the text. For beginners it is recommended to use a \LaTeX{}
+how to typeset the text. For beginners, it is recommended to use a \LaTeX{}
 IDE.\footnote{Some examples of them are listed in
   \autoref{installinglatex}.}
 
@@ -244,17 +243,17 @@ IDE.\footnote{Some examples of them are listed in
 \enquote{Whitespace} characters, such as blank or tab, are treated uniformly as
 \enquote{\wi{space}} by \LaTeX{}. Several consecutive \wi{whitespace}
 characters are treated as \emph{one} \enquote{space}. Whitespace at the start
-of a line is generally ignored, and a single line break is treated as
+of a line is generally ignored, and a single line break has the same effect as
 \enquote{whitespace}\index{whitespace!at the start of a line}.
 
-An empty line between two lines of text defines the end of a paragraph. Several
+An empty line between two lines of text defines the end of a paragraph. Multiple
 empty lines are treated the same as \emph{one} empty line. The text below is an
-example. On the left hand side is the text from the input file, and on the
-right hand side is the formatted output.
+example. On the left-hand side is the text from the input file, and on the
+right-hand side is the formatted output.
 
 \begin{example}
 It does not matter whether you
-enter one or several     spaces
+enter one or many     spaces
 after a word.
 
 An empty line starts a new
@@ -306,7 +305,7 @@ line breaking. Use the \csi{textbackslash} command instead.
 
 \subsection{\LaTeX{} Commands}
 
-\LaTeX{} \wi{commands} are case sensitive, and take one of the following
+\LaTeX{} \wi{commands} are case-sensitive, and take one of the following
 two formats:
 
 \begin{itemize}
@@ -345,7 +344,7 @@ content between them as a single unit. For example
 \end{code}
 will be interpreted as command \enquote*{foo} with first argument
 \enquote*{bar} and second argument \enquote*{baz} followed by text
-\enquote*{qux}. Always using groups when passing parameters usually makes the
+\enquote*{qux}. Always using groups when passing parameters makes the
 source code easier to read.
 
 The commands that do not take any parameters still ignore spaces after them. In
@@ -354,11 +353,11 @@ group.
 
 \begin{chktexignore}
   \begin{example}[examplewidth=0.45\linewidth]
-New \TeX users may miss whitespaces
+New \TeX users may miss the whitespace
 after a command. % renders wrong
 Experienced \TeX{} users are
 \TeX nicians, and know how to use
-whitespaces. % renders correct
+whitespace. % renders correct
 \end{example}
 \end{chktexignore}
 
@@ -366,7 +365,7 @@ whitespaces. % renders correct
 
 A lot of \LaTeX{} commands also accept optional parameters. The optional parameters are normally are enclosed
 within square brackets \verb|[ ]| and usually come right after the command
-name. The following notation will be often used within this book to denote a
+name. The following notation will often be used within this book to denote a
 command with one optional parameter and one required parameter:
 \begin{lscommand}
   \cs{command}[optional parameter: o, parameter: m]
@@ -438,7 +437,7 @@ Small is beautiful.
 Well, and here begins my lovely
 article.
 
-\section{Good Bye World}
+\section{Goodbye World}
 \ldots{} and here it ends.
 
 \end{document}
@@ -500,8 +499,8 @@ have worked with HTML and CSS) you can safely skip this section.
 Let us imagine that you are writing a novel in your favourite WYSIWYG editor. In
 this book there are two parallel storylines happening in different dimensions.
 In order to communicate to the reader which of the dimensions is currently
-described you have decided to use different colours for them. Thus your book may
-look like this
+described you have decided to use different colours for them. Thus, your book may
+look like this:
 \begin{quotation}
   {\color[HTML]{B71C1C}
 
@@ -523,8 +522,8 @@ look like this
 \end{quotation}
 
 After you finish your first draft you decided to email it over to your friend
-so they can share their opinion about it. However it turns out that your
-friend's printer can only print black and white so they cannot print the file
+so they can share their opinion about it. However, it turns out that your
+friend's printer can only print black and white, so they cannot print the file
 you send them.
 
 After some consideration you decided to simply use cursive font for one
@@ -566,7 +565,7 @@ PDF file you produce.
 As you can see by default \LaTeX{} typesets the emphasised text in cursive
 font. It is important to understand that the \csi{emph} command \emph{does not}
 mean \enquote{write this text in cursive}. It is much smarter than that. To
-illustrate that let's see how it behaves when the text of it is inside of is
+illustrate that, let's see how \csi{emph} behaves when used inside the text is
 already in cursive
 \begin{example}
   \itshape%!hide
@@ -587,8 +586,8 @@ Are you gonna eat \emph{that}?
 
 \subsection{Your First Environment}
 
-If you have played with the \csi{emph} command a bit you may have noticed that
-trying to write several paragraphs inside it results in an error. This is the
+If you have played with the \csi{emph} command a bit, you may have noticed that
+trying to write several paragraphs inside it, results in an error. This is the
 case for most of the \LaTeX{} commands. The reason is that putting a lot of
 text inside the parameters could result in poor performance and excessive
 memory consumption. In order to overcome that \LaTeX{} uses a concept of
@@ -647,7 +646,7 @@ This book will describe some packages that the authors thought were especially
 useful and should be installed along with your \LaTeX{} distribution. See
 \autoref{packages} for some examples. The versions installed in your system may be different than
 the ones described in this book, which in turn may lead to differences in the
-produced output. Along with the package introduction we will usually also point
+produced output. Along with the package introduction we will also point
 to its entry in our bibliography. In the bibliography entry you will also find
 information about the package version that was used when writing this booklet.
 You can check the versions of all the packages used in a document, by looking
@@ -655,7 +654,7 @@ at the \eei{.log} file that is produced when compiling the document. If the
 package versions aren't very different (usually the first number is the most
 important) then you should be fine.
 
-Modern \LaTeX{} distributions come with a large number of packages
+Modern \LaTeX{} distributions come with many packages
 preinstalled. If you are working on a \Unix{} system, try using the command
 \texttt{texdoc} for accessing package documentation. Alternatively you can
 search the package on \url{https://www.ctan.org/} and its documentation should

@@ -13,18 +13,24 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 
 # Define some variables
 OUTPUT_DIR=pdfbuild
+#PDFLATEX=lualatex -synctex=1 --shell-escape --interaction=nonstopmode \
+#	--output-directory=$(OUTPUT_DIR) --halt-on-error
 PDFLATEX=lualatex --shell-escape --interaction=nonstopmode \
 	--output-directory=$(OUTPUT_DIR) --halt-on-error
+
 BIBER=biber --input-directory=src --output-directory=$(OUTPUT_DIR)
 PDFLATEX_DEBUG_ARGS=--synctex=1 --file-line-error
 MAKEINDEX=makeindex
 
-.PHONY: quick all lulu
+.PHONY: quick all lulu indent
 
 # The default targets
 all: lshort.pdf lshort-letter.pdf lshort-a5.pdf
 
 lulu: lshort-body.pdf lshort-title.pdf
+
+indent:
+	latexindent -w -m -l .localSettings.yaml src/*.tex
 
 export TEXINPUTS::=src:src/examples:$(OUTPUT_DIR):$(TEXINPUTS)
 

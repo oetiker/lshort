@@ -22,39 +22,37 @@
 \chapter{Graphics in Your Document}\label{chap:graphics}
 
 \begin{intro}
-  Most documents these days contain some graphics along side the text. While
+  Most documents these days contain some graphics alongside the text. While
   photos and drawings can be easily added, integrating diagrams and schematics
-  seamlessly with your document might prove difficult. Fonts, colours and lines
+  seamlessly with your document might prove difficult. Fonts, colours, and lines
   must be adjusted so that they do not look out of place. Furthermore, later
   changes to your document layout may force you to redo this work. Fortunately
   it is possible to create your graphics directly in \LaTeX{} which will
-  automatically take care of of adjusting the aforementioned settings and keep
+  automatically take care of adjusting the aforementioned settings and keep
   them in sync with the document itself.
 \end{intro}
 
 \section{Overview}
 
-When working with graphics in any setting it is important to keep few things
-in mind. Roughly, there are three types of pictures that you may find yourself
+To start, some background on how to think about graphics.
+Roughly, there are three types of pictures that you may find yourself
 dealing with:
 \begin{description}
-  \item[Photo] is any picture that contains realistic shading and lots of
-    details. These may not necessarily be photos but also photo-realistic
+  \item[Photos] are pictures that contains realistic shading and lots of
+    detail. These may not necessarily be photos but also photo-realistic
     renders or screenshots from video games. In photos exact pixel colour is
-    not really important and lossy compression can be used without visible
-    quality degradation. It is best to store these using JPEG format or
-    similar.
-  \item[Drawing] is a picture with flat colours and relatively few details.
+    not really important and lossy compression can be used without visual
+    degradation. It is best to store these photos using the JPEG format.
+  \item[Drawings] are picture with flat colours and relatively few details.
     This category includes, for example,  pixel art and screenshots of programs
     interface. Here lossy compression would result in visible degradation and
-    wouldn't be so efficient anyway. It is best to use lossless compression
+    would not be very efficient anyway. It is best to use a lossless compression
     format such as PNG\@. This will ensure that each picture is reproduced with
-    pixel-perfect fidelity and keep their size small.
-  \item[Diagram] is a very simple graphics that contains text, lines and other
-    simple geometric objects. Logos and schematics are prime examples of these.
-    Ideally they should be all stored as vector based graphics in formats such
-    as SVG or PDF, since this will enable you to scale them effortlessly and
-    make them look good regardless of size.
+    pixel-perfect fidelity while keeping the file sizes small.
+  \item[Diagrams or Charts] are simple graphics that contains text, lines and other
+    geometric objects. Logos and schematics are prime examples of these.
+    Ideally they are stored as drawing instructions in a vector based graphics in format such
+    as EPS, SVG or PDF\@. Vector based graphics can be scale to any size without loss of quality.
 \end{description}
 
 You have already learned about including photos and drawings in
@@ -79,11 +77,11 @@ in the \pai{pgf} documentation.
 
 While \TikZ{} is a powerful and versatile language, using it for creating more
 complicated graphics may not always be easy. Many packages and libraries build
-upon the \pai{pgf} foundation to simplify the creation of specialised diagrams,
+upon the \pai{pgf} foundation to simplify the creation of specialized diagrams,
 such as \pai*{pgfplots} for plotting functions and presenting data or
 \pai*{commutative-diagrams} for creating commutative diagrams. It's usually a
-good idea to search CTAN if a specialised package already solves your problem
-instead of writing \TikZ{} code from the ground up yourself.
+good idea to search CTAN if a package which already solves your problem
+instead of writing new \TikZ{} code from the ground up yourself.
 
 \section{Basic Usage}
 
@@ -144,7 +142,7 @@ the specified path. Multiple actions may be supplied.
 \end{tikzpicture}
 \end{example}
 
-By default \TikZ{} pictures will adjust their size to the minimal rectangle
+By default, \TikZ{} pictures will adjust their size to the minimal rectangle
 surrounding it. If you want to specify the bounding box yourself use the
 \cargv{use as bounding box} action or the equivalent \csi{useasboundingbox}
 command.
@@ -162,13 +160,13 @@ vs.\
 \end{example}
 \end{chktexignore}
 
-Normal \LaTeX{} input may be displayed inside the, so called, nodes. To create
+Normal \LaTeX{} input may be displayed inside, so called, nodes. To create
 a node use the
 \begin{lscommand}
   \csi{node}[«{}» («\bs carg{name}») at «\bs carg{coordinate}» {«\bs carg{input}»};: c]
 \end{lscommand}
 command. The \carg{name} argument is optional and enables you to use the
-\carg{name} as a shorthand for node's coordinate.
+\carg{name} as a shorthand for a node's coordinate.
 \begin{example}
 \begin{tikzpicture}
   \node (text) at (0,0) {%
@@ -178,8 +176,8 @@ command. The \carg{name} argument is optional and enables you to use the
   \draw (A) -- (text) -- (B);
 \end{tikzpicture}
 \end{example}
-By default \TikZ{} attempts to position the lines between nodes in a smart way.
-If you want to set them manually you can specify the exact point on a node
+\TikZ{} attempts to be smart about the way it positions the lines between nodes.
+If you want to influence this, you can specify the exact connection-point on a node
 after a dot. The available points are, for example, \cargv{north},
 \cargv{west}, \cargv{south east} and so on. You can also put a number, which
 will be interpreted as an angle.
@@ -231,10 +229,9 @@ order) as connection between points.
 \tikz{\draw (0, 0) -| (2, 1);}
 \end{example}
 
-If you want to create curved lines the simplest way is to use \ltx{to} to
-connect points. By default it works the same as \ltx{--}, but it can receive
-optional argument with \cargv{in} and \cargv{out} keys to define the angle of
-connection.
+If you want to create curved lines the simplest way is to use \ltx{to} for
+connecting points. It works the same as \ltx{--}, but you can provide an optional arguments with \cargv{in} and \cargv{out} keys to define the angle of
+the connection.
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
 \tikzset{baseline} \vspace{-0.3cm} %!hide
 \tikz{\draw (0, 0) to[out=90, in=-90] (2, 0);}
@@ -259,8 +256,8 @@ used.
 \tikz{\draw (0, 0) to[bend right=90] (2, 0);}
 \end{example}
 
-If you need even finer control over the curves you can use the
-\ltx{.. controls ..} connection for specifying them as Bézier curve with one
+If you need even finer control over the curves you can use a
+\ltx{.. controls ..} connection for specifying a Bézier curve with one
 or two control points.
 \begin{chktexignore}  
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
@@ -297,9 +294,9 @@ receives its radius via the \cargv{radius} key. You can also specify \cargv{x
 Many more shapes are available, such as \ltx{arc}, \ltx{parabola} or \ltx{sin}.
 Be sure to checkout the documentation for the specifics of their use.
 
-\section{Customising Paths and Nodes}
+\section{Customizing Paths and Nodes}
 
-By default all paths are drawn using a black continuous lines. You can modify
+By default, all paths are drawn using a black continuous line. You can modify
 them by passing options to the \csi{draw} command. For example, simply passing
 a colour name will change the colour of the drawn line.
 \begin{example}
@@ -319,7 +316,7 @@ The thickness of a line can be controlled by passing \cargv{line width} key
   (0, 0) -- (1, 1);}
 \end{example}
 
-The endings of lines can also be customised using several different keys. For
+The endings of lines can also be customized. For
 example \cargv{line cap} allows you to change the drawn lines to have rounded
 corners.
 \begin{example}
@@ -329,7 +326,7 @@ corners.
   line cap=round]
   (0, 0) -- (1, 1);}
 \end{example}
-You can also turn them into arrows by specifying \cargv{arrows} key.
+You can turn a line into an arrow by specifying the \cargv{arrows} key.
 \begin{example}
 \tikz{\draw[arrows=->]
   (0, 0) -- (1, 1);}
@@ -337,8 +334,8 @@ You can also turn them into arrows by specifying \cargv{arrows} key.
   (0, 0) -- (1, 1);}
 \end{example}
 
-The lines don't need to be continuous either. You can specify \cargv{dash
-  pattern} or use one of the predefined ones to create dashed paths.
+The lines do not need to be continuous either. You can specify a \cargv{dash
+  pattern} or use one of the predefined patterns.
 \begin{example}
 \tikz{\draw[dash pattern=
   on 4 off 1 on 2 off 1]
@@ -347,8 +344,8 @@ The lines don't need to be continuous either. You can specify \cargv{dash
   (0, 0) -- (1, 1);}
 \end{example}
 
-You can also adjust how the lines are connected with other lines. For example,
-you can pass \cargv{line join} set to \cargv{round}, \cargv{bevel}, or
+Adjust how the lines are connected with other lines using
+\cargv{line join}. Set it to \cargv{round}, \cargv{bevel}, or
 \cargv{miter}.
 \begin{example}
 \tikzset{every picture/.style={line width=6pt}} %!hide
@@ -366,7 +363,7 @@ If you want the line joins to be rounded you can also pass the \cargv{rounded
   (0, 0) -- (0.5, 1) -- (1, 0);}
 \end{example}
 
-Now, let's turn our attention to nodes. By default a node's boundary is not
+Now, let's turn our attention to nodes. By default, a node's boundary is not
 drawn, but you can pass \cargv{draw} and \cargv{fill}, possibly set to a
 colour, to reveal it.
 \begin{example}
@@ -375,7 +372,7 @@ colour, to reveal it.
 \tikz{\node[fill=red] (0, 0)
   {Some Text};}
 \end{example}
-As you can see all nodes are rectangles, but they can be changed to circles if
+As you can see, all nodes are rectangles, but they can be changed to circles if
 you pass the \cargv{circle} key to their options.
 \begin{example}
 \tikz{\node[draw, circle]
@@ -415,7 +412,7 @@ this purpose leads to a more readable code, though they are not as powerful.
 All these options can be freely combined, but the resulting style specification
 may turn out to be long. To avoid retyping it for many nodes or paths you can
 define styles. Some predefined styles already exist. For example, the
-\cargv{help lines} style sets the colour of lines to grey and makes them a bit
+\cargv{help lines} style sets the colour of the lines to grey and makes them a bit
 thinner, which is useful for drawing helping grids when drawing your own
 pictures.
 \begin{example}
@@ -479,7 +476,7 @@ however it is possible to use any \LaTeX{} dimension (see
 
 It is also possible to rescale how the distances are measured by using the
 \cargv{scale} key. This is useful if you find that your picture is too big or
-too small after drawing it, or if there exist some intuitive coordinate system
+too small after drawing it, or if there exists some intuitive coordinate system
 (for example, when drawing function plots).
 \begin{example}
 \tikz[scale=2]{\draw
@@ -506,10 +503,10 @@ values are the \cargv{x} and \cargv{y} keys.
   (0, 0) -- (1, 0.5);}
 \end{example}
 
-You can actually specify three dimensional coordinates when drawing pictures.
+You can actually specify 3D-coordinates when drawing pictures.
 By default, the third coordinate is interpreted as a vector pointing \(45\)
 degrees to the bottom left and is a bit shorter (formally \((0, 0, 1)\) is  the
-same as \((-0.385, -0.385)\)). This gives the effect of parallel (or
+same as \((-0.385, -0.385)\)). This gives the effect of a parallel (or
 axonometric) projection.
 \begin{example}[vertical_mode, examplewidth=0.85\linewidth]
 \begin{tikzpicture}[scale=2]
@@ -521,7 +518,7 @@ axonometric) projection.
     (0, 1, 1) -- (1, 1, 1) (1, 1, 0) -- (0, 1, 0);
 \end{tikzpicture}
 \end{example}
-Its length and direction can also be changed by using \cargv{z} key.
+Length and direction can be changed by using the \cargv{z} key.
 
 Sometimes it may be easier to specify the path by using coordinates relative to
 the previous point instead of absolute ones. To do so prepend \ltx{++} to the
@@ -557,7 +554,7 @@ It is also possible to apply transformations to a single command.
 \end{example}
 If you want to apply the same transformation to more than one command within
 the same picture you can use \ei{scope} environment. It is especially useful
-when your picture consists of more than one subpictures each of which is more
+when your picture consists of more than one sub-pictures, each of which is more
 or less independent.
 \begin{example}[vertical_mode, examplewidth=0.7\linewidth]
 \begin{tikzpicture}
@@ -572,7 +569,7 @@ or less independent.
 \end{tikzpicture}
 \end{example}
 
-When \TikZ{} pictures are positioned within text, their bottom part matches the
+When \TikZ{} pictures are positioned within text, their bottom end matches the
 baseline of the text. If you want to modify it you can use \cargv{baseline} key
 to set at which \(y\) coordinate should the baseline be. If no dimension is
 specified it defaults to \(0\).
@@ -651,7 +648,7 @@ You can also iterate over pairs by separating respective parts by \ltx{/}.
 
 \section{Libraries}
 
-\pai{pgf} and \TikZ{} do not rely on \LaTeX{}. In fact they can be used with
+\pai{pgf} and \TikZ{} do not rely on \LaTeX{}. Infact they can be used with
 any \TeX{} based system or even the \TeX{} itself. For this reason \TikZ{}
 provides its own system of extensions that does not use \LaTeX{}'s
 \cs{usepackage} command. Extensions of \TikZ{} are called libraries and can be
@@ -686,7 +683,7 @@ for you. An example of using it is presented in \autoref{lst:intersections}.
 
 Other libraries extend the number of available shapes. For example, the
 \cargv{arrows.meta} library defines a lot of additional arrow tips if you do
-not like the classical one. Some of the available ones are presented in
+not like the classical one. Some are presented in
 \autoref{lst:arrows.meta}.
 
 \begin{listing}
@@ -708,7 +705,7 @@ not like the classical one. Some of the available ones are presented in
     library.}\label{lst:arrows.meta}
 \end{listing}
 
-Oftentimes you may want to perform additional computations on existing
+You can perform additional computations on existing
 coordinates. The \cargv{calc} library allows you to do so by enclosing them
 within \verb|$| symbols. An example of using it is presented in
 \autoref{lst:calc}.
@@ -745,7 +742,7 @@ subsequent runs. To do this simply put the following code in your preamble.
 This method has some limitations, but should be sufficient for most uses. Read
 up on it in the documentation if problems occur.
 
-These are not the only libraries---additional node shapes, real 3D perspective,
+These are not the only libraries---additional node shapes, real 3D-perspective,
 matrices, mind maps and many more are covered. Most of them are described in
 the \pai*{pgf} package documentation. Check it out if you haven't found
 solution to your problem here.

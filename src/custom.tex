@@ -42,10 +42,10 @@
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
 write documents using logical markup, with commands like \csi{emph} or \csi{section}. There
-may be however situations where \LaTeX{} does not provide an appropriate command for the content you want write about.
+may be however situations where \LaTeX{} does not provide an appropriate command for the content you want to write about.
 You may have noticed that all the
 commands I introduce in this book are typeset in a box, and that they show up
-in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. Thus I
+in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. I
 can write:
 
 \begin{example}
@@ -117,7 +117,7 @@ second, and so on.
 \txsit{very}{long}
 \end{example}
 
-If your command accepts an optional argument but the user does not supply one,
+If your command accepts an optional argument, but the user does not supply one,
 a special marker \cargv{-NoValue-} will be inserted instead.
 \begin{example}
 \NewDocumentCommand{\txsit}{om}
@@ -167,7 +167,7 @@ work exactly the same, but the value\slash{}no-value branches are swapped.
 Often you will want to use optional arguments when present but use some default
 values when the user does not provide them. This could be achieved by
 \csi{IfValueTF}, but with the \cargv{O} argument a default value can be set directly.
-It works like \cargv{o} but allows to set a default
+It works like \cargv{o} but allows setting a default
 if no value is supplied. Write
 
 \begin{example}
@@ -182,7 +182,7 @@ if no value is supplied. Write
 \end{example}
 
 Another useful argument specification is \cargv{s}, short for star. This
-argument allows to provide different definitions based on whether the
+argument allows providing different definitions based on whether the
 starred or non-starred version of command was issued by the user. It uses
 \csi{IfBooleanTF} command (and its variations\csih{IfBooleanT}\csih{IfBooleanF})
 that works analogously to the \csi{IfValueTF} command.
@@ -251,7 +251,7 @@ My humble subjects \ldots
 \end{listing}
 
 Note that when environment argument are read, they are read \emph{after} the
-\csi{begin}[name: m] command. This may be especially counter intuitive when we
+\csi{begin}[name: m] command. This may be especially counterintuitive when we
 consider the \cargv{s} specification. \autoref{lst:kingsenv} illustrates this.
 \begin{listing}
   \begin{example}
@@ -327,7 +327,7 @@ command. Your initial code may look like this
   \emph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{minted}
-but when you try to compile the document you will receive the error
+but when you try to compile the document you will get the error message
 \begin{verbatim}
 ! TeX capacity exceeded, sorry [input stack size=5000].
 \end{verbatim}
@@ -686,7 +686,7 @@ If you need to access even more font variants and shapes\footnote{For example
 
 \subsection{Danger, Will Robinson, Danger}
 
-Note! Using explicit font setting commands defies the the basic idea of
+Note! Using explicit font setting commands defies the basic idea of
 \LaTeX{} described in \autoref{sec:logical_structure}, which is to separate the
 logical and visual markup. The fonts should get switched automatically
 according to the requirements of the context. A simple rule of thumb: If you
@@ -730,7 +730,7 @@ distributions and should be available in the directory
 \begin{code}
   \nolinkurl{.../texmf-dist/fonts/opentype/adobe}
 \end{code}
-where the \cargv{...} denotes the path \TeXLive{} was installed to.
+where the \cargv{...} denotes the install-path of \TeXLive{}.
 \hologo{LuaTeX} checks this directory automatically, so it should work fine,
 but if you are using \hologo{XeTeX} you must first install these fonts in your
 system. You can also download and install them manually from the links provided
@@ -774,7 +774,7 @@ Note that it is best to put these commands in the preamble of your document,
 because some fonts are frozen when the body starts.
 
 The optional \carg{options} argument accepts key value lists that allow to
-customise the font features. For example, many fonts contain the, so called,
+customise the font features. For example, many fonts contain,
 old style numerals that are not used by default. You can pass
 \cargv{Number=OldStyle} if you want to use them in your document.
 \begin{example}
@@ -826,8 +826,9 @@ documentation for a comprehensive description and examples.
 \subsection{Specifying Fonts via Filenames}\label{ssec:fonts_filename}
 
 If you do not want to install fonts in your system or you are working on a
-collaborative project where not everybody has specific fonts installed, you can
-specify the fonts directly via their filenames. In this case you must specify
+collaborative project where not everybody has the necessary fonts installed on their system,
+you can add font files to your project and specify the fonts directly via their filenames.
+In this case you must specify
 font variations manually. Because the filenames are usually very similar, it is
 possible to enter them using \cargv{*} patterns, where \cargv{*} is replaced by
 the main name defined. Extension may also be passed via the \cargv{Extension}
@@ -948,7 +949,7 @@ Now we are using Garamond fonts.
 
 Not all math fonts have the same character coverage. For example, the default
 font doesn't have lowercase script letters. If you don't want to switch the
-fonts entirely but just use some of the characters from a different fonts, you
+fonts entirely but just use some characters from a different font, you
 can use the \cargv{range} key in the options to the \csi{setmathfont} command.
 \begin{example}
 \(xyz = \symscr{Hello}\) vs.\
@@ -958,10 +959,10 @@ can use the \cargv{range} key in the options to the \csi{setmathfont} command.
 \(xyz = \symscr{Hello}\)
 \setmathfont{Latin Modern Math} %!hide
 \end{example}
-You can also set it to exact unicode ranges if you need more control over
+You can also set it to exact Unicode ranges if you need more control over
 replaced symbols.
 
-Some fonts define two types of script font roundhand and chancery. These are
+Some fonts define two types of script font \emph{roundhand} and \emph{chancery}. These are
 normally available as the first stylistic set feature of the font. You can map
 \csi{symcal} which is normally a synonym for \csi{symscr}, to produce the
 alternative script letters.
@@ -977,12 +978,12 @@ alternative script letters.
 \setmathfont{Latin Modern Math} %!hide
 \end{example}
 
-The default behaviour of the \csi{not} command is to combine the negating glyph
+The default behaviour of the \csi{not} command, is to combine the negating glyph
 with the following symbol. This usually produces satisfactory results. If the
 font defines a dedicated negated symbol it is probably better to use it in such
 situations. The \csi{not} command is able to use a predefined mapping to use
 such glyphs based on the negated symbol. If the default mapping does not
-contain the combination or you prefer to use a different negation you can
+contain the combination, or if you prefer to use a different negation you can
 create a new mapping by using \csi{NewNegationCommand}.
 \begin{example}
 \(\not\cong\) vs.\
@@ -1084,7 +1085,7 @@ get the complementary colour.
 While colour mixing via expression is useful for simple colour specification, it
 is often the case that we want to use colour that is defined in terms of its RGB
 or HSB values. Different input method colours can be specified using the optional
-\carg{model} argument. Note that it is case sensitive.
+\carg{model} argument. Note that it is case-sensitive.
 
 The simplest model is \cargv{Gray}. It accepts a single number from \(0\)to
 \(15\) and produces a grey colour with the given brightness.
@@ -1114,7 +1115,7 @@ The \cargv{rgb} model accepts three decimal numbers, each between \(0\) and
 }
 \end{example}
 
-If you prefer the substractive colour model, both \cargv{cmy} and \cargv{cmyk} are
+If you prefer the subtractive colour model, both \cargv{cmy} and \cargv{cmyk} are
 available. They accept decimal numbers between \(0\) and \(1\) to specify
 the amount of each colour.
 \begin{example}
@@ -1232,7 +1233,7 @@ commands. The first one only colours the background, while the second one
 allows also drawing a frame (the \enquote*{f} stands for \enquote{framed}).
 \begin{example}
 It is \colorbox{gray}{curious}
-how much can a document be
+how much a document can be
 enhanced or ruined by
 \fcolorbox{blue}{red}{
   colours.
@@ -1583,7 +1584,7 @@ Whenever possible, I avoid using absolute lengths in
 of other page elements. For the width of a figure this could
 be \verb|\textwidth| in order to make it fill the page.
 
-The following 3 commands allow you to determine the width, height and
+The following 3 commands allow you to determine the width, height, and
 depth of a text string.
 
 \begin{lscommand}
@@ -1632,7 +1633,7 @@ In earlier chapters you encountered some boxes, although I did
 not tell you. The \ei{tabular} environment and the \csi{includegraphics}, for
 example, both produce a box. This means that you can easily arrange two
 tables or images side by side. You just have to make sure that their
-combined width is not larger than the textwidth.
+combined width is not larger than the text width.
 
 You can also pack a paragraph of your choice into a box with either
 the
