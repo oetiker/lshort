@@ -1,0 +1,4 @@
+all: all
+
+%:
+	cd ../ && make $@

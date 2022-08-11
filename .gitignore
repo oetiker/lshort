@@ -8,3 +8,10 @@ lshort-letter.pdf
 lshort-body.pdf
 lshort-title.pdf
 *.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.synctex.gz
+*.ist

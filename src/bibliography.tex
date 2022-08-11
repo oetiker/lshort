@@ -43,7 +43,7 @@ environment.  Each entry starts with
 \begin{lscommand}
   \csi{bibitem}[label: o, marker: m]
 \end{lscommand}
-The \carg{marker} is then used to cite the book, article or paper
+The \carg{marker} is then used to cite the book, article, or paper
 within the document.
 \begin{lscommand}
   \csi{cite}[marker: m]
@@ -68,12 +68,11 @@ TUGboat Volume~9, Issue~1 (1988)
 In order to get the citations typeset properly, two passes of \LaTeX{} compiler
 are needed similarly to table of contents.
 
-This approach has the advantage that it is simple and entirely self
-contained---no outer packages and programs are needed since it is supported out
+This approach has the advantage that it is simple and entirely self-contained---no outer packages and programs are needed since it is supported out
 of the box by \LaTeX{}. There are however many problems:
 \begin{itemize}
   \item Each entry has to be formatted manually, which may lead to inconsistent
-        styling. Moreover simple changes in format will require editing each entry by
+        styling. Moreover, simple changes in format will require editing each entry by
         hand.
   \item There is no logical/structural markup to imply which part of
         bibliographic entry is author, title, journal, etc.
@@ -82,7 +81,7 @@ of the box by \LaTeX{}. There are however many problems:
   \item If you want to use different citation style than numeric, you have to
         manually set all the labels.
 \end{itemize}
-Thus for all projects that contain more than few citations \pai{biblatex} is
+For all projects that contain more than few citations \pai{biblatex} is
 strongly recommended.
 
 % For larger projects, you might want to check out the Bib\TeX{}
@@ -117,7 +116,7 @@ the default style of \pai{biblatex} will accept
 the following \carg{entry type}s:
 \begin{description}
   \item[\cargv{article}] for articles from journals or other periodicals. Important fields are
-    are \cargv{author}, \cargv{title}, \cargv{journaltitle},
+    \cargv{author}, \cargv{title}, \cargv{journaltitle},
     \cargv{date}, \cargv{url}, \cargv{doi}.
   \item[\cargv{book}] for single-volume book. With the fields
     \cargv{author}, \cargv{title}, \cargv{date}, \cargv{publisher},
@@ -227,7 +226,7 @@ traveller~\cite{dream}. \ldots
 
 The default sorting order is \emph{N}ame (author\slash{}editor), \emph{T}itle,
 \emph{Y}ear or \cargv{nty} in short. This order can be changed by passing
-\cargv{sorting=}\carg{order} as a package option. For example if you want to to sort
+\cargv{sorting=}\carg{order} as a package option. For example if you want to sort
 entries in chronological order simply pass the \cargv{ynt} option. Other options
 allow sorting by citation order (\cargv{none}) and by the number of citations
 (\cargv{count}).
@@ -345,7 +344,7 @@ different categories using \cargv{title} option.
 \end{document}
 \end{example}
 
-By default the bibliography does not appear in the table of contents. This is
+By default, the bibliography does not appear in the table of contents. This is
 because it is using starred version of \csi{chapter}\slash\csi{section}
 (depending on the class) to generate its heading. In order to change the default we
 may pass the option \cargv{heading} to \csi{printbibliography}. Available
@@ -443,8 +442,8 @@ Until now we have only used the basic \csi{cite} command. \pai{biblatex} extends
 the command set to allow extra control with
 citations.
 
-Most of the citing commands (\csi{cite} included) allows to insert notes
-around the citations:
+Most of the citing commands (\csi{cite} included) allow inserting notes
+around citations:
 \begin{lscommand}
   \csi{cite}[pre:o, post:o, marker:m]
 \end{lscommand}

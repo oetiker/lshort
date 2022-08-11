@@ -103,9 +103,9 @@ With \pai{amsmath}, both of them are redefined to be synonyms for the
 }
 
 Similarly to the \autoref{sec:display_math}, \ai{\$} is \hologo{plainTeX} syntax
-and it cannot be redefined. Currently there are no visual differences between
-it and the new version, because the \ai{\$} works fine, but it may become an
-issue if you want to modify it yourself. Moreover the \csi{(}, \csi{)} commands
+and it cannot be redefined. Currently, there are no visual differences between
+\$ and the new version, but it may become an
+issue if you want to modify the command yourself. Also, the \csi{(}, \csi{)} commands
 can detect math mode nesting and produce an error if it happens.
 
 \chto|$ 2 + 2 = 4 $||\( 2 + 2 = 4 \)|
@@ -193,8 +193,8 @@ described in \autoref{sec:copyingcommands}.
 }
 
 \ei{eqnarray} and \ei{eqnarray*} are \hologo{LaTeX} environments that allow
-aligning equations. However spacing around the binary operators in these is far
-from ideal. Therefore it is recommended to always use the \ei{align} environments
+aligning equations. However spacing around the binary operators in these environments is far
+from ideal. Therefore, it is recommended to always use the \ei{align} environments
 from \pai{amsmath} or \ei{IEEEeqnarray} as described in
 \autoref{sec:aligned_equations}.
 \begin{chktexignore}
@@ -249,7 +249,7 @@ Use newer commands as described in \autoref{sec:fontsize}.
 }
 
 The default \hologo{LaTeX2e} environments for changing text alignment make it
-nearly impossible to hyphenate words inside them. Therefore it is recommended
+nearly impossible to hyphenate words inside them. Therefore, it is recommended
 to use the \pai{ragged2e} equivalents, as described in
 \autoref{sec:ragged}, that make the text less \enquote*{ragged} than it
 should be.
@@ -277,7 +277,7 @@ should be.
 }
 
 The \TeX{} version of entering quotes was to rely on ligatures for the given
-quotation mark. This method is not context aware and cannot be customised.
+quotation mark. This method is not context aware and cannot be customized.
 Using \pai{csquotes} package as described in \autoref{sec:csquotes} allows
 greater control over the typesetting of the quotations.
 
@@ -297,7 +297,7 @@ with it. Firstly, due to the way delimiting is handled you cannot put spaces
 \begin{chktexignore}
   between \mintinline{latex}|\end| and \mintinline{latex}|{verbatim}|.
 \end{chktexignore}
-Second and more important problem is that it reads the whole input at once
+The second and more important problem is that it reads the whole input at once
 which risks overflowing \TeX{}'s memory. The \pai{verbatim} package described
 in \autoref{sec:verbatim} solves both of these problems.
 \begin{chktexignore}
@@ -318,11 +318,11 @@ in \autoref{sec:verbatim} solves both of these problems.
 }
 
 As was already mentioned in the \autoref{chap:bibliography} before
-\texttt{biber} there was \texttt{bibtex}. It used \ei{natbib} package for
-typesetting the bibliography itself. Both of these are no longer maintained and
-don't handle UTF-8 input, so they should be avoided. However the \ei{natbib}
-styles (\eei{.bst} files) don't work with \ei{biblatex} so if you are forced to
-use one you don't have a choice.
+\texttt{biber} there was \texttt{bibtex}. It used the \ei{natbib} package for
+typesetting the bibliography itself. Both are no longer maintained and
+don't handle UTF-8 input, so they should be avoided. However, the \ei{natbib}
+styles (\eei{.bst} files) don't work with \ei{biblatex}, so if you are forced to
+use such a bibliograph style, you don't have a choice.
 \chto|\usepackage{natbib}||\usepackage{biblatex}|
 
 \section{Creating Relations and Operators}
@@ -391,7 +391,7 @@ command.
   \csi{mspace} (\pai{amsmath} package)
 }
 
-These commands are \TeX{} primitives that use nonstandard syntax, which may
+These commands are \TeX{} primitives that use non-standard syntax, which may
 lead to weird errors. It is preferable to use the \LaTeX{} equivalents, which
 use the standard syntax. The \csi{kern} primitive acts as a vertical space when used between two paragraphs, and as a horizontal space when used inside a paragraph.
 \begin{chktexignore}  

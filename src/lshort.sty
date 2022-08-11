@@ -45,7 +45,10 @@
   ItalicFeatures={SmallCapsFont={LM Mono Caps 10 Oblique}},
 ]{Latin Modern Mono}
 
-\RequirePackage{polyglossia}
+\RequirePackage{polyglossia}%
+\@ifpackagelater{polyglossia}{2022/07/17}{}{%
+    \PackageError{LShort}{poliglossia 1.57 or newer required}%
+}
 \setdefaultlanguage{english}
 \setotherlanguage{german}
 \setotherlanguage{greek}
@@ -111,6 +114,9 @@
   intersections,
   arrows.meta,
   calc,
+}
+\@ifpackagelater{xcolor}{2022/06/11}{}{%
+    \PackageError{LShort}{xcolor 2.14 or newer required!}%
 }
 \addtolength{\headheight}{1.6pt}
 %

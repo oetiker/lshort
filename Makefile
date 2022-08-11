@@ -13,8 +13,11 @@ FILES ::= $(shell find -L src -type f \( -name "*.tex" -o -name "*.bib" -o -name
 
 # Define some variables
 OUTPUT_DIR=pdfbuild
+#PDFLATEX=lualatex -synctex=1 --shell-escape --interaction=nonstopmode \
+#	--output-directory=$(OUTPUT_DIR) --halt-on-error
 PDFLATEX=lualatex --shell-escape --interaction=nonstopmode \
 	--output-directory=$(OUTPUT_DIR) --halt-on-error
+
 BIBER=biber --input-directory=src --output-directory=$(OUTPUT_DIR)
 PDFLATEX_DEBUG_ARGS=--synctex=1 --file-line-error
 MAKEINDEX=makeindex
