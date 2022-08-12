@@ -1518,9 +1518,10 @@ three semantic commands for inserting them:
   \csi{medskip} \\
   \csi{smallskip}
 \end{lscommand}
-The exact sizes of these skips is dependent on the class used. These are useful
-when creating your own environments or to indicate a thought break
-between paragraphs.\index{vertical space}
+The exact sizes of these skips is dependent on the class used. You can access
+them as length by appending \enquote{amount} to their name, for example,
+\csi{medskipamount}. These are useful when creating your own environments or to
+indicate a thought break between paragraphs.\index{vertical space}
 
 There also exist the \csi{addvspace command}, which works similarly to the
 \cs{vspace} command, however when multiple such commands are entered one after
@@ -1846,45 +1847,47 @@ document look.
 
 \subsection{Paragraph Formatting}\label{parsp}
 
-In \LaTeX{}, there are two parameters influencing paragraph layout.
-By placing a definition like
-\begin{code}
-\csi{setlength}\verb|{|\csi{parindent}\verb|}{0pt}| \\
-\verb|\setlength{|\csi{parskip}\verb|}{1ex plus 0.5ex minus 0.2ex}|
-\end{code}
-in the preamble of the input file, you can change the layout of
-paragraphs. These two commands increase the space between two paragraphs
-while setting the paragraph indent to zero.
+In \LaTeX{}, there are two lengths influencing paragraph layout:
+\csi{parindent} defines how much a paragraph is indented, while \csi{parskip}
+is the amount of space inserted between paragraphs.
+\begin{example}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{%
+  \medskipamount}
 
-The \texttt{plus} and \texttt{minus} parts of the length above tell
-\TeX{} that it can compress and expand the inter-paragraph skip by the
-amount specified, if this is necessary to properly fit the paragraphs
-onto the page.
+On the web it is common to
+separate paragraphs by some
+space instead of indenting.
 
-In continental Europe,
-paragraphs are often separated by some space and not indented. But
-beware, this also has its effect on the table of contents. Its lines
-get spaced more loosely now as well. To avoid this, you might want to
-move the two commands from the preamble into your document to some
-place below the command \verb|\tableofcontents| or to not use them at all,
-because you'll find that most professional books use indenting and not
-spacing to separate paragraphs.
+Like this.
+\end{example}
+Beware, that these lengths also affect the table of contents---its lines get
+spaced more loosely. To avoid this, you might want to put the two commands
+after the \cs{tableofcontents} command or to not use them at all, because
+you'll find that most professional books use indenting and not spacing to
+separate paragraphs.
 
-If you want to indent a paragraph that is not indented, use
-\begin{lscommand}
-  \csi{indent}
-\end{lscommand}
-\noindent at the beginning of the paragraph.\footnote{To indent the first paragraph after each section head, use
-  the \pai{indentfirst} package in the `tools' bundle.} Obviously,
-this will only have an effect when \verb|\parindent| is not set to
-zero.
+If you want to indent a paragraph that is not indented, use \csi{indent} at the
+beginning of the paragraph. Obviously, this will only have an effect when
+\csi{parindent} is not set to zero. In continental Europe it is sometimes the
+case that every paragraph should be indented, even after sections. To avoid
+using ths \csi{indent} command everywhere, simply use the \pai*{indentfirst}
+package in your preamble.
+\begin{example}[standalone, paperheight=2.5cm, paperwidth=0.5\linewidth]
+\usepackage{indentfirst}
+% ...
 
-To create a non-indented paragraph, use
-\begin{lscommand}
-  \csi{noindent}
-\end{lscommand}
-\noindent as the first command of the paragraph. This might come in handy when
-you start a document with body text and not with a sectioning command.
+\begin{document} %!hide
+\section{Title}
+
+The first paragraph is now
+indented.
+\end{document} %!hide
+\end{example}
+
+To create a non-indented paragraph, use \csi{noindent} as the first command of
+the paragraph. This might come in handy when you start a document with body
+text and not with a sectioning command.
 
 \section{Page Layout}
 
