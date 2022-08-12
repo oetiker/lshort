@@ -1,0 +1,7 @@
+{
+    "ltex.additionalRules.enablePickyRules": true,
+    "ltex.additionalRules.motherTongue": "en-GB",
+    "ltex.language": "en-GB",
+    "ltex.checkFrequency": "manual",
+    "latex-workshop.latex.external.build.command": "make"
+}
