@@ -1648,12 +1648,149 @@ or scale it to take up half the space available.
 ]{example-image}
 \end{example}
 
+\section{The Layout of the Document}
+
+\subsection{Document Class Options}\label{sec:documentclassoptions}
+
+The easiest way to influence the layout of the document is to pass options to
+the
+\begin{lscommand}
+  \csi{documentclass}[options: o, class: m]
+\end{lscommand}
+command at the beginning of your file. The available classes where already
+described in \autoref{documentclasses} on \autopageref{documentclasses}. The
+\carg{options} have to be separated by commas. The most common options for the
+standard document classes are listed in \autoref{options}.
+
+\begin{table}
+  \RenewDocumentCommand{\arraystretch}{}{1.2}
+  \caption{Document Class Options.}\label{options}
+  \begin{tabular}{@{}>{\RaggedRight}p{2.5cm}p{9cm}@{}}
+    \toprule
+    Options                                  & Description                   \\
+    \midrule
+    \cargv{10pt}, \cargv{11pt}, \cargv{12pt} & Sets the size
+    of the main font in the document. If no option is specified,
+    \cargv{10pt} is assumed.\index{document font size}\index{base
+    font size}                                                               \\
+    \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
+    The default size can be configured when installing \LaTeX. Besides that,
+    \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
+    \cargv{legalpaper} can be specified.\index{legal paper}\index{paper
+      size}\index{A4 paper}\index{letter paper}\index{A5 paper}\index{B5
+    paper}\index{executive paper}                                            \\
+    \cargv{fleqn}                            & Typesets
+    displayed formulae left-aligned instead of centred.                      \\
+    \cargv{leqno}                            & Places
+    the numbering of formulae on the left hand side instead of the right.    \\
+    \cargv{titlepage}, \cargv{notitlepage}   & Specifies
+    whether a new page should be started after the \wi{document title}
+    or not. The \cli{article} class does not start a new page by
+    default, while \cli{report} and \cli{book} do.\index{title}              \\
+    \cargv{onecolumn}, \cargv{twocolumn}     & Instructs
+    \LaTeX{} to typeset the document in \wi{one column} or \wi{two column}s. \\
+    \cargv{twoside, oneside}                 & Specifies whether
+    double or single sided output should be generated. The classes
+    \cli{article} and \cli{report} are \wi{single sided} and the
+    \cli{book} class is \wi{double sided} by default. Note that this
+    option concerns the style of the document only. The option
+    \cargv{twoside} does \emph{not} tell the printer you use that it
+    should actually make a two-sided printout.                               \\
+    \cargv{landscape}                        & Changes the
+    layout of the document to print in landscape mode.                       \\
+    \cargv{openright, openany}               & Makes chapters begin
+    either only on right hand pages or on the next page available. This does
+    not work with the \cli{article} class, as it does not know about
+    chapters. The \cli{report} class by default starts chapters on
+    the next page available and the \cli{book} class starts them on
+    right hand pages.                                                        \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For example, if an input file for a \LaTeX{} document starts with the line
+\begin{code}
+\csi{documentclass}[{11pt, twoside, a4paper}: vo, article: vm]
+\end{code}
+then it instructs \LaTeX{} to typeset the document as an article with a base
+font size of eleven points, and to produce a layout suitable for double sided
+printing\footnote{Note that this only influences the appearance of the document
+  to be adequate for double sided printing---you still have to pass proper
+  instructions to your printer to print it on both sides.} on A4 paper.
+
+\subsection{Page Styles}
+
+\LaTeX{} supports three predefined \wi{header}\slash\wi{footer}
+combinations---so-called \wi{page style}s. The \carg{style} parameter
+of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
+  style!headings@\texttt{headings}}\index{headings@\texttt{headings}}\index{page
+  style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+\begin{lscommand}
+  \csi{pagestyle}[style: m]
+\end{lscommand}
+command defines which one to use. \autoref{pagestyle} lists the predefined
+page styles.
+
+\begin{table}
+  \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
+  \begin{tabular}{lp{8cm}}
+    \toprule
+    Style              & Description                                      \\
+    \midrule
+    \cargv{plain}      & prints the page numbers on the bottom
+    of the page, in the middle of the footer. This is the default page
+    style.                                                                \\
+    \cargv{headings}   & prints the current chapter heading
+    and the page number in the header on each page, while the footer
+    remains empty.  (This is the style used in this document)             \\
+    \cargv{empty}      & sets both the header and the footer
+    to be empty.                                                          \\
+    \cargv{myheadings} & similar to the \cargv{headings} style but leaves
+    the headers and footers empty allowing for them to be defined by
+    the author. A description of how to do this is in
+    \autoref{sec:fancy}.                                                  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+It is possible to change the page style of the current page with the command
+\begin{lscommand}
+  \csi{thispagestyle}[style: m]
+\end{lscommand}
+
+You may also control the style of the displayed page numbers. To change it use
+the
+\begin{lscommand}
+  \csi{pagenumbering}[style: m]
+\end{lscommand}
+command, where \carg{style} is one of the styles presented in
+\autoref{tb:numberings}.
+
+\begin{table}
+  \caption{Possible argument of the \csi{pagenumbering}
+    command.}\label{tb:numberings}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Style          & Description                                   \\
+    \midrule
+    \cargv{arabic} & Arabic numerals (1, 2, 3, \ldots)             \\
+    \cargv{roman}  & Lowercase Roman numerals (i, ii, iii, \ldots) \\
+    \cargv{Roman}  & Uppercase Roman numerals (I, II, III, \ldots) \\
+    \cargv{alph}   & Lowercase Latin letters (a, b, c, \ldots)     \\
+    \cargv{Alph}   & Uppercase Latin letters (A, B, C, \ldots)     \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+If these options are not enough for you, you will description how to create
+your own headers and footers in \autoref{sec:fancy} on \autopageref{sec:fancy}.
+
 \subsection{Line Spacing}\index{line spacing}
 
 When using custom fonts, you may find that the default line spacing does not
-match your taste. You could redefine it using the above \csi{fontsize}
-commands, however, this will be overwritten once you use size changing commands
-described in \autoref{sizes}.
+match your taste. You could redefine it using the \csi{fontsize} commands,
+however, this will be overwritten once you use size changing commands described
+in \autoref{sizes}.
 
 To make such adjustments easier \LaTeX{} defines the
 \begin{lscommand}
@@ -1827,6 +1964,453 @@ In this context, you might want to look at the \pai{calc} package.
 It allows you to use arithmetic operations in the argument of \csi{setlength}
 and other places where numeric values are entered into function
 arguments.
+
+\section{Fancy Headers}\label{sec:fancy}
+
+\subsection{Basic commands}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The \pai*{fancyhdr} package provides a few simple commands that allow you to
+customise the header and footer lines of your document. It defines an
+additional page style \cargv{fancy} and a set of commands to customise it to
+your liking. By default, it only adds a line separating the header from the page
+body.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+%!showbegin %!hide
+\documentclass{article}
+
+%!showend %!hide
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\begin{document}
+\noindent %!hide
+This statement is false.
+\end{document}
+\end{example}
+
+The primary command of the package is
+\begin{lscommand}
+  \csi{fancyhf}[places: o, field: m]
+\end{lscommand}
+The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
+combination of three letters:
+\begin{itemize}
+  \item The first specifies whether the location is in the header (\cargv{H}) or
+        in the footer (\cargv{F}).
+  \item The second letter specifies the location within the header or footer:
+        \cargv{L} for left, \cargv{C} for centre, and \cargv{R} for right.
+  \item The third letter defines whether the field should be printed on even
+        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided,
+        then all pages are treated as odd.
+\end{itemize}
+For example, the combination \cargv{FCE} identifies the centre part of the
+footer on even pages. If any of the letters is omitted, then the identifier
+points toward all positions specifiable by the omitted letter. For example,
+\cargv{HR} is right side of the header on both odd and even pages.
+\begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
+\documentclass[twoside]{article}
+
+%!hidebegin
+\usepackage[paperheight=\height,
+    paperwidth=\width,
+    margin=0.3cm,
+    includefoot,
+    includehead,
+    headsep=.5em,
+    footskip=1em
+]{geometry}
+%!hideend
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf[HCE]{A}
+\fancyhf[L]{\emph{B}}
+\fancyhf[FR]{\textbf{C}}
+\fancyhf[HCO, HRE]{\textsl{D}}
+
+\begin{document}
+\noindent %!hide
+The next statement is false.
+The previous statement is true.
+\end{document}
+\end{example}
+
+There are two additional commands, \csi{fancyhead} and \csi{fancyfoot}, that
+work in the same way, except that they respectively assume \cargv{H} and
+\cargv{F} in their \carg{places} argument, unless otherwise specified.
+\begin{example}[standalone, paperheight=3.5cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{csquotes} %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{A}
+\fancyfoot[R]{B}
+
+\begin{document}%!hide
+\noindent %!hide
+\enquote{Yields a falsehood when
+appended to its own quotation}
+yields a falsehood when appended
+to its own quotation.
+\end{document}%!hide
+\end{example}
+
+The lines drawn by the \pai{fancyhdr} package may also be customised. To change
+%$$ Inserted comma after 'thickness'.
+their thickness, redefine the
+\begin{lscommand}
+  \csi{headrulewidth} \\
+  \csi{footrulewidth}
+\end{lscommand}
+macros to the desired size.
+\begin{example}[standalone, paperheight=3cm, paperwidth=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr} %!hide
+\pagestyle{fancy} %!hide
+\RenewDocumentCommand{\headrulewidth}{}{.2cm}
+\RenewDocumentCommand{\footrulewidth}{}{.5cm}
+
+\begin{document}%!hide
+\noindent %!hide
+Do not read this sentence.
+\end{document}%!hide
+\end{example}
+
+%$$ Inserted comma after 'default'.
+By default, headers and footers are as long as the text on the page. If you want
+%$$ Changed 'extend\slash{}shorten' to 'extend or shorten'.
+%$$ Added comma after 'them'.
+to extend\slash{}shorten them, use the
+\begin{lscommand}
+  \csi{fancyhfoffset}[places: o, offset: m]
+\end{lscommand}
+%$$ Added comma after \csi{fancyhf}.
+command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
+it cannot contain \cargv{C}.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhfoffset[L]{-1cm}
+\fancyhfoffset[R]{.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+If this sentence is true,
+then \(2 + 2 = 5\).
+\end{document}%!hide
+\end{example}
+The command \csi{fancyheadoffset} and \csi{fancyfootoffset} are
+used the same way as \csi{fancyf}, but they only modify header or footer respectively.
+
+\subsection{Contents of the headers}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The default footer of the article class contains the current page number. To
+use it inside the fancy header, simply use the command \csi{thepage}.
+\begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhf{Page~\thepage}
+
+\begin{document}%!hide
+\noindent %!hide
+This statement is dedicated to
+all statements that are not
+dedicated to themselves.
+\end{document}%!hide
+\end{example}
+
+It is often useful to have the header and footer contain information based on
+the content of the page. These are called \enquote{marks} in \LaTeX{}
+terminology. Before we talk about the default ones, let's consider how you can
+define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
+  of \pai*{fancyhdr}.} package.
+\begin{lscommand}
+  \csi{extramarks}[left:m, right:m] \\
+  \csi{firstleftxmark} \\
+  \csi{firstrightxmark} \\
+  \csi{lastleftxmark} \\
+  \csi{lastrightxmark}
+\end{lscommand}
+The \csi{extramarks} command sets the contents of \carg{left} and \carg{right}
+marks. Then you can access these marks inside the headers by using the appropriate
+command. The \texttt{first}- commands refer to the first mark occurring on the
+page, while the \texttt{last}- refer to the last one.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{\firstleftxmark}
+\fancyhead[R]{\lastleftxmark}
+\fancyfoot[L]{\firstrightxmark}
+\fancyfoot[R]{\lastrightxmark}
+
+\begin{document} %!hide
+\noindent %!hide
+The second statement is false.
+\extramarks{One}{2 is false}
+The third statement is false.
+\extramarks{Two}{3 is false}
+The first statement is false.
+\extramarks{Three}{1 is false}
+\end{document} %!hide
+\end{example}
+
+Let us now look at the default marks defined by \LaTeX{}. After loading
+\pai{extramarks}, these may be set and accessed similarly:
+\begin{lscommand}
+  \csi{markboth}[left:m, right:m] \\
+  \csi{firstleftmark} \\
+  \csi{firstrightmark} \\
+  \csi{lastleftmark} \\
+  \csi{lastrightmark}
+\end{lscommand}
+The only difference between these and the extra marks is that \LaTeX{} classes
+automatically fill them. Hence, if you are not careful, you may lose your
+content.\footnote{You may prevent this by setting the pagestyle to
+  \cargv{myheadings} and then redefining it to use it with \pai{fancyhdr} as
+  described later.}
+For example, in the article class, \carg{left} is set by the \csi{section}
+command, while \carg{right} is set by the \csi{subsection} command.
+\begin{example}[standalone, paperheight=5cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\firstleftmark}
+\fancyhead[R]{\lastleftmark}
+\fancyfoot[L]{\firstrightmark}
+\fancyfoot[R]{\lastrightmark}
+
+\begin{document}%!hide
+\section{First}
+\subsection{Sub}
+\section{Second}
+\subsection{Sub}
+\end{document}%!hide
+\end{example}
+Note that \csi{firstrightmark} is empty in the above example. This is caused by
+the fact that \csi{section} commands set both marks, leaving the right one
+empty.
+
+You may have noticed that section titles are typeset in uppercase when provided
+by -\texttt{mark} commands. To disable this use the \csi{nouppercase} command inside the
+\csi{fancyhf} command.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{%
+  \nouppercase{\firstleftmark}%
+}
+
+\begin{document}%!hide
+\section{Today}
+is opposite day.
+\end{document}%!hide
+\end{example}
+
+\subsection{Advanced commands}
+
+If you want even more control over section titles, you can redefine the
+\csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
+command receives the section title as its first argument, while the section
+number is available as \csi{thesection}.
+\begin{example}[standalone, paperheight=4.5cm, paperwidth=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{\firstleftmark}
+\RenewDocumentCommand{\sectionmark}{m}{%
+  \markboth{%
+    Section no.\,\thesection: #1}{}%
+}
+
+\begin{document}%!hide
+\section{Person}
+There exists a person such that
+if they are reading this then
+everybody is reading this.
+\end{document}%!hide
+\end{example}
+If you only want to change the right mark, use the \csi{markright} command.
+
+By default, the field in the centre of the header or footer will expand equally
+to the left and right. This is usually the desired behaviour, but in some
+cases it may overlap with either left or right text, while still having some
+space on the other side.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\thepage}
+\fancyhead[C]{\firstleftmark}
+\fancyhead[R]{Jane Doe}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+In this situation you may want to use the
+\begin{lscommand}
+  \csi{fancycenter}[distance:o, stretch:o, left:m, centre:m, right:m]
+\end{lscommand}
+command, which automatically shifts the centre toward the shorter text. The
+\carg{distance} is the minimum distance by which the elements are always
+surrounded (\cargv{1em}, by default). The \carg{stretch} controls the preference
+for shifting the \carg{centre}; \cargv{1} means shift only when and as much
+as necessary. Higher numbers will start shifting sooner and more aggressively.
+The default is \cargv{3}. This command writes over the whole header\slash{}footer
+space so it should only be put in one place (typically \cargv{C}) and other
+places (\cargv{L,R}) should be empty.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L,R]{}
+\fancyhead[C]{%
+  \fancycenter%
+    {\thepage}%
+    {\firstleftmark}%
+    {Jane Doe}%
+}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+
+You may want to present different headers or footers when the corresponding
+page starts with a float or ends with a footnote. The \pai{fancyhdr} package
+defines four commands that let you achieve this.
+\begin{lscommand}
+  \csi{iftopfloat}[true branch:m, false branch:m] \\
+  \csi{ifbotfloat}[true branch:m, false branch:m] \\
+  \csi{iffloatpage}[true branch:m, false branch:m] \\
+  \csi{iffootnote}[true branch:m, false branch:m]
+\end{lscommand}
+Commands \csi{iftopfloat} and \csi{ifbotfloat} execute their \carg{true branch}
+if a float sits at the top or bottom of the page (respectively).
+
+Similarly, \csi{iffloatpage} checks whether
+the page is a special float-only page, while \csi{iffootnote} checks for a
+footnote at the bottom of the page.
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[C]{%
+  \iftopfloat{%
+    A float is below me%
+  } {}
+}
+\fancyfoot[C]{%
+  \iffootnote{%
+    A footnote is above me%
+  } {%
+    \thepage%
+  }%
+}
+
+\begin{document}%!hide
+\noindent %!hide
+Ignore this footnote.%
+\footnote{Read this.}
+\begin{figure}[t]
+  \centering
+  A floating float.
+  \caption{Hmm}
+\end{figure}
+\end{document}%!hide
+\end{example}
+
+The ruled lines in headers and footers are created by invoking \csi{headrule}
+and \csi{footrule} commands. If you want finer control over the lines, consider
+redefining these macros. Use \csi{headruleskip} and \csi{footruleskip} to raise
+or lower them, if necessary.
+\begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\RenewDocumentCommand{\headrule}{}{
+  \rule{0.05\headwidth}{0.2cm}%
+  \rule[0.1cm]{0.9\headwidth}{\headrulewidth}%
+  \rule{0.05\headwidth}{0.2cm}%
+}
+
+\RenewDocumentCommand{\headruleskip}{}{-0.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+My age is the first number not
+nameable in under twenty words.
+\end{document} %!hide
+\end{example}
+
+While working on a longer document, you may want to have several page styles for
+different occasions. You may also notice that some commands (\csi{chapter} and
+\csi{maketitle}, for example) change the page style to \cargv{plain}.
+The solution to both of these problems is the
+\begin{lscommand}
+  \csi{fancypagestyle}[name:m, code:m]
+\end{lscommand}
+command. The \carg{name} is the name of page style to (re)define, while the %chktex 36
+\carg{code} is the code to set the page style. All page styles declared this
+way use the \cargv{fancy} page style as their basis, so if empty \carg{code} is
+given they will match \cargv{fancy} exactly.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\fancypagestyle{mine}{
+  \fancyhead[L]{My style}
+}
+\pagestyle{mine}
+
+\begin{document}%!hide
+%!showbegin %!hide
+Were you expecting a paradox here?
+%!showend !hidebegin
+\noindent
+You may be disappointed.
+\end{document}
+\end{example}
+%$$ I don't think I understand the above example.
+%$$ The connection between 'paradox' on the left, and 'disappointed' on the 
+%$$ right isn't obvious. Did I miss something?
 
 \section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each
