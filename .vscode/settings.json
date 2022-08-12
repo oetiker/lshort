@@ -1,0 +1,23 @@
+{
+    "ltex.additionalRules.enablePickyRules": true,
+    "ltex.additionalRules.motherTongue": "en-GB",
+    "ltex.language": "en-GB",
+    "ltex.checkFrequency": "manual",
+    "latex-workshop.latex.external.build.command": "make",
+    "latex-workshop.latex.external.build.args": [
+        "quick"
+    ],
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/pdfbuild",
+    "latex-workshop.latexindent.args": [
+        "-c",
+        "%DIR%/",
+        "%TMPFILE%",
+        "-m",
+        "-l",
+        "%WORKSPACE_FOLDER%/.localSettings.yaml"
+    ],
+    "editor.rulers": [
+        80
+    ],
+    "files.insertFinalNewline": true
+}
