@@ -1677,7 +1677,9 @@ standard document classes are listed in \autoref{options}.
     \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
     The default size can be configured when installing \LaTeX. Besides that,
     \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
-    \cargv{legalpaper} can be specified.\index{legal paper}\index{paper
+    \cargv{legalpaper} can be specified. Note that it only affects the layout
+    of margins, not the PDF paper size itself, see \autoref{sec:page_layout}
+    for more details.\index{legal paper}\index{paper
       size}\index{A4 paper}\index{letter paper}\index{A5 paper}\index{B5
     paper}\index{executive paper}                                            \\
     \cargv{fleqn}                            & Typesets
@@ -1889,85 +1891,133 @@ To create a non-indented paragraph, use \csi{noindent} as the first command of
 the paragraph. This might come in handy when you start a document with body
 text and not with a sectioning command.
 
-\section{Page Layout}
+\subsection{Page Layout}\label{sec:page_layout}
+\begingroup
+\LshortExampleSetup{
+  standalone,
+  template=empty,
+  paperwidth=6cm,
+}
+As you have seen, \LaTeX{} allows you to specify the \wi{paper size} via
+options in the \cs{documentclass} command. It then automatically picks the
+right text \wi{margins}, but sometimes you may not be happy with the predefined
+values. Naturally, you can customize them to your liking. But before you start
+making the margins as narrow as possible to cram the text in, take a few
+seconds to think. As with most things in \LaTeX, there are good reasons for the
+page layout to be as it is.
 
-\begin{figure}[!hp]
-  \begin{center}
-    \makeatletter\@mylayout\makeatother
-  \end{center}
-  \vspace*{1.8cm}
-  \caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}\label{fig:layout}
-  \csih{footskip}
-  \csih{headheight}
-  \csih{headsep}
-  \csih{marginparpush}
-  \csih{marginparsep}
-  \csih{marginparwidth}
-  \csih{oddsidemargin}
-  \csih{paperheight}
-  \csih{paperwidth}
-  \csih{textheight}
-  \csih{textwidth}
-  \csih{topmargin}
-\end{figure}\index{page layout}
+Sure, compared to your off-the-shelf page of your favourite WYSIWYG editor, the
+margins look awfully wide. But take a look at your favourite, professionally
+printed book and count the number of characters on a standard text line. You
+will find that most lines contain between 45 and 80 characters. Now do the same
+on your \LaTeX{} page. You will find that the same relationship holds.
+Empirical studies suggest that averaging around 66 characters per line creates
+the optimal reading experience for readers. If you want to save space when
+printing your document consider using \cargv{twocolumn} option or smaller page
+sizes.
 
-\LaTeX{} allows you to specify the \wi{paper size} in the
-\verb|\documentclass| command. It then automatically picks the right
-text \wi{margins}, but sometimes you may not be happy with
-the predefined values. Naturally, you can change them.
-%no idea why this is needed here ...
-\thispagestyle{fancyplain}
-\autoref{fig:layout} shows all the parameters that can be changed.
-The figure was produced with the \pai{layout} package from the tools bundle.%
-\footnote{\CTANref|pkg/tools|}
+With that warning in place let us proceed to the proper introduction of
+\pai*{geometry} package that allows you to easily customize the page dimensions
+of your document. It is worth noting that simply including the package in your
+preamble will result in considerably narrower margins, (the very thing we
+warned you to avoid) so only use the package if you intend to set them
+manually or use the \cargv{pass} option that disables most of the package
+functions but retains the paper size adjustments.
 
-\textbf{WAIT!} \ldots before you launch into a ``Let's make that
-narrow page a bit wider'' frenzy, take a few seconds to think. As with
-most things in \LaTeX, there is a good reason for the page layout to
-be as it is.
+As we have mentioned in \autoref{options}, simply setting \cargv{a5paper} (or
+similar) option will only adjust margins of the document without changing the
+paper dimensions themselves. The simplest way to fix that is to include the
+\pai{geometry} package with your preamble. It will read the page size option
+and adjust it accordingly. The package itself also supports many more page
+sizes, such as \cargv{a0paper} or \cargv{a6paper}.
+\begin{example}
+\documentclass{article}
 
-Sure, compared to your off-the-shelf MS Word page, it looks awfully
-narrow. But take a look at your favourite book\footnote{I mean a real
-  printed book produced by a reputable publisher.} and count the number
-of characters on a standard text line. You will find that there are no
-more than about 66 characters on each line. Now do the same on your
-\LaTeX{} page. You will find that there are also about 66 characters
-per line.  Experience shows that the reading gets difficult as soon as
-there are more characters on a single line. This is because it is
-difficult for the eyes to move from the end of one line to the start of the next one.
-This is also why newspapers are typeset in multiple columns.
+\usepackage[
+  a6paper,
+  landscape,
+]{geometry}
 
-So if you increase the width of your body text, keep in mind that you
-are making life difficult for the readers of your paper. But enough
-of the cautioning, I promised to tell you how you do it \ldots
+\begin{document}
+This document is typeset on
+A6 paper in landscape mode.
+\end{document}
+\end{example}
 
-\LaTeX{} provides two commands to change these parameters. They are
-usually used in the document preamble.
+If the predefined dimensions are not enough you can always set it directly
+using \cargv{paperheight} and \cargv{paperwidth} keys.
+\begin{example}
+\documentclass{article} %!hide
+\usepackage[
+  paperwidth=6cm,
+  paperheight=3cm
+]{geometry}
+% ...
 
-The first command assigns a fixed value to any of the parameters:
-\begin{lscommand}
-  \csi{setlength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
-\end{lscommand}
+\begin{document} %!hide
+This page has dimensions of
+6 by 3 centimetres.
+\end{document} %!hide
+\end{example}
 
-The second command adds a length to any of the parameters:
-\begin{lscommand}
-  \csi{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
-\end{lscommand}
+As we have indicated, the package is also capable of adjusting the margins. The
+simplest way to do so is to use the \cargv{left}, \cargv{right}, \cargv{top},
+and \cargv{bottom} options, each of which sets the size of the respective
+margin.
+\begin{example}[paperheight=4cm]
+\documentclass{article} %!hide
+\usepackage[
+  paperheight=\height, %!hide
+  paperwidth=\width, %!hide
+  top=0.5cm,
+  bottom=1cm,
+  left=1.5cm,
+  right=2cm,
+]{geometry}
+% ...
+%!hidebegin
+\usepackage{blindtext}
+\sloppy
+\begin{document}
+\blindtext
+\end{document}
+\end{example}
+Note that by default the header and footer are not considered part of the
+page body, so they may not fit on page if the margins are too narrow (like in
+the example above). If you want to include them when considering margins use
+the \cargv{includefoot} and/or \cargv{includehead} options.
 
-This second command is actually more useful than the \csi{setlength}
-command, because it works relative to the existing settings.
-To add one centimetre to the overall text width, I put the
-following commands into the document preamble:
-\begin{code}
-\verb|\addtolength{\hoffset}{-0.5cm}|\\
-\verb|\addtolength{\textwidth}{1cm}|
-\end{code}
+One of the killer features of the \pai{geometry} package is its ability to
+calculate the correct margin sizes based on other metrics. For example, we can
+declare that we want the text to have a given width via \cargv{textwidth}
+option and that each page should have a given number of lines via \cargv{lines}
+option and the appropriate sizes of margins will be calculated automatically.
+\begin{example}[paperheight=4cm]
+\documentclass{article} %!hide
+\usepackage[
+  paperheight=\height, %!hide
+  paperwidth=\width, %!hide
+  textwidth=5cm,
+  lines=3
+]{geometry}
+% ...
+%!hidebegin
+\usepackage{blindtext}
+\sloppy
+\begin{document}
+\blindtext
+\end{document}
+\end{example}
+There are many more options to influence the margins: specifying their ratios
+(\cargv{ratio}), defining them to take up certain percent of available paper
+size (\cargv{scale}), or including binding offset (\cargv{bindingoffset}).
+Check out the package documentation~\cite{pack:geometry} for a full list with
+examples.
 
-In this context, you might want to look at the \pai{calc} package.
-It allows you to use arithmetic operations in the argument of \csi{setlength}
-and other places where numeric values are entered into function
-arguments.
-
+A useful option for prototyping your layout is the \cargv{showframe} option
+that draws frames around document body and margins to easier evaluate the
+chosen layout.
+\endgroup
 \section{Fancy Headers}\label{sec:fancy}
 
 \subsection{Basic commands}

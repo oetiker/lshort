@@ -12,7 +12,7 @@ Silent {
     \endhead \endfoot \endlastfoot \endfirsthead
     \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
     \bgroup \egroup \sourcefamily \restoregeometry
-    \itshape \cleardoublepage \IfValueT \pause
+    \itshape \cleardoublepage \IfValueT \pause \blindtext
 }
 
 MathEnvir {
