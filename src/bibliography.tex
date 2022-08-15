@@ -17,7 +17,7 @@
 % this document.  If not, see <https://www.gnu.org/licenses/>.
 
 % !TEX root = ./lshort.tex
-\chapter{Bibliography}\label{chap:bibliography}
+\chapter{Bibliographies}\label{chap:bibliography}
 \begin{intro}
   When writing articles or books concerned with some topic you will often need
   to reference other books and articles to point out where some information
@@ -66,9 +66,9 @@ TUGboat Volume~9, Issue~1 (1988)
 \end{example}
 
 In order to get the citations typeset properly, two passes of \LaTeX{} compiler
-are needed similarly to table of contents.
+are needed similar to how tables of contents are done.
 
-This approach has the advantage that it is simple and entirely self-contained---no outer packages and programs are needed since it is supported out
+This approach has the advantage that it is simple and entirely self-contained---no external packages and programs are needed since it is supported out
 of the box by \LaTeX{}. There are however many problems:
 \begin{itemize}
   \item Each entry has to be formatted manually, which may lead to inconsistent
@@ -94,7 +94,7 @@ strongly recommended.
 \section{\pai{biblatex} with \hologo{biber}}
 
 The \pai*{biblatex} package uses a separate program, \pai*{biber}, for
-bibliography management. \hologo{biber} is a successor of a popular
+bibliography management. \hologo{biber} is a successor of the popular
 \hologo{BibTeX} program. Its main advantage is UTF-8 support, which was lacking
 in the original \hologo{BibTeX}. The database format is largely backward
 compatible, so on many sites you can find ``BibTeX entry'' or ``Export Bibtex

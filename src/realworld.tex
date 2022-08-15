@@ -1276,7 +1276,7 @@ As Dostoevsky once wrote
 \end{example}
 \endgroup
 The commands \csi{foreigntextquote}, \csi{foreignblockquote} and environment
-\ei{foreigndisplayquote} are also available and work analogously to the ones
+\ei{foreigndisplayquote} are also available and work like the ones
 described in previous section.
 
 Some languages have multiple variants of quotes used. To change the variant
@@ -1397,7 +1397,7 @@ Small is beautiful.
 \end{document}
 \end{verbatim}
 \end{example}
-Its starred version will analogously draw the \enquote*{\textvisiblespace}
+Its starred version will draw the \enquote*{\textvisiblespace}
 symbol instead of spaces.
 
 For code snippets it may be useful to store them in their dedicated files,
@@ -1708,7 +1708,7 @@ You can change the line numbering using \cargv{firstnumber} and
 \end{example}
 \end{chktexignore}
 
-Similarly to the \pai{listings} package, \cargv{breaklines} enables automatic
+As in the \pai{listings} package, \cargv{breaklines} enables automatic
 breaking of long lines, however it will only break the lines at whitespace
 characters. If you want the breaks to occur anywhere use the
 \cargv{breakanywhere} key. The breaking behaviour may be even more
@@ -1967,8 +1967,8 @@ argument accepts any combination of \cargv{r}, \cargv{r\{\carg{dim}\}},
 \cargv{l} or \cargv{l\{\carg{dim}\}}. This allows you trim the rule from right
 or left, either by the package default or the specified \carg{dim}. It is
 usually recommended to trim the rules from the side where they touch other
-columns. Finally the only required argument \carg{a-b} is the span of columns
-to draw the line over. See \autoref{lst:cmidrule} for an example.
+columns. The command's only required argument is the span of columns
+to draw the line over (\carg{a-b}). See \autoref{lst:cmidrule} for an example.
 \begin{listing}
   \begin{chktexignore}
   \begin{example}[examplewidth=0.85\linewidth, vertical_mode]
@@ -2065,7 +2065,7 @@ those as shown in \autoref{lst:rowsnext}.
 
 This approach will obviously not work for \emph{really} long tables. This is
 where the \pai{longtable} package shines. It defines a \ei{longtable}
-environment that works similarly to \ei{tabular} environment, but allows
+environment that works similar to the \ei{tabular} environment, but allows
 pagebreaks inside.
 
 \begin{lscommand}
@@ -2148,8 +2148,8 @@ row thanks to \cargv{p\{...\}} specification, it will not broken as seen in
 \end{listing}
 
 The \ei{longtable} environment defines also some additional commands that end
-table rows. One of them is \csi{textbackslash*} which, similarly to its
-paragraph use, prohibits pagebreak after the row. Another useful commands are
+table rows. One of them is \csi{textbackslash*} which, similar to its
+use in a paragraph, prohibits a pagebreak after the row. Another useful commands are
 \csi{endhead}, \csi{endfirsthead}, \csi{endfoot} and \csi{endlastfoot}. If you end
 the row with them they will set the preceding rows as headers and footers of
 the table. The \csi{endhead} and \csi{endfoot} put the headers and footers on
@@ -2660,7 +2660,7 @@ The two commands
 \begin{lscommand}
   \csi{listoffigures} and \csi{listoftables}
 \end{lscommand}
-operate analogously to the \csi{tableofcontents} command, printing a list of
+operate similar to the \csi{tableofcontents} command, printing a list of
 figures or tables, respectively.  These lists will display the whole caption,
 so if you tend to use long captions you must have a shorter version of the
 caption for the lists. This is accomplished by entering the short version in
@@ -2720,9 +2720,9 @@ use the \pai*{newfloat} package. It provides the
   \csi{DeclareFloatingEnvironment}[options: o, name: m]
 \end{lscommand}
 For example the \mintinline{latex}|\DeclareFloatingEnvironment{cat}| will
-define a new environment \mintinline{latex}|cat| that can be used similarly to
-\ei{figure} and \ei{table} environment and \mintinline{latex}|\listofcats| that
-works analogously to \csi{listoftables}. You can customise the float using the
+define a new environment \mintinline{latex}|cat| that can be used like
+the \ei{figure} and \ei{table} environment and \mintinline{latex}|\listofcats| that
+works the same as to \csi{listoftables}. You can customise the floats using the
 \carg{options} to change the printed captions (\cargv{name}), list title
 (\cargv{listname}) or default placement (\cargv{placement}).
 

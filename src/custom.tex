@@ -185,7 +185,7 @@ Another useful argument specification is \cargv{s}, short for star. This
 argument allows providing different definitions based on whether the
 starred or non-starred version of command was issued by the user. It uses
 \csi{IfBooleanTF} command (and its variations\csih{IfBooleanT}\csih{IfBooleanF})
-that works analogously to the \csi{IfValueTF} command.
+that works like the \csi{IfValueTF} command.
 
 \begin{chktexignore}
   \begin{example}
@@ -279,7 +279,7 @@ My humble subjects \ldots
   \caption{An example of using the \cargv{s} specifier when defining a new
     environment.}\label{lst:kingsenv}
 \end{listing}
-If you want to create a starred version of an environment (similarly to some
+If you want to create a starred version of an environment (similar to the
 \hologo{AmSLaTeX} environments) you have to define it separately.
 \begin{minted}{latex}
 \NewDocumentEnvironment{king}{moo} { ... } { ... }
@@ -309,11 +309,11 @@ While this makes one of the \carg{at begin}, \carg{at end} arguments redundant,
 they are still required. (In the example above we provided an empty \carg{at
   end}.)
 
-Do not overuse \cargv{+b} as this will both make the environments subject to
-some limitations (e.g.\ \csi{verb} will not be allowed inside) and slow down the
+Do not overuse \cargv{+b} as this will both add limitations to the environments
+like \csi{verb} not being allowed inside and it will slow down the
 typesetting.
 
-Similarly to the \csi{NewDocumentCommand} \LaTeX{} makes sure that you do not
+Similar to the \csi{NewDocumentCommand}, \LaTeX{} makes sure that you do not
 define an environment that already exists. If you ever want to change an
 existing environment, use the \csi{RenewDocumentEnvironment} command. Its
 arguments are the same as the \csi{NewDocumentEnvironment} command.
@@ -890,7 +890,7 @@ do so using the
 \begin{lscommand}
   \csi{newfontfamily}[command: M, options: o, font: m]
 \end{lscommand}
-It defines new \carg{command} that works analogously to the \csi{rmfamily} or
+It defines new \carg{command} that works like to the \csi{rmfamily} or
 \csi{sffamily} commands.
 \begin{example}
 \newfontfamily{\sourcefamily}[
@@ -905,7 +905,7 @@ This is especially useful when working with multiple languages as you have
 already seen in \autoref{sec:polyglossia}.
 
 The \csi{newfontfamily} checks whether the font family is already defined and
-raises an error if it is. Similarly to \autoref{sec:new_commands} the
+raises an error if it is. As in \autoref{sec:new_commands} the
 \csi{renewfontfamily} and \csi{providefontfamily} are available if you want to
 redefine existing font families.
 
@@ -1197,7 +1197,7 @@ preamble. This will produce warnings when redefinition happens.
 
 If you want to make sure a colour is present but don't want to redefine it if it
 already exists then \csi{providecolor} does exactly that. There is also
-\csi{colorlet} that simply creates a copy of a given colour similarly to the
+\csi{colorlet} that simply creates a copy of a given colour similar to the
 \csi{NewCommandCopy} command.
 
 Colours defined in different models may need to be converted when mixing them.
