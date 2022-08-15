@@ -270,7 +270,6 @@ same manner as \csi{fancyf}, but they only modify the header and footer respecti
 %$$ with the bulk of the rest of the document.
 
 The default footer of the article class contains the current page number. To
-%$$ Added comma after 'header'. Also 'simply' might be superfluous.
 use it inside the fancy header, simply use the command \csi{thepage}.
 \begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -288,9 +287,7 @@ dedicated to themselves.
 \end{example}
 
 It is often useful to have the header and footer contain information based on
-%$$ Changed 'contents' to 'content' (uncountable noun in this context).
 the content of the page. These are called \enquote{marks} in \LaTeX{}
-%$$ Added comma after 'ones'. Language and abbreviations are informal, here.
 terminology. Before we talk about the default ones, let's consider how you can
 define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
   of \pai*{fancyhdr}.} package.
@@ -301,12 +298,9 @@ define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
   \csi{lastleftxmark} \\
   \csi{lastrightxmark}
 \end{lscommand}
-%$$ Changed 'is used to set' to just 'sets'.
 The \csi{extramarks} command sets the contents of \carg{left} and \carg{right}
-%$$ Changed 'Then you can' to 'You can then'.
 marks. Then you can access these marks inside the headers by using the appropriate
 command. The \texttt{first}- commands refer to the first mark occurring on the
-%$$ Added 'commands' after \texttt{last}-, because still needs to be a plural.
 page, while the \texttt{last}- refer to the last one.
 \begin{example}[standalone, paperheight=4cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -332,7 +326,6 @@ The first statement is false.
 \end{example}
 
 Let us now look at the default marks defined by \LaTeX{}. After loading
-%$$ Added comma after '\pai{extramarks}'.
 \pai{extramarks}, these may be set and accessed similarly:
 \begin{lscommand}
   \csi{markboth}[left:m, right:m] \\
@@ -342,15 +335,10 @@ Let us now look at the default marks defined by \LaTeX{}. After loading
   \csi{lastrightmark}
 \end{lscommand}
 The only difference between these and the extra marks is that \LaTeX{} classes
-%$$ Long sentence. Changed 'them, so' to 'them. Hence,'.
-%$$ Added a comma after 'careful'.
-%$$ Furthermore, does 'them' mean 'these' (as opposed to the extra marks)?
 automatically fill them. Hence, if you are not careful, you may lose your
-%$$ Removed whitespace between 'content.' and the footnote.
 content.\footnote{You may prevent this by setting the pagestyle to
 \cargv{myheadings} and then redefining it to use it with \pai{fancyhdr} as
 described later.}
-%$$ Added comma after 'for example'.
 For example, in the article class, \carg{left} is set by the \csi{section}
 command, while \carg{right} is set by the \csi{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
@@ -372,14 +360,11 @@ command, while \carg{right} is set by the \csi{subsection} command.
 \end{document}%!hide
 \end{example}
 Note that \csi{firstrightmark} is empty in the above example. This is caused by
-%$$ Changed 'set' to 'sets', to avoid the double plural with 'commands'.
 the fact that \csi{section} commands set both marks, leaving the right one
 empty.
 
 You may have noticed that section titles are typeset in uppercase when provided
-%$$ Consider "`marks'" or "``marks''" or "mark" or -\texttt{mark} instead of
-%$$ "marks" (in 'marks commands', on the next line).
-by marks commands. To disable this use the \csi{nouppercase} command inside the
+by -\texttt{mark} commands. To disable this use the \csi{nouppercase} command inside the
 \csi{fancyhf} command.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -400,9 +385,7 @@ is opposite day.
 
 \subsection{Advanced commands}
 
-%$$ Changed 'the section titles' to 'section titles,'.
-%$$ Consider 'can' instead of 'may', the latter suggests permission to do so.
-If you want even more control over section titles, you may redefine the
+If you want even more control over section titles, you can redefine the
 \csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
 command receives the section title as its first argument, while the section
 number is available as \csi{thesection}.
