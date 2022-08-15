@@ -41,7 +41,7 @@ introduction will only explain the basic index generation commands.
 For a more in-depth view, please refer to \companion.\index{makeindex
   program}\index{makeidx package}
 
-To enable their indexing feature of \LaTeX{}, the \pai{makeidx} package
+To enable the indexing feature of \LaTeX{}, the \pai{makeidx} package
 must be loaded in the preamble with
 \begin{lscommand}
   \mintinline{latex}|\usepackage{makeidx}|
@@ -87,10 +87,10 @@ page number, to a special file. The file has the same name as the
 \LaTeX{} input file, but a different extension (\verb|.idx|). This
 \eei{.idx} file can then be processed with the \texttt{makeindex}
 program:
-
 \begin{lscommand}
   \texttt{makeindex} \emph{filename}
 \end{lscommand}
+
 The \texttt{makeindex} program generates a sorted index with the same base
 file name, but this time with the extension \eei{.ind}. If now the
 \LaTeX{} input file is processed again, this sorted index gets
@@ -101,7 +101,8 @@ included into the document at the point where \LaTeX{} finds
 
 The \pai{showidx} package that comes with \LaTeX{} prints out all
 index entries in the left margin of the text. This is quite useful for
-proofreading a document and verifying the index.
+proofreading a document and verifying the index. Make sure to load the package
+afer the \pai{hyperref} package. 
 
 Note that the \csi{index} command can affect your layout if not used carefully.
 
@@ -113,7 +114,7 @@ position of the full stop.
 \end{example}
 \end{chktexignore}
 
-\texttt{makeindex} has no clue about characters outside the ASCII range. To
+Note that the texttt{makeindex} has no clue about characters outside the ASCII range. To
 get the sorting correct, use the \verb|@| character as shown in the K\"ase
 and \'ecole examples above.
 
@@ -121,12 +122,16 @@ and \'ecole examples above.
 
 \subsection{Basic commands}
 
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
 The \pai*{fancyhdr} package provides a few simple commands that allow you to
 customise the header and footer lines of your document. It defines an
-additional page style \cargv{fancy} and a set of commands to customise it to our liking. By
-default it only adds a line separating the header from the page body.
+additional page style \cargv{fancy} and a set of commands to customise it to
+your liking. By default, it only adds a line separating the header from the page
+body.
 \begin{example}[standalone, paperheight=3cm]
-\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide 
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 %!showbegin %!hide
 \documentclass{article}
 
@@ -147,17 +152,17 @@ The primary command of the package is
 The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
 combination of three letters:
 \begin{itemize}
-  \item The first specifies whether the location is in the header (\cargv{H}) or in the
-        footer (\cargv{F}).
-  \item The second letter specifies the location within the header\slash{}footer: \cargv{L} for left, \cargv{C} for centre and
-        \cargv{R} for right.
+  \item The first specifies whether the location is in the header (\cargv{H}) or
+        in the footer (\cargv{F}).
+  \item The second letter specifies the location within the header or footer:
+        \cargv{L} for left, \cargv{C} for centre, and \cargv{R} for right.
   \item The third letter defines whether the field should be printed on even
-        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided then
-        all pages are treated as odd.
+        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided,
+        then all pages are treated as odd.
 \end{itemize}
-So for example the combination \cargv{FCE} identifies the centre part of the
-footer on even pages. If any of the letters is omitted then the identifier
-points toward all positions specifiable by the omitted letter, so for example
+For example, the combination \cargv{FCE} identifies the centre part of the
+footer on even pages. If any of the letters is omitted, then the identifier
+points toward all positions specifiable by the omitted letter. For example,
 \cargv{HR} is right side of the header on both odd and even pages.
 \begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
 \documentclass[twoside]{article}
@@ -172,7 +177,7 @@ points toward all positions specifiable by the omitted letter, so for example
     footskip=1em
 ]{geometry}
 %!hideend
-\usepackage{fancyhdr} 
+\usepackage{fancyhdr}
 \pagestyle{fancy}
 
 \fancyhf[HCE]{A}
@@ -187,9 +192,9 @@ The previous statement is true.
 \end{document}
 \end{example}
 
-There are two additional commands \csi{fancyhead} and \csi{fancyfoot} that work
-the same way except that they assume \cargv{H} and \cargv{F} respectively
-in their \carg{places} argument unless specified differently.
+There are two additional commands, \csi{fancyhead} and \csi{fancyfoot}, that
+work in the same way, except that they respectively assume \cargv{H} and
+\cargv{F} in their \carg{places} argument, unless otherwise specified.
 \begin{example}[standalone, paperheight=3.5cm]
 \geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -210,7 +215,8 @@ to its own quotation.
 \end{example}
 
 The lines drawn by the \pai{fancyhdr} package may also be customised. To change
-their thickness redefine the
+%$$ Inserted comma after 'thickness'.
+their thickness, redefine the
 \begin{lscommand}
   \csi{headrulewidth} \\
   \csi{footrulewidth}
@@ -230,12 +236,16 @@ Do not read this sentence.
 \end{document}%!hide
 \end{example}
 
-By default headers and footers are as long as the text on the page. If you want
-to extend\slash{}shorten them use the
+%$$ Inserted comma after 'default'.
+By default, headers and footers are as long as the text on the page. If you want
+%$$ Changed 'extend\slash{}shorten' to 'extend or shorten'.
+%$$ Added comma after 'them'.
+to extend\slash{}shorten them, use the
 \begin{lscommand}
   \csi{fancyhfoffset}[places: o, offset: m]
 \end{lscommand}
-command. The \carg{places} argument is the same as in \csi{fancyhf} except that
+%$$ Added comma after \csi{fancyhf}.
+command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
 it cannot contain \cargv{C}.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -256,8 +266,11 @@ used the same way as \csi{fancyf}, but they only modify header or footer respect
 
 \subsection{Contents of the headers}
 
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
 The default footer of the article class contains the current page number. To
-use it inside the fancy header simply use the command \csi{thepage}.
+use it inside the fancy header, simply use the command \csi{thepage}.
 \begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -269,13 +282,13 @@ use it inside the fancy header simply use the command \csi{thepage}.
 \noindent %!hide
 This statement is dedicated to
 all statements that are not
-dedicated to themselves. 
+dedicated to themselves.
 \end{document}%!hide
 \end{example}
 
 It is often useful to have the header and footer contain information based on
-the contents of the page. These are called \enquote{marks} in \LaTeX{}
-terminology. Before we talk about the default ones let's consider how you can
+the content of the page. These are called \enquote{marks} in \LaTeX{}
+terminology. Before we talk about the default ones, let's consider how you can
 define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
   of \pai*{fancyhdr}.} package.
 \begin{lscommand}
@@ -285,7 +298,7 @@ define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
   \csi{lastleftxmark} \\
   \csi{lastrightxmark}
 \end{lscommand}
-The \csi{extramarks} command is used to set the contents of \carg{left} and \carg{right}
+The \csi{extramarks} command sets the contents of \carg{left} and \carg{right}
 marks. Then you can access these marks inside the headers by using the appropriate
 command. The \texttt{first}- commands refer to the first mark occurring on the
 page, while the \texttt{last}- refer to the last one.
@@ -313,7 +326,7 @@ The first statement is false.
 \end{example}
 
 Let us now look at the default marks defined by \LaTeX{}. After loading
-\pai{extramarks} these may be set and accessed similarly:
+\pai{extramarks}, these may be set and accessed similarly:
 \begin{lscommand}
   \csi{markboth}[left:m, right:m] \\
   \csi{firstleftmark} \\
@@ -322,10 +335,11 @@ Let us now look at the default marks defined by \LaTeX{}. After loading
   \csi{lastrightmark}
 \end{lscommand}
 The only difference between these and the extra marks is that \LaTeX{} classes
-automatically fill them, so if you are not careful you may lose your content.
-\footnote{You may prevent this by setting the pagestyle to \cargv{myheadings}
-  and then redefining it to use it with \pai{fancyhdr} as described later.}
-For example in the article class, \carg{left} is set by the \csi{section}
+automatically fill them. Hence, if you are not careful, you may lose your
+content.\footnote{You may prevent this by setting the pagestyle to
+\cargv{myheadings} and then redefining it to use it with \pai{fancyhdr} as
+described later.}
+For example, in the article class, \carg{left} is set by the \csi{section}
 command, while \carg{right} is set by the \csi{subsection} command.
 \begin{example}[standalone, paperheight=5cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -346,12 +360,12 @@ command, while \carg{right} is set by the \csi{subsection} command.
 \end{document}%!hide
 \end{example}
 Note that \csi{firstrightmark} is empty in the above example. This is caused by
-the fact that \csi{section} commands sets both marks, leaving the right one
+the fact that \csi{section} commands set both marks, leaving the right one
 empty.
 
-You may have noticed that section titles are typeset in uppercase when provided by
-marks commands. To disable this use the \csi{nouppercase} command inside the \csi{fancyhf}
-command.
+You may have noticed that section titles are typeset in uppercase when provided
+by -\texttt{mark} commands. To disable this use the \csi{nouppercase} command inside the
+\csi{fancyhf} command.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -368,9 +382,10 @@ is opposite day.
 \end{document}%!hide
 \end{example}
 
+
 \subsection{Advanced commands}
 
-If you want even more control over the section titles you may redefine the
+If you want even more control over section titles, you can redefine the
 \csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
 command receives the section title as its first argument, while the section
 number is available as \csi{thesection}.
@@ -395,8 +410,8 @@ everybody is reading this.
 \end{example}
 If you only want to change the right mark, use the \csi{markright} command.
 
-By default the field in the centre of the header\slash{}footer will expand equally
-to the left and to the right. This is usually the desired behaviour but in some
+By default, the field in the centre of the header or footer will expand equally
+to the left and right. This is usually the desired behaviour, but in some
 cases it may overlap with either left or right text, while still having some
 space on the other side.
 \begin{example}[standalone, paperheight=3cm]
@@ -418,12 +433,12 @@ In this situation you may want to use the
 \begin{lscommand}
   \csi{fancycenter}[distance:o, stretch:o, left:m, centre:m, right:m]
 \end{lscommand}
-command that automatically shifts the centre toward the shorter text. The
-\carg{distance} is the minimal distance that the elements are always surrounded
-with (\cargv{1em} by default), while the \carg{stretch} controls the preference
-for shifting the \carg{centre}: \cargv{1} means shift only when- and as much
-as necessary, higher numbers will start shifting sooner and more aggressively,
-default is \cargv{3}. This command writes over the whole header\slash{}footer
+command, which automatically shifts the centre toward the shorter text. The
+\carg{distance} is the minimum distance by which the elements are always
+surrounded (\cargv{1em}, by default). The \carg{stretch} controls the preference
+for shifting the \carg{centre}; \cargv{1} means shift only when and as much
+as necessary. Higher numbers will start shifting sooner and more aggressively.
+The default is \cargv{3}. This command writes over the whole header\slash{}footer
 space so it should only be put in one place (typically \cargv{C}) and other
 places (\cargv{L,R}) should be empty.
 \begin{example}[standalone, paperheight=3cm]
@@ -446,7 +461,7 @@ Section by Jane Doe
 \end{document}%!hide
 \end{example}
 
-You may want to present different headers\slash{}footers when the corresponding
+You may want to present different headers or footers when the corresponding
 page starts with a float or ends with a footnote. The \pai{fancyhdr} package
 defines four commands that let you achieve this.
 \begin{lscommand}
@@ -455,10 +470,12 @@ defines four commands that let you achieve this.
   \csi{iffloatpage}[true branch:m, false branch:m] \\
   \csi{iffootnote}[true branch:m, false branch:m]
 \end{lscommand}
-\csi{iftopfloat}/\csi{ifbotfloat} execute \carg{true branch} if a float sits at
-the top\slash{}bottom of the page. Similarly \csi{iffloatpage} checks whether
-the page is special float-only page and \csi{iffootnote} checks if footnote is
-at the bottom of the page.
+Commands \csi{iftopfloat} and \csi{ifbotfloat} execute their \carg{true branch}
+if a float sits at the top or bottom of the page (respectively).
+
+Similarly, \csi{iffloatpage} checks whether
+the page is a special float-only page, while \csi{iffootnote} checks for a
+footnote at the bottom of the page.
 \begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -491,10 +508,10 @@ Ignore this footnote.%
 \end{document}%!hide
 \end{example}
 
-The lines in headers and footers are created by invoking \csi{headrule} and
-\csi{footrule} commands. If you want finer control over the lines consider
+The ruled lines in headers and footers are created by invoking \csi{headrule}
+and \csi{footrule} commands. If you want finer control over the lines, consider
 redefining these macros. Use \csi{headruleskip} and \csi{footruleskip} to raise
-or lower them if necessary.
+or lower them, if necessary.
 \begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
 \sloppy %!hide
@@ -516,16 +533,16 @@ nameable in under twenty words.
 \end{document} %!hide
 \end{example}
 
-While working on a longer document you may want to have several page styles for
-different occasions. You may also notice that some commands (for example
-\csi{chapter}, \csi{maketitle}) change the page style to \cargv{plain} whether
-you want it or not. The solution to both of these problems is the
+While working on a longer document, you may want to have several page styles for
+different occasions. You may also notice that some commands (\csi{chapter} and
+\csi{maketitle}, for example) change the page style to \cargv{plain}.
+The solution to both of these problems is the
 \begin{lscommand}
   \csi{fancypagestyle}[name:m, code:m]
 \end{lscommand}
 command. The \carg{name} is the name of page style to (re)define, while the %chktex 36
-\carg{code} is the code to set up the page style. All page styles declared this
-way use the \cargv{fancy} page style as its basis, so if empty \carg{code} is
+\carg{code} is the code to set the page style. All page styles declared this
+way use the \cargv{fancy} page style as their basis, so if empty \carg{code} is
 given they will match \cargv{fancy} exactly.
 \begin{example}[standalone, paperheight=3cm]
 \geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
@@ -545,6 +562,10 @@ Were you expecting a paradox here?
 You may be disappointed.
 \end{document}
 \end{example}
+%$$ I don't think I understand the above example.
+%$$ The connection between 'paradox' on the left, and 'disappointed' on the 
+%$$ right isn't obvious. Did I miss something?
+
 
 \section{Installing Extra Packages}\label{sec:Packages}
 
