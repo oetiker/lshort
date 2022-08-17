@@ -561,9 +561,6 @@ Were you expecting a paradox here?
 You may be disappointed.
 \end{document}
 \end{example}
-%$$ I don't think I understand the above example.
-%$$ The connection between 'paradox' on the left, and 'disappointed' on the 
-%$$ right isn't obvious. Did I miss something?
 
 \section{Installing Extra Packages}\label{sec:Packages}
 
@@ -579,7 +576,7 @@ package. You should of course read this file first.
 
 In any event, once you have copied the package files onto your
 machine, you still have to process them in a way that (a) tells your
-\TeX\ distribution about the new style package and (b) gives you
+\TeX\ distribution about the new style package, and (b) gives you
 the documentation.  Here's how you do the first part:
 
 \begin{enumerate}
@@ -697,7 +694,7 @@ examples. While this makes the links more visually appealing, it has the
 disadvantage that the coloured links will be printed. To marry the best of both
 worlds you can use the \pai*{ocgx2} package with the option
 \cargv{ocgcolorlinks} like this
-\begin{code}  
+\begin{code}
 \begin{minted}{latex}
 \usepackage{hyperref}
 \usepackage[ocglinks]{ocgx2}
@@ -954,7 +951,7 @@ omitted in the previous example.
   Interesting title}{%
   Even more interesting
   subtitle}
-  
+
   Not so interesting contents.
 \end{frame}
 \end{document} %!hide
@@ -1217,7 +1214,7 @@ relevant if you use high-resolution display for presentation. You can pass
 \begin{frame}{Is serif better?}
   Often repeated assertion is
   that serif fonts are easier
-  to read on paper, however, 
+  to read on paper, however,
   this is not scientifically
   confirmed.
 \end{frame}
@@ -1344,7 +1341,7 @@ specifications can be specified by separating them using \cargv{|}~(vertical
 bar). If no mode is specified,
 \cargv{beamer} mode is assumed.
 \begin{example}[
-  template=empty, 
+  template=empty,
   vertical_mode,
   to_page=2,
   paperheight=3cm,
@@ -1379,7 +1376,7 @@ slide that is not included when compiling the document. An example of doing so
 is presented in \autoref{lst:zero_slides}.
 \begin{listing}
   \begin{example}[
-    template=empty, 
+    template=empty,
     vertical_mode,
     to_page=2,
     paperheight=3cm,
