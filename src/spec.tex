@@ -904,25 +904,31 @@ command would be
   standalone,
 }
 
-\TeX{} and \LaTeX{} were primarily designed for creating text documents and
+\TeX{} and \LaTeX{} were primarily designed for creating text documents, and
 that is where they shine. Still, it is also possible to use them for creating
-presentations, but these presentations will lack fancy animations and
-transitions---they are just cleverly set up PDF files after all. But on the
-plus side, you will be able to tap into the strengths of \LaTeX{} such as
-logical markup, math typesetting and all the typesetting magic provided by the
-various \LaTeX{} extension packages.
+presentations. These lack fancy animations and transitions---they are just
+%$ 'lack fancy animations' - not entirely true, with some effort and JavaScript.
+%$ animation package: https://ctan.org/pkg/animate
+%$ and: https://tex.stackexchange.com/questions/22412/beamer-transition-effect
+cleverly set up PDF files, after all. But on the plus side, you will be able to
+tap into the strengths of \LaTeX{} such as logical markup, mathematical
+typesetting and all the typesetting magic provided by the various \LaTeX{}
+extension packages.
 
-Historically there have been several ways to create presentations, for example
-the standard \LaTeX{} \cli{slides} class or the \pai{powerdot} package. While
-these are still supported, this booklet will focus on the \pai*{beamer} package
-which is the most popular option these days. This section will only scratch the
+Historically, there have been several ways to create presentations; for example,
+the standard \LaTeX{} \cli{slides} class, or the \pai{powerdot} package. While
+these are still supported, this booklet will focus on the \pai*{beamer} package,
+which is the most popular option these days. This section only scratches the
 surface of \pai{beamer}'s capabilities. For a more in-depth tutorial please see
-the User Guide~\cite{pack:beamer} distributed with it.
+the User Guide~\cite{pack:beamer} distributed with \pai{beamer}.
 
 \subsection{Basic Usage}
 
 The \pai{beamer} package provides the \cli{beamer} class, which loads all the
 necessary packages. The most basic environment is the \ei{frame} environment
+%$ consider 'fundamental' instead of 'most basic', and the 'environment' after
+%$ 'frame' may be redundant, since the beginning of the sentence has already
+%$ identified 'frame' as an environment.
 which adds a single page to your presentation.\footnote{Other presentation
   software often uses the term \enquote{slide} instead of frame, but slides are
   a slightly different concept in \pai{beamer}.}
@@ -937,13 +943,13 @@ which adds a single page to your presentation.\footnote{Other presentation
 \end{frame}
 \end{document}
 \end{example}
-The full syntax of the \ei{frame} is actually
+The full syntax of the \ei{frame} is
 \begin{lscommand}
   \ei*{frame}[options: o, title: m, subtitle: m]
 \end{lscommand}
-Where \carg{options} is a key value list of options applied to the frame while
+where \carg{options} is a key--value list applied to the frame, while
 \carg{title} and \carg{subtitle} are displayed at the top of the slide. Despite
-the curly brackets these are actually optional arguments and have been
+the curly brackets, these are optional arguments and have been
 omitted in the previous example.
 \begin{example}
 \begin{document} %!hide
@@ -959,9 +965,9 @@ omitted in the previous example.
 The title and subtitle can also be specified using the \csi{frametitle} and
 \csi{framesubtitle} commands.
 
-As in the standard classes you can specify title, author and date in the preamble
-using the \csi{title}, \csi{author} and \csi{date} commands. The
-\csi{maketitle} will then use theses settings to create a title frame.
+As in the standard classes, you can specify a title, author and date in the preamble
+by using the \csi{title}, \csi{author} and \csi{date} commands. The
+\csi{maketitle} command uses these settings to create a title frame.
 \begin{example}
 \author{Jane Doe}
 \title{Interesting Title}
@@ -972,12 +978,12 @@ using the \csi{title}, \csi{author} and \csi{date} commands. The
 \maketitle
 \end{document} %!hide
 \end{example}
-Additionally \csi{subtitle}, \csi{institute} and \csi{titlegraphic} are
+Additionally, \csi{subtitle}, \csi{institute} and \csi{titlegraphic} are
 available to add extra information to the title frame. The \csi{date} is often
 repurposed to hold the conference name, since it is more informative than the
 exact date. Some themes (discussed later) display these fields on each slide.
 If you find that they are too long for such use, you may specify shorter
-versions via the optional argument like this:
+versions via an optional argument, like this:
 \begin{minted}{latex}
   \title[Short Title]{A Title That Is Too Long}
 \end{minted}
@@ -1007,9 +1013,10 @@ properly hyperlinked entries.
 \end{document} %!hide
 \end{example}
 
-\cli{beamer} provides special commands for emphasising information on the slide:
-the \csi{alert} command typesets its argument using a bright red colour, the
-\ei{block} environment displays its contents with a title and separated from
+%$ Should this be \pai{beamer}?
+\cli{beamer} provides special commands for emphasising information on the slide.
+The \csi{alert} command typesets its argument using a bright red colour. The
+\ei{block} environment displays its contents with a title and separation from
 the rest of the text.
 \begin{example}
 \begin{document} %!hide
@@ -1028,12 +1035,13 @@ Here we will talk about
 \end{frame} %!hide
 \end{document} %!hide
 \end{example}
-Beamer redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded
-  automatically by \cli{beamer}.} environments, such as \ei{theorem} or
-\ei{proof} to also produce blocks.
+%$ Previously just said 'Beamer' here. Changed for consistency with section.
+\pai{beamer} redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded
+  automatically by \cli{beamer}.} environments, including \ei{theorem} and
+\ei{proof}, to also produce blocks.
 
 You will find that most of the \LaTeX{} commands and environments, such as
-\cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable
+\cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable %$ \pai instead of \cli?
 exception is the verbatim input and similar constructs described in
 \autoref{sec:code_listings}. Using them requires you to pass the
 \cargv{fragile} option to the frame options.
@@ -1052,14 +1060,16 @@ Hello!
 
 \subsection{Overlay Specification}
 
-So far, the created frames were very static---they showed all of their contents
+So far, our frames have been static---they show all of their contents
 at once. It is, however, possible to show a frame piece-wise, in order to not
-overwhelm an audience with lots of information.
+overwhelm an audience with too much information.
 
-The simplest way to do so is the \csi{pause} command. It splits the frame so
-that the content before the pause is present on the previous page while the
-rest of the frame is present on the next page. These partial frames are called
+The simplest way to do this is the \csi{pause} command. It splits the frame so
+that the content before the pause is presented on the previous page, while the
+rest of the frame is presented on the next page. These partial frames are called
 slides.
+%$ consider 'previous' and 'current', or 'current' and 'next', but maybe not
+%$ 'previous' and 'next' since that leaves the current page blank.
 \begin{example}[
   vertical_mode,
   to_page=3,
@@ -1074,15 +1084,17 @@ slides.
 \end{frame}
 \end{document} %!hide
 \end{example}
-When presenting this will give an effect of revealing the sentences one by one.
+While presenting, this has the effect of revealing sentences one by one.
+%$ Not, strictly speaking, sentences. Statements?
 
+%$ Consider simply 'A more powerful splitting command is', or similar.
 If the \csi{pause} command is not enough for you, a more powerful variant
-exist:
+exists:
 \begin{lscommand}
   \csi{onslide}[<«\bs carg{overlay specification}»>: c]
 \end{lscommand}
-The \carg{overlay specification} argument specifies at which slides should the
-contents appear at. It may be a single number (slides start at 1), a range of
+The \carg{overlay specification} argument specifies which slides the contents
+should appear on. It may be a single number (slides start at 1), a range of
 numbers (separated by \cargv{-}) or a comma delimited list of the two.
 \begin{chktexignore}
 \begin{example}[
@@ -1100,12 +1112,14 @@ numbers (separated by \cargv{-}) or a comma delimited list of the two.
 \end{document} %!hide
 \end{example}
 \end{chktexignore}
+%$ 'together with a counter' superfluous.
+%$ Alt. 'Internally, the \csi{pause} command uses \csi{onslide} with a counter'
 The \csi{pause} command uses \csi{onslide} internally together with a counter,
-so these can be mixed together as desired, though care is required to set the
-slide numbers correctly.
+so these can be mixed together as desired (although care is required to set the
+slide numbers correctly).
 
 A similar command is \csi{uncover}. It accepts the same optional \carg{overlay
-  specification} argument but only applies it to its mandatory argument.
+  specification} argument, but only applies it to its mandatory argument.
 \begin{chktexignore}
 \begin{example}[
   vertical_mode,
@@ -1127,8 +1141,9 @@ many more preexisting commands and environments that are extended by
 \pai{beamer} to support them. Refer to its User Guide~\cite{pack:beamer} for
 more examples.
 
-By default the contents that are not uncovered are not shown at all. If you
-don't want to have a lot of empty space on your slides or you prefer not to
+%$ 'not shown at all' untrue; does get shown eventually.
+By default, content remains invisible until uncovered. If you
+don't want a lot of empty space on your slides, or if you prefer not to
 surprise your audience, you may adjust this behaviour to typeset the covered
 text as transparent. To do so, use the \csi{setbeamercovered} with the
 \cargv{transparent} option.
@@ -1149,8 +1164,9 @@ text as transparent. To do so, use the \csi{setbeamercovered} with the
 \end{frame}
 \end{document} %!hide
 \end{example}
-There are other possible arguments to these commands. For example, the
-\cargv{dynamic} argument makes the text more transparent the later it is
+%$ No mention any of 'the other possible arguments' besides 'dynamic'.
+Among the other possible arguments to these commands, \cargv{dynamic} makes the
+text increasingly transparent the later it is
 shown.\footnote{The effect is amplified a bit in the below example, so it is
   more visible. The default variant works better when there are more
   \csi{pause}s.}
@@ -1199,13 +1215,13 @@ predefined set of themes that alter the style and colours of the presentation.
 \end{document} %!hide
 \end{example}
 The full list of available themes can be viewed
-at~\cite{AnotherBeamerThemeMatrix}.
+at reference~\cite{AnotherBeamerThemeMatrix}.
 
 The \csi{usefonttheme} command can be used in a similar fashion. By default the
-text in frames is typeset using sans serif font. This choice makes sense,
+text in frames is typeset using a sans serif font. This choice makes sense,
 because it is easier to read on lower resolution projectors, but is less
-relevant if you use high-resolution display for presentation. You can pass
-\cargv{serif} option to switch to default \LaTeX{} font.
+relevant when using a high-resolution display. You can pass the \cargv{serif}
+option to \csi{usefonttheme} to switch to the default \LaTeX{} font.
 \begin{example}
 \usefonttheme{serif}
 % ...
@@ -1221,16 +1237,17 @@ relevant if you use high-resolution display for presentation. You can pass
 \end{document} %!hide
 \end{example}
 
-More granular customisation is also possible using the
+%$ Use 'fine grained' or 'coarse grained'; 'more granular' is ambiguous.
+Greater customisation is possible using the
 \begin{lscommand}
   \csi{setbeamerfont}[element: m, attributes: m] \\
   \csi{setbeamercolor}[element: m, attributes: m]
 \end{lscommand}
 commands. The \carg{element} argument is the element to which the customised
-font or colour should be applied, while the \carg{attributes} specify the
-attributes such as \cargv{size}, \cargv{shape} or \cargv{family} for fonts, and
-\cargv{fg} (foreground) or \cargv{bg} (background) for colours. Fonts are
-further discussed in \autoref{sec:fontspec}, while colours are touched upon in
+font or colour should be applied, while the \carg{attributes} specifies font
+attributes, such as \cargv{size}, \cargv{shape} and \cargv{family}, and the
+foreground and background colours, \cargv{fg} (and \cargv{bg}. Fonts are
+further discussed in \autoref{sec:fontspec}, while colours are covered in
 \autoref{sec:colors}.
 \begin{example}
 \setbeamercolor{frametitle}{
@@ -1253,12 +1270,12 @@ further discussed in \autoref{sec:fontspec}, while colours are touched upon in
 \end{document} %!hide
 \end{example}
 
-The default math font of \LaTeX{} is meant to typeset it in serif fonts. While
-\pai{beamer} tries to adapt it by using the sans serif variables, not all
-symbols exist in sans serif version (for example, Greek letters), which looks
-silly at times. It is best to switch to a sans serif math font and matching
-text font if your presentation is math heavy. Switching math fonts is described
-further in \autoref{sec:math_fonts}.
+By default, \LaTeX{} typesets mathematics in serif fonts.
+When \pai{beamer} attempts the same typesetting in a sans serif font, not all
+symbols may exist (Greek letters, for example).
+If you presentation is mathematically heavy, it may be best to switch to a
+sans serif math font and matching text font.
+Switching math fonts is described further in \autoref{sec:math_fonts}.
 \begin{example}
 \usepackage{unicode-math}
 \setsansfont{Fira Sans}
@@ -1278,13 +1295,16 @@ next to the Latin ones.
 \end{document} %!hide
 \end{example}
 
-By default, \pai{beamer} typesets the slides onto \(4 : 3\) pages. If your
-projector uses other aspect ratio, you may prefer to change it accordingly. You
-may do so by passing the \cargv{aspectratio} to the \cs{documentclass} options.
-It accepts a single integer that encodes the desired ratio, for example
+%$ earlier: 'slides are a slightly different concept in beamer'.
+%$ Slides are rendered onto 4 : 3 ..., but not just slides.
+By default, \pai{beamer} typesets onto \(4 : 3\) aspect-ratio pages. If the
+%$ not 'it'; could refer to changing the projector
+projector uses some other aspect ratio, you may prefer to match. You
+may do so, by passing an \cargv{aspectratio} to the \cs{documentclass} options.
+It accepts a single integer that encodes the desired ratio. For example,
 \cargv{169} is interpreted as \(16:9\), while \cargv{54} is interpreted as
 \(5:4\). Wider ratios are especially useful if you want to include a sidebar
-with the table of contents into your slides.
+with the table of contents on your slides. %$ 'include' and 'on', or 'incorporate' and 'into'
 \begin{example}[paperwidth=8cm]
 %!showbegin !hide
 \documentclass[
@@ -1301,11 +1321,12 @@ with the table of contents into your slides.
 
 \subsection{Handouts}
 
-One of the killer features of \pai{beamer} compared to other presentation
-software is the ability to easily create handouts directly from your source
-files. The simplest way to do so is to add the option \cargv{handout} to the
+%$ As much as I like this feature of Beamer, increasingly other software _is_
+%$ able to generate handouts. Maybe not as well, but in time...
+A feature of \pai{beamer} is the ability to easily create handouts.
+The simplest way to do this is to add the \cargv{handout} option to the
 \cs{documentclass} command. Doing so will make the \cli{beamer} class ignore
-all of the \csi{pause}s and similar commands to produce documents with fewer
+all of the \csi{pause}s, and similar commands, to produce documents with fewer
 pages.
 \begin{example}[template=empty]
 \documentclass[handout]{beamer}
@@ -1330,14 +1351,17 @@ pages.
 \end{frame}
 \end{document}
 \end{example}
-This mode is also useful while creating the presentation to preview the frames
-as a whole without seeking the last slide each time.
+This mode is also useful while creating a presentation, as it previews the
+frames as a whole without uncovering effects.
 
-Internally this effect is accomplished by using overlay specifications with
-modes. The default mode is \cargv{beamer}, while \cargv{handout} class option
-switches to \cargv{handout} mode. You can specify modes explicitly within
+%$ Suggest a review of this paragraph, for clarity.
+Internally, handout generation is accomplished by using overlay specifications
+with modes. %$ We haven't really talked about 'modes', is this a formal term?
+The default mode is \cargv{beamer}, while the \cargv{handout} option
+switches to \cargv{handout} mode. %$ repetition (of previous paragraph)
+You can specify modes explicitly within %$ an?
 overlay specification by passing \cargv{\carg{mode}:\carg{spec}}. Several mode
-specifications can be specified by separating them using \cargv{|}~(vertical
+specifications can be specified by separating them with \cargv{|}~(vertical
 bar). If no mode is specified,
 \cargv{beamer} mode is assumed.
 \begin{example}[
@@ -1369,11 +1393,22 @@ bar). If no mode is specified,
 \end{frame}
 \end{document}
 \end{example}
-Often you will want to show some parts only in one mode, for example to provide
+Often you will want to show some parts only in one mode; to provide
 additional commentary in handouts, or to hide things that only make sense
-during presentation. Doing so is easily achieved by using a special zeroth
-slide that is not included when compiling the document. An example of doing so
+during the presentation. This is easily achieved by using a special zeroth
+slide that is not included in the compiled document. An example of doing so
 is presented in \autoref{lst:zero_slides}.
+%$ Careful here: the slide is not included in the compiled (should that be
+%$ rendered?) document, but it _is_ included when _compiling_ the document.
+%$ In this example, the slide is omitted from the final PDF, but the graphic
+%$ file still needs to exist because the frame is still processed by beamer.
+%$\begin{frame}<0>
+%$\begin{tikzpicture}[remember picture,overlay]
+%$\node[at=(current page.center)]
+%$	{\includegraphics[width=0.95\paperwidth]{this_still_needs_to_exist.pdf}};
+%$\end{tikzpicture}
+%$\end{frame}
+%$ (end of example)
 \begin{listing}
   \begin{example}[
     template=empty,
@@ -1412,20 +1447,22 @@ is presented in \autoref{lst:zero_slides}.
     in handout.}\label{lst:zero_slides}
 \end{listing}
 \endgroup
+%$ Will this listing not fit side-by-side?
+%$ It occupies an entire A4 page in its current form.
 
-While handouts created this way are better compared to full blown presentation,
-they are still rather uneconomical, since the slide structure---with titles,
-lots of empty space and bright colours---is used. The \pai{beamer} package
-provides another way to create handouts---the \cargv{article} mode which, as
-the name suggests, will typeset the document in a fashion similar to a regular
-article. Due to much starker differences between layouts in these modes this
-may require more tweaking compared to the previous mode, but the result will be
-usually much better suited for an actual printed handout.
+Handouts created in this way still use the slide structure---titles, lots of
+empty space, and bright colours.
+As an alternative, the \cargv{article} mode will typeset the document in a
+fashion similar to a regular article. Due to the more pronounced differences
+between layouts, this may require more tweaking than the \cargv{handout} mode,
+but the result will often be much more suitable for a printed handout.
 
-Switching to the \cargv{article} mode is a bit different compared to other
-\pai{beamer} modes. Instead of passing class option, you simply replace the
-class altogether for an \cli{article} and use \pai{beamerarticle} package in
-your preamble. See \autoref{lst:article_mode} for an example. The
+%$ Strictly speaking, this is a LaTeX article with some beamer definitions.
+%$ Don't know that it's accurate to call this a 'beamer mode'.
+Switching to the \cargv{article} mode differs from switching to other
+\pai{beamer} modes. Rather than passing options to the class, the class is
+replaced by \cli{article} and the \pai{beamerarticle} is included in the
+preamble. See \autoref{lst:article_mode} for an example. The
 \pai{beamerarticle} package defines all of the \pai{beamer} commands and
 environments, so that they will produce sensible output in the article.
 \begin{listing}
@@ -1462,8 +1499,8 @@ environments, so that they will produce sensible output in the article.
 
 Because the concept of slides is not present in an article,\footnote{To be more
   precise, only contents of the first slide are typeset.} the overlay
-specifications will be generally useless. However the special zeroth slide
-works normally and can be similarly used to hide content from a given mode.
+specifications will be useless. However the special zeroth slide
+works normally and can be used to hide content.
 \begin{example}[standalone, paperheight=3cm]
 %!hidebegin
 \usepackage{beamerarticle}
@@ -1484,6 +1521,8 @@ works normally and can be similarly used to hide content from a given mode.
 \end{document} %!hide
 \end{example}
 
+%$ Paragraph needs some work; unclear what is being said.
+%$ You only get the <mode> slides when producing output of <mode>?
 Because the overlay specification is often used to provide contents for a
 single mode, there exist another way of specifying it for that purpose---if you
 provide only the mode name, this will be the same as setting all other modes to
@@ -1504,3 +1543,52 @@ results in a more readable code.
 \end{frame}
 \end{document} %!hide
 \end{example}
+
+
+%$ Realising this is not the comprehensive guide to LaTeX, here's a few titbits
+%$ that may or may not be useful and within scope:
+
+%$ To use the default theme, but without navigation symbols (in the preamble):
+%$ \beamertemplatenavigationsymbolsempty
+%$ No mention of how to disable these in the section.
+
+%$ The default font, Computer Modern, font does not support italicised sans-
+%$ serif fonts (at least, not in bold or semi-bold anyway, but I think in
+%$ general). This means all your emphasised text renders in Roman upright,
+%$ same as everything else. The Latin Modern font does support emphasised
+%$ sans serif. In the preamble again:
+%$ \usepackage{lmodern}
+
+%$ Latin Modern's font weight is a little light for my liking, while its bold
+%$ is very bold indeed (technically, it's a bold extended (wide) font). What we
+%$ want, is something in between. In the case of Latin Modern, we have a
+%$ semi-bold condensed (sbc) variant, which we now set as the default style for
+%$ the structure element. This is inherited by everything else; normal text,
+%$ altered text, block titles, enumerators, and so on. In the preamble:
+%$ \setbeamerfont{structure}{size=\normalsize, series=\fontseries{sbc}}
+%$ \AtBeginDocument{\usebeamerfont{structure}}
+
+%$ To include external graphics files with TikZ, you may need to enable the
+%$ 'remember picture' and 'overlay' options, and process the document twice
+%$ (pictures will be incorrectly placed after the first run).
+%$ \begin{frame}[plain]
+%$ \begin{tikzpicture}[remember picture,overlay]
+%$ \node[at=(current page.center)]
+%$   {\includegraphics[width=1.01\paperwidth]{Art/picture.pdf}};
+%$ \node[text=blue,text width=0.5\paperwidth,align=right] at
+%$   ([xshift=0.25\paperwidth,yshift=-0.20\paperheight]current page.north)
+%$   {\large{\textbf{Overlaid Title}}};
+%$ \end{tikzpicture}
+%$ \end{frame}
+
+%$ Changing the frame title to a smaller but bold font, with an underline.
+%$ Again, the preamble.
+%$ \setbeamertemplate{frametitle}
+%$   {\bfseries\large\insertframetitle\par\vskip-6pt\color{black}\leavemode}
+%$ Adding \leaders\hrule height 0.6pt\hfill\kern0pt after \leavemode (and before
+%$ the } adds an underline. There are subtleties between LaTeX vs pdfTeX.
+
+%$ Changing the bullet-point vertical spacing, the markers, and their colour
+%$ can be accomplished by redefining Beamer's itemize environment, but it's
+%$ easier to create a new environment from scratch. Too long and specialised a
+%$ discussion for this booklet, I would think.
