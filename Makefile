@@ -33,6 +33,8 @@ indent:
 	latexindent -w -m -l .localSettings.yaml src/*.tex
 
 export TEXINPUTS::=src:src/examples:$(OUTPUT_DIR):$(TEXINPUTS)
+export VERS
+export GITHUB_SHA
 
 %.pdf: $(FILES) $(OUTPUT_DIR)
 	$(PDFLATEX) $(basename $@)
@@ -46,9 +48,6 @@ export TEXINPUTS::=src:src/examples:$(OUTPUT_DIR):$(TEXINPUTS)
 $(OUTPUT_DIR): src/lshort.bib
 	mkdir -p $(OUTPUT_DIR)
 	cp src/lshort.bib $(OUTPUT_DIR)/
-
-src/title.tex: Makefile fixdate.pl src/title.template.tex
-	perl fixdate.pl $(VERS) $(GITHUB_SHA) < src/title.template.tex > src/title.tex
 
 quick: $(FILES) $(OUTPUT_DIR)
 	$(PDFLATEX) $(PDFLATEX_DEBUG_ARGS) lshort
