@@ -113,19 +113,13 @@ between points may be specified in many ways, the simplest is
 \begin{tikzpicture}
   \draw (0, 0)
     -- (15:4)
-    -- (0, 2);
+    -- (1, 2);
 \end{tikzpicture}
-%$ consider maybe (1, 2) as the final point above, since the asymmetry then
-%$ allows the reader to identify the origin (0, 0), the direction of drawing,
-%$ and the direction of increasing y (since SVG et al have y increasing
-%$ downwards). Alternatively, changing the polar point to say (30:3) might
-%$ achieve the same thing
 \tikz{\draw (0, 0) -- (1,1);}
 \end{example}
 If you want to close the shape you are drawing, use \cargv{cycle} instead of
 repeating the first point. In addition to being clearer about the intention,
-it also produces a better looking line connection.
-%$ 'a properly mitred join'? Impressive example, by the way.
+it also produces a better looking line connection (a properly mitred join, as they say).
 \begin{example}[vertical_mode, examplewidth=0.75\linewidth]
 \begin{tikzpicture}
 \begin{scope}[spy using outlines={circle, magnification=15, size=1.2cm, connect spies}] %!hide
@@ -143,11 +137,8 @@ vs.\
 \end{example}
 
 The \csi{draw} command is just a shortcut to the more general \csi{path} command.
-The latter accepts a path in the same way, but
-%$ 'It' is ambiguous; I think you are referring to the \path command.
-an action
-%$ 'must' and 'optional' don't go together; some or other action is mandatory?
-must be specified as an argument. The \csi{draw} command simply
+The latter accepts a path in the same way, but an action
+must be specified in square brackets. The \csi{draw} command simply
 supplies the \cargv{draw} action. The \cargv{fill} action fills the area under
 the specified path. Multiple actions may be supplied.
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
@@ -184,8 +175,6 @@ a node, use the
 \begin{lscommand}
   \csi{node}[«{}» («\bs carg{name}») at «\bs carg{coordinate}» {«\bs carg{input}»};: c]
 \end{lscommand}
-%$ Standard English would be 'coordinates' (above & below), a coordinate being a
-%$ single scalar component of a point, but Tantau does say 'coordinate'.
 command. The \carg{name} argument is optional and enables you to use the
 \carg{name} as a shorthand for a node's coordinate.
 
@@ -253,8 +242,8 @@ order) as the connection between points.
 
 If you want to create curved lines, the simplest way is to use \ltx{to}
 between points. It works the same as \ltx{--}, but you can provide an optional
-argument, with \cargv{in} and \cargv{out} keys, to define the angles of
-the connection.%$'terminal angles'?
+argument, with \cargv{in} and \cargv{out} keys, to define the terminal angles of
+the connection.
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
 \tikzset{baseline} \vspace{-0.3cm} %!hide
 \tikz{\draw (0, 0) to[out=90, in=-90] (2, 0);}
@@ -281,8 +270,6 @@ used.
 
 If you need even finer control over the curves you, can use a
 \ltx{.. controls ..} connection to specify a Bézier curve with one
-%$ Bézier seems to work (I had no idea). Should we be using B\'ezier, or is that
-%$ so thirty years ago?
 or two control points.
 \begin{chktexignore}
 \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
@@ -317,8 +304,7 @@ receives its radius via the \cargv{radius} key. You can also specify \cargv{x
 \tikz{\draw (0, 0) circle[x radius=2, y radius=0.5];}
 \end{example}
 Many more shapes are available, such as \ltx{arc}, \ltx{parabola} or \ltx{sin}.
-Be sure to check out the documentation for the specifics of their use.
-%$ provide the reference again? it's been a while since we last saw it.
+Be sure to check out the documentation\cite{pack:pgf} for the specifics of their use.
 
 \section{Customizing Paths and Nodes}
 
@@ -406,7 +392,7 @@ passing the \cargv{circle} key to their options.
 \end{example}
 
 If you want to place multi-line text inside a node, you have to specify the
-\cargv{align} key; without it, new lines are ignored. Possible values %$ newlines?
+\cargv{align} key; without it, new lines are ignored. Possible values
 are \cargv{left}, \cargv{center} and \cargv{right}.
 \begin{example}
 \tikz{\node[draw, align=left]
@@ -548,8 +534,8 @@ Length and direction can be changed by using the \cargv{z} key. %$ no example
 
 Sometimes, it may be easier to specify a path by using coordinates relative to
 the previous point instead of absolute ones. To do so, prepend \ltx{++} to the
-coordinate, which will be interpreted as the previous specified point with the
-coordinate added. %$ 'as the previous point plus this vector'?
+coordinate, which will be interpreted as the previous specified point plus
+this vector.
 \begin{example}
 \begin{tikzpicture}[scale=2]
   \draw (0, 0) -- ++(0, 1) --
