@@ -38,6 +38,7 @@
 - add sections about changing math fonts / marcin-serwin
 - rewrite the beamer section / marcin-serwin
 - rewrite the graphics chapter to focus on TikZ / marcin-serwin
+- reviewed graphics chapter @rmrstar
 
 ## 6.4 2021.03.09
 

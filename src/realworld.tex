@@ -216,45 +216,6 @@ which allows hyphenation.  Normal
 Typesetting units, such as \unit[per-mode = symbol]{\mebi\byte\per\s}, will be
 described in \autoref{sec:units}.
 
-\section{The Euro Currency Symbol \texorpdfstring{(\officialeuro)}{}}
-
-When writing about money these days, you need the Euro symbol. Many current
-fonts contain a Euro symbol. To typeset it use the command
-\begin{lscommand}
-  \csi{texteuro}
-\end{lscommand}
-
-If your font does not provide its own Euro symbol or if you do not like the
-font's Euro symbol, you have two more choices:
-
-First the \pai{eurosym} package. It provides the official Euro symbol:
-\begin{lscommand}
-  \csi{usepackage}[official: vo, eurosym: m]
-\end{lscommand}
-If you prefer a Euro symbol that matches your font, use the option
-\texttt{gen} in place of the \texttt{official} option. Comparison of the
-available Euro symbols can be fount in \autoref{eurosymb}.
-
-\begin{table}
-  \caption[Available Euro symbols]{The appearance of available Euro symbols based
-    on the loaded package and the used font.}\label{eurosymb}
-  \begin{tabular}{@{}llccc@{}}
-    \toprule
-                   &                               & \multicolumn{3}{c}{Symbol used}                                             \\
-    \cmidrule(l){3-5}
-    Package        & Command                       & Roman                           & Sans serif                    & Monospace \\
-    \midrule
-    \emph{none}    & \csi{texteuro}                & \huge\texteuro{}                & \huge\sffamily\texteuro{}
-                   & \huge\ttfamily\texteuro{}                                                                                   \\
-    eurosym        & \csi{euro}                    & \huge\officialeuro{}            & \huge\sffamily\officialeuro{}
-                   & \huge\ttfamily\officialeuro{}                                                                               \\
-    {[gen]eurosym} & \csi{euro}                    & \huge\geneuro{}                 & \huge\sffamily\geneuro{}
-                   & \huge\ttfamily\geneuro{}                                                                                    \\
-    \bottomrule
-  \end{tabular}
-  \medskip
-\end{table}
-
 \section{Ellipsis (\ldots)}
 
 On a typewriter, a \wi{comma} or a \wi{period} takes the same amount of
