@@ -29,6 +29,16 @@
 }
 
 \begingroup
+\ExplSyntaxOn
+\NewDocumentCommand{\versionstring}{}{
+  \tl_if_empty:NTF \GITHUBSHA { % chktex 1
+    Version\nobreakspace\VERSION,~\today
+  } {
+    Nightly~version\nobreakspace\VERSION@\GITHUBSHA,~\today
+  }
+}
+\ExplSyntaxOff
+
 \setlength{\parindent}{0pt}
 \setlength{\topskip}{0pt}
 \vspace*{\stretch{1}}
@@ -59,7 +69,7 @@
     \end{center}
     \begin{flushright}
       \footnotesize
-      !versionplaceholder!
+      \versionstring{}
     \end{flushright}
   } % chktex 6
 }

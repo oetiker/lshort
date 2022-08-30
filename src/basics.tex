@@ -34,8 +34,9 @@
 \TeX{} is a computer program created by Donald E. Knuth\index{Knuth, Donald
   E.}~\cite{texbook}. The original program was aimed at typesetting text and
 mathematical formulae. Knuth started writing the \TeX{} typesetting engine in
-1977 to explore the potential of the digital printing equipment. These new devices were
-beginning to infiltrate the publishing industry at that time. His goal was to reverse the trend of deteriorating typographical
+1977 to explore the potential of digital printing equipment. These new devices
+were beginning to infiltrate the publishing industry at that time.
+His goal was to reverse the trend of deteriorating typographical
 quality that he saw affecting his own books and articles. The first stable
 version of \TeX{} was released in 1982. Version 3.0 was released in 1989 to
 better support 8-bit characters and multiple languages. Knuth considered the
@@ -47,12 +48,12 @@ to the \(\pi\) constant and is now at \(3.141592653\).
 \TeX{} is pronounced \enquote{Tech}, with a \enquote{ch} as in the German word
 \enquote{Ach}\footnote{In German there are actually two pronunciations for
   \enquote{ch} and one might assume that the soft \enquote{ch} sound from
-  \enquote{Pech} would be a more appropriate. When asked about this by one of the
-  German Wikipedia contributors, Knuth wrote:
+  \enquote{Pech} would be a more appropriate. When asked about this by one of
+  the German Wikipedia contributors, Knuth wrote:
   \textquote[\cite{germanwikiknuth}]{I do not get angry when people pronounce
-    \TeX{} in their favorite way\ldots{}and in Germany many use a soft ch because
-    the {\fontspec{cmunrm.otf}χ} follows the vowel e, not the harder ch that
-    follows the vowel a. In Russia, \enquote*{tex} is a very common word,
+    \TeX{} in their favorite way\ldots{}and in Germany many use a soft ch
+    because the {\fontspec{cmunrm.otf}χ} follows the vowel e, not the harder ch
+    that follows the vowel a. In Russia, \enquote*{tex} is a very common word,
     pronounced \enquote*{tyekh}. But I believe the most proper pronunciation is
     heard in Greece, where you have the harsher ch of ach and Loch.}} or in the
 Scottish \enquote{Loch}' The \enquote{ch} originates from the Greek alphabet
@@ -62,52 +63,52 @@ syllable of the Greek word technique. In an ASCII environment, \TeX{} becomes
 
 \subsection{Other \TeX{} engines}
 
-While the original \TeX{} engine is still fully functional and can be used to
+While the original \TeX{} engine is still fully functional, and can be used to
 typeset documents, some of the technical solutions it uses are now dated. Over
-the years the \TeX{} engine has been extended, introducing many new features.
+the years, the \TeX{} engine has been extended, introducing many new features.
 Due to the way \TeX{} is licensed, anyone is free to produce enhanced versions
-of \TeX{} but they must not call the program \TeX{} anymore. The first widely
+of \TeX{}, but they must not call the program \TeX{} anymore. The first widely
 popular enhanced version of \TeX{} was \hologo{eTeX}~\cite{etex}.
 
 The original program produced \eei{.dvi} files which were meant only to be sent
-to printer. With the proliferation of high resolution displays it became more
-common to read documents directly on screen without printing them. This
-prompted creation of another extension called \hologo{pdfTeX} which could
-produce standard PDF files. Yet another problem was the original font format
+to a printer. With the proliferation of high resolution displays, it became more
+common to read documents directly on-screen without printing them. This
+prompted creation of another extension, called \hologo{pdfTeX}, which could
+produce standard PDF files. Yet another problem was the original font format,
 which was not compatible with modern font formats. This was in turn solved in
 \hologo{XeTeX}.
 
-Today four \TeX{} engines are actively maintained: the original \TeX{},
+Today, four \TeX{} engines are actively maintained: the original \TeX{},
 \hologo{pdfTeX}, \hologo{XeTeX} and \hologo{LuaTeX}. This book recommends using
 either \hologo{XeTeX} or \hologo{LuaTeX}. The examples presented should produce
 the same results on both engines (except where otherwise noted). The basic
 examples will work with \hologo{pdfTeX}\footnote{The original \TeX{} will not
   work at all, because \LaTeX{} requires an \hologo{eTeX}-enabled engine since
   2017~\cite{etex-kernel}.} too, but we suggest to switch to \hologo{XeTeX} or
-\hologo{LuaTeX} from the start, to avoid complications down the road as you explore
-more advanced concepts.
+\hologo{LuaTeX} from the start, to avoid complications down the road as you
+explore more advanced concepts.
 
 \subsection{\LaTeX{}}
 
-\LaTeX{} is a set of macros\footnote{Macros are short names for long list of
-  instructions, that are created to avoid retyping the instructions each time
-  they are needed.} for the \TeX{} engine, \LaTeX{} was originally developed by
+\LaTeX{} is a set of macros\footnote{Macros are short names for long lists of
+  instructions, which are created to avoid retyping the instructions each time
+  they are needed.} for the \TeX{} engine. \LaTeX{} was originally developed by
 Leslie Lamport\index{Lamport, Leslie} for his own use. After some
-consideration he decided to make them more general so others could use them
-for their project. Thus in 1985 the first version of \LaTeX{} --- named
-\LaTeX{} 2.09 --- was released~\cite{manual}.
+consideration, he decided to make them more general so that others could use
+them for their own projects. Thus, in 1985, the first version of \LaTeX{} ---
+named \LaTeX{} 2.09 --- was released~\cite{manual}.
 
 The original \LaTeX{} became quite popular and promoted the creation of many
-extension packages. Unfortunately some of the more popular extensions were not
+extension packages. Unfortunately, some of the more popular extensions were not
 compatible with each other. \LaTeXe{} managed to unify many of the extensions,
 and also provided an extension packaging system, dealing with third party
-extensions on a standardised way.
+extensions in a standardised way.
 
-The same year when \LaTeXe{} was released, the \LaTeX3 project started. Its aim
-was to create improved standard for writing \LaTeX{} documents, fixing some of
+The same year \LaTeXe{} was released, the \LaTeX3 project was started. Its aim
+was to create improved standards for writing \LaTeX{} documents, fixing some of
 the mistakes that were made when defining the initial \LaTeX{} macros. While at
-the beginning it was planned to release \LaTeX3 as a standalone system that was
-not backward compatible with \LaTeXe{}, in the end the consensus was that
+the beginning, it was planned to release \LaTeX3 as a standalone system that was
+not backward compatible with \LaTeXe{}, in the end, the consensus was that
 abandoning the huge collection of third party packages written for \LaTeXe{},
 would be a mistake. Thus, the development team decided that
 \LaTeX3 would be slowly backported into \LaTeXe{} format, while avoiding
@@ -131,7 +132,7 @@ book according to these instructions.
 
 A human book designer tries to find out what the author had in mind
 while writing the manuscript. He decides on chapter headings,
-citations, examples, formulae, etc.\ based on his professional
+citations, examples, formulae, etc., based on his professional
 knowledge and from the contents of the manuscript.
 
 In a \LaTeX{} environment, \LaTeX{} takes the role of the book designer and
@@ -140,16 +141,16 @@ therefore needs more guidance. The author has to provide additional information
 to describe the logical structure of his work. This information is written into
 the text as \enquote{\LaTeX{} commands.}
 
-This is quite different from the \wi{WYSIWYG}\footnote{What you see is
-  what you get.} approach that most modern word processors, such as
+This is quite different from the \wi{WYSIWYG}\footnote{What You See Is
+  What You Get.} approach that most modern word processors, such as
 \emph{MS Word} or \emph{LibreOffice}, take. With these
 applications, authors specify the document layout interactively while
 typing text into the computer. They can see on the
 screen how the final work will look when it is printed.
 
-When using \LaTeX{} it is not normally possible to see the final output
+When using \LaTeX{}, it is not normally possible to see the final output
 while typing the text, but the final output can be previewed on the
-screen after processing the file with \LaTeX. Then corrections can be
+screen after processing the file with \LaTeX. Corrections can then be
 made before actually sending the document to the printer.
 
 \subsection{Layout Design}\label{sec:layout_design}
@@ -170,7 +171,7 @@ Examples:
 \end{itemize}
 
 With \wi{WYSIWYG} systems, authors tend to generate aesthetically
-pleasing documents with very little or inconsistent structure.
+pleasing documents with very little, or inconsistent, structure.
 \LaTeX{} prevents such problems by forcing the author to
 declare the \emph{logical} structure of his document. \LaTeX{} then
 chooses the most suitable layout.
@@ -179,7 +180,7 @@ chooses the most suitable layout.
 
 When people from the \wi{WYSIWYG} world meet people who use \LaTeX{},
 they often discuss \enquote{the \wi{advantages of \LaTeX{}} over a normal
-  word processor} or the opposite.  The best thing to do when such
+  word processor}, or the opposite.  The best thing to do when such
 a discussion starts, is to keep a low profile, since such discussions
 like to get out of hand. But sometimes there is no escaping \ldots
 
@@ -194,8 +195,8 @@ of \LaTeX{} over normal word processors are the following:
   \item Users only need to learn a few easy-to-understand commands
         that specify the logical structure of a document. They almost never
         need to tinker with the actual layout of the document.
-  \item Even complex structures such as footnotes, references, table of
-        contents, and bibliographies can be generated easily.
+  \item Even complex structures, such as footnotes, references, table of
+        contents, and bibliographies, can be generated easily.
   \item Free add-on packages exist for many typographical tasks not directly
         supported by basic \LaTeX. For example, packages are available to
         include \PSi{} graphics or to typeset bibliographies conforming to
@@ -232,10 +233,10 @@ can tell you hundreds \smiley.
 \section{\LaTeX{} Input Files}
 
 The input for \LaTeX{} is a plain text file. On \Unix{} systems text files are
-pretty common. On Windows, one would use Notepad to create a text file. It
+pretty common. On Windows, one could use Notepad to create a text file. It
 contains the text of the document, as well as the commands that tell \LaTeX{}
 how to typeset the text. For beginners, it is recommended to use a \LaTeX{}
-IDE.\footnote{Some examples of them are listed in
+IDE.\footnote{Some examples of these are listed in
   \autoref{installinglatex}.}
 
 \subsection{Spaces}\label{sec:spaces}
@@ -297,7 +298,7 @@ the same by using a prefix backslash:
 \textbackslash{}
 \end{example}
 
-The other symbols and many more can be printed with special commands
+Many more other symbols and many more can be printed with special commands
 in mathematical formulae or as accents. The backslash character
 \textbackslash{} can \emph{not} be entered by adding another backslash
 in front of it (\csi{\bs}); this sequence is used for
@@ -327,18 +328,18 @@ command name.
 \subsection{Groups}
 
 Many commands act on parameters. Parameters are the first things the command
-encounters after its end in the source file. If the command name consists of
-letters then it ignores following spaces. For example if command \enquote*{foo}
-accepts two arguments then
+encounters after its name ends in the source file. If the command name consists
+of letters, then it ignores following spaces. For example, if command
+\enquote*{foo} accepts two arguments, then
 \begin{code}
   \mintinline{latex}+\foo bar+
 \end{code}
-Will be read as command \enquote*{foo} with first argument \enquote*{b} and
-second argument \enquote*{a} followed by the letter \enquote*{r}. In order to pass
-more than one letter to the commands, groups are used.
+will be read as command \enquote*{foo} with first argument \enquote*{b} and
+second argument \enquote*{a} followed by the letter \enquote*{r}. In order to
+pass more than one letter as a parameter, groups are used.
 
 Groups are delimited by \ai{\{} and \ai{\}}. They tell \LaTeX{} to treat the
-content between them as a single unit. For example
+content between them as a single unit. For example,
 \begin{code}
   \mintinline{latex}+\foo{bar}{baz}qux+
 \end{code}
@@ -347,13 +348,13 @@ will be interpreted as command \enquote*{foo} with first argument
 \enquote*{qux}. Always using groups when passing parameters makes the
 source code easier to read.
 
-The commands that do not take any parameters still ignore spaces after them. In
-order to stop this behaviour the easiest way is to follow them by an empty
-group.
+Commands that do not take any parameters still ignore any spaces after them.
+The easiest way to stop this behaviour, is to follow them by an empty group.
 
 \begin{chktexignore}
   \begin{example}[examplewidth=0.45\linewidth]
-New \TeX users may miss the whitespace
+New \TeX users may miss
+the whitespace
 after a command. % renders wrong
 Experienced \TeX{} users are
 \TeX nicians, and know how to use
@@ -363,8 +364,9 @@ whitespace. % renders correct
 
 \subsection{Optional parameters}
 
-A lot of \LaTeX{} commands also accept optional parameters. The optional parameters are normally are enclosed
-within square brackets \verb|[ ]| and usually come right after the command
+Many \LaTeX{} commands also accept optional parameters. The optional parameters
+are normally enclosed
+within square brackets \verb|[ ]|, and usually come right after the command
 name. The following notation will often be used within this book to denote a
 command with one optional parameter and one required parameter:
 \begin{lscommand}
@@ -381,21 +383,21 @@ command
 The \carg{class} argument specifies what sort of document you intend to write.
 
 Now begins an area of the input file that is called the \emph{\wi{preamble}}.
-Inside it you add commands to influence the style of the whole document, or
+Inside it, you add commands to influence the style of the whole document, or
 load \wi{package}s that add new features to the \LaTeX{} system. To load such a
-package you use the command
+package, you use the command
 \begin{code}
   \csi{usepackage}[package: m]
 \end{code}
 
-When the preamble is finished you start the \emph{body} of the text with the
+When the preamble is finished, you start the \emph{body} of the text with the
 command
 \begin{code}
 \mintinline{latex}|\begin{document}|
 \end{code}
 
-Inside the body you enter the text mixed with some useful \LaTeX{} commands.
-Mark the end of the document with
+Inside the body, you enter the text mixed with some useful \LaTeX{} commands.
+Mark the end of the document with the
 \begin{code}
 \mintinline{latex}|\end{document}|
 \end{code}
@@ -454,20 +456,21 @@ I bet you must be dying to try out the neat small \LaTeX{} input file shown on
 \autopageref{mini}. Here is some help: \LaTeX{} itself comes without a GUI or
 fancy buttons to press. It is just a program that crunches away at your input
 file. Some \LaTeX{} installations feature a graphical front-end where there is
-a \LaTeX{} button to start compiling your input file. On other systems there
+a \LaTeX{} button to start compiling your input file. On other systems, there
 might be some typing involved, so here is how to coax \LaTeX{} into compiling
 your input file on a text based system. Please note: this description assumes
 that a working \LaTeX{} installation already sits on your computer. If this is
-not the case you may want to look at \autoref{installinglatex} on
+not the case, you may want to look at \autoref{installinglatex} on
 \autopageref{installinglatex} first.
 
 \begin{enumerate}
   \item Edit/Create your \LaTeX{} input file. This file must be plain text.  On
-        \Unix{} systems most of the editors will create just that. On Windows
+        \Unix{} systems, most of the editors will create just that. On Windows,
         you might want to make sure that you save the file in \emph{Plain Text}
         format. When picking a name for your file, make sure it bears the
         extension \eei{.tex}.
 
+  %$ Should this be '\texttt{cmd} window' (or some such formatting)?
   \item Open a shell or cmd window, \texttt{cd} to the directory where your
         input file is located and run \LaTeX{} on your input file using either
         \begin{lscommand}
@@ -479,7 +482,7 @@ not the case you may want to look at \autoref{installinglatex} on
         \end{lscommand}
 \end{enumerate}
 
-If successful you will end up with a \texttt{.pdf} file. It may be necessary to
+If successful, you will end up with a \eei{.pdf} file. It may be necessary to
 run \LaTeX{} several times to get the table of contents and all internal
 references right. When your input file has a bug, \LaTeX{} will tell you about
 it and stop processing your input file. Type \texttt{ctrl-D} to get back to the
@@ -487,20 +490,22 @@ command line.
 
 \section{Logical Structure of Your Document}\label{sec:logical_structure}
 
-In the \autoref{sec:layout_design} we have mentioned that one of the
+In \autoref{sec:layout_design}, we mentioned that one of the
 differences between \LaTeX{} and WYSIWYG editors is that in \LaTeX{} you write
 the document by specifying its logical structure. This section will explore
 this idea in more detail by presenting a problem and demonstrating how it can be
-solved with logical markup. If you are familiar with the idea (for example you
-have worked with HTML and CSS) you can safely skip this section.
+solved with logical markup. If you are familiar with the idea (for example, you
+have worked with HTML and CSS), you can safely skip this section.
 
+%$ Never-ending is standard English, but Neverending Story has crept in from
+%$ unendliche, which I guess is what you're going for here.
 \subsection{A Neverending Story of Problems with WYSIWYG Editors}
 
 Let us imagine that you are writing a novel in your favourite WYSIWYG editor. In
-this book there are two parallel storylines happening in different dimensions.
+this book, there are two parallel storylines happening in different dimensions.
 In order to communicate to the reader which of the dimensions is currently
-described you have decided to use different colours for them. Thus, your book may
-look like this:
+described, you have decided to use different colours for them. Thus, your book
+may look like this:
 \begin{quotation}
   {\color[HTML]{B71C1C}
 
@@ -521,35 +526,35 @@ look like this:
   }
 \end{quotation}
 
-After you finish your first draft you decided to email it over to your friend
+After you finish your first draft, you decided to email it over to your friend
 so they can share their opinion about it. However, it turns out that your
 friend's printer can only print black and white, so they cannot print the file
-you send them.
+you sent them.
 
-After some consideration you decided to simply use cursive font for one
-dimension, while keep upright font for the other. After some time of manually
-changing each paragraph of your book to match the correct font you remembered
+After some consideration, you decided to simply use cursive font for one
+dimension, while keeping upright font for the other. After some time of manually
+changing each paragraph of your book to match the correct font, you remembered
 that you have already used cursive font for emphasis in some cases, such as
 \enquote{{\color[HTML]{2E7D32} Are you gonna eat \emph{that}?}}. Continuing
-with your current approach you would have to also check each paragraph for
+with your current approach you, would also have to check each paragraph for
 emphasis and change it to something else before changing the font to cursive.
 
 The above problems with changing the style of paragraphs are caused by the fact
 that your WYSIWYG editor doesn't know that all green paragraphs somehow
 represent common concept (events in one dimension). It just remembers that you
-want these words in green, those in red and that one in cursive. Thus changing
-it to a different style means going over everything again and changing style of
-each and every paragraph and word.
+want these words in green, those in red and that one in cursive. Thus, changing
+it to a different style means going over everything again, and manually changing
+the style of each and every paragraph and word.
 
 Wouldn't it be nice if you could somehow communicate to your editor
-\enquote{these paragraphs are happening in dimension A} and then simply decide
-that all such paragraphs are green or using a different font? This is exactly
+\enquote{these paragraphs are happening in dimension A}, and then simply decide
+that all such paragraphs are green or use a different font? This is exactly
 what logical markup does.
 
 \subsection{Your First Text Command}
 
-To see how this example would play out different in \LaTeX{} let's introduce
-our first text command
+To see how this example would play out differently in \LaTeX{}, let's introduce
+our first text command:
 \begin{lscommand}
   \csi{emph}[text: m]
 \end{lscommand}
@@ -559,24 +564,24 @@ It stands for \enquote{emphasise} and does just that: it emphasises the
 Are you gonna eat \emph{that}?
 \end{example}
 If you write the code on the left in the body of your document (you can use
-\autoref{mini} as a template) you will get the output on the right in the
+\autoref{mini} as a template), you will get the output on the right in the
 PDF file you produce.
 
-As you can see by default \LaTeX{} typesets the emphasised text in cursive
-font. It is important to understand that the \csi{emph} command \emph{does not}
-mean \enquote{write this text in cursive}. It is much smarter than that. To
-illustrate that, let's see how \csi{emph} behaves when used inside the text is
-already in cursive
+As you can see, \LaTeX{} typesets the emphasised text in cursive font by
+default. It is important to understand that the \csi{emph} command
+\emph{does not} mean \enquote{write this text in cursive}. It is much smarter
+than that. To illustrate this, let's see how \csi{emph} behaves when used inside
+text that is already in cursive
 \begin{example}
   \itshape%!hide
 Are you gonna eat \emph{that}?
 \end{example}
-As you can see in this case it changed the font back to upright.
+As you can see, in this case it changed the font back to upright.
 
 Remember that you should only use the \csi{emph} command to emphasise text and
 nothing else, even if the resulting output would be the same (for example
 cursive font). If you stick to this rule, then if you later decide to use a
-different form of emphasis you can simply change the definition of the
+different form of emphasis, you can simply change the definition of the
 \csi{emph} command and other things that just \emph{happened} to be in cursive
 will be unaffected.
 \begin{example}
@@ -587,21 +592,21 @@ Are you gonna eat \emph{that}?
 \subsection{Your First Environment}
 
 If you have played with the \csi{emph} command a bit, you may have noticed that
-trying to write several paragraphs inside it, results in an error. This is the
-case for most of the \LaTeX{} commands. The reason is that putting a lot of
-text inside the parameters could result in poor performance and excessive
-memory consumption. In order to overcome that \LaTeX{} uses a concept of
+trying to write several paragraphs inside it results in an error. This is the
+case for most \LaTeX{} commands. The reason is that putting a lot of
+text inside their parameters could result in poor performance and excessive
+memory consumption. In order to overcome that, \LaTeX{} uses a concept of
 \emph{environments}.
 
 Environments are started using the \csi{begin} command and ended using the
 \csi{end} command. You have already seen one environment --- the
 \cargv{document} environment that holds the body of the document. This one is
-present exactly once in every \LaTeX{} document. To explore the concept a bit
-let's introduce another one that is not very useful in practice, but easy to
+present exactly once in every \LaTeX{} document. To explore the concept a bit,
+let's introduce another one that is not very useful in practice, but is easy to
 understand: the \ei{em} environment, short for
 \enquote{emphasise}.\footnote{It is not useful because there is very little
   reason to emphasise more than one paragraph. In order to make the emphasis
-  effective it should be used with restraint. After all, if everything is
+  effective, it should be used with restraint. After all, if everything is
   emphasised then nothing is.}
 \begin{example}
 \begin{em}
@@ -613,26 +618,27 @@ understand: the \ei{em} environment, short for
 
 \subsection{Summary}
 
-Using logical markup we can embed the logical structure of our document inside
+Using logical markup, we can embed the logical structure of our document inside
 the document itself. Instead of saying \enquote{write this in green and write
   this word in cursive}, we say \enquote{this text happens in dimension A and
-  this word is emphasised} and the style of all texts in \enquote*{dimension A}
-or emphasised words can be decided later and easily changed.
+  this word is emphasised}. The style of all text in \enquote*{dimension A},
+or of emphasised words, can be decided later and easily changed.
 
-If you started writing your hypothetical novel using \LaTeX{} instead of
-WYSIWYG editor and used custom environments for typesetting events in different
-dimensions and \csi{emph} for emphasis, then changing it to black and white
+If you started writing your hypothetical novel using \LaTeX{} instead of a
+WYSIWYG editor, and used custom environments for typesetting events in different
+dimensions, and \csi{emph} for emphasis, then changing it to a black and white
 version would come down to simply changing the definition of the custom
 environments.
 
 Before learning how to define your own commands and environments, this book
-will introduce you to many standard ones, that are provided either by \LaTeX{}
-itself or available via third party packages.
+will introduce you to many of the standard ones that are provided either by
+\LaTeX{} itself or third-party packages.
 
 \section{Packages}\index{package} While writing your document, you will
 probably find that there are some areas where basic \LaTeX{} cannot solve your
 problem. If you want to include \wi{graphics}, \wi{coloured text} or source
-code from a file into your document, you need to enhance the capabilities of
+code from a file in your document, then you need to enhance the capabilities of
+%$ 'include' and 'in' or 'within', or 'embed' and 'into'
 \LaTeX. Such enhancements are called packages. Packages are activated with the
 \begin{lscommand}
   \csi{usepackage}[options: o, package: m]
@@ -644,21 +650,22 @@ document. See \autoref{sec:structure} for details.
 
 This book will describe some packages that the authors thought were especially
 useful and should be installed along with your \LaTeX{} distribution. See
-\autoref{packages} for some examples. The versions installed in your system may be different than
+\autoref{packages} for some examples. The versions installed on your system may
+be different than
 the ones described in this book, which in turn may lead to differences in the
-produced output. Along with the package introduction we will also point
-to its entry in our bibliography. In the bibliography entry you will also find
+produced output. Along with each package's description we will also point
+to its entry in our bibliography. In the bibliography entry, you will find
 information about the package version that was used when writing this booklet.
-You can check the versions of all the packages used in a document, by looking
-at the \eei{.log} file that is produced when compiling the document. If the
+You can check the versions of all packages used in a document by looking
+at the \eei{.log} file that is produced when compiling it. If the
 package versions aren't very different (usually the first number is the most
 important) then you should be fine.
 
 Modern \LaTeX{} distributions come with many packages
 preinstalled. If you are working on a \Unix{} system, try using the command
 \texttt{texdoc} for accessing package documentation. Alternatively you can
-search the package on \url{https://www.ctan.org/} and its documentation should
-be present under the \enquote*{Documentation} field.
+search for the package on \url{https://www.ctan.org/}, and its documentation
+should be present under the \enquote*{Documentation} field.
 
 \begin{table}[htp]
   \centering
@@ -668,11 +675,11 @@ be present under the \enquote*{Documentation} field.
     Package            & Description                                          \\
     \midrule
     \pai*{amsmath}     & Provides additional commands for typesetting
-    mathematical symbols and environments for aligning equations. Described
+    mathematical symbols, and environments for aligning equations. Described
     in \autoref{chap:math}.                                                   \\
 
     \pai*{polyglossia} & Makes it easy to write \LaTeX{} documents in
-    languages different than English or even multiple languages.
+    languages other than English, or even in multiple languages.
     Described in \autoref{sec:polyglossia}.                                   \\
 
     \pai*{booktabs}    & Provides commands for producing beautifully
@@ -683,7 +690,7 @@ be present under the \enquote*{Documentation} field.
     producing a bibliography for your document. Described in
     \autoref{chap:bibliography}.                                              \\
 
-    \pai*{makeidx}     & Provides commands for producing indices. Described
+    \pai*{makeidx}     & Provides commands for producing indexes. Described
     in \autoref{sec:indexing}.                                                \\
 
     \pai*{fancyhdr}    & Let's you easily customise page headers and footers.
@@ -704,7 +711,7 @@ if these ideas are well-structured, and will see and feel this
 structure much better if the typographical form reflects the logical
 and semantic structure of the content.
 
-As we have seen \LaTeX{} is different from other typesetting systems in that
+As we have seen, \LaTeX{} is different from other typesetting systems in that
 you just have to tell it the logical and semantic structure of a text.  It then
 derives the typographical form of the text according to the \enquote{rules}
 given in the document class file and in various style files.
@@ -768,7 +775,7 @@ transistor model. \ldots
 \end{document}%!hide
 \end{example}
 
-The next smaller text unit is a sentence.  In English texts, there is
+The next smaller text unit is the sentence.  In English texts, there is
 a larger space after a period that ends a sentence than after one
 that ends an abbreviation.  \LaTeX{} tries to figure out which one
 you wanted to have.  If \LaTeX{} gets it wrong, you must tell it what
@@ -789,7 +796,7 @@ higher level, by putting them into chapters, sections, subsections, and so on.
 
 \section{Files You Might Encounter}
 
-When you work with \LaTeX{} you will soon find yourself in a maze of
+When you work with \LaTeX{}, you will soon find yourself in a maze of
 files with various \wi{extension}s and probably no clue. The following
 list explains the various \wi{file types} you might encounter when
 working with \TeX{}. Please note that this table does not claim to be
@@ -812,7 +819,7 @@ think is important, please drop me a line.
     \eei{.ins} file to unpack the \eei{.dtx} file.
   \item[\eei{.cls}] Class files define what your document looks
     like. They are selected with the \csi{documentclass} command.
-  \item[\eei{.fd}] Font description file telling  \LaTeX{} about new fonts.
+  \item[\eei{.fd}] Font description file, telling  \LaTeX{} about new fonts.
 \end{description}
 
 The following files are generated when you run \LaTeX{} on your input
@@ -822,16 +829,16 @@ file:
     last compiler run.
   \item[\eei{.toc}] Stores all your section headers. It gets read in for the
     next compiler run and is used to produce the table of contents.
-  \item[\eei{.lof}] This is like \eei{.toc} but for the list of figures.
-  \item[\eei{.lot}] And again the same for the list of tables.
+  \item[\eei{.lof}] This is like \eei{.toc}, but for the list of figures.
+  \item[\eei{.lot}] Same again, for the list of tables.
   \item[\eei{.aux}] Another file that transports information from one
     compiler run to the next. Among other things, the \eei{.aux} file is used
     to store information associated with cross-references.
-  \item[\eei{.idx}] If your document contains an index. \LaTeX{} stores all
+  \item[\eei{.idx}] If your document contains an index, \LaTeX{} stores all
     the words that go into the index in this file. Process this file with
     \texttt{makeindex}. Refer to \autoref{sec:indexing} on
     \autopageref{sec:indexing} for more information on indexing.
   \item[\eei{.ind}] The processed \eei{.idx} file, ready for inclusion into your
     document on the next compile cycle.
-  \item[\eei{.ilg}] Logfile telling what \texttt{makeindex} did.
+  \item[\eei{.ilg}] Log file, telling what \texttt{makeindex} did.
 \end{description}
