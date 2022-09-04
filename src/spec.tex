@@ -1358,8 +1358,8 @@ frames as a whole without uncovering effects.
 Internally, handout generation is accomplished by using overlay specifications
 with modes. %$ We haven't really talked about 'modes', is this a formal term?
 The default mode is \cargv{beamer}, while the \cargv{handout} option
-switches to \cargv{handout} mode. %$ repetition (of previous paragraph)
-You can specify modes explicitly within %$ an?
+switches to \cargv{handout} mode.
+You can specify modes explicitly within an
 overlay specification by passing \cargv{\carg{mode}:\carg{spec}}. Several mode
 specifications can be specified by separating them with \cargv{|}~(vertical
 bar). If no mode is specified,
@@ -1393,10 +1393,10 @@ bar). If no mode is specified,
 \end{frame}
 \end{document}
 \end{example}
-Often you will want to show some parts only in one mode; to provide
+Often you will want to show some parts only in one mode---to provide
 additional commentary in handouts, or to hide things that only make sense
 during the presentation. This is easily achieved by using a special zeroth
-slide that is not included in the compiled document. An example of doing so
+slide that is not included in the rendered document. An example of doing so
 is presented in \autoref{lst:zero_slides}.
 %$ Careful here: the slide is not included in the compiled (should that be
 %$ rendered?) document, but it _is_ included when _compiling_ the document.
@@ -1412,7 +1412,7 @@ is presented in \autoref{lst:zero_slides}.
 \begin{listing}
   \begin{example}[
     template=empty,
-    vertical_mode,
+    vertical_pages,
     to_page=2,
     paperheight=3cm,
     paperwidth=4cm,
@@ -1447,8 +1447,6 @@ is presented in \autoref{lst:zero_slides}.
     in handout.}\label{lst:zero_slides}
 \end{listing}
 \endgroup
-%$ Will this listing not fit side-by-side?
-%$ It occupies an entire A4 page in its current form.
 
 Handouts created in this way still use the slide structure---titles, lots of
 empty space, and bright colours.
@@ -1521,10 +1519,8 @@ works normally and can be used to hide content.
 \end{document} %!hide
 \end{example}
 
-%$ Paragraph needs some work; unclear what is being said.
-%$ You only get the <mode> slides when producing output of <mode>?
 Because the overlay specification is often used to provide contents for a
-single mode, there exist another way of specifying it for that purpose---if you
+single mode, there exists a short cut: f you
 provide only the mode name, this will be the same as setting all other modes to
 zeroth slide and leaving the first slide for the specified mode. This usually
 results in a more readable code.
