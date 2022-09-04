@@ -1368,7 +1368,7 @@ space, you can use:\index{horizontal!space}
 \begin{lscommand}
   \csi{hspace}[length: m]
 \end{lscommand}
-The \carg{length} argument can be specified using units described in previous
+The \carg{length} argument can be specified using the units described in previous
 section in the usual way. You can use decimal and even negative numbers as
 values.
 \begin{example}
@@ -1377,7 +1377,7 @@ of \qty{1.5}{\cm}. A bit too
 cramped\hspace{-5pt}here.
 \end{example}
 The space added that way will disappear if it lands on the end of a line,
-similarly to an interword spacing. If you want to retain it there use the
+similarly to an interword spacing. If you want to retain the extra space, use the
 starred version of the command.
 \begin{example}
 The gap here is\hspace{1cm}%
@@ -1415,7 +1415,7 @@ too crampy.
 \end{example}
 
 When there are multiple rubber spaces in text \TeX{} calculates the amount of
-stretch proportionally to the specified maximum. Thus if \TeX{} needs
+'stretch` proportionally to the specified maximum. Thus if \TeX{} needs
 additional \qty{2}{\cm} of whitespace and one length has \ltx{plus 1cm} while
 the other has \ltx{plus 3cm} modifier, it will result in the first one being
 enlarged by \(\left(\frac{1}{1+3}\right) \times \qty{2}{\cm}\) while the second
@@ -1509,8 +1509,7 @@ space between paragraphs. Similarly to the \cs{hspace} command, the space will
 be discarded if it lands at the end of a page---use the starred version if this
 is not desirable.
 
-The rubber lengths, \csi{stretch} and \csi{vfill} work just as you would expect
-them when it comes to vertical space. However, since manual vertical spacing is
+The rubber lengths, \csi{stretch} and \csi{vfill} work for vertical space too. However, since manual vertical spacing is
 much more common compared to manual horizontal spacing, \LaTeX{} also declares
 three semantic commands for inserting them:
 \begin{lscommand}
@@ -1639,7 +1638,7 @@ presented in \autoref{lst:fun_with_lengths}.
 \end{listing}
 
 As you will see \LaTeX{} uses length variables for many things. When
-typesetting document you can use some of them when setting lengths to make them
+typesetting a document you can use some of them when setting lengths to make them
 relative. For example, the \csi{linewidth} length holds the length of the
 current line. You can use it when inserting a picture to make it fill the page
 or scale it to take up half the space available.
@@ -1723,7 +1722,7 @@ printing\footnote{Note that this only influences the appearance of the document
 
 If you do not like the appearance of the standard \LaTeX{} classes, the easiest
 way to change it is to use some alternatives. For example, the
-\pai*{koma-script} provides alternatives that produce documents with European
+\pai*{koma-script} package provides alternatives that produce documents with European
 typography traditions in mind. Another popular package is \pai*{memoir}, which
 provides a single \cli{memoir} class with extensive customization options. On
 \href{https://www.ctan.org/}{CTAN} you can find many more specialized classes
@@ -1794,8 +1793,7 @@ command, where \carg{style} is one of the styles presented in
   \end{tabular}
 \end{table}
 
-If these options are not enough for you, you will description how to create
-your own headers and footers in \autoref{sec:fancy} on \autopageref{sec:fancy}.
+If would like more control over the apparance of your headers and footers, refere to \autoref{sec:fancy} on \autopageref{sec:fancy}.
 
 \subsection{Line Spacing}\index{line spacing}
 
@@ -1935,8 +1933,8 @@ functions but retains the paper size adjustments.
 
 As we have mentioned in \autoref{options}, simply setting \cargv{a5paper} (or
 similar) option will only adjust margins of the document without changing the
-paper dimensions themselves. The simplest way to fix that is to include the
-\pai{geometry} package with your preamble. It will read the page size option
+paper dimensions themselves. The simplest way to fix that is to add the
+\pai{geometry} package to your preamble. It will read the page size option
 and adjust it accordingly. The package itself also supports many more page
 sizes, such as \cargv{a0paper} or \cargv{a6paper}.
 \begin{example}
@@ -2145,15 +2143,12 @@ Do not read this sentence.
 \end{document}%!hide
 \end{example}
 
-%$$ Inserted comma after 'default'.
 By default, headers and footers are as long as the text on the page. If you want
-%$$ Changed 'extend\slash{}shorten' to 'extend or shorten'.
-%$$ Added comma after 'them'.
-to extend\slash{}shorten them, use the
+to extend or shorten them, use the
 \begin{lscommand}
   \csi{fancyhfoffset}[places: o, offset: m]
 \end{lscommand}
-%$$ Added comma after \csi{fancyhf}.
+Added comma after \csi{fancyhf}.
 command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
 it cannot contain \cargv{C}.
 \begin{example}[standalone, paperheight=3cm]
