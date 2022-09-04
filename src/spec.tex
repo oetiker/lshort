@@ -118,6 +118,450 @@ Note that the texttt{makeindex} has no clue about characters outside the ASCII r
 get the sorting correct, use the \verb|@| character as shown in the K\"ase
 and \'ecole examples above.
 
+\section{Fancy Headers}\label{sec:fancy}
+
+\subsection{Basic commands}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The \pai*{fancyhdr} package provides a few simple commands that allow you to
+customise the header and footer lines of your document. It defines an
+additional page style \cargv{fancy} and a set of commands to customise it to
+your liking. By default, it only adds a line separating the header from the page
+body.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+%!showbegin %!hide
+\documentclass{article}
+
+%!showend %!hide
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\begin{document}
+\noindent %!hide
+This statement is false.
+\end{document}
+\end{example}
+
+The primary command of the package is
+\begin{lscommand}
+  \csi{fancyhf}[places: o, field: m]
+\end{lscommand}
+The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
+combination of three letters:
+\begin{itemize}
+  \item The first specifies whether the location is in the header (\cargv{H}) or
+        in the footer (\cargv{F}).
+  \item The second letter specifies the location within the header or footer:
+        \cargv{L} for left, \cargv{C} for centre, and \cargv{R} for right.
+  \item The third letter defines whether the field should be printed on even
+        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided,
+        then all pages are treated as odd.
+\end{itemize}
+For example, the combination \cargv{FCE} identifies the centre part of the
+footer on even pages. If any of the letters is omitted, then the identifier
+points toward all positions specifiable by the omitted letter. For example,
+\cargv{HR} is right side of the header on both odd and even pages.
+\begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
+\documentclass[twoside]{article}
+
+%!hidebegin
+\usepackage[paperheight=\height,
+    paperwidth=\width,
+    margin=0.3cm,
+    includefoot,
+    includehead,
+    headsep=.5em,
+    footskip=1em
+]{geometry}
+%!hideend
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf[HCE]{A}
+\fancyhf[L]{\emph{B}}
+\fancyhf[FR]{\textbf{C}}
+\fancyhf[HCO, HRE]{\textsl{D}}
+
+\begin{document}
+\noindent %!hide
+The next statement is false.
+The previous statement is true.
+\end{document}
+\end{example}
+
+There are two additional commands, \csi{fancyhead} and \csi{fancyfoot}, that
+work in the same way, except that they respectively assume \cargv{H} and
+\cargv{F} in their \carg{places} argument, unless otherwise specified.
+\begin{example}[standalone, paperheight=3.5cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{csquotes} %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{A}
+\fancyfoot[R]{B}
+
+\begin{document}%!hide
+\noindent %!hide
+\enquote{Yields a falsehood when
+appended to its own quotation}
+yields a falsehood when appended
+to its own quotation.
+\end{document}%!hide
+\end{example}
+
+The lines drawn by the \pai{fancyhdr} package may also be customised. To change
+%$$ Inserted comma after 'thickness'.
+their thickness, redefine the
+\begin{lscommand}
+  \csi{headrulewidth} \\
+  \csi{footrulewidth}
+\end{lscommand}
+macros to the desired size.
+\begin{example}[standalone, paperheight=3cm, paperwidth=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr} %!hide
+\pagestyle{fancy} %!hide
+\RenewDocumentCommand{\headrulewidth}{}{.2cm}
+\RenewDocumentCommand{\footrulewidth}{}{.5cm}
+
+\begin{document}%!hide
+\noindent %!hide
+Do not read this sentence.
+\end{document}%!hide
+\end{example}
+
+%$$ Inserted comma after 'default'.
+By default, headers and footers are as long as the text on the page. If you want
+%$$ Changed 'extend\slash{}shorten' to 'extend or shorten'.
+%$$ Added comma after 'them'.
+to extend\slash{}shorten them, use the
+\begin{lscommand}
+  \csi{fancyhfoffset}[places: o, offset: m]
+\end{lscommand}
+%$$ Added comma after \csi{fancyhf}.
+command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
+it cannot contain \cargv{C}.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhfoffset[L]{-1cm}
+\fancyhfoffset[R]{.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+If this sentence is true,
+then \(2 + 2 = 5\).
+\end{document}%!hide
+\end{example}
+The command \csi{fancyheadoffset} and \csi{fancyfootoffset} are
+used the same way as \csi{fancyf}, but they only modify header or footer respectively.
+
+\subsection{Contents of the headers}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The default footer of the article class contains the current page number. To
+use it inside the fancy header, simply use the command \csi{thepage}.
+\begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhf{Page~\thepage}
+
+\begin{document}%!hide
+\noindent %!hide
+This statement is dedicated to
+all statements that are not
+dedicated to themselves.
+\end{document}%!hide
+\end{example}
+
+It is often useful to have the header and footer contain information based on
+the content of the page. These are called \enquote{marks} in \LaTeX{}
+terminology. Before we talk about the default ones, let's consider how you can
+define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
+  of \pai*{fancyhdr}.} package.
+\begin{lscommand}
+  \csi{extramarks}[left:m, right:m] \\
+  \csi{firstleftxmark} \\
+  \csi{firstrightxmark} \\
+  \csi{lastleftxmark} \\
+  \csi{lastrightxmark}
+\end{lscommand}
+The \csi{extramarks} command sets the contents of \carg{left} and \carg{right}
+marks. Then you can access these marks inside the headers by using the appropriate
+command. The \texttt{first}- commands refer to the first mark occurring on the
+page, while the \texttt{last}- refer to the last one.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{\firstleftxmark}
+\fancyhead[R]{\lastleftxmark}
+\fancyfoot[L]{\firstrightxmark}
+\fancyfoot[R]{\lastrightxmark}
+
+\begin{document} %!hide
+\noindent %!hide
+The second statement is false.
+\extramarks{One}{2 is false}
+The third statement is false.
+\extramarks{Two}{3 is false}
+The first statement is false.
+\extramarks{Three}{1 is false}
+\end{document} %!hide
+\end{example}
+
+Let us now look at the default marks defined by \LaTeX{}. After loading
+\pai{extramarks}, these may be set and accessed similarly:
+\begin{lscommand}
+  \csi{markboth}[left:m, right:m] \\
+  \csi{firstleftmark} \\
+  \csi{firstrightmark} \\
+  \csi{lastleftmark} \\
+  \csi{lastrightmark}
+\end{lscommand}
+The only difference between these and the extra marks is that \LaTeX{} classes
+automatically fill them. Hence, if you are not careful, you may lose your
+content.\footnote{You may prevent this by setting the pagestyle to
+  \cargv{myheadings} and then redefining it to use it with \pai{fancyhdr} as
+  described later.}
+For example, in the article class, \carg{left} is set by the \csi{section}
+command, while \carg{right} is set by the \csi{subsection} command.
+\begin{example}[standalone, paperheight=5cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\firstleftmark}
+\fancyhead[R]{\lastleftmark}
+\fancyfoot[L]{\firstrightmark}
+\fancyfoot[R]{\lastrightmark}
+
+\begin{document}%!hide
+\section{First}
+\subsection{Sub}
+\section{Second}
+\subsection{Sub}
+\end{document}%!hide
+\end{example}
+Note that \csi{firstrightmark} is empty in the above example. This is caused by
+the fact that \csi{section} commands set both marks, leaving the right one
+empty.
+
+You may have noticed that section titles are typeset in uppercase when provided
+by -\texttt{mark} commands. To disable this use the \csi{nouppercase} command inside the
+\csi{fancyhf} command.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{%
+  \nouppercase{\firstleftmark}%
+}
+
+\begin{document}%!hide
+\section{Today}
+is opposite day.
+\end{document}%!hide
+\end{example}
+
+\subsection{Advanced commands}
+
+If you want even more control over section titles, you can redefine the
+\csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
+command receives the section title as its first argument, while the section
+number is available as \csi{thesection}.
+\begin{example}[standalone, paperheight=4.5cm, paperwidth=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{\firstleftmark}
+\RenewDocumentCommand{\sectionmark}{m}{%
+  \markboth{%
+    Section no.\,\thesection: #1}{}%
+}
+
+\begin{document}%!hide
+\section{Person}
+There exists a person such that
+if they are reading this then
+everybody is reading this.
+\end{document}%!hide
+\end{example}
+If you only want to change the right mark, use the \csi{markright} command.
+
+By default, the field in the centre of the header or footer will expand equally
+to the left and right. This is usually the desired behaviour, but in some
+cases it may overlap with either left or right text, while still having some
+space on the other side.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\thepage}
+\fancyhead[C]{\firstleftmark}
+\fancyhead[R]{Jane Doe}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+In this situation you may want to use the
+\begin{lscommand}
+  \csi{fancycenter}[distance:o, stretch:o, left:m, centre:m, right:m]
+\end{lscommand}
+command, which automatically shifts the centre toward the shorter text. The
+\carg{distance} is the minimum distance by which the elements are always
+surrounded (\cargv{1em}, by default). The \carg{stretch} controls the preference
+for shifting the \carg{centre}; \cargv{1} means shift only when and as much
+as necessary. Higher numbers will start shifting sooner and more aggressively.
+The default is \cargv{3}. This command writes over the whole header\slash{}footer
+space so it should only be put in one place (typically \cargv{C}) and other
+places (\cargv{L,R}) should be empty.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L,R]{}
+\fancyhead[C]{%
+  \fancycenter%
+    {\thepage}%
+    {\firstleftmark}%
+    {Jane Doe}%
+}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+
+You may want to present different headers or footers when the corresponding
+page starts with a float or ends with a footnote. The \pai{fancyhdr} package
+defines four commands that let you achieve this.
+\begin{lscommand}
+  \csi{iftopfloat}[true branch:m, false branch:m] \\
+  \csi{ifbotfloat}[true branch:m, false branch:m] \\
+  \csi{iffloatpage}[true branch:m, false branch:m] \\
+  \csi{iffootnote}[true branch:m, false branch:m]
+\end{lscommand}
+Commands \csi{iftopfloat} and \csi{ifbotfloat} execute their \carg{true branch}
+if a float sits at the top or bottom of the page (respectively).
+
+Similarly, \csi{iffloatpage} checks whether
+the page is a special float-only page, while \csi{iffootnote} checks for a
+footnote at the bottom of the page.
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[C]{%
+  \iftopfloat{%
+    A float is below me%
+  } {}
+}
+\fancyfoot[C]{%
+  \iffootnote{%
+    A footnote is above me%
+  } {%
+    \thepage%
+  }%
+}
+
+\begin{document}%!hide
+\noindent %!hide
+Ignore this footnote.%
+\footnote{Read this.}
+\begin{figure}[t]
+  \centering
+  A floating float.
+  \caption{Hmm}
+\end{figure}
+\end{document}%!hide
+\end{example}
+
+The ruled lines in headers and footers are created by invoking \csi{headrule}
+and \csi{footrule} commands. If you want finer control over the lines, consider
+redefining these macros. Use \csi{headruleskip} and \csi{footruleskip} to raise
+or lower them, if necessary.
+\begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\RenewDocumentCommand{\headrule}{}{
+  \rule{0.05\headwidth}{0.2cm}%
+  \rule[0.1cm]{0.9\headwidth}{\headrulewidth}%
+  \rule{0.05\headwidth}{0.2cm}%
+}
+
+\RenewDocumentCommand{\headruleskip}{}{-0.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+My age is the first number not
+nameable in under twenty words.
+\end{document} %!hide
+\end{example}
+
+While working on a longer document, you may want to have several page styles for
+different occasions. You may also notice that some commands (\csi{chapter} and
+\csi{maketitle}, for example) change the page style to \cargv{plain}.
+The solution to both of these problems is the
+\begin{lscommand}
+  \csi{fancypagestyle}[name:m, code:m]
+\end{lscommand}
+command. The \carg{name} is the name of page style to (re)define, while the %chktex 36
+\carg{code} is the code to set the page style. All page styles declared this
+way use the \cargv{fancy} page style as their basis, so if empty \carg{code} is
+given they will match \cargv{fancy} exactly.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\fancypagestyle{mine}{
+  \fancyhead[L]{My style}
+}
+\pagestyle{mine}
+
+\begin{document}%!hide
+%!showbegin %!hide
+Were you expecting a paradox here?
+%!showend !hidebegin
+\noindent
+You may be disappointed.
+\end{document}
+\end{example}
+
 \section{Installing Extra Packages}\label{sec:Packages}
 
 Most \LaTeX{} installations come with a large set of pre-installed
@@ -132,7 +576,7 @@ package. You should of course read this file first.
 
 In any event, once you have copied the package files onto your
 machine, you still have to process them in a way that (a) tells your
-\TeX\ distribution about the new style package and (b) gives you
+\TeX\ distribution about the new style package, and (b) gives you
 the documentation.  Here's how you do the first part:
 
 \begin{enumerate}
@@ -250,7 +694,7 @@ examples. While this makes the links more visually appealing, it has the
 disadvantage that the coloured links will be printed. To marry the best of both
 worlds you can use the \pai*{ocgx2} package with the option
 \cargv{ocgcolorlinks} like this
-\begin{code}  
+\begin{code}
 \begin{minted}{latex}
 \usepackage{hyperref}
 \usepackage[ocglinks]{ocgx2}
@@ -460,25 +904,25 @@ command would be
   standalone,
 }
 
-\TeX{} and \LaTeX{} were primarily designed for creating text documents and
+\TeX{} and \LaTeX{} were primarily designed for creating text documents, and
 that is where they shine. Still, it is also possible to use them for creating
-presentations, but these presentations will lack fancy animations and
-transitions---they are just cleverly set up PDF files after all. But on the
-plus side, you will be able to tap into the strengths of \LaTeX{} such as
-logical markup, math typesetting and all the typesetting magic provided by the
-various \LaTeX{} extension packages.
+presentations. In presentations created with \LaTeX{} you will be able to
+use all the \LaTeX{} features such as logical markup, mathematical
+typesetting and all the typesetting magic you are acustomed too. While these presentations
+are just PDF files, you may be amazed what is possible with the
+PDF in this respect.
 
-Historically there have been several ways to create presentations, for example
-the standard \LaTeX{} \cli{slides} class or the \pai{powerdot} package. While
-these are still supported, this booklet will focus on the \pai*{beamer} package
-which is the most popular option these days. This section will only scratch the
+Historically, there have been several ways to create presentations; for example,
+the standard \LaTeX{} \cli{slides} class, or the \pai{powerdot} package. While
+these are still supported, this booklet will focus on the \pai*{beamer} package,
+which is the most popular option these days. This section only scratches the
 surface of \pai{beamer}'s capabilities. For a more in-depth tutorial please see
-the User Guide~\cite{pack:beamer} distributed with it.
+the User Guide~\cite{pack:beamer} distributed with \pai{beamer}.
 
 \subsection{Basic Usage}
 
 The \pai{beamer} package provides the \cli{beamer} class, which loads all the
-necessary packages. The most basic environment is the \ei{frame} environment
+necessary packages. The fundamental environment is the \ei{frame}
 which adds a single page to your presentation.\footnote{Other presentation
   software often uses the term \enquote{slide} instead of frame, but slides are
   a slightly different concept in \pai{beamer}.}
@@ -493,13 +937,13 @@ which adds a single page to your presentation.\footnote{Other presentation
 \end{frame}
 \end{document}
 \end{example}
-The full syntax of the \ei{frame} is actually
+The full syntax of the \ei{frame} is
 \begin{lscommand}
   \ei*{frame}[options: o, title: m, subtitle: m]
 \end{lscommand}
-Where \carg{options} is a key value list of options applied to the frame while
+where \carg{options} is a key-value list applied to the frame, while
 \carg{title} and \carg{subtitle} are displayed at the top of the slide. Despite
-the curly brackets these are actually optional arguments and have been
+the curly brackets, these are optional arguments and have been
 omitted in the previous example.
 \begin{example}
 \begin{document} %!hide
@@ -507,7 +951,7 @@ omitted in the previous example.
   Interesting title}{%
   Even more interesting
   subtitle}
-  
+
   Not so interesting contents.
 \end{frame}
 \end{document} %!hide
@@ -515,9 +959,9 @@ omitted in the previous example.
 The title and subtitle can also be specified using the \csi{frametitle} and
 \csi{framesubtitle} commands.
 
-As in the standard classes you can specify title, author and date in the preamble
-using the \csi{title}, \csi{author} and \csi{date} commands. The
-\csi{maketitle} will then use theses settings to create a title frame.
+As in the standard classes, you can specify a title, author and date in the preamble
+by using the \csi{title}, \csi{author} and \csi{date} commands. The
+\csi{maketitle} command uses these settings to create a title frame.
 \begin{example}
 \author{Jane Doe}
 \title{Interesting Title}
@@ -528,12 +972,12 @@ using the \csi{title}, \csi{author} and \csi{date} commands. The
 \maketitle
 \end{document} %!hide
 \end{example}
-Additionally \csi{subtitle}, \csi{institute} and \csi{titlegraphic} are
+Additionally, \csi{subtitle}, \csi{institute} and \csi{titlegraphic} are
 available to add extra information to the title frame. The \csi{date} is often
 repurposed to hold the conference name, since it is more informative than the
 exact date. Some themes (discussed later) display these fields on each slide.
 If you find that they are too long for such use, you may specify shorter
-versions via the optional argument like this:
+versions via an optional argument, like this:
 \begin{minted}{latex}
   \title[Short Title]{A Title That Is Too Long}
 \end{minted}
@@ -563,9 +1007,9 @@ properly hyperlinked entries.
 \end{document} %!hide
 \end{example}
 
-\cli{beamer} provides special commands for emphasising information on the slide:
-the \csi{alert} command typesets its argument using a bright red colour, the
-\ei{block} environment displays its contents with a title and separated from
+\cli{beamer} provides special commands for emphasising information on the slide.
+The \csi{alert} command typesets its argument using a bright red colour. The
+\ei{block} environment displays its contents with a title and separation from
 the rest of the text.
 \begin{example}
 \begin{document} %!hide
@@ -584,9 +1028,9 @@ Here we will talk about
 \end{frame} %!hide
 \end{document} %!hide
 \end{example}
-Beamer redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded
-  automatically by \cli{beamer}.} environments, such as \ei{theorem} or
-\ei{proof} to also produce blocks.
+\pai{beamer} redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded
+  automatically by \cli{beamer}.} environments, including \ei{theorem} and
+\ei{proof}, to also produce blocks.
 
 You will find that most of the \LaTeX{} commands and environments, such as
 \cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable
@@ -608,13 +1052,13 @@ Hello!
 
 \subsection{Overlay Specification}
 
-So far, the created frames were very static---they showed all of their contents
+So far, our frames have been static---they show all of their contents
 at once. It is, however, possible to show a frame piece-wise, in order to not
-overwhelm an audience with lots of information.
+overwhelm an audience with too much information.
 
-The simplest way to do so is the \csi{pause} command. It splits the frame so
-that the content before the pause is present on the previous page while the
-rest of the frame is present on the next page. These partial frames are called
+The simplest way to do this is the \csi{pause} command. It splits the frame so
+that the content before the pause is presented on the current page, while the
+rest of the frame is presented on the next page. These partial frames are called
 slides.
 \begin{example}[
   vertical_mode,
@@ -630,15 +1074,15 @@ slides.
 \end{frame}
 \end{document} %!hide
 \end{example}
-When presenting this will give an effect of revealing the sentences one by one.
+While presenting, this has the effect of revealing statements one by one.
 
-If the \csi{pause} command is not enough for you, a more powerful variant
-exist:
+A more powerful frame splitting command is
+exists:
 \begin{lscommand}
   \csi{onslide}[<«\bs carg{overlay specification}»>: c]
 \end{lscommand}
-The \carg{overlay specification} argument specifies at which slides should the
-contents appear at. It may be a single number (slides start at 1), a range of
+The \carg{overlay specification} argument specifies which slides the contents
+should appear on. It may be a single number (slides start at 1), a range of
 numbers (separated by \cargv{-}) or a comma delimited list of the two.
 \begin{chktexignore}
 \begin{example}[
@@ -656,12 +1100,12 @@ numbers (separated by \cargv{-}) or a comma delimited list of the two.
 \end{document} %!hide
 \end{example}
 \end{chktexignore}
-The \csi{pause} command uses \csi{onslide} internally together with a counter,
-so these can be mixed together as desired, though care is required to set the
-slide numbers correctly.
+Internally, the \csi{pause} command uses \csi{onslide} with a counter,
+so these can be mixed together as desired (although care is required to set the
+slide numbers correctly).
 
 A similar command is \csi{uncover}. It accepts the same optional \carg{overlay
-  specification} argument but only applies it to its mandatory argument.
+  specification} argument, but only applies it to its mandatory argument.
 \begin{chktexignore}
 \begin{example}[
   vertical_mode,
@@ -683,8 +1127,8 @@ many more preexisting commands and environments that are extended by
 \pai{beamer} to support them. Refer to its User Guide~\cite{pack:beamer} for
 more examples.
 
-By default the contents that are not uncovered are not shown at all. If you
-don't want to have a lot of empty space on your slides or you prefer not to
+By default, content remains invisible until uncovered. If you
+don't want a lot of empty space on your slides, or if you prefer not to
 surprise your audience, you may adjust this behaviour to typeset the covered
 text as transparent. To do so, use the \csi{setbeamercovered} with the
 \cargv{transparent} option.
@@ -705,8 +1149,8 @@ text as transparent. To do so, use the \csi{setbeamercovered} with the
 \end{frame}
 \end{document} %!hide
 \end{example}
-There are other possible arguments to these commands. For example, the
-\cargv{dynamic} argument makes the text more transparent the later it is
+Among the other possible arguments to these commands, \cargv{dynamic} makes the
+text increasingly transparent the later it is
 shown.\footnote{The effect is amplified a bit in the below example, so it is
   more visible. The default variant works better when there are more
   \csi{pause}s.}
@@ -755,13 +1199,13 @@ predefined set of themes that alter the style and colours of the presentation.
 \end{document} %!hide
 \end{example}
 The full list of available themes can be viewed
-at~\cite{AnotherBeamerThemeMatrix}.
+at reference~\citetitle{AnotherBeamerThemeMatrix}.
 
 The \csi{usefonttheme} command can be used in a similar fashion. By default the
-text in frames is typeset using sans serif font. This choice makes sense,
+text in frames is typeset using a sans serif font. This choice makes sense,
 because it is easier to read on lower resolution projectors, but is less
-relevant if you use high-resolution display for presentation. You can pass
-\cargv{serif} option to switch to default \LaTeX{} font.
+relevant when using a high-resolution display. You can pass the \cargv{serif}
+option to \csi{usefonttheme} to switch to the default \LaTeX{} font.
 \begin{example}
 \usefonttheme{serif}
 % ...
@@ -770,23 +1214,24 @@ relevant if you use high-resolution display for presentation. You can pass
 \begin{frame}{Is serif better?}
   Often repeated assertion is
   that serif fonts are easier
-  to read on paper, however, 
+  to read on paper, however,
   this is not scientifically
   confirmed.
 \end{frame}
 \end{document} %!hide
 \end{example}
 
-More granular customisation is also possible using the
+%$ Use 'fine grained' or 'coarse grained'; 'more granular' is ambiguous.
+Greater customisation is possible using the
 \begin{lscommand}
   \csi{setbeamerfont}[element: m, attributes: m] \\
   \csi{setbeamercolor}[element: m, attributes: m]
 \end{lscommand}
 commands. The \carg{element} argument is the element to which the customised
-font or colour should be applied, while the \carg{attributes} specify the
-attributes such as \cargv{size}, \cargv{shape} or \cargv{family} for fonts, and
-\cargv{fg} (foreground) or \cargv{bg} (background) for colours. Fonts are
-further discussed in \autoref{sec:fontspec}, while colours are touched upon in
+font or colour should be applied, while the \carg{attributes} specifies font
+attributes, such as \cargv{size}, \cargv{shape} and \cargv{family}, and the
+foreground and background colours, \cargv{fg} and \cargv{bg}. Fonts are
+further discussed in \autoref{sec:fontspec}, while colours are covered in
 \autoref{sec:colors}.
 \begin{example}
 \setbeamercolor{frametitle}{
@@ -809,12 +1254,12 @@ further discussed in \autoref{sec:fontspec}, while colours are touched upon in
 \end{document} %!hide
 \end{example}
 
-The default math font of \LaTeX{} is meant to typeset it in serif fonts. While
-\pai{beamer} tries to adapt it by using the sans serif variables, not all
-symbols exist in sans serif version (for example, Greek letters), which looks
-silly at times. It is best to switch to a sans serif math font and matching
-text font if your presentation is math heavy. Switching math fonts is described
-further in \autoref{sec:math_fonts}.
+By default, \LaTeX{} typesets mathematics in serif fonts.
+When \pai{beamer} attempts the same typesetting in a sans serif font, not all
+symbols may exist (Greek letters, for example).
+If your presentation is mathematically heavy, it may be best to switch to a
+sans serif math font and matching text font.
+Switching math fonts is described further in \autoref{sec:math_fonts}.
 \begin{example}
 \usepackage{unicode-math}
 \setsansfont{Fira Sans}
@@ -834,12 +1279,15 @@ next to the Latin ones.
 \end{document} %!hide
 \end{example}
 
-By default, \pai{beamer} typesets the slides onto \(4 : 3\) pages. If your
-projector uses other aspect ratio, you may prefer to change it accordingly. You
-may do so by passing the \cargv{aspectratio} to the \cs{documentclass} options.
-It accepts a single integer that encodes the desired ratio, for example
+%$ earlier: 'slides are a slightly different concept in beamer'.
+%$ Slides are rendered onto 4 : 3 ..., but not just slides.
+By default, \pai{beamer} typesets onto \(4 : 3\) aspect-ratio pages. If the
+%$ not 'it'; could refer to changing the projector
+projector uses some other aspect ratio, you may prefer to match it. You
+may do so, by passing an \cargv{aspectratio} to the \cs{documentclass} options.
+It accepts a single integer that encodes the desired ratio. For example,
 \cargv{169} is interpreted as \(16:9\), while \cargv{54} is interpreted as
-\(5:4\). Wider ratios are especially useful if you want to include a sidebar
+\(5:4\). Wider ratios are especially useful if you want to incorporate a sidebar
 with the table of contents into your slides.
 \begin{example}[paperwidth=8cm]
 %!showbegin !hide
@@ -857,11 +1305,12 @@ with the table of contents into your slides.
 
 \subsection{Handouts}
 
-One of the killer features of \pai{beamer} compared to other presentation
-software is the ability to easily create handouts directly from your source
-files. The simplest way to do so is to add the option \cargv{handout} to the
+%$ As much as I like this feature of Beamer, increasingly other software _is_
+%$ able to generate handouts. Maybe not as well, but in time...
+A feature of \pai{beamer} is the ability to easily create handouts.
+The simplest way to do this is to add the \cargv{handout} option to the
 \cs{documentclass} command. Doing so will make the \cli{beamer} class ignore
-all of the \csi{pause}s and similar commands to produce documents with fewer
+all of the \csi{pause}s, and similar commands, to produce documents with fewer
 pages.
 \begin{example}[template=empty]
 \documentclass[handout]{beamer}
@@ -886,18 +1335,21 @@ pages.
 \end{frame}
 \end{document}
 \end{example}
-This mode is also useful while creating the presentation to preview the frames
-as a whole without seeking the last slide each time.
+This mode is also useful while creating a presentation, as it previews the
+frames as a whole without uncovering effects.
 
-Internally this effect is accomplished by using overlay specifications with
-modes. The default mode is \cargv{beamer}, while \cargv{handout} class option
-switches to \cargv{handout} mode. You can specify modes explicitly within
+%$ Suggest a review of this paragraph, for clarity.
+Internally, handout generation is accomplished by using overlay specifications
+with modes. %$ We haven't really talked about 'modes', is this a formal term?
+The default mode is \cargv{beamer}, while the \cargv{handout} option
+switches to \cargv{handout} mode.
+You can specify modes explicitly within an
 overlay specification by passing \cargv{\carg{mode}:\carg{spec}}. Several mode
-specifications can be specified by separating them using \cargv{|}~(vertical
+specifications can be specified by separating them with \cargv{|}~(vertical
 bar). If no mode is specified,
 \cargv{beamer} mode is assumed.
 \begin{example}[
-  template=empty, 
+  template=empty,
   vertical_mode,
   to_page=2,
   paperheight=3cm,
@@ -925,15 +1377,26 @@ bar). If no mode is specified,
 \end{frame}
 \end{document}
 \end{example}
-Often you will want to show some parts only in one mode, for example to provide
+Often you will want to show some parts only in one mode---to provide
 additional commentary in handouts, or to hide things that only make sense
-during presentation. Doing so is easily achieved by using a special zeroth
-slide that is not included when compiling the document. An example of doing so
+during the presentation. This is easily achieved by using a special zeroth
+slide that is not included in the rendered document. An example of doing so
 is presented in \autoref{lst:zero_slides}.
+%$ Careful here: the slide is not included in the compiled (should that be
+%$ rendered?) document, but it _is_ included when _compiling_ the document.
+%$ In this example, the slide is omitted from the final PDF, but the graphic
+%$ file still needs to exist because the frame is still processed by beamer.
+%$\begin{frame}<0>
+%$\begin{tikzpicture}[remember picture,overlay]
+%$\node[at=(current page.center)]
+%$	{\includegraphics[width=0.95\paperwidth]{this_still_needs_to_exist.pdf}};
+%$\end{tikzpicture}
+%$\end{frame}
+%$ (end of example)
 \begin{listing}
   \begin{example}[
-    template=empty, 
-    vertical_mode,
+    template=empty,
+    vertical_pages,
     to_page=2,
     paperheight=3cm,
     paperwidth=4cm,
@@ -969,19 +1432,17 @@ is presented in \autoref{lst:zero_slides}.
 \end{listing}
 \endgroup
 
-While handouts created this way are better compared to full blown presentation,
-they are still rather uneconomical, since the slide structure---with titles,
-lots of empty space and bright colours---is used. The \pai{beamer} package
-provides another way to create handouts---the \cargv{article} mode which, as
-the name suggests, will typeset the document in a fashion similar to a regular
-article. Due to much starker differences between layouts in these modes this
-may require more tweaking compared to the previous mode, but the result will be
-usually much better suited for an actual printed handout.
+Handouts created in this way still use the slide structure---titles, lots of
+empty space, and bright colours.
+As an alternative, the \cargv{article} mode will typeset the document in a
+fashion similar to a regular article. Due to the more pronounced differences
+between layouts, this may require more tweaking than the \cargv{handout} mode,
+but the result will often be much more suitable for a printed handout.
 
-Switching to the \cargv{article} mode is a bit different compared to other
-\pai{beamer} modes. Instead of passing class option, you simply replace the
-class altogether for an \cli{article} and use \pai{beamerarticle} package in
-your preamble. See \autoref{lst:article_mode} for an example. The
+Switching to the \cargv{article} mode differs from switching to other
+\pai{beamer} modes. Rather than passing options to the class, the class is
+replaced by \cli{article} and the \pai{beamerarticle} is included in the
+preamble. See \autoref{lst:article_mode} for an example. The
 \pai{beamerarticle} package defines all of the \pai{beamer} commands and
 environments, so that they will produce sensible output in the article.
 \begin{listing}
@@ -1018,8 +1479,8 @@ environments, so that they will produce sensible output in the article.
 
 Because the concept of slides is not present in an article,\footnote{To be more
   precise, only contents of the first slide are typeset.} the overlay
-specifications will be generally useless. However the special zeroth slide
-works normally and can be similarly used to hide content from a given mode.
+specifications will be useless. However the special zeroth slide
+works normally and can be used to hide content.
 \begin{example}[standalone, paperheight=3cm]
 %!hidebegin
 \usepackage{beamerarticle}
@@ -1041,7 +1502,7 @@ works normally and can be similarly used to hide content from a given mode.
 \end{example}
 
 Because the overlay specification is often used to provide contents for a
-single mode, there exist another way of specifying it for that purpose---if you
+single mode, there exists a short cut: f you
 provide only the mode name, this will be the same as setting all other modes to
 zeroth slide and leaving the first slide for the specified mode. This usually
 results in a more readable code.
@@ -1060,3 +1521,52 @@ results in a more readable code.
 \end{frame}
 \end{document} %!hide
 \end{example}
+
+
+%$ Realising this is not the comprehensive guide to LaTeX, here's a few titbits
+%$ that may or may not be useful and within scope:
+
+%$ To use the default theme, but without navigation symbols (in the preamble):
+%$ \beamertemplatenavigationsymbolsempty
+%$ No mention of how to disable these in the section.
+
+%$ The default font, Computer Modern, font does not support italicised sans-
+%$ serif fonts (at least, not in bold or semi-bold anyway, but I think in
+%$ general). This means all your emphasised text renders in Roman upright,
+%$ same as everything else. The Latin Modern font does support emphasised
+%$ sans serif. In the preamble again:
+%$ \usepackage{lmodern}
+
+%$ Latin Modern's font weight is a little light for my liking, while its bold
+%$ is very bold indeed (technically, it's a bold extended (wide) font). What we
+%$ want, is something in between. In the case of Latin Modern, we have a
+%$ semi-bold condensed (sbc) variant, which we now set as the default style for
+%$ the structure element. This is inherited by everything else; normal text,
+%$ altered text, block titles, enumerators, and so on. In the preamble:
+%$ \setbeamerfont{structure}{size=\normalsize, series=\fontseries{sbc}}
+%$ \AtBeginDocument{\usebeamerfont{structure}}
+
+%$ To include external graphics files with TikZ, you may need to enable the
+%$ 'remember picture' and 'overlay' options, and process the document twice
+%$ (pictures will be incorrectly placed after the first run).
+%$ \begin{frame}[plain]
+%$ \begin{tikzpicture}[remember picture,overlay]
+%$ \node[at=(current page.center)]
+%$   {\includegraphics[width=1.01\paperwidth]{Art/picture.pdf}};
+%$ \node[text=blue,text width=0.5\paperwidth,align=right] at
+%$   ([xshift=0.25\paperwidth,yshift=-0.20\paperheight]current page.north)
+%$   {\large{\textbf{Overlaid Title}}};
+%$ \end{tikzpicture}
+%$ \end{frame}
+
+%$ Changing the frame title to a smaller but bold font, with an underline.
+%$ Again, the preamble.
+%$ \setbeamertemplate{frametitle}
+%$   {\bfseries\large\insertframetitle\par\vskip-6pt\color{black}\leavemode}
+%$ Adding \leaders\hrule height 0.6pt\hfill\kern0pt after \leavemode (and before
+%$ the } adds an underline. There are subtleties between LaTeX vs pdfTeX.
+
+%$ Changing the bullet-point vertical spacing, the markers, and their colour
+%$ can be accomplished by redefining Beamer's itemize environment, but it's
+%$ easier to create a new environment from scratch. Too long and specialised a
+%$ discussion for this booklet, I would think.
