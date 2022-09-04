@@ -369,9 +369,9 @@ are normally enclosed
 within square brackets \verb|[ ]|, and usually come right after the command
 name. The following notation will often be used within this book to denote a
 command with one optional parameter and one required parameter:
-\begin{lscommand}
+\begin{code}
   \cs{command}[optional parameter: o, parameter: m]
-\end{lscommand}
+\end{code}
 
 \section{Input File Structure}\label{sec:structure}
 When \LaTeX{} processes an input file, it expects it to follow a
@@ -381,6 +381,27 @@ command
   \csi{documentclass}[class: m]
 \end{code}
 The \carg{class} argument specifies what sort of document you intend to write.
+Available classes are listed in \autoref{documentclasses}. Usually the
+\cli{article} class is sufficient.
+
+\begin{table}
+  \caption{Document Classes.}\label{documentclasses}
+  \begin{tabular}{@{}lp{8cm}@{}}
+    \toprule
+    Class         & Description                                       \\
+    \midrule
+    \cli{article} & for articles in
+    scientific journals, short reports, and any other short document. \\
+    \cli{proc}    & a class for
+    proceedings based on the article class.                           \\
+    \cli{report}  & for longer reports.
+    containing several chapters, small books, PhD theses, \ldots      \\
+    \cli{book}    & for real books.                                   \\
+    \cli{beamer}  & for presentations.                                \\
+    \cli{letter}  & for letters.                                      \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 Now begins an area of the input file that is called the \emph{\wi{preamble}}.
 Inside it, you add commands to influence the style of the whole document, or
@@ -393,13 +414,13 @@ package, you use the command
 When the preamble is finished, you start the \emph{body} of the text with the
 command
 \begin{code}
-\mintinline{latex}|\begin{document}|
+  \ltx|\begin{document}|
 \end{code}
 
 Inside the body, you enter the text mixed with some useful \LaTeX{} commands.
 Mark the end of the document with the
 \begin{code}
-\mintinline{latex}|\end{document}|
+  \ltx|\end{document}|
 \end{code}
 command, which tells \LaTeX{} to call it a day. Anything that
 follows this command will be ignored by \LaTeX.
