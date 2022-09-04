@@ -906,14 +906,11 @@ command would be
 
 \TeX{} and \LaTeX{} were primarily designed for creating text documents, and
 that is where they shine. Still, it is also possible to use them for creating
-presentations. These lack fancy animations and transitions---they are just
-%$ 'lack fancy animations' - not entirely true, with some effort and JavaScript.
-%$ animation package: https://ctan.org/pkg/animate
-%$ and: https://tex.stackexchange.com/questions/22412/beamer-transition-effect
-cleverly set up PDF files, after all. But on the plus side, you will be able to
-tap into the strengths of \LaTeX{} such as logical markup, mathematical
-typesetting and all the typesetting magic provided by the various \LaTeX{}
-extension packages.
+presentations. In presentations created with \LaTeX{} you will be able to
+use all the \LaTeX{} features such as logical markup, mathematical
+typesetting and all the typesetting magic you are acustomed too. While these presentations
+are just PDF files, you may be amazed what is possible with the
+PDF in this respect.
 
 Historically, there have been several ways to create presentations; for example,
 the standard \LaTeX{} \cli{slides} class, or the \pai{powerdot} package. While
@@ -1010,7 +1007,6 @@ properly hyperlinked entries.
 \end{document} %!hide
 \end{example}
 
-%$ Should this be \pai{beamer}?
 \cli{beamer} provides special commands for emphasising information on the slide.
 The \csi{alert} command typesets its argument using a bright red colour. The
 \ei{block} environment displays its contents with a title and separation from
@@ -1032,13 +1028,12 @@ Here we will talk about
 \end{frame} %!hide
 \end{document} %!hide
 \end{example}
-%$ Previously just said 'Beamer' here. Changed for consistency with section.
 \pai{beamer} redefines many \pai{amsmath}\footnote{\pai{amsmath} is loaded
   automatically by \cli{beamer}.} environments, including \ei{theorem} and
 \ei{proof}, to also produce blocks.
 
 You will find that most of the \LaTeX{} commands and environments, such as
-\cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable %$ \pai instead of \cli?
+\cs{ref}s or \env{itemize}, work just as expected with \cli{beamer}. A notable
 exception is the verbatim input and similar constructs described in
 \autoref{sec:code_listings}. Using them requires you to pass the
 \cargv{fragile} option to the frame options.
@@ -1132,7 +1127,6 @@ many more preexisting commands and environments that are extended by
 \pai{beamer} to support them. Refer to its User Guide~\cite{pack:beamer} for
 more examples.
 
-%$ 'not shown at all' untrue; does get shown eventually.
 By default, content remains invisible until uncovered. If you
 don't want a lot of empty space on your slides, or if you prefer not to
 surprise your audience, you may adjust this behaviour to typeset the covered
@@ -1155,7 +1149,6 @@ text as transparent. To do so, use the \csi{setbeamercovered} with the
 \end{frame}
 \end{document} %!hide
 \end{example}
-%$ No mention any of 'the other possible arguments' besides 'dynamic'.
 Among the other possible arguments to these commands, \cargv{dynamic} makes the
 text increasingly transparent the later it is
 shown.\footnote{The effect is amplified a bit in the below example, so it is
@@ -1206,7 +1199,7 @@ predefined set of themes that alter the style and colours of the presentation.
 \end{document} %!hide
 \end{example}
 The full list of available themes can be viewed
-at reference~\cite{AnotherBeamerThemeMatrix}.
+at reference~\citetitle{AnotherBeamerThemeMatrix}.
 
 The \csi{usefonttheme} command can be used in a similar fashion. By default the
 text in frames is typeset using a sans serif font. This choice makes sense,
@@ -1237,7 +1230,7 @@ Greater customisation is possible using the
 commands. The \carg{element} argument is the element to which the customised
 font or colour should be applied, while the \carg{attributes} specifies font
 attributes, such as \cargv{size}, \cargv{shape} and \cargv{family}, and the
-foreground and background colours, \cargv{fg} (and \cargv{bg}. Fonts are
+foreground and background colours, \cargv{fg} and \cargv{bg}. Fonts are
 further discussed in \autoref{sec:fontspec}, while colours are covered in
 \autoref{sec:colors}.
 \begin{example}
@@ -1264,7 +1257,7 @@ further discussed in \autoref{sec:fontspec}, while colours are covered in
 By default, \LaTeX{} typesets mathematics in serif fonts.
 When \pai{beamer} attempts the same typesetting in a sans serif font, not all
 symbols may exist (Greek letters, for example).
-If you presentation is mathematically heavy, it may be best to switch to a
+If your presentation is mathematically heavy, it may be best to switch to a
 sans serif math font and matching text font.
 Switching math fonts is described further in \autoref{sec:math_fonts}.
 \begin{example}
@@ -1290,12 +1283,12 @@ next to the Latin ones.
 %$ Slides are rendered onto 4 : 3 ..., but not just slides.
 By default, \pai{beamer} typesets onto \(4 : 3\) aspect-ratio pages. If the
 %$ not 'it'; could refer to changing the projector
-projector uses some other aspect ratio, you may prefer to match. You
+projector uses some other aspect ratio, you may prefer to match it. You
 may do so, by passing an \cargv{aspectratio} to the \cs{documentclass} options.
 It accepts a single integer that encodes the desired ratio. For example,
 \cargv{169} is interpreted as \(16:9\), while \cargv{54} is interpreted as
-\(5:4\). Wider ratios are especially useful if you want to include a sidebar
-with the table of contents on your slides. %$ 'include' and 'on', or 'incorporate' and 'into'
+\(5:4\). Wider ratios are especially useful if you want to incorporate a sidebar
+with the table of contents into your slides.
 \begin{example}[paperwidth=8cm]
 %!showbegin !hide
 \documentclass[
@@ -1446,8 +1439,6 @@ fashion similar to a regular article. Due to the more pronounced differences
 between layouts, this may require more tweaking than the \cargv{handout} mode,
 but the result will often be much more suitable for a printed handout.
 
-%$ Strictly speaking, this is a LaTeX article with some beamer definitions.
-%$ Don't know that it's accurate to call this a 'beamer mode'.
 Switching to the \cargv{article} mode differs from switching to other
 \pai{beamer} modes. Rather than passing options to the class, the class is
 replaced by \cli{article} and the \pai{beamerarticle} is included in the
