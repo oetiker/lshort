@@ -231,9 +231,7 @@ between zero and four. By setting \emph{n} to a value below 4, you leave
 bad. Do not confuse these \enquote{break} commands with the \enquote{new}
 commands. Even when you give a \enquote{break} command, \LaTeX{} still tries to
 even out the right border of the line and the total length of the page. As
-described in the next section, this can lead to unpleasant gaps in your text.
-%$ 'section': The next section is about ready-made strings, the next subsection
-%$ is about hyphenation. The next paragraph, perhaps?
+described in the next paragraph, this can lead to unpleasant gaps in your text.
 If you really want to start a \enquote{new line} or a \enquote{new page}, then
 use the corresponding command. Guess their names!
 \begin{example}[examplewidth=0.4\linewidth]
@@ -456,7 +454,7 @@ stick with \pai{babel}.
 
 \subsection{Entering Characters}
 
-Initial versions of \TeX{} were only intended to support the English language,
+Early versions of \TeX{} were only intended to support the English language,
 and thus assumed that source files were ASCII encoded; that is, in a format
 that only supports the Latin alphabet plus few symbols common on computers. With
 the popularization of \LaTeX{} outside the English-speaking world, the situation
@@ -889,8 +887,8 @@ backslash in front of a space generates a space that will not be enlarged. A
 tilde~\enquote*{\ai{\~}} character generates a non-breaking space (prohibits a
 line break). The command \csi{@} in front of a period specifies that this
 period terminates a sentence even when it follows an uppercase letter.
-\csih{@}\ai{\~}\index{tilde@tilde (\verb.~.)}% chktex 18
-\index{., space after} %$ Is the above tilde intentionally visible in output?
+\csih{@}\index{tilde@tilde (\verb.~.)}% chktex 18
+\index{., space after}
 
 \begin{example}
 Mr.~Smith was happy to see her\\
@@ -1319,8 +1317,8 @@ you type
   \csi{verb}[|«\bs carg{text}»|: c]
 \end{lscommand}
 Any text that is enclosed between these delimiters will be directly printed, as
-if typed on a typewriter, with all spaces, and without any \LaTeX{} commands
-being executed.%$ Should this explicitly state 'in monospaced font'?
+if typed on a old typewriter (in a monospaced font), with all spaces, and without any \LaTeX{} commands
+being executed.
 \begin{example}
 Use \verb|\LaTeX{}| to
 print \LaTeX.
@@ -1766,6 +1764,12 @@ In \LaTeX{}, the environment to typeset tables (and more) is called
 \ei{tabular}. While it can be used on its own, the resulting table layouts look
 extremely old fashioned. We recommend adding the \pai*{booktabs} package, which
 provides several commands that let you typeset beautiful modern looking tables.
+
+Note that the \pai*{booktabs} package does not modify the tabular environment,
+it just adds some extra commands for spacing and adding lines to your tables,
+such that the results are more in line with todays aestetic assumptions. If you write 
+for a publication which has other requirements, like not using any extra packages,
+simply do not use the extra commands.
 To achieve some more advanced table layouts, you will also learn about the
 \pai*{longtable}, \pai*{array} and \pai*{multirow} packages in this section.
 They are so useful, that you'll probably want to put them all into the preamble
@@ -2201,8 +2205,7 @@ will then need several passes to properly calculate the column widths.
 In regular text, you can specify the amount of space between two lines as an
 optional argument to the \csi{\textbackslash} command. Can the same be done
 within a table? It turns out that it can, but there is one caveat. If you use
-it together with a \cargv{p\{...\}} column, the space specified will be
-%$ The 'space specified', or the 'resulting space'? The latter, surely?
+it together with a \cargv{p\{...\}} column, the resulting space will be
 different depending on column order.
 \begin{example}[standalone, paperheight=3cm, paperwidth=0.57\linewidth]
 \begin{document} %!hide
@@ -2796,7 +2799,7 @@ argument of the \csi{includeonly} command will be executed.
 
 The \csi{include} command starts typesetting the included text on a new
 page. This is helpful when you use \csi{includeonly}, because the
-page breaks will not move, even when some included files are omitted.%$ or \csi{include}?
+page breaks will not move, even when some \csi{include} files are omitted.
 Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
   \csi{input}[filename: m]
