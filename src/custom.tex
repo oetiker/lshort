@@ -932,10 +932,14 @@ is equivalent to
 and the latter works in both \hologo{LuaLaTeX} and \hologo{XeLaTeX}. While
 changing math fonts throughout the document is possible, it may lead to some
 problems; prefer to set them in the preamble for the whole document.
-\begin{example}
-\setoperatorfont\symrm%!hide
-\setmainfont{Garamond Libre}
+\begin{example}[standalone, paperheight=2.5cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\setmainfont{EB Garamond}
 \setmathfont{Garamond Math}
+% ...
+
+\begin{document} %!hide
+\noindent %!hide
 Now we are using Garamond fonts.
 \[
   \symrm{e}^{\symrm{\pi}
@@ -944,20 +948,23 @@ Now we are using Garamond fonts.
   \lim_{h\to0}\frac{\sqrt[3]{
     \symbb{A}}}{2^h}\,\symrm{d}x
 \]
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 
 Not all math fonts have the same character coverage. For example, the default
 font doesn't have lowercase script letters. If you don't want to switch the
 fonts entirely but just use some characters from a different font, you
 can use the \cargv{range} key in the options to the \csi{setmathfont} command.
-\begin{example}
+\begin{example}[standalone, paperheight=1cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\begin{document} %!hide
+\noindent %!hide
 \(xyz = \symscr{Hello}\) vs.\
 \setmathfont[
   range=scr,
 ]{STIX Two Math}
 \(xyz = \symscr{Hello}\)
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 You can also set it to exact Unicode ranges if you need more control over
 replaced symbols.
@@ -966,16 +973,20 @@ Some fonts define two types of script font \emph{roundhand} and \emph{chancery}.
 normally available as the first stylistic set feature of the font. You can map
 \csi{symcal} which is normally a synonym for \csi{symscr}, to produce the
 alternative script letters.
-\begin{example}
+\begin{example}[standalone, paperheight=1cm, paperwidth=6cm]
+\usepackage{unicode-math}%!hide
+\begin{document} %!hide
+% TODO: Waiting for unicode-math fix
 \setmathfont{STIX Two Math}
 \setmathfont[
   range={cal, bfcal},
   StylisticSet=1,
 ]{STIX Two Math}
 
+\noindent %!hide
 \(\symscr{ABCDabcd}\) vs.\
 \(\symcal{ABCDabcd}\) 
-\setmathfont{Latin Modern Math} %!hide
+\end{document}%!hide
 \end{example}
 
 The default behaviour of the \csi{not} command, is to combine the negating glyph
@@ -1294,24 +1305,24 @@ is defined as exactly \qty{25.4}{\mm}. All units in \TeX{} are ultimately
 represented as a whole numbers of \unit{sp}. See \autoref{units} for the exact
 values.
 \begin{table}
-  \caption{\TeX{} Units.}\label{units}\index{units}
+  \caption{\LaTeX{} Units.}\label{units}\index{units}
   \begin{tabular}{@{}clrrl@{}}
     \toprule
-    Unit                   & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
+    Unit     & Meaning                                                                                                 & Definition            & {Value (\unit{\sp})} & Demo            \\
     \midrule
-    \mintinline{latex}{cm} & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
-    \mintinline{latex}{mm} & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
-    \mintinline{latex}{in} & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
-    \mintinline{latex}{pt} & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
-    \mintinline{latex}{sp} & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
-    \mintinline{latex}{pc} & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
-    \mintinline{latex}{dd} & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
-    \mintinline{latex}{cc} & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
-    \mintinline{latex}{nd} & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
-    \mintinline{latex}{bp} & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
-    \mintinline{latex}{em} & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
-    \mintinline{latex}{ex} & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
-    \mintinline{latex}{mu} & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
+    \ltx|cm| & centimetre                                                                                              & \qty{0.01}{\m}        & \DimVal{1cm}         & \demowidth{1cm} \\
+    \ltx|mm| & millimetre                                                                                              & \qty{0.001}{\m}       & \DimVal{1mm}         & \demowidth{1mm} \\
+    \ltx|in| & inch                                                                                                    & \qty{25.4}{\mm}       & \DimVal{1in}         & \demowidth{1in} \\
+    \ltx|pt| & point                                                                                                   & \fqty{1}{72.27}{\in}  & \DimVal{1pt}         & \demowidth{1pt} \\
+    \ltx|sp| & scaled point                                                                                            & \fqty{1}{65536}{\pt}  & \DimVal{1sp}         & \demowidth{1sp} \\
+    \ltx|pc| & pica                                                                                                    & \qty{12}{\pt}         & \DimVal{1pc}         & \demowidth{1pc} \\
+    \ltx|dd| & didot                                                                                                   & \qty{0.376065}{\mm}   & \DimVal{1dd}         & \demowidth{1dd} \\
+    \ltx|cc| & cicero                                                                                                  & \qty{12}{\dd}         & \DimVal{1cc}         & \demowidth{1cc} \\
+    \ltx|nd| & new didot                                                                                               & \qty{0.375}{\mm}      & \DimVal{1nd}         & \demowidth{1nd} \\
+    \ltx|bp| & big point                                                                                               & \fqty{1}{72}{\in}     & \DimVal{1bp}         & \demowidth{1bp} \\[6pt]
+    \ltx|em| & \multicolumn{3}{m{7cm}}{roughly width of an \enquote*{M} in the current font}                           & \demowidth{1em}                                                \\
+    \ltx|ex| & \multicolumn{3}{m{7cm}}{roughly height of an \enquote*{x} in the current font}                          & \demowidth{1ex}                                                \\
+    \ltx|mu| & \multicolumn{3}{m{7cm}}{equal to \fqty{1}{18}{em}, where \unit{em} is taken from the current math font} & \demowidth{0.05556em}                                          \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1347,274 +1358,1116 @@ Text in 12 \TeX{} points.
 Text in 12 DTP points.
 \end{example}
 \endgroup
+
+\subsection{Horizontal Space}\label{sec:hspace}
+
+\LaTeX{} determines the spaces between words and sentences automatically.
+However, similarly to commands described in \autoref{sec:math_spacing}, there are
+ways to influence the spaces in normal text. For example, to add horizontal
+space, you can use:\index{horizontal!space}
+\begin{lscommand}
+  \csi{hspace}[length: m]
+\end{lscommand}
+The \carg{length} argument can be specified using the units described in previous
+section in the usual way. You can use decimal and even negative numbers as
+values.
+\begin{example}
+This\hspace{1.5cm}is a space
+of \qty{1.5}{\cm}. A bit too
+cramped\hspace{-5pt}here.
+\end{example}
+The space added that way will disappear if it lands on the end of a line,
+similarly to an interword spacing. If you want to retain the extra space, use the
+starred version of the command.
+\begin{example}
+The gap here is\hspace{1cm}%
+\linebreak missing.
+
+Here the gap is\hspace*{1cm}%
+\linebreak not missing.
+\end{example}
+
+So far all the lengths we have seen have been \emph{rigid}\index{rigid
+  length}\index{length!rigid}, that is the length is exactly as specified. But
+you probably noticed that the spaces between words are not rigid---they can
+stretch and shrink, so that \TeX{} can make the right margin equal. Lengths
+that can do that are called \emph{rubber} lengths\index{rubber
+  length}\index{length!rubber}.
+
+Such lengths can be specified using a special \ltx{plus} and \ltx{minus}
+syntax. For example to specify that a space can stretch if a need arises you
+can specify it by writing \ltx{plus} followed by the maximum allowed stretch.
+\begin{example}
+This small\hspace{1em plus 2cm}%
+space may grow if a need arises.
+
+Here\hspace{1em plus 2cm}the
+need\linebreak very much arises.
+\end{example}
+The additional space can extend even beyond the specified maximum, but in such
+cases \LaTeX{} will print a warning.
+
+The shrinking can be specified in a similar way using the \ltx{minus} syntax.
+\begin{example}
+This\hspace{1em minus 2em}%
+space may disappear if it gets
+too crampy.
+\end{example}
+
+When there are multiple rubber spaces in text \TeX{} calculates the amount of
+`stretch' proportionally to the specified maximum. Thus if \TeX{} needs
+additional \qty{2}{\cm} of whitespace and one length has \ltx{plus 1cm} while
+the other has \ltx{plus 3cm} modifier, it will result in the first one being
+enlarged by \(\left(\frac{1}{1+3}\right) \times \qty{2}{\cm}\) while the second
+one by \(\left(\frac{3}{1+3}\right) \times \qty{2}{\cm}\).
+\begin{example}
+This\hspace{0pt plus 3cm}is
+stretched\hspace{0pt plus 1cm}%
+three\linebreak times as much.
+\end{example}
+
+With these informations you can use the spaces to automatically centre the text
+in a page by setting the allowed stretching to a high number.
+\begin{example}
+\hspace*{0pt plus 100cm}Hello
+\hspace*{0pt plus 100cm}
+\linebreak
+\end{example}
+This approach will, however, interfere with the spacing inside the centred
+expression, since the spaces are still distributed proportionally. The effect
+will be getting smaller if you set the allowed stretching to a larger number
+but it will still be present. For situations like these, \TeX{} actually
+supports a concept of infinitely stretchable space---by using the special
+\cargv{fill} unit, allowed only as stretching and shrinking value, we can
+ensure that all the other rubber lengths will not stretch.\footnote{\TeX{}
+  actually recognises three orders of infinity: \cargv{fil}, \cargv{fill} and
+  \cargv{filll}, but as a document author you should stick to using only the
+  second one. The first order infinity---\cargv{fil}---is used by some of the
+  internal \LaTeX{} such as \cs{\bs} or \cs{newpage}. The third one can be used
+  to disallow stretching of the second order infinity when it's needed in some
+  very rare circumstances.}
+\begin{example}
+\hspace*{0pt plus 1fill}%
+No\hspace{0pt plus 100cm}
+stretching allowed.%
+\hspace*{0pt plus 1fill}%
+\linebreak
+\end{example}
+
+Because the \cargv{fill} value is often used with zero width space \LaTeX{}
+defines a macro that simplifies entering it---the
+\begin{lscommand}
+  \csi{stretch}[n: m]
+\end{lscommand}
+command.
+\begin{example}
+\hspace*{\stretch{1}}
+is equivalent to
+\hspace*{0pt plus 1fill}
+\linebreak
+\end{example}
+The \carg{n} argument is the coefficient by which the \cargv{fill} is
+multiplied. Recall that the spaces are distributed proportionally and this is
+still the case when infinities are involved.
+\begin{example}
+x\hspace{\stretch{1}}%
+x\hspace{\stretch{3}}x
+\end{example}
+
+Still, the most common value to use is \ltx{\hspace{0pt plus 1fill}} and so
+\LaTeX{} defines \csi{hfill} that is equivalent to it. It's often used when you
+want to flush the rest of the line right.
+\begin{example}
+Peter Pan\hfill Neverland
+
+Dear Wendy, \ldots
+\end{example}
+
+\subsection{Vertical Space}
+
+You have already seen that vertical space between lines can be inserted using
+\csi{\bs} command. However, it does not work well when used for spacing between
+paragraphs---the reason being that it always starts a new line, so if it's used
+at the end of paragraph, it will end in an empty line.
+\begin{example}
+Paragraph.\\
+
+There's an empty line above.
+\end{example}
+\LaTeX{} has a dedicated command for setting the space between paragraphs, the
+\begin{lscommand}
+  \csi{vspace}[length: m]
+\end{lscommand}
+command. It works similarly to the \cs{hspace} command, however when used
+inside a line it will only produce the space after the line is ended.
+\begin{example}
+Some\vspace{1em} text that
+spans multiple lines.
+\end{example}
+Since it does not produce empty lines when used, it is perfect for inserting a
+space between paragraphs. Similarly to the \cs{hspace} command, the space will
+be discarded if it lands at the end of a page---use the starred version if this
+is not desirable.
+
+The rubber lengths, \csi{stretch} and \csi{vfill} work for vertical space too. However, since manual vertical spacing is
+much more common compared to manual horizontal spacing, \LaTeX{} also declares
+three semantic commands for inserting them:
+\begin{lscommand}
+  \csi{bigskip} \\
+  \csi{medskip} \\
+  \csi{smallskip}
+\end{lscommand}
+The exact sizes of these skips is dependent on the class used. You can access
+them as length by appending \enquote{amount} to their name, for example,
+\csi{medskipamount}. These are useful when creating your own environments or to
+indicate a thought break between paragraphs.\index{vertical space}
+
+There also exist the \csi{addvspace command}, which works similarly to the
+\cs{vspace} command, however when multiple such commands are entered one after
+another, only the one with the biggest length will be used. Note that using it
+will lead to an error if it is not used between paragraphs.
+\begin{example}
+Hello.
+
+\addvspace{1pt}
+\addvspace{1em}
+\addvspace{1cm}
+There is \qty{1}{\cm} space
+above me.
+\end{example}
+This command is useful if you want to ensure that a vertical space is present
+but avoid entering several of them accidentally.
+
+\subsection{Length Variables}
+
+Like many things in \LaTeX, lengths can be stored inside commands to allow
+reuse.
+\begin{example}
+\NewDocumentCommand{%
+  \mylength}{}{2em}
+foo\hspace{\mylength}bar
+\end{example}
+However, \LaTeX{} provides dedicated length variables, which are much better
+suited for the purpose. These are created using
+\begin{lscommand}
+  \csi{newlength}[variable: M]
+\end{lscommand}
+and set using
+\begin{lscommand}
+  \csi{setlength}[variable: M, length: m]
+\end{lscommand}
+It's important to note that \csi{newlength} declares the length globally, but
+\csi{setlength} only affects the current group. If you declare a length
+variable without setting it, it will have a default value of zero.
+
+In contrast to the command approach, length variables are stored as numbers and
+not as text. This allows you to to do simple arithmetic operations, for
+example, to scale them by prepending them with a number.
+\begin{example}
+\newlength{\mylength}
+\setlength{\mylength}{2em}
+foo\hspace{0.5\mylength}bar%
+\hspace{2\mylength}baz
+\end{example}
+In order to increase an existing length variable you can use \csi{addtolength}.
+\begin{example}
+\setlength{\mylength}{2em} %!hide
+foo\hspace{\mylength}bar\\
+\addtolength{\mylength}{2em}
+foo\hspace{\mylength}bar
+\end{example}
+
+Since length variables are not stored as text macros, but as \TeX{} internal
+numbers, trying to typeset them in a document results in an error. To translate
+them back into their textual representation use the \csi{the} command. Note
+that their value will always be printed using points as units.
+\begin{chktexignore}  
+\begin{example}
+\setlength{\mylength}{1cm}
+\the\mylength
+\end{example}
+\end{chktexignore}
+
+Lengths can be also determined dynamically from the content. The following
+commands allow you to determine the width, height and depth of a \LaTeX{} text
+and assign it to length variable.
+\begin{lscommand}
+  \csi{settoheight}[variable: M, element: m]\\
+  \csi{settodepth}[variable: M, element: m] \\
+  \csi{settowidth}[variable: M, element: m]
+\end{lscommand}
+The element height is calculated by taking into account the part of the element
+that extends above baseline, while the depth takes into account the part that
+extends below baseline.
+\begin{example}[vertical_mode, examplewidth=0.85\linewidth]
+\newlength{\myheight} \settoheight{\myheight}{Major}
+\newlength{\mydepth} \settodepth{\mydepth}{Major}
+\newlength{\mywidth} \settowidth{\mywidth}{Major}
+The word Major has width of \the\mywidth, height of
+\the\myheight{} and depth of \the\mydepth.
+\end{example}
+
+These commands are especially useful when creating your own environments
+requiring complicated alignment or spacing. An example of using them is
+presented in \autoref{lst:fun_with_lengths}.
+
+\begin{listing}
+  \begin{example}[vertical_mode, examplewidth=0.85\linewidth]
+\newlength{\vardescindent}
+\NewDocumentEnvironment{vardesc}{m}{%
+  \settowidth{\vardescindent}{#1:\ }%
+  \RenewDocumentCommand{\item}{so}{%
+    \IfBooleanTF{##1}{#1: }{\\\hspace*{\vardescindent}}%
+    \IfValueT{##2}{##2 ---}%
+  }%
+  \ignorespaces
+}{}
+
+\[  a^2+b^2=c^2 \]
+\begin{vardesc}{Where}
+  \item*[\(a\), \(b\)] are adjacent to the right angle
+    of a right-angled triangle.
+  \item[\(c\)] is the hypotenuse of the triangle and
+    feels lonely.
+  \item[\(d\)] finally does not show up here at all.
+    Isn't that puzzling?
+\end{vardesc}
+\end{example}
+  \caption{An example of using \cs{settowidth} to align all of the
+    definitions to a preceding phrase.}\label{lst:fun_with_lengths}
+\end{listing}
+
+As you will see \LaTeX{} uses length variables for many things. When
+typesetting a document you can use some of them when setting lengths to make them
+relative. For example, the \csi{linewidth} length holds the length of the
+current line. You can use it when inserting a picture to make it fill the page
+or scale it to take up half the space available.
+\begin{example}
+\includegraphics[
+  width=0.5\linewidth,
+]{example-image}
+\end{example}
+
+\section{The Layout of the Document}
+
+\subsection{Document Class Options}\label{sec:documentclassoptions}
+
+The easiest way to influence the layout of the document is to pass options to
+the
+\begin{lscommand}
+  \csi{documentclass}[options: o, class: m]
+\end{lscommand}
+command at the beginning of your file. The available classes where already
+described in \autoref{documentclasses} on \autopageref{documentclasses}. The
+\carg{options} have to be separated by commas. The most common options for the
+standard document classes are listed in \autoref{options}.
+
+\begin{table}
+  \RenewDocumentCommand{\arraystretch}{}{1.2}
+  \caption{Document Class Options.}\label{options}
+  \begin{tabular}{@{}>{\RaggedRight}p{2.5cm}p{9cm}@{}}
+    \toprule
+    Options                                  & Description                   \\
+    \midrule
+    \cargv{10pt}, \cargv{11pt}, \cargv{12pt} & Sets the size
+    of the main font in the document. If no option is specified,
+    \cargv{10pt} is assumed.\index{document font size}\index{base
+    font size}                                                               \\
+    \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
+    The default size can be configured when installing \LaTeX. Besides that,
+    \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
+    \cargv{legalpaper} can be specified. Note that it only affects the layout
+    of margins, not the PDF paper size itself, see \autoref{sec:page_layout}
+    for more details.\index{legal paper}\index{paper
+      size}\index{A4 paper}\index{letter paper}\index{A5 paper}\index{B5
+    paper}\index{executive paper}                                            \\
+    \cargv{fleqn}                            & Typesets
+    displayed formulae left-aligned instead of centred.                      \\
+    \cargv{leqno}                            & Places
+    the numbering of formulae on the left hand side instead of the right.    \\
+    \cargv{titlepage}, \cargv{notitlepage}   & Specifies
+    whether a new page should be started after the \wi{document title}
+    or not. The \cli{article} class does not start a new page by
+    default, while \cli{report} and \cli{book} do.\index{title}              \\
+    \cargv{onecolumn}, \cargv{twocolumn}     & Instructs
+    \LaTeX{} to typeset the document in \wi{one column} or \wi{two column}s. \\
+    \cargv{twoside, oneside}                 & Specifies whether
+    double or single sided output should be generated. The classes
+    \cli{article} and \cli{report} are \wi{single sided} and the
+    \cli{book} class is \wi{double sided} by default. Note that this
+    option concerns the style of the document only. The option
+    \cargv{twoside} does \emph{not} tell the printer you use that it
+    should actually make a two-sided printout.                               \\
+    \cargv{landscape}                        & Changes the
+    layout of the document to print in landscape mode.                       \\
+    \cargv{openright, openany}               & Makes chapters begin
+    either only on right hand pages or on the next page available. This does
+    not work with the \cli{article} class, as it does not know about
+    chapters. The \cli{report} class by default starts chapters on
+    the next page available and the \cli{book} class starts them on
+    right hand pages.                                                        \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For example, if an input file for a \LaTeX{} document starts with the line
+\begin{code}
+\csi{documentclass}[{11pt, twoside, a4paper}: vo, article: vm]
+\end{code}
+then it instructs \LaTeX{} to typeset the document as an article with a base
+font size of eleven points, and to produce a layout suitable for double sided
+printing\footnote{Note that this only influences the appearance of the document
+  to be adequate for double sided printing---you still have to pass proper
+  instructions to your printer to print it on both sides.} on A4 paper.
+
+If you do not like the appearance of the standard \LaTeX{} classes, the easiest
+way to change it is to use some alternatives. For example, the
+\pai*{koma-script} package provides alternatives that produce documents with European
+typography traditions in mind. Another popular package is \pai*{memoir}, which
+provides a single \cli{memoir} class with extensive customization options. On
+\href{https://www.ctan.org/}{CTAN} you can find many more specialized classes
+that will let you produce documents as prescribed by various universities or
+typographical traditions.
+
+\subsection{Page Styles}
+
+\LaTeX{} supports three predefined \wi{header}\slash\wi{footer}
+combinations---so-called \wi{page style}s. The \carg{style} parameter
+of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
+  style!headings@\texttt{headings}}\index{headings@\texttt{headings}}\index{page
+  style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
+\begin{lscommand}
+  \csi{pagestyle}[style: m]
+\end{lscommand}
+command defines which one to use. \autoref{pagestyle} lists the predefined
+page styles.
+
+\begin{table}
+  \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
+  \begin{tabular}{lp{8cm}}
+    \toprule
+    Style              & Description                                      \\
+    \midrule
+    \cargv{plain}      & prints the page numbers on the bottom
+    of the page, in the middle of the footer. This is the default page
+    style.                                                                \\
+    \cargv{headings}   & prints the current chapter heading
+    and the page number in the header on each page, while the footer
+    remains empty.  (This is the style used in this document)             \\
+    \cargv{empty}      & sets both the header and the footer
+    to be empty.                                                          \\
+    \cargv{myheadings} & similar to the \cargv{headings} style but leaves
+    the headers and footers empty allowing for them to be defined by
+    the author. A description of how to do this is in
+    \autoref{sec:fancy}.                                                  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+It is possible to change the page style of the current page with the command
+\begin{lscommand}
+  \csi{thispagestyle}[style: m]
+\end{lscommand}
+
+You may also control the style of the displayed page numbers. To change it use
+the
+\begin{lscommand}
+  \csi{pagenumbering}[style: m]
+\end{lscommand}
+command, where \carg{style} is one of the styles presented in
+\autoref{tb:numberings}.
+
+\begin{table}
+  \caption{Possible argument of the \csi{pagenumbering}
+    command.}\label{tb:numberings}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Style          & Description                                   \\
+    \midrule
+    \cargv{arabic} & Arabic numerals (1, 2, 3, \ldots)             \\
+    \cargv{roman}  & Lowercase Roman numerals (i, ii, iii, \ldots) \\
+    \cargv{Roman}  & Uppercase Roman numerals (I, II, III, \ldots) \\
+    \cargv{alph}   & Lowercase Latin letters (a, b, c, \ldots)     \\
+    \cargv{Alph}   & Uppercase Latin letters (A, B, C, \ldots)     \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+If would like more control over the apparance of your headers and footers, refere to \autoref{sec:fancy} on \autopageref{sec:fancy}.
+
 \subsection{Line Spacing}\index{line spacing}
 
-If you want to use larger inter-line spacing in a
-document, change its value by putting the
+When using custom fonts, you may find that the default line spacing does not
+match your taste. You could redefine it using the \csi{fontsize} commands,
+however, this will be overwritten once you use size changing commands described
+in \autoref{sizes}.
+
+To make such adjustments easier \LaTeX{} defines the
 \begin{lscommand}
   \csi{linespread}[factor: m]
 \end{lscommand}
-command into the preamble of your document.
-Use \verb|\linespread{1.3}| for ``one and a half'' line
-spacing, and \verb|\linespread{1.6}| for ``double'' line spacing.  Normally
-the lines are not spread, so the default line spread factor
-is~1.\index{double line spacing}
-
-Note that the effect of the \csi{linespread} command is rather drastic and
-not appropriate for published work. So if you have a good reason for
-changing the line spacing you might want to use the command:
-\begin{lscommand}
-  \mintinline{latex}|\setlength{\baselineskip}{1.5\baselineskip}|
-\end{lscommand}
-
+command. Once used, each line skip will be multiplied by the \carg{factor}.
+Note, that outside the preamble, you must follow it by \csi{selectfont} for the
+changes to be visible.
 \begin{example}
-{\setlength{\baselineskip}%
-           {1.5\baselineskip}
+\linespread{0.9}\selectfont
+If you want to save paper, set
+the linespread to a value
+below 1 to sacrifice a bit of
+space between lines.
+
+\linespread{1.1}\selectfont
+On the other hand, if your
+assignment is short a few
+pages, setting it to a value
+above 1 might just save you
+some typing.
+\end{example}
+
+Using the \csi{linespread} command it's also possible to create an effect of
+\enquote{one and a half} or \enquote{double} line spacing. Recall that the
+default line spacing is around \qty{1.2}{em}. Thus if you want to make the
+document use double line spacing you have to set the \carg{factor} to
+\(\sfrac{2}{1.2} \approx 1.667\).
+
+Note that setting the \csi{linespread} will change the line spacing
+\emph{everywhere}---including footnotes, table of contents and floats. Doing so
+is not always desirable, so another approach is to set the \csi{baselineskip}
+length. This will only affect the line spacing of the main document text.
+Similarly to the size changing commands it affects the whole paragraph.
+\begin{example}
+{\setlength{\baselineskip}{%
+  1.5\baselineskip}
 This paragraph is typeset with
 the baseline skip set to 1.5 of
 what it was before. Note the
 par command at the end of the
 paragraph.\par}
 
-This paragraph has a clear
-purpose, it shows that after the
-curly brace has been closed,
-everything is back to normal.
+Here the line spacing returns
+to normal, because line skip
+changes are local to a group.
 \end{example}
+
+Yet another approach is to use a dedicated package, like \pai*{setspace} that
+defines \csi{doublespacing} and similar commands. Note that in general you
+should avoid using excessive line spacing, unless you are emulating an old
+document look.
 
 \subsection{Paragraph Formatting}\label{parsp}
 
-In \LaTeX{}, there are two parameters influencing paragraph layout.
-By placing a definition like
-\begin{code}
-\csi{setlength}\verb|{|\csi{parindent}\verb|}{0pt}| \\
-\verb|\setlength{|\csi{parskip}\verb|}{1ex plus 0.5ex minus 0.2ex}|
-\end{code}
-in the preamble of the input file, you can change the layout of
-paragraphs. These two commands increase the space between two paragraphs
-while setting the paragraph indent to zero.
-
-The \texttt{plus} and \texttt{minus} parts of the length above tell
-\TeX{} that it can compress and expand the inter-paragraph skip by the
-amount specified, if this is necessary to properly fit the paragraphs
-onto the page.
-
-In continental Europe,
-paragraphs are often separated by some space and not indented. But
-beware, this also has its effect on the table of contents. Its lines
-get spaced more loosely now as well. To avoid this, you might want to
-move the two commands from the preamble into your document to some
-place below the command \verb|\tableofcontents| or to not use them at all,
-because you'll find that most professional books use indenting and not
-spacing to separate paragraphs.
-
-If you want to indent a paragraph that is not indented, use
-\begin{lscommand}
-  \csi{indent}
-\end{lscommand}
-\noindent at the beginning of the paragraph.\footnote{To indent the first paragraph after each section head, use
-  the \pai{indentfirst} package in the `tools' bundle.} Obviously,
-this will only have an effect when \verb|\parindent| is not set to
-zero.
-
-To create a non-indented paragraph, use
-\begin{lscommand}
-  \csi{noindent}
-\end{lscommand}
-\noindent as the first command of the paragraph. This might come in handy when
-you start a document with body text and not with a sectioning command.
-
-\subsection{Horizontal Space}\label{sec:hspace}
-
-\LaTeX{} determines the spaces between words and sentences
-automatically. To add horizontal space, use:\index{horizontal!space}
-\begin{lscommand}
-  \csi{hspace}[length: m]
-\end{lscommand}
-If such a space should be kept even if it falls at the end or the
-start of a line, use \verb|\hspace*| instead of \verb|\hspace|.
-
+In \LaTeX{}, there are two lengths influencing paragraph layout:
+\csi{parindent} defines how much a paragraph is indented, while \csi{parskip}
+is the amount of space inserted between paragraphs.
 \begin{example}
-This\hspace{1.5cm}is a space
-of \qty{1.5}{\cm}.
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{%
+  \medskipamount}
+
+On the web it is common to
+separate paragraphs by some
+space instead of indenting.
+
+Like this.
+\end{example}
+Beware, that these lengths also affect the table of contents---its lines get
+spaced more loosely. To avoid this, you might want to put the two commands
+after the \cs{tableofcontents} command or to not use them at all, because
+you'll find that most professional books use indenting and not spacing to
+separate paragraphs.
+
+If you want to indent a paragraph that is not indented, use \csi{indent} at the
+beginning of the paragraph. Obviously, this will only have an effect when
+\csi{parindent} is not set to zero. In continental Europe it is sometimes the
+case that every paragraph should be indented, even after sections. To avoid
+using ths \csi{indent} command everywhere, simply use the \pai*{indentfirst}
+package in your preamble.
+\begin{example}[standalone, paperheight=2.5cm, paperwidth=0.5\linewidth]
+\usepackage{indentfirst}
+% ...
+
+\begin{document} %!hide
+\section{Title}
+
+The first paragraph is now
+indented.
+\end{document} %!hide
 \end{example}
 
-The command
-\begin{lscommand}
-  \csi{stretch}[n: m]
-\end{lscommand}
-\noindent generates a special rubber space. It stretches until all the
-remaining space on a line is filled up. If multiple
-\verb|\hspace{\stretch{|\emph{n}\verb|}}| commands are issued on the same
-line, they occupy all available space in proportion of their respective
-stretch factors.
+To create a non-indented paragraph, use \csi{noindent} as the first command of
+the paragraph. This might come in handy when you start a document with body
+text and not with a sectioning command.
 
+\subsection{Page Layout}\label{sec:page_layout}
+\begingroup
+\LshortExampleSetup{
+  standalone,
+  template=empty,
+  paperwidth=6cm,
+}
+As you have seen, \LaTeX{} allows you to specify the \wi{paper size} via
+options in the \cs{documentclass} command. It then automatically picks the
+right text \wi{margins}, but sometimes you may not be happy with the predefined
+values. Naturally, you can customize them to your liking. But before you start
+making the margins as narrow as possible to cram the text in, take a few
+seconds to think. As with most things in \LaTeX, there are good reasons for the
+page layout to be as it is.
+
+Sure, compared to your off-the-shelf page of your favourite WYSIWYG editor, the
+margins look awfully wide. But take a look at your favourite, professionally
+printed book and count the number of characters on a standard text line. You
+will find that most lines contain between 45 and 80 characters. Now do the same
+on your \LaTeX{} page. You will find that the same relationship holds.
+Empirical studies suggest that averaging around 66 characters per line creates
+the optimal reading experience for readers. If you want to save space when
+printing your document consider using \cargv{twocolumn} option or smaller page
+sizes.
+
+With that warning in place let us proceed to the proper introduction of
+\pai*{geometry} package that allows you to easily customize the page dimensions
+of your document. It is worth noting that simply including the package in your
+preamble will result in considerably narrower margins, (the very thing we
+warned you to avoid) so only use the package if you intend to set them
+manually or use the \cargv{pass} option that disables most of the package
+functions but retains the paper size adjustments.
+
+As we have mentioned in \autoref{options}, simply setting \cargv{a5paper} (or
+similar) option will only adjust margins of the document without changing the
+paper dimensions themselves. The simplest way to fix that is to add the
+\pai{geometry} package to your preamble. It will read the page size option
+and adjust it accordingly. The package itself also supports many more page
+sizes, such as \cargv{a0paper} or \cargv{a6paper}.
 \begin{example}
-x\hspace{\stretch{1}}
-x\hspace{\stretch{3}}x
+\documentclass{article}
+
+\usepackage[
+  a6paper,
+  landscape,
+]{geometry}
+
+\begin{document}
+This document is typeset on
+A6 paper in landscape mode.
+\end{document}
 \end{example}
 
-When using horizontal space together with text, it may make sense to make
-the space adjust its size relative to the size of the current font.
-This can be done by using the text-relative units \texttt{em} and
-\texttt{ex}:
-
+If the predefined dimensions are not enough you can always set it directly
+using \cargv{paperheight} and \cargv{paperwidth} keys.
 \begin{example}
-{\Large{}big\hspace{1em}y}\\
-{\tiny{}tin\hspace{1em}y}
+\documentclass{article} %!hide
+\usepackage[
+  paperwidth=6cm,
+  paperheight=3cm
+]{geometry}
+% ...
+
+\begin{document} %!hide
+This page has dimensions of
+6 by 3 centimetres.
+\end{document} %!hide
 \end{example}
 
-\subsection{Vertical Space}
-The space between paragraphs, sections, subsections, \ldots\ is
-determined automatically by \LaTeX. If necessary, additional vertical
-space \emph{between two paragraphs} can be added with the command:
-\begin{lscommand}
-  \csi{vspace}[length: m]
-\end{lscommand}
-
-This command should normally be used between two empty lines.  If the
-space should be preserved at the top or at the bottom of a page, use
-the starred version of the command, \verb|\vspace*|, instead of \verb|\vspace|.\index{vertical space}
-
-The \verb|\stretch| command, in connection with \verb|\pagebreak|, can
-be used to typeset text on the last line of a page, or to centre text
-vertically on a page.
-\begin{code}
-\begin{minted}{latex}
-Some text \ldots
-
-\vspace{\stretch{1}}
-This goes onto the last line of the page.\pagebreak
-\end{minted}
-\end{code}
-
-Additional space between two lines of \emph{the same} paragraph or
-within a table is specified with the
-\begin{lscommand}
-  \csi{\bs}[length: o]
-\end{lscommand}
-\noindent command.
-
-With \csi{bigskip} and \csi{smallskip} you can skip a predefined amount of
-vertical space without having to worry about exact numbers.
-
-\section{Page Layout}
-
-\begin{figure}[!hp]
-  \begin{center}
-    \makeatletter\@mylayout\makeatother
-  \end{center}
-  \vspace*{1.8cm}
-  \caption[Layout parameters for this book.]{Layout parameters for this book. Try the \pai{layouts} package to print the layout of your own document.}\label{fig:layout}
-  \csih{footskip}
-  \csih{headheight}
-  \csih{headsep}
-  \csih{marginparpush}
-  \csih{marginparsep}
-  \csih{marginparwidth}
-  \csih{oddsidemargin}
-  \csih{paperheight}
-  \csih{paperwidth}
-  \csih{textheight}
-  \csih{textwidth}
-  \csih{topmargin}
-\end{figure}\index{page layout}
-
-\LaTeX{} allows you to specify the \wi{paper size} in the
-\verb|\documentclass| command. It then automatically picks the right
-text \wi{margins}, but sometimes you may not be happy with
-the predefined values. Naturally, you can change them.
-%no idea why this is needed here ...
-\thispagestyle{fancyplain}
-\autoref{fig:layout} shows all the parameters that can be changed.
-The figure was produced with the \pai{layout} package from the tools bundle.%
-\footnote{\CTANref|pkg/tools|}
-
-\textbf{WAIT!} \ldots before you launch into a ``Let's make that
-narrow page a bit wider'' frenzy, take a few seconds to think. As with
-most things in \LaTeX, there is a good reason for the page layout to
-be as it is.
-
-Sure, compared to your off-the-shelf MS Word page, it looks awfully
-narrow. But take a look at your favourite book\footnote{I mean a real
-  printed book produced by a reputable publisher.} and count the number
-of characters on a standard text line. You will find that there are no
-more than about 66 characters on each line. Now do the same on your
-\LaTeX{} page. You will find that there are also about 66 characters
-per line.  Experience shows that the reading gets difficult as soon as
-there are more characters on a single line. This is because it is
-difficult for the eyes to move from the end of one line to the start of the next one.
-This is also why newspapers are typeset in multiple columns.
-
-So if you increase the width of your body text, keep in mind that you
-are making life difficult for the readers of your paper. But enough
-of the cautioning, I promised to tell you how you do it \ldots
-
-\LaTeX{} provides two commands to change these parameters. They are
-usually used in the document preamble.
-
-The first command assigns a fixed value to any of the parameters:
-\begin{lscommand}
-  \csi{setlength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
-\end{lscommand}
-
-The second command adds a length to any of the parameters:
-\begin{lscommand}
-  \csi{addtolength}\verb|{|\emph{parameter}\verb|}{|\emph{length}\verb|}|
-\end{lscommand}
-
-This second command is actually more useful than the \csi{setlength}
-command, because it works relative to the existing settings.
-To add one centimetre to the overall text width, I put the
-following commands into the document preamble:
-\begin{code}
-\verb|\addtolength{\hoffset}{-0.5cm}|\\
-\verb|\addtolength{\textwidth}{1cm}|
-\end{code}
-
-In this context, you might want to look at the \pai{calc} package.
-It allows you to use arithmetic operations in the argument of \csi{setlength}
-and other places where numeric values are entered into function
-arguments.
-
-\section{More Fun With Lengths}
-
-Whenever possible, I avoid using absolute lengths in
-\LaTeX{} documents. I rather try to base things on the width or height
-of other page elements. For the width of a figure this could
-be \verb|\textwidth| in order to make it fill the page.
-
-The following 3 commands allow you to determine the width, height, and
-depth of a text string.
-
-\begin{lscommand}
-  \csi{settoheight}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \csi{settodepth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|\\
-  \csi{settowidth}\verb|{|\emph{variable}\verb|}{|\emph{text}\verb|}|
-\end{lscommand}
-
-\noindent The example below shows a possible application of these commands.
-
-\begin{example}[examplewidth=0.45\linewidth]
-\newenvironment{vardesc}[1]{%
-  \settowidth{\parindent}{#1:\ }
-  \makebox[0pt][r]{#1:\ }}{}
-
-\begin{displaymath}
-a^2+b^2=c^2
-\end{displaymath}
-
-\begin{vardesc}{Where}\(a\),
-\(b\) --- are adjacent to the right
-angle of a right-angled triangle.
-
-\(c\) --- is the hypotenuse of
-the triangle and feels lonely.
-
-\(d\) --- finally does not show up
-here at all. Isn't that puzzling?
-\end{vardesc}
+As we have indicated, the package is also capable of adjusting the margins. The
+simplest way to do so is to use the \cargv{left}, \cargv{right}, \cargv{top},
+and \cargv{bottom} options, each of which sets the size of the respective
+margin.
+\begin{example}[paperheight=4cm]
+\documentclass{article} %!hide
+\usepackage[
+  paperheight=\height, %!hide
+  paperwidth=\width, %!hide
+  top=0.5cm,
+  bottom=1cm,
+  left=1.5cm,
+  right=2cm,
+]{geometry}
+% ...
+%!hidebegin
+\usepackage{blindtext}
+\sloppy
+\begin{document}
+\blindtext
+\end{document}
 \end{example}
+Note that by default the header and footer are not considered part of the
+page body, so they may not fit on page if the margins are too narrow (like in
+the example above). If you want to include them when considering margins use
+the \cargv{includefoot} and/or \cargv{includehead} options.
+
+One of the killer features of the \pai{geometry} package is its ability to
+calculate the correct margin sizes based on other metrics. For example, we can
+declare that we want the text to have a given width via \cargv{textwidth}
+option and that each page should have a given number of lines via \cargv{lines}
+option and the appropriate sizes of margins will be calculated automatically.
+\begin{example}[paperheight=4cm]
+\documentclass{article} %!hide
+\usepackage[
+  paperheight=\height, %!hide
+  paperwidth=\width, %!hide
+  textwidth=5cm,
+  lines=3
+]{geometry}
+% ...
+%!hidebegin
+\usepackage{blindtext}
+\sloppy
+\begin{document}
+\blindtext
+\end{document}
+\end{example}
+There are many more options to influence the margins: specifying their ratios
+(\cargv{ratio}), defining them to take up certain percent of available paper
+size (\cargv{scale}), or including binding offset (\cargv{bindingoffset}).
+Check out the package documentation~\cite{pack:geometry} for a full list with
+examples.
+
+A useful option for prototyping your layout is the \cargv{showframe} option
+that draws frames around document body and margins to easier evaluate the
+chosen layout.
+\endgroup
+\section{Fancy Headers}\label{sec:fancy}
+
+\subsection{Basic commands}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The \pai*{fancyhdr} package provides a few simple commands that allow you to
+customise the header and footer lines of your document. It defines an
+additional page style \cargv{fancy} and a set of commands to customise it to
+your liking. By default, it only adds a line separating the header from the page
+body.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+%!showbegin %!hide
+\documentclass{article}
+
+%!showend %!hide
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\begin{document}
+\noindent %!hide
+This statement is false.
+\end{document}
+\end{example}
+
+The primary command of the package is
+\begin{lscommand}
+  \csi{fancyhf}[places: o, field: m]
+\end{lscommand}
+The \carg{places} is a comma separated list of places where the \carg{field} should be displayed. There are total of 12 different places and each is identified by a
+combination of three letters:
+\begin{itemize}
+  \item The first specifies whether the location is in the header (\cargv{H}) or
+        in the footer (\cargv{F}).
+  \item The second letter specifies the location within the header or footer:
+        \cargv{L} for left, \cargv{C} for centre, and \cargv{R} for right.
+  \item The third letter defines whether the field should be printed on even
+        (\cargv{E}) or odd (\cargv{O}) pages. If the document is not two sided,
+        then all pages are treated as odd.
+\end{itemize}
+For example, the combination \cargv{FCE} identifies the centre part of the
+footer on even pages. If any of the letters is omitted, then the identifier
+points toward all positions specifiable by the omitted letter. For example,
+\cargv{HR} is right side of the header on both odd and even pages.
+\begin{example}[template=empty, standalone, paperheight=2.3cm, paperwidth=6cm, to_page=2,vertical_pages]
+\documentclass[twoside]{article}
+
+%!hidebegin
+\usepackage[paperheight=\height,
+    paperwidth=\width,
+    margin=0.3cm,
+    includefoot,
+    includehead,
+    headsep=.5em,
+    footskip=1em
+]{geometry}
+%!hideend
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf[HCE]{A}
+\fancyhf[L]{\emph{B}}
+\fancyhf[FR]{\textbf{C}}
+\fancyhf[HCO, HRE]{\textsl{D}}
+
+\begin{document}
+\noindent %!hide
+The next statement is false.
+The previous statement is true.
+\end{document}
+\end{example}
+
+There are two additional commands, \csi{fancyhead} and \csi{fancyfoot}, that
+work in the same way, except that they respectively assume \cargv{H} and
+\cargv{F} in their \carg{places} argument, unless otherwise specified.
+\begin{example}[standalone, paperheight=3.5cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{csquotes} %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{A}
+\fancyfoot[R]{B}
+
+\begin{document}%!hide
+\noindent %!hide
+\enquote{Yields a falsehood when
+appended to its own quotation}
+yields a falsehood when appended
+to its own quotation.
+\end{document}%!hide
+\end{example}
+
+The lines drawn by the \pai{fancyhdr} package may also be customised. To change
+%$$ Inserted comma after 'thickness'.
+their thickness, redefine the
+\begin{lscommand}
+  \csi{headrulewidth} \\
+  \csi{footrulewidth}
+\end{lscommand}
+macros to the desired size.
+\begin{example}[standalone, paperheight=3cm, paperwidth=3cm]
+\geometry{includefoot, includehead, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr} %!hide
+\pagestyle{fancy} %!hide
+\RenewDocumentCommand{\headrulewidth}{}{.2cm}
+\RenewDocumentCommand{\footrulewidth}{}{.5cm}
+
+\begin{document}%!hide
+\noindent %!hide
+Do not read this sentence.
+\end{document}%!hide
+\end{example}
+
+By default, headers and footers are as long as the text on the page. If you want
+to extend or shorten them, use the
+\begin{lscommand}
+  \csi{fancyhfoffset}[places: o, offset: m]
+\end{lscommand}
+Added comma after \csi{fancyhf}.
+command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
+it cannot contain \cargv{C}.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhfoffset[L]{-1cm}
+\fancyhfoffset[R]{.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+If this sentence is true,
+then \(2 + 2 = 5\).
+\end{document}%!hide
+\end{example}
+The command \csi{fancyheadoffset} and \csi{fancyfootoffset} are
+used the same way as \csi{fancyf}, but they only modify header or footer respectively.
+
+\subsection{Contents of the headers}
+
+%$$ Not sure if the overall conversational tone of this subsection is in keeping
+%$$ with the bulk of the rest of the document.
+
+The default footer of the article class contains the current page number. To
+use it inside the fancy header, simply use the command \csi{thepage}.
+\begin{example}[standalone, paperheight=2.5cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\pagestyle{fancy}%!hide
+\fancyhf{Page~\thepage}
+
+\begin{document}%!hide
+\noindent %!hide
+This statement is dedicated to
+all statements that are not
+dedicated to themselves.
+\end{document}%!hide
+\end{example}
+
+It is often useful to have the header and footer contain information based on
+the content of the page. These are called \enquote{marks} in \LaTeX{}
+terminology. Before we talk about the default ones, let's consider how you can
+define your own using the \pai{extramarks}\footnote{\pai{extramarks} is part
+  of \pai*{fancyhdr}.} package.
+\begin{lscommand}
+  \csi{extramarks}[left:m, right:m] \\
+  \csi{firstleftxmark} \\
+  \csi{firstrightxmark} \\
+  \csi{lastleftxmark} \\
+  \csi{lastrightxmark}
+\end{lscommand}
+The \csi{extramarks} command sets the contents of \carg{left} and \carg{right}
+marks. Then you can access these marks inside the headers by using the appropriate
+command. The \texttt{first}- commands refer to the first mark occurring on the
+page, while the \texttt{last}- refer to the last one.
+\begin{example}[standalone, paperheight=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}
+\pagestyle{fancy}%!hide
+
+\fancyhead[L]{\firstleftxmark}
+\fancyhead[R]{\lastleftxmark}
+\fancyfoot[L]{\firstrightxmark}
+\fancyfoot[R]{\lastrightxmark}
+
+\begin{document} %!hide
+\noindent %!hide
+The second statement is false.
+\extramarks{One}{2 is false}
+The third statement is false.
+\extramarks{Two}{3 is false}
+The first statement is false.
+\extramarks{Three}{1 is false}
+\end{document} %!hide
+\end{example}
+
+Let us now look at the default marks defined by \LaTeX{}. After loading
+\pai{extramarks}, these may be set and accessed similarly:
+\begin{lscommand}
+  \csi{markboth}[left:m, right:m] \\
+  \csi{firstleftmark} \\
+  \csi{firstrightmark} \\
+  \csi{lastleftmark} \\
+  \csi{lastrightmark}
+\end{lscommand}
+The only difference between these and the extra marks is that \LaTeX{} classes
+automatically fill them. Hence, if you are not careful, you may lose your
+content.\footnote{You may prevent this by setting the pagestyle to
+  \cargv{myheadings} and then redefining it to use it with \pai{fancyhdr} as
+  described later.}
+For example, in the article class, \carg{left} is set by the \csi{section}
+command, while \carg{right} is set by the \csi{subsection} command.
+\begin{example}[standalone, paperheight=5cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\firstleftmark}
+\fancyhead[R]{\lastleftmark}
+\fancyfoot[L]{\firstrightmark}
+\fancyfoot[R]{\lastrightmark}
+
+\begin{document}%!hide
+\section{First}
+\subsection{Sub}
+\section{Second}
+\subsection{Sub}
+\end{document}%!hide
+\end{example}
+Note that \csi{firstrightmark} is empty in the above example. This is caused by
+the fact that \csi{section} commands set both marks, leaving the right one
+empty.
+
+You may have noticed that section titles are typeset in uppercase when provided
+by -\texttt{mark} commands. To disable this use the \csi{nouppercase} command inside the
+\csi{fancyhf} command.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{%
+  \nouppercase{\firstleftmark}%
+}
+
+\begin{document}%!hide
+\section{Today}
+is opposite day.
+\end{document}%!hide
+\end{example}
+
+\subsection{Advanced commands}
+
+If you want even more control over section titles, you can redefine the
+\csi{sectionmark}.\footnote{Or \csi{chaptermark}, \csi{subsectionmark} \ldots} The
+command receives the section title as its first argument, while the section
+number is available as \csi{thesection}.
+\begin{example}[standalone, paperheight=4.5cm, paperwidth=4cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[R]{\firstleftmark}
+\RenewDocumentCommand{\sectionmark}{m}{%
+  \markboth{%
+    Section no.\,\thesection: #1}{}%
+}
+
+\begin{document}%!hide
+\section{Person}
+There exists a person such that
+if they are reading this then
+everybody is reading this.
+\end{document}%!hide
+\end{example}
+If you only want to change the right mark, use the \csi{markright} command.
+
+By default, the field in the centre of the header or footer will expand equally
+to the left and right. This is usually the desired behaviour, but in some
+cases it may overlap with either left or right text, while still having some
+space on the other side.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L]{\thepage}
+\fancyhead[C]{\firstleftmark}
+\fancyhead[R]{Jane Doe}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+In this situation you may want to use the
+\begin{lscommand}
+  \csi{fancycenter}[distance:o, stretch:o, left:m, centre:m, right:m]
+\end{lscommand}
+command, which automatically shifts the centre toward the shorter text. The
+\carg{distance} is the minimum distance by which the elements are always
+surrounded (\cargv{1em}, by default). The \carg{stretch} controls the preference
+for shifting the \carg{centre}; \cargv{1} means shift only when and as much
+as necessary. Higher numbers will start shifting sooner and more aggressively.
+The default is \cargv{3}. This command writes over the whole header\slash{}footer
+space so it should only be put in one place (typically \cargv{C}) and other
+places (\cargv{L,R}) should be empty.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\fancyhead[L,R]{}
+\fancyhead[C]{%
+  \fancycenter%
+    {\thepage}%
+    {\firstleftmark}%
+    {Jane Doe}%
+}
+
+\begin{document}%!hide
+\section{Section}
+Section by Jane Doe
+\end{document}%!hide
+\end{example}
+
+You may want to present different headers or footers when the corresponding
+page starts with a float or ends with a footnote. The \pai{fancyhdr} package
+defines four commands that let you achieve this.
+\begin{lscommand}
+  \csi{iftopfloat}[true branch:m, false branch:m] \\
+  \csi{ifbotfloat}[true branch:m, false branch:m] \\
+  \csi{iffloatpage}[true branch:m, false branch:m] \\
+  \csi{iffootnote}[true branch:m, false branch:m]
+\end{lscommand}
+Commands \csi{iftopfloat} and \csi{ifbotfloat} execute their \carg{true branch}
+if a float sits at the top or bottom of the page (respectively).
+
+Similarly, \csi{iffloatpage} checks whether
+the page is a special float-only page, while \csi{iffootnote} checks for a
+footnote at the bottom of the page.
+\begin{example}[standalone, paperheight=4cm, to_page=2, vertical_pages]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+
+\fancyhead[C]{%
+  \iftopfloat{%
+    A float is below me%
+  } {}
+}
+\fancyfoot[C]{%
+  \iffootnote{%
+    A footnote is above me%
+  } {%
+    \thepage%
+  }%
+}
+
+\begin{document}%!hide
+\noindent %!hide
+Ignore this footnote.%
+\footnote{Read this.}
+\begin{figure}[t]
+  \centering
+  A floating float.
+  \caption{Hmm}
+\end{figure}
+\end{document}%!hide
+\end{example}
+
+The ruled lines in headers and footers are created by invoking \csi{headrule}
+and \csi{footrule} commands. If you want finer control over the lines, consider
+redefining these macros. Use \csi{headruleskip} and \csi{footruleskip} to raise
+or lower them, if necessary.
+\begin{example}[standalone, paperheight=4cm, paperwidth=3.2cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\pagestyle{fancy}%!hide
+\RenewDocumentCommand{\headrule}{}{
+  \rule{0.05\headwidth}{0.2cm}%
+  \rule[0.1cm]{0.9\headwidth}{\headrulewidth}%
+  \rule{0.05\headwidth}{0.2cm}%
+}
+
+\RenewDocumentCommand{\headruleskip}{}{-0.2cm}
+
+\begin{document}%!hide
+\noindent %!hide
+My age is the first number not
+nameable in under twenty words.
+\end{document} %!hide
+\end{example}
+
+While working on a longer document, you may want to have several page styles for
+different occasions. You may also notice that some commands (\csi{chapter} and
+\csi{maketitle}, for example) change the page style to \cargv{plain}.
+The solution to both of these problems is the
+\begin{lscommand}
+  \csi{fancypagestyle}[name:m, code:m]
+\end{lscommand}
+command. The \carg{name} is the name of page style to (re)define, while the %chktex 36
+\carg{code} is the code to set the page style. All page styles declared this
+way use the \cargv{fancy} page style as their basis, so if empty \carg{code} is
+given they will match \cargv{fancy} exactly.
+\begin{example}[standalone, paperheight=3cm]
+\geometry{includehead, includefoot, headsep=.5em, footskip=1em} %!hide
+\sloppy %!hide
+\usepackage{fancyhdr}%!hide
+\usepackage{extramarks}%!hide
+\fancypagestyle{mine}{
+  \fancyhead[L]{My style}
+}
+\pagestyle{mine}
+
+\begin{document}%!hide
+%!showbegin %!hide
+Were you expecting a paradox here?
+%!showend !hidebegin
+\noindent
+You may be disappointed.
+\end{document}
+\end{example}
+%$$ I don't think I understand the above example.
+%$$ The connection between 'paradox' on the left, and 'disappointed' on the 
+%$$ right isn't obvious. Did I miss something?
 
 \section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each

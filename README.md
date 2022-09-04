@@ -33,7 +33,6 @@ in the parentheses) of the following programs:
 - `git` (`2.36.1`)
 - `GNU make` (`4.3`)
 - `pygments` (`2.12.0`)
-- `perl` (`v5.36.0`)
 
 After installing them there are just three steps:
 
