@@ -30,162 +30,6 @@
   to produce real world documents.
 \end{intro}
 
-\section{The Layout of the Document}
-
-\subsection{Document Classes}\label{sec:documentclass}
-
-The first thing \LaTeX{} needs to know when processing an
-input file, is the type of document the author wants to create. This
-is specified with the \csi{documentclass} command.
-\begin{lscommand}
-  \csi{documentclass}[options:o, class: m]
-\end{lscommand}
-Here, \carg{class} specifies the type of document to be created.
-\autoref{documentclasses} lists some important document classes. The
-\carg{\wi{option}s} parameter customizes the behaviour of the document class.
-The options have to be separated by commas. The most common options for the
-standard document classes are listed in \autoref{options}.
-
-\begin{table}
-  \caption{Document Classes.}\label{documentclasses}
-  \begin{tabular}{@{}lp{8cm}@{}}
-    \toprule
-    Class         & Description                                       \\
-    \midrule
-    \cli{article} & for articles in
-    scientific journals, short reports, and any other short document. \\
-    \cli{proc}    & a class for
-    proceedings based on the article class.                           \\
-    \cli{report}  & for longer reports.
-    containing several chapters, small books, PhD theses, \ldots      \\
-    \cli{book}    & for real books.                                   \\
-    \cli{beamer}  & for presentations.                                \\
-    \cli{letter}  & for letters.                                      \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{table}
-  \RenewDocumentCommand{\arraystretch}{}{1.2}
-  \caption{Document Class Options.}\label{options}
-  \begin{tabular}{@{}>{\RaggedRight}p{2.5cm}p{9cm}@{}}
-    \toprule
-    Options                                  & Description                   \\
-    \midrule
-    \cargv{10pt}, \cargv{11pt}, \cargv{12pt} & Sets the size
-    of the main font in the document. If no option is specified,
-    \cargv{10pt} is assumed.\index{document font size}\index{base
-    font size}                                                               \\
-    \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
-    The default size can be configured when installing \LaTeX. Besides these,
-    \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
-    \cargv{legalpaper} can be specified.\index{legal paper}\index{paper
-      size}\index{A4 paper}\index{letter paper}\index{A5 paper}\index{B5
-    paper}\index{executive paper}                                            \\
-    \cargv{fleqn}                            & Typesets
-    displayed formulae left-aligned instead of centred.                      \\
-    \cargv{leqno}                            & Places
-    the numbering of formulae on the left hand side instead of the right.    \\
-    \cargv{titlepage}, \cargv{notitlepage}   & Specifies
-    whether a new page should be started after the \wi{document title},
-    or not. The \cargv{article} class does not start a new page by
-    default, while the \cargv{report} and \cargv{book} classes do.\index{title}          \\
-    \cargv{onecolumn}, \cargv{twocolumn}     & Instructs
-    \LaTeX{} to typeset the document in \wi{one column} or \wi{two column}s. \\
-    \cargv{twoside, oneside}                 & Specifies whether
-    double or single sided output should be generated. The classes
-    \cargv{article} and \cargv{report} are \wi{single sided}, while the
-    \cargv{book} class is \wi{double sided} by default. Note that this
-    option concerns the style of the document only. The option
-    \cargv{twoside} does \emph{not} tell the printer to
-    make a two-sided printout.                               \\
-    \cargv{landscape}                        & Changes the
-    layout of the document to print in landscape mode.                       \\
-    \cargv{openright, openany}               & Makes chapters begin
-    either only on right hand pages, or on the next page available. This does
-    not work with the \cargv{article} class, as it does not know about
-    chapters. By default, the \cargv{report} class starts chapters on
-    the next page available, while the \cargv{book} class starts them on
-    right hand pages.                                                        \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-For example, if an input file for a \LaTeX{} document starts with the
-line
-\begin{code}
-\csi{documentclass}[{11pt, twoside, a4paper}: vo, article: vm]
-\end{code}
-then it instructs \LaTeX{} to typeset the document as an article
-with a base font size of eleven points, and to produce a
-layout suitable for double sided printing on A4 paper.
-
-\subsection{Page Styles}
-
-\LaTeX{} supports three predefined \wi{header}/\wi{footer}
-combinations---so-called \wi{page style}s. The \emph{style} parameter
-of the\index{page style!plain@\texttt{plain}}\index{plain@\texttt{plain}}\index{page
-  style!headings@\texttt{headings}}\index{headings@\texttt{headings}}\index{page
-  style!empty@\texttt{empty}}\index{empty@\texttt{empty}}
-\begin{lscommand}
-  \csi{pagestyle}[style: m]
-\end{lscommand}
-command defines which one to use. \autoref{pagestyle} lists the predefined
-page styles.
-
-\begin{table}
-  \caption{The Predefined Page Styles of \LaTeX.}\label{pagestyle}
-  \begin{tabular}{lp{8cm}}
-    \toprule
-    Style              & Description                                      \\
-    \midrule
-    \cargv{plain}      & Prints the page numbers on the bottom
-    of the page, in the middle of the footer. This is the default page
-    style.                                                                \\
-    \cargv{headings}   & Prints the current chapter heading
-    and the page number in the header on each page, while the footer
-    remains empty.  (This is the style used in this document.)             \\
-    \cargv{empty}      & Sets both the header and footer
-    to be empty.                                                          \\
-    \cargv{myheadings} & Similar to the \cargv{headings} style but leaves
-    the headers and footers empty, allowing them to be defined by
-    the author. A description of how to do this is in
-    \autoref{sec:fancy}.                                                  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-It is possible to change the page style of the current page with the command
-\begin{lscommand}
-  \csi{thispagestyle}[style: m]
-\end{lscommand}
-
-You may also control the style of the displayed page numbers. To change it, use
-the
-\begin{lscommand}
-  \csi{pagenumbering}[style: m]
-\end{lscommand}
-command, where \carg{style} is one of the styles presented in
-\autoref{tb:numberings}.
-
-\begin{table}
-  \caption{Possible argument of the \csi{pagenumbering} command.}\label{tb:numberings}
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    Style          & Description                                   \\
-    \midrule
-    \cargv{arabic} & Arabic numerals (1, 2, 3, \ldots)             \\
-    \cargv{roman}  & Lowercase Roman numerals (i, ii, iii, \ldots) \\
-    \cargv{Roman}  & Uppercase Roman numerals (I, II, III, \ldots) \\
-    \cargv{alph}   & Lowercase Latin letters (a, b, c, \ldots)     \\
-    \cargv{Alph}   & Uppercase Latin letters (A, B, C, \ldots)     \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-A description how to create your own headers and footers can be found in
-\autoref{sec:fancy} on \autopageref{sec:fancy}.
-
 \section{Line Breaking and Page Breaking}
 
 \subsection{Justified Paragraphs}
@@ -231,9 +75,8 @@ between zero and four. By setting \emph{n} to a value below 4, you leave
 bad. Do not confuse these \enquote{break} commands with the \enquote{new}
 commands. Even when you give a \enquote{break} command, \LaTeX{} still tries to
 even out the right border of the line and the total length of the page. As
-described in the next section, this can lead to unpleasant gaps in your text.
-%$ 'section': The next section is about ready-made strings, the next subsection
-%$ is about hyphenation. The next paragraph, perhaps?
+described in the next paragraph, this can lead to unpleasant gaps in your text.
+
 If you really want to start a \enquote{new line} or a \enquote{new page}, then
 use the corresponding command. Guess their names!
 \begin{example}[examplewidth=0.4\linewidth]
@@ -456,7 +299,8 @@ stick with \pai{babel}.
 
 \subsection{Entering Characters}
 
-Initial versions of \TeX{} were only intended to support the English language,
+Early versions of \TeX{} were only intended to support the English language,
+
 and thus assumed that source files were ASCII encoded; that is, in a format
 that only supports the Latin alphabet plus few symbols common on computers. With
 the popularization of \LaTeX{} outside the English-speaking world, the situation
@@ -471,16 +315,21 @@ documents. Thus, inputting non-English characters is as easy as:
 \end{example}
 \end{chktexignore}
 
-Due to backward compatibility, \LaTeX{} still supports entering \wi{accent}s and
-\wi{special character}s via dedicated commands. These are not very useful if
-you are typing in your native language and have all the necessary characters on
-your keyboard, but they still come in handy when accented characters
-from another language appear infrequently throughout the document. The commands
-for adding accents to characters are listed in \autoref{accents}. Keep in mind
-that while older \TeX{} engines worked by combining accents with existing
+If your keyboard does not have all the special characters, you can also enter
+\wi{accent}s and \wi{special character}s via dedicated commands.
+The commands for adding accents to characters are listed in \autoref{accents}.
+Keep in mind that while older \TeX{} engines worked by combining accents with existing
 letters manually, nowadays they simply look up the correct glyph in the font.
 This means that accents and characters can no longer be freely combined, and
-output is produced only if the font supports the combination.
+output is produced only if the font supports the combination. The Example above would
+look like this if entered on an english keyboard:
+\begin{chktexignore}
+\begin{example}
+  H\^otel, na\"\{i}ve, \'el\`ve, \\
+  sm\{o}rrebr\{o}d, !`Se\~norita!, \\
+  Sch\"onbrunner Schlo\ss, \.Z\'o\l\'c
+\end{example}
+\end{chktexignore}
 
 \begin{table}
   \caption{Accents and Special Characters.}\label{accents}
@@ -889,8 +738,9 @@ backslash in front of a space generates a space that will not be enlarged. A
 tilde~\enquote*{\ai{\~}} character generates a non-breaking space (prohibits a
 line break). The command \csi{@} in front of a period specifies that this
 period terminates a sentence even when it follows an uppercase letter.
-\csih{@}\ai{\~}\index{tilde@tilde (\verb.~.)}% chktex 18
-\index{., space after} %$ Is the above tilde intentionally visible in output?
+\csih{@}\index{tilde@tilde (\verb.~.)}% chktex 18
+\index{., space after}
+
 
 \begin{example}
 Mr.~Smith was happy to see her\\
@@ -1319,8 +1169,8 @@ you type
   \csi{verb}[|«\bs carg{text}»|: c]
 \end{lscommand}
 Any text that is enclosed between these delimiters will be directly printed, as
-if typed on a typewriter, with all spaces, and without any \LaTeX{} commands
-being executed.%$ Should this explicitly state 'in monospaced font'?
+if typed on an old typewriter (in a monospaced font), with all spaces, and without any \LaTeX{} commands
+being executed.
 \begin{example}
 Use \verb|\LaTeX{}| to
 print \LaTeX.
@@ -1766,6 +1616,12 @@ In \LaTeX{}, the environment to typeset tables (and more) is called
 \ei{tabular}. While it can be used on its own, the resulting table layouts look
 extremely old fashioned. We recommend adding the \pai*{booktabs} package, which
 provides several commands that let you typeset beautiful modern looking tables.
+
+Note that the \pai*{booktabs} package does not modify the tabular environment,
+it just adds some extra commands for spacing and adding lines to your tables.
+If you write  for a publication which has other requirements, like not using
+any extra packages, simply do not use the extra commands from \pai*{booktabs}.
+
 To achieve some more advanced table layouts, you will also learn about the
 \pai*{longtable}, \pai*{array} and \pai*{multirow} packages in this section.
 They are so useful, that you'll probably want to put them all into the preamble
@@ -2201,8 +2057,8 @@ will then need several passes to properly calculate the column widths.
 In regular text, you can specify the amount of space between two lines as an
 optional argument to the \csi{\textbackslash} command. Can the same be done
 within a table? It turns out that it can, but there is one caveat. If you use
-it together with a \cargv{p\{...\}} column, the space specified will be
-%$ The 'space specified', or the 'resulting space'? The latter, surely?
+specified', or the 'resulting space'? The latter, surely?
+it together with a \cargv{p\{...\}} column, the resulting space will be
 different depending on column order.
 \begin{example}[standalone, paperheight=3cm, paperwidth=0.57\linewidth]
 \begin{document} %!hide
@@ -2796,7 +2652,7 @@ argument of the \csi{includeonly} command will be executed.
 
 The \csi{include} command starts typesetting the included text on a new
 page. This is helpful when you use \csi{includeonly}, because the
-page breaks will not move, even when some included files are omitted.%$ or \csi{include}?
+page breaks will not move, even when some \csi{include} files are omitted.
 Sometimes this might not be desirable. In this case, use the
 \begin{lscommand}
   \csi{input}[filename: m]

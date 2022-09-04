@@ -1809,7 +1809,7 @@ appropriate class inside.
 \( 17 \modulo 3 = 2 \)
 \end{example}
 
-\subsection{Manual Spacing}
+\subsection{Manual Spacing}\label{sec:math_spacing}
 
 If \LaTeX{}'s choice of spacing within formulae is not satisfactory, it can
 be adjusted manually. The most basic command to do so is
@@ -1836,17 +1836,17 @@ creating a document.
   \caption{Commands for manual math spacing}\label{tbl:math_space}
   \begin{tabular}{llll}
     \toprule
-    Command             & Alias   & Equivalent to                        & Effect                     \\
+    Command             & Alias   & Equivalent to       & Effect                     \\
     \midrule
-    \emph{none}         &         &                                      & \ShowSpace{}               \\[0.5em]
-    \csi{thinspace}     & \csi{,} & \mintinline{latex}|\mathspace{3mu}|  & \ShowSpace{\thinspace}     \\
-    \csi{medspace}      & \csi{:} & \mintinline{latex}|\mathspace{4mu}|  & \ShowSpace{\medspace}      \\
-    \csi{thickspace}    & \csi{;} & \mintinline{latex}|\mathspace{5mu}|  & \ShowSpace{\thickspace}    \\
-    \csi{quad}          &         & \mintinline{latex}|\mathspace{18mu}| & \ShowSpace{\quad}          \\
-    \csi{qquad}         &         & \mintinline{latex}|\mathspace{36mu}| & \ShowSpace{\qquad}         \\[0.5em]
-    \csi{negthinspace}  & \csi{!} & \mintinline{latex}|\mathspace{-3mu}| & \ShowSpace{\negthinspace}  \\
-    \csi{negmedspace}   &         & \mintinline{latex}|\mathspace{-4mu}| & \ShowSpace{\negmedspace}   \\
-    \csi{negthickspace} &         & \mintinline{latex}|\mathspace{-5mu}| & \ShowSpace{\negthickspace} \\
+    \emph{none}         &         &                     & \ShowSpace{}               \\[0.5em]
+    \csi{thinspace}     & \csi{,} & \ltx|\mspace{3mu}|  & \ShowSpace{\thinspace}     \\
+    \csi{medspace}      & \csi{:} & \ltx|\mspace{4mu}|  & \ShowSpace{\medspace}      \\
+    \csi{thickspace}    & \csi{;} & \ltx|\mspace{5mu}|  & \ShowSpace{\thickspace}    \\
+    \csi{quad}          &         & \ltx|\mspace{18mu}| & \ShowSpace{\quad}          \\
+    \csi{qquad}         &         & \ltx|\mspace{36mu}| & \ShowSpace{\qquad}         \\[0.5em]
+    \csi{negthinspace}  & \csi{!} & \ltx|\mspace{-3mu}| & \ShowSpace{\negthinspace}  \\
+    \csi{negmedspace}   &         & \ltx|\mspace{-4mu}| & \ShowSpace{\negmedspace}   \\
+    \csi{negthickspace} &         & \ltx|\mspace{-5mu}| & \ShowSpace{\negthickspace} \\
     \bottomrule
   \end{tabular}
 \end{table}
