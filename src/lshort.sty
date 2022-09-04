@@ -383,9 +383,23 @@
   \end{center}
 }
 
+\NewDocumentCommand{\GetEnv}{om} {
+  \sys_get_shell:nnN {kpsewhich~--var-value~#2} {} \l_tmpa_tl
+  \tl_trim_spaces:N \l_tmpa_tl
+  \tl_if_eq:NnT \l_tmpa_tl {\par} {
+    \tl_clear:N \l_tmpa_tl
+  }
+  \IfNoValueTF {#1} {
+    \tl_use:N \l_tmpa_tl
+  } {
+    \tl_set_eq:NN #1 \l_tmpa_tl
+  }
+}
+
+\GetEnv[\VERSION]{VERSION}
+\GetEnv[\GITHUBSHA]{GITHUB_SHA}
 \ExplSyntaxOff
 % I want no headers on pages created by clearpage
-
 \renewcommand{\cleardoublepage}
 {\clearpage\if@twoside \ifodd\c@page\else
       \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
