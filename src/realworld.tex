@@ -313,16 +313,21 @@ documents. Thus, inputting non-English characters is as easy as:
 \end{example}
 \end{chktexignore}
 
-Due to backward compatibility, \LaTeX{} still supports entering \wi{accent}s and
-\wi{special character}s via dedicated commands. These are not very useful if
-you are typing in your native language and have all the necessary characters on
-your keyboard, but they still come in handy when accented characters
-from another language appear infrequently throughout the document. The commands
-for adding accents to characters are listed in \autoref{accents}. Keep in mind
-that while older \TeX{} engines worked by combining accents with existing
+If your keyboard does not have all the special characters, you can also enter
+\wi{accent}s and \wi{special character}s via dedicated commands.
+The commands for adding accents to characters are listed in \autoref{accents}.
+Keep in mind that while older \TeX{} engines worked by combining accents with existing
 letters manually, nowadays they simply look up the correct glyph in the font.
 This means that accents and characters can no longer be freely combined, and
-output is produced only if the font supports the combination.
+output is produced only if the font supports the combination. The Example above would
+look like this if entered on an english keyboard:
+\begin{chktexignore}
+\begin{example}
+  H\^otel, na\"\ive, \'el\`ve, \\
+  sm\{o}rrebr\{o}d, !`Se\~norita!, \\
+  Sch\"onbrunner Schlo\ss, \.Z\'o\l\'c
+\end{example}
+\end{chktexignore}
 
 \begin{table}
   \caption{Accents and Special Characters.}\label{accents}
