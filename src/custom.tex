@@ -41,26 +41,27 @@
 \section{New Commands, Environments and Packages}
 
 At the beginning of this book we have mentioned that \LaTeX{} allows us to
-write documents using logical markup, with commands like \csi{emph} or \csi{section}. There
-may be however situations where \LaTeX{} does not provide an appropriate command for the content you want to write about.
+write documents using logical markup, with commands like \csi{emph} or
+\csi{section}. There may be however situations where \LaTeX{} does not provide
+an appropriate command for the content you want to write about.
 You may have noticed that all the
 commands I introduce in this book are typeset in a box, and that they show up
-in the index at the end of the book. There is no \LaTeX{} markup to format example code or commands, but \LaTeX{} allows me to define my own commands for this purpose. I
-can write:
+in the index at the end of the book. There is no \LaTeX{} markup to format
+example code or commands, but \LaTeX{} allows me to define my own commands
+for this purpose.
 
 \begin{example}
 \begin{lscommand}
   \csi{dum}
 \end{lscommand}
 \end{example}
-
-In this example, I am using both a new environment called
-\ei{lscommand}, which is responsible for drawing the box around the
-command, and a new command named \csi{csi}, which typesets the command
+In this example, a new environment called
+\ei{lscommand} draws a box around the
+command, and a new command named \csi{csi}, typesets the command
 name and makes a corresponding entry in the index. Check
 this out by looking up the \csi{dum} command in the index at the back
 of this book, where you'll find an entry for \csi{dum}, pointing to
-every page where I mentioned the \csi{dum} command.
+every page where we mention the \csi{dum} command.
 
 If I ever decide that I do not like having the commands typeset in
 a box any more, I can simply change the definition of the
@@ -1674,7 +1675,7 @@ standard document classes are listed in \autoref{options}.
     \cargv{10pt} is assumed.\index{document font size}\index{base
     font size}                                                               \\
     \cargv{a4paper}, \cargv{letterpaper}     & Defines the paper size.
-    The default size can be configured when installing \LaTeX. Besides that,
+    The default size can be configured when installing \LaTeX. Besides these,
     \cargv{a5paper}, \cargv{b5paper}, \cargv{executivepaper}, and
     \cargv{legalpaper} can be specified. Note that it only affects the layout
     of margins, not the PDF paper size itself, see \autoref{sec:page_layout}
@@ -1688,23 +1689,22 @@ standard document classes are listed in \autoref{options}.
     \cargv{titlepage}, \cargv{notitlepage}   & Specifies
     whether a new page should be started after the \wi{document title}
     or not. The \cli{article} class does not start a new page by
-    default, while \cli{report} and \cli{book} do.\index{title}              \\
+    default, while the \cli{report} and \cli{book} classes do.\index{title}  \\
     \cargv{onecolumn}, \cargv{twocolumn}     & Instructs
     \LaTeX{} to typeset the document in \wi{one column} or \wi{two column}s. \\
     \cargv{twoside, oneside}                 & Specifies whether
     double or single sided output should be generated. The classes
-    \cli{article} and \cli{report} are \wi{single sided} and the
+    \cli{article} and \cli{report} are \wi{single sided}, while the
     \cli{book} class is \wi{double sided} by default. Note that this
-    option concerns the style of the document only. The option
-    \cargv{twoside} does \emph{not} tell the printer you use that it
-    should actually make a two-sided printout.                               \\
+    option concerns the style of the document only. \cargv{twoside}
+    does \emph{not} tell the printer to make a two-sided printout.           \\
     \cargv{landscape}                        & Changes the
     layout of the document to print in landscape mode.                       \\
     \cargv{openright, openany}               & Makes chapters begin
-    either only on right hand pages or on the next page available. This does
+    either only on right hand pages o,r on the next page available. This does
     not work with the \cli{article} class, as it does not know about
-    chapters. The \cli{report} class by default starts chapters on
-    the next page available and the \cli{book} class starts them on
+    chapters. By default, the \cli{report} class by default starts chapters on
+    the next page available, while the \cli{book} class starts them on
     right hand pages.                                                        \\
     \bottomrule
   \end{tabular}
@@ -1748,16 +1748,16 @@ page styles.
     \toprule
     Style              & Description                                      \\
     \midrule
-    \cargv{plain}      & prints the page numbers on the bottom
+    \cargv{plain}      & Prints the page numbers on the bottom
     of the page, in the middle of the footer. This is the default page
     style.                                                                \\
-    \cargv{headings}   & prints the current chapter heading
+    \cargv{headings}   & Prints the current chapter heading
     and the page number in the header on each page, while the footer
-    remains empty.  (This is the style used in this document)             \\
-    \cargv{empty}      & sets both the header and the footer
+    remains empty.  (This is the style used in this document.)            \\
+    \cargv{empty}      & Sets both the header and footer
     to be empty.                                                          \\
-    \cargv{myheadings} & similar to the \cargv{headings} style but leaves
-    the headers and footers empty allowing for them to be defined by
+    \cargv{myheadings} & Similar to the \cargv{headings} style but leaves
+    the headers and footers empty, allowing them to be defined by
     the author. A description of how to do this is in
     \autoref{sec:fancy}.                                                  \\
     \bottomrule
@@ -1769,7 +1769,7 @@ It is possible to change the page style of the current page with the command
   \csi{thispagestyle}[style: m]
 \end{lscommand}
 
-You may also control the style of the displayed page numbers. To change it use
+You may also control the style of the displayed page numbers. To change it, use
 the
 \begin{lscommand}
   \csi{pagenumbering}[style: m]
