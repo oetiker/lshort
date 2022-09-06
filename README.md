@@ -26,7 +26,7 @@ necessarily up to date) and can be found [here][ctan-url].
 ## Building from source
 
 The newest version of the document is available on [GitHub][github]. To build
-the document yourself you will need resonably recent versions (mine are listed
+the document yourself you will need reasonably recent versions (mine are listed
 in the parentheses) of the following programs:
 
 - `TeXLive` (`2022`, `full`)
@@ -53,6 +53,10 @@ because `pygments` and example cache need to build. Subsequent runs should be
 significantly faster.
 
 The current development builds are also available on [Actions][ci-url] page.
+
+## Contributing
+
+See our [contributing guide](CONTRIBUTING.MD).
 
 ## Copyright
 
