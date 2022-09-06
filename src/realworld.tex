@@ -306,10 +306,10 @@ has slowly improved. These days \TeX{} engines speak UTF-8 natively, which
 considerably eases the usage of \LaTeX{} when typesetting non-English
 documents. Thus, inputting non-English characters is as easy as:
 \begin{chktexignore}
-\begin{example}
-  Hôtel, naïve, élève, \\
-  smørrebrød, ¡Señorita!, \\
-  Schönbrunner Schloß, Żółć
+\begin{example}[examplewidth=0.4\textwidth]
+Hôtel, naïve, élève, \\
+smørrebrød, ¡Señorita!, \\
+Schönbrunner Schloß, Żółć
 \end{example}
 \end{chktexignore}
 
@@ -319,13 +319,13 @@ The commands for adding accents to characters are listed in \autoref{accents}.
 Keep in mind that while older \TeX{} engines worked by combining accents with existing
 letters manually, nowadays they simply look up the correct glyph in the font.
 This means that accents and characters can no longer be freely combined, and
-output is produced only if the font supports the combination. The Example above would
+output is produced only if the font supports the combination. The example above would
 look like this if entered on an english keyboard:
 \begin{chktexignore}
-\begin{example}
-  H\^otel, na\"{\i}ve, \'el\`ve, \\
-  sm{\o}rrebr{\o}d, !`Se\~norita!, \\
-  Sch\"onbrunner Schlo\ss, \.Z\'o\l\'c
+\begin{example}[examplewidth=0.4\textwidth]
+H\^otel, na\"{\i}ve, \'el\`ve, \\ 
+sm{\o}rrebr{\o}d, !`Se\~norita!, \\
+Sch\"onbrunner Schlo\ss, \.Z\'o\l\'c
 \end{example}
 \end{chktexignore}
 
@@ -1253,16 +1253,59 @@ Here is some \LaTeX{} code.
 %$ The side-by-side layout makes it easier to visually associate each of the
 %$ three inputs with their respective outputs.
 
-%$ See commit notes. Short version is that this is in a serif font, and
-%$ maybe the \ttfamily setting should be made now rather than much later.
 As you can see, by default it isn't much different from the \ei{verbatim
   environment}. The big difference is that every command accepts optional
 argument that allows you to customise the output. The argument accepts a
 comma-delimited key-value list. For example, to automatically highlight the
 code, we may pass the \cargv{language} key.
+
 \begin{example}[examplewidth=0.6\linewidth, vertical_mode]
 \lstinputlisting[language=C]{hello.c}
 \end{example}
+
+For many, the default style of the listings may look a bit strange. No
+worries, this is easily fixed. The output can be customized using the
+following keys:
+\begin{lscommand}
+  \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
+  \cargv{commentstyle}
+\end{lscommand}
+Note that you will need to use some font changing commands, when configuring
+the styles. More about font changing command can be found in \autoref{sec:fontsize}.
+\begin{example}[examplewidth=0.55\linewidth]
+\lstinputlisting[
+  language=SQL,
+  basicstyle=\ttfamily,
+  commentstyle=\color{gray},
+  keywordstyle=\itshape,
+]{employee.sql}
+\end{example}
+
+If you intend to use similar options for many listings in the document, you can
+use the \csi{lstset} command to set them beforehand. In this way, you will avoid
+repeating them every time you want to typeset some code.
+
+\begin{example}[examplewidth=0.55\linewidth]
+\lstset{
+  language=C,
+  numbers=left,
+  xleftmargin=1.2em, %!hide
+  breaklines,
+  basicstyle=\ttfamily,
+  commentstyle=\color{gray},
+  prebreak=\textrightarrow,
+}
+
+\lstinputlisting{hello.c}
+
+The statement
+\lstinline|int x = 1;|
+assigns 1 to variable
+\lstinline|x|.
+\end{example}
+
+\lstset{basicstyle=\ttfamily,commentstyle=\color{gray}}
+
 If a language has several dialects, you may specify which inside square brackets
 before the language name. You must enclose the value in curly brackets.
 \begin{example}[examplewidth=0.8\linewidth, vertical_mode]
@@ -1388,7 +1431,7 @@ include label. To fix this we may use the \cargv{escapeinside} key that accepts
 sets the two delimiters between which \LaTeX{} code can be typed. The
 delimiters themselves will not be printed.
 \begin{example}
-  \begin{lstlisting}[
+\begin{lstlisting}[
   escapeinside={(*}{*)},
   numbers=left,
   xleftmargin=1.2em, %!hide
@@ -1398,52 +1441,9 @@ cost x = show ( (*\label{show}*)
     foldr (+) 0 x
   ) ++ " eur" (*(\texteuro)*)
 \end{lstlisting}
-%$ The looks strange, because the 'show' is syntax-highlighted in the listing,
-%$ but not in the \lstinline (so they don't match).
 The \lstinline|show| in Haskell
 as seen in line~\ref{show}
 converts its argument to a string.
-\end{example}
-
-%$ This should probably come first in the section, before worrying about
-%$ cross-references, step-numbers, and dialects.
-If you do not like the default style of listings, you may customise them using
-the
-\begin{lscommand}
-  \cargv{basicstyle}, \cargv{keywordstyle}, \cargv{identifierstyle} and
-  \cargv{commentstyle}
-\end{lscommand}
-keys. Note that you will need to use some font changing commands, which
-you will learn about in \autoref{sec:fontsize}.
-\begin{example}[examplewidth=0.55\linewidth]
-\lstinputlisting[
-  language=SQL,
-  basicstyle=\ttfamily,
-  commentstyle=\color{gray},
-  keywordstyle=\itshape,
-]{employee.sql}
-\end{example}
-
-If you intend to use similar options for many listings in the document, you can
-use the \csi{lstset} command to set them beforehand. In this way, you will avoid
-repeating them every time you want to typeset some code.
-
-\begin{example}[examplewidth=0.55\linewidth]
-\lstset{
-  language=C,
-  numbers=left,
-  xleftmargin=1.2em, %!hide
-  breaklines,
-  basicstyle=\ttfamily,
-  prebreak=\textrightarrow,
-}
-
-\lstinputlisting{hello.c}
-
-The statement
-\lstinline|int x = 1;|
-assigns 1 to variable
-\lstinline|x|.
 \end{example}
 
 \subsection{The \pai{minted} Package}
