@@ -323,7 +323,7 @@ output is produced only if the font supports the combination. The example above 
 look like this if entered on an english keyboard:
 \begin{chktexignore}
 \begin{example}[examplewidth=0.4\textwidth]
-H\^otel, na\"{\i}ve, \'el\`ve, \\ 
+H\^otel, na\"{\i}ve, \'el\`ve, \\
 sm{\o}rrebr{\o}d, !`Se\~norita!, \\
 Sch\"onbrunner Schlo\ss, \.Z\'o\l\'c
 \end{example}
@@ -666,7 +666,6 @@ mathematical notation \ldots{}
 In the example above, we have used \ai{\%} comments to avoid introducing spaces.
 If you need a refresher on this technique, refer to \autoref{sec:comments}.
 
-%$ I am missing the commercial minus glyph (three below)
 While the \enquote*{Ł} character is available in \LaTeX{} from the \csi{L}
 command, this is not the case for all unicode characters. For example, the
 default font contains a glyph for the commercial minus sign (⁒), used in some
@@ -679,7 +678,6 @@ up a command to typeset it for you.
 
 Now I can type ⁒ or \comminus.
 \end{example}
-%$ I am missing the commercial minus glyph (three above)
 
 Yet another use is to define a command for a simple string you may
 want to change later. For example, let's imagine you are writing a novel, but
@@ -1248,10 +1246,6 @@ Here is some \LaTeX{} code.
 
 \lstinputlisting{hello.c}
 \end{example}
-%$ There are really three separate examples here. I guess they don't quite fit
-%$ side-by-side, but the equivalent example in the minted section manages it.
-%$ The side-by-side layout makes it easier to visually associate each of the
-%$ three inputs with their respective outputs.
 
 As you can see, by default it isn't much different from the \ei{verbatim
   environment}. The big difference is that every command accepts optional
@@ -1424,8 +1418,6 @@ The \lstinline|++| in Haskell
 as seen in line~\ref{concat}
 means string concatenation.
 \end{example}
-%$ It's such a downside, consider combining these two examples. All you really
-%$ need is the first example changed to use escapeinside.
 This has the downside that it introduces empty comments that are just there to
 include label. To fix this we may use the \cargv{escapeinside} key that accepts
 sets the two delimiters between which \LaTeX{} code can be typed. The
@@ -1700,7 +1692,6 @@ lines between the columns. Well, we did not mention them because the first rule
 of producing professional-looking tables is that you \emph{must not} use
 vertical lines.
 
-%$ Someone should tell my journal editors; double-lines are mandatory.
 The second rule is to never use double lines such as these shown in
 \autoref{lst:doublerule}.
 \begin{listing}
@@ -2168,7 +2159,6 @@ it.
 \end{tabular}
 \end{example}
 
-%$ Several paragraphs back, we were told we \emph{must not} use vertical lines.
 In order to create a tic-tac-toe grid, you need to put some vertical and
 horizontal lines of the same width. In order to do so, you may use the
 \cargv{|}~(vertical bar) column specifier for vertical rules and \csi{hline} for
@@ -2209,7 +2199,7 @@ it is necessary to use the \pai*{graphicx} package. It provides the
 \end{lscommand}
 command that can be used to include the \carg{file} in the
 document.\footnote{In the subsequent examples, we are using images from the
-  \pai*{mwe} package that should be installed with your \LaTeX{} distribution.} %$ Nothing below a footnote
+  \pai*{mwe} package that should be installed with your \LaTeX{} distribution.}
 \begin{example}
 Here is an image:
 %!showbegin !hide

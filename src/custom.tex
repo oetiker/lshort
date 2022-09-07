@@ -352,7 +352,7 @@ Note that
   \oldemph{#1}~(\enquote{#1} is emphasised)%
 }
 \end{minted}
-will suffer the same fate since \mintinline{latex}|\oldemph{...}| %chktex 11 
+will suffer the same fate since \mintinline{latex}|\oldemph{...}| %chktex 11
 will  be replaced by \TeX{} with \mintinline{latex}|\emph{...}| and %chktex 11
 the  cycle repeats.
 
@@ -582,7 +582,7 @@ When working with switch versions of fonts that are slanted right it is
 important to remember about \wi{italic correction}. This is a small space after
 the end of right slanting text that is sometimes necessary to avoid overlapping
 letters. It is inserted using \csi{/} command.
-\begin{chktexignore}  
+\begin{chktexignore}
 \begin{example}
 Without: {\itshape oof}bar \\
 With: {\itshape oof\/}bar
@@ -845,7 +845,7 @@ Normal text. \textit{Italics.} \textbf{Bold.}
 \setmainfont{SourceSerifPro-Regular.otf}
 Normal text. \textit{Italics.} \textbf{Bold.}
 \textit{\textbf{Bold italics.}} \\
- 
+
 \setmainfont[
   ItalicFont=SourceSerifPro-RegularIt.otf,
   BoldFont=SourceSerifPro-Bold.otf,
@@ -986,7 +986,7 @@ alternative script letters.
 
 \noindent %!hide
 \(\symscr{ABCDabcd}\) vs.\
-\(\symcal{ABCDabcd}\) 
+\(\symcal{ABCDabcd}\)
 \end{document}%!hide
 \end{example}
 
@@ -1177,7 +1177,7 @@ spectrum in nanometres.
 \textcolor[wave]{452}{
   If a light has wavelength
   \qty{452}{\nm} it looks
-  like this.  
+  like this.
 } \\
 \textcolor[wave]{700}{
   Light with wavelength above
@@ -1582,7 +1582,7 @@ Since length variables are not stored as text macros, but as \TeX{} internal
 numbers, trying to typeset them in a document results in an error. To translate
 them back into their textual representation use the \csi{the} command. Note
 that their value will always be printed using points as units.
-\begin{chktexignore}  
+\begin{chktexignore}
 \begin{example}
 \setlength{\mylength}{1cm}
 \the\mylength
@@ -2029,9 +2029,6 @@ chosen layout.
 
 \subsection{Basic commands}
 
-%$$ Not sure if the overall conversational tone of this subsection is in keeping
-%$$ with the bulk of the rest of the document.
-
 The \pai*{fancyhdr} package provides a few simple commands that allow you to
 customise the header and footer lines of your document. It defines an
 additional page style \cargv{fancy} and a set of commands to customise it to
@@ -2122,7 +2119,6 @@ to its own quotation.
 \end{example}
 
 The lines drawn by the \pai{fancyhdr} package may also be customised. To change
-%$$ Inserted comma after 'thickness'.
 their thickness, redefine the
 \begin{lscommand}
   \csi{headrulewidth} \\
@@ -2169,9 +2165,6 @@ The command \csi{fancyheadoffset} and \csi{fancyfootoffset} are
 used the same way as \csi{fancyf}, but they only modify header or footer respectively.
 
 \subsection{Contents of the headers}
-
-%$$ Not sure if the overall conversational tone of this subsection is in keeping
-%$$ with the bulk of the rest of the document.
 
 The default footer of the article class contains the current page number. To
 use it inside the fancy header, simply use the command \csi{thepage}.
@@ -2465,9 +2458,6 @@ Were you expecting a paradox here?
 You may be disappointed.
 \end{document}
 \end{example}
-%$$ I don't think I understand the above example.
-%$$ The connection between 'paradox' on the left, and 'disappointed' on the 
-%$$ right isn't obvious. Did I miss something?
 
 \section{Boxes}\label{sec:boxes}
 \LaTeX{} builds up its pages by pushing around boxes. At first, each
