@@ -56,22 +56,15 @@ dealing with:
     scaled to any size without loss of quality.
 \end{description}
 
-\noindent %$ <- I think the indent looks strange here, but it's your call.
+\noindent
 You have already learned about including photos and drawings, in
-%$ comma after drawings, because we're not including drawings in the section.
-%$ alternatively, insert 'in \LaTeX{} documents', or begin the sentence with
-%$ 'In \autoref{sec:images}, you have already'.
 \autoref{sec:images}. You can use the same techniques to include
 diagrams, and this is totally fine. Some programs, such as
 Inkscape~\cite{inkscape}, even support ways to easily include produced graphics
-%$ 'include produced graphics'; do you mean export to a native LaTeX format, or
-%$ are we talking about EPS and friends?
 in \LaTeX{} documents. However, this chapter will focus on drawing diagrams
 directly in \LaTeX{}. This has many advantages, such as logical structuring,
 plain text formatting, and seamless integration with the document layout.
 
-%$ First sentence sounds odd. Maybe 'Drawing with \LaTex{} has a long history'
-%$ but that doesn't sit right, either. Also consider 'began' for 'started out'.
 Creating graphical output with \LaTeX{} has a long tradition. It started out
 with the \ei{picture} environment, which allows you to create graphics by
 cleverly placing predefined elements onto a canvas. Unfortunately, this
@@ -206,7 +199,7 @@ will be interpreted as an angle (in degrees).
 
 Nodes can be created within paths by typing \ltx{node}
 after a given coordinate or line. A node added after a line
-is placed at its midpoint. %$ 'created on' instead of 'added after'?
+is placed at its midpoint.
 \begin{example}
 \begin{tikzpicture}
   \draw (0, 0) node {Start}
@@ -530,7 +523,7 @@ This gives the effect of a parallel (or axonometric) projection.
     (0, 1, 1) -- (1, 1, 1) (1, 1, 0) -- (0, 1, 0);
 \end{tikzpicture}
 \end{example}
-Length and direction can be changed by using the \cargv{z} key. %$ no example
+Length and direction can be changed by using the \cargv{z} key.
 
 Sometimes, it may be easier to specify a path by using coordinates relative to
 the previous point instead of absolute ones. To do so, prepend \ltx{++} to the
@@ -550,7 +543,6 @@ this vector.
 Scaling is not the only transformation that can be applied to points. It is
 also possible to rotate, shift, or apply an arbitrary linear transformation by
 specifying its matrix. Check out the documentation for a detailed description.
-%$ 'translate' instead of 'shift'
 \begin{example}
 \begin{tikzpicture}[rotate=45]
   \draw (0, 0) -- (0, 1) --
@@ -624,8 +616,6 @@ presented in \autoref{lst:pics}.
 \end{example}
   \caption{An example of using pics in \TikZ{}.}\label{lst:pics}
 \end{listing}
-%$ This (above listing) must fit here (i.e., before the below paragraph).
-%$ It's being held until the next page, is there a missing placement option?
 
 If you find yourself repeating a lot of simple commands (for example, drawing
 ticks on an axis), you may simplify your code by using the \csi{foreach} command. It
@@ -674,7 +664,6 @@ For example, if you intend to draw some geometry problems, you will often find
 yourself looking for intersections of objects. While you could calculate
 their exact coordinates by hand, the \cargv{intersections} library will do it
 for you. An example is presented in \autoref{lst:intersections}.
-%$ same again; listings are floating for longer than they need to.
 
 \begin{listing}
   \begin{example}[vertical_mode, examplewidth=0.8\linewidth]
@@ -763,7 +752,3 @@ matrices, mind maps and many more are covered. Most of them are described in
 the \pai*{pgf} package documentation. Check it out if you haven't found
 solution to your problem here.
 
-%$ Christian Feuers\"anger's manual is pretty good, but consider including an
-%$ example here of pgfplots with scientific data as a common use-case; data
-%$ points with error bars over a mathematical function, with ticked and labelled
-%$ axes.

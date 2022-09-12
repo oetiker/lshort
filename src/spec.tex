@@ -122,9 +122,6 @@ and \'ecole examples above.
 
 \subsection{Basic commands}
 
-%$$ Not sure if the overall conversational tone of this subsection is in keeping
-%$$ with the bulk of the rest of the document.
-
 The \pai*{fancyhdr} package provides a few simple commands that allow you to
 customise the header and footer lines of your document. It defines an
 additional page style \cargv{fancy} and a set of commands to customise it to
@@ -215,7 +212,6 @@ to its own quotation.
 \end{example}
 
 The lines drawn by the \pai{fancyhdr} package may also be customised. To change
-%$$ Inserted comma after 'thickness'.
 their thickness, redefine the
 \begin{lscommand}
   \csi{headrulewidth} \\
@@ -236,15 +232,11 @@ Do not read this sentence.
 \end{document}%!hide
 \end{example}
 
-%$$ Inserted comma after 'default'.
 By default, headers and footers are as long as the text on the page. If you want
-%$$ Changed 'extend\slash{}shorten' to 'extend or shorten'.
-%$$ Added comma after 'them'.
 to extend\slash{}shorten them, use the
 \begin{lscommand}
   \csi{fancyhfoffset}[places: o, offset: m]
 \end{lscommand}
-%$$ Added comma after \csi{fancyhf}.
 command. The \carg{places} argument is the same as in \csi{fancyhf}, except that
 it cannot contain \cargv{C}.
 \begin{example}[standalone, paperheight=3cm]
@@ -265,9 +257,6 @@ The command \csi{fancyheadoffset} and \csi{fancyfootoffset} are
 used the same way as \csi{fancyf}, but they only modify header or footer respectively.
 
 \subsection{Contents of the headers}
-
-%$$ Not sure if the overall conversational tone of this subsection is in keeping
-%$$ with the bulk of the rest of the document.
 
 The default footer of the article class contains the current page number. To
 use it inside the fancy header, simply use the command \csi{thepage}.
@@ -1221,7 +1210,6 @@ option to \csi{usefonttheme} to switch to the default \LaTeX{} font.
 \end{document} %!hide
 \end{example}
 
-%$ Use 'fine grained' or 'coarse grained'; 'more granular' is ambiguous.
 Greater customisation is possible using the
 \begin{lscommand}
   \csi{setbeamerfont}[element: m, attributes: m] \\
@@ -1279,10 +1267,7 @@ next to the Latin ones.
 \end{document} %!hide
 \end{example}
 
-%$ earlier: 'slides are a slightly different concept in beamer'.
-%$ Slides are rendered onto 4 : 3 ..., but not just slides.
 By default, \pai{beamer} typesets onto \(4 : 3\) aspect-ratio pages. If the
-%$ not 'it'; could refer to changing the projector
 projector uses some other aspect ratio, you may prefer to match it. You
 may do so, by passing an \cargv{aspectratio} to the \cs{documentclass} options.
 It accepts a single integer that encodes the desired ratio. For example,
@@ -1305,8 +1290,6 @@ with the table of contents into your slides.
 
 \subsection{Handouts}
 
-%$ As much as I like this feature of Beamer, increasingly other software _is_
-%$ able to generate handouts. Maybe not as well, but in time...
 A feature of \pai{beamer} is the ability to easily create handouts.
 The simplest way to do this is to add the \cargv{handout} option to the
 \cs{documentclass} command. Doing so will make the \cli{beamer} class ignore
@@ -1338,9 +1321,8 @@ pages.
 This mode is also useful while creating a presentation, as it previews the
 frames as a whole without uncovering effects.
 
-%$ Suggest a review of this paragraph, for clarity.
 Internally, handout generation is accomplished by using overlay specifications
-with modes. %$ We haven't really talked about 'modes', is this a formal term?
+with modes.
 The default mode is \cargv{beamer}, while the \cargv{handout} option
 switches to \cargv{handout} mode.
 You can specify modes explicitly within an
@@ -1382,17 +1364,6 @@ additional commentary in handouts, or to hide things that only make sense
 during the presentation. This is easily achieved by using a special zeroth
 slide that is not included in the rendered document. An example of doing so
 is presented in \autoref{lst:zero_slides}.
-%$ Careful here: the slide is not included in the compiled (should that be
-%$ rendered?) document, but it _is_ included when _compiling_ the document.
-%$ In this example, the slide is omitted from the final PDF, but the graphic
-%$ file still needs to exist because the frame is still processed by beamer.
-%$\begin{frame}<0>
-%$\begin{tikzpicture}[remember picture,overlay]
-%$\node[at=(current page.center)]
-%$	{\includegraphics[width=0.95\paperwidth]{this_still_needs_to_exist.pdf}};
-%$\end{tikzpicture}
-%$\end{frame}
-%$ (end of example)
 \begin{listing}
   \begin{example}[
     template=empty,
@@ -1522,50 +1493,3 @@ results in a more readable code.
 \end{document} %!hide
 \end{example}
 
-%$ Realising this is not the comprehensive guide to LaTeX, here's a few titbits
-%$ that may or may not be useful and within scope:
-
-%$ To use the default theme, but without navigation symbols (in the preamble):
-%$ \beamertemplatenavigationsymbolsempty
-%$ No mention of how to disable these in the section.
-
-%$ The default font, Computer Modern, font does not support italicised sans-
-%$ serif fonts (at least, not in bold or semi-bold anyway, but I think in
-%$ general). This means all your emphasised text renders in Roman upright,
-%$ same as everything else. The Latin Modern font does support emphasised
-%$ sans serif. In the preamble again:
-%$ \usepackage{lmodern}
-
-%$ Latin Modern's font weight is a little light for my liking, while its bold
-%$ is very bold indeed (technically, it's a bold extended (wide) font). What we
-%$ want, is something in between. In the case of Latin Modern, we have a
-%$ semi-bold condensed (sbc) variant, which we now set as the default style for
-%$ the structure element. This is inherited by everything else; normal text,
-%$ altered text, block titles, enumerators, and so on. In the preamble:
-%$ \setbeamerfont{structure}{size=\normalsize, series=\fontseries{sbc}}
-%$ \AtBeginDocument{\usebeamerfont{structure}}
-
-%$ To include external graphics files with TikZ, you may need to enable the
-%$ 'remember picture' and 'overlay' options, and process the document twice
-%$ (pictures will be incorrectly placed after the first run).
-%$ \begin{frame}[plain]
-%$ \begin{tikzpicture}[remember picture,overlay]
-%$ \node[at=(current page.center)]
-%$   {\includegraphics[width=1.01\paperwidth]{Art/picture.pdf}};
-%$ \node[text=blue,text width=0.5\paperwidth,align=right] at
-%$   ([xshift=0.25\paperwidth,yshift=-0.20\paperheight]current page.north)
-%$   {\large{\textbf{Overlaid Title}}};
-%$ \end{tikzpicture}
-%$ \end{frame}
-
-%$ Changing the frame title to a smaller but bold font, with an underline.
-%$ Again, the preamble.
-%$ \setbeamertemplate{frametitle}
-%$   {\bfseries\large\insertframetitle\par\vskip-6pt\color{black}\leavemode}
-%$ Adding \leaders\hrule height 0.6pt\hfill\kern0pt after \leavemode (and before
-%$ the } adds an underline. There are subtleties between LaTeX vs pdfTeX.
-
-%$ Changing the bullet-point vertical spacing, the markers, and their colour
-%$ can be accomplished by redefining Beamer's itemize environment, but it's
-%$ easier to create a new environment from scratch. Too long and specialised a
-%$ discussion for this booklet, I would think.
