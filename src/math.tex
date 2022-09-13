@@ -920,6 +920,27 @@ comments with the \csi{text} command.
 \end{align*}
 \end{example}
 
+The \csi{phantom} command from \autoref{sec:math_phantoms} allows us to
+correctly align equation systems. 
+\begin{example}
+\begin{align}
+  a + b + c
+    &= d + e + f \nonumber \\
+    & \phantom{=}\ + g + h
+               \nonumber \\
+    & \phantom{=}\ + i \\
+    &= j + k + l
+\end{align}
+\end{example}
+\LaTeX{} encloses relation symbols in thick spaces \csi{;} and binary symbols in 
+medium spaces \csi{:}. The symbols \(=\) and \(+\) in our example are each of 
+this type. The \csi{phantom} command strips \(=\) of its relation status, leaving
+it short of two thick spaces. On the other hand, \LaTeX{} interprets \(+\)
+following \csi{phantom} as a binary symbol, creating a spurious medium space.
+So we need an extra normal space: \verb*|\ |\verb| = \; + \; - \:|.
+
+If this aproach seems a bit complicated to you, have a look at \autoref{sec:IEEEeqnarray_intro}.
+
 \subsection{Equations as Building Blocks}
 
 All the environments presented above can be used inside other equations by
@@ -1054,6 +1075,20 @@ The latter changes the numbering to indicate sub expressions.
 \end{IEEEeqnarray}
 \end{example}
 Note that \cs{label} commands should eventually follow after these.
+
+Here is an alternative
+approach to the \csi{phantom} example above. 
+Note the extra \csi{:} space which is required to separate the
+plus sign from the variable name. \LaTeX{} assumes the plus sign belongs to the
+variable as it does not understand that line is continued from the previous line.
+\begin{example}
+\begin{IEEEeqnarray}{rCl}
+a + b + c &= & d + e + f \\
+& & +\: g + h   \nonumber \\
+& & +\: i       \nonumber  \\
+& = & j + k + l
+\end{IEEEeqnarray}
+\end{example}
 
 \section{Units}\label{sec:units}\index{units (SI)}\index{SI}
 
@@ -1871,7 +1906,7 @@ mathematical symbols by overlaying existing ones.
 \( x \myrel y \)
 \end{example}
 
-\subsection{Phantoms}
+\subsection{Phantoms}\label{sec:math_phantoms}
 
 In some situations, it may be useful to insert the space that would normally be
 occupied by some existing symbol. While you could eyeball it and insert
