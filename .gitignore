@@ -13,3 +13,5 @@ lshort-title.pdf
 *.pdf
 *.synctex.gz
 *.ist
+*.bak*
+*~
