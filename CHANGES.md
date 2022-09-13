@@ -39,6 +39,7 @@
 - rewrite the beamer section / marcin-serwin
 - rewrite the graphics chapter to focus on TikZ / marcin-serwin
 - reviewed graphics chapter @rmrstar
+- formatting multi equationns systems with phantoms / chrisoph hamburger
 
 ## 6.4 2021.03.09
 
