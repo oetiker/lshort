@@ -1,5 +1,6 @@
 ## UNRELEASED
 
+- replace sec:this with my-marker in the crosref section @oetiker
 - renamed chapter 1 and 2 / tobi
 - add full text of license for easier distribution / marcin-serwin
 - switch to biblatex for bibliography generation / marcin-serwin
