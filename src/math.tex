@@ -1078,18 +1078,18 @@ Note that \cs{label} commands should eventually follow after these.
 
 Here is an alternative
 approach to the \csi{phantom} example above.
-Note the extra \csi{negmedspace} is required to make the
-plus sign properly separate from the variable name. The \csi{negmedspace}
-command adds a medium negative space which cancles out the space \LaTeX{}
-adds between variable and operator in a formula like this \(a+b\), while
-filling the role of a variable when \LaTeX{} has to decide whether
-the next symbol is a relation symbol or a unary operator.
+Notice the extra \csi{negmedspace} required to properly separate the
+plus sign from the variable name. The \csi{negmedspace{}} command
+adds a medium negative space, which cancels the space that \LaTeX{}
+inserts between variable and operator in a formula like \(a+b\), while
+playing the role of a variable when \LaTeX{} decides whether the next
+symbol is a relation symbol or a unary operator.
 \begin{example}
 \begin{IEEEeqnarray*}{rCl}
-a & = & d + e + f \\
-& & + g \quad \text{too narrow!}\\
-& & \negmedspace{} + g \\
-& = & k + 2g
+a & = & b + c + d \\
+& & + e \quad \text{too narrow!}\\
+& & \negmedspace{} + e \\
+& = & f + 2e
 \end{IEEEeqnarray*}
 \end{example}
 
