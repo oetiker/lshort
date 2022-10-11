@@ -1,5 +1,7 @@
 ## UNRELEASED
 
+- improve wording regarding latex symbols and where to look them up
+  since we removed the integrated list of symbols. @oetiker
 - replace sec:this with my-marker in the crosref section @oetiker
 - renamed chapter 1 and 2 / tobi
 - add full text of license for easier distribution / marcin-serwin
