@@ -1,0 +1,58 @@
+%%
+%% This is file `xcolor.lox',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% xcolor.dtx  (with options: `extract')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from xcolor.lox.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file xcolor.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% ----------------------------------------------------------------
+%% Copyright (C) 2003-2021 by Dr. Uwe Kern <xcolor at ukern dot de>
+%%               2021-2022    LaTeX Project https://github.com/latex3/xcolor/issues
+%% ----------------------------------------------------------------
+%%
+\def\XCfileversion{v2.14}%
+\def\XCfiledate{2022/06/12}%
+\def\ukfile#1#2#3#4%
+ {\def\ukhead
+   {\ifnum#1>2 \perCent!^^J\fi
+    \defaultpreamble^^J\MetaPrefix^^J%
+    \ifcase#1
+      \string\ProvidesPackage{#2}^^J\or
+      \string\ProvidesFile{#2}^^J\or
+      \string\ProvidesFile{#2.def}^^J\or
+      \MetaPrefix\space #2.pro (PostScript/dvips header file)^^J\MetaPrefix\space
+    \fi
+    \space[\XCfiledate\space\XCfileversion\space#4\space(UK)]}
+  \usepreamble\ukhead
+  \file{#2.\ifcase#1sty\or tex\or def\or pro\fi}{\from{xcolor.dtx}{#3}}}
+\generate{
+\ukfile0{xcolor}{package}{LaTeX color extensions}
+\ukfile2{svgnam}{svgnames}{Predefined colors according to SVG 1.1}
+\ukfile2{x11nam}{x11names}{Predefined colors according to Unix/X11}
+\ukfile1{xcolor1}{test1}{Color conversion test}
+\ukfile1{xcolor2}{test2}{Pstricks color test}
+\ukfile1{xcolor3}{test3}{Color logging test}
+\ukfile1{xcolor4}{test4}{Color driver test}
+\def\PStail{\MetaPrefix\space End of file `\outFileName'.}
+\usepostamble\PStail
+\ukfile3{xcolor}{dvips}{LaTeX color extensions}
+}
+\endinput
+%%
+%% End of file `xcolor.lox'.

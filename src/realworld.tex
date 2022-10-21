@@ -2328,6 +2328,7 @@ be inherited from the \csi{documentclass} options, if specified there.
 \end{example}
 
 \section{Floating Bodies}
+
 If you try writing a longer text with tables and images, you will soon notice a
 problem: they cannot be broken across multiple pages (except for
 \pai{longtable}s). If you simply include them in normal text flow, this will
@@ -2535,9 +2536,9 @@ command. It orders \LaTeX{} to immediately place all floats remaining in the
 queues and then start a new page. \csi{cleardoublepage} even goes to a new
 right-hand page.
 
-\subsection{Other Floats}
+\subsection{Createing your own Float-Types}
 
-If you want to have other float lists besides \enquote{Table} and
+If you want to have other float types besides \enquote{Table} and
 \enquote{Figure}, use the \pai*{newfloat} package. It provides the
 \begin{lscommand}
   \csi{DeclareFloatingEnvironment}[options: o, name: m]
