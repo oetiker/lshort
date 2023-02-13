@@ -1,5 +1,6 @@
 ## UNRELEASED
 
+- fix accent table mixup @Samuel-Martineau
 - improve wording regarding latex symbols and where to look them up
   since we removed the integrated list of symbols. @oetiker
 - replace sec:this with my-marker in the crosref section @oetiker
