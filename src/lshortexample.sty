@@ -368,3 +368,10 @@
     }
   }
 }
+
+% Workaround for https://github.com/gpoore/minted/issues/354
+\ifwindows
+  \def\minted@opt@quote#1{\detokenize\expandafter{\expandafter"\expanded{#1}"}}
+\else
+  \def\minted@opt@quote#1{\detokenize\expandafter{\expandafter'\expanded{#1}'}}
+\fi
