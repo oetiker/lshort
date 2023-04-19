@@ -55,8 +55,8 @@
   \begin{trivlist}
     \item
     % Workaround for https://github.com/gpoore/minted/issues/356
-    \RenewCommandCopy\VerbEnv\Verbatim
-    \RenewCommandCopy\endVerbEnv\endVerbatim
+    \RenewCommandCopy{\VerbEnv}{\Verbatim}
+    \RenewCommandCopy{\endVerbEnv}{\endVerbatim}
     \begin{minipage}{0.4\textwidth}
       \mintinline{latex}:#1:
     \end{minipage}
@@ -71,8 +71,8 @@
 \NewDocumentCommand{\vchto}{+v+v}{
   \begin{center}
     % Workaround for https://github.com/gpoore/minted/issues/356
-    \RenewCommandCopy\VerbEnv\Verbatim
-    \RenewCommandCopy\endVerbEnv\endVerbatim
+    \RenewCommandCopy{\VerbEnv}{\Verbatim}
+    \RenewCommandCopy{\endVerbEnv}{\endVerbatim}
     \mintinline{latex}:#1:
     \(\big\downarrow\)\\[.2cm]
     \mintinline{latex}:#2:

@@ -1,5 +1,5 @@
 CmdLine {
-    -eall -n22 -n30 -e16 -n46 -n21 -n29 -n3 -n17 -n11
+    -eall -n22 -n30 -e16 -n46 -n21 -n29 -n3 -n17 -n11 -n12
 }
 
 VerbEnvir {
@@ -13,6 +13,7 @@ Silent {
     \tabularnewline \ifpdf \ExplSyntaxOn \ExplSyntaxOff
     \bgroup \egroup \sourcefamily \restoregeometry
     \itshape \cleardoublepage \IfValueT \pause \blindtext
+    \backmatter
 }
 
 MathEnvir {
