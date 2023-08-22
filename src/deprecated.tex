@@ -54,6 +54,9 @@
 \NewDocumentCommand{\chto}{+v+v}{
   \begin{trivlist}
     \item
+    % Workaround for https://github.com/gpoore/minted/issues/356
+    \RenewCommandCopy{\VerbEnv}{\Verbatim}
+    \RenewCommandCopy{\endVerbEnv}{\endVerbatim}
     \begin{minipage}{0.4\textwidth}
       \mintinline{latex}:#1:
     \end{minipage}
@@ -67,7 +70,10 @@
 }
 \NewDocumentCommand{\vchto}{+v+v}{
   \begin{center}
-    \mintinline{latex}:#1:\\[.2cm]
+    % Workaround for https://github.com/gpoore/minted/issues/356
+    \RenewCommandCopy{\VerbEnv}{\Verbatim}
+    \RenewCommandCopy{\endVerbEnv}{\endVerbatim}
+    \mintinline{latex}:#1:
     \(\big\downarrow\)\\[.2cm]
     \mintinline{latex}:#2:
   \end{center}
@@ -155,7 +161,7 @@ optional argument with default value (specified as second optional argument)
 followed by few mandatory ones (specified as number in first optional
 argument).
 \begin{chktexignore}
-  \vchto|\newcommand{\foo}[4][bar]{ ... }|
+  \vchto|\newcommand{\foo}[4][bar]{ ... }|%
   |\NewDocumentCommand{\foo}{O{bar}mmmm}{ ... }|
 \end{chktexignore}
 
