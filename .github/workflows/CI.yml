@@ -19,7 +19,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
       - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v4
+        uses: fkirc/skip-duplicate-actions@v5
         with:
           cancel_others: 'true'
           paths: '["src/**", "Makefile", "fixdate.pl"]'
@@ -27,7 +27,7 @@ jobs:
   check:
     name: Check LaTeX
     needs: skip_check
-    if: ${{ needs.skip_check.outputs.should_skip != 'true' }}
+    if: ${{ needs.skip_check.outputs.should_skip != true }}
     runs-on: ubuntu-latest
     container: ghcr.io/xu-cheng/texlive-small:latest
 
@@ -40,7 +40,7 @@ jobs:
           tlmgr install latexindent
 
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run ChkTeX
         run: |
@@ -56,7 +56,7 @@ jobs:
   build_latex:
     name: Build LaTeX
     needs: skip_check
-    if: ${{ needs.skip_check.outputs.should_skip != 'true' }}
+    if: ${{ needs.skip_check.outputs.should_skip != true }}
     runs-on: ubuntu-latest
     container: ghcr.io/xu-cheng/texlive-full:latest
 
@@ -70,7 +70,7 @@ jobs:
           apk add py3-pygments
 
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
