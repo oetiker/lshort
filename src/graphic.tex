@@ -104,9 +104,9 @@ between points may be specified in many ways, the simplest is
 \ltx|--|, which draws a straight line.
 \begin{example}
 \begin{tikzpicture}
-  \draw (0, 0)
-    -- (15:4)
-    -- (1, 2);
+  \draw (0, 0) % bottom left
+    -- (15:4)  % angle:length
+    -- (1, 2); % x,y
 \end{tikzpicture}
 \tikz{\draw (0, 0) -- (1,1);}
 \end{example}
