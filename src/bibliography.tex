@@ -479,8 +479,9 @@ Again\footnote{Smart
 \end{example}
 
 Another set of commands allows us to extract specific information from
-the bibliographic entry, and use the information directly in the text. This is includes commands such as \csi{citeauthor},
-\csi{citetitle}, \csi{citeyear}, \csi{citedate}, \csi{citeurl}.
+the bibliographic entry, and use the information directly in the text. This
+includes commands such as \csi{citeauthor}, \csi{citetitle}, \csi{citeyear},
+\csi{citedate}, \csi{citeurl}.
 
 \begin{example}[standalone,
   biber,
@@ -553,20 +554,28 @@ This is auto citation \autocite{curie}.
 
 \subsection{More about entries}
 
-\hologo{biber} uses ``and'' as a separator in author entries. To prevent
-this behaviour, enclose ``and'' in curly brackets
+\hologo{biber} uses \enquote{and} as a separator in certain entries. To prevent
+this behaviour, enclose \enquote{and} in curly brackets
 \begin{minted}{bibtex}
 @book{kru,
-  author = {Kruger {and} sons}
+  publisher = {Kruger {and} sons}
 }
 \end{minted}
 The same trick may be useful when \hologo{biber} changes capitalisation, even
-though it shouldn't.
+though it shouldn't. On top of this \hologo{biber} splits author entries into
+smaller bits which are then used elsewhere. So in \autoref{lst:bibfile} the
+name Jane Diviner is split into the first name Jane and the surname Diviner.
+When you don't want this, enclose the entire name in braces
+\begin{minted}{bibtex}
+@book{kru,
+  author = {{Kruger brothers}}
+}
+\end{minted}
 
 When writing about certain subject it often happens that the same author or
 publishing company released several books. In order to reuse the information in
-several entries in the \eei{.bib} file, a special entry \cargv{xdata} is available. It may be used
-like this
+several entries in the \eei{.bib} file, a special entry \cargv{xdata} is
+available. It may be used like this
 
 \begin{example}[standalone,
   biber,
@@ -578,8 +587,8 @@ like this
 \begin{filecontents}{example2.bib} 
 %!hideend
 @xdata{krugers,
-  author    = {Kruger {and} sons},
-  publisher = {Krugers Inc.},
+  author    = {{Kruger brothers}},
+  publisher = {Kruger {and} sons},
   location  = {Paris}
 }
 
@@ -604,3 +613,4 @@ like this
 \printbibliography
 \end{document}
 \end{example}
+
