@@ -50,9 +50,11 @@ jobs:
 
       - name: Run latexindent
         run: |
-          latexindent -kv -m -l .localSettings.yaml src/*.tex > /dev/null
+          E=0
+          latexindent -kv -m -l .localSettings.yaml src/*.tex > /dev/null || E=1
           cat src/indent.log
-
+          exit $E
+          
   build_latex:
     name: Build LaTeX
     needs: skip_check
