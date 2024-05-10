@@ -67,8 +67,9 @@ jobs:
     steps:
       - name: Install tools
         run: |
-          tlmgr update --self
-          tlmgr update --all
+#         tlmgr update --self
+#         tlmgr update --all
+          tlmgr install hyphen-french hyph-utf8 hyphen-german
           apk add make
           apk add git
           apk add py3-pygments
