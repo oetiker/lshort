@@ -46,7 +46,7 @@ and for being virtually bug free. The version number of \TeX{} is converging
 to the \(\pi\) constant and is now at \(3.141592653\).
 
 \TeX{} is pronounced \enquote{Tech}, with a \enquote{ch} as in the German word
-\enquote{Ach}\footnote{In German there are actually two pronunciations for
+\enquote{Ach}\footnote{In German, there are actually two pronunciations for
   \enquote{ch} and one might assume that the soft \enquote{ch} sound from
   \enquote{Pech} would be a more appropriate. When asked about this by one of
   the German Wikipedia contributors, Knuth wrote:
@@ -73,9 +73,9 @@ popular enhanced version of \TeX{} was \hologo{eTeX}~\cite{etex}.
 The original program produced \eei{.dvi} files which were meant only to be sent
 to a printer. With the proliferation of high resolution displays, it became more
 common to read documents directly on-screen without printing them. This
-prompted creation of another extension, called \hologo{pdfTeX}, which could
+prompted the creation of another extension, called \hologo{pdfTeX}, which could
 produce standard PDF files. Yet another problem was the original font format,
-which was not compatible with modern font formats. This was in turn solved in
+which was incompatible with modern font formats. This was, in turn, solved in
 \hologo{XeTeX}.
 
 Today, four \TeX{} engines are actively maintained: the original \TeX{},
@@ -101,15 +101,15 @@ named \LaTeX{} 2.09 --- was released~\cite{manual}.
 The original \LaTeX{} became quite popular and promoted the creation of many
 extension packages. Unfortunately, some of the more popular extensions were not
 compatible with each other. \LaTeXe{} managed to unify many of the extensions,
-and also provided an extension packaging system, dealing with third party
-extensions in a standardised way.
+and also provided an extension packaging system, dealing with third-party
+extensions in a standardized way.
 
 The same year \LaTeXe{} was released, the \LaTeX3 project was started. Its aim
 was to create improved standards for writing \LaTeX{} documents, fixing some of
 the mistakes that were made when defining the initial \LaTeX{} macros. While at
 the beginning, it was planned to release \LaTeX3 as a standalone system that was
 not backward compatible with \LaTeXe{}, in the end, the consensus was that
-abandoning the huge collection of third party packages written for \LaTeXe{},
+abandoning the huge collection of third-party packages written for \LaTeXe{},
 would be a mistake. Thus, the development team decided that
 \LaTeX3 would be slowly backported into \LaTeXe{} format, while avoiding
 breaking changes as much as reasonably possible~\cite{quovadis}.
@@ -165,7 +165,7 @@ Examples:
 \begin{itemize}
   \item The font size and the numbering of headings have to be chosen to make
         the structure of chapters and sections clear to the reader.
-  \item The line length has to be short enough to not strain
+  \item The line length has to be short enough not to strain
         the eyes of the reader, while long enough to fill the page
         beautifully.
 \end{itemize}
@@ -225,7 +225,7 @@ can tell you hundreds \smiley.
   \item Although some parameters can be adjusted within a predefined
         document layout, the design of a whole new layout is difficult and
         takes a lot of time.
-  \item It is very hard to write unstructured and disorganised documents.
+  \item It is very hard to write unstructured and disorganized documents.
   \item Your hamster might, despite some encouraging first steps, never be
         able to fully grasp the concept of Logical Markup.
 \end{itemize}
@@ -243,7 +243,7 @@ IDE.\footnote{Some examples of these are listed in
 
 \enquote{Whitespace} characters, such as blank or tab, are treated uniformly as
 \enquote{\wi{space}} by \LaTeX{}. Several consecutive \wi{whitespace}
-characters are treated as \emph{one} \enquote{space}. Whitespace at the start
+characters are treated as \emph{one} \enquote{space}. The whitespace at the start
 of a line is generally ignored, and a single line break has the same effect as
 \enquote{whitespace}\index{whitespace!at the start of a line}.
 
@@ -670,7 +670,7 @@ useful and should be installed along with your \LaTeX{} distribution. See
 \autoref{packages} for some examples. The versions installed on your system may
 be different than
 the ones described in this book, which in turn may lead to differences in the
-produced output. Along with each package's description we will also point
+produced output. Along with each package's description, we will also point
 to its entry in our bibliography. In the bibliography entry, you will find
 information about the package version that was used when writing this booklet.
 You can check the versions of all packages used in a document by looking
@@ -680,7 +680,7 @@ important) then you should be fine.
 
 Modern \LaTeX{} distributions come with many packages
 preinstalled. If you are working on a \Unix{} system, try using the command
-\texttt{texdoc} for accessing package documentation. Alternatively you can
+\texttt{texdoc} for accessing package documentation. Alternatively, you can
 search for the package on \url{https://www.ctan.org/}, and its documentation
 should be present under the \enquote*{Documentation} field.
 
@@ -734,8 +734,8 @@ derives the typographical form of the text according to the \enquote{rules}
 given in the document class file and in various style files.
 
 The most important text unit in \LaTeX{} (and in typography) is the
-\wi{paragraph}.  We call it \enquote{text unit} because a paragraph is the
-typographical form that should reflect one coherent thought, or one idea.
+\wi{paragraph}.  We call it \enquote{text unit} because a paragraph is a
+typographical form that should reflect one coherent thought or idea.
 Therefore, if a new thought begins, a new paragraph should begin, and if not,
 only line breaks should be used.  If in doubt about paragraph breaks, think
 about your text as a conveyor of ideas and thoughts.  If you have a paragraph
@@ -762,7 +762,7 @@ his formula
 \end{equation}
 which is at the same time the
 most widely known and the least
-well understood physical formula.
+well-understood physical formula.
 \end{document}%!hide
 \end{example}
 \begin{example}[standalone, paperwidth=5cm, paperheight=4cm]
@@ -795,20 +795,20 @@ transistor model. \ldots
 The next smaller text unit is the sentence.  In English texts, there is
 a larger space after a period that ends a sentence than after one
 that ends an abbreviation.  \LaTeX{} tries to figure out which one
-you wanted to have.  If \LaTeX{} gets it wrong, you must tell it what
+you want to have.  If \LaTeX{} gets it wrong, you must tell it what
 you want.  This is explained later in the next chapter.
 
 The structuring of text even extends to parts of sentences.  Most
 languages have very complicated punctuation rules, but in many
 languages (including German and English), you will get almost every
 comma right if you remember what it represents: a short stop in the
-flow of language.  If you are not sure about where to put a comma,
+the flow of language.  If you are not sure about where to put a comma,
 read the sentence aloud and take a short breath at every comma.  If
-this feels awkward at some place, delete that comma; if you feel the
+this feels awkward at some places, delete that comma; if you feel the
 urge to breathe (or make a short stop) at some other place, insert a
 comma.
 
-Finally, the paragraphs of a text should also be structured logically at a
+Finally, the paragraphs of a text should also be structured logically in a
 higher level, by putting them into chapters, sections, subsections, and so on.
 
 \section{Files You Might Encounter}
