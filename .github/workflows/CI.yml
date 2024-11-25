@@ -69,7 +69,7 @@ jobs:
         run: |
           tlmgr update --self
           tlmgr update --all
-          tlmgr install hyphen-french hyph-utf8 hyphen-german
+          tlmgr install hyphen-french hyph-utf8 hyphen-german lm
           apk add make
           apk add git
           apk add py3-pygments
