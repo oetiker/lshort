@@ -873,11 +873,11 @@ The default \LaTeX{} fonts are rather atypical in that they distinguish between
 \pai{fontspec} defines slanted font to be the same as italics. This may be
 fixed by setting the \cargv{SlantedFont} key explicitly.
 \begin{example}[vertical_mode, examplewidth=0.7\linewidth]
+\usepackage[TU]{fontenc}
 \setmainfont{Latin Modern Roman}
 \textit{italics} vs. \textsl{slanted}
 
 \setmainfont[
-  ItalicFont=Latin Modern Roman Italic,
   SlantedFont=Latin Modern Roman Slanted,
 ]{Latin Modern Roman}
 \textit{italics} vs. \textsl{slanted}
