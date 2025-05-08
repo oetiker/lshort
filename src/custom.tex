@@ -1272,10 +1272,12 @@ Boxes are explored further in \autoref{sec:boxes}.
     number-mode=text,
     parse-numbers=false,
   ]{
-    \sfrac{
-      \num[number-mode=math,parse-numbers=true]{#1}
-    }{
-      \num[number-mode=math,parse-numbers=true]{#2}
+  \text{
+      \sfrac{
+        \num[number-mode=math,parse-numbers=true]{#1}
+      }{
+        \num[number-mode=math,parse-numbers=true]{#2}
+      }
     }
   }
 }
@@ -1284,11 +1286,12 @@ Boxes are explored further in \autoref{sec:boxes}.
   \qty[
     number-mode=text,
     parse-numbers=false,
-  ]{
-    \sfrac{
-      \num[number-mode=math,parse-numbers=true]{#1}
-    }{
-      \num[number-mode=math,parse-numbers=true]{#2}
+  ]{\text{
+      \sfrac{
+        \num[number-mode=math,parse-numbers=true]{#1}
+      }{
+        \num[number-mode=math,parse-numbers=true]{#2}
+      }
     }
   }{#3}
 }
