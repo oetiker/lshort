@@ -1,5 +1,4 @@
 defaultIndent: "  "
-
 verbatimEnvironments:
   example: 1
   code: 1
