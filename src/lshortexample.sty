@@ -51,6 +51,8 @@
 %%%
 
 \tl_new:N \__lshortexample_example_label
+\tl_new:N \__lshortexample_verbatim_input_file
+\tl_new:N \__lshortexample_verbatim_output_file
 \int_new:N \__lshortexample_example_counter
 \bool_new:N \__lshortexample_hide_switch
 \bool_new:N \__lshortexample_show_switch
@@ -88,12 +90,6 @@
   examplewidth .tl_set:N = \__lshortexample_examplewidth,
   examplewidth .initial:n = 0.5\linewidth,
 
-  verbatim_input_file_name .tl_set:N = \__lshortexample_verbatim_input_file,
-  verbatim_input_file_name .initial:n = {\c_sys_jobname_str _input.exa},
-
-  verbatim_output_file_name .tl_set:N = \__lshortexample_verbatim_output_file,
-  verbatim_output_file_name .initial:n = {\c_sys_jobname_str _output.exa},
-
   from_page .int_set:N  = \__lshortexample_from_page,
   from_page .initial:n  = 1,
 
@@ -118,6 +114,13 @@
 }
 
 \NewDocumentEnvironment{example}{!o} {
+  \tl_set:Nx \__lshortexample_verbatim_input_file {
+    \c_sys_jobname_str _example_ \int_use:N\__lshortexample_example_counter _input.tex
+  }
+  \tl_set:Nx \__lshortexample_verbatim_output_file {
+    \c_sys_jobname_str _example_ \int_use:N\__lshortexample_example_counter _output.tex
+  }
+
   \group_begin:
   \IfValueT {#1} {
     \keys_set:nn { lshortexample } { #1 }
